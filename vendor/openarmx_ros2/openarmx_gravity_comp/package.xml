@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>openarmx_gravity_comp</name>
+  <version>0.1.0</version>
+  <description>Gravity compensation feedforward node for OpenArmX bimanual arms</description>
+  <maintainer email="dev@openarmx.com">OpenArmX</maintainer>
+  <license>CC-BY-NC-SA-4.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>urdf</depend>
+  <depend>urdfdom_headers</depend>
+  <depend>orocos_kdl</depend>
+  <depend>kdl_parser</depend>
+  <depend>urdfdom</depend>
+
+  <build_depend>eigen3_cmake_module</build_depend>
+  <depend>Eigen3</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

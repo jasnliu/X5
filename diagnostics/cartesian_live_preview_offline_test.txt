@@ -1,0 +1,22 @@
+Offline live Cartesian preview integration — 2026-09-14
+No Run button invocation; viewer mode stayed offline/no-CAN.
+
+Valid edited fields:
+Offline preview — no CAN
+Goal preview (m): X=+0.0200, Y=-0.0100, Z=+0.0300 — INSIDE zone1
+{"action": 0, "position": [0.019426000000000002, 0.1598930197941219, 0.08708949019211785], "color": [1.0, 0.0, 1.0, 1.0]}
+
+Outside-zone edited fields:
+Offline preview — no CAN
+Goal preview (m): X=+2.0000, Y=-0.0100, Z=+0.0300 — OUTSIDE zone1
+{"action": 0, "position": [1.999426, 0.1598930197941219, 0.08708949019211785], "color": [1.0, 0.0, 0.0, 1.0]}
+
+Invalid partial edit:
+Offline preview — no CAN
+Goal preview: enter finite numeric X, Y and Z values
+{"action": 2, "position": [0.0, 0.0, 0.0], "color": [0.0, 0.0, 0.0, 0.0]}
+
+Restored default fields:
+Offline preview — no CAN
+Goal preview (m): X=+0.0000, Y=+0.0000, Z=+0.0500 — INSIDE zone1
+{"action": 0, "position": [-0.0005739999999999981, 0.1698930197941219, 0.10708949019211786], "color": [1.0, 0.0, 1.0, 1.0]}

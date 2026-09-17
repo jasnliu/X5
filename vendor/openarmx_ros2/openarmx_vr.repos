@@ -1,0 +1,49 @@
+# OpenArmX ROS2 Additional Packages
+# Usage:
+#   1. Clone base package: git clone https://github.com/openarmx/openarmx_ros2.git
+#   2. Navigate to workspace src directory: cd your_ws/src
+#   3. Import all packages: vcs import < openarmx_ros2/openarmx.repos
+#   4. Or selective import: vcs import --input openarmx_ros2/openarmx.repos openarmx_description openarmx_tools
+
+repositories:
+  # Robot description package (URDF, meshes, xacro)
+  # Required: Contains robot model definitions
+  openarmx_description:
+    type: git
+    url: https://github.com/openarmx/openarmx_description.git
+    version: 6.0_basic
+
+  # Teleoperation / Leader arm control package
+  # Optional: For leader-follower teleoperation scenarios
+  openarmx_teleop_bimanual:
+    type: git
+    url: https://github.com/openarmx/openarmx_teleop_bimanual.git
+    version: 6.0_basic
+
+  # Tools collection (RViz panels, teaching features)
+  # Optional: Includes KP/KD tuning panel, gripper panel, trajectory teaching/playback
+  openarmx_tools:
+    type: git
+    url: https://github.com/openarmx/openarmx_tools.git
+    version: 6.0_basic
+
+  # Motor management tool
+  # Optional: For motor parameter configuration and management
+  openarmx_motor_manager:
+    type: git
+    url: https://github.com/openarmx/openarmx_motor_manager.git
+    version: 6.0_basic
+  
+  # Teleop VR
+  # Optional: This directory is the OpenArmX VR teleoperation pipeline
+  openarmx_teleop_vr:
+    type: git
+    url: https://github.com/openarmx/openarmx_teleop_vr.git
+    version: 6.0_basic
+
+  # Teleop VR APK
+  # Optional: This is the OpenArmX repository for Pico VR teleoperation APK installers
+  openarmx_teleop_vr_apk:
+    type: git
+    url: https://github.com/openarmx/openarmx_teleop_vr_apk.git
+    version: 6.0_basic

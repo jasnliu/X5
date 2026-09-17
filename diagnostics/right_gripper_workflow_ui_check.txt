@@ -1,0 +1,55 @@
+[
+  {
+    "side": "left",
+    "title": "LEFT arm: Cartesian Goal \u2014 OFFLINE PREVIEW",
+    "tcp": "openarmx_left_hand_tcp",
+    "zone_points": 1197,
+    "center_degrees": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "origin_tcp_m": [
+      -0.0005739999999999981,
+      0.1698930197941219,
+      0.057089490192117856
+    ],
+    "default_preview_m": [
+      -0.0005739999999999981,
+      0.1698930197941219,
+      0.10708949019211786
+    ],
+    "center_inside_buffered_zone": true
+  },
+  {
+    "side": "right",
+    "title": "RIGHT arm: Cartesian Goal \u2014 OFFLINE PREVIEW",
+    "tcp": "openarmx_right_hand_tcp",
+    "zone_points": 1258,
+    "center_degrees": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      80.21409131831524
+    ],
+    "origin_tcp_m": [
+      -0.0005739999999999981,
+      -0.1700970197941164,
+      0.057089488693450166
+    ],
+    "default_preview_m": [
+      -0.0005739999999999981,
+      -0.1700970197941164,
+      0.10708948869345017
+    ],
+    "center_inside_buffered_zone": true
+  }
+]
+PASS: distinct left/right Cartesian UI, TCP, zone and center configuration; no CAN or movement

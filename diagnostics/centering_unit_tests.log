@@ -1,0 +1,35 @@
+test_all_sdk_fixtures (test_centering.PacketTests.test_all_sdk_fixtures) ... ok
+test_cancel_blocks_enable_before_send (test_centering.PacketTests.test_cancel_blocks_enable_before_send) ... ok
+test_decoder_mode_fault_and_temperature (test_centering.PacketTests.test_decoder_mode_fault_and_temperature) ... ok
+test_emergency_attempts_every_left_motor_on_write_failure (test_centering.PacketTests.test_emergency_attempts_every_left_motor_on_write_failure) ... ok
+test_motion_rejects_bad_numbers (test_centering.PacketTests.test_motion_rejects_bad_numbers) ... ok
+test_only_left_can_control_only_joints_1_to_7 (test_centering.PacketTests.test_only_left_can_control_only_joints_1_to_7) ... ok
+test_partial_enable_cancel_has_no_later_enable_or_motion (test_centering.PacketTests.test_partial_enable_cancel_has_no_later_enable_or_motion) ... ok
+test_loaded_plant_converges_not_just_sent_command (test_centering.PolicyTests.test_loaded_plant_converges_not_just_sent_command) ... ok
+test_obstruction_stops_instead_of_unbounded_correction (test_centering.PolicyTests.test_obstruction_stops_instead_of_unbounded_correction) ... ok
+test_stale_and_out_of_limits_stop (test_centering.PolicyTests.test_stale_and_out_of_limits_stop) ... ok
+test_stationary_encoder_jitter_can_settle (test_centering.PolicyTests.test_stationary_encoder_jitter_can_settle) ... ok
+test_fault_is_latched_and_cannot_be_cleared_by_center (test_centering.SupervisorTests.test_fault_is_latched_and_cannot_be_cleared_by_center) ... ok
+test_no_auto_enable_or_motion_at_launch (test_centering.SupervisorTests.test_no_auto_enable_or_motion_at_launch) ... ok
+test_relax_verifies_disabled_and_fault_is_not_false_success (test_centering.SupervisorTests.test_relax_verifies_disabled_and_fault_is_not_false_success) ... ok
+test_stop_clears_pending_start_and_heartbeat_watchdog (test_centering.SupervisorTests.test_stop_clears_pending_start_and_heartbeat_watchdog) ... ok
+test_wrong_modes_including_right_and_gripper_rejected (test_centering.SupervisorTests.test_wrong_modes_including_right_and_gripper_rejected) ... ok
+test_background_buffer_faces_and_resting_border (test_safe_zone.GeometryTests.test_background_buffer_faces_and_resting_border) ... ok
+test_buffer_does_not_modify_hull_or_saved_geometry (test_safe_zone.GeometryTests.test_buffer_does_not_modify_hull_or_saved_geometry) ... ok
+test_buffer_does_not_validate_bad_input_or_empty_zone (test_safe_zone.GeometryTests.test_buffer_does_not_validate_bad_input_or_empty_zone) ... ok
+test_buffer_sloping_face (test_safe_zone.GeometryTests.test_buffer_sloping_face) ... ok
+test_cube (test_safe_zone.GeometryTests.test_cube) ... ok
+test_empty_round_trip (test_safe_zone.GeometryTests.test_empty_round_trip) ... ok
+test_fk_left_only (test_safe_zone.GeometryTests.test_fk_left_only) ... ok
+test_flat_and_small (test_safe_zone.GeometryTests.test_flat_and_small) ... ok
+test_round_trip_and_validation (test_safe_zone.GeometryTests.test_round_trip_and_validation) ... ok
+test_spacing_and_invalid (test_safe_zone.GeometryTests.test_spacing_and_invalid) ... ok
+test_disabled_decode (test_safe_zone.ProtocolTests.test_disabled_decode) ... ok
+test_enabled_and_faults_rejected (test_safe_zone.ProtocolTests.test_enabled_and_faults_rejected) ... ok
+test_identical_buses_rejected_before_socket (test_safe_zone.ProtocolTests.test_identical_buses_rejected_before_socket) ... ok
+test_sdk_query_bytes (test_safe_zone.ProtocolTests.test_sdk_query_bytes) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.053s
+
+OK
