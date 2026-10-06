@@ -1,0 +1,69 @@
+[
+  {
+    "path": "playback_results/20261002T234820-smooth_200hz-3896e5",
+    "method": "smooth_200hz",
+    "success": true,
+    "duration_s": 13.640675041926222,
+    "measured_position_ripple_3_15hz_rms_deg": [
+      0.03843155566409829,
+      0.011206883360428212,
+      0.009784669213573566,
+      0.02881288080153218,
+      0.007762695083954,
+      0.004796209794346291,
+      0.014426733682504975
+    ],
+    "measured_position_ripple_3_15hz_vector_rms_deg": 0.053102676629554514,
+    "measured_acceleration_rms_rad_s2": [
+      0.39556969921498397,
+      0.12493068816449283,
+      0.12164966245944313,
+      0.33843981447585275,
+      0.110531227093856,
+      0.07485685962168374,
+      0.18497899565997383
+    ],
+    "measured_velocity_peak_rad_s": [
+      0.23629375325869248,
+      0.09738771314836325,
+      0.08554061603703977,
+      0.3801641395014943,
+      0.13768450393328635,
+      0.11563976700704748,
+      0.2085738575278695
+    ],
+    "tracking_rms_deg": [
+      0.14231894459938263,
+      0.03977023387264407,
+      0.04856561298578515,
+      0.2990465339861222,
+      0.13979160607646232,
+      0.07696757156825319,
+      0.22077851520367575
+    ],
+    "feedback_max_gap_s": [
+      0.010663017979823053,
+      0.011073809990193695,
+      0.011129185964819044,
+      0.01074486703146249,
+      0.012254885979928076,
+      0.012265236000530422,
+      0.010490896995179355
+    ],
+    "physical_feedback_samples": [
+      3075,
+      3075,
+      3075,
+      3074,
+      3074,
+      3074,
+      3074
+    ],
+    "max_scheduler_lateness_s": 0.005899050971493125,
+    "p95_scheduler_lateness_s": 0.0032861168438103046,
+    "endpoint_error_deg": 0.02197933771202081,
+    "center_error_deg": 0.02148099950622766,
+    "relaxed_verified": true,
+    "note": "3-15 Hz bandpass of actual encoder position, 100 Hz resampling, 0.25 s trim each end; motor-side motion proxy, not an accelerometer. Same-duration matched comparator isolates spatial smoothing from slowdown."
+  }
+]

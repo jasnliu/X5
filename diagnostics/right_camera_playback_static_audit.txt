@@ -1,0 +1,26 @@
+Recorded-path right camera alignment static audit
+2026-09-18T23:00:21-07:00
+
+[original right-camera Cartesian hashes]
+camera_search/__init__.py: OK
+camera_search/app.py: OK
+camera_search/camera.py: OK
+camera_search/control.py: OK
+camera_search/hill_climb.py: OK
+camera_search/notify.py: OK
+camera_search/planner.py: OK
+camera_search/protocol.py: OK
+camera_search/vision.py: OK
+launch_right_camera_cartesian.py: OK
+start_right_camera_cartesian.sh: OK
+
+[new launcher/app isolation]
+52:    "/usr/bin/python3", "-m", "camera_playback.app",
+59:    str(venv_python), str(ROOT / "camera_search/camera.py"),
+6:export ROS_DOMAIN_ID=92
+
+[powered transport ownership inherited from right-only base]
+44:        super().__init__(hardware, "right", manual_finish=False)
+42:        self.bus=Motors(side,control_gripper) if hardware else None;self.setup=None;self.control=None;self.phase='READY';self.last_command=0.;self.relax_at=None;self.hold_until=None
+
+[result] No hardware launcher or CAN-opening command was executed during verification.

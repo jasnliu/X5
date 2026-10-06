@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-04",
+  "verification": "OFFLINE ONLY; no physical arm, camera, microphone, or ESP32 operated",
+  "full_suite": {
+    "passed": 439,
+    "seconds": 125.214
+  },
+  "post_review_focused_suite": {
+    "passed": 25,
+    "seconds": 3.528
+  },
+  "gui_checks": [
+    "hardware-mode App with mocked I/O",
+    "unchanged --test simulated workflow",
+    "unchanged --hardwaretest controls",
+    "offline preview"
+  ],
+  "physical_timing_verified": false,
+  "simulation_note": "Synthetic plant matched to experiment tuning; reference arrival errors are not measured cymbal/audio timing.",
+  "synthetic_swing": [
+    {
+      "degrees": 5,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 4.9568389922720835,
+      "max_depth_deg": 4.9568389922720835,
+      "max_abs_reference_arrival_error_ms": 8.000000003857366,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 6,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 5.9459091893141265,
+      "max_depth_deg": 5.967888527026172,
+      "max_abs_reference_arrival_error_ms": 4.000000003868465,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 7,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 6.956958724068216,
+      "max_depth_deg": 6.956958724068216,
+      "max_abs_reference_arrival_error_ms": 6.00000000463119,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 8,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 7.946028921110246,
+      "max_depth_deg": 7.968008258822293,
+      "max_abs_reference_arrival_error_ms": 6.0000000039135415,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 9,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 8.957078455864336,
+      "max_depth_deg": 8.957078455864336,
+      "max_abs_reference_arrival_error_ms": 10.000000003929088,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 10,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 9.946148652906379,
+      "max_depth_deg": 9.946148652906379,
+      "max_abs_reference_arrival_error_ms": 8.000000003942631,
+      "stopped_at_settled_anchor": true
+    },
+    {
+      "degrees": 11,
+      "strokes": 30,
+      "partial_returns": 10,
+      "min_depth_deg": 10.957198187660456,
+      "max_depth_deg": 10.957198187660456,
+      "max_abs_reference_arrival_error_ms": 8.000000003958618,
+      "stopped_at_settled_anchor": true
+    }
+  ],
+  "backup": "/tmp/x5_hybrid_before_20261004_175236",
+  "sha256": {
+    "camera_playback/app.py": "0aeacb85c504839eb6355dd3a3e32d781843165902db2ed7a7a4b0f0c468648d",
+    "camera_playback/hybrid_strike.py": "1a053b263b1391d9cbed53d4fdfeed892852ab1240b47de4d3e0d7351658d283",
+    "camera_playback/hybrid_workflow.py": "16ef47d605ccd622da574b70eeed46d9cdc3fd81d56d8e270bf771e01173ebd9",
+    "strike_lab/engine.py": "fe670c7fb60743d9d93a5a81bb6b4caf4cf79f1376834265400d9030df81063a",
+    "launch_right_camera_playback.py": "17df48fff7dfcd8a974212b27880a3d3329e6dbee2977945e7e46b4e41aae1c0",
+    "config/experiment_hardware_tuned.json": "94ec208a520dec1eced59c951d229aa4348ba3058cccda04b57d6a80a979c694",
+    "tests/test_hybrid_strike.py": "567646b539744ad826c85ec60844ab8df237471376a492ead1ccf3ae070ee36b",
+    "tests/test_hybrid_workflow.py": "9b99d367efdc24b5fe26c850f291e625dc740cc8e7602734d3d09504f0efa4f5",
+    "tests/hybrid_hardware_ui_check.py": "95039cf4b52e9746761a7a998835000f9543ca0e1c4ace3c3535d975e5000537"
+  },
+  "post_review_playback_suite": {
+    "passed": 90,
+    "seconds": 10.4
+  },
+  "review_note": "Full suite passed before final no-I/O release-validation and fault/audio guards; all 25 focused hybrid tests, 90 playback tests and hardware-mode mocked UI were rerun afterward."
+}

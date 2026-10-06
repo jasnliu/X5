@@ -1,0 +1,16 @@
+Current strike constants:
+15:STRIKE_START_DEGREES = 5
+16:STRIKE_INCREMENT_DEGREES = 1
+17:STRIKE_INCREMENT_RAD = math.radians(STRIKE_INCREMENT_DEGREES)
+77:    amount_degrees = STRIKE_START_DEGREES
+91:        amount_degrees += STRIKE_INCREMENT_DEGREES
+
+Removed fine-tuning symbols in runtime code (expect no matches):
+none
+
+Selection path:
+600:                self._finish_hit_strike_attempt()
+995:            self._finish_hit_strike_attempt()
+1014:    def _finish_hit_strike_attempt(self) -> None:
+1043:            f"FIRST DETECTED STRIKE: J7 −{self.continuous_strike_degrees}°; starting "
+PASS: py_compile and bash -n completed successfully

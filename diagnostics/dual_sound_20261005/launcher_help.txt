@@ -1,0 +1,85 @@
+usage: launch_right_camera_playback.py [-h]
+                                       [--hardware | --test | --hardwaretest]
+                                       [--recording RECORDING]
+                                       [--camera CAMERA | --select-camera]
+                                       [--list-cameras] [--recording-only]
+                                       [--auto-run] [--verify-swing]
+                                       [--model MODEL] [--imgsz IMGSZ]
+                                       [--conf CONF] [--device DEVICE]
+                                       [--preprocessing {local,reference,none}]
+                                       [--lighting-profile LIGHTING_PROFILE]
+                                       [--no-normalization] [--width WIDTH]
+                                       [--height HEIGHT]
+                                       [--allow-low-light-fps]
+                                       [--process-every PROCESS_EVERY]
+                                       [--output OUTPUT]
+                                       [--audio-source AUDIO_SOURCE]
+                                       [--audio-device AUDIO_DEVICE]
+                                       [--esp-port ESP_PORT]
+                                       [--mit-fall-kd MIT_FALL_KD]
+                                       [--mit-inertia MIT_INERTIA]
+                                       [--mit-brake-accel MIT_BRAKE_ACCEL]
+                                       [--mit-latency-ms MIT_LATENCY_MS]
+
+Right recorded-path camera alignment
+
+options:
+  -h, --help            show this help message and exit
+  --hardware            one RUN: center + close, recording, ride-v2 hybrid
+                        search, 100 BPM swing; hi-hat-v1 sound display only
+                        (camera/TONOR/ESP32)
+  --test                pure simulation with no CAN, camera, microphone, or
+                        ESP32; animate playback and fixed 10-degree strikes in
+                        RViz
+  --hardwaretest        run center/open/load, recorded playback, and single-
+                        frame pink-zone alignment on the physical right arm;
+                        then run one editable damped J7 freefall, predictive
+                        catch and smooth MIT return per press (no ESP32)
+  --recording RECORDING
+                        right-arm recording (default: recordings/record1.json)
+  --camera CAMERA       orbbec (default), camera index N, /dev/videoN, or a
+                        stable /dev/v4l/by-id/ or by-path/ link
+  --select-camera       choose a connected camera interactively before any
+                        controllers launch
+  --list-cameras        list connected camera names, indices and stable paths,
+                        then exit without launching hardware
+  --recording-only      physical no-strike test: recording, verified center,
+                        then relax; never align or strike
+  --auto-run            requires --recording-only: Run automatically, close
+                        gripper after 5 s loading pause, exit after safe relax
+  --verify-swing        AUTHORIZED MOTION: auto RUN, verify 5 s physical
+                        swing, center/relax, save evidence
+  --model MODEL
+  --imgsz IMGSZ
+  --conf CONF
+  --device DEVICE
+  --preprocessing {local,reference,none}
+  --lighting-profile LIGHTING_PROFILE
+  --no-normalization
+  --width WIDTH         RGB width (Orbbec full-FOV default: 1280; omitted
+                        partner dimension inferred as 16:9)
+  --height HEIGHT       RGB height (Orbbec full-FOV default: 720; cropped
+                        modes are rejected)
+  --allow-low-light-fps
+  --process-every PROCESS_EVERY
+  --output OUTPUT
+  --audio-source AUDIO_SOURCE
+                        stable PipeWire/PulseAudio TONOR TD510 capture-source
+                        name
+  --audio-device AUDIO_DEVICE
+                        sounddevice input used by ST7 after selecting the
+                        TONOR source
+  --esp-port ESP_PORT   ESP32 motor_beat serial port (default: connected
+                        CP2102 by-id path)
+  --mit-fall-kd MIT_FALL_KD
+                        hardwaretest only: gravity-descent damping (default
+                        0.04)
+  --mit-inertia MIT_INERTIA
+                        hardwaretest only: loaded J7 inertia, kg m^2 (default
+                        0.02)
+  --mit-brake-accel MIT_BRAKE_ACCEL
+                        hardwaretest only: calibrated catch acceleration,
+                        rad/s^2 (default 40)
+  --mit-latency-ms MIT_LATENCY_MS
+                        hardwaretest only: command/actuation delay estimate,
+                        ms (default 4)

@@ -1,0 +1,135 @@
+{
+  "modified_existing_files": [
+    "camera_playback/app.py"
+  ],
+  "checked_existing_files": 18108,
+  "changed_app_methods": [
+    "__init__",
+    "load_recording",
+    "_begin_playback",
+    "_advance_playback",
+    "_restore_playback_speed",
+    "_clear_alignment_state",
+    "fail",
+    "relax",
+    "run"
+  ],
+  "unchanged_app_methods": [
+    "choose_recording",
+    "_refresh_loading_label",
+    "_show_recording_loading",
+    "_hide_recording_loading",
+    "_sync_camera_loading_label",
+    "_refresh_buttons",
+    "_hardware_test_entered_degrees",
+    "_format_hardware_test_degrees",
+    "_refresh_hardware_test_controls",
+    "_hardware_test_session_ready",
+    "hardware_test_strike_once",
+    "_stop_hardware_test_session",
+    "_advance_hardware_test_mit",
+    "initial_gripper_goal",
+    "start",
+    "_start_preflighted_recording",
+    "camera_tick",
+    "_camera_ready_for_start",
+    "_sound_ready_for_start",
+    "_hihat_ready_for_start",
+    "_hihat_required_now",
+    "_sound_required_now",
+    "sound_tick",
+    "_hardware_test_sound_monitor_active",
+    "_log_hardware_test_sound_hit",
+    "hihat_tick",
+    "centered",
+    "continue_motion",
+    "extra_control",
+    "complete_stage",
+    "_record_playback_observation",
+    "_begin_playback_alignment",
+    "_process_alignment_frame",
+    "_advance_measurement",
+    "_alignment_success",
+    "_prepare_hardware_test_manual_strikes",
+    "_begin_test_striking",
+    "_current_strike_degrees",
+    "_current_strike_target",
+    "_begin_strike_attempt",
+    "_begin_strike_stage",
+    "_select_strike_leg_speed",
+    "_pause_strike_feedback",
+    "_process_sound_hit",
+    "_finish_no_hit_attempt",
+    "_finish_hit_strike_attempt",
+    "_begin_continuous_striking",
+    "_advance_continuous_striking",
+    "_begin_continuous_stage",
+    "_reset_continuous_j7_measurement",
+    "_start_continuous_j7_measurement",
+    "_sample_continuous_j7_minimum",
+    "_log_continuous_j7_minimum",
+    "_take_next_swing_event",
+    "_send_pending_hihat",
+    "_request_continuous_stop",
+    "_finish_continuous_striking",
+    "center_relax",
+    "_restore_strike_speed",
+    "_plan_next_candidate",
+    "_stop_hihat_sequence",
+    "_cancel_continuous_striking",
+    "_program_failure",
+    "_fault_motor_number",
+    "_enter_hardware_test_workflow_fault",
+    "_enter_hardware_test_hold_fault",
+    "_maintain_hardware_test_fault_hold",
+    "_maintain_hardware_test_workflow_fault",
+    "safety"
+  ],
+  "added_app_methods": [
+    "_begin_smooth_playback",
+    "_advance_smooth_playback",
+    "_stop_smooth_playback",
+    "begin_stage"
+  ],
+  "record3_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+  "source_hashes": {
+    "camera_playback/app.py": "325636d3f29dfe97ad61dc83d579cbb75f3b8e74693f64ba6904485f5a847ee1",
+    "camera_playback/smooth_recording.py": "96cf7517fd4d77186a0825c957c3be6d04088dc6b70708d841a4ce44001ea164",
+    "camera_playback/smooth_recording_worker.py": "3d7b89a2b22693eb8a6be1ac0d5ba92ac6d73ff6e449c535d3eb4dbcbfb03055",
+    "tests/test_smooth_recording.py": "ea727b3421c0d9617743f3c6dfae6683d96d0c3e893260e4c057c1779fb53b47",
+    "tests/smooth_recording_ui_check.py": "5a6d046018c664facca88f20c029117a27aff8c7106764d51b670a4a000ff0dc"
+  },
+  "tests": {
+    "all_tests": {
+      "count": 372,
+      "seconds": 120.116,
+      "passed": true
+    },
+    "focused_tests": {
+      "count": 14,
+      "seconds": 57.472,
+      "passed": true
+    },
+    "standalone_tests": {
+      "count": 24,
+      "seconds": 19.168,
+      "passed": true
+    },
+    "hardwaretest_ui": {
+      "passed": true
+    },
+    "simulation_ui": {
+      "passed": true
+    },
+    "smooth_hardware_ui": {
+      "passed": true
+    },
+    "smooth_hardwaretest_ui": {
+      "passed": true
+    }
+  },
+  "verification_boundary": "Offline only. Real PF_CAN sockets prohibited by audit hooks; no arm movement during integration.",
+  "unchanged_workflow": "Center/open/load/close gripper, approach start, endpoint settling, camera alignment, normal/hardwaretest striking; --test unchanged.",
+  "record3_movement_duration_s": 4.8,
+  "record3_trajectory_equivalence_tolerance_rad": 2e-14
+}

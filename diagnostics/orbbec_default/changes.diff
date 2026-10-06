@@ -1,0 +1,108 @@
+--- diagnostics/orbbec_default/before/camera_search/camera.py	2026-09-18 14:07:49.120147099 -0700
++++ camera_search/camera.py	2026-10-03 23:58:42.817356082 -0700
+@@ -13,6 +13,7 @@
+ 
+ from camera_search.protocol import DetectionSender, has_required_detection
+ from camera_search.vision import cymbal_grid_geometry
++from camera_search.device import add_camera_argument, open_camera
+ 
+ 
+ CYMBAL_GRID_COLOR = (255, 255, 255)
+@@ -66,7 +67,7 @@
+     parser.add_argument("--lighting-profile", type=Path, default=None)
+     parser.add_argument("--preprocessing", choices=("local", "reference", "none"), default=None)
+     parser.add_argument("--no-normalization", action="store_true")
+-    parser.add_argument("--camera", type=int, default=0)
++    add_camera_argument(parser)
+     parser.add_argument("--model", type=Path, default=None)
+     parser.add_argument("--imgsz", type=int, default=None)
+     parser.add_argument("--conf", type=float, default=None)
+@@ -107,19 +108,11 @@
+         print(f"Preprocessing: {mode}", flush=True)
+         print(f"Model: {model_path}; input: {imgsz}; required: drumstick + YOLO pose tip", flush=True)
+ 
+-        camera = cv2.VideoCapture(args.camera)
+-        if args.width:
+-            camera.set(cv2.CAP_PROP_FRAME_WIDTH, args.width)
+-        if args.height:
+-            camera.set(cv2.CAP_PROP_FRAME_HEIGHT, args.height)
+-        if not camera.isOpened():
+-            camera.release()
+-            raise RuntimeError(f"could not open camera index {args.camera}")
+-        if not camera.set(cv2.CAP_PROP_FPS, 30):
+-            print("Warning: camera did not accept the 30 FPS request.", flush=True)
++        camera, camera_index = open_camera(args.camera, cv2=cv2,
++                                          width=args.width, height=args.height)
+         if sys.platform.startswith("linux"):
+             try:
+-                settings = set_auto_frame_rate(args.camera, args.allow_low_light_fps)
++                settings = set_auto_frame_rate(camera_index, args.allow_low_light_fps)
+                 low_light = "enabled" if settings["current"] else "disabled"
+                 print(f"Camera: requested 30 FPS; automatic low-light FPS reduction {low_light}.", flush=True)
+             except OSError as exc:
+
+--- diagnostics/orbbec_default/before/launch_right_camera_cartesian.py	2026-09-18 14:20:58.464828637 -0700
++++ launch_right_camera_cartesian.py	2026-10-03 23:58:42.817356082 -0700
+@@ -10,6 +10,7 @@
+ from launch.event_handlers import OnProcessExit
+ from launch.events import Shutdown
+ from launch_ros.actions import Node
++from camera_search.device import add_camera_argument
+ 
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -19,7 +20,7 @@
+ def parse_args():
+     parser = argparse.ArgumentParser(description="Right-arm camera-guided Cartesian search")
+     parser.add_argument("--hardware", action="store_true")
+-    parser.add_argument("--camera", type=int, default=0)
++    add_camera_argument(parser)
+     parser.add_argument("--model", type=Path, default=None)
+     parser.add_argument("--imgsz", type=int, default=None)
+     parser.add_argument("--conf", type=float, default=None)
+
+--- diagnostics/orbbec_default/before/launch_right_camera_playback.py	2026-10-03 11:51:40.526658054 -0700
++++ launch_right_camera_playback.py	2026-10-03 23:58:42.818356148 -0700
+@@ -12,6 +12,7 @@
+ from launch_ros.actions import Node
+ 
+ from camera_playback.hihat import DEFAULT_ESP_PORT
++from camera_search.device import add_camera_argument
+ 
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -48,7 +49,7 @@
+         "--recording", type=Path, default=ROOT / "recordings/record1.json",
+         help="right-arm recording (default: recordings/record1.json)",
+     )
+-    parser.add_argument("--camera", type=int, default=0)
++    add_camera_argument(parser)
+     parser.add_argument("--recording-only", action="store_true",
+                         help="physical no-strike test: recording, verified center, then relax; never align or strike")
+     parser.add_argument("--auto-run", action="store_true",
+
+--- diagnostics/orbbec_default/before/smooth_playback/hardware.py	2026-10-02 22:45:09.865248731 -0700
++++ smooth_playback/hardware.py	2026-10-03 23:58:42.818356148 -0700
+@@ -192,10 +192,10 @@
+         self.thread.start();self.ready.wait(5)
+     def run(self):
+         import cv2
+-        cap=cv2.VideoCapture(0,cv2.CAP_V4L2);writer=None
++        from camera_search.device import open_camera
++        cap=None;writer=None
+         try:
+-            if not cap.isOpened():raise RuntimeError('Camera unavailable')
+-            cap.set(cv2.CAP_PROP_FPS,30)
++            cap,_=open_camera(cv2=cv2)
+             with open(self.directory/'video_frames.csv','w') as f:
+                 out=csv.writer(f);out.writerow(['frame','monotonic_s','phase'])
+                 while not self.stop.is_set():
+@@ -209,7 +209,7 @@
+                     writer.write(frame);out.writerow([self.count,now,self.phase()]);self.count+=1
+         except Exception as e:self.error=str(e);self.ready.set()
+         finally:
+-            cap.release()
++            if cap:cap.release()
+             if writer:writer.release()
+     def close(self):
+         self.stop.set();self.thread.join(5)

@@ -1,0 +1,4 @@
+ST7 hihat audio model hihat_v1: /home/jason/Proyectos3/st7/models/hihat_v1 (matching config, checkpoint and normality reference)
+{"status": "listening", "instrument": "hihat", "label": "hihat_close", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.9, "low_threshold": 0.225, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+{"event": "HIT", "instrument": "hihat", "label": "hihat_close", "time_since_start": 14.83, "event_monotonic": 577986.177159924, "score": 0.99917, "normality_score": 85.8, "notification_monotonic": 577987.044091125}
+{"status": "stopped", "captured_seconds": 22.3}

@@ -1,0 +1,118 @@
+[
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.55
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.3,
+      "up_time": 0.3,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.3,
+      "up_time": 0.3
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 8,
+      "kd": 0.6,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.3,
+      "up_time": 0.3
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "brake": 40.0,
+      "return_time": 0.3
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "brake": 40.0,
+      "return_time": 0.3,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "brake": 40.0,
+      "return_time": 0.3
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12
+    },
+    "repetitions": 2,
+    "stage": "family_calibration"
+  }
+]

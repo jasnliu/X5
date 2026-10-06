@@ -1,0 +1,47 @@
+CAN trace: 86936 frames, duration 187.177 s
+Planned safe scan: 15 points, Y +0.020 through +0.160 m; first outside +0.170 m
+Exact seven-joint stage commands found in order:
+  initial center t=  62.009s J2= +0.00deg
+  Y=+0.020       t= 106.612s J2= +0.00deg
+  Y=+0.030       t= 108.645s J2= +0.00deg
+  Y=+0.040       t= 109.274s J2= +0.00deg
+  Y=+0.050       t= 109.939s J2= +0.00deg
+  Y=+0.060       t= 110.609s J2= +0.00deg
+  Y=+0.070       t= 111.241s J2= +0.00deg
+  Y=+0.080       t= 111.906s J2= +0.00deg
+  Y=+0.090       t= 112.576s J2= +0.00deg
+  Y=+0.100       t= 113.238s J2= +0.00deg
+  Y=+0.110       t= 113.904s J2= +0.00deg
+  Y=+0.120       t= 114.575s J2= +0.00deg
+  Y=+0.130       t= 115.220s J2= +0.00deg
+  Y=+0.140       t= 115.880s J2= +0.00deg
+  Y=+0.150       t= 116.539s J2= +0.00deg
+  Y=+0.160       t= 117.173s J2= +0.00deg
+  final center   t= 117.842s J2= +0.00deg
+Measured Cartesian pose at each completed scan stage (sample immediately before next stage command):
+  goal Y=+0.020: actual X=+0.399 Y=+0.020 Z=+0.249 m
+  goal Y=+0.030: actual X=+0.400 Y=+0.030 Z=+0.250 m
+  goal Y=+0.040: actual X=+0.400 Y=+0.040 Z=+0.250 m
+  goal Y=+0.050: actual X=+0.400 Y=+0.050 Z=+0.250 m
+  goal Y=+0.060: actual X=+0.400 Y=+0.059 Z=+0.250 m
+  goal Y=+0.070: actual X=+0.400 Y=+0.070 Z=+0.250 m
+  goal Y=+0.080: actual X=+0.400 Y=+0.080 Z=+0.250 m
+  goal Y=+0.090: actual X=+0.400 Y=+0.089 Z=+0.250 m
+  goal Y=+0.100: actual X=+0.400 Y=+0.100 Z=+0.250 m
+  goal Y=+0.110: actual X=+0.400 Y=+0.110 Z=+0.250 m
+  goal Y=+0.120: actual X=+0.400 Y=+0.120 Z=+0.250 m
+  goal Y=+0.130: actual X=+0.400 Y=+0.130 Z=+0.250 m
+  goal Y=+0.140: actual X=+0.400 Y=+0.140 Z=+0.251 m
+  goal Y=+0.150: actual X=+0.400 Y=+0.149 Z=+0.250 m
+  goal Y=+0.160: actual X=+0.400 Y=+0.161 Z=+0.250 m
+Left-arm control frames: 0
+Right disable frames: 24
+Last complete right feedback all disabled: True
+Measured Y progression: first=+0.020 m, last=+0.161 m, monotonic=True
+PASS: center/open, close, fixed goal, all 0.01 m +Y commands, final center command, and right-arm disable were observed; no left control commands.
+Additional exact checks:
+  Gripper -3 degree open commands: 361
+  Gripper +7 degree closed commands: 124
+  Last measured joints before disable (deg): +0.16 +0.01 +0.01 +0.05 +0.02 +0.01 +80.24
+  Max customized-center joint error before disable: 0.165 deg
+  Center-before-disable tolerance passed: True

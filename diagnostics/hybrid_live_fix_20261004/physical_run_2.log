@@ -1,0 +1,107 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-04-19-57-34-873798-jason-band37-686035
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [686065]
+[INFO] [rviz2-2]: process started with pid [686066]
+[INFO] [python3-3]: process started with pid [686067]
+[INFO] [python-4]: process started with pid [686068]
+[INFO] [python3-5]: process started with pid [686069]
+[robot_state_publisher-1] [INFO] [1791169054.948444073] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1791169055.301832109] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791169055.301905701] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791169055.315357755] [rviz2]: Stereo is NOT SUPPORTED
+[python3-3] HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth → 100 BPM hybrid swing with partial returns; --test/--hardwaretest unchanged
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: 0 -> /dev/video0
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL VERIFICATION EVIDENCE: /home/jason/Proyectos3/X5/playback_results/swing_verification/20261005T025749-47303546
+[python3-3] VERIFICATION PHASE: {"t": 509217.011956224, "phase": "READY", "status": "Recording preflight passed; waiting for camera, ST7/TONOR, ESP32 hi-hat, and fresh encoders"}
+[python3-3] VERIFICATION PHASE: {"t": 509217.082064824, "phase": "SETTING UP", "status": "Recording preflight passed; centering with J7=80.2\u00b0 and closing gripper to +7\u00b0; recording follows automatically"}
+[python3-3] VERIFICATION PHASE: {"t": 509219.366300207, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+[python3-3] VERIFICATION PHASE: {"t": 509221.918823373, "phase": "MOVING TO RECORDING START", "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] VERIFICATION PHASE: {"t": 509223.699567744, "phase": "RECORDING PLAYBACK", "status": "Smooth recording: 0.00/4.80 s \u2022 STARTING \u2022 camera observations 0"}
+[python3-3] START HOLD 
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 4.8}
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 509231.914713175, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7333499656672, 0.20476168513003543, -0.30516319523918334, 0.6005442893110562], "max_error_deg": 0.02197933771202081, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6012449099798687, "tolerance_deg": 0.05}
+[python3-3] VERIFICATION PHASE: {"t": 509232.070342525, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"}
+[python3-3] PINK ZONE CONFIRMED ONCE (camera frame 867); starting the J7 hit search at 5°, then increasing by 1°
+[python3-3] HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 11°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+[python3-3] VERIFICATION PHASE: {"t": 509233.003685634, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22125\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509233.927121807, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u22125\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −5°: measured peak 5.231°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509234.215340104, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u22125\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509235.077905799, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22126\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509235.175772361, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u22126\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −6°: measured peak 6.132°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509235.500333207, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u22126\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509236.133476972, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22127\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509236.234494593, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u22127\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −7°: measured peak 7.143°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509236.532160351, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u22127\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509237.463447718, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22128\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509237.560819143, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u22128\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −8°: measured peak 8.242°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509237.882581104, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u22128\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509238.563903215, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22129\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509238.665684938, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u22129\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −9°: measured peak 9.165°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509239.000408001, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u22129\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509239.72664276, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u221210\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509239.864988451, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u221210\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −10°: measured peak 10.110°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509240.136793774, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u221210\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-3] VERIFICATION PHASE: {"t": 509241.010703255, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u221211\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] VERIFICATION PHASE: {"t": 509241.11845815, "phase": "STRIKE RETURNING TO CYMBAL POSE", "status": "Hybrid hit search: J7 \u221211\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID search −11°: measured peak 10.748°; returned and settled
+[python3-3] VERIFICATION PHASE: {"t": 509241.433171578, "phase": "STRIKE WAITING FOR SOUND", "status": "J7 \u221211\u00b0 attempt returned to the pink-zone pose \u2014 waiting for ST7's finalized audio interval before declaring a miss"}
+[python3-5] {"event": "HIT", "time_since_start": 36.83, "event_monotonic": 509241.090916792, "score": 0.671939, "normality_score": 48.9, "notification_monotonic": 509241.854447278}
+[python3-3] ST7 CYMBAL HIT DETECTED on J7 −11° attempt — selecting this first detected depth
+[python3-3] HYBRID first detected depth 11°: 100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases
+[python3-3] VERIFICATION PHASE: {"t": 509241.880058415, "phase": "100 BPM STRIKE WAITING", "status": "HYBRID first detected depth 11\u00b0: 100 BPM swing + hi-hat; 4\u00b0 minimum rebound before partial-return releases"}
+[python3-3] VERIFICATION PHASE: {"t": 509241.917170099, "phase": "100 BPM STRIKE MOVING OUT", "status": "HYBRID first detected depth 11\u00b0: 100 BPM swing + hi-hat; 4\u00b0 minimum rebound before partial-return releases"}
+[python3-3] VERIFICATION PHASE: {"t": 509241.991714355, "phase": "100 BPM STRIKE RETURNING", "status": "HYBRID first detected depth 11\u00b0: 100 BPM swing + hi-hat; 4\u00b0 minimum rebound before partial-return releases"}
+[python3-3] HYBRID swing 1 (pickup (extra before beat 1)): target 11°; arrival error +0.0 ms; partial returns 0
+[python3-3] J7 STRIKE LOW strike 1 [pickup (extra before beat 1), hybrid]: 10.68 deg down from anchor; lowest J7 encoder: 23.70 deg; commanded: 11 deg
+[python3-3] VERIFICATION PHASE: {"t": 509242.168065492, "phase": "100 BPM STRIKE MOVING OUT", "status": "HYBRID first detected depth 11\u00b0: 100 BPM swing + hi-hat; 4\u00b0 minimum rebound before partial-return releases"}
+[python3-3] VERIFICATION PHASE: {"t": 509242.312157936, "phase": "100 BPM STRIKE RETURNING", "status": "100 BPM swing beat 1: hi-hat motor 2 CLOSE 110\u00b0 on the main-beat deadline"}
+[python3-3] HYBRID FAULT: Hybrid target arrival missed swing grid — stopping strikes; holding while recovering position control for Center + Relax
+[python3-3] VERIFICATION PHASE: {"t": 509242.458561078, "phase": "HYBRID HOLD FAULT", "status": "HYBRID FAULT: Hybrid target arrival missed swing grid \u2014 stopping strikes; holding while recovering position control for Center + Relax"}
+[python3-3] HYBRID RECOVERY: confirming CSP at measured pose, then centering; not relaxed
+[python3-3] VERIFICATION PHASE: {"t": 509242.503584735, "phase": "HYBRID LEAVING MIT SESSION", "status": "HYBRID FAULT: Hybrid target arrival missed swing grid \u2014 stopping strikes; holding while recovering position control for Center + Relax"}
+[python3-3] VERIFICATION PHASE: {"t": 509242.66913813, "phase": "CENTER RELAX RECENTERING", "status": "Hybrid stopped; position mode confirmed \u2014 centering, then relaxing"}
+[python3-5] {"event": "HIT", "time_since_start": 38.01, "event_monotonic": 509242.27092641796, "score": 0.386673, "normality_score": 60.9, "notification_monotonic": 509243.112086216}
+[python3-3] ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "CENTER RELAX RECENTERING", "onset": 509242.27092641796, "detected_at": 509243.112194154, "release": 509240.998618041, "returned": 509241.400296617}
+[python3-3] CENTER VERIFIED BEFORE RELAX: {"t": 509248.167053433, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.05494834428010291, "span_deg": 0.06593801313616421, "settled_s": 0.6290119820041582}
+[python3-3] VERIFICATION PHASE: {"t": 509248.190181029, "phase": "RELAXING", "status": "Center + Relax complete; centered; right motors disabled \u2014 confirming disabled feedback"}
+[python3-3] VERIFICATION PHASE: {"t": 509248.22912684, "phase": "RELAXED", "status": "Right motors disabled"}
+[python3-3] PHYSICAL SWING RESULT: {"success": false, "physical": true, "duration_s": 0.0, "encoder_strikes": 1, "audio_hits": 0, "audio_matched_strikes": 0, "audio_span_s": 0.0, "faults": [{"t": 509242.334420353, "source": "hybrid", "message": "Hybrid target arrival missed swing grid"}], "center": {"t": 509248.167053433, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.05494834428010291, "span_deg": 0.06593801313616421, "settled_s": 0.6290119820041582}, "relaxed_verified": true, "bottoms": [{"at": 509242.019236309, "count": 1, "lateness": 0.0, "peak": 0.1864353398947145, "partial_returns": 0, "q": 0.415259784847791, "target_degrees": 11}], "audio": []}
+[python3-3] CLOSE REQUEST: center and verify before disabling or exiting
+[INFO] [python3-3]: process has finished cleanly [pid 686067]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791169101.193894619] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791169101.194296073] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20261004_195736_020219.mp4
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 686065]
+[python3-5] {"status": "stopped", "captured_seconds": 44.2}
+[INFO] [rviz2-2]: process has finished cleanly [pid 686066]
+[INFO] [python-4]: process has finished cleanly [pid 686068]
+[INFO] [python3-5]: process has finished cleanly [pid 686069]

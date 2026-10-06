@@ -1,0 +1,517 @@
+{
+  "method": "Offline WAV broadband/high-frequency onset proposals followed by assistant visual review of all 30 positive waveforms/spectrograms and all 34 enlarged onset windows; 30 negatives reviewed separately. No trained model or auditory review.",
+  "label_status": "draft_visual_signal_review",
+  "human_verified": false,
+  "auditory_review_performed": false,
+  "target": "hihat_close",
+  "motor_timestamps_are_labels": false,
+  "timing_note": "Timestamps use a consistent main broadband attack convention. Six decimal places encode sample-based placement, not sub-millisecond semantic certainty; early contact/motor transients can differ by several milliseconds.",
+  "limitations": [
+    "Single new hi-hat recording session; no independent held-out session.",
+    "Ride-negative copies retain their original session group.",
+    "Mixed depth and relative command offset are paired, not a full factorial experiment.",
+    "Manual auditory review remains recommended before training."
+  ],
+  "reviewed_plots": [
+    "review_page_1.png",
+    "review_page_2.png",
+    "review_page_3.png",
+    "review_page_4.png",
+    "review_page_5.png",
+    "review_page_6.png",
+    "onset_details_1.png",
+    "onset_details_2.png",
+    "onset_details_3.png",
+    "onset_details_4.png",
+    "onset_details_5.png",
+    "background_review.png",
+    "ride_negative_review_1.png",
+    "ride_negative_review_2.png"
+  ],
+  "examples": [
+    {
+      "accepted": true,
+      "block": 1,
+      "clip_start_seconds": 41.4256875,
+      "clip_end_seconds": 47.6311875,
+      "onsets_raw_seconds": [
+        42.9256875,
+        44.1311875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 2,
+      "clip_start_seconds": 48.510375,
+      "clip_end_seconds": 53.635375,
+      "onsets_raw_seconds": [
+        50.135375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 3,
+      "clip_start_seconds": 54.3875,
+      "clip_end_seconds": 59.6375,
+      "onsets_raw_seconds": [
+        56.1375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 4,
+      "clip_start_seconds": 60.2576875,
+      "clip_end_seconds": 65.6326875,
+      "onsets_raw_seconds": [
+        62.1326875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 5,
+      "clip_start_seconds": 66.1341875,
+      "clip_end_seconds": 71.6341875,
+      "onsets_raw_seconds": [
+        68.1341875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 6,
+      "clip_start_seconds": 72.6335,
+      "clip_end_seconds": 77.6335,
+      "onsets_raw_seconds": [
+        74.1335
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 7,
+      "clip_start_seconds": 78.51175,
+      "clip_end_seconds": 83.63675,
+      "onsets_raw_seconds": [
+        80.13675
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 8,
+      "clip_start_seconds": 84.3940625,
+      "clip_end_seconds": 90.844625,
+      "onsets_raw_seconds": [
+        86.1440625,
+        87.344625
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 9,
+      "clip_start_seconds": 91.467875,
+      "clip_end_seconds": 96.842875,
+      "onsets_raw_seconds": [
+        93.342875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 10,
+      "clip_start_seconds": 97.3449375,
+      "clip_end_seconds": 102.8449375,
+      "onsets_raw_seconds": [
+        99.3449375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 11,
+      "clip_start_seconds": 103.8499375,
+      "clip_end_seconds": 110.052125,
+      "onsets_raw_seconds": [
+        105.3499375,
+        106.552125
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 12,
+      "clip_start_seconds": 110.9275,
+      "clip_end_seconds": 116.0525,
+      "onsets_raw_seconds": [
+        112.5525
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 13,
+      "clip_start_seconds": 116.804125,
+      "clip_end_seconds": 122.054125,
+      "onsets_raw_seconds": [
+        118.554125
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 14,
+      "clip_start_seconds": 122.6794375,
+      "clip_end_seconds": 128.0544375,
+      "onsets_raw_seconds": [
+        124.5544375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 15,
+      "clip_start_seconds": 128.56,
+      "clip_end_seconds": 134.06,
+      "onsets_raw_seconds": [
+        130.56
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 16,
+      "clip_start_seconds": 135.0604375,
+      "clip_end_seconds": 141.2613125,
+      "onsets_raw_seconds": [
+        136.5604375,
+        137.7613125
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 17,
+      "clip_start_seconds": 142.141,
+      "clip_end_seconds": 147.266,
+      "onsets_raw_seconds": [
+        143.766
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 18,
+      "clip_start_seconds": 148.0176875,
+      "clip_end_seconds": 153.2676875,
+      "onsets_raw_seconds": [
+        149.7676875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 19,
+      "clip_start_seconds": 153.893,
+      "clip_end_seconds": 159.268,
+      "onsets_raw_seconds": [
+        155.768
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 20,
+      "clip_start_seconds": 159.7675,
+      "clip_end_seconds": 165.2675,
+      "onsets_raw_seconds": [
+        161.7675
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening."
+    },
+    {
+      "accepted": true,
+      "block": 21,
+      "clip_start_seconds": 230.999375,
+      "clip_end_seconds": 235.999375,
+      "onsets_raw_seconds": [
+        232.499375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 22,
+      "clip_start_seconds": 236.8806875,
+      "clip_end_seconds": 242.0056875,
+      "onsets_raw_seconds": [
+        238.5056875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 23,
+      "clip_start_seconds": 242.7560625,
+      "clip_end_seconds": 248.0060625,
+      "onsets_raw_seconds": [
+        244.5060625
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 24,
+      "clip_start_seconds": 248.6315625,
+      "clip_end_seconds": 254.0065625,
+      "onsets_raw_seconds": [
+        250.5065625
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 25,
+      "clip_start_seconds": 254.5141875,
+      "clip_end_seconds": 260.0141875,
+      "onsets_raw_seconds": [
+        256.5141875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 26,
+      "clip_start_seconds": 261.013375,
+      "clip_end_seconds": 266.013375,
+      "onsets_raw_seconds": [
+        262.513375
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 27,
+      "clip_start_seconds": 266.889625,
+      "clip_end_seconds": 272.014625,
+      "onsets_raw_seconds": [
+        268.514625
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 28,
+      "clip_start_seconds": 272.7763125,
+      "clip_end_seconds": 278.0263125,
+      "onsets_raw_seconds": [
+        274.5263125
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 29,
+      "clip_start_seconds": 278.6453125,
+      "clip_end_seconds": 284.0203125,
+      "onsets_raw_seconds": [
+        280.5203125
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 30,
+      "clip_start_seconds": 284.5216875,
+      "clip_end_seconds": 290.0216875,
+      "onsets_raw_seconds": [
+        286.5216875
+      ],
+      "notes": "Waveform, spectrogram and enlarged onset proposal visually reviewed. Timestamp marks the main broadband closure attack, not motor command/opening. Ride overlap retained as positive; no label added for the ride attack."
+    },
+    {
+      "accepted": true,
+      "block": 31,
+      "clip_start_seconds": 10.8381875,
+      "clip_end_seconds": 16.8181875,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 32,
+      "clip_start_seconds": 16.838625,
+      "clip_end_seconds": 22.818625,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 33,
+      "clip_start_seconds": 22.8413125,
+      "clip_end_seconds": 28.8213125,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 34,
+      "clip_start_seconds": 28.8438125,
+      "clip_end_seconds": 34.8238125,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 35,
+      "clip_start_seconds": 34.84525,
+      "clip_end_seconds": 40.82525,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 36,
+      "clip_start_seconds": 165.69625,
+      "clip_end_seconds": 171.67625,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 37,
+      "clip_start_seconds": 171.698625,
+      "clip_end_seconds": 177.678625,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 38,
+      "clip_start_seconds": 177.7000625,
+      "clip_end_seconds": 183.6800625,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 39,
+      "clip_start_seconds": 183.7011875,
+      "clip_end_seconds": 189.6811875,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "block": 40,
+      "clip_start_seconds": 189.7053125,
+      "clip_end_seconds": 195.6853125,
+      "onsets_raw_seconds": [],
+      "notes": "No closure scheduled. Full background waveform and spectrogram visually reviewed; incidental non-target noise retained."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r1",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r2",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r3",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r4",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r5",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r6",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r7",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r8",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r9",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r10",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r11",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r12",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r21",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r22",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r23",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r24",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r25",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r26",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r27",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    },
+    {
+      "accepted": true,
+      "ride_id": "r28",
+      "notes": "Previously collected ride-only source, preserved byte-for-byte. Full waveform/spectrogram reviewed. Target-specific negative CSV has no hi-hat labels."
+    }
+  ]
+}

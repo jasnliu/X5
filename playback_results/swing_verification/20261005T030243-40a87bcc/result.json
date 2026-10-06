@@ -1,0 +1,80 @@
+{
+  "success": false,
+  "physical": true,
+  "duration_s": 1.2128228620276786,
+  "encoder_strikes": 4,
+  "audio_hits": 0,
+  "audio_matched_strikes": 0,
+  "audio_span_s": 0.0,
+  "faults": [
+    {
+      "t": 509536.598300177,
+      "source": "hybrid",
+      "message": "Hybrid target arrival missed swing grid"
+    }
+  ],
+  "center": {
+    "t": 509542.360763969,
+    "goal_rad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4
+    ],
+    "actual_rad": [
+      0.0005754177157246687,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00029659014262470307,
+      0.00019180590524214836,
+      1.4003749141680029
+    ],
+    "max_error_deg": 0.0989070197042463,
+    "span_deg": 0.1098966885603076,
+    "settled_s": 0.6160643979674205
+  },
+  "relaxed_verified": true,
+  "bottoms": [
+    {
+      "at": 509535.098582536,
+      "count": 1,
+      "lateness": 0.0,
+      "peak": 0.17607782101167402,
+      "partial_returns": 0,
+      "q": 0.42446646829938217,
+      "target_degrees": 10
+    },
+    {
+      "at": 509535.368595751,
+      "count": 2,
+      "lateness": 0.07001321500865743,
+      "peak": 0.17454337376974216,
+      "partial_returns": 1,
+      "q": 0.4275353627832459,
+      "target_degrees": 10
+    },
+    {
+      "at": 509535.906690224,
+      "count": 3,
+      "lateness": 0.00810768804512918,
+      "peak": 0.17722865644312336,
+      "partial_returns": 1,
+      "q": 0.43405676356145584,
+      "target_degrees": 10
+    },
+    {
+      "at": 509536.311405398,
+      "count": 4,
+      "lateness": 0.012822862016037107,
+      "peak": 0.17607782101167402,
+      "partial_returns": 1,
+      "q": 0.4355912108033877,
+      "target_degrees": 10
+    }
+  ],
+  "audio": []
+}

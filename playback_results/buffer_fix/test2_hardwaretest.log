@@ -1,0 +1,76 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-03-12-03-39-022079-jason-band37-443987
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [444011]
+[INFO] [rviz2-2]: process started with pid [444012]
+[INFO] [python3-3]: process started with pid [444013]
+[INFO] [python-4]: process started with pid [444014]
+[INFO] [python3-5]: process started with pid [444015]
+[robot_state_publisher-1] [INFO] [1791054219.119110307] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1791054219.475595403] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791054219.475693924] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791054219.489811936] [rviz2]: Stereo is NOT SUPPORTED
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] NO-STRIKE RECORDING-ONLY MODE; evidence: /home/jason/Proyectos3/X5/playback_results/start_beat_recording_only/20261003T190339-b7e2b022
+[python3-3] RECORDING ONLY PHASE: {"t": 394381.063070651, "phase": "READY", "status": "Recording-only preflight passed; waiting for fresh camera frames and encoders; no strikes"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394381.123129444, "phase": "SETTING UP", "status": "Recording preflight passed; confirming all drives at their live poses, then centering with J7=80.2\u00b0 and opening gripper to \u22123\u00b0"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394383.480123556, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394386.261689532, "phase": "WAITING FOR LOAD", "status": "Centered with gripper open at \u22123\u00b0 \u2014 load the drumstick, then press Continue (the recording and pink-zone alignment run next)"}
+[python3-3] RECORDING ONLY: gripper closes in 5 seconds; keep hands clear
+[python3-3] RECORDING ONLY PHASE: {"t": 394391.330339274, "phase": "CLOSING GRIPPER", "status": "Closing gripper to +7\u00b0 \u2014 recording starts in 0.7 s"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394392.083480828, "phase": "MOVING TO RECORDING START", "status": "Gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394393.820868775, "phase": "RECORDING PLAYBACK", "status": "Smooth recording: 0.00/4.80 s \u2022 STARTING \u2022 camera observations 0"}
+[python3-3] START HOLD 
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 4.8}
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 394401.452687339, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7333499656672, 0.20514529694051795, -0.30516319523918334, 0.6005442893110562], "max_error_deg": 0.02197933771202081, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6022961419657804, "tolerance_deg": 0.05}
+[python3-3] CHECKING RECORDING ONLY RECENTER 
+[python3-3] RECORDING ONLY RECENTER {"duration_s": 11.60725423437857}
+[python3-3] RECORDING ONLY: NOT RELAXED; operator attention required: Encoder feedback lost
+[python3-3] RECORDING ONLY RESULT: {"reason": "Recording endpoint verified", "playback_success": true, "success": false, "center": null, "relaxed_verified": false, "worker_directory": "/home/jason/Proyectos3/X5/playback_results/start_beat/20261003T190405-a21a3051", "error": "Encoder feedback lost"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394402.130469851, "phase": "SAFE HOLD - NOT RELAXED", "status": "NOT RELAXED: Encoder feedback lost"}
+[python3-3] RECORDING ONLY PHASE: {"t": 394649.7055401, "phase": "CENTER RELAX RECENTERING", "status": "Center + Relax requested \u2014 returning from the current pose to customized right center, then disabling the right arm"}
+[python3-3] CHECKING RECORDING ONLY RECENTER 
+[python3-3] RECORDING ONLY RECENTER {"duration_s": 1.0}
+[python3-3] RECORDING ONLY RECENTER SETTLED 
+[python3-3] RECORDING ONLY RESULT: {"reason": "Center + Relax complete; centered; right motors disabled", "playback_success": false, "success": false, "center": {"t": 394656.582016986, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.3999913023575203], "max_error_deg": 0.010989668856061292, "settle_range_deg": 0.0439586754241434, "settled_seconds": 0.600020123005379, "tolerance_deg": 0.2}, "relaxed_verified": true, "worker_directory": "/home/jason/Proyectos3/X5/playback_results/start_beat/20261003T190405-a21a3051", "disable_center_evidence": {"t": 394656.741157124, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.032969006568082104, "span_deg": 0.0439586754241434, "settled_s": 0.6494444799609482}}
+[python3-3] RECORDING ONLY PHASE: {"t": 394656.786454057, "phase": "RELAXED", "status": "Recording-only complete: centered, then relaxed; no alignment or strikes"}
+[INFO] [python3-3]: process has finished cleanly [pid 444013]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791054509.694814353] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791054509.695388597] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/X5/playback_results/buffer_fix/test2_video.mp4
+[python-4] Traceback (most recent call last):
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 204, in <module>
+[python-4]     raise SystemExit(main())
+[python-4]                      ^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 200, in main
+[python-4]     return base_camera.main()
+[python-4]            ^^^^^^^^^^^^^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_search/camera.py", line 145, in main
+[python-4]     ok, frame = camera.read()
+[python-4]                 ^^^^^^^^^^^^^
+[python-4] KeyboardInterrupt
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 444011]
+[INFO] [rviz2-2]: process has finished cleanly [pid 444012]
+[python3-5] {"status": "stopped", "captured_seconds": 288.6}
+[ERROR] [python-4]: process has died [pid 444014, exit code -2, cmd '/home/jason/Proyectos3/Y2/.venv/bin/python /home/jason/Proyectos3/X5/camera_playback/camera.py --socket /tmp/x5-right-camera-playback-443987.sock --root /home/jason/Proyectos3/Y2 --camera 0 --device auto --process-every 1 --output /home/jason/Proyectos3/X5/playback_results/buffer_fix/test2_video.mp4'].
+[INFO] [python3-5]: process has finished cleanly [pid 444015]

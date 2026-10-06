@@ -1,0 +1,128 @@
+"""Temporary, authorized physical playback + MIT-hold audit. No strike requests."""
+import argparse
+import json
+import math
+import os
+from pathlib import Path
+import time
+
+import numpy as np
+import rclpy
+from camera_playback.app import App, DEFAULT_RECORDING, HARDWARE_TEST_READY_PHASE, HARDWARE_TEST_HOLD_PHASE
+
+class PlaybackHoldAudit(App):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.audit_started=False
+        self.audit_continued=False
+        self.audit_fault=None
+        self.audit_phase=None
+        self.audit_hold_at=None
+        self.audit_last_log=0.
+        self.audit_ready_samples=0
+        self.audit_samples=0
+        self.audit_center_requested=False
+        self.audit_started_at=time.monotonic()
+        self.audit_events=[]
+        self.root.after(50,self.audit_tick)
+
+    def event(self,event,**values):
+        row={'event':event,'at':time.monotonic(),'phase':self.phase,**values}
+        self.audit_events.append(row)
+        Path('/tmp/x5-live-mit-evidence.json').write_text(json.dumps(self.audit_events,indent=2))
+        print('PHYSICAL AUDIT '+json.dumps(row),flush=True)
+
+    def fail(self,message):
+        self.audit_fault=str(message)
+        session=getattr(self,'hardware_test_session',None)
+        self.event('fault_details', message=str(message), encoders_deg=np.rad2deg(self.arm()).tolist(), worker=repr(session.status) if session else None)
+        print('PHYSICAL AUDIT FAULT '+str(message),flush=True)
+        super().fail(message)
+
+    def _begin_playback_alignment(self,now):
+        # Test-only bypass explicitly authorized for the unloaded/no-stick arm.
+        # Production loading and visual alignment behavior is NOT changed.
+        super()._begin_playback_alignment(now)
+        if self.phase!='CHECKING PLAYBACK END':return
+        self.alignment_active=False
+        self.control=None
+        self.event('recording_physically_finished',
+                   encoders_deg=np.rad2deg(self.arm()).tolist(),
+                   target_deg=np.rad2deg(self.playback_trajectory.last_joints).tolist())
+        self.event('test_only_visual_acceptance_bypass',
+                   detail='No stick; using recorded endpoint for MIT hold, not claiming pink-zone detection')
+        self._prepare_hardware_test_manual_strikes(-1,self.arm().copy())
+
+    def audit_tick(self):
+        now=time.monotonic()
+        if self.phase!=self.audit_phase:
+            self.audit_phase=self.phase
+            self.event('phase',status=self.status.get())
+        if self.audit_fault:
+            # Keep the existing powered fault hold alive for inspection, not an
+            # unsolicited release at a raised pose. The agent will inspect it.
+            self.root.after(100,self.audit_tick)
+            return
+        if not self.audit_started:
+            if self.phase=='READY' and self.bus.fresh() and self._camera_ready_for_start():
+                self.start()
+                if self.phase=='PLAYBACK PREFLIGHTED':
+                    self.audit_started=True
+                    self.event('start_authorized_playback',recording=str(self.playback_trajectory.source))
+        elif self.phase=='WAITING FOR LOAD' and not self.audit_continued:
+            self.continue_motion()
+            if self.phase=='CLOSING GRIPPER':
+                self.audit_continued=True
+                self.event('skip_human_stick_loading',detail='Empty gripper; no strikes will be requested')
+        session=getattr(self,'hardware_test_session',None)
+        if session is not None and session.status.sample is not None and session.status.phase == 'hold':
+            status=session.status
+            if self.audit_hold_at is None:
+                self.audit_hold_at=now
+                self.event('physical_mit_hold_started',pid=session.process.pid)
+            self.audit_samples+=1
+            if self._hardware_test_session_ready():self.audit_ready_samples+=1
+            if now-self.audit_last_log>=5:
+                self.audit_last_log=now
+                self.event('mit_hold_measurement',elapsed=now-self.audit_hold_at,
+                           ready=status.ready, q_deg=math.degrees(status.sample.position),
+                           velocity=status.sample.velocity,
+                           error_deg=math.degrees(status.sample.position-self.hardware_test_anchor[6]),
+                           last_gap_ms=status.last_gap*1000,max_gap_ms=status.max_gap*1000,
+                           feedback_age_ms=status.feedback_age*1000,
+                           hold_recoveries=status.hold_recoveries,
+                           commands_sent=status.commands_sent,error=status.error)
+            if (now-self.audit_hold_at>=60 and self._hardware_test_session_ready()
+                    and not self.audit_center_requested):
+                self.event('physical_mit_hold_passed',duration=now-self.audit_hold_at,
+                           samples=self.audit_samples,ready_samples=self.audit_ready_samples,
+                           max_gap_ms=status.max_gap*1000,recoveries=status.hold_recoveries)
+                self.center_relax()
+                self.audit_center_requested=True
+        if self.audit_center_requested and self.phase=='RELAXED':
+            self.event('PASS',detail='Real recording completed, 60 s real MIT hold without fault, centered and relaxed',
+                       states={str(key):val[1] for key,val in self.bus.states.items()})
+            self.root.after(100,self.root.quit)
+            return
+        if now-self.audit_started_at>240:
+            self.event('audit_timeout',status=self.status.get())
+            self.audit_fault='Timed out; agent inspection required'
+        self.root.after(20,self.audit_tick)
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--hardwaretest',action='store_true')
+    parser.add_argument('--detection-socket',required=True)
+    parser.add_argument('--audio-socket',required=True)
+    parser.add_argument('--esp-port')
+    parser.add_argument('--recording',type=Path,default=DEFAULT_RECORDING)
+    args=parser.parse_args()
+    if not args.hardwaretest:raise SystemExit('This audit requires explicitly authorized hardwaretest')
+    rclpy.init(args=[])
+    app=PlaybackHoldAudit(True,args.detection_socket,args.audio_socket,args.recording,hardware_test_mode=True)
+    try:app.run()
+    finally:
+        if rclpy.ok():rclpy.shutdown()
+    return 1 if app.audit_fault else 0
+
+if __name__=='__main__':raise SystemExit(main())

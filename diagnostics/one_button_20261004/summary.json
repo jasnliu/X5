@@ -1,0 +1,24 @@
+{
+  "scope": "Normal start_beat.sh --hardware one-button startup only",
+  "workflow": "RUN -> center + close gripper -> verify closure -> recording -> camera alignment -> hybrid depth search -> first-hit 100 BPM hybrid swing with partial returns",
+  "checks": {
+    "unit_tests": 450,
+    "unit_result": "PASS",
+    "single_run_tests": 10,
+    "mocked_normal_hardware_tk": "PASS",
+    "hardwaretest_tk_offline": "PASS",
+    "test_mode_tk": "PASS",
+    "preview_tk": "PASS",
+    "python_compile": "PASS",
+    "bash_syntax": "PASS",
+    "launcher_help": "PASS"
+  },
+  "physical_hardware_operated": false,
+  "unchanged": [
+    "test and hardwaretest startup contracts",
+    "recording-only startup",
+    "hybrid strike controller and partial returns",
+    "recordings",
+    "hardware tuning"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "selected_method": "paced_precise",
+  "duration_s": 4.8,
+  "original_duration_s": 3.841315,
+  "successful_runs": 4,
+  "all_run_median_improvement": {
+    "baseline": {
+      "position_percent": 8.523830384805242,
+      "velocity_percent": 13.61270813341574
+    },
+    "legacy_gui": {
+      "position_percent": 11.485069108848922,
+      "velocity_percent": 17.781415267395307
+    },
+    "paced_kp20": {
+      "position_percent": 6.482265119269237,
+      "velocity_percent": 1.85183985109576
+    }
+  },
+  "reason": "Best repeated speed-eligible balance of measured ripple and precise endpoint. Slow methods disqualified. Raw cap-10 endpoint accuracy was insufficient; original-gain endpoint restoration fixes that without slowing the movement.",
+  "all_data": "comparison.json",
+  "final_verification": {
+    "all_16_motors_relaxed": true,
+    "gains": {
+      "1": 80.0,
+      "2": 80.0,
+      "3": 60.0,
+      "4": 60.0,
+      "5": 30.0,
+      "6": 30.0,
+      "7": 30.0
+    },
+    "can_healthy_zero_current_errors": true,
+    "protected_existing_files": 265,
+    "changed_files": [],
+    "final_runtime_matches_physical_test": true,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "final_session": "playback_results/20261003T054749-paced_precise-c1515a",
+    "postflight_directory": "playback_results/postflight_20261003T054933"
+  }
+}

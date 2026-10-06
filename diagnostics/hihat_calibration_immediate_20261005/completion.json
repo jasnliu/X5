@@ -1,0 +1,35 @@
+{
+  "implemented": true,
+  "startup": "first tick after controller, firmware telemetry and hi-hat detector readiness",
+  "notification": false,
+  "countdown": false,
+  "focused_tests": 71,
+  "full_tests": 571,
+  "tests_passed": true,
+  "mocked_ui": {
+    "success": true,
+    "actual_normal_hardware_app": true,
+    "physical_io": false,
+    "synthetic_hit": true,
+    "angle": 95,
+    "automatic_without_button": true,
+    "startup_latency_seconds": 0.05942253803368658,
+    "notification": false,
+    "countdown": false,
+    "arm_active": false,
+    "phase": "READY"
+  },
+  "protected": {
+    "checked_files": 523,
+    "changed_files": [],
+    "unchanged": true
+  },
+  "physical_hardware_test_this_change": false,
+  "firmware_changed_or_flashed": false,
+  "changed_files": [
+    "camera_playback/hihat_calibration_runtime.py",
+    "tests/test_hihat_calibration.py",
+    "README.md",
+    "esp32_hihat/README.md"
+  ]
+}

@@ -1,0 +1,213 @@
+--- playback_results/start_beat_integration/app.before.py	2026-09-30 22:48:25.326428821 -0700
++++ camera_playback/app.py	2026-10-02 23:33:50.006510548 -0700
+@@ -52,6 +52,8 @@
+     build_strike_plan,
+ )
+ from .trajectory import PlaybackFollower, load_playback_trajectory
++from .smooth_recording import SmoothRecording, load_smooth_recording
++from .smooth_recording_worker import RecordingSession
+ from .visual import (
+     PlaybackVisualSample,
+     infer_direction_order,
+@@ -64,8 +66,8 @@
+ ROOT = Path(__file__).resolve().parents[1]
+ RECORDINGS_DIR = ROOT / "recordings"
+ DEFAULT_RECORDING = RECORDINGS_DIR / "record1.json"
+-# Feed the fitted trajectory to the position controllers in small 20 ms steps.
+-# Encoder feedback remains independently monitored by Motors.
++# Legacy simulation/preview playback; physical playback uses an independent
++# 200 Hz paced_precise worker, leaving the rest of the GUI workflow unchanged.
+ PLAYBACK_COMMAND_INTERVAL = .02
+ STRIKE_SOUND_WAIT_SECONDS = 1.25
+ STRIKE_SOUND_EVENT_EARLY_TOLERANCE_SECONDS = 0.05
+@@ -176,6 +178,8 @@
+             self.hihat_fault_detail = self.hihat.detail
+         RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
+         self.playback_trajectory = None
++        self.smooth_playback_session = None
++        self.smooth_playback_cleanup_error = None
+         self.playback_active = False
+         self.playback_started_at = None
+         self.playback_last_command = 0.0
+@@ -477,7 +481,10 @@
+             source_name, "Preparing recording validation"
+         )
+         try:
+-            trajectory = load_playback_trajectory(
++            loader = (load_smooth_recording
++                      if getattr(self, "hardware", False) and not self.test_mode
++                      else load_playback_trajectory)
++            trajectory = loader(
+                 path, self.model, self.zone, self.lower, self.upper,
+                 self.center_goal, self.ik.speed,
+                 playback_speed=RIGHT_PLAYBACK_SPEED,
+@@ -502,12 +509,14 @@
+         self.target_offset = self.target_point - self.ik.origin_tcp
+         self.target_inside = True
+         scale = trajectory.time_scale
++        method = ("paced_precise 200 Hz; endpoint-exact; temporary gains restored"
++                  if isinstance(trajectory, SmoothRecording) else
++                  f"smooth 50 Hz; 0.8 rad/s playback limit; velocity-only scale ×{scale:.3f}")
+         self.recording_status.set(
+             f"Recording: {trajectory.source.name} • {trajectory.sample_count} samples • "
+             f"{trajectory.original_duration_s:.2f} s source → "
+             f"{trajectory.duration_s:.2f} s playback "
+-            f"(smooth 50 Hz; 0.8 rad/s playback limit; "
+-            f"velocity-only scale ×{scale:.3f})"
++            f"({method})"
+         )
+         self.recording_label.config(fg="#087f23")
+         if self.test_mode:
+@@ -1275,6 +1284,9 @@
+         super().complete_stage(now)
+ 
+     def _begin_playback(self, now: float) -> None:
++        if isinstance(getattr(self, "playback_trajectory", None), SmoothRecording):
++            self._begin_smooth_playback(now)
++            return
+         # This higher firmware velocity applies only to the recorded path.  Set
+         # the flag first so a partial seven-motor write is restored on failure.
+         self.playback_speed_fast = True
+@@ -1305,6 +1317,9 @@
+         )
+ 
+     def _advance_playback(self, now: float) -> None:
++        if getattr(self, "smooth_playback_session", None) is not None:
++            self._advance_smooth_playback(now)
++            return
+         elapsed = max(0.0, now - self.playback_started_at)
+         desired, finished = self.playback_trajectory.joints_at(elapsed)
+         command = self.playback_follower.update(self.arm(), desired, now)
+@@ -1326,6 +1341,77 @@
+             self.begin_stage("SETTLING RECORDING END", self.playback_trajectory.last_joints)
+             self.status.set("Recorded path complete — settling at its final pose")
+ 
++    def _begin_smooth_playback(self, now: float) -> None:
++        self.control = None
++        self.phase = "RECORDING PLAYBACK"
++        self.playback_active = True
++        self.playback_started_at = now
++        self.playback_visual_samples = []
++        self.playback_frame_ids = set()
++        self.playback_follower = None
++        self.playback_speed_fast = True
++        try:
++            if getattr(self, "smooth_playback_cleanup_error", None):
++                raise RuntimeError(self.smooth_playback_cleanup_error)
++            self.smooth_playback_session = RecordingSession(self.playback_trajectory, self.bus)
++        except Exception as exc:
++            self.playback_active = False
++            self._program_failure("FAILED: smooth recording startup: " + str(exc))
++            return
++        self.result_status.set(
++            "PLAYBACK: paced_precise 200 Hz; observing camera; exact recorded endpoint"
++        )
++        self.result_label.config(fg="navy")
++        self.status.set("Recording start reached — starting smooth recording playback")
++
++    def _advance_smooth_playback(self, now: float) -> None:
++        update = self.smooth_playback_session.poll()
++        desired, _ = self.playback_trajectory.joints_at(update["elapsed"])
++        self.goal = desired.copy()
++        self.target_point = self.hill_ik.position(desired)
++        self.target_offset = self.target_point - self.ik.origin_tcp
++        self.target_inside = True
++        # Display/observe only. No Tk-clock arm targets compete with the worker.
++        self.status.set(
++            f"Smooth recording: {update['elapsed']:.2f}/{self.playback_trajectory.duration_s:.2f} s "
++            f"• {update['phase']} • camera observations {len(self.playback_visual_samples)}"
++        )
++        if not update["done"]:
++            return
++        restored = self._stop_smooth_playback()
++        self.playback_active = False
++        result = update["result"]
++        if not result["success"] or not restored:
++            self._program_failure("FAILED: smooth recording: " + str(
++                result.get("error") or self.smooth_playback_cleanup_error))
++            return
++        # Same endpoint -> settling -> camera alignment transition as before.
++        # Never call playback.sh's recenter/relax workflow here.
++        self.begin_stage("SETTLING RECORDING END", self.playback_trajectory.last_joints)
++        self.status.set("Recorded path complete — original gains restored; settling at its final pose")
++
++    def _stop_smooth_playback(self) -> bool:
++        session = getattr(self, "smooth_playback_session", None)
++        if session is None:
++            return True
++        result = session.stop()  # writer has exited before returning ownership
++        self.smooth_playback_session = None
++        self.playback_active = False
++        if result.get("cleanup_error") or not result.get("gains_restored", False):
++            self.smooth_playback_cleanup_error = (
++                "Smooth playback settings handoff failed: "
++                + str(result.get("cleanup_error") or result.get("error"))
++            )
++            print(self.smooth_playback_cleanup_error, flush=True)
++            return False
++        return True
++
++    def begin_stage(self, name, desired):
++        # Covers ordinary stages and inherited zone/error recovery alike.
++        if not self._stop_smooth_playback():
++            raise RuntimeError(self.smooth_playback_cleanup_error)
++        return super().begin_stage(name, desired)
++
+     def _record_playback_observation(self, message: dict, now: float) -> None:
+         observation = observation_from_message(message)
+         frame_id = message.get("frame_id")
+@@ -2172,6 +2258,9 @@
+             return False
+ 
+     def _restore_playback_speed(self, context: str) -> bool:
++        if not self._stop_smooth_playback():
++            self.fail(self.smooth_playback_cleanup_error)
++            return False
+         if not getattr(self, "playback_speed_fast", False):
+             return True
+         try:
+@@ -2217,6 +2306,7 @@
+         )
+ 
+     def _clear_alignment_state(self) -> None:
++        self._stop_smooth_playback()
+         self._stop_hardware_test_session()
+         super()._clear_alignment_state()
+         self.playback_active = False
+@@ -2299,6 +2389,8 @@
+         super()._program_failure(message)
+ 
+     def fail(self, message):
++        if not self._stop_smooth_playback():
++            message = str(message) + "; " + self.smooth_playback_cleanup_error
+         self._stop_hardware_test_session()
+         message = str(message)
+         if getattr(self, "hardware_test_mode", False) and message.startswith("STALL:"):
+@@ -2545,6 +2637,7 @@
+         super().safety()
+ 
+     def relax(self, message=None):
++        self._stop_smooth_playback()
+         self._stop_hardware_test_session()
+         hihat = getattr(self, "hihat", None)
+         if hihat is not None:
+@@ -2580,9 +2673,19 @@
+             self.playback_speed_fast = False
+ 
+     def run(self):
++        # Parent run() relaxes/closes the bus immediately after mainloop exits.
++        # Join the recording writer first on window close, signal, or exception.
++        mainloop = self.root.mainloop
++        def recording_safe_mainloop(*args, **kwargs):
++            try:
++                return mainloop(*args, **kwargs)
++            finally:
++                self._stop_smooth_playback()
++        self.root.mainloop = recording_safe_mainloop
+         try:
+             super().run()
+         finally:
++            self.root.mainloop = mainloop
+             self.audio_receiver.close()
+             hihat = getattr(self, "hihat", None)
+             if hihat is not None:

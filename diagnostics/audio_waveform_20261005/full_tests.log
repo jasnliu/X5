@@ -1,0 +1,206 @@
+..ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='138025070843984'>
+............ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+...........Camera: orbbec -> /dev/video4 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+.Camera: orbbec -> /dev/video14 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+........Camera: 2 -> /dev/video2
+.Camera: 2 -> /dev/video2 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+...................ST7 CYMBAL HIT DETECTED on J7 −6° attempt — selecting this first detected depth
+...........MIT strike complete: goal 1°, measured peak drop 1.100°, return overshoot 0.050°; encoder position stable — MIT remains enabled
+......MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 CSP powered-hold confirmation missing after rebound
+.HARDWARE-TEST POWERED WORKFLOW FAULT: healthy drives remain powered at their last commanded poses; workflow locked — processed camera detections became stale
+.MIT strike complete: goal 2°, measured peak drop 0.000°, return overshoot 0.000°; encoder position stable — MIT remains enabled
+....MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 run-mode 5 readback missing during hardware test
+.PINK ZONE CONFIRMED ONCE (camera frame 44); holding the fixed pink-zone reference — arming MIT hold; the strike button becomes available after fresh encoder positions stabilize
+.......FAILED: playback ended; could not restore normal right-arm speed: CAN write failed
+.STALL FAULT: immediate right-arm relaxation — STALL: motor 7
+..HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked — Motor 7: CSP enable not confirmed after 3 attempts (run-mode readback=5, feedback operating state=0, encoder=20.000 deg)
+......................PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+...ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+...................FAILED: test camera loss
+......DETECTED: drumstick + observed YOLO tip at actual Y=+0.000 m (active goal Y=+0.000, camera frame 12)
+..Skipped -Z: test seed is infeasible
+.FAILED: cymbal unavailable after gripper close
+.....FAULT: Position timeout — returning to customized right center before relaxing
+STALL FAULT: immediate right-arm relaxation — STALL: motor 3
+..........FAULT: Position timeout — returning to customized right center before relaxing
+FAULT: center command retry pending; motors remain enabled until centered or the user presses EMERGENCY RELAX — Position timeout; temporary CAN congestion
+..FAILED: no drumstick + tip detection; next Y=+0.020 m is outside right zone1
+....SUCCESS: drumstick tip held inside cymbal center cell for 2 seconds (confirmed by camera frame 51)
+...........ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+..ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+........................................................ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+....HI-HAT SOUND (visual only) #1: score=0.980; normality=81.0
+.............................HIHAT CALIBRATION: {"kind": "fault", "at": 584659.690134417, "phase": "WAITING", "angle": null, "detail": "Calibration cancelled; restart the program"}
+.HIHAT CALIBRATION: {"kind": "open", "at": 0.3, "phase": "INITIAL OPENING", "angle": null}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 1.0, "phase": "WAITING", "angle": null, "detail": "Hi-hat detector unavailable for startup calibration"}
+.HIHAT CALIBRATION: {"kind": "open", "at": 0.1, "phase": "INITIAL OPENING", "angle": null}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 3.2, "phase": "WAITING", "angle": null, "detail": "ESP32 calibration v2 status unavailable; install the updated X5 hi-hat firmware"}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 91.0, "phase": "WAITING", "angle": null, "detail": "Hi-hat calibration startup timed out waiting for firmware or detector"}
+................ARM WAIT: hi-hat calibration must finish before ride calibration
+...ARM WAIT: hi-hat calibration must finish before ride calibration
+.............................<Mock name='mock.get()' id='138025065569680'>
+.HIHAT SYNC: {"kind": "fault", "at": 10.0, "detail": "Ride status stale; cancelling future hi-hat edges"}
+.....................<Mock name='mock.get()' id='138025062777824'>
+.<Mock name='mock.get()' id='138024495549952'>
+..<Mock name='mock.get()' id='138025062777824'>
+.HYBRID search −5°: measured peak 5.000°; returned and settled
+.HYBRID swing 1 (pickup): target 5°; arrival error +0.0 ms; partial returns 0
+HYBRID swing 2 (beat 1): target 5°; arrival error +0.0 ms; partial returns 0
+..HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; hard corridor 13°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+.ST7 HIT NOT SELECTED: {"reason": "onset follows this completed return", "phase": "STRIKE MOVING OUT", "onset": 10.6, "detected_at": null, "release": 10.0, "returned": 10.4}
+.<Mock name='mock.get()' id='138024495845488'>
+.ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "STRIKE WAITING FOR SOUND", "onset": 10.2, "detected_at": null, "release": null, "returned": null}
+.ST7 HIT NOT SELECTED: {"reason": "onset precedes this release", "phase": "STRIKE MOVING OUT", "onset": 9.0, "detected_at": null, "release": 10.0, "returned": null}
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='138025063456768'>
+.<Mock name='mock.get()' id='138024495853552'>
+.<Mock name='mock.get()' id='138024495855616'>
+..<Mock name='mock.get()' id='138024495842896'>
+.................................................................CLOSE REQUEST: center and verify before disabling or exiting
+.......MAJOR FAULT EMERGENCY RELAX: STALL: motor 4
+..CENTER VERIFIED BEFORE RELAX: {"t": 584676.08670091, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 584676.088199286, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 584676.089557032, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.............RECORDING PREFLIGHT FAILED: invalid recording
+......RIDE SWING DEPTH: detected 10° + 0.5° = 10.5°
+<Mock name='mock.get()' id='138024495705376'>
+.RIDE SWING DEPTH: detected 12° + 0.5° = 12.5°
+<Mock name='mock.get()' id='138024495994288'>
+....................................ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+............Smooth playback settings handoff failed: readback failed
+......START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "RuntimeError: Recording GUI heartbeat lost"}
+CANCEL HOLD 
+.ERROR {"error": "RuntimeError: Recording worker requires existing CSP mode"}
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ERROR {"error": "RuntimeError: Injected gain restoration failure"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 584734.772745332, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6013741529313847, "tolerance_deg": 0.05}
+..ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+...ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+Hi-hat sound monitor unavailable (required for normal hardware calibration): missing optional hi-hat
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+.............................usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+...........................usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth plus tolerance must be below the 12° motion limit
+...............................
+----------------------------------------------------------------------
+Ran 600 tests in 136.241s
+
+OK

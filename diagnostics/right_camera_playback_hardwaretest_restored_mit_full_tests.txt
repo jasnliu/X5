@@ -1,0 +1,27 @@
+..............ST7 CYMBAL HIT DETECTED on J7 −6° attempt — selecting this first detected depth
+............J7 completed the entered 5° decrease (trigger -5.000°, observed -5.500°); immediate MIT rebound toward the captured starting pose at 3.5 rad/s with KP=10, KD=0.5
+.MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 CSP powered-hold confirmation missing after rebound
+.HARDWARE-TEST POWERED WORKFLOW FAULT: healthy drives remain powered at their last commanded poses; workflow locked — processed camera detections became stale
+.....MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 run-mode 5 readback missing during hardware test
+.PINK ZONE CONFIRMED ONCE (camera frame 44); holding the accepted pink-zone cymbal pose — set the relative J7 freefall amount and press the MIT strike button
+..........FAILED: playback ended; could not restore normal right-arm speed: CAN write failed
+.STALL FAULT: immediate right-arm relaxation — STALL: motor 7
+..MANUAL MIT STRIKE 1: J7 released with minimum non-zero damping KD=0.00007630; a 4.5° encoder decrease triggers the immediate fast rebound; the accepted pink-zone pose remains the rebound anchor
+.HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked — Motor 7: CSP enable not confirmed after 3 attempts (run-mode readback=5, feedback operating state=0, encoder=20.000 deg)
+..................PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+...ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+...................FAILED: test camera loss
+......DETECTED: drumstick + observed YOLO tip at actual Y=+0.000 m (active goal Y=+0.000, camera frame 12)
+..Skipped -Z: test seed is infeasible
+.FAILED: cymbal unavailable after gripper close
+.....FAULT: Position timeout — returning to customized right center before relaxing
+STALL FAULT: immediate right-arm relaxation — STALL: motor 3
+..........FAULT: Position timeout — returning to customized right center before relaxing
+FAULT: center command retry pending; motors remain enabled until centered or the user presses EMERGENCY RELAX — Position timeout; temporary CAN congestion
+..FAILED: no drumstick + tip detection; next Y=+0.020 m is outside right zone1
+....SUCCESS: drumstick tip held inside cymbal center cell for 2 seconds (confirmed by camera frame 51)
+....................................................................................................................
+----------------------------------------------------------------------
+Ran 234 tests in 36.436s
+
+OK

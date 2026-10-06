@@ -1,0 +1,50 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-04-20-11-15-246074-jason-band37-690254
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [690274]
+[INFO] [rviz2-2]: process started with pid [690275]
+[INFO] [python3-3]: process started with pid [690276]
+[INFO] [python-4]: process started with pid [690277]
+[INFO] [python3-5]: process started with pid [690278]
+[robot_state_publisher-1] [INFO] [1791169875.326990017] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1791169875.627103553] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791169875.627200299] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791169875.642279265] [rviz2]: Stereo is NOT SUPPORTED
+[python3-3] HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth → 100 BPM hybrid swing with partial returns; --test/--hardwaretest unchanged
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: 0 -> /dev/video0
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL VERIFICATION EVIDENCE: /home/jason/Proyectos3/X5/playback_results/swing_verification/20261005T031130-6b6d003c
+[python3-3] VERIFICATION PHASE: {"t": 510037.608236385, "phase": "READY", "status": "Recording preflight passed; waiting for camera, ST7/TONOR, ESP32 hi-hat, and fresh encoders"}
+[python3-3] VERIFICATION PHASE: {"t": 510037.644305455, "phase": "SETTING UP", "status": "Recording preflight passed; centering with J7=80.2\u00b0 and closing gripper to +7\u00b0; recording follows automatically"}
+[python3-3] VERIFICATION PHASE: {"t": 510039.793023897, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] CLOSE REQUEST: center and verify before disabling or exiting
+[python3-3] VERIFICATION PHASE: {"t": 510041.65914231, "phase": "CENTER RELAX RECENTERING", "status": "Center + Relax requested \u2014 returning from the current pose to customized right center, then disabling the right arm"}
+[python3-3] CENTER VERIFIED BEFORE RELAX: {"t": 510042.520132322, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.3999913023575203], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6314581750193611}
+[python3-3] VERIFICATION PHASE: {"t": 510042.534211401, "phase": "RELAXING", "status": "Center + Relax complete; centered; right motors disabled \u2014 confirming disabled feedback"}
+[python3-3] VERIFICATION PHASE: {"t": 510042.564803368, "phase": "RELAXED", "status": "Right motors disabled"}
+[python3-3] PHYSICAL SWING RESULT: {"success": false, "physical": true, "duration_s": 0.0, "encoder_strikes": 0, "audio_hits": 0, "audio_matched_strikes": 0, "audio_span_s": 0.0, "faults": [], "center": {"t": 510042.520132322, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.3999913023575203], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6314581750193611}, "relaxed_verified": true, "bottoms": [], "audio": []}
+[INFO] [python3-3]: process has finished cleanly [pid 690276]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791169895.557592171] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791169895.557750787] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20261004_201116_385958.mp4
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 690274]
+[python3-5] {"status": "stopped", "captured_seconds": 18.2}
+[INFO] [rviz2-2]: process has finished cleanly [pid 690275]
+[INFO] [python-4]: process has finished cleanly [pid 690277]
+[INFO] [python3-5]: process has finished cleanly [pid 690278]

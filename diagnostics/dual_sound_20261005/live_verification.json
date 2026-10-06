@@ -1,0 +1,122 @@
+{
+  "success": true,
+  "simultaneously_ready_seconds": 10.026846657972783,
+  "models": {
+    "ride": {
+      "progress_updates": 35,
+      "max_progress_gap_s": 0.4039002279751003,
+      "max_capture_to_bridge_s": 0.22157239890657365,
+      "hits": 0
+    },
+    "hihat": {
+      "progress_updates": 35,
+      "max_progress_gap_s": 0.4039002279751003,
+      "max_capture_to_bridge_s": 0.22155194997321814,
+      "hits": 0
+    }
+  },
+  "tonor_streams": [
+    {
+      "index": 3949,
+      "driver": "PipeWire",
+      "owner_module": null,
+      "client": "3948",
+      "source": 58,
+      "sample_specification": "float32le 1ch 16000Hz",
+      "channel_map": "mono",
+      "format": "pcm, format.sample_format = \"\\\"float32le\\\"\"  format.rate = \"16000\"  format.channels = \"1\"  format.channel_map = \"\\\"mono\\\"\"",
+      "corked": false,
+      "mute": false,
+      "volume": {
+        "mono": {
+          "value": 65536,
+          "value_percent": "100%",
+          "db": "0.00 dB"
+        }
+      },
+      "balance": 0.0,
+      "buffer_latency_usec": 0.0,
+      "source_latency_usec": 0.0,
+      "resample_method": "PipeWire",
+      "properties": {
+        "remote.name": "pipewire-0",
+        "application.name": "X5-hihat-detector",
+        "node.name": "alsa_capture.python3.12",
+        "device.description": "ALSA Capture [python3.12]",
+        "media.name": "ALSA Capture",
+        "media.type": "Audio",
+        "media.category": "Capture",
+        "node.latency": "1600/16000",
+        "node.rate": "1/16000",
+        "stream.is-live": "true",
+        "node.want-driver": "true",
+        "node.autoconnect": "true",
+        "media.class": "Stream/Input/Audio",
+        "target.object": "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo",
+        "adapt.follower.spa-node": "",
+        "object.register": "false",
+        "factory.id": "8",
+        "clock.quantum-limit": "8192",
+        "factory.mode": "merge",
+        "audio.adapt.follower": "",
+        "library.name": "audioconvert/libspa-audioconvert",
+        "client.id": "101",
+        "object.id": "102",
+        "object.serial": "3949",
+        "module-stream-restore.id": "source-output-by-application-name:X5-hihat-detector"
+      }
+    },
+    {
+      "index": 3951,
+      "driver": "PipeWire",
+      "owner_module": null,
+      "client": "3950",
+      "source": 58,
+      "sample_specification": "float32le 1ch 16000Hz",
+      "channel_map": "mono",
+      "format": "pcm, format.sample_format = \"\\\"float32le\\\"\"  format.rate = \"16000\"  format.channels = \"1\"  format.channel_map = \"\\\"mono\\\"\"",
+      "corked": false,
+      "mute": false,
+      "volume": {
+        "mono": {
+          "value": 65536,
+          "value_percent": "100%",
+          "db": "0.00 dB"
+        }
+      },
+      "balance": 0.0,
+      "buffer_latency_usec": 0.0,
+      "source_latency_usec": 0.0,
+      "resample_method": "PipeWire",
+      "properties": {
+        "remote.name": "pipewire-0",
+        "application.name": "X5-ride-detector",
+        "node.name": "alsa_capture.python3.12",
+        "device.description": "ALSA Capture [python3.12]",
+        "media.name": "ALSA Capture",
+        "media.type": "Audio",
+        "media.category": "Capture",
+        "node.latency": "1600/16000",
+        "node.rate": "1/16000",
+        "stream.is-live": "true",
+        "node.want-driver": "true",
+        "node.autoconnect": "true",
+        "media.class": "Stream/Input/Audio",
+        "target.object": "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo",
+        "adapt.follower.spa-node": "",
+        "object.register": "false",
+        "factory.id": "8",
+        "clock.quantum-limit": "8192",
+        "factory.mode": "merge",
+        "audio.adapt.follower": "",
+        "library.name": "audioconvert/libspa-audioconvert",
+        "client.id": "78",
+        "object.id": "104",
+        "object.serial": "3951",
+        "module-stream-restore.id": "source-output-by-application-name:X5-ride-detector"
+      }
+    }
+  ],
+  "physical_hits_attempted": false,
+  "motor_access": false
+}

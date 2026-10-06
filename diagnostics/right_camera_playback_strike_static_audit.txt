@@ -1,0 +1,26 @@
+Right playback cymbal-strike static command audit
+2026-09-19T14:10:54-07:00
+
+12:RIGHT_STRIKE_SPEED = 2.0
+40:                         i==7 and frame==parameter(7,0x7017,RIGHT_STRIKE_SPEED)
+53:        if frame==parameter(7,0x7017,RIGHT_STRIKE_SPEED) and side!='right':
+54:            raise RuntimeError('Fast strike speed is right-J7-only')
+160:    def set_right_joint7_speed(self, speed):
+165:        if speed not in (SPEED,RIGHT_STRIKE_SPEED):
+
+33:from .camera import MIN_DIMENSION_CHANGE_PX
+68:        "STRIKE MOVING OUT",
+69:        "STRIKE RETURNING TO CYMBAL POSE",
+72:        "RECENTERING AFTER STRIKE",
+358:        if self.phase == "STRIKE MOVING OUT":
+361:                "STRIKE RETURNING TO CYMBAL POSE",
+365:        if self.phase == "STRIKE RETURNING TO CYMBAL POSE":
+375:        if self.phase == "RECENTERING AFTER STRIKE":
+645:            "STRIKE MOVING OUT", self.strike_plan.targets[self.strike_index]
+660:        if name == "STRIKE MOVING OUT":
+671:        if self.phase not in {"STRIKE MOVING OUT", "STRIKE RETURNING TO CYMBAL POSE"}:
+687:        if (abs(delta_width) > MIN_DIMENSION_CHANGE_PX
+688:                or abs(delta_height) > MIN_DIMENSION_CHANGE_PX):
+708:        self.begin_stage("RECENTERING AFTER STRIKE", self.center_goal)
+
+No hardware launcher or CAN-opening command was executed.

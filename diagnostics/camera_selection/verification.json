@@ -1,0 +1,61 @@
+{
+  "verified_at_utc": "2026-10-04T17:17:48.234113+00:00",
+  "physical_camera": "Logitech Webcam C925e",
+  "camera_index": 0,
+  "live_pipeline_checks": {
+    "index": {
+      "mode": "playback",
+      "exit_code": 0,
+      "physical_camera": true,
+      "can_forbidden": true,
+      "camera_source": "0",
+      "display_frames": 301,
+      "processed_frame_messages": 158,
+      "elapsed_display_s": 10.127997955016326,
+      "image_shape": [
+        480,
+        640,
+        3
+      ],
+      "video_bytes": 1643964
+    },
+    "stable_path": {
+      "mode": "playback",
+      "exit_code": 0,
+      "physical_camera": true,
+      "can_forbidden": true,
+      "camera_source": "/dev/v4l/by-id/usb-046d_Logitech_Webcam_C925e_A26952DF-video-index0",
+      "display_frames": 301,
+      "processed_frame_messages": 142,
+      "elapsed_display_s": 10.092256096017081,
+      "image_shape": [
+        480,
+        640,
+        3
+      ],
+      "video_bytes": 1541415
+    }
+  },
+  "regressions_passed": 415,
+  "picker_terminal_test": true,
+  "no_arm_movement": true,
+  "protected_unchanged": {
+    "recordings/record2.json": "305d32e9dc1c99d655341542737e4631fd5726e841e289e1d49c8ee4f6aae681",
+    "recordings/record3.json": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "recordings/record1.json": "067badcaf98f98f2631e44b8be5eac3480cfef39aa2f7f6c8e01478a1c30f90e",
+    "centering/motors.py": "02a1a9d7c60ce305fd8e7d90236ded4183bb959719f6c86a4722abb889db0548",
+    "camera_playback/app.py": "4f56739761bc24e165d931965601ba4a26c3ea2167762a71489d8ccac540c387",
+    "camera_playback/smooth_recording_worker.py": "78eac919c0cfecfa16fe105fdb767b12fe9b4e533c92fcf97f89e9b18d541828",
+    "smooth_playback/hardware.py": "aff04909eefca3b42929b252a5a3e21613236f3efaf4916bc553bf9181e8787a",
+    "config/camera.json": "d795f81f2ff0d870b3290f3d940e3f990130d004cd764e2d515ac4305b601b4b",
+    "start_beat.sh": "de3669442d81f427c185849f043a0a640a0f110dbc8afd1d9fa62e9e1e206c6b"
+  },
+  "final_hashes": {
+    "camera_search/device.py": "7b6bb99bc340bbbb3429a71245f9077615d522c0a0954e12df47f01310cd43ea",
+    "camera_playback/camera_selection.py": "a459a30c77fb507507744afbe66bb25a8cdab5e1694d7d938a078c5ac978002b",
+    "launch_right_camera_playback.py": "10323d5acd2fa1fc08c54c2d2fe39042cde7d2a6ac0f38b25b6345e80a2c34ca",
+    "tests/test_camera_selection.py": "5a7c56b9adecf94e8db55766e5277694ca70c3bfab96f91f62b1ba5412254d66",
+    "RIGHT_CAMERA_PLAYBACK.md": "8ca29a02ec72799a2ac1e0e7436c9217c187d33d6c9eb53084b949379059cde2",
+    "CAMERA_DEFAULT.md": "73f91e2229c1f11201530a3208c87250484527fa8d20c6904a55b49fbb821e7b"
+  }
+}

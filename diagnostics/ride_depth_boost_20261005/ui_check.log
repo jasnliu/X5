@@ -1,0 +1,15 @@
+HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth +0.5° → 100 BPM hybrid swing with partial returns; ride v2 controls search; hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged
+ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+PASS: one actual RUN button press centers with +7° closed gripper and automatically enters recording; no Start control or loading pause
+PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; hard corridor 13°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+HIHAT SYNC: {"kind": "start", "at": 574763.677749868, "advance": 0.0, "period": 0.6, "close_beats": [2, 4], "open_beats": [1, 3]}
+HYBRID swing depth 5.5° (first detected +0.5°): 100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases
+HIHAT SYNC: {"kind": "stop", "at": 574763.677863307, "advance": 0.0, "matches": 0, "skips": 0}
+Stop requested — finishing hybrid return, then Center + Relax
+Hybrid stopped; J7 stays powered in its current mode until verified center, then relax
+PASS: real App(hardware=True) selects hybrid, boosts first-hit depth by 0.5 degrees, starts 100 BPM swing, and joins/centers in MIT before simulated relax
+PASS: Tk widgets show hybrid; motor, microphone and ESP32 I/O were substituted; no physical hardware operated

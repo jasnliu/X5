@@ -204,8 +204,13 @@ See [CARTESIAN_GOAL.md](CARTESIAN_GOAL.md). Run either
 to that arm's all-zero gripper TCP, and click **Run Cartesian Goal**. Each program
 loads its matching `left_zones/zone1.json` or `right_zones/zone1.json`, rejects
 an unsafe target/path, converts an accepted point to seven joint angles, then
-uses the same goal → 2-second hold → recenter → relax controller. The Cartesian
-layer controls endpoint position, not orientation or a straight-line trajectory.
+uses the same measured-goal controller. The left program holds for two seconds
+and then automatically recenters. The right program holds indefinitely until its
+right-only **End** button is pressed, then recenters and relaxes. After the first
+right goal settles, changing the coordinates to another inside-zone point enables
+a right-only **Update** button. It validates the new IK, live transition, and
+center returns before moving and holding at the updated goal. The Cartesian layer
+controls endpoint position, not orientation or a straight-line trajectory.
 Before Run is clicked, its RViz target follows valid field edits live: magenta
 inside zone1, red outside, and hidden for invalid/incomplete input. This preview
 does not enable motors or run IK. The bottom encoder panel includes joints 1–7
@@ -223,6 +228,446 @@ length is not present in the current URDF TCP.
 The right Cartesian program additionally opens its custom gripper to −3° while
 centering, pauses at center for the user to load an object, and enables a
 right-only **Continue** button. Continue closes the gripper to +7°, then performs
-the existing goal → 2-second hold → special-center sequence while continuously
-holding +7°. It never sends another open command before all eight right motors
-are disabled. The left Cartesian workflow is unchanged.
+the goal motion and holds that goal indefinitely while continuously holding +7°.
+A standalone-right IK constraint keeps J2 at its centered 0° value and uses the
+other six joints for the same requested TCP point; this avoids the measured
+small-negative-J2 tracking failure without changing the left or camera program.
+A right-only **Update: Move to Changed Goal** button becomes available only after
+the current goal has settled and the coordinate fields contain a different
+inside-zone point. It may be used repeatedly after each updated goal settles.
+Update planning uses the current posture first and a bounded path preflight, so
+ordinary updates validate promptly instead of repeating a full return-path test
+at every 20 ms motion sample. Initial and updated goals use the same 3-degree,
+0.6-second joint-settling rule as the standalone left Cartesian program.
+A right-only **End: Return to Center → Relax** button then returns the arm to its
+special center with the gripper still closed and disables all eight right motors.
+It never sends another open command before that relaxation. The left Cartesian
+workflow remains the automatic two-second hold sequence.
+
+## Right-arm camera Cartesian hill climber
+
+See [CAMERA_SEARCH.md](CAMERA_SEARCH.md). The separate
+`start_right_camera_cartesian.sh` program combines the original right-arm
+center/open/load/close workflow with Y2's pose detector. It uses the fixed
+Cartesian goal `(0.250, 0.000, 0.350)`, then increases only Y by 0.010 m through
+the preflighted right-zone coordinates until a fresh drumstick plus YOLO-tip
+detection occurs. If no detection occurs, it returns to the customized right
+center and relaxes. Its redundant IK keeps right joint 2 centered while
+preserving each requested TCP coordinate.
+
+Start and Continue require a fresh cymbal detection. After a drumstick plus
+directly observed YOLO tip is detected, the arm runs a deterministic coordinate
+hill climber in `+X, -X, +Y, -Y, +Z, -Z` order. It accepts only moves that reduce
+the normalized image distance from the tip to the cymbal's center ninth, using
+0.010, 0.005, and 0.0025 m step levels. Each candidate, anchor return, and center
+return is zone/IK checked before movement. Intermittent missing-tip frames make
+the arm hold rather than fabricate a tip or abort immediately. Success requires
+the tip to remain in the target for two seconds and a fresh inside confirmation;
+the arm then centers and relaxes.
+
+Because the customized center puts J7 exactly at its URDF maximum, the candidate
+planner tolerates up to three encoder counts of measured limit overshoot and
+clips only its SciPy initial seed inside the bounds. It continues to validate
+paths from the unmodified measured anchor and rejects larger limit violations.
+
+Program failures and every non-stall fault center before relaxing; a detected
+stall remains the sole automatic immediate-relax exception. Support-process
+exits are reported to the controller so they use the same recovery instead of
+forcing an arbitrary-pose shutdown.
+
+The program launches RViz, one control panel, and only Y2's processed camera
+window. The processed preview draws a 3-by-3 grid over the strongest cymbal box
+and highlights its center rectangle as `CYMBAL TARGET`; that center cell is now
+the visual alignment goal. The original `start_right_cartesian.sh` is unchanged.
+
+## Query-only right-arm motion recorder
+
+See [RIGHT_RECORDING.md](RIGHT_RECORDING.md). Run:
+
+```bash
+./start_right_recording.sh --hardware
+```
+
+This opens RViz and a separate recording panel. With right motors 1–8 already
+disabled, the user can support and manually guide the limp arm from any starting
+pose to any ending pose. The program queries only `can0`, never enables, disables,
+holds, centers, or commands a motor, and records seven right joint positions,
+right gripper opening, TCP position, and sample times at approximately 20 Hz.
+The left CAN bus is not opened or recorded. JSON files are atomically saved only
+under `recordings/`; offline launch without `--hardware` is view-only. If an
+active recording exceeds a J1–J7 URDF limit, the recorder shows a warning and
+aborts and discards the complete take.
+
+## Right-arm recording video editor
+
+See [RIGHT_RECORDING_EDITOR.md](RIGHT_RECORDING_EDITOR.md). Run:
+
+```bash
+./start_right_recording_editor.sh
+```
+
+This separate program opens an RViz simulation and a video-style playback/crop
+panel. Select a right-arm recording JSON at startup, play or scrub its timeline,
+and drag sample-aligned START and END handles. RViz previews the applicable
+boundary pose while either handle is dragged. The save button shows an explicit
+warning and then atomically overwrites that same selected JSON; there is no Save
+As operation and no new recording or backup file. The editor never opens CAN or
+commands physical hardware.
+
+## Recorded-path right camera alignment
+
+See [RIGHT_CAMERA_PLAYBACK.md](RIGHT_CAMERA_PLAYBACK.md). This is a separate
+program; the original `right_camera_cartesian` program remains unchanged.
+It loads `recordings/record1.json` by default.
+
+```bash
+./start_beat.sh --hardware \
+  --recording recordings/right_motion_YYYYMMDD_HHMMSS.json
+```
+
+A pure simulation test is also available:
+
+```bash
+./start_beat.sh --test
+```
+
+This test mode never constructs the real motor controller, never opens CAN, and
+does not start or require the camera, ST7/TONOR microphone, or ESP32 hi-hat. An
+in-memory arm is animated in RViz through centering, the selected recording,
+and the safe 10-degree J7 target in the same triplet-based 100 BPM swing ride
+used by hardware mode. It performs no strike-depth search and sends no hi-hat
+commands. The
+same **Stop 100 BPM striking: Center + Relax** sequence centers and relaxes only
+the simulated arm. The three modes are mutually exclusive.
+
+A manual powered test mode is also available:
+
+```bash
+./start_beat.sh --hardwaretest
+```
+
+`--hardwaretest` starts the physical right-arm controller, RViz, processed Y2
+camera, and TONOR/ST7 detector. The ESP32 hi-hat remains disabled. It restores
+the original hardware-test preparation: select and preflight a recording, press
+Start to center with the gripper open at −3°, load the stick, press Continue to
+close the gripper to +7°, play the recording, and use one fresh stick-tip
+detection inside the visible pink rectangle to accept the cymbal pose. ST7
+events are logged for information only and never trigger or retry a strike.
+
+At the accepted pink-zone pose, J7 switches once to MIT hold. The text box
+accepts a **maximum drop goal** in degrees (default 5°), relative to a **fixed
+reference anchor**, not a new cached position on every press. A dedicated spawned
+process handles timestamped J7 position/velocity feedback
+independently of the Tk/ROS interpreter: 500 Hz during a strike and 100 Hz during
+stationary hold. Active motion retains a 20 ms deadline. A late idle send refreshes
+the same hold without discarding valid encoder stability; old feedback or a gap
+in the position history resets readiness. Idle gaps over 250 ms still fault.
+The descent is gravity-driven with lighter damping (default KD=0.04); a
+predictive catch accounts for velocity, latency and the blended trajectory's
+braking distance. Upward acceleration continues through the lowest point into
+withdrawal, rather than gently stopping and restarting at the bottom. The return
+still decelerates to zero desired velocity and acceleration at the upper anchor.
+No contact detection is used. J7 remains in MIT between strikes: no
+per-strike disable/mode-switch or slow CSP correction. Another press is enabled
+only after a fresh 40 ms encoder-position window is stable near the anchor.
+Readiness uses position variation and movement trend with hysteresis, not noisy
+instantaneous drive velocity. Raw velocity still drives predictive catching.
+Results show measured peak drop and return overshoot. Center + Relax restores CSP only when leaving the session.
+
+The dynamics defaults are initial tuning, not a claim of physical calibration.
+`--mit-fall-kd`, `--mit-inertia`, `--mit-brake-accel`, and `--mit-latency-ms` expose
+the main hardware-test calibration values. See [MIT hardware-test details and
+calibration](RIGHT_CAMERA_PLAYBACK.md#hardware-test-calibration). No physical
+accuracy or sound-consistency claim follows from the offline tests alone.
+
+Before sending any center target, `--hardwaretest` performs a powered-state
+preflight at the live encoder pose. Arm drives J1–J7 are explicitly disabled,
+configured for CSP mode, preloaded with their current positions, enabled, and
+required to report powered operation. After those arm drives confirm, the
+gripper is configured with the requested safe −3° open target rather than
+replaying a manually positioned encoder angle that may be outside its narrow
+command envelope. The mode/enable sequence is retried up to three times. Only
+after **every** drive, including J7, confirms operation can the arm begin moving
+toward center. If any confirmation fails, the program prints that motor's
+run-mode readback, feedback operating state, and encoder position, disables only
+that named drive, leaves already powered drives holding their starting poses,
+and never starts a partial-arm center move.
+
+On leaving the MIT session, CSP mode and powered-state confirmation may be
+retried for two seconds. If J7 is known to be in CSP mode but still reports relaxed, the program repeatedly sends
+both enable and anchor-hold commands rather than declaring success. If
+confirmation or another MIT step fails, the program locks out further strikes
+and keeps requesting the safest hold supported by the confirmed mode. Other
+hardware-test faults also lock the workflow instead of automatically centering
+and relaxing: a fault naming one right drive disables only that drive and holds
+the others, while a fault without a reliable drive number preserves the last
+commands and keeps the healthy drives powered. A detected motor stall is the
+intentional exception and immediately disables the entire right arm because the
+motor may be pushing into an obstruction and overheating. The MIT rebound has a
+0.5-second J7 stall monitor. **Emergency Relax** remains an explicit user action.
+
+Normal `--hardware` has one **RUN: CENTER + CLOSE → RECORDING → HYBRID SWING**
+button instead of separate Start and Continue steps. With the stick already
+secured, press RUN once: the arm centers while the gripper closes to +7°, then
+automatically moves to the recording's first right-arm pose after center and
+gripper closure are confirmed. There is no gripper-opening or loading pause,
+and simply opening the application does not start motion. Recording, camera,
+ST7, hi-hat, and encoder readiness gates remain in place. `--test`,
+`--hardwaretest`, and `--recording-only` retain their existing startup workflows.
+Normal hardware temporarily raises only recorded-path J1–J7
+motion to a 0.8 rad/s firmware limit, follows its time-scaled path at up to 90%
+of that limit, and settles at the recorded endpoint. It restores the ordinary
+0.4 rad/s setting after the endpoint is physically reached and before any
+alignment, recovery, or centering. Camera observations collected during
+playback reorder but never eliminate the six Cartesian search directions.
+Post-playback alignment
+checks one fresh tip and accepts the recording endpoint immediately when it is
+anywhere inside the larger visible pink rectangle. If outside, Cartesian
+correction keeps using robust outside-zone measurements to choose its next
+move, but the first fresh tip detection anywhere inside the visible pink
+rectangle immediately completes alignment. There is no smaller invisible goal,
+second confirmation, or timed hold. The launcher starts the scoring-enabled ST7 cymbal-sound
+detector from the sibling `/home/jason/Proyectos3/st7`, explicitly selecting
+`models/v2/config.yaml`, `models/v2/best.pt`, and the matching
+`models/v2/normality/reference.npz`. Missing V2 assets stop startup; there is no
+fallback to V1 or `/home/jason/st7`. This applies to every audio-enabled mode
+(including `--hardware` and `--hardwaretest`); pure `--test` still runs no audio
+model. ST7's own default launcher and the Y2 camera model are unchanged.
+The launcher also starts **`models/hihat_v1`** (its own config, checkpoint and
+normality reference) on the same TONOR source. A separate **Hi-hat sound v1**
+panel flashes green for each detected closure and shows its count, last score
+and normality. The panel/layout is unchanged. In normal **--hardware**, hi-hat
+audio now selects the startup closure angle and then adjusts **only hi-hat
+timing** during swing. It never selects a J7 depth or retimes the ride.
+During swing, missing/stale/ambiguous hi-hat detections freeze the last valid
+advance. During startup calibration, detector failure or exhaustion of the
+90°–115° search is a fault and prevents ride search/swing. Status wording in the
+existing panels reflects calibration rather than claiming “visual only”. ESP32
+motor faults still use the existing controlled-stop safety path.
+
+Ride and hi-hat use independent listener processes and Unix sockets, with
+instrument-tagged messages checked at both the bridge and receiver. Each
+listener is explicitly pinned to TONOR through PipeWire and uses bounded
+single-thread CPU pools to avoid oversubscription. Independent listeners keep
+optional hi-hat failures out of ride control; the models, decoder thresholds,
+lookahead and normality references are not changed or retrained. Both audio
+models run in audio-enabled modes; **`--test` still opens no microphone and
+starts neither model**. No new launch flags or workflow steps are needed.
+See [dual-detector verification](diagnostics/dual_sound_20261005/VERIFICATION.md).
+
+X5 explicitly routes audio input through PipeWire
+to the connected TONOR TD510 microphone, and will not enable the sequence until
+the **ride** detector reports that normality scoring is ready. After the
+single accepted camera frame, normal `--hardware` starts the **same hybrid
+method and hardware tuning as `experiment.sh`**: a smooth 0.3 Nm / 40 ms
+downward torque pulse, low-impedance coast, predictive catch, and smooth powered
+return. Search attempts remain complete round trips:
+anchor→−5°→anchor, anchor→−6°→anchor, anchor→−7°→anchor, in 1-degree
+increments. Goals are bounded by the safe-zone path, joint limits, and the
+beat's 13° hard corridor (integer search goals through 12°). The experiment
+itself retains its 12° default; copying that default into the beat had wrongly
+prevented the next 12° attempt, which ST7 detected in physical testing.
+After each settled return, the controller waits until ST7 has finalized the
+entire strike's audio interval. Hits use PortAudio ADC capture timestamps, not
+the time the listener printed its startup message. A three-second audio backlog
+causes a controlled stop rather than falsely declaring a miss. In `--hardware`,
+the swing depth is now **the first detected depth + 0.5°** of J7 displacement:
+for example, detection at 10° produces 10.5° swing hits. Search attempts remain
+at their original integer depths and complete their original return before the
+boost is applied. Fractional depths are retained through the worker and logs.
+The existing validated corridor and joint/experiment limits still apply; an
+unsafe boosted target causes a controlled Center + Relax, not widened limits.
+No normality-based selection, detector changes or additional search are used.
+`--test` and `--hardwaretest` are unchanged, as is hi-hat synchronization.
+
+That boosted depth then plays hybrid strokes in the existing 100 BPM triplet
+swing: opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
+spacing from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
+A separate 500 Hz J7 worker reuses `strike_lab.methods.hybrid` and
+`config/experiment_hardware_tuned.json`; Tk never clocks the catch. It predicts
+release timing from measured position/velocity and the hybrid impulse/load
+model, with coast inertia identified from encoder velocities for scheduling
+only, not a constant position-mode speed. For 200 ms pairs, a 110 ms smooth
+partial rebound targets 4.4° above the selected low target, braking upward
+momentum before the next impulse. Another stroke requires encoder clearance
+of at least 4° above that fixed target. The original camera anchor and
+absolute strike depth remain fixed. Complete search hits match the experiment
+method; short swing returns intentionally use the same quintic/tracking law
+with a shorter rebound endpoint. Longer returns retain the full experiment
+profile. Late/unachievable deadlines fault instead of firing catch-up bursts.
+Physical acceptance now requires an actual **ST7 HIT accepted by the search**,
+followed by at least five seconds of fault-free swing and verified center/relax.
+No independent waveform analysis or repeated-HIT quota substitutes for ST7.
+See [ST7 physical verification](diagnostics/st7_handoff_20261004/VERIFICATION.md).
+The normal return keeps J7 powered in MIT while centering (0.35 rad/s bounded
+reference); it does not disable J7 to change modes at the cymbal. An off-center
+CSP handoff was found to drop J7 and produce an unintended, correctly rejected hit.
+Normal hardware now guards every whole-arm relax, including window close and
+Ctrl-C: all seven joints must be within 0.20° of center and settled for 0.6 s
+before disabling. A detected stall/overheating remains a major-fault exception.
+`--test` retains its existing powered simulation; `--hardwaretest` retains its
+separate manual gravity/catch controller.
+
+The integrated
+115200-baud ESP32 hi-hat remains on the main
+quarter-note beats only; it receives no command on a ride extra. Its main-beat
+commands in normal hardware mode are now `O`, `B`, `O`, `B`…: **OPEN on
+1/3, CLOSE on 2/4**. `B` uses the startup-calibrated **90°–115° close/hold** target;
+`O` retains the **0° return/release** target. Legacy `C`/`J` commands remain
+fixed at 100° for other programs and existing collection procedures. Commands use the unchanged ride grid minus one signed hi-hat
+advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
+motor 1. The ESP32 code is copied under
+`esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
+`/dev/serial/by-id/` path.
+
+### Automatic hi-hat angle calibration (normal hardware only)
+
+Immediately after launch, without pressing RUN, the program starts calibration
+as soon as hi-hat ST7/TONOR and the ESP32 calibration-v2 protocol are ready.
+There is **no ntfy alert or countdown**. The arm remains under its existing
+RUN control. No startup calibration runs in `--test`, `--hardwaretest`, offline
+preview, or recording-only mode.
+
+The hi-hat first returns to encoder zero. It then tries **90, 95, 100, 105, 110,
+115 degrees**, each time verifying encoder arrival, holding closed for **2 s**,
+returning to zero and remaining open for **2 s**. A valid hi-hat-model HIT whose
+audio onset belongs to that closure selects the first successful angle, but
+does not shorten the hold/open cycle. No angle boost is applied. Late detection
+notifications can still select their original trial; opening sounds and old
+hits cannot select the next trial. Before a miss is declared, ST7 must finalize
+the closure's audio interval. Stale feedback, missing acknowledgments, audio
+processing stalls, detector failure and a completed **115° attempt with no HIT**
+are faults, never permission to move farther. There is no 120° attempt or
+fallback to a fixed angle. Calibration restarts at 90° on the next launch.
+The return is verified by the firmware's encoder-zero arrival latch followed
+by a settled released encoder. A passive motor may coast after release; it is
+not incorrectly required to keep holding exactly zero while unpowered.
+
+RUN may center/close/play the arm recording while the hi-hat is calibrating.
+At the recording endpoint the arm waits in its feedback-supervised powered
+hold if needed. Once the hi-hat is ready, a fresh camera alignment check precedes
+the unchanged ride search (+0.5° swing boost retained). Calibration failure
+uses the existing **center-before-relax** arm recovery. Cancelling or closing
+the application also cancels calibration and supervises the hi-hat's return;
+a stalled/faulted hi-hat output is released rather than held indefinitely.
+This dedicated stationary wait retains feedback/stall checks without timing out
+solely because a successfully held pose lasts longer than a normal 30 s move.
+
+This requires the updated `esp32_hihat/motor_beat` firmware; normal launch never
+flashes it automatically. Unsupported firmware fails closed before calibration
+motion. `playback_results/hihat_calibration/<session>/events.jsonl` records
+trials, encoder arrival, selected HIT, angle and faults.
+The recording picker is temporarily disabled during calibration motion. In normal
+hardware mode, recording validation runs in a calculation-only background worker;
+ESP32 heartbeats/status queries and detector/encoder polling continue on the GUI
+loop. RUN stays unavailable until validation finishes, then requires a fresh ESP32
+reply before enabling the arm. A failed validation cannot reuse an older recording.
+Real missing-feedback/controller faults remain latched; their timeouts are not
+weakened. The UI layout and RUN workflow are otherwise unchanged.
+
+### Visual-only TONOR sound timeline
+
+`start_beat.sh` also opens a separate sound-debug window whenever the live
+detectors run (not in microphone-free `--test`). It shows a **fixed 10-second
+rolling waveform**, not an ever-growing recording. **Red** vertical lines label
+ride cymbal detections; **blue** dashed lines label hi-hat detections. Both use
+the ST7 event's original ADC-monotonic onset time. A delayed detection therefore
+appears over the earlier sound, then scrolls left with that waveform; it is not
+placed at notification time. Overlapping ride/hi-hat labels occupy separate rows.
+
+The viewer has its own read-only TONOR capture stream and uses the same
+ADC-to-monotonic mapping as ST7. It consumes nonblocking, one-way copies of
+existing detector events, without changing model output, calibration, offsets,
+ride timing, or motor control. Visual gain is display-only. Audio gaps are not
+stitched together; only a bounded in-memory history is retained, and **no audio
+files are saved**. Closing or losing this window leaves the beat program and
+both detectors running normally. Exiting the beat program closes it too.
+
+### Background hi-hat synchronization (no ride offset)
+
+Only `--hardware` has the new servo. `--test`, `--hardwaretest`, data collectors,
+model assets/thresholds, the ride search and hybrid motion controller are unchanged.
+Both detectors' ADC-derived monotonic acoustic onsets share one internal timeline;
+notification delays never become timing offsets. The read-only ride pickup/grid
+starts a 5 ms host callback scheduler; no command is sent on the pickup or extras.
+
+A closure on beat 2/4 is matched against one unambiguous ride onset within
+140 ms of that scheduled beat, plus a neighboring ride-grid detection. One
+hi-hat onset must occur within 450 ms of its actual close command. Both detector
+watermarks must finalize the entire matching window. Duplicates, missing or
+ambiguous events, stale sources and corrections outside the ±250 ms safety
+bound do not change the advance. This cannot eliminate classifier cross-talk:
+a missing real ride plus a false ride response to a hi-hat can still be ambiguous
+in reality even when the detector output looks unique. Better models may be needed.
+
+The estimate uses the **actual advance used for that historical command** plus
+`hihat_onset - ride_onset`, avoiding repeated integration of delayed errors.
+After three valid pairs, a rolling five-estimate median drives smoothed changes
+(maximum 10 ms per update, 15 ms deadband). Every close and following open share
+a latched advance, preserving their 600 ms separation. New pairs change by at
+most 10 ms; already scheduled edges never jump. Missed deadlines cause the
+existing controlled stop, never a burst or an airborne arm release. No guarantee
+of perfect acoustic synchronization is made at the models' finite time resolution.
+
+Each swing writes `playback_results/hihat_sync/<session>/timeline.jsonl` with
+common-clock detector onsets, beat IDs, actual commands, applied advances,
+accepted timing errors and rejected-pair reasons. No new UI or launch action is
+required. These logs are diagnostics, not training labels.
+
+This automatic arm-and-hi-hat loop belongs to `--hardware`; its arm and hi-hat
+continue until the user presses **Stop 100 BPM striking:
+Center + Relax**. Stop finishes any
+active hybrid return and settled anchor, tells the hi-hat to return to 0°,
+joins the worker, restores and confirms position mode at normal speed, then
+centers and relaxes. Hybrid controller/transport faults block automatic movement
+and retain a fixed-pose hold where feedback/transport permits; use Emergency
+Relax or the physical stop and restart. Emergency Relax and window close join
+the worker before disabling motors. The camera box-motion
+overlay is retained only as a visual diagnostic and never decides a hit. This
+behavior is confined to the recorded-path playback program.
+
+## Separate hi-hat sound data collection
+
+See [HIHAT_DATA_COLLECTION.md](HIHAT_DATA_COLLECTION.md) for the finite collector
+`collect_hihat_data.sh`, its offline-only `--check`, and separate offline labeling
+program `label_hihat_data.py`. The collected hi-hat WAV/CSV pairs live under
+`X5data/hihat/recording` and `X5data/hihat/timestamp`; existing ride data has moved
+unchanged to `X5data/ride/recordings` and `X5data/ride/timestamps`. Mixed ride/hi-hat
+closures remain positive for the new hi-hat target. No model training or merging
+into ST7 is performed. The first batch needed verified post-capture center
+recovery; see the linked verification report before rerunning physical collection.
+
+## Isolated right-J7 ten-degree test
+
+See [RIGHT_JOINT7_TEST.md](RIGHT_JOINT7_TEST.md). The separate test panel has no
+camera or recording dependency. **Start** centers only the right arm at the
+custom J7-at-maximum center and opens the right gripper to -3 degrees.
+**Continue** closes the gripper to +7 degrees, waits for encoder-confirmed full
+closure, moves only J7 down by 10 degrees at its separate 2.0 rad/s test speed,
+and immediately returns J7 to the custom center. It then
+restores the normal 0.4 rad/s J7 setting and disables all right motors.
+
+```bash
+./start_right_joint7_test.sh --hardware
+```
+
+The complete outbound/return TCP path is preflighted against buffered right
+zone1 before any motor is enabled. The left arm and left gripper remain relaxed
+and query-only. Running without `--hardware` is an offline UI/safety preview and
+cannot open CAN or move the arm.
+
+## Standalone strike experiment
+
+`./experiment.sh` opens a separate J7 strike laboratory with control buttons and
+RViz. Simulation is the default; physical transport requires `--hardware`.
+Preparation closes the gripper, centers the arm, plays `record3`, and holds its
+endpoint. Nine selectable modes share an editable J7 strike depth below that
+endpoint (default 10°; UI entry or `--degrees 3`). The gripper stays closed while
+enabled. No camera, sound detection, stick loading, or ESP32 is used. Every attempt preserves its source,
+parameters, full-rate trace, and result. Existing `start_beat.sh` modes are unchanged.
+See [EXPERIMENT.md](EXPERIMENT.md) for scoring, saved methods, configuration,
+finite tuning campaigns, reanalysis, and the explicit physical-testing boundary.
+The unloaded real-arm comparison and calibrated profiles are documented in
+[EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md); those centered/no-stick results
+are not a calibration of the new record3 posture or attached stick. The graph
+measures encoder-zone timing, not actual cymbal contact or sound quality.

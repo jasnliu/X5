@@ -1,0 +1,62 @@
+{
+  "success": false,
+  "error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow",
+  "cleanup_error": null,
+  "endpoint": null,
+  "gains_restored": true,
+  "original_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "method": {
+    "name": "paced_precise",
+    "duration_s": 4.8,
+    "time_scale": 1.2495720866422046,
+    "peak_velocity_rad_s": 0.6927121372718875,
+    "peak_acceleration_rad_s2": 1.264880637963705,
+    "peak_piecewise_jerk_rad_s3": 37.96401992993546,
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "max_joint_deviation_deg": 1.3099577192798504,
+    "max_tcp_deviation_mm": 3.769757187813178,
+    "exact_first": true,
+    "exact_last": true,
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "gaussian_sigma_s": 0.1,
+    "smoothing_search": [
+      {
+        "sigma": 0.14,
+        "accepted": false,
+        "reason": "Joint corridor 2.1546 deg > 1.5 deg"
+      },
+      {
+        "sigma": 0.1,
+        "accepted": true
+      }
+    ],
+    "original_recording_duration_s": 3.841315,
+    "recording_duration_ratio": 1.2495720866422046,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  }
+}

@@ -25,7 +25,13 @@ try:
                 assert app.zone.contains(app.planned_tcp(app.center_goal),MEMBERSHIP_BUFFER_M)
             assert app.control_gripper==(side=='right')
             assert (app.continue_button is not None)==(side=='right')
+            assert (app.update_button is not None)==(side=='right')
+            assert (app.finish_button is not None)==(side=='right')
+            if side=='right':
+                assert 'UPDATE:' in app.update_button.cget('text')
+                assert 'END:' in app.finish_button.cget('text')
             results.append({'side':side,'title':app.root.title(),'tcp':tcp,'zone_points':len(app.zone.points),
+                            'manual_finish':app.manual_finish,
                             'center_degrees':np.degrees(app.center_goal).tolist(),
                             'origin_tcp_m':app.ik.origin_tcp.tolist(),
                             'default_preview_m':app.target_point.tolist(),

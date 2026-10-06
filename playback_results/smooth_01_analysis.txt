@@ -1,0 +1,69 @@
+[
+  {
+    "path": "playback_results/20261002T234429-smooth-b5ffeb",
+    "method": "smooth",
+    "success": true,
+    "duration_s": 13.640675041926222,
+    "measured_position_ripple_3_15hz_rms_deg": [
+      0.04625933473281236,
+      0.01131820328536166,
+      0.01165220439037367,
+      0.03280148749890136,
+      0.008264803879883985,
+      0.00527152446999705,
+      0.014890607042604101
+    ],
+    "measured_position_ripple_3_15hz_vector_rms_deg": 0.06162438929786446,
+    "measured_acceleration_rms_rad_s2": [
+      0.4909962398806145,
+      0.13068912221345205,
+      0.14716534913112964,
+      0.38317302216229165,
+      0.12219566038623178,
+      0.07712618601717715,
+      0.19307842051282095
+    ],
+    "measured_velocity_peak_rad_s": [
+      0.2542983612885953,
+      0.10375186312690055,
+      0.09336748294636543,
+      0.3880767252721955,
+      0.12879793370390225,
+      0.11235425391927856,
+      0.20555263374110044
+    ],
+    "tracking_rms_deg": [
+      0.12265288080528798,
+      0.03369049887055631,
+      0.041459637402321406,
+      0.24418120290728493,
+      0.1216267653835225,
+      0.06849240243763947,
+      0.1960842235956029
+    ],
+    "feedback_max_gap_s": [
+      0.00897997198626399,
+      0.008724980987608433,
+      0.00786140700802207,
+      0.008970013994257897,
+      0.007985696953255683,
+      0.008871564001310617,
+      0.008244806027505547
+    ],
+    "physical_feedback_samples": [
+      2660,
+      2660,
+      2660,
+      2659,
+      2659,
+      2659,
+      2659
+    ],
+    "max_scheduler_lateness_s": 0.0024409069446846843,
+    "p95_scheduler_lateness_s": 0.0001290312357014045,
+    "endpoint_error_deg": 0.02197933771202081,
+    "center_error_deg": 0.02148099950622766,
+    "relaxed_verified": true,
+    "note": "3-15 Hz bandpass of actual encoder position, 100 Hz resampling, 0.25 s trim each end; motor-side motion proxy, not an accelerometer. Same-duration matched comparator isolates spatial smoothing from slowdown."
+  }
+]

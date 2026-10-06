@@ -1,0 +1,67 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-04-20-55-05-895800-jason-band37-702189
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [702209]
+[INFO] [rviz2-2]: process started with pid [702210]
+[INFO] [python3-3]: process started with pid [702211]
+[INFO] [python-4]: process started with pid [702212]
+[INFO] [python3-5]: process started with pid [702213]
+[robot_state_publisher-1] [INFO] [1791172505.970220171] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1791172506.306849997] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791172506.306922867] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791172506.321928827] [rviz2]: Stereo is NOT SUPPORTED
+[python3-3] HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth → 100 BPM hybrid swing with partial returns; --test/--hardwaretest unchanged
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: 0 -> /dev/video0
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL VERIFICATION EVIDENCE: /home/jason/Proyectos3/X5/playback_results/swing_verification/20261005T035520-d39c91e5
+[python3-3] VERIFICATION PHASE: {"t": 512668.306964865, "phase": "READY", "status": "Recording preflight passed; waiting for camera, ST7/TONOR, ESP32 hi-hat, and fresh encoders"}
+[python3-3] VERIFICATION PHASE: {"t": 512668.362246263, "phase": "SETTING UP", "status": "Recording preflight passed; centering with J7=80.2\u00b0 and closing gripper to +7\u00b0; recording follows automatically"}
+[python3-3] VERIFICATION PHASE: {"t": 512670.527409634, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+[python3-3] VERIFICATION PHASE: {"t": 512673.115437345, "phase": "MOVING TO RECORDING START", "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] START HOLD 
+[python3-3] VERIFICATION PHASE: {"t": 512674.9803111, "phase": "RECORDING PLAYBACK", "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"}
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 4.8}
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 512682.936453689, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6051476310368518, 0.21194552529182964, 0.2445525291828794, 1.7329663538567175, 0.20514529694051795, -0.30516319523918334, 0.6005442893110562], "max_error_deg": 0.02197933771202081, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6008345400332473, "tolerance_deg": 0.05}
+[python3-3] VERIFICATION PHASE: {"t": 512683.093281028, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"}
+[python3-3] PINK ZONE CONFIRMED ONCE (camera frame 868); starting the J7 hit search at 5°, then increasing by 1°
+[python3-3] HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+[python3-3] VERIFICATION PHASE: {"t": 512684.047574887, "phase": "STRIKE MOVING OUT", "status": "Hybrid hit search: J7 \u22125\u00b0 \u2014 waiting for fresh settled hold, then impulse/coast/catch/return"}
+[python3-3] HYBRID FAULT: Encoder feedback lost — stopping strikes; holding while recovering position control for Center + Relax
+[python3-3] VERIFICATION PHASE: {"t": 512684.717298883, "phase": "HYBRID HOLD FAULT", "status": "HYBRID FAULT: Encoder feedback lost \u2014 stopping strikes; holding while recovering position control for Center + Relax"}
+[python3-3] Hybrid stopped; J7 stays powered in its current mode until verified center, then relax
+[python3-3] VERIFICATION PHASE: {"t": 512684.75139974, "phase": "CENTER RELAX RECENTERING", "status": "Hybrid stopped; J7 stays powered in its current mode until verified center, then relax"}
+[python3-3] CENTER VERIFIED BEFORE RELAX: {"t": 512690.185619697, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.0005754177157246687, 0.00019180590524214836, 0.00019180590524214836, 0.0005754177157246687, -8.702166785959364e-05, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.0989070197042463, "span_deg": 0.1098966885603076, "settled_s": 0.6335373829933815}
+[python3-3] VERIFICATION PHASE: {"t": 512690.202162928, "phase": "RELAXING", "status": "Center + Relax complete; centered; right motors disabled \u2014 confirming disabled feedback"}
+[python3-3] VERIFICATION PHASE: {"t": 512690.258295997, "phase": "RELAXED", "status": "Right motors disabled"}
+[python3-3] PHYSICAL SWING RESULT: {"success": false, "physical": true, "duration_s": 0.0, "motion_success": false, "st7_search_confirmed": false, "accepted_search_hit": null, "encoder_strikes": 0, "audio_hits": 0, "audio_matched_strikes": 0, "audio_span_s": 0.0, "faults": [{"t": 512684.047913089, "source": "fail", "message": "Encoder feedback lost"}, {"t": 512684.047920232, "source": "hybrid", "message": "Encoder feedback lost"}], "center": {"t": 512690.185619697, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.0005754177157246687, 0.00019180590524214836, 0.00019180590524214836, 0.0005754177157246687, -8.702166785959364e-05, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.0989070197042463, "span_deg": 0.1098966885603076, "settled_s": 0.6335373829933815}, "relaxed_verified": true, "bottoms": [], "audio": []}
+[python3-3] CLOSE REQUEST: center and verify before disabling or exiting
+[INFO] [python3-3]: process has finished cleanly [pid 702211]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791172543.238557764] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791172543.239006719] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20261004_205507_019081.mp4
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 702209]
+[python3-5] {"status": "stopped", "captured_seconds": 35.2}
+[INFO] [rviz2-2]: process has finished cleanly [pid 702210]
+[INFO] [python-4]: process has finished cleanly [pid 702212]
+[INFO] [python3-5]: process has finished cleanly [pid 702213]

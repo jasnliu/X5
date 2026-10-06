@@ -1,0 +1,262 @@
+--- before/HIHAT_DATA_COLLECTION.md
++++ after/HIHAT_DATA_COLLECTION.md
+@@ -19,7 +19,7 @@
+ ambiguous material must not be silently labeled as a verified positive.
+ 
+ Hi-hat operation reuses `camera_playback.hihat.HiHatController` and existing
+-firmware: motor 2 `C` closes to 110 degrees, `O` returns to zero, heartbeat every
++firmware: motor 2 `C` now closes to 100 degrees, `O` returns to zero, heartbeat every
+ 100 ms. No firmware flashing, motor-1 commands, force/gain changes, or new travel
+ limits. Each closure opens after 0.6 seconds; pairs repeat after 1.2 seconds,
+ matching 100 BPM swing command timing. The user-confirmed starting rest position
+@@ -92,6 +92,10 @@
+ 
+ ## Collected batch: 2026-10-05
+ 
++This existing batch was captured with the earlier **110-degree** closure.
++The later runtime change to 100 degrees applies to future collection only;
++existing audio, labels and saved capture metadata remain unchanged.
++
+ The first batch is exported: **60 WAV/CSV pairs, 30 positive clips, 30 negative
+ clips, 34 closure onsets**. See [dataset details](X5data/hihat/README.md) and
+ [verification report](diagnostics/hihat_collection/VERIFICATION.md).
+--- before/README.md
++++ after/README.md
+@@ -512,8 +512,8 @@
+ 115200-baud ESP32 hi-hat remains on the main
+ quarter-note beats only; it receives no command on a ride extra. Its main-beat
+ commands in normal hardware mode are now `O`, `C`, `O`, `C`…: **OPEN on
+-1/3, CLOSE on 2/4**. The exact 110° close/hold and 0° return/release targets
+-are unchanged. Commands use the unchanged ride grid minus one signed hi-hat
++1/3, CLOSE on 2/4**. The hi-hat now uses a **100° close/hold** target and the same **0°
++return/release** target; firmware and host displays match. Commands use the unchanged ride grid minus one signed hi-hat
+ advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
+ motor 1. The ESP32 code is copied under
+ `esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
+--- before/camera_playback/app.py
++++ after/camera_playback/app.py
+@@ -2346,7 +2346,7 @@
+             )
+             self._request_continuous_stop()
+             return False
+-        detail = "CLOSE 110°" if command == b"C" else "OPEN 0°"
++        detail = f"CLOSE {MOTOR2_TARGET_DEGREES}°" if command == b"C" else "OPEN 0°"
+         self.status.set(
+             f"100 BPM swing {self.continuous_current_swing_label}: "
+             f"hi-hat motor 2 {detail} on the main-beat deadline"
+--- before/camera_playback/hihat.py
++++ after/camera_playback/hihat.py
+@@ -12,7 +12,7 @@
+ ESP_HEARTBEAT_SECONDS = 0.1
+ ESP_STARTUP_SECONDS = 0.3
+ ESP_PROBE_SECONDS = 0.5
+-MOTOR2_TARGET_DEGREES = 110
++MOTOR2_TARGET_DEGREES = 100
+ DEFAULT_ESP_PORT = (
+     "/dev/serial/by-id/"
+     "usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0"
+@@ -69,8 +69,9 @@
+ class HiHatController:
+     """Drive only motor 2 of the copied motor_beat firmware.
+ 
+-    Beat 1 closes to 110 degrees, beat 2 opens to zero, and the pattern then
+-    alternates. The firmware's motor-1 kick command is intentionally never sent.
++    Explicit beat-program edges close on 2/4 and open on 1/3. The legacy
++    send_beat API starts closed for finite collection cycles. Closure targets
++    100 degrees; open targets zero. Motor-1 kick commands are never sent.
+     """
+ 
+     def __init__(self, port: str | Path | None = DEFAULT_ESP_PORT):
+@@ -204,7 +205,7 @@
+         if not self.ready():
+             raise RuntimeError("ESP32 hi-hat is not ready")
+         # Firmware encoder zero is the open position. The first arm beat closes
+-        # to 110 degrees, and the second returns to zero.
++        # to 100 degrees, and the second returns to zero.
+         self.sequence_active = True
+         self.next_beat_closes = True
+         self.beat_count = 0
+--- before/esp32_hihat/README.md
++++ after/esp32_hihat/README.md
+@@ -9,13 +9,14 @@
+ 
+ During the robot arm's learned 100 BPM loop, the host sends only:
+ 
+-- `C`: motor 2 closes to and holds **110 degrees**;
++- `C`: motor 2 closes to and holds **100 degrees**;
+ - `O`: motor 2 returns to encoder zero, then releases;
+ - `H`: 100 ms watchdog heartbeat;
+ - `S`: release both firmware motor outputs when the program exits.
+ 
+-The first arm beat sends `C`, the next sends `O`, and this alternates so the
+-hi-hat strikes every other beat. The host never sends `K`; firmware motor 1 is
++The beat program sends `O` on beats 1/3 and `C` on beats 2/4, shifted together
++by its automatically tuned hi-hat advance. Rotation is 0° to 100° regardless
++of that timing adjustment. The matching keyboard `J` closure is also 100°. The host never sends `K`; firmware motor 1 is
+ replaced rhythmically by right-arm joint 7 and remains released.
+ 
+ The copied `flash_beat.sh` is provided only when the board needs its firmware
+--- before/esp32_hihat/motor_beat/motor_beat.ino
++++ after/esp32_hihat/motor_beat/motor_beat.ino
+@@ -4,8 +4,8 @@
+ // timed commands. This firmware just executes them:
+ //
+ //   MOTOR 2  (the "hold" motor -- the old single-motor beat behavior):
+-//     'C' = BEAT CLOSE -> drive to 110 deg and actively hold (closed-loop).
+-//     'J' = KEY CLOSE  -> drive to 110 deg and actively hold (closed-loop).
++//     'C' = BEAT CLOSE -> drive to 100 deg and actively hold (closed-loop).
++//     'J' = KEY CLOSE  -> drive to 100 deg and actively hold (closed-loop).
+ //     'O' = OPEN  -> actively return to 0 deg at HALF speed, then release (loose).
+ //     Host sends C on beats 2 & 4, O on beats 1 & 3  -> Motor 2 hits on 2 & 4.
+ //
+@@ -58,8 +58,8 @@
+ static const float COUNTS_PER_MOTOR_REV  = 28.0f;
+ static const float GEAR_RATIO            = 19.2f;
+ static const float COUNTS_PER_OUTPUT_REV = COUNTS_PER_MOTOR_REV * GEAR_RATIO;
+-static const float BEAT_TARGET_DEGREES   = 110.0f;
+-static const float KEY_TARGET_DEGREES    = 110.0f;
++static const float BEAT_TARGET_DEGREES   = 100.0f;
++static const float KEY_TARGET_DEGREES    = 100.0f;
+ static const long  BEAT_TARGET_COUNTS =
+     (long)lroundf(COUNTS_PER_OUTPUT_REV * (BEAT_TARGET_DEGREES / 360.0f));
+ static const long  KEY_TARGET_COUNTS =
+--- before/hihat_collection/collect.py
++++ after/hihat_collection/collect.py
+@@ -15,7 +15,7 @@
+ from x5_collection.collect import Collector,preflight,dump
+ from x5_collection.hybrid import CollectionSession
+ from .control import HiHatSession
+-from .plan import make_plan,CLOSURE_INTERVAL_SECONDS
++from .plan import make_plan,CLOSURE_INTERVAL_SECONDS,CLOSE_DEGREES
+ 
+ ROOT=Path(__file__).resolve().parents[1]
+ 
+@@ -34,7 +34,7 @@
+         self.collection_plan=plan;self.hihat=None;self.examples=[]
+ 
+     def notify_motion(self):
+-        notify(self.directory,'hihat','Hi-hat data collection starts in 10 seconds. Normal 110-degree close / open cycles only; arm remains disabled initially. A separate warning precedes the arm stage. Keep clear.')
++        notify(self.directory,'hihat',f'Hi-hat data collection starts in 10 seconds. Normal {CLOSE_DEGREES:g}-degree close / open cycles only; arm remains disabled initially. A separate warning precedes the arm stage. Keep clear.')
+ 
+     def check_audio(self):
+         super().check_audio()
+@@ -134,7 +134,7 @@
+     plan=make_plan();prepared=preflight()
+     if args.check:
+         print(json.dumps(dict(plan=plan,recording=str(prepared[1].source),arm_corridor_deg=12,
+-                             hihat_close_deg=110,training=False),indent=2));return 0
++                             hihat_close_deg=CLOSE_DEGREES,training=False),indent=2));return 0
+     if os.environ.get('PLAYBACK_OFFLINE_ONLY')=='1' or os.environ.get('STRIKE_LAB_OFFLINE_ONLY')=='1':
+         raise RuntimeError('Hardware forbidden by offline environment')
+     directory=ROOT/'diagnostics/hihat_collection'/(
+--- before/hihat_collection/plan.py
++++ after/hihat_collection/plan.py
+@@ -1,7 +1,7 @@
+ """Finite, unchanged swing close/open cycles; ride overlap is still positive."""
+ import random
+ 
+-CLOSE_DEGREES = 110
++CLOSE_DEGREES = 100
+ OPEN_AFTER_SECONDS = .6
+ CLOSURE_INTERVAL_SECONDS = 1.2
+ OPEN_SETTLE_SECONDS = 1.5
+--- before/tests/test_camera_playback.py
++++ after/tests/test_camera_playback.py
+@@ -1660,7 +1660,7 @@
+         self.assertEqual(app.continuous_j7_measurement_strike_count, 1)
+         app.hihat.send_beat.assert_called_once_with()
+         self.assertTrue(any(
+-            "hi-hat motor 2 CLOSE 110°" in call.args[0]
++            "hi-hat motor 2 CLOSE 100°" in call.args[0]
+             for call in app.status.set.call_args_list
+         ))
+         app._program_failure.assert_not_called()
+@@ -1770,7 +1770,7 @@
+         self.assertTrue(app._send_pending_hihat(1.2))
+         app.hihat.send_beat.assert_called_once_with()
+         self.assertIn("beat 1", app.status.set.call_args.args[0])
+-        self.assertIn("CLOSE 110°", app.status.set.call_args.args[0])
++        self.assertIn("CLOSE 100°", app.status.set.call_args.args[0])
+ 
+     def test_hihat_command_failure_at_beat_requests_safe_stop(self):
+         app = App.__new__(App)
+@@ -2262,7 +2262,7 @@
+         self.assertIn("continuous_strike", playback_app)
+         self.assertIn("_request_continuous_stop", playback_app)
+         copied_firmware = (ROOT / "esp32_hihat/motor_beat/motor_beat.ino").read_text()
+-        self.assertIn("BEAT_TARGET_DEGREES   = 110.0f", copied_firmware)
++        self.assertIn("BEAT_TARGET_DEGREES   = 100.0f", copied_firmware)
+         self.assertIn("c == 'C'", copied_firmware)
+         self.assertIn("c == 'O'", copied_firmware)
+         self.assertNotIn("camera_playback", original_launcher)
+--- before/tests/test_hihat.py
++++ after/tests/test_hihat.py
+@@ -3,6 +3,7 @@
+ import os
+ from pathlib import Path
+ import pty
++import re
+ import tempfile
+ import termios
+ import unittest
+@@ -48,9 +49,9 @@
+         self.assertTrue(self.controller.ready())
+         return handshake
+ 
+-    def test_proven_port_baud_and_motor2_target_are_preserved(self):
++    def test_proven_port_baud_and_current_motor2_target(self):
+         self.assertEqual(ESP_BAUD, 115200)
+-        self.assertEqual(MOTOR2_TARGET_DEGREES, 110)
++        self.assertEqual(MOTOR2_TARGET_DEGREES, 100)
+         self.assertEqual(ESP_HEARTBEAT_SECONDS, 0.1)
+         self.assertIn("Silicon_Labs_CP2102", DEFAULT_ESP_PORT)
+         self.assertEqual(find_esp_port(self.port), self.port)
+@@ -59,6 +60,16 @@
+         attrs = termios.tcgetattr(self.controller.fd)
+         self.assertEqual(attrs[4], termios.B115200)
+         self.assertEqual(attrs[5], termios.B115200)
++
++    def test_firmware_and_host_close_targets_match_at_100_degrees(self):
++        firmware = (Path(__file__).resolve().parents[1] /
++                    'esp32_hihat/motor_beat/motor_beat.ino').read_text()
++        for name in ('BEAT_TARGET_DEGREES', 'KEY_TARGET_DEGREES'):
++            value = float(re.search(rf'{name}\s*=\s*([0-9.]+)f;', firmware).group(1))
++            self.assertEqual(value, MOTOR2_TARGET_DEGREES)
++        self.assertEqual(round(28 * 19.2 * MOTOR2_TARGET_DEGREES / 360), 149)
++        self.assertIn("m2Close(BEAT_TARGET_COUNTS)", firmware)
++        self.assertIn("m2Open()  { setpoint2 = 0;", firmware)
+ 
+     def test_arm_beats_replace_motor1_and_alternate_motor2_close_open(self):
+         handshake = self.make_ready()
+@@ -92,7 +103,7 @@
+         os.write(self.master, b"READY motor_beat (2 motors)\r\n")
+         self.controller.tick(20.01)
+         self.assertTrue(self.controller.ready())
+-        self.assertIn("110", self.controller.detail)
++        self.assertIn("100", self.controller.detail)
+         self.assertEqual(self.drain(), b"HS")
+ 
+     def test_firmware_fault_is_latched(self):
+--- before/tests/test_hihat_collection.py
++++ after/tests/test_hihat_collection.py
+@@ -13,7 +13,8 @@
+ from unittest.mock import patch
+ import numpy as np
+ 
+-from hihat_collection.plan import make_plan,cycle_commands
++from hihat_collection.plan import make_plan,cycle_commands,CLOSE_DEGREES
++from camera_playback.hihat import MOTOR2_TARGET_DEGREES
+ from hihat_collection.control import HiHatSession
+ from hihat_collection.collect import HiHatCollector
+ from x5_collection.collect import Collector
+@@ -21,6 +22,10 @@
+ 
+ 
+ class HiHatCollectionTests(unittest.TestCase):
++    def test_collection_matches_current_100_degree_swing_target(self):
++        self.assertEqual(CLOSE_DEGREES, 100)
++        self.assertEqual(CLOSE_DEGREES, MOTOR2_TARGET_DEGREES)
++
+     def test_finite_balanced_plan(self):
+         p=make_plan()
+         self.assertEqual(len(p['clean']),20)

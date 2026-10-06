@@ -1,0 +1,270 @@
+{
+  "paths": {
+    "run": "diagnostics/hihat_sync_20261005/run_20261005_134848",
+    "evidence": "playback_results/swing_verification/20261005T204914-6a572157",
+    "timeline": "playback_results/hihat_sync/20261005T204941-72baa6d3/timeline.jsonl"
+  },
+  "audio_clock_offset": 573486.250836262,
+  "audio_clock_spread_ms": 9.721184032969177,
+  "clipped_samples": 0,
+  "commands": 68,
+  "closures": 34,
+  "matches": 22,
+  "skips": 11,
+  "initial_five_detector_error_median_ms": 68.03028692957014,
+  "final_five_detector_error_median_ms": 48.04295883513987,
+  "max_command_lateness_ms": 49.69727713614702,
+  "final_estimated_advance_ms": 119.99999999999999,
+  "final_applied_advance_ms": 109.99999999999999,
+  "exact_grid_error_ms": 0.0,
+  "paired_advances_identical": true,
+  "independent_waveform_review": {
+    "method": "1 ms causal RMS above 1.5 kHz; 15 percent burst rise, sustained 2.5 ms of 3 ms, searched 35-180 ms after close; visually reviewed representative plots.",
+    "caveat": "Dominant closure-burst measurements, not independent classification of the weak overlapping ride; no exact acoustic lock claim.",
+    "baseline_closures": 4,
+    "late_closures": 15,
+    "baseline_grid_error_median_ms": 86.11224603373557,
+    "late_grid_error_median_ms": -12.325253919698298,
+    "closure_latency_median_ms": 83.34213402122259,
+    "measurements": [
+      {
+        "index": 1,
+        "onset": 573529.694773762,
+        "latency_ms": 82.12188596371561,
+        "relative_to_ride_grid_ms": 85.17474611289799,
+        "advance_ms": 0.0
+      },
+      {
+        "index": 3,
+        "onset": 573530.895586262,
+        "latency_ms": 83.33250193390995,
+        "relative_to_ride_grid_ms": 85.98724601324648,
+        "advance_ms": 0.0
+      },
+      {
+        "index": 5,
+        "onset": 573532.095836262,
+        "latency_ms": 81.92127896472812,
+        "relative_to_ride_grid_ms": 86.23724605422467,
+        "advance_ms": 0.0
+      },
+      {
+        "index": 7,
+        "onset": 573533.296273762,
+        "latency_ms": 85.1838169619441,
+        "relative_to_ride_grid_ms": 86.67474612593651,
+        "advance_ms": 0.0
+      },
+      {
+        "index": 9,
+        "onset": 573534.487336262,
+        "latency_ms": 84.66683002188802,
+        "relative_to_ride_grid_ms": 77.73724605794996,
+        "advance_ms": 10.0
+      },
+      {
+        "index": 11,
+        "onset": 573535.6872112621,
+        "latency_ms": 81.31164603400975,
+        "relative_to_ride_grid_ms": 77.61224615387619,
+        "advance_ms": 20.0
+      },
+      {
+        "index": 13,
+        "onset": 573536.866711262,
+        "latency_ms": 82.07466907333583,
+        "relative_to_ride_grid_ms": 57.11224605329335,
+        "advance_ms": 30.0
+      },
+      {
+        "index": 15,
+        "onset": 573538.057898762,
+        "latency_ms": 82.83773402217776,
+        "relative_to_ride_grid_ms": 48.29974612221122,
+        "advance_ms": 40.0
+      },
+      {
+        "index": 17,
+        "onset": 573539.253523762,
+        "latency_ms": 82.12522196117789,
+        "relative_to_ride_grid_ms": 43.924746103584766,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 19,
+        "onset": 573540.443898762,
+        "latency_ms": 81.95244905073196,
+        "relative_to_ride_grid_ms": 34.29974603932351,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 21,
+        "onset": 573541.659898762,
+        "latency_ms": 85.86980495601892,
+        "relative_to_ride_grid_ms": 50.2997461007908,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 23,
+        "onset": 573542.855023762,
+        "latency_ms": 83.31704093143344,
+        "relative_to_ride_grid_ms": 45.42474600020796,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 25,
+        "onset": 573544.055961262,
+        "latency_ms": 84.13423202000558,
+        "relative_to_ride_grid_ms": 46.362246037460864,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 27,
+        "onset": 573545.257398762,
+        "latency_ms": 85.66027507185936,
+        "relative_to_ride_grid_ms": 47.79974615667015,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 29,
+        "onset": 573546.4549612621,
+        "latency_ms": 83.35176610853523,
+        "relative_to_ride_grid_ms": 45.362246106378734,
+        "advance_ms": 50.0
+      },
+      {
+        "index": 31,
+        "onset": 573547.634961262,
+        "latency_ms": 82.06036395858973,
+        "relative_to_ride_grid_ms": 25.362246087752283,
+        "advance_ms": 60.00000000000001
+      },
+      {
+        "index": 33,
+        "onset": 573548.830336262,
+        "latency_ms": 81.53254596982151,
+        "relative_to_ride_grid_ms": 20.737246028147638,
+        "advance_ms": 70.0
+      },
+      {
+        "index": 35,
+        "onset": 573550.022711262,
+        "latency_ms": 84.59402504377067,
+        "relative_to_ride_grid_ms": 13.112246058881283,
+        "advance_ms": 80.0
+      },
+      {
+        "index": 37,
+        "onset": 573551.204086262,
+        "latency_ms": 83.37054599542171,
+        "relative_to_ride_grid_ms": -5.5127538507804275,
+        "advance_ms": 90.0
+      },
+      {
+        "index": 39,
+        "onset": 573552.392961262,
+        "latency_ms": 82.735595991835,
+        "relative_to_ride_grid_ms": -16.6377539280802,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 41,
+        "onset": 573553.597273762,
+        "latency_ms": 87.28811703622341,
+        "relative_to_ride_grid_ms": -12.325253919698298,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 43,
+        "onset": 573554.804148762,
+        "latency_ms": 83.21000298019499,
+        "relative_to_ride_grid_ms": -5.450253956951201,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 45,
+        "onset": 573555.994336262,
+        "latency_ms": 83.45903595909476,
+        "relative_to_ride_grid_ms": -15.262753935530782,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 47,
+        "onset": 573557.198773762,
+        "latency_ms": 87.58886100258678,
+        "relative_to_ride_grid_ms": -10.825253906659782,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 49,
+        "onset": 573558.4003362621,
+        "latency_ms": 83.72216310817748,
+        "relative_to_ride_grid_ms": -9.262753883376718,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 51,
+        "onset": 573559.596648762,
+        "latency_ms": 84.15124705061316,
+        "relative_to_ride_grid_ms": -12.95025390572846,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 53,
+        "onset": 573560.801961262,
+        "latency_ms": 81.54996298253536,
+        "relative_to_ride_grid_ms": -7.637753966264427,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 55,
+        "onset": 573561.993523762,
+        "latency_ms": 82.60645100381225,
+        "relative_to_ride_grid_ms": -16.075253952294588,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 57,
+        "onset": 573563.1971487621,
+        "latency_ms": 82.58003403898329,
+        "relative_to_ride_grid_ms": -12.450253823772073,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 59,
+        "onset": 573564.394336262,
+        "latency_ms": 84.17578798253089,
+        "relative_to_ride_grid_ms": -15.262753935530782,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 61,
+        "onset": 573565.598586262,
+        "latency_ms": 84.37866694293916,
+        "relative_to_ride_grid_ms": -11.012753937393427,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 63,
+        "onset": 573566.814836262,
+        "latency_ms": 84.63424001820385,
+        "relative_to_ride_grid_ms": 5.2372460486367345,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 65,
+        "onset": 573567.998961262,
+        "latency_ms": 85.14138008467853,
+        "relative_to_ride_grid_ms": -10.637753875926137,
+        "advance_ms": 99.99999999999999
+      },
+      {
+        "index": 67,
+        "onset": 573569.189711262,
+        "latency_ms": 83.18896603304893,
+        "relative_to_ride_grid_ms": -19.887753878720105,
+        "advance_ms": 109.99999999999999
+      }
+    ]
+  }
+}

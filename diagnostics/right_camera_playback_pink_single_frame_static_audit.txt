@@ -1,0 +1,17 @@
+== Python compile ==
+PASS
+== start_beat.sh syntax ==
+PASS
+== Playback runtime has no inner target or verification phase ==
+PASS
+== Original camera-search program still retains its independent behavior ==
+33:TARGET_HOLD_SECONDS = 2.0
+510:        if self.phase == "HOLDING CYMBAL TARGET":
+515:                if now - self.hold_inside_since >= TARGET_HOLD_SECONDS:
+593:        self.phase = "HOLDING CYMBAL TARGET"
+603:        if self.phase != "HOLDING CYMBAL TARGET":
+608:        remaining = max(0.0, TARGET_HOLD_SECONDS - (now - self.hold_inside_since))
+615:        if not self.alignment_active or self.phase != "HOLDING CYMBAL TARGET":
+PASS
+== Launcher help ==
+PASS

@@ -1,0 +1,45 @@
+test_baseline_measurement_uses_median_then_plans_first_direction (tests.test_camera_search.CameraSearchTests.test_baseline_measurement_uses_median_then_plans_first_direction) ... ok
+test_camera_controller_settles_at_original_tolerance_plus_one_encoder_count (tests.test_camera_search.CameraSearchTests.test_camera_controller_settles_at_original_tolerance_plus_one_encoder_count) ... ok
+test_camera_failure_during_search_returns_to_center (tests.test_camera_search.CameraSearchTests.test_camera_failure_during_search_returns_to_center) ... FAILED: test camera loss
+ok
+test_camera_wrapper_defines_only_processed_window (tests.test_camera_search.CameraSearchTests.test_camera_wrapper_defines_only_processed_window) ... ok
+test_candidate_accepts_only_lower_score_and_reject_returns_to_anchor (tests.test_camera_search.CameraSearchTests.test_candidate_accepts_only_lower_score_and_reject_returns_to_anchor) ... ok
+test_component_median_rejects_one_tip_and_box_outlier (tests.test_camera_search.CameraSearchTests.test_component_median_rejects_one_tip_and_box_outlier) ... ok
+test_cymbal_target_is_absent_without_valid_cymbal_box (tests.test_camera_search.CameraSearchTests.test_cymbal_target_is_absent_without_valid_cymbal_box) ... ok
+test_cymbal_target_is_center_ninth_of_highest_confidence_box (tests.test_camera_search.CameraSearchTests.test_cymbal_target_is_center_ninth_of_highest_confidence_box) ... ok
+test_detection_is_latched_until_pose_settles_then_starts_hill (tests.test_camera_search.CameraSearchTests.test_detection_is_latched_until_pose_settles_then_starts_hill) ... DETECTED: drumstick + observed YOLO tip at actual Y=+0.000 m (active goal Y=+0.000, camera frame 12)
+ok
+test_gripper_close_requires_fresh_cymbal_then_starts_search (tests.test_camera_search.CameraSearchTests.test_gripper_close_requires_fresh_cymbal_then_starts_search) ... FAILED: cymbal unavailable after gripper close
+ok
+test_hill_accept_keeps_direction_until_it_stops_improving (tests.test_camera_search.CameraSearchTests.test_hill_accept_keeps_direction_until_it_stops_improving) ... ok
+test_hill_climber_uses_fixed_order_and_step_reductions (tests.test_camera_search.CameraSearchTests.test_hill_climber_uses_fixed_order_and_step_reductions) ... ok
+test_missing_tip_frames_do_not_cancel_measurement_or_target_hold (tests.test_camera_search.CameraSearchTests.test_missing_tip_frames_do_not_cancel_measurement_or_target_hold) ... ok
+test_no_detection_advances_only_y (tests.test_camera_search.CameraSearchTests.test_no_detection_advances_only_y) ... ok
+test_nonstall_fault_recenters_but_stall_relaxes_immediately (tests.test_camera_search.CameraSearchTests.test_nonstall_fault_recenters_but_stall_relaxes_immediately) ... FAULT: Position timeout — returning to customized right center before relaxing
+STALL FAULT: immediate right-arm relaxation — STALL: motor 3
+ok
+test_observation_requires_simultaneous_direct_tip_and_cymbal_geometry (tests.test_camera_search.CameraSearchTests.test_observation_requires_simultaneous_direct_tip_and_cymbal_geometry) ... ok
+test_old_inference_cannot_trigger_required_detection (tests.test_camera_search.CameraSearchTests.test_old_inference_cannot_trigger_required_detection) ... ok
+test_outside_tip_resets_hold_and_remeasures_without_moving (tests.test_camera_search.CameraSearchTests.test_outside_tip_resets_hold_and_remeasures_without_moving) ... ok
+test_prolonged_visual_loss_routes_to_center_recovery (tests.test_camera_search.CameraSearchTests.test_prolonged_visual_loss_routes_to_center_recovery) ... ok
+test_protocol_reports_stick_without_fabricating_missing_cymbal (tests.test_camera_search.CameraSearchTests.test_protocol_reports_stick_without_fabricating_missing_cymbal) ... ok
+test_protocol_transmits_selected_visual_geometry (tests.test_camera_search.CameraSearchTests.test_protocol_transmits_selected_visual_geometry) ... ok
+test_real_right_zone_uses_requested_ten_mm_y_steps (tests.test_camera_search.CameraSearchTests.test_real_right_zone_uses_requested_ten_mm_y_steps) ... ok
+test_real_search_plan_and_dynamic_candidate_keep_joint2_centered (tests.test_camera_search.CameraSearchTests.test_real_search_plan_and_dynamic_candidate_keep_joint2_centered) ... ok
+test_repeated_nonstall_recovery_fault_never_relaxes_away_from_center (tests.test_camera_search.CameraSearchTests.test_repeated_nonstall_recovery_fault_never_relaxes_away_from_center) ... FAULT: Position timeout — returning to customized right center before relaxing
+FAULT: center command retry pending; motors remain enabled until centered or the user presses EMERGENCY RELAX — Position timeout; temporary CAN congestion
+ok
+test_requirement_needs_box_and_directly_observed_yolo_tip (tests.test_camera_search.CameraSearchTests.test_requirement_needs_box_and_directly_observed_yolo_tip) ... ok
+test_search_exhaustion_recenters_before_relax (tests.test_camera_search.CameraSearchTests.test_search_exhaustion_recenters_before_relax) ... FAILED: no drumstick + tip detection; next Y=+0.020 m is outside right zone1
+ok
+test_start_and_continue_are_blocked_without_cymbal (tests.test_camera_search.CameraSearchTests.test_start_and_continue_are_blocked_without_cymbal) ... ok
+test_success_failure_and_fault_returns_relax_only_after_center_completion (tests.test_camera_search.CameraSearchTests.test_success_failure_and_fault_returns_relax_only_after_center_completion) ... ok
+test_support_process_exit_notifies_controller_instead_of_forcing_shutdown (tests.test_camera_search.CameraSearchTests.test_support_process_exit_notifies_controller_instead_of_forcing_shutdown) ... ok
+test_target_requires_two_seconds_and_fresh_inside_confirmation (tests.test_camera_search.CameraSearchTests.test_target_requires_two_seconds_and_fresh_inside_confirmation) ... SUCCESS: drumstick tip held inside cymbal center cell for 2 seconds (confirmed by camera frame 51)
+ok
+test_visual_score_is_zero_inside_and_normalized_outside (tests.test_camera_search.CameraSearchTests.test_visual_score_is_zero_inside_and_normalized_outside) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 23.772s
+
+OK

@@ -1,0 +1,28 @@
+[
+  {
+    "program": "left_cartesian",
+    "side": "left",
+    "manual_finish": false,
+    "fixed_joints": {},
+    "update_fixed_joints": null
+  },
+  {
+    "program": "right_cartesian",
+    "side": "right",
+    "manual_finish": true,
+    "fixed_joints": {
+      "1": 0.0
+    },
+    "update_fixed_joints": {
+      "1": 0.0
+    }
+  },
+  {
+    "program": "right_camera_cartesian_base",
+    "side": "right",
+    "manual_finish": false,
+    "fixed_joints": {},
+    "update_fixed_joints": null
+  }
+]
+PASS: centered-J2 IK applies only to standalone right_cartesian; left and camera base unchanged

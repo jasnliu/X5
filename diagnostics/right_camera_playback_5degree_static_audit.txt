@@ -1,0 +1,7 @@
+15:STRIKE_INCREMENT_DEGREES = 5
+36:from .strike import STRIKE_INCREMENT_DEGREES, StrikeControl, build_strike_plan
+730:        amount = (self.strike_index + 1) * STRIKE_INCREMENT_DEGREES
+768:        amount = (self.strike_index + 1) * STRIKE_INCREMENT_DEGREES
+789:        learned_degrees = (self.strike_index + 1) * STRIKE_INCREMENT_DEGREES
+PASS: planner and all playback status-depth calculations use the shared 5-degree increment
+PASS: isolated right_joint7_test was outside this change

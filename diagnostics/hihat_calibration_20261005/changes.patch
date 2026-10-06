@@ -1,0 +1,1777 @@
+--- before/README.md
++++ after/README.md
+@@ -436,14 +436,14 @@
+ The launcher also starts **`models/hihat_v1`** (its own config, checkpoint and
+ normality reference) on the same TONOR source. A separate **Hi-hat sound v1**
+ panel flashes green for each detected closure and shows its count, last score
+-and normality. The panel/layout is unchanged. In normal **--hardware** swing,
+-a nonvisual servo now also uses hi-hat onsets to adjust **only hi-hat timing**.
+-Hi-hat audio never selects a J7 depth, retimes the ride, starts/stops the beat
+-or gates RUN. Missing/stale/ambiguous hi-hat detections freeze the last valid
+-advance; existing ride readiness/failure handling is unchanged. The panel's
+-legacy “visual only” wording is retained per the no-UI-changes requirement;
+-background timing decisions are logged separately. ESP32 motor faults still
+-use the existing controlled-stop safety path.
++and normality. The panel/layout is unchanged. In normal **--hardware**, hi-hat
++audio now selects the startup closure angle and then adjusts **only hi-hat
++timing** during swing. It never selects a J7 depth or retimes the ride.
++During swing, missing/stale/ambiguous hi-hat detections freeze the last valid
++advance. During startup calibration, detector failure or exhaustion of the
++90°–115° search is a fault and prevents ride search/swing. Status wording in the
++existing panels reflects calibration rather than claiming “visual only”. ESP32
++motor faults still use the existing controlled-stop safety path.
+ 
+ Ride and hi-hat use independent listener processes and Unix sockets, with
+ instrument-tagged messages checked at both the bridge and receiver. Each
+@@ -511,13 +511,54 @@
+ The integrated
+ 115200-baud ESP32 hi-hat remains on the main
+ quarter-note beats only; it receives no command on a ride extra. Its main-beat
+-commands in normal hardware mode are now `O`, `C`, `O`, `C`…: **OPEN on
+-1/3, CLOSE on 2/4**. The hi-hat now uses a **100° close/hold** target and the same **0°
+-return/release** target; firmware and host displays match. Commands use the unchanged ride grid minus one signed hi-hat
++commands in normal hardware mode are now `O`, `B`, `O`, `B`…: **OPEN on
++1/3, CLOSE on 2/4**. `B` uses the startup-calibrated **90°–115° close/hold** target;
++`O` retains the **0° return/release** target. Legacy `C`/`J` commands remain
++fixed at 100° for other programs and existing collection procedures. Commands use the unchanged ride grid minus one signed hi-hat
+ advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
+ motor 1. The ESP32 code is copied under
+ `esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
+ `/dev/serial/by-id/` path.
++
++### Automatic hi-hat angle calibration (normal hardware only)
++
++Immediately after launch, without pressing RUN, the program waits for hi-hat
++ST7/TONOR and the ESP32 calibration-v2 protocol, delivers an ntfy movement
++warning, then gives a 10-second countdown. The arm remains under its existing
++RUN control. No startup calibration runs in `--test`, `--hardwaretest`, offline
++preview, or recording-only mode.
++
++The hi-hat first returns to encoder zero. It then tries **90, 95, 100, 105, 110,
++115 degrees**, each time verifying encoder arrival, holding closed for **2 s**,
++returning to zero and remaining open for **2 s**. A valid hi-hat-model HIT whose
++audio onset belongs to that closure selects the first successful angle, but
++does not shorten the hold/open cycle. No angle boost is applied. Late detection
++notifications can still select their original trial; opening sounds and old
++hits cannot select the next trial. Before a miss is declared, ST7 must finalize
++the closure's audio interval. Stale feedback, missing acknowledgments, audio
++processing stalls, detector failure and a completed **115° attempt with no HIT**
++are faults, never permission to move farther. There is no 120° attempt or
++fallback to a fixed angle. Calibration restarts at 90° on the next launch.
++The return is verified by the firmware's encoder-zero arrival latch followed
++by a settled released encoder. A passive motor may coast after release; it is
++not incorrectly required to keep holding exactly zero while unpowered.
++
++RUN may center/close/play the arm recording while the hi-hat is calibrating.
++At the recording endpoint the arm waits in its feedback-supervised powered
++hold if needed. Once the hi-hat is ready, a fresh camera alignment check precedes
++the unchanged ride search (+0.5° swing boost retained). Calibration failure
++uses the existing **center-before-relax** arm recovery. Cancelling or closing
++the application also cancels calibration and supervises the hi-hat's return;
++a stalled/faulted hi-hat output is released rather than held indefinitely.
++This dedicated stationary wait retains feedback/stall checks without timing out
++solely because a successfully held pose lasts longer than a normal 30 s move.
++
++This requires the updated `esp32_hihat/motor_beat` firmware; normal launch never
++flashes it automatically. Unsupported firmware fails closed before calibration
++motion. `playback_results/hihat_calibration/<session>/events.jsonl` records
++warning delivery, trials, encoder arrival, selected HIT, angle and faults.
++The recording picker is temporarily disabled during calibration motion because
++its preflight is synchronous; the UI layout and RUN workflow are otherwise unchanged.
+ 
+ ### Background hi-hat synchronization (no ride offset)
+ 
+--- before/camera_playback/app.py
++++ after/camera_playback/app.py
+@@ -34,7 +34,7 @@
+     SPEED,
+ )
+ from goal_motion.app import App as JointGoalApp
+-from goal_motion.control import STALL_ERROR, STALL_MOVEMENT
++from goal_motion.control import STALL_ERROR, STALL_MOVEMENT, TOLERANCE
+ from safe_zone.geometry import MEMBERSHIP_BUFFER_M
+ 
+ from .audio import AudioReceiver
+@@ -43,6 +43,7 @@
+ from .hill import GuidedHillClimber
+ from .hihat import DEFAULT_ESP_PORT, HiHatController, MOTOR2_TARGET_DEGREES
+ from .hihat_sync_runtime import HiHatSyncRuntime
++from .hihat_calibration_runtime import HiHatCalibrationRuntime
+ from .planner import solve_playback_coordinate
+ from .simulation import SimulatedMotors
+ from .strike import (
+@@ -115,6 +116,7 @@
+ CONTINUOUS_OUT_PHASE = "100 BPM STRIKE MOVING OUT"
+ CONTINUOUS_RETURN_PHASE = "100 BPM STRIKE RETURNING"
+ CENTER_RELAX_PHASE = "CENTER RELAX RECENTERING"
++HIHAT_CALIBRATION_WAIT_PHASE = "WAITING FOR HI-HAT CALIBRATION"
+ HARDWARE_TEST_READY_PHASE = "HARDWARE TEST READY FOR MANUAL STRIKE"
+ HARDWARE_TEST_OUT_PHASE = "HARDWARE TEST J7 MIT FREEFALL"
+ HARDWARE_TEST_RETURN_PHASE = "HARDWARE TEST J7 MIT REBOUND"
+@@ -139,6 +141,20 @@
+ )
+ 
+ 
++class HiHatCalibrationHold(CameraGoalControl):
++    """Stationary wait, not a 30-second movement; retain all stall history."""
++
++    def update(self, actual, now):
++        actual = np.asarray(actual, dtype=float)
++        if (actual.shape == (7,) and np.isfinite(actual).all()
++                and np.max(np.abs(self.desired-actual)) <= TOLERANCE + ENCODER_LSB_RAD):
++            # A reached stationary hold may outlast the normal movement
++            # deadline while ST7 warms/calibrates. Never extend a failed move,
++            # discard history or suppress the inherited stall/feedback checks.
++            self.started = now
++        return super().update(actual, now)
++
++
+ class App(CameraSearchApp):
+     CAMERA_REQUIRED_PHASES = {
+         "CLOSING GRIPPER",
+@@ -146,6 +162,7 @@
+         "RECORDING PLAYBACK",
+         "SETTLING RECORDING END",
+         "CHECKING PLAYBACK END",
++        HIHAT_CALIBRATION_WAIT_PHASE,
+         "HILL MEASURING ANCHOR",
+         "HILL MEASURING CANDIDATE",
+         "HILL PLANNING",
+@@ -188,7 +205,9 @@
+         self.hybrid_stopping = self.hybrid_restoring = False
+         self.hybrid_tuning = hybrid_control.load_tuning() if self.hybrid_enabled else None
+         if self.hybrid_enabled:
+-            print('HARDWARE: one RUN button → center + close gripper → recording → '
++            print('HARDWARE: automatic hi-hat calibration 90°..115° in 5° steps; '
++                  'one RUN button → center + close gripper → recording → '
++                  'wait for hi-hat calibration → '
+                   'experiment hybrid J7 search → first-hit depth +0.5° → '
+                   '100 BPM hybrid swing with partial returns; ride v2 controls search; '
+                   'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
+@@ -208,6 +227,7 @@
+             else HiHatController(esp_port)
+         )
+         self.hihat_sync = HiHatSyncRuntime(self) if self.hybrid_enabled else None
++        self.hihat_calibration = None
+         self.hihat_fault_detail = None
+         if real_hardware and self.hihat is not None and not self.hihat.connect():
+             self.hihat_fault_detail = self.hihat.detail
+@@ -414,8 +434,10 @@
+         self.sound_label.pack(fill="x", padx=20, pady=5, before=self.start_button)
+         self.hihat_sound_monitor = HiHatSoundMonitor(
+             self.root, hihat_audio_socket, before=self.start_button, disabled=self.test_mode)
+-        if self.hihat_sync is not None:
+-            self.hihat_sound_monitor.on_messages = lambda messages: self.hihat_sync.feed('hihat', messages)
++        if self.hybrid_enabled:
++            self.hihat_calibration = HiHatCalibrationRuntime(self)
++            self.hihat_sound_monitor.control_required = True
++        self.hihat_sound_monitor.on_messages = self._hihat_sound_messages
+         if self.test_mode:
+             hihat_text = "Hi-hat ESP32: ignored in test mode — serial port not opened"
+         elif self.hardware_test_mode or self.recording_only:
+@@ -492,6 +514,10 @@
+                 self.root.after(100, lambda: recording_only_control.auto_tick(self))
+ 
+     def choose_recording(self) -> None:
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None and calibration.busy:
++            self.status.set('Wait for hi-hat calibration before changing recordings')
++            return  # Recording preflight is synchronous; do not starve serial supervision.
+         if self.bus and self.bus.active:
+             self.status.set("Cannot change recordings while the right arm is powered")
+             return
+@@ -538,6 +564,12 @@
+         self._refresh_loading_label()
+ 
+     def load_recording(self, path, show_dialog: bool = True) -> bool:
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None and calibration.busy:
++            # A modal picker can remain open while Tk starts calibration.
++            # Recheck here before synchronous preflight can starve heartbeats.
++            self.status.set('Hi-hat calibration is moving; load the recording after it finishes')
++            return False
+         if self.bus and self.bus.active:
+             self.status.set("Cannot load a recording while the right arm is powered")
+             return False
+@@ -609,6 +641,8 @@
+         selector = getattr(self, "recording_button", None)
+         if selector is not None:
+             selectable = not (self.bus and self.bus.active)
++            calibration = getattr(self, 'hihat_calibration', None)
++            selectable = selectable and not (calibration is not None and calibration.busy)
+             selector.config(state="normal" if selectable else "disabled")
+         self._refresh_hardware_test_controls()
+         continuous = getattr(self, "continuous_strike_active", False)
+@@ -1167,6 +1201,9 @@
+         try:
+             if self.hardware:
+                 self.hihat.tick()
++                calibration = getattr(self, 'hihat_calibration', None)
++                if calibration is not None:
++                    calibration.tick()
+                 if self.hihat.state == "error":
+                     first_fault = self.hihat_fault_detail is None
+                     self.hihat_fault_detail = self.hihat.detail
+@@ -1186,6 +1223,9 @@
+             elif self.hihat_fault_detail:
+                 text = "Hi-hat ESP32 ERROR: " + self.hihat_fault_detail
+                 color = "#b00020"
++            elif getattr(self, 'hihat_calibration', None) is not None:
++                text = 'Hi-hat ESP32: ' + self.hihat_calibration.detail
++                color = '#087f23' if self.hihat_calibration.ready else '#8a5a00'
+             elif self.hihat.ready():
+                 text = (
+                     f"Hi-hat ESP32 READY — motor 2 alternates "
+@@ -1203,6 +1243,19 @@
+             self.hihat_status.set("Hi-hat ESP32 ERROR: " + str(exc))
+             self.hihat_label.config(fg="#b00020")
+         self.root.after(20, self.hihat_tick)
++
++    def _hihat_sound_messages(self, messages):
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None:
++            calibration.feed(messages)
++        sync = getattr(self, 'hihat_sync', None)
++        if sync is not None:
++            sync.feed('hihat', messages)
++
++    def _cancel_hihat_calibration(self):
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None:
++            calibration.cancel()
+ 
+     def centered(self, now=None):
+         if getattr(self, 'single_run_mode', False):
+@@ -1274,6 +1327,12 @@
+             )
+         if not self.bus.active:
+             return
++        if self.phase == HIHAT_CALIBRATION_WAIT_PHASE:
++            calibration = getattr(self, 'hihat_calibration', None)
++            if calibration is not None and calibration.ready:
++                # Recheck the current endpoint and a fresh camera frame; do
++                # not reuse an alignment observation made before this wait.
++                self._begin_playback_alignment(now)
+         self._sample_continuous_j7_minimum()
+         self._advance_hardware_test_mit(now)
+         hybrid_control.tick(self, now)
+@@ -1335,6 +1394,8 @@
+ 
+     def complete_stage(self, now=None):
+         now = time.monotonic() if now is None else now
++        if self.phase == HIHAT_CALIBRATION_WAIT_PHASE:
++            return  # Keep the inherited feedback-supervised hold controller.
+         if (getattr(self, 'single_run_mode', False)
+                 and isinstance(self.bus, PlaybackMotors)
+                 and self.phase in self.RETURN_PHASES | {'RECENTERING',
+@@ -1587,6 +1648,17 @@
+             recording_only_control.finish(self, 'Alignment bypassed', playback_success=True)
+             return
+         self.playback_active = False
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None and not calibration.ready:
++            if calibration.engine.failure:
++                self.fail('Hi-hat calibration failed: ' + calibration.engine.failure)
++                return
++            self.alignment_active = False
++            self.phase = HIHAT_CALIBRATION_WAIT_PHASE
++            self._reset_hold_controller()
++            self.status.set('Holding recording endpoint — waiting for hi-hat calibration before ride search')
++            print('ARM WAIT: hi-hat calibration must finish before ride calibration', flush=True)
++            return
+         actual_joints = self.arm().copy()
+         joint2 = actual_joints[1]
+         if joint2 < self.lower[1] - 3 * ENCODER_LSB_RAD or joint2 > self.upper[1] + 3 * ENCODER_LSB_RAD:
+@@ -1611,6 +1683,14 @@
+         self.status.set(
+             message + " — waiting for one fresh tip check in the visible pink rectangle"
+         )
++
++    def _reset_hold_controller(self) -> None:
++        if self.phase != HIHAT_CALIBRATION_WAIT_PHASE:
++            super()._reset_hold_controller()
++            return
++        desired = self.control.desired.copy() if self.control is not None else self.arm().copy()
++        self.control = HiHatCalibrationHold(desired, self.lower, self.upper, time.monotonic())
++        self.last_command = 0.0
+ 
+     def _process_alignment_frame(self, message: dict, now: float) -> None:
+         observation = observation_from_message(message)
+@@ -1713,6 +1793,10 @@
+         """Prepare striking after one fresh visible-pink observation."""
+         acceptance_phases = {"CHECKING PLAYBACK END"} | self.MEASUREMENT_PHASES
+         if not self.alignment_active or self.phase not in acceptance_phases:
++            return
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None and not calibration.ready:
++            self._begin_playback_alignment(time.monotonic())
+             return
+         anchor = self.arm().copy()
+         if getattr(self, "hardware_test_mode", False):
+@@ -1877,6 +1961,10 @@
+         return self.strike_plan.targets[self.strike_index]
+ 
+     def _begin_strike_attempt(self) -> None:
++        calibration = getattr(self, 'hihat_calibration', None)
++        if calibration is not None and not calibration.ready:
++            self.fail('Ride search blocked: hi-hat calibration has not succeeded')
++            return
+         if hybrid_control.enabled(self):
+             try:
+                 hybrid_control.begin_search(self)
+@@ -2346,7 +2434,10 @@
+             )
+             self._request_continuous_stop()
+             return False
+-        detail = f"CLOSE {MOTOR2_TARGET_DEGREES}°" if command == b"C" else "OPEN 0°"
++        amount = getattr(self.hihat, 'target_degrees', MOTOR2_TARGET_DEGREES)
++        if not isinstance(amount, (int, float)):
++            amount = MOTOR2_TARGET_DEGREES
++        detail = f"CLOSE {amount}°" if command in (b"C", b"B") else "OPEN 0°"
+         self.status.set(
+             f"100 BPM swing {self.continuous_current_swing_label}: "
+             f"hi-hat motor 2 {detail} on the main-beat deadline"
+@@ -2390,6 +2481,7 @@
+ 
+     def center_relax(self) -> None:
+         """Cancel the active workflow, move from the live pose to center, then relax."""
++        self._cancel_hihat_calibration()
+         if getattr(self, 'phase', None) == hybrid_control.FAULT:
+             if getattr(self, 'single_run_mode', False):
+                 hybrid_control.recover_to_center(self)
+@@ -2619,6 +2711,7 @@
+             button.config(text="CENTER + RELAX")
+ 
+     def _program_failure(self, message: str) -> None:
++        self._cancel_hihat_calibration()
+         if hybrid_control.engaged(self):
+             if self.phase == hybrid_control.FAULT:
+                 return
+@@ -2641,6 +2734,7 @@
+         super()._program_failure(message)
+ 
+     def fail(self, message):
++        self._cancel_hihat_calibration()
+         if (getattr(self, 'single_run_mode', False) and self.bus and self.bus.active
+                 and ('STALL:' in str(message) or 'too hot' in str(message).lower())):
+             self.relax('MAJOR FAULT: '+str(message))
+@@ -2908,6 +3002,7 @@
+         super().safety()
+ 
+     def relax(self, message=None):
++        self._cancel_hihat_calibration()
+         if getattr(self, 'single_run_mode', False) and self.bus and self.bus.active:
+             fatal = 'STALL:' in str(message or '') or str(message or '').startswith('Hybrid stall:')
+             fatal = fatal or 'too hot' in str(message or '').lower()
+@@ -2928,7 +3023,8 @@
+         hybrid_control.close(self)
+         self.hybrid_stopping = self.hybrid_restoring = False
+         hihat = getattr(self, "hihat", None)
+-        if hihat is not None:
++        calibration = getattr(self, 'hihat_calibration', None)
++        if hihat is not None and not (calibration is not None and calibration.busy):
+             try:
+                 hihat.release_all()
+             except Exception as exc:
+@@ -2971,7 +3067,9 @@
+         self.center_relax()
+ 
+     def _safe_close_tick(self):
+-        if not self.bus.active and self.phase != 'RELAXING':
++        calibration = getattr(self, 'hihat_calibration', None)
++        if (not self.bus.active and self.phase != 'RELAXING'
++                and not (calibration is not None and calibration.busy)):
+             self.root.quit()
+             return
+         if self.phase not in self.RETURN_PHASES | {'RELAXING', 'FAULT RECENTERING', 'ZONE RECENTERING'}:
+@@ -2993,7 +3091,9 @@
+                         self.fail('GUI loop failed: '+str(exc))
+                         self.request_safe_close()
+                         continue
+-                    if not (getattr(self, 'single_run_mode', False) and self.bus.active):
++                    calibration = getattr(self, 'hihat_calibration', None)
++                    if not (getattr(self, 'single_run_mode', False) and
++                            (self.bus.active or (calibration is not None and calibration.busy))):
+                         return result
+                     self.request_safe_close()
+             finally:
+@@ -3010,6 +3110,9 @@
+             monitor = getattr(self, 'hihat_sound_monitor', None)
+             if monitor is not None:
+                 monitor.close()
++            calibration = getattr(self, 'hihat_calibration', None)
++            if calibration is not None:
++                calibration.close()
+             hihat = getattr(self, "hihat", None)
+             if hihat is not None:
+                 hihat.close()
+@@ -3023,7 +3126,7 @@
+     mode.add_argument("--hardwaretest", action="store_true")
+     parser.add_argument("--detection-socket", required=True)
+     parser.add_argument("--audio-socket", required=True)
+-    parser.add_argument("--hihat-audio-socket", help="optional visual-only hi-hat detector socket")
++    parser.add_argument("--hihat-audio-socket", help="hi-hat detector socket (required for normal hardware calibration)")
+     parser.add_argument("--esp-port", default=DEFAULT_ESP_PORT)
+     parser.add_argument("--recording", type=Path, default=DEFAULT_RECORDING)
+     parser.add_argument("--recording-only", action="store_true")
+--- before/camera_playback/hihat.py
++++ after/camera_playback/hihat.py
+@@ -2,6 +2,7 @@
+ from __future__ import annotations
+ 
+ import glob
++import math
+ import os
+ from pathlib import Path
+ import termios
+@@ -13,6 +14,8 @@
+ ESP_STARTUP_SECONDS = 0.3
+ ESP_PROBE_SECONDS = 0.5
+ MOTOR2_TARGET_DEGREES = 100
++CALIBRATION_MIN_DEGREES = 90
++CALIBRATION_MAX_DEGREES = 115
+ DEFAULT_ESP_PORT = (
+     "/dev/serial/by-id/"
+     "usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0"
+@@ -70,8 +73,9 @@
+     """Drive only motor 2 of the copied motor_beat firmware.
+ 
+     Explicit beat-program edges close on 2/4 and open on 1/3. The legacy
+-    send_beat API starts closed for finite collection cycles. Closure targets
+-    100 degrees; open targets zero. Motor-1 kick commands are never sent.
++    send_beat API starts closed for finite collection cycles. Legacy closure
++    targets 100 degrees; calibrated closure uses B at the learned 90..115 degree
++    target. Open targets zero. Motor-1 kick commands are never sent.
+     """
+ 
+     def __init__(self, port: str | Path | None = DEFAULT_ESP_PORT):
+@@ -90,6 +94,34 @@
+         self.beat_count = 0
+         self.motor2_closed = False
+         self.buffer = bytearray()
++        self.target_degrees = MOTOR2_TARGET_DEGREES
++        self.calibrated = False
++        self.telemetry = None
++        self.telemetry_at = None
++        self.angle_ack = None
++
++    @staticmethod
++    def counts_for(degrees: int) -> int:
++        return int(math.floor(28 * 19.2 * degrees / 360 + .5))
++
++    def query_status(self) -> None:
++        """Non-moving capability/encoder query; old firmware safely ignores Q."""
++        self._write(b"Q")
++
++    def set_calibration_angle(self, degrees: int) -> None:
++        if (type(degrees) is not int or not CALIBRATION_MIN_DEGREES <= degrees <= CALIBRATION_MAX_DEGREES):
++            raise ValueError("Hi-hat calibration angle must be an integer from 90 through 115")
++        if not self.ready():
++            raise RuntimeError("ESP32 hi-hat is not ready")
++        self.angle_ack = None
++        self._write(f"A{degrees}\n".encode("ascii"))
++
++    def calibration_edge(self, closed: bool) -> None:
++        """Separate ownership from swing sequences, which may be reset by RUN."""
++        if not self.ready():
++            raise RuntimeError("ESP32 hi-hat is not ready")
++        self._write(b"B" if closed else b"O")
++        self.motor2_closed = bool(closed)
+ 
+     @property
+     def enabled(self) -> bool:
+@@ -148,19 +180,49 @@
+         self.state = "ready"
+         self.detail = (
+             f"ESP32 hi-hat ready on {self.port} at {ESP_BAUD} baud; "
+-            f"motor 2 alternates 0°/{MOTOR2_TARGET_DEGREES}°"
++            f"motor 2 alternates 0°/{self.target_degrees}°"
+         )
+ 
+     def _handle_line(self, text: str) -> None:
++        if self.state == "error":
++            return  # No later ACK/READY can clear a latched fault.
+         if text.startswith("READY motor_beat"):
++            if self.firmware_verified:
++                self._fail("ESP32 restarted; encoder zero and hi-hat calibration are invalid; restart program")
++                return
+             if not self.initialized:
+                 self._write(b"S")
+                 self.initialized = True
+             self._mark_ready()
+         elif self.initialized and text.startswith("STOP -- all motors released"):
+             self._mark_ready()
+-        elif text.startswith(("FAULT", "LINK LOST")):
++        elif text.startswith(("FAULT", "LINK LOST", "ERROR:")):
+             self._fail(text)
++        elif text.startswith(("HIHAT ", "ANGLE ")):
++            try:
++                values = dict(item.split("=", 1) for item in text.split()[1:])
++                values = {key: int(value) for key, value in values.items()}
++                if text.startswith("HIHAT "):
++                    if (set(values) != {"v", "min", "max", "angle", "counts", "pos", "target", "released", "opened", "fault"}
++                            or values['v'] != 2 or values['min'] != CALIBRATION_MIN_DEGREES
++                            or values['max'] != CALIBRATION_MAX_DEGREES
++                            or not CALIBRATION_MIN_DEGREES <= values['angle'] <= CALIBRATION_MAX_DEGREES
++                            or values['counts'] != self.counts_for(values['angle'])
++                            or values['released'] not in (0, 1) or values['opened'] not in (0, 1)
++                            or values['fault'] not in (0, 1)):
++                        raise ValueError("incompatible calibration capability/encoder reply")
++                    self.telemetry = values
++                    self.telemetry_at = time.monotonic()
++                    if values['fault']:
++                        self._fail("ESP32 reports a latched hi-hat motor fault")
++                else:
++                    if (set(values) != {'degrees', 'counts'}
++                            or not CALIBRATION_MIN_DEGREES <= values['degrees'] <= CALIBRATION_MAX_DEGREES
++                            or values['counts'] != self.counts_for(values['degrees'])):
++                        raise ValueError("invalid angle acknowledgment")
++                    self.angle_ack = (values['degrees'], values['counts'], time.monotonic())
++            except (TypeError, ValueError) as exc:
++                self._fail("Invalid ESP32 calibration response: " + str(exc))
+ 
+     def _drain(self) -> None:
+         if self.fd is None:
+@@ -204,8 +266,8 @@
+     def start_sequence(self) -> None:
+         if not self.ready():
+             raise RuntimeError("ESP32 hi-hat is not ready")
+-        # Firmware encoder zero is the open position. The first arm beat closes
+-        # to 100 degrees, and the second returns to zero.
++        # Legacy alternating cycles start closed; explicit swing edges use
++        # send_state instead. Neither resets the learned angle or encoder zero.
+         self.sequence_active = True
+         self.next_beat_closes = True
+         self.beat_count = 0
+@@ -214,7 +276,7 @@
+     def send_beat(self) -> bytes:
+         if not self.sequence_active:
+             raise RuntimeError("ESP32 hi-hat beat sequence is not active")
+-        command = b"C" if self.next_beat_closes else b"O"
++        command = (b"B" if self.calibrated else b"C") if self.next_beat_closes else b"O"
+         self._write(command)
+         self.motor2_closed = self.next_beat_closes
+         self.next_beat_closes = not self.next_beat_closes
+@@ -225,7 +287,7 @@
+         """Explicit scheduled edge; same firmware targets as send_beat()."""
+         if not self.sequence_active or not self.ready():
+             raise RuntimeError("ESP32 hi-hat beat sequence is not active/ready")
+-        command = b"C" if closed else b"O"
++        command = (b"B" if self.calibrated else b"C") if closed else b"O"
+         self._write(command)
+         self.motor2_closed = bool(closed)
+         self.next_beat_closes = not closed
+--- before/camera_playback/sound_monitor.py
++++ after/camera_playback/sound_monitor.py
+@@ -31,7 +31,14 @@
+         self.tick()
+ 
+     def poll_display(self, now=None):
+-        """Return display state only. Even a detector failure is informational."""
++        """Keep the same widgets; accurately describe calibration ownership."""
++        text, color, flash = self._poll_display(now)
++        if getattr(self, 'control_required', False):
++            text = text.replace('visual only; beat unaffected', 'calibration required')
++            text = text.replace('visual only', 'calibration + timing')
++        return text, color, flash
++
++    def _poll_display(self, now=None):
+         if self.disabled:
+             return "Hi-hat sound v1: ignored in test mode — no microphone", "#666666", False
+         if getattr(self, 'startup_error', None):
+@@ -51,7 +58,8 @@
+                 self.count += 1
+                 self.last_hit = message
+                 self.last_received_at = now
+-                print(f"HI-HAT SOUND (visual only) #{self.count}: "
++                use = 'calibration + timing' if getattr(self, 'control_required', False) else 'visual only'
++                print(f"HI-HAT SOUND ({use}) #{self.count}: "
+                       f"score={message['score']:.3f}; normality={message['normality_score']:.1f}",
+                       flush=True)
+         summary = f"Closures: {self.count}"
+--- before/esp32_hihat/README.md
++++ after/esp32_hihat/README.md
+@@ -7,17 +7,39 @@
+ `--hardwaretest` performs isolated, user-requested arm strikes without a swing
+ beat and does not open the ESP32 serial port.
+ 
+-During the robot arm's learned 100 BPM loop, the host sends only:
++Normal hardware startup automatically calibrates before ride search. The host
++verifies calibration-v2 support using `Q`; old firmware cannot silently continue
++at its fixed angle. After an ntfy warning and countdown, it tries 90..115° in 5°
++steps, holding closed for 2 s and open for 2 s. The first hi-hat detector HIT
++selects the swing target; no HIT at 115° is a fault.
+ 
+-- `C`: motor 2 closes to and holds **100 degrees**;
++The protocol is:
++
++- `A90\n` through `A115\n`: set the integer calibrated angle, only while released
++  at open zero; acknowledged by `ANGLE degrees=... counts=...`. Does not move.
++- `B`: motor 2 closes to and holds the acknowledged calibrated angle;
++- `C` or `J`: legacy fixed **100-degree** closure (unchanged for collectors/keyboard);
+ - `O`: motor 2 returns to encoder zero, then releases;
++- `Q`: read protocol bounds, configured angle, encoder position, active target,
++  released state, zero-return arrival latch (`opened`) and fault state, with no motion;
+ - `H`: 100 ms watchdog heartbeat;
+ - `S`: release both firmware motor outputs when the program exits.
+ 
+-The beat program sends `O` on beats 1/3 and `C` on beats 2/4, shifted together
+-by its automatically tuned hi-hat advance. Rotation is 0° to 100° regardless
+-of that timing adjustment. The matching keyboard `J` closure is also 100°. The host never sends `K`; firmware motor 1 is
++The beat program sends `O` on beats 1/3 and `B` on beats 2/4, shifted together
++by its automatically tuned hi-hat advance. This changes timing, not the learned
++rotation. The host never sends `K`; firmware motor 1 is
+ replaced rhythmically by right-arm joint 7 and remains released.
++
++All calibrated angle commands are bounded to **90..115°** in firmware and host.
++Travel retains encoder quantization and closed-loop tolerance; 115° is the
++maximum commanded target, not a claim of zero physical overshoot. The firmware
++reports counts (115° = 172 counts). The movement timeout is 2 seconds; motor
++faults latch until reset and cannot be cleared by another closure command.
++The 400 ms heartbeat watchdog and original motor gains remain active. Startup
++always assumes the hi-hat is physically open at its encoder-zero position.
++Open completion records the actual zero crossing before coasting/releasing.
++The host waits for the released encoder to settle, rather than repeatedly
++reopening a motor that already returned but passively coasted beyond zero.
+ 
+ The copied `flash_beat.sh` is provided only when the board needs its firmware
+ reloaded. Normal camera playback does **not** flash the ESP32. Do not run the
+--- before/esp32_hihat/motor_beat/motor_beat.ino
++++ after/esp32_hihat/motor_beat/motor_beat.ino
+@@ -6,6 +6,8 @@
+ //   MOTOR 2  (the "hold" motor -- the old single-motor beat behavior):
+ //     'C' = BEAT CLOSE -> drive to 100 deg and actively hold (closed-loop).
+ //     'J' = KEY CLOSE  -> drive to 100 deg and actively hold (closed-loop).
++//     'A90\n'..'A115\n' = configure calibrated target (only while open).
++//     'B' = calibrated CLOSE; 'Q' = protocol/encoder status (no motion).
+ //     'O' = OPEN  -> actively return to 0 deg at HALF speed, then release (loose).
+ //     Host sends C on beats 2 & 4, O on beats 1 & 3  -> Motor 2 hits on 2 & 4.
+ //
+@@ -64,6 +66,10 @@
+     (long)lroundf(COUNTS_PER_OUTPUT_REV * (BEAT_TARGET_DEGREES / 360.0f));
+ static const long  KEY_TARGET_COUNTS =
+     (long)lroundf(COUNTS_PER_OUTPUT_REV * (KEY_TARGET_DEGREES / 360.0f));
++static const int CALIBRATION_MIN_DEGREES = 90;
++static const int CALIBRATION_MAX_DEGREES = 115;
++static int calibratedDegrees = 100;
++static long calibratedCounts = BEAT_TARGET_COUNTS;
+ 
+ static const unsigned long CONTROL_PERIOD_US = 5000;   // 200 Hz
+ static const int   MAX_DUTY = 255;
+@@ -127,6 +133,7 @@
+ // ===== State =====
+ long          setpoint2   = 0;      // 0, KEY_TARGET_COUNTS, or BEAT_TARGET_COUNTS
+ bool          released2   = true;   // Motor 2 loose/disabled
++bool          openReached2 = true; // Boot assumes open. Latches a controlled zero return.
+ float         integral2   = 0.0f;   // close-hold effort (persists across beats)
+ float         prevError2  = 0.0f;
+ unsigned long lastControlUs = 0;
+@@ -134,6 +141,14 @@
+ bool          faulted2    = false;
+ bool          kick1Active = false;
+ unsigned long kick1StartMs = 0;
++unsigned long movementStartedMs = 0;
++bool movementPending = false;
++static const unsigned long MOVEMENT_TIMEOUT_MS = 2000;
++char angleBuffer[8];
++uint8_t angleLength = 0;
++bool readingAngle = false;
++bool angleInvalid = false;
++unsigned long angleStartedMs = 0;
+ 
+ void startKick1() {
+   digitalWrite(M1_R_EN, HIGH);
+@@ -143,16 +158,45 @@
+   kick1Active = true;
+   kick1StartMs = millis();
+ }
+-void m2Open()  { setpoint2 = 0;            released2 = false; prevError2 = (float)(0 - readPos2()); }
++void m2Open()  {
++  if (faulted2) return;
++  openReached2 = false;
++  setpoint2 = 0; released2 = false; prevError2 = (float)(0 - readPos2());
++  movementStartedMs = millis(); movementPending = true;
++}
+ void m2Close(long targetCounts) {
++  if (faulted2) return;  // Faults latch until reset, never cleared by a close.
++  openReached2 = false;
+   setpoint2 = targetCounts;
+   released2 = false;
+-  faulted2 = false;
+   prevError2 = (float)(targetCounts - readPos2());
++  movementStartedMs = millis(); movementPending = true;
+ }
+ void releaseAll() {
+   coast1(); kick1Active = false;
+   coast2(); released2 = true; setpoint2 = 0;
++  movementPending = false;
++}
++
++void reportHiHat() {
++  Serial.printf("HIHAT v=2 min=%d max=%d angle=%d counts=%ld pos=%ld target=%ld released=%d opened=%d fault=%d\n",
++    CALIBRATION_MIN_DEGREES, CALIBRATION_MAX_DEGREES, calibratedDegrees,
++    calibratedCounts, readPos2(), setpoint2, released2 ? 1 : 0, openReached2 ? 1 : 0, faulted2 ? 1 : 0);
++}
++
++void finishAngle() {
++  angleBuffer[angleLength] = '\0';
++  const int degrees = atoi(angleBuffer);
++  readingAngle = false;
++  if (angleInvalid || angleLength == 0 || degrees < CALIBRATION_MIN_DEGREES ||
++      degrees > CALIBRATION_MAX_DEGREES || faulted2 || !released2 || !openReached2) {
++    Serial.println("ERROR: calibrated angle rejected; require verified open return and integer 90..115");
++    return;
++  }
++  calibratedDegrees = degrees;
++  calibratedCounts = (long)lroundf(COUNTS_PER_OUTPUT_REV * degrees / 360.0f);
++  integral2 = 0;  // New attempt must not inherit close-hold effort from a miss.
++  Serial.printf("ANGLE degrees=%d counts=%ld\n", calibratedDegrees, calibratedCounts);
+ }
+ 
+ void setup() {
+@@ -192,6 +236,7 @@
+   Serial.print("  C=motor2 ");
+   Serial.print(BEAT_TARGET_DEGREES, 0);
+   Serial.println("  O=motor2 open  H=beat  S=stop(all)");
++  Serial.println("Calibration v2: A<90..115> newline=set angle while open; B=calibrated close; Q=status");
+ 
+   lastRxMs = millis();
+   lastControlUs = micros();
+@@ -203,11 +248,29 @@
+   while (Serial.available() > 0) {
+     const int c = Serial.read();
+     lastRxMs = millis();
+-    if      (c == 'K' || c == 'k') startKick1();
++    // Consume a complete framed value: malformed payloads must never become
++    // motor commands. Emergency S remains available even during a partial frame.
++    if (c == 'S' || c == 's') {
++      readingAngle = false; releaseAll(); Serial.println("STOP -- all motors released."); continue;
++    }
++    if (readingAngle) {
++      if (c == '\n') finishAngle();
++      else if (c != '\r') {
++        if (c < '0' || c > '9' || angleLength >= sizeof(angleBuffer)-1) angleInvalid = true;
++        else angleBuffer[angleLength++] = (char)c;
++      }
++      continue;
++    }
++    if (c == 'A') { readingAngle = true; angleLength = 0; angleInvalid = false; angleStartedMs = millis(); }
++    else if (c == 'Q') reportHiHat();
++    else if (c == 'B') m2Close(calibratedCounts);
++    else if (c == 'K' || c == 'k') startKick1();
+     else if (c == 'C' || c == 'c') m2Close(BEAT_TARGET_COUNTS);
+     else if (c == 'J' || c == 'j') m2Close(KEY_TARGET_COUNTS);
+     else if (c == 'O' || c == 'o') m2Open();
+-    else if (c == 'S' || c == 's') { releaseAll(); Serial.println("STOP -- all motors released."); }
++  }
++  if (readingAngle && millis()-angleStartedMs > 150) {
++    readingAngle = false; Serial.println("ERROR: calibrated angle frame timed out");
+   }
+ 
+   // ---- Motor 1 kick timing (non-blocking; runs alongside Motor 2) ----
+@@ -244,8 +307,16 @@
+ 
+   if (released2) { coast2(); return; }
+ 
++  if (labs(setpoint2-position) <= REACHED_DEADBAND) movementPending = false;
++  if (movementPending && millis()-movementStartedMs > MOVEMENT_TIMEOUT_MS) {
++    faulted2 = true; releaseAll();
++    Serial.println("FAULT: Motor 2 movement timed out before reaching target; outputs released");
++    return;
++  }
++
+   // Reached 0 on the return -> latch loose (stops oscillation at 0).
+   if (setpoint2 == 0 && labs(position) <= REACHED_DEADBAND) {
++    openReached2 = true;  // Preserve proof even if the loose mechanism coasts afterward.
+     released2 = true;
+     coast2();
+     return;
+--- before/launch_right_camera_playback.py
++++ after/launch_right_camera_playback.py
+@@ -31,7 +31,7 @@
+     mode = parser.add_mutually_exclusive_group()
+     mode.add_argument(
+         "--hardware", action="store_true",
+-        help="one RUN: center + close, recording, ride-v2 hybrid search, 100 BPM swing; hi-hat-v1 sound display only (camera/TONOR/ESP32)",
++        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, 100 BPM swing (camera/TONOR/ESP32)",
+     )
+     mode.add_argument(
+         "--test", action="store_true",
+--- before/tests/test_hihat.py
++++ after/tests/test_hihat.py
+@@ -69,7 +69,50 @@
+             self.assertEqual(value, MOTOR2_TARGET_DEGREES)
+         self.assertEqual(round(28 * 19.2 * MOTOR2_TARGET_DEGREES / 360), 149)
+         self.assertIn("m2Close(BEAT_TARGET_COUNTS)", firmware)
+-        self.assertIn("m2Open()  { setpoint2 = 0;", firmware)
++        self.assertRegex(firmware, r"void m2Open\(\).*?\{[\s\S]*?setpoint2 = 0;")
++
++    def test_bounded_calibration_angle_protocol_and_feedback(self):
++        self.make_ready()
++        self.drain()
++        for invalid in (89, 116, -1, 90.5, True, '95'):
++            with self.assertRaises(ValueError):
++                self.controller.set_calibration_angle(invalid)
++        self.assertEqual(self.drain(), b'')
++        self.controller.set_calibration_angle(115)
++        self.controller.query_status()
++        self.assertEqual(self.drain(), b'A115\nQ')
++        os.write(self.master, b'ANGLE degrees=115 counts=172\n'
++                 b'HIHAT v=2 min=90 max=115 angle=115 counts=172 pos=0 target=0 released=1 opened=1 fault=0\n')
++        self.controller.tick(10.33)
++        self.assertEqual(self.controller.angle_ack[:2], (115, 172))
++        self.assertEqual(self.controller.telemetry['pos'], 0)
++        self.controller.calibration_edge(True)
++        self.controller.calibration_edge(False)
++        self.assertFalse(self.controller.sequence_active)
++        self.assertEqual(self.drain(), b'BO')
++
++    def test_selected_angle_uses_calibrated_closure_not_legacy_fixed_command(self):
++        self.make_ready()
++        self.drain()
++        self.controller.calibrated = True
++        self.controller.target_degrees = 95
++        self.controller.start_sequence()
++        self.assertEqual(self.controller.send_state(True), b'B')
++        self.assertEqual(self.controller.send_state(False), b'O')
++        self.assertEqual(self.controller.send_beat(), b'B')
++        self.assertEqual(self.drain(), b'BOB')
++
++    def test_reset_and_bad_readback_invalidate_calibration(self):
++        for line in ('READY motor_beat (2 motors)',
++                     'HIHAT v=2 min=90 max=120 angle=100 counts=149 pos=0 target=0 released=1 opened=1 fault=0',
++                     'ANGLE degrees=116 counts=173', 'ERROR: calibrated angle rejected'):
++            with self.subTest(line=line):
++                self.controller.state = 'ready'
++                self.controller.firmware_verified = True
++                self.controller._handle_line(line)
++                self.assertEqual(self.controller.state, 'error')
++                self.controller._handle_line('STOP -- all motors released.')
++                self.assertEqual(self.controller.state, 'error')
+ 
+     def test_arm_beats_replace_motor1_and_alternate_motor2_close_open(self):
+         handshake = self.make_ready()
+--- /dev/null
++++ after/camera_playback/hihat_calibration.py
+@@ -0,0 +1,243 @@
++"""Finite hi-hat angle search. No Tk, CAN, notification or model dependencies.
++
++Only timestamped hi-hat HITs select an angle. Encoder feedback verifies travel,
++not sound. Every trial finishes its full hold/open cycle before selection.
++"""
++from __future__ import annotations
++
++import math
++
++from .hihat import CALIBRATION_MIN_DEGREES, CALIBRATION_MAX_DEGREES
++
++ANGLES = tuple(range(CALIBRATION_MIN_DEGREES, CALIBRATION_MAX_DEGREES + 1, 5))
++CLOSE_SECONDS = 2.0
++OPEN_SECONDS = 2.0
++MOVEMENT_TIMEOUT = 2.5
++ACK_TIMEOUT = 1.0
++FEEDBACK_TIMEOUT = .6
++AUDIO_BACKLOG_TIMEOUT = 3.0
++REACHED_COUNTS = 2
++
++
++class HiHatCalibration:
++    def __init__(self, controller, log=lambda row: None):
++        self.controller = controller
++        self.log = log
++        self.phase = 'WAITING'
++        self.angle = None
++        self.selected_angle = None
++        self.failure = None
++        self.close_at = None
++        self.open_at = None
++        self.hit = None
++        self.finalized_at = None
++        self.progress_at = None
++        self.command_at = None
++        self.reached_at = None
++        self.hold_until = None
++        self.deadline = None
++        self.open_settle_position = None
++
++    @property
++    def ready(self):
++        return self.phase == 'READY'
++
++    @property
++    def busy(self):
++        return self.phase not in {'WAITING', 'READY', 'FAULT'}
++
++    def event(self, kind, now, **extra):
++        self.log(dict(kind=kind, at=now, phase=self.phase, angle=self.angle, **extra))
++
++    def start(self, now):
++        if self.phase != 'WAITING' or self.failure:
++            raise RuntimeError('Hi-hat calibration may only start once per program launch')
++        self.controller.calibrated = False
++        self._open(now, 'INITIAL OPENING')
++
++    def _open(self, now, phase='OPENING'):
++        self.controller.calibration_edge(False)
++        self.command_at = now
++        self.open_at = now
++        self.reached_at = None
++        self.open_settle_position = None
++        self.deadline = now + MOVEMENT_TIMEOUT
++        self.phase = phase
++        self.event('open', now)
++
++    def _configure(self, now, angle):
++        if angle not in ANGLES:
++            raise RuntimeError('Attempt outside the approved 90..115 degree search')
++        self.angle = angle
++        self.close_at = self.open_at = None
++        self.hit = None
++        self.controller.set_calibration_angle(angle)
++        self.command_at = now
++        self.deadline = now + ACK_TIMEOUT
++        self.phase = 'CONFIGURING'
++        self.event('configure', now)
++
++    def feed(self, messages, now):
++        if not self.busy or self.failure:
++            return
++        for message in messages:
++            if message.get('instrument') != 'hihat':
++                continue
++            if message.get('kind') == 'progress':
++                value = message.get('finalized_at')
++                if (isinstance(value, (int, float)) and not isinstance(value, bool)
++                        and math.isfinite(value) and value <= now + .05
++                        and (self.finalized_at is None or value >= self.finalized_at)):
++                    self.finalized_at, self.progress_at = value, now
++            elif message.get('kind') == 'hit' and self.close_at is not None:
++                onset, received = message.get('event_at'), message.get('detected_at')
++                if not all(isinstance(v, (int, float)) and not isinstance(v, bool)
++                           and math.isfinite(v) for v in (onset, received)):
++                    continue
++                if (self.close_at <= onset <= now + .05 and onset <= received + .05
++                        and received <= now + .05
++                        and (self.open_at is None or onset < self.open_at)):
++                    if self.hit is None:
++                        self.hit = dict(message)
++                        self.event('hit', now, onset=onset, detected_at=received)
++                else:
++                    self.event('ignored_hit', now, onset=onset,
++                               reason='outside this closure; opening/older hits cannot select an angle')
++
++    def abort(self, reason, now):
++        if self.failure is not None:
++            return
++        self.failure = str(reason)
++        self.controller.calibrated = False
++        self.event('fault', now, detail=self.failure)
++        if self.phase in {'WAITING', 'READY'}:
++            self.phase = 'FAULT'
++            return
++        try:
++            if not self.controller.ready():
++                raise RuntimeError('Controller fault prevents a supervised return')
++            self._open(now, 'FAULT OPENING')
++        except Exception:
++            # This is ONLY the separate hi-hat output, never the airborne arm.
++            self._release_after_fault(now)
++
++    def _release_after_fault(self, now):
++        # Even an unplugged serial cable must complete the software fault path
++        # so the arm is told to center, rather than waiting forever on cleanup.
++        self.phase = 'FAULT'
++        try:
++            self.controller.release_all()
++        except Exception as exc:
++            self.event('release_unconfirmed', now, detail=str(exc),
++                       recovery='ESP32 heartbeat watchdog; inspect hardware before restart')
++
++    def _fresh_feedback(self, now):
++        c = self.controller
++        return (c.telemetry is not None and c.telemetry_at is not None
++                and 0 <= now - c.telemetry_at <= FEEDBACK_TIMEOUT)
++
++    def _at_target(self, target, now, *, released=False):
++        c = self.controller
++        return (self._fresh_feedback(now) and c.telemetry_at >= self.command_at
++                and c.telemetry['target'] == target
++                and ((c.telemetry['released'] == 1 and c.telemetry.get('opened') == 1)
++                     if released else abs(c.telemetry['pos'] - target) <= REACHED_COUNTS))
++
++    def tick(self, now, *, audio_ready=True):
++        if not self.busy:
++            return
++        try:
++            self._tick(now, audio_ready)
++        except Exception as exc:
++            if self.failure is None:
++                self.abort(str(exc), now)
++            else:
++                # Failed return or stalled hi-hat: do not drive it indefinitely.
++                self._release_after_fault(now)
++                self.event('return_failed', now, detail=str(exc))
++
++    def _tick(self, now, audio_ready):
++        c = self.controller
++        if not c.ready():
++            raise RuntimeError('Hi-hat controller fault: ' + c.detail)
++        if not self._fresh_feedback(now):
++            raise RuntimeError('Hi-hat encoder feedback became stale')
++        if not self.failure and not audio_ready:
++            raise RuntimeError('Hi-hat detector stopped or became stale during calibration')
++
++        if self.phase == 'CONFIGURING':
++            ack = c.angle_ack
++            if ack is not None and ack[0] == self.angle and ack[2] >= self.command_at:
++                c.calibration_edge(True)
++                self.command_at = self.close_at = now
++                self.open_at = None
++                self.reached_at = None
++                self.deadline = now + MOVEMENT_TIMEOUT
++                self.phase = 'CLOSING'
++                self.event('close', now, target_counts=ack[1])
++            elif now >= self.deadline:
++                raise RuntimeError('Hi-hat angle acknowledgment timed out; no closure issued')
++        elif self.phase == 'CLOSING':
++            if self._at_target(c.counts_for(self.angle), now):
++                self.reached_at = now if self.reached_at is None else self.reached_at
++                if now - self.reached_at >= .1:
++                    self.hold_until = now + CLOSE_SECONDS
++                    self.phase = 'HOLDING CLOSED'
++                    self.event('closed', now, hold_seconds=CLOSE_SECONDS, pos=c.telemetry['pos'])
++            else:
++                self.reached_at = None
++            if self.phase == 'CLOSING' and now >= self.deadline:
++                raise RuntimeError('Hi-hat failed to reach its closure target')
++        elif self.phase == 'HOLDING CLOSED':
++            if abs(c.telemetry['pos'] - c.counts_for(self.angle)) > 8:
++                raise RuntimeError('Hi-hat moved away from its commanded closed position')
++            if now >= self.hold_until:
++                self._open(now)
++        elif self.phase in {'INITIAL OPENING', 'OPENING', 'FAULT OPENING'}:
++            if self._at_target(0, now, released=True):
++                # Firmware releases on crossing its zero deadband. The passive
++                # mechanism then coasts: do not demand that an unpowered motor
++                # continue holding exactly zero. Require the real return latch
++                # AND a stationary released encoder before the 2 s open dwell.
++                position = c.telemetry['pos']
++                if self.open_settle_position is None or abs(position-self.open_settle_position) > REACHED_COUNTS:
++                    self.open_settle_position, self.reached_at = position, now
++                if now-self.reached_at < .2:
++                    if now >= self.deadline:
++                        raise RuntimeError('Hi-hat did not settle after its open return')
++                    return
++                if self.phase == 'FAULT OPENING':
++                    self._release_after_fault(now)
++                    self.event('fault_open_verified', now, pos=c.telemetry['pos'])
++                else:
++                    initial = self.phase == 'INITIAL OPENING'
++                    self.hold_until = now + OPEN_SECONDS
++                    self.deadline = self.hold_until + AUDIO_BACKLOG_TIMEOUT
++                    self.phase = 'INITIAL OPEN' if initial else 'HOLDING OPEN'
++                    self.event('opened', now, open_seconds=OPEN_SECONDS, pos=c.telemetry['pos'])
++            elif now >= self.deadline:
++                raise RuntimeError('Hi-hat failed to return to open zero')
++            else:
++                self.open_settle_position = self.reached_at = None
++        elif self.phase in {'INITIAL OPEN', 'HOLDING OPEN'}:
++            if not self._at_target(0, now, released=True):
++                raise RuntimeError('Hi-hat lost its verified open/released state while waiting')
++            if now < self.hold_until:
++                return
++            if self.phase == 'INITIAL OPEN':
++                self._configure(now, ANGLES[0])
++            elif self.hit is not None:
++                self.selected_angle = self.angle
++                c.target_degrees = self.angle
++                c.calibrated = True
++                self.phase = 'READY'
++                self.event('selected', now, onset=self.hit['event_at'])
++            elif (self.finalized_at is not None and self.finalized_at >= self.open_at
++                  and self.progress_at is not None and now - self.progress_at <= 2):
++                self.event('miss', now, finalized_at=self.finalized_at)
++                if self.angle == ANGLES[-1]:
++                    self.abort('No hi-hat HIT detected at any angle from 90° through 115°; calibration failed', now)
++                else:
++                    self._configure(now, self.angle + 5)
++            elif now >= self.deadline:
++                raise RuntimeError('Hi-hat audio processing did not finalize the closure interval; not treating it as a miss')
+--- /dev/null
++++ after/camera_playback/hihat_calibration_runtime.py
+@@ -0,0 +1,179 @@
++"""Automatic background hi-hat calibration; never owns or commands arm motors."""
++from datetime import datetime, timezone
++import importlib.util
++import json
++from pathlib import Path
++import queue
++import threading
++import time
++import uuid
++
++from .hihat_calibration import HiHatCalibration
++
++WARNING_SECONDS = 10.0
++STARTUP_TIMEOUT = 90.0
++
++
++def notify_calibration():
++    path = Path.home() / '.local/bin/codex-ntfy.py'
++    spec = importlib.util.spec_from_file_location('hihat_calibration_ntfy', path)
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    if not module.post_ntfy(
++            'Automatic hi-hat calibration starts in 10 seconds: 90 to at most 115 degrees, '
++            '5-degree steps, 2 seconds closed and 2 seconds open. Keep clear. '
++            'The robot arm moves only if RUN is pressed.',
++            'X5 hi-hat calibration: movement warning', 'warning,robot'):
++        raise RuntimeError('ntfy delivery failed; hi-hat motion is blocked')
++    module.play_sound('{"type":"agent-turn-complete"}')
++
++
++class HiHatCalibrationRuntime:
++    def __init__(self, app, *, notifier=notify_calibration, now=None, directory=None):
++        self.app = app
++        self.notifier = notifier
++        self.started_at = time.monotonic() if now is None else now
++        self.controller_ready_at = None
++        self.next_query = self.started_at
++        self.warning_until = None
++        self.notification = queue.Queue(maxsize=1)
++        self.notification_started = False
++        self.failure_reported = False
++        self.wait_detail = 'waiting for ESP32 and hi-hat detector'
++        self.stream = None
++        self.closed = False
++        self.directory = directory or (Path(__file__).resolve().parents[1] /
++            'playback_results' / 'hihat_calibration' /
++            (datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8]))
++        try:
++            Path(self.directory).mkdir(parents=True, exist_ok=True)
++            self.stream = (Path(self.directory) / 'events.jsonl').open('w', buffering=1)
++        except OSError as exc:
++            print('HIHAT CALIBRATION: diagnostic file unavailable: ' + str(exc), flush=True)
++        self.engine = HiHatCalibration(app.hihat, self.log)
++
++    @property
++    def ready(self):
++        return self.engine.ready
++
++    @property
++    def busy(self):
++        return self.engine.busy
++
++    @property
++    def detail(self):
++        e = self.engine
++        if e.failure:
++            return 'FAULT: ' + e.failure
++        if e.ready:
++            return f'CALIBRATED {e.selected_angle}° / OPEN 0°'
++        if e.phase == 'WAITING':
++            return 'CALIBRATING: ' + self.wait_detail
++        return f'CALIBRATING {e.angle if e.angle is not None else 90}°: {e.phase.lower()}'
++
++    def log(self, row):
++        print('HIHAT CALIBRATION: ' + json.dumps(row, allow_nan=False), flush=True)
++        if self.stream is not None:
++            try:
++                self.stream.write(json.dumps(row, allow_nan=False) + '\n')
++            except OSError:
++                self.stream.close()
++                self.stream = None
++
++    def feed(self, messages):
++        self.engine.feed(messages, time.monotonic())
++
++    def _notify(self):
++        # No GUI, serial, or arm access from this thread. It cannot initiate
++        # motion after cancellation; only tick() can consume its result.
++        try:
++            self.notifier()
++            result = (True, '')
++        except Exception as exc:
++            result = (False, str(exc))
++        self.notification.put(result)
++
++    def tick(self, now=None):
++        if self.closed:
++            return
++        now = time.monotonic() if now is None else now
++        c, e = self.app.hihat, self.engine
++        try:
++            if e.phase == 'FAULT':
++                self._report_failure()
++                return
++            if c.state == 'error':
++                raise RuntimeError(c.detail)
++            if c.ready():
++                if self.controller_ready_at is None:
++                    self.controller_ready_at = now
++                if now >= self.next_query:
++                    c.query_status()
++                    self.next_query = now + (.5 if e.ready else .1)
++                if c.telemetry is None and now - self.controller_ready_at > 3:
++                    raise RuntimeError('ESP32 calibration v2 status unavailable; install the updated X5 hi-hat firmware')
++            monitor = getattr(self.app, 'hihat_sound_monitor', None)
++            receiver = getattr(monitor, 'receiver', None)
++            audio_ready = receiver is not None and receiver.ready(now)
++            if e.phase == 'WAITING':
++                if now - self.started_at >= STARTUP_TIMEOUT:
++                    raise RuntimeError('Hi-hat calibration startup timed out waiting for firmware, detector or notification')
++                if receiver is None or receiver.state in {'error', 'stopped'}:
++                    raise RuntimeError('Hi-hat detector unavailable for startup calibration')
++                if not (c.ready() and c.telemetry is not None and audio_ready):
++                    return
++                if not self.notification_started:
++                    self.notification_started = True
++                    self.wait_detail = 'sending ntfy movement warning'
++                    threading.Thread(target=self._notify, daemon=True, name='hihat-calibration-ntfy').start()
++                if self.warning_until is None:
++                    try:
++                        ok, detail = self.notification.get_nowait()
++                    except queue.Empty:
++                        return
++                    if not ok:
++                        raise RuntimeError(detail)
++                    self.warning_until = now + WARNING_SECONDS
++                    self.log(dict(kind='notification_delivered', at=now, warning_seconds=WARNING_SECONDS))
++                self.wait_detail = f'motion warning: {max(0, self.warning_until-now):.1f} s'
++                if now >= self.warning_until:
++                    e.start(now)
++            if e.ready:
++                if c.telemetry_at is None or now - c.telemetry_at > 1.5:
++                    raise RuntimeError('Calibrated ESP32 status became stale')
++                if c.telemetry['angle'] != e.selected_angle:
++                    raise RuntimeError('ESP32 calibrated target changed unexpectedly')
++            else:
++                e.tick(now, audio_ready=audio_ready)
++        except Exception as exc:
++            e.abort(str(exc), now)
++            # Service a pending fault return even when the detector is gone.
++            if e.busy:
++                e.tick(now, audio_ready=False)
++        self._report_failure()
++
++    def _report_failure(self):
++        if self.engine.failure and not self.failure_reported:
++            self.failure_reported = True
++            a = self.app
++            a.hihat_fault_detail = self.engine.failure
++            message = 'HI-HAT CALIBRATION FAULT: ' + self.engine.failure
++            a.result_status.set(message)
++            a.result_label.config(fg='#b00020')
++            # Existing arm failure path performs center-before-relax. An idle
++            # arm remains disabled; calibrator itself never accesses its bus.
++            if a.bus and a.bus.active:
++                a.fail(message)
++            else:
++                a.status.set(message)
++
++    def cancel(self, reason='Calibration cancelled; restart the program'):
++        if not self.ready and self.engine.failure is None:
++            self.engine.abort(reason, time.monotonic())
++            self._report_failure()
++
++    def close(self):
++        self.closed = True
++        if self.stream is not None:
++            self.stream.close()
++            self.stream = None
+--- /dev/null
++++ after/tests/test_hihat_calibration.py
+@@ -0,0 +1,270 @@
++"""No hardware: finite angle search, delayed audio and startup integration."""
++import tempfile
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++
++from camera_playback.hihat import HiHatController
++from camera_playback.hihat_calibration import HiHatCalibration, ANGLES
++from camera_playback.hihat_calibration_runtime import HiHatCalibrationRuntime
++
++
++class Controller:
++    counts_for = staticmethod(HiHatController.counts_for)
++
++    def __init__(self):
++        self.now = 0.
++        self.commands = []
++        self.angle_ack = None
++        self.target_degrees = 100
++        self.calibrated = False
++        self.state, self.detail = 'ready', ''
++        self.telemetry = dict(angle=100, counts=149, pos=0, target=0, released=1, opened=1, fault=0)
++        self.telemetry_at = 0.
++        self.auto_move = True
++
++    def ready(self):
++        return self.state == 'ready'
++
++    def query_status(self):
++        self.commands.append((self.now, 'Q'))
++
++    def set_calibration_angle(self, angle):
++        assert angle in ANGLES
++        self.commands.append((self.now, f'A{angle}'))
++        self.telemetry.update(angle=angle, counts=self.counts_for(angle))
++        self.angle_ack = (angle, self.counts_for(angle), self.now)
++
++    def calibration_edge(self, closed):
++        self.commands.append((self.now, 'B' if closed else 'O'))
++        target = self.telemetry['counts'] if closed else 0
++        self.telemetry.update(target=target, released=int(not closed), opened=int(not closed))
++        if self.auto_move:
++            self.telemetry['pos'] = target
++
++    def release_all(self):
++        self.commands.append((self.now, 'S'))
++        self.telemetry.update(target=0, released=1)
++
++
++class SearchTests(unittest.TestCase):
++    def setUp(self):
++        self.c = Controller()
++        self.events = []
++        self.e = HiHatCalibration(self.c, self.events.append)
++        self.e.start(0.)
++
++    def step(self, dt=.05, *, progress=True, audio=True, fresh=True):
++        self.c.now = round(self.c.now + dt, 6)
++        if fresh:
++            self.c.telemetry_at = self.c.now
++        if progress:
++            self.e.feed([dict(kind='progress', instrument='hihat', finalized_at=self.c.now-.6)], self.c.now)
++        self.e.tick(self.c.now, audio_ready=audio)
++
++    def until(self, predicate, **options):
++        for _ in range(1200):
++            if predicate():
++                return
++            self.step(**options)
++        self.fail('state transition timed out: ' + self.e.phase)
++
++    def hit(self, onset=None, instrument='hihat'):
++        self.e.feed([dict(kind='hit', instrument=instrument,
++                         event_at=self.c.now if onset is None else onset,
++                         detected_at=self.c.now, score=.8, normality_score=75.)], self.c.now)
++
++    def test_six_attempts_no_sound_fault_at_115_never_120(self):
++        self.until(lambda: self.e.phase == 'FAULT')
++        self.assertEqual([r['angle'] for r in self.events if r['kind'] == 'close'], list(ANGLES))
++        self.assertIn('115°', self.e.failure)
++        self.assertFalse(self.e.ready)
++        self.assertFalse(self.c.calibrated)
++        self.assertEqual(self.c.telemetry['pos'], 0)
++        self.assertEqual(self.c.commands[-1][1], 'S')
++
++    def test_first_hit_latches_but_always_finishes_two_second_hold_and_open(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED' and self.e.angle == 95)
++        self.hit()
++        self.assertFalse(self.e.ready)
++        self.until(lambda: self.e.ready)
++        self.assertEqual(self.e.selected_angle, 95)
++        self.assertEqual(self.c.target_degrees, 95)
++        self.assertTrue(self.c.calibrated)
++        closed = next(r for r in self.events if r['kind'] == 'closed' and r['angle'] == 95)
++        opened_command = next(r for r in self.events if r['kind'] == 'open' and r['angle'] == 95)
++        opened = next(r for r in self.events if r['kind'] == 'opened' and r['angle'] == 95)
++        selected = next(r for r in self.events if r['kind'] == 'selected')
++        self.assertGreaterEqual(opened_command['at'] - closed['at'], 2.)
++        self.assertGreaterEqual(selected['at'] - opened['at'], 2.)
++        self.assertEqual([r['angle'] for r in self.events if r['kind'] == 'close'], [90,95])
++
++    def test_late_notification_after_open_still_selects_onset_of_closure(self):
++        self.until(lambda: self.e.phase == 'HOLDING OPEN' and self.e.angle == 90)
++        self.hit(self.e.close_at + .2)
++        self.until(lambda: self.e.ready)
++        self.assertEqual(self.e.selected_angle, 90)
++
++    def test_hit_at_maximum_is_success_not_fault(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED' and self.e.angle == 115)
++        self.hit()
++        self.until(lambda: self.e.ready)
++        self.assertEqual(self.e.selected_angle, 115)
++        self.assertIsNone(self.e.failure)
++
++    def test_normal_passive_coast_after_verified_zero_return_is_not_false_fault(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.hit()
++        self.until(lambda: self.e.phase == 'OPENING')
++        self.c.telemetry['pos'] = -19  # Actual observed passive coast after release.
++        self.until(lambda: self.e.ready)
++        self.assertEqual(self.e.selected_angle, 90)
++        self.assertIsNone(self.e.failure)
++
++    def test_released_alone_cannot_fake_a_verified_open_return(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.until(lambda: self.e.phase == 'OPENING')
++        self.c.telemetry['opened'] = 0
++        self.until(lambda: self.e.failure is not None)
++        self.assertIn('return', self.e.failure)
++
++    def test_ride_old_future_and_opening_hits_do_not_select(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.hit(instrument='ride')
++        self.hit(self.e.close_at - 1)
++        self.hit(self.c.now + 5)
++        self.until(lambda: self.e.phase == 'HOLDING OPEN')
++        self.hit(self.e.open_at)
++        self.hit()
++        self.assertIsNone(self.e.hit)
++        self.until(lambda: self.e.angle == 95)
++        self.assertFalse(self.e.ready)
++
++    def test_missing_progress_is_a_fault_not_a_miss_or_deeper_trial(self):
++        self.until(lambda: self.e.phase == 'FAULT', progress=False)
++        self.assertIn('finalize', self.e.failure)
++        self.assertEqual(self.e.angle, 90)
++
++    def test_slow_progress_keeps_open_before_next_trial(self):
++        self.until(lambda: self.e.phase == 'HOLDING OPEN', progress=False)
++        for _ in range(45): self.step(progress=False)
++        self.assertEqual(self.e.phase, 'HOLDING OPEN')
++        self.assertEqual(self.e.angle, 90)
++        self.e.feed([dict(kind='progress', instrument='hihat', finalized_at=self.e.open_at)], self.c.now)
++        self.step(progress=False)
++        self.assertEqual(self.e.angle, 95)
++
++    def test_cancel_returns_to_zero_and_cannot_restart(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.e.abort('cancelled', self.c.now)
++        self.assertEqual(self.e.phase, 'FAULT OPENING')
++        self.until(lambda: self.e.phase == 'FAULT')
++        self.assertEqual(self.c.commands[-1][1], 'S')
++        self.assertEqual(self.c.telemetry['pos'], 0)
++        with self.assertRaises(RuntimeError): self.e.start(self.c.now)
++
++    def test_audio_failure_stops_increasing_and_opens(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.step(audio=False)
++        self.until(lambda: self.e.phase == 'FAULT', audio=False)
++        self.assertIn('detector', self.e.failure)
++        self.assertEqual(self.e.angle, 90)
++
++    def test_encoder_loss_and_failed_return_are_bounded(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.step(dt=.7, fresh=False)
++        self.step(fresh=False)
++        self.assertEqual(self.e.phase, 'FAULT')
++        self.assertEqual(self.c.commands[-1][1], 'S')
++
++    def test_missing_angle_ack_never_closes(self):
++        self.until(lambda: self.e.phase == 'CONFIGURING')
++        self.c.angle_ack = None
++        self.until(lambda: self.e.phase == 'FAULT')
++        self.assertIn('acknowledgment', self.e.failure)
++        self.assertNotIn('B', [command for _,command in self.c.commands])
++
++    def test_serial_unplug_cannot_prevent_terminal_fault(self):
++        self.until(lambda: self.e.phase == 'HOLDING CLOSED')
++        self.c.state = 'error'
++        self.c.release_all = Mock(side_effect=OSError('serial unplugged'))
++        self.step()
++        self.assertEqual(self.e.phase, 'FAULT')
++        self.assertIsNotNone(self.e.failure)
++        self.assertTrue(any(e['kind'] == 'release_unconfirmed' for e in self.events))
++
++    def test_stalled_closure_aborts_instead_of_indefinite_hold(self):
++        self.until(lambda: self.e.phase == 'CONFIGURING')
++        self.c.auto_move = False
++        self.until(lambda: self.e.phase == 'FAULT')
++        self.assertIn('reach', self.e.failure)
++
++
++class RuntimeTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.c = Controller()
++        self.app = SimpleNamespace(hihat=self.c, bus=SimpleNamespace(active=False),
++            hihat_sound_monitor=SimpleNamespace(receiver=SimpleNamespace(state='ready',ready=lambda now: True)),
++            hihat_fault_detail=None, result_status=Mock(), result_label=Mock(), status=Mock(), fail=Mock())
++        self.r = HiHatCalibrationRuntime(self.app, now=0., directory=self.temp.name, notifier=Mock())
++        self.addCleanup(self.r.close)
++
++    def step(self, now):
++        self.c.now = self.c.telemetry_at = now
++        self.r.tick(now)
++
++    def test_no_button_needed_but_notification_and_countdown_are_required(self):
++        with patch('camera_playback.hihat_calibration_runtime.threading.Thread') as thread:
++            self.step(.1)
++            thread.return_value.start.assert_called_once()
++        self.assertEqual(self.r.engine.phase, 'WAITING')
++        self.assertNotIn('O', [cmd for _,cmd in self.c.commands])
++        self.r.notification.put((True, ''))
++        self.step(1.)
++        self.step(10.99)
++        self.assertEqual(self.r.engine.phase, 'WAITING')
++        self.step(11.01)
++        self.assertTrue(self.r.busy)
++        self.app.fail.assert_not_called()
++
++    def test_notification_failure_blocks_all_motion(self):
++        self.r.notification_started = True
++        self.r.notification.put((False, 'ntfy failed'))
++        self.step(.1)
++        self.assertEqual(self.r.engine.phase, 'FAULT')
++        self.assertTrue(all(cmd == 'Q' for _,cmd in self.c.commands))
++        self.assertIn('ntfy', self.app.hihat_fault_detail)
++
++    def test_cancel_before_notification_finishes_never_moves_later(self):
++        self.r.cancel()
++        self.r.notification.put((True,''))
++        self.step(20.)
++        self.assertEqual(self.c.commands, [])
++
++    def test_missing_firmware_capability_faults_without_close(self):
++        self.c.telemetry = None
++        self.step(.1)
++        self.step(3.2)
++        self.assertIn('firmware', self.r.engine.failure)
++        self.assertTrue(all(cmd == 'Q' for _,cmd in self.c.commands))
++
++    def test_failure_uses_existing_arm_safe_failure_path_once(self):
++        self.app.bus.active = True
++        self.r.notification_started = True
++        self.r.notification.put((False,'notification unavailable'))
++        self.step(1.)
++        self.step(2.)
++        self.app.fail.assert_called_once()
++
++    def test_waits_for_warm_model_without_attempts(self):
++        self.app.hihat_sound_monitor.receiver.ready = lambda now: False
++        self.step(30.)
++        self.assertEqual(self.r.engine.phase, 'WAITING')
++        self.assertFalse(self.r.notification_started)
++        self.step(91.)
++        self.assertIn('startup timed out', self.r.engine.failure)
++
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ after/tests/test_hihat_calibration_integration.py
+@@ -0,0 +1,142 @@
++"""App gating and actual ESP32 source, without physical hardware."""
++from pathlib import Path
++import shutil
++import subprocess
++import tempfile
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++import numpy as np
++
++from camera_playback.app import App, HIHAT_CALIBRATION_WAIT_PHASE, HiHatCalibrationHold
++
++
++class AppGateTests(unittest.TestCase):
++    def test_stationary_wait_can_exceed_normal_thirty_second_move_timeout(self):
++        control = HiHatCalibrationHold(np.zeros(7), -np.ones(7), np.ones(7), 0.)
++        for now in np.arange(0, 100, .05):
++            command, error, reached = control.update(np.zeros(7), now)
++        self.assertTrue(reached)
++        np.testing.assert_array_equal(command, np.zeros(7))
++
++    def test_wait_hold_preserves_stall_detection(self):
++        control = HiHatCalibrationHold(np.zeros(7), -np.ones(7), np.ones(7), 0.)
++        actual = np.zeros(7); actual[2] = np.deg2rad(10)
++        with self.assertRaisesRegex(RuntimeError, 'STALL: motor 3'):
++            for now in np.arange(0, 3, .05): control.update(actual, now)
++
++    def test_wait_hold_rejects_invalid_feedback(self):
++        control = HiHatCalibrationHold(np.zeros(7), -np.ones(7), np.ones(7), 0.)
++        with self.assertRaisesRegex(RuntimeError, 'Invalid encoder'):
++            control.update(np.full(7, np.nan), 1.)
++
++    def fixture(self, ready=False):
++        a = App.__new__(App)
++        a.hihat_calibration = SimpleNamespace(ready=ready, engine=SimpleNamespace(failure=None))
++        a.playback_active = True
++        a.alignment_active = False
++        a._reset_hold_controller = Mock()
++        a.status = Mock()
++        a.fail = Mock()
++        return a
++
++    def test_endpoint_wait_holds_without_beginning_ride_or_alignment(self):
++        a = self.fixture()
++        a._begin_strike_attempt = Mock()
++        a._begin_playback_alignment(1.)
++        self.assertEqual(a.phase, HIHAT_CALIBRATION_WAIT_PHASE)
++        self.assertFalse(a.playback_active)
++        self.assertFalse(a.alignment_active)
++        a._reset_hold_controller.assert_called_once()
++        a._begin_strike_attempt.assert_not_called()
++
++    def test_picker_return_cannot_start_blocking_preflight_during_calibration(self):
++        a = self.fixture()
++        a.hihat_calibration.busy = True
++        with patch('camera_playback.app.load_smooth_recording') as loader:
++            self.assertFalse(a.load_recording('record3.json'))
++        loader.assert_not_called()
++
++    def test_reaching_wait_pose_does_not_clear_hold_or_relax(self):
++        a = self.fixture()
++        a.phase = HIHAT_CALIBRATION_WAIT_PHASE
++        hold = a.control = object()
++        a.relax = Mock()
++        a.complete_stage(2.)
++        self.assertIs(a.control, hold)
++        a.relax.assert_not_called()
++
++    def test_alignment_and_direct_strike_cannot_bypass_gate(self):
++        a = self.fixture()
++        a.phase = 'CHECKING PLAYBACK END'
++        a.alignment_active = True
++        a._alignment_success(23)
++        self.assertEqual(a.phase, HIHAT_CALIBRATION_WAIT_PHASE)
++        with patch('camera_playback.app.hybrid_control.begin_search') as search:
++            a.hybrid_enabled = True
++            a._begin_strike_attempt()
++        search.assert_not_called()
++        a.fail.assert_called_once()
++
++    def test_arm_start_not_blocked_by_unfinished_calibration(self):
++        a = self.fixture()
++        a.hardware = True
++        a.hihat_fault_detail = None
++        a.hihat = Mock()
++        a.hihat.ready.return_value = True
++        self.assertTrue(a._hihat_ready_for_start())
++
++    def test_wait_resumes_only_after_success_with_a_new_alignment_check(self):
++        a = self.fixture()
++        a.phase = HIHAT_CALIBRATION_WAIT_PHASE
++        a.bus = SimpleNamespace(active=True)
++        a.single_run_mode = True
++        a._sample_continuous_j7_minimum = Mock()
++        a._advance_hardware_test_mit = Mock()
++        a._maintain_hardware_test_fault_hold = Mock()
++        a._maintain_hardware_test_workflow_fault = Mock()
++        a.gripper_closed_latched = False
++        a.continuous_strike_active = False
++        a._begin_playback_alignment = Mock()
++        with patch('camera_playback.app.hybrid_control.tick'):
++            a.extra_control(10.)
++            a._begin_playback_alignment.assert_not_called()
++            a.hihat_calibration.ready = True
++            a.extra_control(11.)
++        a._begin_playback_alignment.assert_called_once_with(11.)
++
++    def test_sync_and_calibration_receive_same_messages_without_polling_twice(self):
++        a = App.__new__(App)
++        a.hihat_calibration, a.hihat_sync = Mock(), Mock()
++        messages = [dict(kind='hit', instrument='hihat', event_at=1.)]
++        a._hihat_sound_messages(messages)
++        a.hihat_calibration.feed.assert_called_once_with(messages)
++        a.hihat_sync.feed.assert_called_once_with('hihat', messages)
++
++    def test_close_waits_for_hihat_return_even_when_arm_is_disabled(self):
++        a = App.__new__(App)
++        a.bus = SimpleNamespace(active=False)
++        a.phase = 'READY'
++        a.hihat_calibration = SimpleNamespace(busy=True)
++        a.center_relax, a.root = Mock(), Mock()
++        a._safe_close_tick()
++        a.root.quit.assert_not_called()
++        a.root.after.assert_called_once()
++        a.hihat_calibration.busy = False
++        a._safe_close_tick()
++        a.root.quit.assert_called_once()
++
++
++class FirmwareTests(unittest.TestCase):
++    @unittest.skipUnless(shutil.which('g++'), 'g++ required for native firmware parser test')
++    def test_actual_firmware_parser_and_limits(self):
++        source = Path(__file__).with_name('hihat_firmware_harness.cpp')
++        with tempfile.TemporaryDirectory() as directory:
++            binary = Path(directory) / 'firmware_test'
++            subprocess.run(['g++','-std=c++17','-Wall','-Wextra',str(source),'-o',str(binary)],
++                           check=True,capture_output=True,text=True)
++            result = subprocess.run([str(binary)],check=True,capture_output=True,text=True)
++            self.assertIn('stall latch passed', result.stdout)
++
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ after/tests/hihat_firmware_harness.cpp
+@@ -0,0 +1,75 @@
++// Run the actual firmware parser/control flow without an ESP32 or any motor.
++#include <cassert>
++#include <cstdarg>
++#include <cstdio>
++#include <cstdlib>
++#include <cstdint>
++#include <string>
++#include <deque>
++#include <iostream>
++#define IRAM_ATTR
++#define HIGH 1
++#define LOW 0
++#define OUTPUT 1
++#define INPUT 0
++#define INPUT_PULLUP 2
++#define CHANGE 3
++unsigned long clockMs = 100;
++unsigned long millis() { return clockMs; }
++unsigned long micros() { return clockMs*1000; }
++void noInterrupts() {} void interrupts() {}
++void pinMode(int,int) {} void digitalWrite(int,int) {}
++int digitalRead(int) { return 0; }
++bool ledcAttach(int,int,int) { return true; }
++void ledcWrite(int,int) {}
++int digitalPinToInterrupt(int p) { return p; }
++void attachInterrupt(int,void(*)(),int) {}
++struct SerialMock {
++  std::deque<char> input; std::string output;
++  void begin(int) {} int available() { return input.size(); }
++  int read() { int c=input.front(); input.pop_front(); return c; }
++  void print(const char* s) { output += s; }
++  template<class T> void print(T v) { output += std::to_string(v); }
++  void print(float v,int) { output += std::to_string(v); }
++  void println(const char* s) { output += s; output += '\n'; }
++  void printf(const char* f, ...) {
++    char buffer[512]; va_list args; va_start(args,f);
++    vsnprintf(buffer,sizeof(buffer),f,args);va_end(args);output+=buffer;
++  }
++} Serial;
++#include "../esp32_hihat/motor_beat/motor_beat.ino"
++void send(const std::string& s) {
++  for (char c:s) Serial.input.push_back(c);
++  clockMs += 10; loop();
++}
++void pos(long p) { enc2Raw = -p; }
++int main() {
++  setup(); send("Q");
++  assert(Serial.output.find("HIHAT v=2 min=90 max=115") != std::string::npos);
++  send("A115\n"); assert(calibratedDegrees==115 && calibratedCounts==172);
++  assert(released2 && setpoint2==0);  // Setting an angle never moves the motor.
++  send("B"); assert(setpoint2==172 && !released2);
++  send("A95\n"); assert(calibratedDegrees==115); // Can't retarget while closed.
++  pos(172); send("H"); assert(!movementPending);
++  send("C"); assert(setpoint2==149); // Legacy collector remains fixed at 100.
++  send("J"); assert(setpoint2==149);
++  send("O"); pos(0); send("H"); assert(released2);
++  assert(openReached2); pos(-19); send("Q");
++  assert(openReached2 && released2); // Passive coast does not erase return proof.
++  send("A110\n"); assert(calibratedDegrees==110); // Allowed after actual zero return.
++  send("A115\n");
++  for (const auto& s:{"A116\n","A120\n","A89\n","A-90\n","A90.5\n","A999999999\n","A\n"}) {
++    send(s); assert(calibratedDegrees==115 && released2 && setpoint2==0);
++  }
++  send("A90BK\n"); assert(!kick1Active && released2 && calibratedDegrees==115);
++  send("A11"); clockMs+=160; send("H"); assert(!readingAngle && released2);
++  send("A90\n"); assert(calibratedDegrees==90 && calibratedCounts==134);
++  send("A9S"); assert(!readingAngle && released2); // Stop interrupts partial frames.
++  send("B");
++  assert(!openReached2);
++  for(int n=0;n<22;n++) { clockMs+=100;send("H"); }
++  assert(faulted2 && released2 && setpoint2==0); // Fresh heartbeats don't mask stall.
++  send("B");send("C");send("J");send("O");send("S");
++  assert(faulted2 && released2 && setpoint2==0); // Fault can't be cleared by a beat.
++  std::cout << "Firmware parser, 115 degree cap, legacy targets, encoder status and stall latch passed\n";
++}

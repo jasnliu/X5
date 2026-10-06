@@ -1,0 +1,24 @@
+..ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+<Mock name='mock.get()' id='137034862198608'>
+...<Mock name='mock.get()' id='137034861595584'>
+.<Mock name='mock.get()' id='137034862198320'>
+..<Mock name='mock.get()' id='137034851696608'>
+.HYBRID search −5°: measured peak 5.000°; returned and settled
+.HYBRID swing 1 (pickup): target 5°; arrival error +0.0 ms; partial returns 0
+HYBRID swing 2 (beat 1): target 5°; arrival error +0.0 ms; partial returns 0
+..HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 11°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+.ST7 HIT NOT SELECTED: {"reason": "onset follows this completed return", "phase": "STRIKE MOVING OUT", "onset": 10.6, "detected_at": null, "release": 10.0, "returned": 10.4}
+.<Mock name='mock.get()' id='137034841602432'>
+.ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "STRIKE WAITING FOR SOUND", "onset": 10.2, "detected_at": null, "release": null, "returned": null}
+.ST7 HIT NOT SELECTED: {"reason": "onset precedes this release", "phase": "STRIKE MOVING OUT", "onset": 9.0, "detected_at": null, "release": 10.0, "returned": null}
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+<Mock name='mock.get()' id='137034844180736'>
+.<Mock name='mock.get()' id='137034867781520'>
+.<Mock name='mock.get()' id='137034841600560'>
+.CLOSE REQUEST: center and verify before disabling or exiting
+...
+----------------------------------------------------------------------
+Ran 22 tests in 0.013s
+
+OK

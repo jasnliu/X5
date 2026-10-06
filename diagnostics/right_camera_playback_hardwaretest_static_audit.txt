@@ -1,0 +1,42 @@
+PASS: executable launcher is start_beat.sh and the old shell launcher is absent
+PASS: --hardware, --test, and --hardwaretest are mutually exclusive
+PASS: --hardwaretest launches real app/camera/audio paths and gates strike motion in the app
+PASS: normal --hardware automatic branch and pure --test simulation branch remain separate
+usage: launch_right_camera_playback.py [-h]
+                                       [--hardware | --test | --hardwaretest]
+                                       [--recording RECORDING]
+                                       [--camera CAMERA] [--model MODEL]
+                                       [--imgsz IMGSZ] [--conf CONF]
+                                       [--device DEVICE]
+                                       [--preprocessing {local,reference,none}]
+                                       [--lighting-profile LIGHTING_PROFILE]
+                                       [--no-normalization] [--width WIDTH]
+                                       [--height HEIGHT]
+                                       [--allow-low-light-fps]
+                                       [--process-every PROCESS_EVERY]
+                                       [--output OUTPUT]
+                                       [--audio-source AUDIO_SOURCE]
+                                       [--audio-device AUDIO_DEVICE]
+                                       [--esp-port ESP_PORT]
+
+Right recorded-path camera alignment
+
+options:
+  -h, --help            show this help message and exit
+  --hardware            run the complete camera, TONOR, ESP32, and physical-
+                        arm workflow
+  --test                pure simulation with no CAN, camera, microphone, or
+                        ESP32; animate playback and fixed 10-degree strikes in
+                        RViz
+  --hardwaretest        run all physical hardware, but require a button press
+                        before each strike-depth attempt and before starting
+                        the detected swing beat
+  --recording RECORDING
+                        right-arm recording (default: recordings/record1.json)
+  --camera CAMERA
+  --model MODEL
+  --imgsz IMGSZ
+  --conf CONF
+  --device DEVICE
+  --preprocessing {local,reference,none}
+  --lighting-profile LIGHTING_PROFILE

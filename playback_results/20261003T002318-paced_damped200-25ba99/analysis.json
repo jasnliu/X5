@@ -1,0 +1,79 @@
+{
+  "path": "/home/jason/Proyectos3/X5/playback_results/20261003T002318-paced_damped200-25ba99",
+  "method": "paced_damped200",
+  "success": true,
+  "duration_s": 4.8,
+  "measured_position_ripple_3_15hz_rms_deg": [
+    0.04247752867080112,
+    0.02078648888416418,
+    0.02685118099118748,
+    0.03927494324282207,
+    0.02734864601123004,
+    0.01049575135614261,
+    0.03973187854921347
+  ],
+  "measured_position_ripple_3_15hz_vector_rms_deg": 0.08328659590645786,
+  "firmware_velocity_ripple_3_15hz_rms_rad_s": [
+    0.027746534778436818,
+    0.019746634369551243,
+    0.02729395812048539,
+    0.03470874401196869,
+    0.025447195540920804,
+    0.015490039364198975,
+    0.030069313237355795
+  ],
+  "firmware_velocity_ripple_vector_rms_rad_s": 0.07000801026222245,
+  "measured_acceleration_rms_rad_s2": [
+    0.6881380010093473,
+    0.37200011431901997,
+    0.42465340581765854,
+    0.7223141850017003,
+    0.4774199838007886,
+    0.23315370222317386,
+    0.6737543846489344
+  ],
+  "measured_velocity_peak_rad_s": [
+    0.38547478856982,
+    0.2841350544848188,
+    0.32956098405578715,
+    0.742724405910562,
+    0.3691319279646075,
+    0.2377552566035587,
+    0.4034937628200046
+  ],
+  "tracking_rms_deg": [
+    0.5882877704902817,
+    0.18601817897983813,
+    0.28010767611746257,
+    1.3227958040734715,
+    0.7263101288946667,
+    0.30426116375089785,
+    0.9779276551841851
+  ],
+  "feedback_max_gap_s": [
+    0.010138430981896818,
+    0.01037193596130237,
+    0.010414767020847648,
+    0.009923261008225381,
+    0.011296807962935418,
+    0.011486610979773104,
+    0.011501158005557954
+  ],
+  "physical_feedback_samples": [
+    1082,
+    1083,
+    1083,
+    1083,
+    1083,
+    1082,
+    1082
+  ],
+  "max_scheduler_lateness_s": 0.005307270970661193,
+  "p95_scheduler_lateness_s": 0.0031751314701978115,
+  "endpoint_error_deg": 0.021979337712122585,
+  "center_error_deg": 0.02148099950622766,
+  "relaxed_verified": true,
+  "original_gains_restored": true,
+  "actual_command_span_s": 4.804869587009307,
+  "note": "3-15 Hz bandpass of actual encoder position and independently reported motor velocity, 100 Hz resampling, 0.25 s trim each end. Host receipt timestamps, not hardware timestamps. Motor-side motion proxies, not an accelerometer or whole-arm visual measurement. Different durations do not isolate individual causes."
+}

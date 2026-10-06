@@ -1,0 +1,17 @@
+[0.2, -0.2, 0.15]: 0.278s OK error=0.000mm
+[0.2, -0.2, 0.5]: 0.679s OK error=0.000mm
+[0.2, -0.05, 0.3]: 0.596s OK error=0.000mm
+[0.2, 0.1, 0.15]: 0.229s OK error=0.000mm
+[0.2, 0.1, 0.5]: 0.771s OK error=0.000mm
+[0.3, -0.2, 0.3]: 0.356s OK error=0.000mm
+[0.3, -0.05, 0.15]: 0.272s OK error=0.000mm
+[0.3, -0.05, 0.5]: 0.621s OK error=0.000mm
+[0.3, 0.1, 0.3]: 0.518s OK error=0.000mm
+[0.4, -0.2, 0.3]: 0.396s OK error=0.000mm
+[0.4, -0.05, 0.15]: 1.798s REJECT An updated joint solution was found, but its update or center-return path leaves zone1
+[0.4, -0.05, 0.5]: 0.547s OK error=0.000mm
+[0.4, 0.1, 0.5]: 0.410s OK error=0.000mm
+[0.5, -0.05, 0.3]: 0.401s OK error=0.000mm
+[0.6, -0.05, 0.5]: 0.660s OK error=0.000mm
+WORST: 1.798s [0.4, -0.05, 0.15] REJECT An updated joint solution was found, but its update or center-return path leaves zone1
+PASS: 15 deterministic inside-zone update preflights all completed under 3 seconds; no CAN used

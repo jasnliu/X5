@@ -8,7 +8,7 @@ program uses `right_zones/zone1.json`.
 Run exactly one Cartesian program at a time:
 
 ```bash
-cd /home/jason/X5
+cd /home/jason/Proyectos3/X5
 ./start_left_cartesian.sh --hardware
 # or:
 ./start_right_cartesian.sh --hardware
@@ -31,19 +31,38 @@ right-only workflow:
    powered at their targets so the user can load the object.
 3. **Continue** commands the right gripper to +7°. The close command is given
    0.75 seconds for this small 10° movement before arm motion resumes.
-4. The arm moves to the Cartesian goal, holds for 2 seconds, and returns to its
-   special right center. The +7° close target is resent throughout goal motion,
-   holding, normal recentering, and zone-fault recentering.
-5. After recentering, all eight right motors are disabled. Once Continue has
-   been pressed, no open command is sent before that relaxation.
+4. The arm moves to the Cartesian goal and holds there indefinitely with the
+   gripper closed. The right-only **End: Return to Center → Relax** button becomes
+   available after the measured goal has settled. At that point, editing X/Y/Z
+   to a different valid point enables **Update: Move to Changed Goal**. Update is
+   disabled while moving, before the first goal is reached, when the values are
+   unchanged, and when the preview is outside zone1.
+5. **Update** solves near the currently held posture while the arm continues to
+   hold still. It checks the new endpoint, current-to-new transition, and center
+   returns before commanding movement. When the updated goal settles, the arm
+   holds there again and another changed coordinate can be submitted.
+6. **End** returns the arm to its special right center while continuing to hold
+   the +7° gripper target. Only after recentering are all eight right motors
+   disabled. Once Continue has been pressed, no open command is sent before that
+   relaxation.
 
 The left center remains all seven joints at zero. The right center is J1–J6 at
 zero and J7 at its positive URDF limit, `+1.4 rad` (`+80.214°`). The right arm's
 motor direction is reversed, so this is the safe folded position corresponding
 to the motor-side negative direction. That right center does not redefine
 Cartesian zero: the right program centers at J7 `+80.214°`, moves to the joint
-solution for the requested point relative to the all-zero TCP, holds, returns to
-the same right center, and only then relaxes.
+solution for the requested point relative to the all-zero TCP, holds until End
+is pressed, returns to the same right center, and only then relaxes.
+
+The standalone right program's initial and Update IK keep right J2 at its
+centered `0°` value and use the other six joints for the requested TCP position.
+Live testing showed that this physical J2 stayed near center for small negative
+targets even while the other six joints settled, which left a persistent Y
+error. Position-only IK has enough redundancy to remove that untrackable J2
+target without changing the requested point. The left Cartesian solver and the
+separate camera Cartesian program are not changed by this standalone-right
+selection; joint control, correction, settling, and zone/path validation remain
+the existing shared implementations.
 
 The RViz goal-preview sphere updates immediately as any X/Y/Z field changes;
 you do not need to click Run. An accepted zone location is magenta, a point
@@ -65,14 +84,21 @@ Before any motor setup, the program:
 6. Waits for fresh encoders again after IK before enabling the selected arm.
 
 The resulting seven joint angles are passed to exactly the same joint controller
-used by the tested angle-goal program. Goal completion is therefore unchanged:
-all seven encoders must remain within 3 degrees of their computed targets for
-0.6 seconds. It then holds the goal for 2 continuous seconds, while continuing
-encoder correction and all safety checks. If a joint leaves the 3-degree
-tolerance, the hold timer restarts. After the hold, it returns to that arm's
-configured center and disables the selected motors. The left program keeps the
-right arm and both grippers relaxed. The right program keeps the left arm and
-left gripper relaxed while controlling right motors 1–8. Arm-joint stall,
+used by the tested angle-goal program. All seven encoders must remain within 3
+degrees of their computed targets for 0.6 seconds before the goal is declared
+reached. This completion rule is identical for the standalone left and right
+Cartesian programs. The **left** Cartesian program then holds for 2 continuous seconds and
+automatically recenters. The **right** Cartesian program instead keeps correcting
+and holding the goal until Update or End is pressed. Update performs its IK and
+path checks in a background worker so live feedback, correction, and gripper
+holding continue; it then moves to and holds the changed goal. The update solver
+first uses the current held posture, checks the complete update trajectory, and
+checks complete center-return trajectories at seven bounded points including
+both ends. This replaces the old quadratic every-sample return check that could
+take roughly 30 seconds. End recenters.
+Each program disables its selected motors only after recentering. The left
+program keeps the right arm and both grippers relaxed. The right program keeps
+the left arm and left gripper relaxed while controlling right motors 1–8. Arm-joint stall,
 zone-recovery, other fault, arm isolation, and Emergency Relax behavior remain
 active. Intentional right-gripper contact is not treated as an arm-joint stall;
 Emergency Relax and any arm fault disable the right gripper with the arm.

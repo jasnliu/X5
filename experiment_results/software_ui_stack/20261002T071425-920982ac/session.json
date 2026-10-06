@@ -1,0 +1,82 @@
+{
+  "backend": "simulation",
+  "extra": {
+    "options": {
+      "exit_after_batch": true,
+      "hardware": false,
+      "limits": {},
+      "output": "experiment_results/software_ui_stack",
+      "plant": {},
+      "realtime": true,
+      "rules": {}
+    },
+    "plant": {
+      "delay": 0.004,
+      "encoder_step": 0.00038361181048294807,
+      "friction": 0.02,
+      "gravity": 0.16,
+      "inertia": 0.02
+    }
+  },
+  "initial_tuning_not_calibrated": true,
+  "limits": {
+    "acceleration": 80.0,
+    "control_timeout": 0.02,
+    "feedback_timeout": 0.02,
+    "hard_depth_deg": 12.0,
+    "held_joint_drift_deg": 0.75,
+    "hz": 500.0,
+    "jerk": 8000.0,
+    "torque": 3.0,
+    "torque_slew": 300.0,
+    "trial_timeout": 3.0,
+    "upper_excursion_deg": 0.2,
+    "velocity": 3.0
+  },
+  "rules": {
+    "acceptance_deg": 0.2,
+    "depth_match_deg": 0.1,
+    "maximum_approach_seconds": 0.8,
+    "maximum_cycle_seconds": 1.5,
+    "maximum_feedback_gap": 0.01,
+    "maximum_prezone_pause": 0.03,
+    "maximum_start_lateness": 0.02,
+    "maximum_upper_overshoot_deg": 0.15,
+    "minimum_entry_speed": 0.2,
+    "return_tolerance_deg": 0.15,
+    "settle_range_deg": 0.05,
+    "settle_seconds": 0.04
+  },
+  "source_id": "396392a6cd101e11",
+  "source_manifest": {
+    "camera_playback/mit_strike.py": "cde1839b5042c5b6c931d8489bd83294a3b31b6ab4de29e8152351fb936a8c79",
+    "centering/motors.py": "02a1a9d7c60ce305fd8e7d90236ded4183bb959719f6c86a4722abb889db0548",
+    "config/experiment.rviz": "2a319977c0aa915c52ee567c32ce7815863f3cc42b8f187116372f97a8e7b96e",
+    "experiment.sh": "f0500dc7e4becbcb202ccf3688d300f8a9ea8f3db17b8facf9b6783d64adee16",
+    "launch_experiment.py": "33da798d0ad29e9ac2f9c45bc456b6764e2bd099d896132737a91caa5aae10a1",
+    "model/openarmx.urdf": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "safe_zone/encoder.py": "473bbb009ed1f751780c76697a598c8f0b7f20eaca8d8e420a46e30345487b98",
+    "strike_lab/__init__.py": "3afc1f54eef96ea8ce8b931a0f1f95fa818c2d7ecdacae3e97944f7d5f378330",
+    "strike_lab/app.py": "ab365a0046b5eb5fee6a6efc454d9cf028e53a1328ee5552396633b3f391d022",
+    "strike_lab/backends.py": "34931504eae99dc9a0f669e967e6e8366cc5b231717742f3caed2d2f5288182e",
+    "strike_lab/campaign.py": "c2f2d1003978a6514113739d8ff06a72dab2223b338bfeaaea7d17a5a2e45b08",
+    "strike_lab/cli.py": "0a30f1f998d07320499ec274ee56069baea4514d1939299ffb8a7872b4303537",
+    "strike_lab/config.py": "39dd24da7dfec1cb972984a337f02b9f33d3b2b01140489648fedc5b90fcf0e5",
+    "strike_lab/curves.py": "bf5b69bd2a53f527c697d7f0cdf82fbc1f4fce655b21e13026b29ee572c0b384",
+    "strike_lab/engine.py": "1d9fe66b3116718720d2fb559ff631e9786cf09eee381ec172639663e05f2cfa",
+    "strike_lab/methods/__init__.py": "bca42e4f9f6196c1b2589ff8f38582b5bb88165562097fffa657c1cdc51d6bd4",
+    "strike_lab/methods/base.py": "a9e874c1260067790dee95564c1a1249c6d69c82b6b984918dc422c8411236d2",
+    "strike_lab/methods/baseline.py": "1fe9317f76d1d71636feec1414c143636de161b7f721ffb44c5bb47aecdabe70",
+    "strike_lab/methods/gravity.py": "993077330a163f2c5abfe037cc0a7ec1c4664e4ee71a9a3c84f23a02ac41f7da",
+    "strike_lab/methods/hybrid.py": "ebe78e33bdafc000e4f9907f17b3238480813d35ea0551d383d2a80790e3aa7d",
+    "strike_lab/methods/impedance.py": "4ac951d05c58bcd3019b2117a5d86a6c60f8ada1de3c50dcc7c810fe5d593e40",
+    "strike_lab/methods/optimized.py": "07bd2c369a617a76b74c37bca928d2ef2494e4e5b03210021e2188d2ddc8384c",
+    "strike_lab/methods/powered.py": "6d33438b470d2d0803f164e99afcafeb365cbdbb4e6a78046b1ef2a3a03e907d",
+    "strike_lab/methods/torque.py": "3be912909545789e47cce76094626c213dae19ea83d2e4780bbbb61aa35b7d17",
+    "strike_lab/runtime.py": "e0a6b3d0ca55ca1f0249415683bc8d8d601849d80387796a2bc0251d2b3d682a",
+    "strike_lab/scoring.py": "bb2695ddc19b4da4a48f650849519679722af1a59b882c47f2820214f2107364",
+    "strike_lab/storage.py": "6bdb012e343b6441199355f48d2e9ae80099ceafeb706b8be94cea63349a8c94"
+  },
+  "target_deg": 10.0,
+  "zone_deg": 9.0
+}

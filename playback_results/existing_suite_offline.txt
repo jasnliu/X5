@@ -1,0 +1,189 @@
+..............ST7 CYMBAL HIT DETECTED on J7 −6° attempt — selecting this first detected depth
+...........MIT strike complete: goal 1°, measured peak drop 1.100°, return overshoot 0.050°; encoder position stable — MIT remains enabled
+......MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 CSP powered-hold confirmation missing after rebound
+.HARDWARE-TEST POWERED WORKFLOW FAULT: healthy drives remain powered at their last commanded poses; workflow locked — processed camera detections became stale
+.MIT strike complete: goal 2°, measured peak drop 0.000°, return overshoot 0.000°; encoder position stable — MIT remains enabled
+....MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 run-mode 5 readback missing during hardware test
+.PINK ZONE CONFIRMED ONCE (camera frame 44); holding the fixed pink-zone reference — arming MIT hold; the strike button becomes available after fresh encoder positions stabilize
+.......FAILED: playback ended; could not restore normal right-arm speed: CAN write failed
+.STALL FAULT: immediate right-arm relaxation — STALL: motor 7
+..HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked — Motor 7: CSP enable not confirmed after 3 attempts (run-mode readback=5, feedback operating state=0, encoder=20.000 deg)
+......................PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+...ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+...................FAILED: test camera loss
+......DETECTED: drumstick + observed YOLO tip at actual Y=+0.000 m (active goal Y=+0.000, camera frame 12)
+..Skipped -Z: test seed is infeasible
+.FAILED: cymbal unavailable after gripper close
+.....FAULT: Position timeout — returning to customized right center before relaxing
+STALL FAULT: immediate right-arm relaxation — STALL: motor 3
+..........FAULT: Position timeout — returning to customized right center before relaxing
+FAULT: center command retry pending; motors remain enabled until centered or the user presses EMERGENCY RELAX — Position timeout; temporary CAN congestion
+..FAILED: no drumstick + tip detection; next Y=+0.020 m is outside right zone1
+....SUCCESS: drumstick tip held inside cymbal center cell for 2 seconds (confirmed by camera frame 51)
+.....................................................................................................................Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 285, in run_path
+  File "<frozen runpy>", line 254, in _get_code_from_file
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jason/Proyectos3/X5/<stdin>'
+F.............................................................Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 285, in run_path
+  File "<frozen runpy>", line 254, in _get_code_from_file
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jason/Proyectos3/X5/<stdin>'
+F.......Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 285, in run_path
+  File "<frozen runpy>", line 254, in _get_code_from_file
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jason/Proyectos3/X5/<stdin>'
+F...usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: --fast requires --headless simulation
+usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: --fast requires --headless simulation
+...........................usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: - [-h] [--hardware | --simulate]
+         [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+         [--headless] [--no-rviz] [--no-motion-notification] [--fast]
+         [--auto-run] [--exit-after-batch] [--degrees DEGREES]
+         [--repetitions REPETITIONS] [--interval INTERVAL] [--campaign]
+         [--jobs JOBS] [--stage {screen,refine,validate,all}]
+         [--config CONFIG] [--output OUTPUT] [--list-methods]
+         [--rescore RESCORE]
+-: error: Strike depth plus tolerance must be below the 12° motion limit
+....Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 285, in run_path
+  File "<frozen runpy>", line 254, in _get_code_from_file
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jason/Proyectos3/X5/<stdin>'
+F.............
+======================================================================
+FAIL: test_spawned_worker_survives_parent_interpreter_contention (test_mit_strike.SessionTests.test_spawned_worker_survives_parent_interpreter_contention)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_mit_strike.py", line 672, in test_spawned_worker_survives_parent_interpreter_contention
+    self.wait_for(lambda:session.status.ready,5)
+  File "/home/jason/Proyectos3/X5/tests/test_mit_strike.py", line 497, in wait_for
+    self.fail('Worker condition did not arrive')
+AssertionError: Worker condition did not arrive
+
+======================================================================
+FAIL: test_spawned_simulator_prepares_executes_and_closes (test_strike_lab.HardwareAdapterTests.test_spawned_simulator_prepares_executes_and_closes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_strike_lab.py", line 407, in test_spawned_simulator_prepares_executes_and_closes
+    self.assertFalse(faults,faults);self.assertTrue(complete)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'phase': 'FAULT', 'error': 'Controller exited unexpectedly: 1'}] is not false : [{'phase': 'FAULT', 'error': 'Controller exited unexpectedly: 1'}]
+
+======================================================================
+FAIL: test_worker_terminal_interrupt_is_a_clean_stop_not_a_fault (test_strike_lab.IntegrityTests.test_worker_terminal_interrupt_is_a_clean_stop_not_a_fault)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_strike_lab.py", line 427, in test_worker_terminal_interrupt_is_a_clean_stop_not_a_fault
+    self.assertTrue(sent);self.assertFalse(s.process.is_alive())
+    ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_worker_rejects_bad_goal_then_runs_new_goal_without_repreparing (test_strike_lab_cymbal.AdjustableGoalTests.test_worker_rejects_bad_goal_then_runs_new_goal_without_repreparing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_strike_lab_cymbal.py", line 220, in test_worker_rejects_bad_goal_then_runs_new_goal_without_repreparing
+    self.assertEqual(phase,'finish')
+AssertionError: 'prepare' != 'finish'
+- prepare
++ finish
+
+
+----------------------------------------------------------------------
+Ran 358 tests in 47.852s
+
+FAILED (failures=4)

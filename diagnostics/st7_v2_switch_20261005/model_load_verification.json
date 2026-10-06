@@ -1,0 +1,36 @@
+{
+  "live_listener_command": [
+    "/home/jason/Proyectos3/st7/.venv/bin/python",
+    "/home/jason/Proyectos3/st7/cymbal.py",
+    "--config",
+    "/home/jason/Proyectos3/st7/models/v2/config.yaml",
+    "listen",
+    "--checkpoint",
+    "/home/jason/Proyectos3/st7/models/v2/best.pt",
+    "--normality-artifact",
+    "/home/jason/Proyectos3/st7/models/v2/normality/reference.npz",
+    "--device",
+    "pipewire"
+  ],
+  "config": "/home/jason/Proyectos3/st7/models/v2/config.yaml",
+  "checkpoint": "/home/jason/Proyectos3/st7/models/v2/best.pt",
+  "checkpoint_sha256": "ea4038cca1db1a1005fc3bd4e51ec69617bdc3345cfe6efeddba2047662e5565",
+  "normality": "/home/jason/Proyectos3/st7/models/v2/normality/reference.npz",
+  "normality_sha256": "6d2247a209fa4c34fbbe0cb0800eda0870ce7e9cf30ef2eec5ba44201afbe335",
+  "file_inference": [
+    {
+      "file": "/home/jason/Proyectos3/st7/data/recordings/r56.wav",
+      "events": 1,
+      "normality_finite": true
+    },
+    {
+      "file": "/home/jason/Proyectos3/st7/data/recordings/r76.wav",
+      "events": 2,
+      "normality_finite": true
+    }
+  ],
+  "microphone_opened": false,
+  "arm_accessed": false,
+  "training_performed": false,
+  "note": "Smoke checks on existing training examples verify integration, not independent accuracy."
+}

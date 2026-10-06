@@ -1,0 +1,109 @@
+[
+  {
+    "event": "phase",
+    "at": 161525.596478859,
+    "phase": "READY",
+    "status": "Recording preflight passed; waiting for camera and fresh encoders (ST7 is informational; ESP32 is not used)"
+  },
+  {
+    "event": "start_authorized_playback",
+    "at": 161526.584716047,
+    "phase": "PLAYBACK PREFLIGHTED",
+    "recording": "/home/jason/Proyectos3/X5/recordings/record1.json"
+  },
+  {
+    "event": "phase",
+    "at": 161526.619469018,
+    "phase": "SETTING UP",
+    "status": "Recording preflight passed; confirming all drives at their live poses, then centering with J7=80.2\u00b0 and opening gripper to \u22123\u00b0"
+  },
+  {
+    "event": "phase",
+    "at": 161529.178774374,
+    "phase": "CENTERING",
+    "status": "CENTERING"
+  },
+  {
+    "event": "phase",
+    "at": 161532.292919893,
+    "phase": "WAITING FOR LOAD",
+    "status": "Centered with gripper open at \u22123\u00b0 \u2014 load the drumstick, then press Continue (the recording and pink-zone alignment run next)"
+  },
+  {
+    "event": "skip_human_stick_loading",
+    "at": 161532.29504868,
+    "phase": "CLOSING GRIPPER",
+    "detail": "Empty gripper; no strikes will be requested"
+  },
+  {
+    "event": "phase",
+    "at": 161532.395547417,
+    "phase": "CLOSING GRIPPER",
+    "status": "Closing gripper to +7\u00b0 \u2014 recording starts in 0.7 s"
+  },
+  {
+    "event": "phase",
+    "at": 161533.070068795,
+    "phase": "MOVING TO RECORDING START",
+    "status": "Gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+  },
+  {
+    "event": "phase",
+    "at": 161534.008097773,
+    "phase": "RECORDING PLAYBACK",
+    "status": "Playing recording: 0.00/5.42 s \u2022 camera observations 0"
+  },
+  {
+    "event": "phase",
+    "at": 161539.450199908,
+    "phase": "SETTLING RECORDING END",
+    "status": "Recorded path complete \u2014 settling at its final pose"
+  },
+  {
+    "event": "recording_physically_finished",
+    "at": 161540.092206441,
+    "phase": "CHECKING PLAYBACK END",
+    "encoders_deg": [
+      11.769935344800324,
+      -0.14286569512828792,
+      -5.329989395171,
+      16.451534277465946,
+      -5.433882389169688,
+      1.6814193349714748,
+      78.27941126144938
+    ],
+    "target_deg": [
+      11.769935344800324,
+      -0.16484503284030874,
+      -5.329989395171,
+      16.451534277465946,
+      -5.455861726881709,
+      1.6814193349714748,
+      78.27941126144938
+    ]
+  },
+  {
+    "event": "test_only_visual_acceptance_bypass",
+    "at": 161540.092614698,
+    "phase": "CHECKING PLAYBACK END",
+    "detail": "No stick; using recorded endpoint for MIT hold, not claiming pink-zone detection"
+  },
+  {
+    "event": "phase",
+    "at": 161540.129249228,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh position and velocity settle"
+  },
+  {
+    "event": "phase",
+    "at": 161541.166656247,
+    "phase": "HARDWARE TEST POWERED HOLD FAULT",
+    "status": "MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked \u2014 right TCP left zone1 during the J7 MIT freefall/rebound"
+  },
+  {
+    "event": "phase",
+    "at": 161590.145124426,
+    "phase": "HARDWARE TEST ISOLATED FAULT",
+    "status": "HARDWARE-TEST ISOLATED MOTOR FAULT: motor 1 disabled in isolation; the other drives remain powered at their captured poses; workflow locked \u2014 right motor 1: fault"
+  }
+]

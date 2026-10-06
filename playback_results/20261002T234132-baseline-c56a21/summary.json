@@ -1,0 +1,30 @@
+{
+  "backend": "physical",
+  "method": "baseline",
+  "trajectory": {
+    "name": "baseline",
+    "duration_s": 7.095750340668312,
+    "time_scale": 1.8472190748918826,
+    "peak_velocity_rad_s": 0.72,
+    "peak_acceleration_rad_s2": 18.412661475257476,
+    "peak_piecewise_jerk_rad_s3": 652.9941798704654,
+    "acceleration_continuous_into_hold": false,
+    "command_hz": 50,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": null,
+    "max_joint_deviation_deg": 0.49425452374896733,
+    "max_tcp_deviation_mm": 1.180586363160203,
+    "exact_first": true,
+    "exact_last": true,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  },
+  "success": false,
+  "error": "RuntimeError: Both arms and grippers must be relaxed with fresh encoder readings",
+  "endpoint": null,
+  "center": null,
+  "relaxed_verified": false,
+  "camera_error": null,
+  "video_frames": 1,
+  "gripper": "closed",
+  "source_sha256_after": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+}

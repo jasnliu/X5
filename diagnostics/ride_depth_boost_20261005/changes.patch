@@ -1,0 +1,360 @@
+--- diagnostics/ride_depth_boost_20261005/before/camera_playback/app.py	2026-10-05 13:44:49.110781873 -0700
++++ camera_playback/app.py	2026-10-05 14:09:49.910772349 -0700
+@@ -189,9 +189,9 @@
+         self.hybrid_tuning = hybrid_control.load_tuning() if self.hybrid_enabled else None
+         if self.hybrid_enabled:
+             print('HARDWARE: one RUN button → center + close gripper → recording → '
+-                  'experiment hybrid J7 search → first-hit depth → '
++                  'experiment hybrid J7 search → first-hit depth +0.5° → '
+                   '100 BPM hybrid swing with partial returns; ride v2 controls search; '
+-                  'hi-hat v1 continuously tunes only hi-hat timing; ride motion unchanged', flush=True)
++                  'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
+         super().__init__(real_hardware, detection_socket)
+         if real_hardware and isinstance(self.bus, Motors):
+             self.bus = PlaybackMotors.adopt(self.bus, self.center_goal,
+@@ -2049,17 +2049,29 @@
+         hit = self.strike_hit_pending
+         if hit is None:
+             return
+-        degrees = int(hit["degrees"])
++        degrees = float(hit["degrees"])
+         self.strike_sound_deadline = None
+         target = self._current_strike_target().copy()
++        if hybrid_control.enabled(self):
++            try:
++                degrees, target = hybrid_control.boosted_swing_target(self, degrees)
++            except ValueError as exc:
++                self._program_failure(
++                    f"FAILED: detected {hit['degrees']:g}° + "
++                    f"{hybrid_control.SWING_DEPTH_BOOST_DEG:g}° swing boost is unsafe: {exc}"
++                )
++                return
++            print(f"RIDE SWING DEPTH: detected {hit['degrees']:g}° + "
++                  f"{hybrid_control.SWING_DEPTH_BOOST_DEG:g}° = {degrees:g}°", flush=True)
+         self._begin_continuous_striking(degrees, target)
+ 
+-    def _begin_continuous_striking(self, degrees: int, target) -> None:
++    def _begin_continuous_striking(self, degrees: float, target) -> None:
+         if getattr(self, 'recording_only', False):
+             raise RuntimeError('Strikes are forbidden in recording-only mode')
+         target = np.asarray(target, dtype=float)
+-        if (not isinstance(degrees, (int, np.integer))
+-                or isinstance(degrees, bool) or degrees < STRIKE_START_DEGREES
++        if (not isinstance(degrees, (int, float, np.integer, np.floating))
++                or isinstance(degrees, bool) or not math.isfinite(float(degrees))
++                or degrees < STRIKE_START_DEGREES
+                 or target.shape != (7,) or not np.isfinite(target).all()):
+             self._program_failure("FAILED: invalid detected cymbal-strike target")
+             return
+@@ -2079,7 +2091,7 @@
+         self.control = None
+         self.continuous_strike_active = True
+         self.continuous_strike_target = target.copy()
+-        self.continuous_strike_degrees = int(degrees)
++        self.continuous_strike_degrees = float(degrees)
+         self.continuous_strike_count = 0
+         self.continuous_last_beat_at = None
+         self.continuous_next_beat_at = time.monotonic()
+@@ -2096,12 +2108,18 @@
+         if getattr(self, "test_mode", False):
+             message = (
+                 f"TEST DEFAULT: camera and sound bypassed; J7 "
+-                f"−{self.continuous_strike_degrees}° swing at "
++                f"−{self.continuous_strike_degrees:g}° swing at "
+                 f"{STRIKE_BPM:.0f} BPM until Stop"
+             )
++        elif hybrid_control.enabled(self):
++            message = (
++                f"SWING STRIKE: J7 −{self.continuous_strike_degrees:g}° "
++                f"(first detected +{hybrid_control.SWING_DEPTH_BOOST_DEG:g}°); "
++                f"starting triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
++            )
+         else:
+             message = (
+-                f"FIRST DETECTED STRIKE: J7 −{self.continuous_strike_degrees}°; starting "
++                f"FIRST DETECTED STRIKE: J7 −{self.continuous_strike_degrees:g}°; starting "
+                 f"triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
+             )
+         self.result_status.set(message)
+@@ -2157,7 +2175,7 @@
+             else:
+                 detail = "waiting at the full anchor"
+             self.status.set(
+-                f"100 BPM swing J7 −{self.continuous_strike_degrees}°; "
++                f"100 BPM swing J7 −{self.continuous_strike_degrees:g}°; "
+                 f"{detail}; {next_label} deadline in {max(0.0, remaining):.2f} s"
+             )
+             return
+@@ -2217,7 +2235,7 @@
+                        "hi-hat command scheduled at the main-beat deadline"))
+             self.status.set(
+                 f"100 BPM swing {swing_label}, strike {self.continuous_strike_count}: J7 "
+-                f"−{self.continuous_strike_degrees}°; {detail}"
++                f"−{self.continuous_strike_degrees:g}°; {detail}"
+             )
+         else:
+             anchor_name = ("recording endpoint" if getattr(self, "test_mode", False)
+@@ -2283,7 +2301,7 @@
+             encoder_degrees = math.degrees(lowest)
+             commanded_degrees = getattr(self, "continuous_strike_degrees", None)
+             command_text = (
+-                f"{int(commanded_degrees)} deg"
++                f"{commanded_degrees:g} deg"
+                 if commanded_degrees is not None else "unknown"
+             )
+             print(
+--- diagnostics/ride_depth_boost_20261005/before/camera_playback/hybrid_workflow.py	2026-10-05 13:44:49.111070759 -0700
++++ camera_playback/hybrid_workflow.py	2026-10-05 14:08:34.580666663 -0700
+@@ -21,6 +21,7 @@
+ # search at 11 degrees. Allow the next integer goal (12), retaining one degree
+ # of emergency margin and every geometric, torque and speed constraint.
+ HARDWARE_SEARCH_HARD_DEPTH_DEG = 13.
++SWING_DEPTH_BOOST_DEG = .5
+ 
+ 
+ def enabled(app):
+@@ -110,6 +111,20 @@
+     return True
+ 
+ 
++def boosted_swing_target(app, detected_degrees):
++    """Add depth once, only after a successful search; retain the same anchor.
++
++    The session corridor already intersects the validated geometry and J7
++    bounds. Reuse its normal goal validation, never expand it for the boost.
++    """
++    degrees = float(detected_degrees) + SWING_DEPTH_BOOST_DEG
++    amount = math.radians(degrees)
++    app.hybrid_session.controller.validate_depth(amount)
++    target = app.strike_plan.anchor_joints.copy()
++    target[6] -= amount
++    return degrees, target
++
++
+ def start_swing(app, events):
+     app.hybrid_main_count = app.hybrid_seen_bottoms = 0
+     app.hybrid_seen_closed = 0
+@@ -117,7 +132,8 @@
+     sync = getattr(app, 'hihat_sync', None)
+     if sync is not None:
+         sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+-    app.status.set(f'HYBRID first detected depth {app.continuous_strike_degrees}°: '
++    app.status.set(f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
++                   f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
+                    '100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases')
+     print(app.status.get(), flush=True)
+ 
+@@ -275,7 +291,7 @@
+         print(f'J7 STRIKE LOW strike {s.closed_count} [{s.closed_label}, hybrid]: '
+               f'{math.degrees(s.closed_peak):.2f} deg down from anchor; '
+               f'lowest J7 encoder: {math.degrees(app.hybrid_anchor[6]-s.closed_peak):.2f} deg; '
+-              f'commanded: {app.continuous_strike_degrees} deg', flush=True)
++              f'commanded: {app.continuous_strike_degrees:g} deg', flush=True)
+     if getattr(app, 'hybrid_stopping', False):
+         if (s.request_id >= app.hybrid_stop_request and not s.swing and s.ready
+                 and s.sample is not None and now-s.sample.at <= .020):
+@@ -328,6 +344,6 @@
+                 app.continuous_hihat_pending = False
+         if s.bottoms > app.hybrid_seen_bottoms:
+             app.hybrid_seen_bottoms = s.bottoms
+-            print(f'HYBRID swing {s.count} ({s.label}): target {app.continuous_strike_degrees}°; '
++            print(f'HYBRID swing {s.count} ({s.label}): target {app.continuous_strike_degrees:g}°; '
+                   f'arrival error {s.last_lateness*1000:+.1f} ms; '
+                   f'partial returns {s.partial_returns}', flush=True)
+--- diagnostics/ride_depth_boost_20261005/before/tests/test_hybrid_workflow.py	2026-10-04 20:53:36.123329752 -0700
++++ tests/test_hybrid_workflow.py	2026-10-05 14:09:13.635990789 -0700
+@@ -110,8 +110,8 @@
+         with patch('camera_playback.app.time.monotonic', return_value=10.4):
+             hw.tick(a, 10.4)
+         self.assertTrue(a.continuous_strike_active)
+-        self.assertEqual(a.continuous_strike_degrees, 5)
+-        a.hybrid_session.request.assert_called_once_with('swing', math.radians(5), SWING_EVENTS)
++        self.assertEqual(a.continuous_strike_degrees, 5.5)
++        a.hybrid_session.request.assert_called_once_with('swing', math.radians(5.5), SWING_EVENTS)
+         a.hihat.start_sequence.assert_called_once()
+ 
+     def test_return_before_sound_display_tick_still_rejects_late_onset(self):
+--- diagnostics/ride_depth_boost_20261005/before/tests/test_hybrid_strike.py	2026-10-04 20:58:20.565339661 -0700
++++ tests/test_hybrid_strike.py	2026-10-05 14:09:13.636127933 -0700
+@@ -72,6 +72,23 @@
+         h.until(lambda s: s.count >= 16, 8.)
+         self.assertIsNone(h.c.status.error)
+ 
++    def test_half_degree_boost_survives_real_controller_swing_and_return(self):
++        for detected in (10, 12):
++            with self.subTest(detected=detected):
++                h = Harness(detected, hard_depth=13.)
++                h.until(lambda s: s.completed == 1)
++                anchor = h.c.anchor
++                depth = math.radians(detected + .5)
++                h.c.request_swing(depth, EVENTS)
++                h.until(lambda s: s.count >= 16, 8.)
++                self.assertEqual(h.c.amount, depth)
++                self.assertEqual(h.c.anchor, anchor)
++                self.assertIsNone(h.c.status.error)
++                self.assertLess(abs(math.degrees(h.c.status.closed_peak) - (detected + .5)), .3)
++                h.c.stop_swing()
++                h.until(lambda s: s.ready and not s.swing)
++                self.assertAlmostEqual(h.c.anchor, anchor)
++
+     def test_uses_effective_hardware_tuning_not_untuned_method_defaults(self):
+         p, _, l = load_tuning()
+         self.assertEqual((p['kick_torque'], p['kick_time'], p['return_time']), (.3, .04, .22))
+--- diagnostics/ride_depth_boost_20261005/before/tests/test_audio_timing.py	2026-10-04 19:53:18.248417054 -0700
++++ tests/test_audio_timing.py	2026-10-05 14:12:04.088144202 -0700
+@@ -73,7 +73,8 @@
+         self.assertEqual(a.phase, STRIKE_SOUND_WAIT_PHASE)
+         a._process_sound_hit(dict(event_at=10.1, detected_at=12.))
+         self.assertTrue(a.continuous_strike_active)
+-        self.assertEqual(a.continuous_strike_degrees, 5)
++        self.assertEqual(a.continuous_strike_degrees, 5.5)
++        self.assertEqual(a._current_strike_degrees(), 5)  # Same original search attempt.
+ 
+     def test_no_hit_wait_requires_finalization_and_backlog_fails_safely(self):
+         a = self.waiting()
+--- diagnostics/ride_depth_boost_20261005/before/tests/hybrid_hardware_ui_check.py	2026-10-04 20:58:49.761086391 -0700
++++ tests/hybrid_hardware_ui_check.py	2026-10-05 14:10:10.654364075 -0700
+@@ -103,8 +103,8 @@
+         session.status = replace(session.status, phase='hold', ready=True, completed=1,
+             returned_at=now, sample=Sample(anchor[6], 0, .745, 2, now))
+         hw.tick(app, now)
+-        assert app.continuous_strike_active and app.continuous_strike_degrees == 5
+-        assert session.request.call_args.args == ('swing', math.radians(5), SWING_EVENTS)
++        assert app.continuous_strike_active and app.continuous_strike_degrees == 5.5
++        assert session.request.call_args.args == ('swing', math.radians(5.5), SWING_EVENTS)
+         assert '100 BPM' in app.status.get()
+         app.center_relax()
+         assert session.request.call_args.args == ('finish',)
+@@ -122,7 +122,7 @@
+         bus._joints = app.center_goal.copy()
+         app.complete_stage(now+.1)
+         assert not bus.active
+-        print('PASS: real App(hardware=True) selects hybrid, preserves first-hit depth, '
++        print('PASS: real App(hardware=True) selects hybrid, boosts first-hit depth by 0.5 degrees, '
+               'starts 100 BPM swing, and joins/centers in MIT before simulated relax')
+         print('PASS: Tk widgets show hybrid; motor, microphone and ESP32 I/O were substituted; '
+               'no physical hardware operated')
+--- diagnostics/ride_depth_boost_20261005/before/README.md	2026-10-05 13:48:28.645997527 -0700
++++ README.md	2026-10-05 14:08:34.581334780 -0700
+@@ -470,10 +470,17 @@
+ After each settled return, the controller waits until ST7 has finalized the
+ entire strike's audio interval. Hits use PortAudio ADC capture timestamps, not
+ the time the listener printed its startup message. A three-second audio backlog
+-causes a controlled stop rather than falsely declaring a miss. The first detected depth is kept; there is no fine-tuning or
+-normality-score-based depth selection.
++causes a controlled stop rather than falsely declaring a miss. In `--hardware`,
++the swing depth is now **the first detected depth + 0.5°** of J7 displacement:
++for example, detection at 10° produces 10.5° swing hits. Search attempts remain
++at their original integer depths and complete their original return before the
++boost is applied. Fractional depths are retained through the worker and logs.
++The existing validated corridor and joint/experiment limits still apply; an
++unsafe boosted target causes a controlled Center + Relax, not widened limits.
++No normality-based selection, detector changes or additional search are used.
++`--test` and `--hardwaretest` are unchanged, as is hi-hat synchronization.
+ 
+-That same depth then plays hybrid strokes in the existing 100 BPM triplet
++That boosted depth then plays hybrid strokes in the existing 100 BPM triplet
+ swing: opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
+ spacing from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
+ A separate 500 Hz J7 worker reuses `strike_lab.methods.hybrid` and
+--- /dev/null	2026-09-28 22:30:58.821296986 -0700
++++ tests/test_ride_depth_boost.py	2026-10-05 14:09:13.640850073 -0700
+@@ -0,0 +1,98 @@
++"""Detected ride depth +0.5 degrees in hardware swing, never the search."""
++from dataclasses import replace
++import math
++import unittest
++from unittest.mock import Mock, patch
++
++import numpy as np
++
++from camera_playback.app import App, SWING_EVENTS
++from camera_playback.hybrid_strike import HybridController, load_tuning
++from camera_playback import hybrid_workflow as hw
++from test_hybrid_workflow import app_fixture
++
++
++class RideBoostTests(unittest.TestCase):
++    def fixture(self, detected=10, corridor=13., hard_depth=13.):
++        a=app_fixture()
++        p,r,l=load_tuning()
++        a.hybrid_session.controller=HybridController(0.,-math.radians(corridor),.01,
++            p,r,replace(l,hard_depth_deg=hard_depth))
++        a.strike_index=detected-5
++        a.strike_hit_pending=dict(degrees=detected,message='detected')
++        a._program_failure=Mock()
++        return a
++
++    def test_10_becomes_10_point_5_after_successful_search(self):
++        a=self.fixture()
++        original=a.strike_plan.targets[a.strike_index].copy()
++        a._finish_hit_strike_attempt()
++        self.assertEqual(a.continuous_strike_degrees,10.5)
++        self.assertAlmostEqual(a.continuous_strike_target[6],-math.radians(10.5))
++        np.testing.assert_array_equal(a.continuous_strike_target[:6],a.strike_plan.anchor_joints[:6])
++        a.hybrid_session.request.assert_called_once_with('swing',math.radians(10.5),SWING_EVENTS)
++        np.testing.assert_array_equal(a.strike_plan.targets[a.strike_index],original)
++        self.assertEqual(a._current_strike_degrees(),10)
++        a._program_failure.assert_not_called()
++
++    def test_boost_is_absolute_from_anchor_never_accumulates(self):
++        a=self.fixture(11)
++        first,q=hw.boosted_swing_target(a,11)
++        second,q2=hw.boosted_swing_target(a,11)
++        self.assertEqual(first,11.5);self.assertEqual(second,11.5)
++        np.testing.assert_array_equal(q,q2)
++        np.testing.assert_array_equal(a.strike_plan.anchor_joints,np.zeros(7))
++
++    def test_12_point_5_uses_existing_13_degree_corridor(self):
++        a=self.fixture(12)
++        a._finish_hit_strike_attempt()
++        self.assertEqual(a.continuous_strike_degrees,12.5)
++        a.hybrid_session.request.assert_called_once_with('swing',math.radians(12.5),SWING_EVENTS)
++        self.assertEqual(a.hybrid_session.controller.limits.hard_depth_deg,13.)
++
++    def test_geometric_corridor_blocks_boost_before_hihat_or_swing_start(self):
++        a=self.fixture(10,corridor=10.)
++        a._finish_hit_strike_attempt()
++        a._program_failure.assert_called_once()
++        self.assertIn('boost is unsafe',a._program_failure.call_args.args[0])
++        self.assertFalse(a.continuous_strike_active)
++        a.hihat.start_sequence.assert_not_called()
++        a.hybrid_session.request.assert_not_called()
++
++    def test_hard_limit_is_not_widened_for_boost(self):
++        a=self.fixture(12,hard_depth=12.6)
++        a._finish_hit_strike_attempt()
++        a._program_failure.assert_called_once()
++        a.hihat.start_sequence.assert_not_called()
++        a.hybrid_session.request.assert_not_called()
++
++    def test_nonhybrid_path_does_not_receive_boost(self):
++        a=self.fixture();a.hybrid_enabled=False
++        a._begin_continuous_striking=Mock()
++        a._finish_hit_strike_attempt()
++        degrees,target=a._begin_continuous_striking.call_args.args
++        self.assertEqual(degrees,10)
++        self.assertAlmostEqual(target[6],-math.radians(10))
++
++    def test_bad_depth_values_are_rejected_without_starting_hihat(self):
++        for degrees in (True,np.nan,np.inf,-np.inf,'10.5'):
++            a=self.fixture()
++            a._begin_continuous_striking(degrees,np.zeros(7))
++            a._program_failure.assert_called_once()
++            a.hihat.start_sequence.assert_not_called()
++
++    def test_reported_minimum_does_not_truncate_fractional_command(self):
++        a=self.fixture()
++        a.continuous_j7_measurement_strike_count=1
++        a.continuous_j7_measurement_reached=True
++        a.continuous_j7_lowest_encoder_rad=-math.radians(10.5)
++        a.continuous_j7_measurement_anchor_rad=0.
++        a.continuous_j7_measurement_label='beat 2'
++        a.continuous_strike_degrees=10.5
++        a._sample_continuous_j7_minimum=Mock()
++        # Fixture mocks the inherited logger; invoke the actual method.
++        with patch('builtins.print') as output:App._log_continuous_j7_minimum(a)
++        self.assertIn('commanded: 10.5 deg',output.call_args.args[0])
++
++
++if __name__=='__main__':unittest.main()

@@ -1,0 +1,30 @@
+{
+  "paths": {
+    "run": "diagnostics/hihat_sync_20261005/run_20261005_134848",
+    "evidence": "playback_results/swing_verification/20261005T204914-6a572157",
+    "timeline": "playback_results/hihat_sync/20261005T204941-72baa6d3/timeline.jsonl"
+  },
+  "audio_clock_offset": 573486.250836262,
+  "audio_clock_spread_ms": 9.721184032969177,
+  "clipped_samples": 0,
+  "commands": 68,
+  "closures": 34,
+  "matches": 22,
+  "skips": 11,
+  "initial_five_detector_error_median_ms": 68.03028692957014,
+  "final_five_detector_error_median_ms": 48.04295883513987,
+  "max_command_lateness_ms": 49.69727713614702,
+  "final_estimated_advance_ms": 119.99999999999999,
+  "final_applied_advance_ms": 109.99999999999999,
+  "exact_grid_error_ms": 0.0,
+  "paired_advances_identical": true
+}
+{
+  "method": "1 ms causal RMS above 1.5 kHz; 15 percent burst rise, sustained 2.5 ms of 3 ms, searched 35-180 ms after close; visually reviewed representative plots.",
+  "caveat": "Dominant closure-burst measurements, not independent classification of the weak overlapping ride; no exact acoustic lock claim.",
+  "baseline_closures": 4,
+  "late_closures": 15,
+  "baseline_grid_error_median_ms": 86.11224603373557,
+  "late_grid_error_median_ms": -12.325253919698298,
+  "closure_latency_median_ms": 83.34213402122259
+}

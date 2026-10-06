@@ -1,0 +1,137 @@
+{
+  "verified_at_utc": "2026-10-03T19:27:08.585217+00:00",
+  "offline_evidence_audit": true,
+  "physical_runs": [
+    {
+      "test": 3,
+      "mode": "hardwaretest",
+      "command": "./start_beat.sh --hardwaretest --recording recordings/record3.json --recording-only --auto-run",
+      "directory": "playback_results/start_beat_recording_only/20261003T191158-1011e719",
+      "worker_directory": "playback_results/start_beat/20261003T191224-f25c4ebd",
+      "source_duration_s": 3.841315,
+      "playback_duration_s": 4.8,
+      "trace_wall_duration_s": 4.798683973029256,
+      "playback_target_sets": 638,
+      "effective_target_hz": 132.74472825887767,
+      "median_target_interval_ms": 8.75422399258241,
+      "max_target_interval_ms": 13.593767012935132,
+      "endpoint_max_error_deg": 0.02197933771202081,
+      "disable_max_center_error_deg": 0.032969006568082104,
+      "disable_center_settled_s": 0.6495716600329615,
+      "disable_packets_audited": 24,
+      "gains_restored": true,
+      "relaxed_verified": true,
+      "no_alignment_or_strike": true,
+      "worker_transport": {
+        "left": {
+          "retries": 0,
+          "maximum_wait_s": 0.00014180399011820555
+        },
+        "right": {
+          "retries": 4930,
+          "maximum_wait_s": 0.007313383975997567
+        }
+      },
+      "gui_transport": {
+        "left": {
+          "retries": 0,
+          "maximum_wait_s": 0.0002712960122153163
+        },
+        "right": {
+          "retries": 43,
+          "maximum_wait_s": 0.006830058002378792
+        }
+      }
+    },
+    {
+      "test": 5,
+      "mode": "hardware",
+      "command": "./start_beat.sh --hardware --recording recordings/record3.json --recording-only --auto-run",
+      "directory": "playback_results/start_beat_recording_only/20261003T191653-75d52cf5",
+      "worker_directory": "playback_results/start_beat/20261003T191719-b642f6c4",
+      "source_duration_s": 3.841315,
+      "playback_duration_s": 4.8,
+      "trace_wall_duration_s": 4.803682018013205,
+      "playback_target_sets": 638,
+      "effective_target_hz": 132.60661251334494,
+      "median_target_interval_ms": 8.728739048819989,
+      "max_target_interval_ms": 14.070374018047005,
+      "endpoint_max_error_deg": 0.02197933771202081,
+      "disable_max_center_error_deg": 0.02148099950622766,
+      "disable_center_settled_s": 0.6482204929925501,
+      "disable_packets_audited": 24,
+      "gains_restored": true,
+      "relaxed_verified": true,
+      "no_alignment_or_strike": true,
+      "worker_transport": {
+        "left": {
+          "retries": 0,
+          "maximum_wait_s": 8.639699080958962e-05
+        },
+        "right": {
+          "retries": 4873,
+          "maximum_wait_s": 0.006604608963243663
+        }
+      },
+      "gui_transport": {
+        "left": {
+          "retries": 0,
+          "maximum_wait_s": 0.0004945769906044006
+        },
+        "right": {
+          "retries": 54,
+          "maximum_wait_s": 0.006236506975255907
+        }
+      }
+    }
+  ],
+  "postflight": {
+    "all_16_relaxed": true,
+    "original_gains_verified": true,
+    "both_can_error_active": true,
+    "current_tx_rx_error_counters_zero": true
+  },
+  "unchanged_protected_files": [
+    "start_beat.sh",
+    "centering/motors.py",
+    "camera_playback/smooth_recording.py",
+    "recordings/record1.json",
+    "recordings/record2.json",
+    "recordings/record3.json",
+    "smooth_playback/hardware.py",
+    "smooth_playback/retime_prototype.py",
+    "smooth_playback/cli.py",
+    "smooth_playback/runner.py",
+    "smooth_playback/__init__.py",
+    "smooth_playback/campaign.py",
+    "smooth_playback/test_playback.py",
+    "smooth_playback/make_results.py",
+    "smooth_playback/fast_prototype.py",
+    "smooth_playback/analyze.py",
+    "smooth_playback/path_evidence.py",
+    "smooth_playback/test_existing.py",
+    "smooth_playback/report.py",
+    "smooth_playback/live_cancel_check.py",
+    "smooth_playback/capture_legacy_timing.py",
+    "smooth_playback/trajectory.py",
+    "playback.sh"
+  ],
+  "current_production_hashes_match_final_physical_test": {
+    "camera_playback/app.py": "4f56739761bc24e165d931965601ba4a26c3ea2167762a71489d8ccac540c387",
+    "camera_playback/playback_transport.py": "d09e326d02167d52705e1beae15d43d7b23d2dbb66c2e31c0a29b7bf17bfef43",
+    "camera_playback/recording_only.py": "693e38d4dff49a7a816084e14b5451f93566a1abbd5d4289edd76ed55f8ee441",
+    "camera_playback/smooth_recording_worker.py": "78eac919c0cfecfa16fe105fdb767b12fe9b4e533c92fcf97f89e9b18d541828",
+    "camera_playback/smooth_recording.py": "96cf7517fd4d77186a0825c957c3be6d04088dc6b70708d841a4ce44001ea164",
+    "camera_playback/camera.py": "3ce38879abf9fd4ba667c84d571743632207d21764f01e983a401882ab1c64e5",
+    "launch_right_camera_playback.py": "b229265012d188882dd9b8b8cf688b54c2064e8bb271aad8c7dcd13c1ac2813a",
+    "start_beat.sh": "de3669442d81f427c185849f043a0a640a0f110dbc8afd1d9fa62e9e1e206c6b",
+    "centering/motors.py": "02a1a9d7c60ce305fd8e7d90236ded4183bb959719f6c86a4722abb889db0548",
+    "smooth_playback/runner.py": "0126b42ea308c93f4e8ee57b3f45ee471192d469a2fdd52b5f7d41f1bc4f2c8e",
+    "smooth_playback/hardware.py": "503dd70ef64d08cdea868f5545bff935f8a8a7ef6a55500a745717479857e2e0",
+    "recordings/record3.json": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  },
+  "offline_tests": {
+    "regressions_passed": 385,
+    "ui_checks_passed": 4
+  }
+}

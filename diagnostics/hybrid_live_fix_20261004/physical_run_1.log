@@ -1,0 +1,32 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-04-19-56-33-522676-jason-band37-685560
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [685580]
+[INFO] [rviz2-2]: process started with pid [685581]
+[INFO] [python3-3]: process started with pid [685582]
+[INFO] [python-4]: process started with pid [685583]
+[INFO] [python3-5]: process started with pid [685584]
+[robot_state_publisher-1] [INFO] [1791168993.597681533] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1791168993.903657562] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791168993.903728518] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791168993.917555694] [rviz2]: Stereo is NOT SUPPORTED
+[python3-3] HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth → 100 BPM hybrid swing with partial returns; --test/--hardwaretest unchanged
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera error: Orbbec Gemini 2 RGB (AY6R463004K) RGB capture interface not uniquely available. Connect that camera and close OrbbecViewer/other camera programs. No fallback camera was selected; use --camera N for an explicit override.
+[ERROR] [python-4]: process has died [pid 685583, exit code 1, cmd '/home/jason/Proyectos3/Y2/.venv/bin/python /home/jason/Proyectos3/X5/camera_playback/camera.py --socket /tmp/x5-right-camera-playback-685560.sock --root /home/jason/Proyectos3/Y2 --camera orbbec --device auto --process-every 1'].
+[INFO] [python3-6]: process started with pid [685727]
+[INFO] [python3-6]: process has finished cleanly [pid 685727]
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL VERIFICATION EVIDENCE: /home/jason/Proyectos3/X5/playback_results/swing_verification/20261005T025643-66c6a42c
+[python3-3] VERIFICATION PHASE: {"t": 509150.765330086, "phase": "READY", "status": "Recording preflight passed; waiting for camera, ST7/TONOR, ESP32 hi-hat, and fresh encoders"}
+[python3-3] CLOSE REQUEST: center and verify before disabling or exiting
+[INFO] [python3-3]: process has finished cleanly [pid 685582]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791169025.612375092] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791169025.612606268] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 685580]
+[INFO] [rviz2-2]: process has finished cleanly [pid 685581]
+[python3-5] {"status": "stopped", "captured_seconds": 30.0}
+[INFO] [python3-5]: process has finished cleanly [pid 685584]

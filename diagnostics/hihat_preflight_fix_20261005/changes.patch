@@ -1,0 +1,486 @@
+--- before/README.md
++++ after/README.md
+@@ -557,8 +557,13 @@
+ flashes it automatically. Unsupported firmware fails closed before calibration
+ motion. `playback_results/hihat_calibration/<session>/events.jsonl` records
+ trials, encoder arrival, selected HIT, angle and faults.
+-The recording picker is temporarily disabled during calibration motion because
+-its preflight is synchronous; the UI layout and RUN workflow are otherwise unchanged.
++The recording picker is temporarily disabled during calibration motion. In normal
++hardware mode, recording validation runs in a calculation-only background worker;
++ESP32 heartbeats/status queries and detector/encoder polling continue on the GUI
++loop. RUN stays unavailable until validation finishes, then requires a fresh ESP32
++reply before enabling the arm. A failed validation cannot reuse an older recording.
++Real missing-feedback/controller faults remain latched; their timeouts are not
++weakened. The UI layout and RUN workflow are otherwise unchanged.
+ 
+ ### Background hi-hat synchronization (no ride offset)
+ 
+--- before/camera_playback/app.py
++++ after/camera_playback/app.py
+@@ -58,6 +58,7 @@
+ )
+ from .trajectory import PlaybackFollower, load_playback_trajectory
+ from .smooth_recording import SmoothRecording, load_smooth_recording
++from .recording_preflight import RecordingPreflight
+ from .smooth_recording_worker import RecordingSession
+ from .playback_transport import PlaybackMotors
+ from centering.motors import Motors
+@@ -233,6 +234,7 @@
+             self.hihat_fault_detail = self.hihat.detail
+         RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
+         self.playback_trajectory = None
++        self.recording_preflight = None
+         self.smooth_playback_session = None
+         self.smooth_playback_cleanup_error = None
+         self.playback_active = False
+@@ -514,10 +516,12 @@
+                 self.root.after(100, lambda: recording_only_control.auto_tick(self))
+ 
+     def choose_recording(self) -> None:
++        if getattr(self, 'recording_preflight', None) is not None:
++            return
+         calibration = getattr(self, 'hihat_calibration', None)
+         if calibration is not None and calibration.busy:
+             self.status.set('Wait for hi-hat calibration before changing recordings')
+-            return  # Recording preflight is synchronous; do not starve serial supervision.
++            return  # Keep recording changes separate from calibration motion.
+         if self.bus and self.bus.active:
+             self.status.set("Cannot change recordings while the right arm is powered")
+             return
+@@ -546,8 +550,7 @@
+             f"LOADING RECORDING: {source_name}\n{detail}"
+         )
+         self._refresh_loading_label()
+-        # The preflight currently runs synchronously. Flush geometry/text changes
+-        # so each detailed stage is visible while the calculation is underway.
++        # Only the GUI thread calls this, including queued background progress.
+         self.root.update_idletasks()
+ 
+     def _hide_recording_loading(self) -> None:
+@@ -564,10 +567,13 @@
+         self._refresh_loading_label()
+ 
+     def load_recording(self, path, show_dialog: bool = True) -> bool:
++        if (getattr(self, 'recording_preflight', None) is not None
++                or getattr(self, 'close_requested', False)):
++            return False
+         calibration = getattr(self, 'hihat_calibration', None)
+         if calibration is not None and calibration.busy:
+             # A modal picker can remain open while Tk starts calibration.
+-            # Recheck here before synchronous preflight can starve heartbeats.
++            # Recheck before accepting a recording change during motion.
+             self.status.set('Hi-hat calibration is moving; load the recording after it finishes')
+             return False
+         if self.bus and self.bus.active:
+@@ -578,6 +584,24 @@
+         self._show_recording_loading(
+             source_name, "Preparing recording validation"
+         )
++        if getattr(self, 'hybrid_enabled', False):
++            # Heavy geometry/retiming must not suspend ESP32 heartbeats, status
++            # queries, audio polling, or arm encoder observation on the Tk loop.
++            # Clear the old selection so RUN cannot race a replacement load.
++            self.playback_trajectory = None
++            self._refresh_buttons()
++            try:
++                self.recording_preflight = RecordingPreflight(
++                    path, self.model, self.zone, self.lower.copy(), self.upper.copy(),
++                    self.center_goal.copy(), self.ik.speed,
++                    playback_speed=RIGHT_PLAYBACK_SPEED)
++            except Exception as exc:
++                self._hide_recording_loading()
++                self._recording_load_failed(str(exc), show_dialog=False)
++                return False
++            self._refresh_buttons()
++            self.root.after(20, lambda: self._poll_recording_preflight(source_name))
++            return True  # Accepted for validation, not yet ready to RUN.
+         try:
+             loader = (load_smooth_recording
+                       if getattr(self, "hardware", False) and not self.test_mode
+@@ -601,6 +625,49 @@
+             return False
+         finally:
+             self._hide_recording_loading()
++        self._install_recording(trajectory)
++        return True
++
++    def _poll_recording_preflight(self, source_name):
++        job = getattr(self, 'recording_preflight', None)
++        if job is None:
++            return
++        if getattr(self, 'close_requested', False):
++            self._cancel_recording_preflight()
++            return
++        for kind, value in job.poll():
++            if kind == 'progress':
++                self._show_recording_loading(source_name, value)
++            else:
++                self.recording_preflight = None
++                self._hide_recording_loading()
++                if kind == 'error':
++                    # A modal error dialog must not delay motor supervision.
++                    self._recording_load_failed(value, show_dialog=False)
++                elif self.bus and self.bus.active:
++                    self._recording_load_failed('Arm became active during validation', show_dialog=False)
++                else:
++                    self._install_recording(value)
++                return
++        self.root.after(20, lambda: self._poll_recording_preflight(source_name))
++
++    def _cancel_recording_preflight(self):
++        job = getattr(self, 'recording_preflight', None)
++        if job is not None:
++            job.cancel()
++            self.recording_preflight = None
++
++    def _recording_load_failed(self, detail, show_dialog=False):
++        self.playback_trajectory = None
++        self.recording_status.set('Recording rejected: ' + detail)
++        self.recording_label.config(fg='#b00020')
++        self.status.set('ERROR: recording preflight failed: ' + detail)
++        print('RECORDING PREFLIGHT FAILED: ' + detail, flush=True)
++        if show_dialog:
++            messagebox.showerror('Recording rejected', detail)
++        self._refresh_buttons()
++
++    def _install_recording(self, trajectory):
+         self.playback_trajectory = trajectory
+         self.goal = trajectory.first_joints
+         self.target_point = trajectory.tcp_positions[0].copy()
+@@ -635,12 +702,12 @@
+         self.result_status.set("Result: recording ready; sequence not started")
+         self.result_label.config(fg="navy")
+         self._refresh_buttons()
+-        return True
+ 
+     def _refresh_buttons(self) -> None:
+         selector = getattr(self, "recording_button", None)
+         if selector is not None:
+             selectable = not (self.bus and self.bus.active)
++            selectable = selectable and getattr(self, 'recording_preflight', None) is None
+             calibration = getattr(self, 'hihat_calibration', None)
+             selectable = selectable and not (calibration is not None and calibration.busy)
+             selector.config(state="normal" if selectable else "disabled")
+@@ -869,6 +936,9 @@
+         return super().initial_gripper_goal()
+ 
+     def start(self):
++        if getattr(self, 'recording_preflight', None) is not None:
++            self.status.set('Wait for recording validation before RUN')
++            return
+         if not self.hardware:
+             self.status.set("Offline preview only — add --hardware to run the sequence")
+             return
+@@ -914,6 +984,7 @@
+         self.result_status.set("Result: recording playback has not started")
+         self.result_label.config(fg="navy")
+         self.phase = "PLAYBACK PREFLIGHTED"
++        self.hihat_start_query_at = None
+         self.ik_refresh_deadline = time.monotonic() + 2.0
+         if getattr(self, "test_mode", False):
+             preflight_status = (
+@@ -943,9 +1014,22 @@
+             self.audio_receiver.poll()
+             if self.hihat is not None:
+                 self.hihat.tick()
++        fresh_hihat_reply = True
++        if getattr(self, 'hybrid_enabled', False):
++            # A serial descriptor being open is not proof that the ESP32 is
++            # still alive. Require a real response newer than this RUN request
++            # before any arm enable. Normal calibration polling stays active.
++            now = time.monotonic()
++            requested = getattr(self, 'hihat_start_query_at', None)
++            if requested is None and self.hihat.ready() and not self.hihat_fault_detail:
++                self.hihat_start_query_at = now
++                self.hihat.query_status()
++            stamp = self.hihat.telemetry_at
++            fresh_hihat_reply = (requested is not None and stamp is not None
++                                and requested <= stamp and 0 <= now - stamp <= .6)
+         if (not self.bus.fresh() or not self._camera_ready_for_start()
+                 or not self._sound_ready_for_start()
+-                or not self._hihat_ready_for_start()):
++                or not self._hihat_ready_for_start() or not fresh_hihat_reply):
+             if time.monotonic() >= self.ik_refresh_deadline:
+                 self.phase = "READY"
+                 if getattr(self, "test_mode", False):
+@@ -3060,6 +3144,7 @@
+ 
+     def request_safe_close(self):
+         """Window close/Ctrl-C is a center request, never an airborne disable."""
++        self._cancel_recording_preflight()
+         if not getattr(self, 'close_requested', False):
+             self.close_requested = True
+             print('CLOSE REQUEST: center and verify before disabling or exiting', flush=True)
+@@ -3106,6 +3191,7 @@
+             super().run()
+         finally:
+             self.root.mainloop = mainloop
++            self._cancel_recording_preflight()
+             self.audio_receiver.close()
+             monitor = getattr(self, 'hihat_sound_monitor', None)
+             if monitor is not None:
+--- before/launch_right_camera_playback.py
++++ after/launch_right_camera_playback.py
+@@ -139,8 +139,10 @@
+     try:
+         detector_command(ST7, args.audio_device, 'hihat')
+     except RuntimeError as exc:
+-        print(f"Hi-hat sound monitor unavailable (beat workflow unchanged): {exc}", flush=True)
+-    print(f"ST7 hi-hat audio model {HIHAT_MODEL_VERSION}: visual only; "
++        print(f"Hi-hat sound monitor unavailable (required for normal hardware calibration): {exc}", flush=True)
++    hihat_purpose = ('startup calibration and hi-hat-only timing'
++                     if args.hardware and not args.recording_only else 'visual only')
++    print(f"ST7 hi-hat audio model {HIHAT_MODEL_VERSION}: {hihat_purpose}; "
+           "ride v2 remains the only strike-search input", flush=True)
+ socket_path = Path(f"/tmp/x5-right-camera-playback-{os.getpid()}.sock")
+ audio_socket_path = Path(f"/tmp/x5-right-camera-audio-{os.getpid()}.sock")
+@@ -253,15 +255,15 @@
+             cwd=str(ROOT), output="screen",
+         )],
+     )))
+-    # An exit updates only the optional hi-hat panel, never the camera/ride
+-    # fault path or the launch-wide shutdown event.
++    # Notify the hi-hat receiver, not the ride receiver. Normal hardware
++    # calibration/synchronization owns the resulting supervised stop policy.
+     description.add_action(RegisterEventHandler(OnProcessExit(
+         target_action=hihat_audio,
+         on_exit=[ExecuteProcess(
+             cmd=[
+                 "/usr/bin/python3", "-m", "camera_playback.audio_notify",
+                 "--socket", str(hihat_audio_socket_path), "--instrument", "hihat",
+-                "--detail", "Hi-hat sound detector exited (visual only; beat unaffected)",
++                "--detail", "Hi-hat sound detector exited",
+             ],
+             cwd=str(ROOT), output="screen",
+         )],
+--- /dev/null
++++ after/camera_playback/recording_preflight.py
+@@ -0,0 +1,45 @@
++"""Background, calculation-only recording validation; no GUI or device access.
++
++The model/zone are read-only inputs. Progress and completion cross a queue;
++only the GUI thread may install the result or update widgets. Cancelling a job
++discards its result, never starts a recording, and never controls any motor.
++"""
++import queue
++import threading
++
++from .smooth_recording import load_smooth_recording
++
++
++class RecordingPreflight:
++    def __init__(self, *args, playback_speed, loader=load_smooth_recording):
++        self.messages = queue.SimpleQueue()
++        self.cancelled = threading.Event()
++        self.thread = threading.Thread(
++            target=self._work, args=(loader, args, playback_speed),
++            name='recording-preflight', daemon=True)
++        self.thread.start()
++
++    def _send(self, kind, value):
++        if not self.cancelled.is_set():
++            self.messages.put((kind, value))
++
++    def _work(self, loader, args, playback_speed):
++        try:
++            result = loader(*args, playback_speed=playback_speed,
++                            progress=lambda text: self._send('progress', text))
++        except Exception as exc:
++            self._send('error', str(exc))
++        else:
++            self._send('result', result)
++
++    def poll(self):
++        rows = []
++        while not self.cancelled.is_set():
++            try:
++                rows.append(self.messages.get_nowait())
++            except queue.Empty:
++                break
++        return rows
++
++    def cancel(self):
++        self.cancelled.set()
+--- /dev/null
++++ after/tests/test_recording_preflight.py
+@@ -0,0 +1,179 @@
++"""Background validation and fresh-before-enable guards; no physical devices."""
++import threading
++import time
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++
++import numpy as np
++
++from camera_playback.app import App
++from camera_playback.recording_preflight import RecordingPreflight
++from camera_playback.hihat_calibration import HiHatCalibration
++from camera_playback.hihat_calibration_runtime import HiHatCalibrationRuntime
++
++
++class WorkerTests(unittest.TestCase):
++    def test_slow_validation_returns_immediately_and_never_calls_gui(self):
++        entered, release = threading.Event(), threading.Event()
++        main_thread = threading.get_ident()
++        def loader(*args, progress, **kwargs):
++            self.assertNotEqual(threading.get_ident(), main_thread)
++            progress('checking geometry')
++            entered.set()
++            self.assertTrue(release.wait(3))
++            return 'validated'
++        start = time.monotonic()
++        job = RecordingPreflight(playback_speed=.8, loader=loader)
++        self.addCleanup(release.set)
++        self.assertLess(time.monotonic()-start, .2)
++        self.assertTrue(entered.wait(1))
++        self.assertEqual(job.poll(), [('progress', 'checking geometry')])
++        self.assertEqual(job.poll(), [])
++        release.set(); job.thread.join(2)
++        self.assertEqual(job.poll(), [('result', 'validated')])
++
++    def test_failure_is_queued_not_raised_on_ui_or_worker(self):
++        job = RecordingPreflight(playback_speed=.8, loader=Mock(side_effect=ValueError('bad path')))
++        job.thread.join(2)
++        self.assertEqual(job.poll(), [('error', 'bad path')])
++
++    def test_cancel_discards_late_result(self):
++        release = threading.Event()
++        def loader(*args, **kwargs):
++            release.wait(2)
++            return 'late'
++        job = RecordingPreflight(playback_speed=.8, loader=loader)
++        job.cancel(); release.set(); job.thread.join(2)
++        self.assertEqual(job.poll(), [])
++
++
++class AppTests(unittest.TestCase):
++    def fixture(self):
++        a = App.__new__(App)
++        a.hybrid_enabled = a.hardware = True
++        a.test_mode = a.hardware_test_mode = a.recording_only = False
++        a.close_requested = False
++        a.recording_preflight = None
++        a.hihat_calibration = SimpleNamespace(busy=False, ready=True)
++        a.bus = Mock(active=False); a.bus.fresh.return_value = True
++        a.model = a.zone = object()
++        a.lower = np.full(7,-3.); a.upper = np.full(7,3.)
++        a.center_goal = np.zeros(7)
++        a.ik = SimpleNamespace(speed=.4)
++        for name in ('root','status','_refresh_buttons','_show_recording_loading',
++                     '_hide_recording_loading','_install_recording','recording_status',
++                     'recording_label'):
++            setattr(a,name,Mock())
++        a.playback_trajectory = 'old'
++        return a
++
++    def test_calibrated_then_load_disables_run_until_queued_completion(self):
++        a=self.fixture(); job=Mock()
++        with patch('camera_playback.app.RecordingPreflight',return_value=job):
++            self.assertTrue(a.load_recording('record3.json'))
++        self.assertIsNone(a.playback_trajectory)
++        a.start()
++        self.assertIn('validation',a.status.set.call_args.args[0])
++        self.assertFalse(a.load_recording('record2.json'))
++        job.poll.return_value=[('progress','checking'),('result','new')]
++        a._poll_recording_preflight('record3.json')
++        self.assertIsNone(a.recording_preflight)
++        a._install_recording.assert_called_once_with('new')
++
++    def test_validation_error_cannot_reuse_old_path_or_open_modal_dialog(self):
++        a=self.fixture(); job=Mock()
++        with patch('camera_playback.app.RecordingPreflight',return_value=job):
++            a.load_recording('bad.json')
++        job.poll.return_value=[('error','invalid recording')]
++        with patch('camera_playback.app.messagebox.showerror') as dialog:
++            a._poll_recording_preflight('bad.json')
++        dialog.assert_not_called()
++        self.assertIsNone(a.playback_trajectory)
++        a._install_recording.assert_not_called()
++
++    def test_cancel_and_close_discard_completion(self):
++        a=self.fixture(); job=a.recording_preflight=Mock()
++        a.close_requested=True
++        a._poll_recording_preflight('record3.json')
++        job.cancel.assert_called_once()
++        job.poll.assert_not_called()
++        a._install_recording.assert_not_called()
++
++    def start_fixture(self):
++        a=self.fixture()
++        a.phase='PLAYBACK PREFLIGHTED'; a.ik_refresh_deadline=12.
++        a.hihat_start_query_at=None
++        a.receiver=a.audio_receiver=Mock()
++        a._camera_ready_for_start=Mock(return_value=True)
++        a._sound_ready_for_start=Mock(return_value=True)
++        a._hihat_ready_for_start=Mock(return_value=True)
++        a.hihat=Mock(telemetry_at=9.9)
++        a.hihat.ready.return_value=True; a.hihat_fault_detail=None
++        return a
++
++    def test_no_arm_enable_until_response_newer_than_run_request(self):
++        a=self.start_fixture()
++        with patch('camera_playback.app.time.monotonic',return_value=10.) as clock, \
++             patch('camera_playback.app.JointGoalApp.start') as enable:
++            a._start_preflighted_recording()
++            a.hihat.query_status.assert_called_once()
++            enable.assert_not_called()
++            a._start_preflighted_recording()  # old telemetry is not a reply
++            enable.assert_not_called()
++            a.hihat.telemetry_at=10.02
++            clock.return_value=10.03
++            a._start_preflighted_recording()
++            enable.assert_called_once_with(a)
++
++    def test_missing_reply_times_out_without_arm_enable(self):
++        a=self.start_fixture(); a.hihat_start_query_at=10.
++        with patch('camera_playback.app.time.monotonic',return_value=12.01), \
++             patch('camera_playback.app.JointGoalApp.start') as enable:
++            a._start_preflighted_recording()
++        enable.assert_not_called()
++        self.assertEqual(a.phase,'READY')
++        self.assertIn('did not all become ready',a.status.set.call_args.args[0])
++
++    def test_future_timestamp_is_not_a_fresh_start_reply(self):
++        a=self.start_fixture(); a.hihat_start_query_at=10.
++        a.hihat.telemetry_at=11.
++        with patch('camera_playback.app.time.monotonic',return_value=10.1), \
++             patch('camera_playback.app.JointGoalApp.start') as enable:
++            a._start_preflighted_recording()
++        enable.assert_not_called()
++
++
++class StatusSafetyTests(unittest.TestCase):
++    def fixture(self, stamp):
++        c=Mock(state='ready',telemetry_at=stamp,telemetry={'angle':90})
++        c.ready.return_value=True
++        app=SimpleNamespace(hihat=c,hihat_sound_monitor=SimpleNamespace(receiver=Mock()),
++            bus=SimpleNamespace(active=False),result_status=Mock(),result_label=Mock(),status=Mock())
++        r=HiHatCalibrationRuntime.__new__(HiHatCalibrationRuntime)
++        r.app=app; r.closed=False; r.controller_ready_at=0.; r.next_query=0.
++        r.failure_reported=False
++        r.engine=HiHatCalibration(c)
++        r.engine.phase='READY';r.engine.angle=r.engine.selected_angle=90
++        return r
++
++    def test_real_missing_status_after_calibration_still_faults(self):
++        r=self.fixture(0.)
++        r.tick(1.51)
++        self.assertEqual(r.engine.phase,'FAULT')
++        self.assertEqual(r.engine.failure,'Calibrated ESP32 status became stale')
++        r.app.hihat.query_status.assert_called_once()
++        # A fresh reply cannot silently clear a genuine latched fault.
++        r.app.hihat.telemetry_at=1.52
++        r.tick(1.52)
++        self.assertEqual(r.engine.phase,'FAULT')
++
++    def test_queried_current_status_preserves_selected_angle(self):
++        r=self.fixture(10.)
++        r.tick(10.1)
++        self.assertTrue(r.ready)
++        self.assertEqual(r.engine.selected_angle,90)
++        self.assertIsNone(r.engine.failure)
++
++
++if __name__=='__main__': unittest.main()

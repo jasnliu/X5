@@ -1,0 +1,538 @@
+[
+  {
+    "event": "phase",
+    "at": 164508.135080094,
+    "phase": "READY",
+    "status": "Recording preflight passed; waiting for camera and fresh encoders (ST7 is informational; ESP32 is not used)"
+  },
+  {
+    "event": "start_authorized_playback",
+    "at": 164508.164618784,
+    "phase": "PLAYBACK PREFLIGHTED",
+    "recording": "/home/jason/Proyectos3/X5/recordings/record3.json"
+  },
+  {
+    "event": "phase",
+    "at": 164508.206608995,
+    "phase": "SETTING UP",
+    "status": "Recording preflight passed; confirming all drives at their live poses, then centering with J7=80.2\u00b0 and opening gripper to \u22123\u00b0"
+  },
+  {
+    "event": "phase",
+    "at": 164510.82313838,
+    "phase": "CENTERING",
+    "status": "CENTERING"
+  },
+  {
+    "event": "phase",
+    "at": 164513.501252412,
+    "phase": "WAITING FOR LOAD",
+    "status": "Centered with gripper open at \u22123\u00b0 \u2014 load the drumstick, then press Continue (the recording and pink-zone alignment run next)"
+  },
+  {
+    "event": "skip_human_stick_loading",
+    "at": 164513.503105375,
+    "phase": "CLOSING GRIPPER",
+    "detail": "Empty gripper; three unloaded 1-degree button presses after readiness verification"
+  },
+  {
+    "event": "phase",
+    "at": 164513.538042116,
+    "phase": "CLOSING GRIPPER",
+    "status": "Closing gripper to +7\u00b0 \u2014 recording starts in 0.7 s"
+  },
+  {
+    "event": "phase",
+    "at": 164514.269149804,
+    "phase": "MOVING TO RECORDING START",
+    "status": "Gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+  },
+  {
+    "event": "phase",
+    "at": 164515.360389203,
+    "phase": "RECORDING PLAYBACK",
+    "status": "Playing recording: 0.00/7.10 s \u2022 camera observations 0"
+  },
+  {
+    "event": "phase",
+    "at": 164522.466776041,
+    "phase": "SETTLING RECORDING END",
+    "status": "Recorded path complete \u2014 settling at its final pose"
+  },
+  {
+    "event": "recording_physically_finished",
+    "at": 164523.135237646,
+    "phase": "CHECKING PLAYBACK END",
+    "encoders_deg": [
+      -34.67240524075155,
+      12.165563423617105,
+      13.989848453716867,
+      99.29165811416469,
+      11.731980363937698,
+      -17.462583812219922,
+      34.38667385049498
+    ],
+    "target_deg": [
+      -34.69438457846357,
+      12.143584085905085,
+      13.989848453716867,
+      99.29165811416469,
+      11.731980363937698,
+      -17.48456314993194,
+      34.38667385049498
+    ]
+  },
+  {
+    "event": "test_only_visual_acceptance_bypass",
+    "at": 164523.13562332,
+    "phase": "CHECKING PLAYBACK END",
+    "detail": "No stick; using recorded endpoint for MIT hold, not claiming pink-zone detection"
+  },
+  {
+    "event": "phase",
+    "at": 164523.172887689,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"
+  },
+  {
+    "event": "physical_mit_hold_started",
+    "at": 164523.931900459,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "pid": 148268
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164523.934930833,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "elapsed": 0.0,
+    "ready": false,
+    "q_deg": 31.50738061021689,
+    "velocity": 0.051865415426874506,
+    "error_deg": -2.8792932402780846,
+    "last_gap_ms": 9.95367401628755,
+    "max_gap_ms": 10.020121990237385,
+    "feedback_age_ms": 9.239620994776487,
+    "hold_recoveries": 0,
+    "commands_sent": 4,
+    "error": null
+  },
+  {
+    "event": "phase",
+    "at": 164524.102803132,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164528.969705089,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 5.037909130012849,
+    "ready": true,
+    "q_deg": 34.430632525919016,
+    "velocity": 0.036758983749138,
+    "error_deg": 0.04395867542404162,
+    "last_gap_ms": 9.620741999242455,
+    "max_gap_ms": 14.591126004233956,
+    "feedback_age_ms": 8.924406982259825,
+    "hold_recoveries": 0,
+    "commands_sent": 508,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164533.989192606,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 10.057401046011364,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.01057450217440703,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.057507006218657,
+    "max_gap_ms": 14.591126004233956,
+    "feedback_age_ms": 8.36460743448697,
+    "hold_recoveries": 0,
+    "commands_sent": 1010,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164539.0114899,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 15.079678301000968,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": -0.0005035477225874274,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.897775977151468,
+    "max_gap_ms": 16.45150501281023,
+    "feedback_age_ms": 9.251948300516233,
+    "hold_recoveries": 0,
+    "commands_sent": 1512,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164544.02186448,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 20.09006715900614,
+    "ready": true,
+    "q_deg": 34.364694512782854,
+    "velocity": -0.03373769741359922,
+    "error_deg": -0.021979337712122585,
+    "last_gap_ms": 9.95169099769555,
+    "max_gap_ms": 16.45150501281023,
+    "feedback_age_ms": 9.244861459592357,
+    "hold_recoveries": 0,
+    "commands_sent": 2013,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164549.029292998,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 25.097435520990985,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.022659647516590553,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.941160009475425,
+    "max_gap_ms": 16.45150501281023,
+    "feedback_age_ms": 9.240818733815104,
+    "hold_recoveries": 0,
+    "commands_sent": 2514,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164554.064121872,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 30.132280576013727,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.043808651865418824,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.988991980208084,
+    "max_gap_ms": 16.45150501281023,
+    "feedback_age_ms": 9.218934836098924,
+    "hold_recoveries": 0,
+    "commands_sent": 3017,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164559.071426936,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 35.13963560698903,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.022659647516590553,
+    "error_deg": 0.0,
+    "last_gap_ms": 8.954938006354496,
+    "max_gap_ms": 16.45150501281023,
+    "feedback_age_ms": 8.241411880590022,
+    "hold_recoveries": 0,
+    "commands_sent": 3518,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164564.07587061,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 40.14407606399618,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.024673838406954474,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.48712500394322,
+    "max_gap_ms": 21.594723977614194,
+    "feedback_age_ms": 8.760421711485833,
+    "hold_recoveries": 1,
+    "commands_sent": 4018,
+    "error": null
+  },
+  {
+    "event": "phase",
+    "at": 164567.087112313,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"
+  },
+  {
+    "event": "unexpected_readiness_drop",
+    "at": 164567.087885504,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "worker_ready": false,
+    "button": "disabled",
+    "status_age_ms": 13.533808378269896,
+    "position_error_deg": 0.0,
+    "recoveries": 2,
+    "last_gap_ms": 10.227922990452498
+  },
+  {
+    "event": "unexpected_readiness_drop",
+    "at": 164567.125974155,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "worker_ready": true,
+    "button": "disabled",
+    "status_age_ms": 12.120743602281436,
+    "position_error_deg": 0.0,
+    "recoveries": 2,
+    "last_gap_ms": 9.928526997100562
+  },
+  {
+    "event": "phase",
+    "at": 164567.184181334,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164569.089936867,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 45.15811860500253,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.06495765621423288,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.97741098399274,
+    "max_gap_ms": 34.96035898569971,
+    "feedback_age_ms": 9.251693729311228,
+    "hold_recoveries": 2,
+    "commands_sent": 4518,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164574.125687275,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 50.19389699699241,
+    "ready": true,
+    "q_deg": 34.364694512782854,
+    "velocity": -0.001510643167776493,
+    "error_deg": -0.021979337712122585,
+    "last_gap_ms": 9.426709002582356,
+    "max_gap_ms": 34.96035898569971,
+    "feedback_age_ms": 8.732479909667745,
+    "hold_recoveries": 2,
+    "commands_sent": 5022,
+    "error": null
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164579.148725185,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 55.216929887013976,
+    "ready": true,
+    "q_deg": 34.38667385049498,
+    "velocity": 0.08107118333714425,
+    "error_deg": 0.0,
+    "last_gap_ms": 9.882156999083236,
+    "max_gap_ms": 34.96035898569971,
+    "feedback_age_ms": 9.198200947139412,
+    "hold_recoveries": 2,
+    "commands_sent": 5524,
+    "error": null
+  },
+  {
+    "event": "physical_button_press",
+    "at": 164583.940343649,
+    "phase": "HARDWARE TEST J7 MIT FREEFALL",
+    "number": 1
+  },
+  {
+    "event": "phase",
+    "at": 164583.999869812,
+    "phase": "HARDWARE TEST J7 MIT REBOUND",
+    "status": "MANUAL MIT STRIKE 1: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164584.124122628,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "MANUAL MIT STRIKE 1: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "physical_button_strike_completed",
+    "at": 164584.125034456,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "number": 1,
+    "peak_drop_deg": 0.9670908593301369,
+    "overshoot_deg": 0.08791735084818501,
+    "ready": true
+  },
+  {
+    "event": "phase",
+    "at": 164584.177396213,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "status": "MIT strike complete: goal 1\u00b0, measured peak drop 0.967\u00b0, return overshoot 0.088\u00b0; encoder position stable \u2014 MIT remains enabled"
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164584.178075954,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 60.2456313240109,
+    "ready": true,
+    "q_deg": 34.408653188207,
+    "velocity": -0.001510643167776493,
+    "error_deg": 0.02197933771202081,
+    "last_gap_ms": 8.827583980746567,
+    "max_gap_ms": 34.96035898569971,
+    "feedback_age_ms": 9.03220646432601,
+    "hold_recoveries": 2,
+    "commands_sent": 6085,
+    "error": null
+  },
+  {
+    "event": "physical_button_press",
+    "at": 164587.145320626,
+    "phase": "HARDWARE TEST J7 MIT FREEFALL",
+    "number": 2
+  },
+  {
+    "event": "phase",
+    "at": 164587.179217956,
+    "phase": "HARDWARE TEST J7 MIT FREEFALL",
+    "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164587.219587737,
+    "phase": "HARDWARE TEST J7 MIT REBOUND",
+    "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164587.317151104,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164587.350241106,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "status": "MIT strike complete: goal 1\u00b0, measured peak drop 0.945\u00b0, return overshoot 0.066\u00b0; encoder position stable \u2014 MIT remains enabled"
+  },
+  {
+    "event": "physical_button_strike_completed",
+    "at": 164587.351553257,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "number": 2,
+    "peak_drop_deg": 0.9451115216181161,
+    "overshoot_deg": 0.06593801313606243,
+    "ready": true
+  },
+  {
+    "event": "mit_hold_measurement",
+    "at": 164589.197656798,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "elapsed": 65.26586087900796,
+    "ready": true,
+    "q_deg": 34.408653188207,
+    "velocity": -0.02366674296177962,
+    "error_deg": 0.02197933771202081,
+    "last_gap_ms": 9.888208995107561,
+    "max_gap_ms": 34.96035898569971,
+    "feedback_age_ms": 9.190291777485982,
+    "hold_recoveries": 3,
+    "commands_sent": 6649,
+    "error": null
+  },
+  {
+    "event": "physical_button_press",
+    "at": 164590.372810294,
+    "phase": "HARDWARE TEST J7 MIT FREEFALL",
+    "number": 3
+  },
+  {
+    "event": "phase",
+    "at": 164590.405091086,
+    "phase": "HARDWARE TEST J7 MIT FREEFALL",
+    "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164590.445595887,
+    "phase": "HARDWARE TEST J7 MIT REBOUND",
+    "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164590.524973243,
+    "phase": "HARDWARE TEST SETTLING MIT HOLD",
+    "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"
+  },
+  {
+    "event": "phase",
+    "at": 164590.564477486,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "status": "MIT strike complete: goal 1\u00b0, measured peak drop 0.989\u00b0, return overshoot 0.066\u00b0; encoder position stable \u2014 MIT remains enabled"
+  },
+  {
+    "event": "physical_button_strike_completed",
+    "at": 164590.565647723,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "number": 3,
+    "peak_drop_deg": 0.9890701970421577,
+    "overshoot_deg": 0.06593801313606243,
+    "ready": true
+  },
+  {
+    "event": "readiness_verification",
+    "at": 164593.569543812,
+    "phase": "HARDWARE TEST READY FOR MANUAL STRIKE",
+    "checks": 1598,
+    "disabled_checks": 2,
+    "unready_checks": 1,
+    "completed": 3,
+    "errors": [
+      "Readiness/button dropped during stationary observation"
+    ]
+  },
+  {
+    "event": "phase",
+    "at": 164593.733920587,
+    "phase": "HARDWARE TEST LEAVING MIT SESSION",
+    "status": "Leaving MIT hold; confirming position mode before centering"
+  },
+  {
+    "event": "phase",
+    "at": 164593.899249328,
+    "phase": "CENTER RELAX RECENTERING",
+    "status": "CENTER RELAX RECENTERING"
+  },
+  {
+    "event": "phase",
+    "at": 164599.049016038,
+    "phase": "RELAXING",
+    "status": "Center + Relax complete; centered; right motors disabled \u2014 confirming disabled feedback"
+  },
+  {
+    "event": "phase",
+    "at": 164599.086140071,
+    "phase": "RELAXED",
+    "status": "Right motors disabled"
+  },
+  {
+    "event": "VALIDATION_FAILED",
+    "at": 164599.087081236,
+    "phase": "RELAXED",
+    "detail": "record3, steady enabled button, three actual 1-degree button presses, centered and relaxed",
+    "states": {
+      "('left', 1)": 0,
+      "('left', 2)": 0,
+      "('left', 3)": 0,
+      "('left', 4)": 0,
+      "('left', 5)": 0,
+      "('left', 6)": 0,
+      "('left', 7)": 0,
+      "('left', 8)": 0,
+      "('right', 1)": 0,
+      "('right', 2)": 0,
+      "('right', 3)": 0,
+      "('right', 4)": 0,
+      "('right', 5)": 0,
+      "('right', 6)": 0,
+      "('right', 7)": 0,
+      "('right', 8)": 0
+    }
+  }
+]

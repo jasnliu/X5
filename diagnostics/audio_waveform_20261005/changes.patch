@@ -1,0 +1,769 @@
+--- before/README.md
++++ after/README.md
+@@ -565,6 +565,24 @@
+ Real missing-feedback/controller faults remain latched; their timeouts are not
+ weakened. The UI layout and RUN workflow are otherwise unchanged.
+ 
++### Visual-only TONOR sound timeline
++
++`start_beat.sh` also opens a separate sound-debug window whenever the live
++detectors run (not in microphone-free `--test`). It shows a **fixed 10-second
++rolling waveform**, not an ever-growing recording. **Red** vertical lines label
++ride cymbal detections; **blue** dashed lines label hi-hat detections. Both use
++the ST7 event's original ADC-monotonic onset time. A delayed detection therefore
++appears over the earlier sound, then scrolls left with that waveform; it is not
++placed at notification time. Overlapping ride/hi-hat labels occupy separate rows.
++
++The viewer has its own read-only TONOR capture stream and uses the same
++ADC-to-monotonic mapping as ST7. It consumes nonblocking, one-way copies of
++existing detector events, without changing model output, calibration, offsets,
++ride timing, or motor control. Visual gain is display-only. Audio gaps are not
++stitched together; only a bounded in-memory history is retained, and **no audio
++files are saved**. Closing or losing this window leaves the beat program and
++both detectors running normally. Exiting the beat program closes it too.
++
+ ### Background hi-hat synchronization (no ride offset)
+ 
+ Only `--hardware` has the new servo. `--test`, `--hardwaretest`, data collectors,
+--- before/camera_playback/audio_bridge.py
++++ after/camera_playback/audio_bridge.py
+@@ -14,6 +14,7 @@
+ import time
+ 
+ from .audio import AudioSender
++from .audio_visual import MirroredAudioSender
+ 
+ 
+ DEFAULT_TONOR_SOURCE = (
+@@ -137,10 +138,12 @@
+     parser.add_argument("--source", default=DEFAULT_TONOR_SOURCE)
+     parser.add_argument("--device", default=DEFAULT_AUDIO_DEVICE)
+     parser.add_argument("--instrument", choices=tuple(MODEL_VERSIONS), default="ride")
++    parser.add_argument('--visual-socket', help='optional one-way event copy for the waveform window')
+     args = parser.parse_args()
+ 
+     version = MODEL_VERSIONS[args.instrument]
+-    sender = AudioSender(args.socket, instrument=args.instrument)
++    sender = (MirroredAudioSender(args.socket, instrument=args.instrument, visual_path=args.visual_socket)
++              if args.visual_socket else AudioSender(args.socket, instrument=args.instrument))
+     child = None
+     selector = None
+     stopping = False
+--- before/launch_right_camera_playback.py
++++ after/launch_right_camera_playback.py
+@@ -147,6 +147,8 @@
+ socket_path = Path(f"/tmp/x5-right-camera-playback-{os.getpid()}.sock")
+ audio_socket_path = Path(f"/tmp/x5-right-camera-audio-{os.getpid()}.sock")
+ hihat_audio_socket_path = Path(f"/tmp/x5-right-hihat-audio-{os.getpid()}.sock")
++waveform_ride_socket = Path(f'/tmp/x5-wave-ride-{os.getpid()}.sock')
++waveform_hihat_socket = Path(f'/tmp/x5-wave-hihat-{os.getpid()}.sock')
+ 
+ app_command = [
+     "/usr/bin/python3", "-m", "camera_playback.app",
+@@ -194,12 +196,19 @@
+     "--root", str(ST7),
+     "--source", args.audio_source,
+     "--device", args.audio_device,
++    '--visual-socket', str(waveform_ride_socket),
+ ]
+ hihat_audio_command = [
+     "/usr/bin/python3", "-m", "camera_playback.audio_bridge",
+     "--socket", str(hihat_audio_socket_path),
+     "--root", str(ST7), "--instrument", "hihat",
+     "--source", args.audio_source, "--device", args.audio_device,
++    '--visual-socket', str(waveform_hihat_socket),
++]
++waveform_command = [
++    str(ST7 / '.venv/bin/python'), '-m', 'camera_playback.audio_waveform',
++    '--ride-socket', str(waveform_ride_socket), '--hihat-socket', str(waveform_hihat_socket),
++    '--source', args.audio_source, '--device', args.audio_device,
+ ]
+ 
+ camera_env = os.environ.copy()
+@@ -208,12 +217,18 @@
+ audio_env = os.environ.copy()
+ audio_env.pop("PYTHONPATH", None)
+ audio_env.pop("LD_LIBRARY_PATH", None)
++waveform_env = audio_env.copy()
++for key in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'):
++    waveform_env[key] = '1'
+ 
+ app = ExecuteProcess(cmd=app_command, cwd=str(ROOT), output="screen",
+                      sigterm_timeout='45', sigkill_timeout='45')
+ camera = ExecuteProcess(cmd=camera_command, cwd=str(Y2), env=camera_env, output="screen")
+ audio = ExecuteProcess(cmd=audio_command, cwd=str(ROOT), env=audio_env, output="screen")
+ hihat_audio = ExecuteProcess(cmd=hihat_audio_command, cwd=str(ROOT), env=audio_env, output="screen")
++# This optional process has no support-fault/Shutdown handler: closing or losing
++# the graph must never stop calibration, either detector, or the physical beat.
++waveform = ExecuteProcess(cmd=waveform_command, cwd=str(ROOT), env=waveform_env, output='screen')
+ rsp = Node(
+     package="robot_state_publisher", executable="robot_state_publisher",
+     parameters=[{"robot_description": (ROOT / "model/openarmx.urdf").read_text()}],
+@@ -224,7 +239,7 @@
+ )
+ processes = [rsp, rviz, app]
+ if perception_enabled:
+-    processes.extend([camera, audio, hihat_audio])
++    processes.extend([camera, audio, hihat_audio, waveform])
+ description = LaunchDescription(processes)
+ watched_processes = [
+     (rsp, "Robot-state publisher exited"),
+--- /dev/null
++++ after/camera_playback/audio_visual.py
+@@ -0,0 +1,44 @@
++"""One-way, nonblocking event copies for an optional visual-only process."""
++import json
++import socket
++
++from .audio import AudioSender, AUDIO_PROTOCOL_VERSION
++
++
++class MirroredAudioSender(AudioSender):
++    """Deliver control first, then a best-effort copy. Never wait for a viewer.
++
++    Missing, closed or overloaded visual sockets cannot affect the original
++    detector/control protocol. The viewer has no path to send motor commands.
++    """
++    def __init__(self, path, instrument='ride', visual_path=None):
++        super().__init__(path, instrument)
++        self.visual_path = str(visual_path) if visual_path is not None else None
++        self.visual_socket = None
++        if self.visual_path is not None:
++            try:
++                self.visual_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
++                self.visual_socket.setblocking(False)
++            except OSError:
++                if self.visual_socket is not None:
++                    self.visual_socket.close()
++                self.visual_socket = None
++
++    def send(self, message):
++        super().send(message)  # Preserve original validation/delivery semantics.
++        if self.visual_socket is not None and message.get('kind') in {'hit', 'status'}:
++            try:
++                payload = json.dumps({'version': AUDIO_PROTOCOL_VERSION, **message,
++                                      'instrument': self.instrument},
++                                     separators=(',', ':'), allow_nan=False).encode()
++                self.visual_socket.sendto(payload, self.visual_path)
++            except (OSError, TypeError, ValueError):
++                pass  # Drawing is never a reason to fault calibration or motion.
++
++    def close(self):
++        try:
++            super().close()
++        finally:
++            if self.visual_socket is not None:
++                self.visual_socket.close()
++                self.visual_socket = None
+--- /dev/null
++++ after/camera_playback/audio_waveform.py
+@@ -0,0 +1,194 @@
++"""Optional TONOR debug window in its own process; never imports arm controls.
++
++The independent capture stream uses the same ADC-monotonic clock convention
++as ST7. Detector messages are read-only copies, never inputs to calibration.
++No audio is saved. Closing/failing this process cannot stop the beat program.
++"""
++import argparse
++import json
++import os
++import queue
++import signal
++import subprocess
++import time
++import tkinter as tk
++
++import numpy as np
++
++from .audio import AudioReceiver
++from .audio_bridge import (DEFAULT_TONOR_SOURCE, DEFAULT_AUDIO_DEVICE,
++                           capture_sources, choose_tonor_source)
++from .waveform import WaveformTimeline, WaveformWindow, capture_start, HISTORY_SECONDS
++
++
++class MicrophoneCapture:
++    def __init__(self, device=DEFAULT_AUDIO_DEVICE):
++        self.device = int(device) if str(device).isdecimal() else device
++        self.blocks = queue.Queue(maxsize=100)
++        self.stream = None
++        self.dropped_blocks = 0
++        self.error = None
++        self.captured_frames = 0
++
++    def callback(self, data, frames, timing, status):
++        try:
++            if status:
++                raise ValueError('Microphone capture gap: ' + str(status))
++            started = capture_start(time.monotonic(), timing.currentTime,
++                                    timing.inputBufferAdcTime)
++            item = (started, np.array(data[:, 0], dtype=np.float32, copy=True))
++            # Prefer current audio if drawing fell behind. Absolute ADC times
++            # expose the missing interval rather than compressing the timeline.
++            if self.blocks.full():
++                try:
++                    self.blocks.get_nowait()
++                    self.dropped_blocks += 1
++                except queue.Empty:
++                    pass
++            self.blocks.put_nowait(item)
++            self.captured_frames += frames
++        except (ValueError, queue.Full) as exc:
++            self.error = str(exc)
++            self.dropped_blocks += 1
++
++    def start(self):
++        # Delay PortAudio import until PULSE_SOURCE is set for this process.
++        import sounddevice as sd
++        self.stream = sd.InputStream(device=self.device, samplerate=16000,
++                                     channels=1, dtype='float32', blocksize=320,
++                                     callback=self.callback)
++        self.stream.start()
++
++    def poll(self):
++        blocks = []
++        for _ in range(100):
++            try:
++                blocks.append(self.blocks.get_nowait())
++            except queue.Empty:
++                break
++        return blocks
++
++    def close(self):
++        if self.stream is not None:
++            self.stream.close()
++            self.stream = None
++
++
++class WaveformApp:
++    def __init__(self, root, ride_socket, hihat_socket, *, device=DEFAULT_AUDIO_DEVICE,
++                 history=HISTORY_SECONDS):
++        self.root = root
++        self.timeline = WaveformTimeline(history)
++        self.window = WaveformWindow(root, self.timeline)
++        self.receivers = {}
++        self.errors = []
++        for instrument, path in (('ride', ride_socket), ('hihat', hihat_socket)):
++            try:
++                self.receivers[instrument] = AudioReceiver(path, instrument=instrument)
++            except Exception as exc:
++                self.errors.append(f'{instrument} markers unavailable: {exc}')
++        self.capture = MicrophoneCapture(device)
++        self.stopping = self.closed = False
++        self.after_id = None
++        root.protocol('WM_DELETE_WINDOW', self.request_close)
++
++    def request_close(self, *_):
++        self.stopping = True
++
++    def start(self):
++        try:
++            self.capture.start()
++        except Exception as exc:
++            self.errors.append('TONOR capture unavailable: ' + str(exc))
++        self.tick()
++
++    def tick(self):
++        if self.closed:
++            return
++        if self.stopping:
++            self.root.quit()
++            return
++        for started, samples in self.capture.poll():
++            self.timeline.add_audio(started, samples)
++        # Poll both streams before rendering; delayed events are inserted at
++        # event_at, never notification time or the graph's right edge.
++        for receiver in self.receivers.values():
++            for message in receiver.poll():
++                self.timeline.add_hit(message, time.monotonic())
++        now = time.monotonic()
++        details = []
++        if self.errors:
++            details.append('; '.join(self.errors))
++        if self.timeline.latest_sample is None:
++            details.append('Waiting for TONOR audio')
++        elif now-self.timeline.latest_sample > .5:
++            details.append('TONOR audio stale — capture gap')
++        else:
++            details.append('TONOR live')
++        for instrument, receiver in self.receivers.items():
++            state = 'ready' if receiver.ready(now) else receiver.state
++            if state == 'ready' and not receiver.ready(now):
++                state = 'stale'
++            details.append(f'{instrument}: {state}')
++        if self.capture.dropped_blocks:
++            details.append(f'visual capture gaps: {self.capture.dropped_blocks}')
++        self.window.render(now, ' · '.join(details))
++        self.after_id = self.root.after(50, self.tick)
++
++    def close(self):
++        if self.closed:
++            return
++        self.closed = True
++        if self.after_id is not None:
++            try:
++                self.root.after_cancel(self.after_id)
++            except tk.TclError:
++                pass
++        try:
++            self.capture.close()
++        finally:
++            for receiver in self.receivers.values():
++                receiver.close()
++
++
++def configure_capture_source(preferred):
++    # No set-default-source command: do not change routing for other programs.
++    result = subprocess.run(['pactl', 'list', 'short', 'sources'], check=True,
++                            capture_output=True, text=True)
++    source = choose_tonor_source(capture_sources(result.stdout), preferred)
++    os.environ['PULSE_SOURCE'] = source
++    os.environ['PIPEWIRE_PROPS'] = json.dumps(
++        {'application.name': 'X5-audio-waveform', 'target.object': source})
++    return source
++
++
++def main():
++    p = argparse.ArgumentParser(description='Visual-only rolling TONOR waveform with ST7 onset markers')
++    p.add_argument('--ride-socket', required=True)
++    p.add_argument('--hihat-socket', required=True)
++    p.add_argument('--source', default=DEFAULT_TONOR_SOURCE)
++    p.add_argument('--device', default=DEFAULT_AUDIO_DEVICE)
++    p.add_argument('--history-seconds', type=float, default=HISTORY_SECONDS)
++    args = p.parse_args()
++    root = tk.Tk()
++    app = WaveformApp(root, args.ride_socket, args.hihat_socket,
++                      device=args.device, history=args.history_seconds)
++    signal.signal(signal.SIGINT, app.request_close)
++    signal.signal(signal.SIGTERM, app.request_close)
++    try:
++        try:
++            source = configure_capture_source(args.source)
++            print('WAVEFORM: visual-only TONOR capture on ' + source, flush=True)
++            app.start()
++        except Exception as exc:
++            # Keep an informative window without selecting a different mic.
++            app.errors.append(str(exc))
++            app.tick()
++        root.mainloop()
++    finally:
++        app.close()
++        root.destroy()
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ after/camera_playback/waveform.py
+@@ -0,0 +1,178 @@
++"""Bounded capture-time waveform and onset markers, with no motor dependencies."""
++from collections import deque
++from dataclasses import dataclass
++import math
++import tkinter as tk
++
++import numpy as np
++
++
++HISTORY_SECONDS = 10.
++COLORS = {'ride': '#dc2626', 'hihat': '#2563eb'}
++LABELS = {'ride': 'Ride cymbal', 'hihat': 'Hi-hat'}
++MAX_MARKERS = 256
++
++
++def capture_start(callback_monotonic, current_time, adc_time):
++    """Same ADC-to-monotonic mapping used by ST7, not callback/receipt time."""
++    values = (callback_monotonic, current_time, adc_time)
++    if not all(math.isfinite(float(v)) for v in values):
++        raise ValueError('Invalid microphone clock')
++    age = current_time - adc_time
++    if current_time <= 0 or adc_time <= 0 or not -.01 <= age <= 1.:
++        raise ValueError('Microphone did not supply a valid ADC capture clock')
++    return callback_monotonic - age
++
++
++@dataclass(frozen=True)
++class Marker:
++    instrument: str
++    event_at: float
++    detected_at: float
++
++
++class WaveformTimeline:
++    def __init__(self, history=HISTORY_SECONDS):
++        if not math.isfinite(history) or not 2 <= history <= 30:
++            raise ValueError('Waveform history must be 2 through 30 seconds')
++        self.history = float(history)
++        # Each capture block is 20 ms; the extra second accommodates jitter.
++        self.blocks = deque(maxlen=math.ceil((history+1)/.02))
++        self.markers = deque(maxlen=MAX_MARKERS)
++        self.latest_sample = None
++        self.counts = dict(ride=0, hihat=0)
++        self.delays = dict(ride=None, hihat=None)
++
++    def add_audio(self, started_at, samples, sample_rate=16000):
++        samples = np.asarray(samples, dtype=np.float32).reshape(-1)
++        if (not math.isfinite(started_at) or sample_rate <= 0
++                or len(samples) == 0 or not np.isfinite(samples).all()):
++            raise ValueError('Invalid waveform capture block')
++        # Retain a 1 ms min/max envelope, not every raw sample. This preserves
++        # transient peaks while bounding both memory and redraw work.
++        stride = max(1, int(sample_rate/1000))
++        indices = np.arange(0, len(samples), stride)
++        low, high = np.minimum.reduceat(samples, indices), np.maximum.reduceat(samples, indices)
++        times = started_at + (indices + np.minimum(stride, len(samples)-indices)/2)/sample_rate
++        self.blocks.append((times, low, high))
++        self.latest_sample = started_at + len(samples)/sample_rate
++
++    def add_hit(self, message, now):
++        instrument = message.get('instrument')
++        event, detected = message.get('event_at'), message.get('detected_at')
++        if (message.get('kind') != 'hit' or instrument not in COLORS
++                or not all(isinstance(v, (int, float)) and not isinstance(v, bool)
++                           and math.isfinite(v) for v in (event, detected))
++                or event > detected + .05 or detected > now + .05
++                or event < now-self.history):
++            return False
++        marker = Marker(instrument, float(event), float(detected))
++        if any(m.instrument == instrument and m.event_at == event for m in self.markers):
++            return False
++        self.markers.append(marker)
++        self.counts[instrument] += 1
++        self.delays[instrument] = max(0., detected-event)
++        return True
++
++    def prune(self, now):
++        cutoff = now-self.history
++        while self.blocks and self.blocks[0][0][-1] < cutoff:
++            self.blocks.popleft()
++        # Different detector delays mean arrival order is not onset order.
++        self.markers = deque((m for m in self.markers if m.event_at >= cutoff),
++                             maxlen=MAX_MARKERS)
++
++    def fraction(self, timestamp, now):
++        return (timestamp-(now-self.history))/self.history
++
++    def envelope(self, now, width):
++        """Per-screen-column peaks; missing columns remain gaps, not silence."""
++        self.prune(now)
++        low = np.full(width, np.inf)
++        high = np.full(width, -np.inf)
++        for times, minimum, maximum in self.blocks:
++            columns = np.floor((times-(now-self.history))*width/self.history).astype(int)
++            mask = (columns >= 0) & (columns < width)
++            np.minimum.at(low, columns[mask], minimum[mask])
++            np.maximum.at(high, columns[mask], maximum[mask])
++        return low, high
++
++
++class WaveformWindow:
++    """Separate visual window. Its close button never stops the beat program."""
++    def __init__(self, root, timeline):
++        self.root, self.timeline = root, timeline
++        root.title('TONOR — live sound timeline (visual only)')
++        root.geometry('1120x500')
++        root.minsize(700, 360)
++        root.configure(bg='#f8fafc')
++        tk.Label(root, text=f'TONOR MICROPHONE  ·  LAST {timeline.history:g} SECONDS',
++                 bg='#f8fafc', fg='#0f172a', font=('Sans', 13, 'bold'),
++                 anchor='w', padx=18, pady=10).pack(fill='x')
++        legend = tk.Frame(root, bg='#f8fafc')
++        legend.pack(fill='x', padx=18)
++        for instrument in ('ride', 'hihat'):
++            tk.Label(legend, text='│ '+LABELS[instrument], fg=COLORS[instrument],
++                     bg='#f8fafc', font=('Sans', 11, 'bold')).pack(side='left', padx=(0, 24))
++        tk.Label(legend, text='Markers arrive after detection, at the original sound time.',
++                 bg='#f8fafc', fg='#475569', font=('Sans', 10)).pack(side='left')
++        self.canvas = tk.Canvas(root, bg='white', highlightthickness=1,
++                                highlightbackground='#cbd5e1')
++        self.canvas.pack(fill='both', expand=True, padx=18, pady=(12, 8))
++        self.status = tk.StringVar(value='Starting TONOR capture…  |  Visual only; no audio saved')
++        tk.Label(root, textvariable=self.status, bg='#f8fafc', fg='#475569',
++                 font=('Sans', 10), anchor='w', padx=18, pady=8).pack(fill='x')
++        self.drawn_markers = []  # Read-only inspection aid for UI regression tests.
++
++    def render(self, now, detail=''):
++        c, timeline = self.canvas, self.timeline
++        w, h = max(100, c.winfo_width()), max(100, c.winfo_height())
++        left, right, top, bottom = 62., w-20., 94., h-35.
++        width = max(1, int(right-left))
++        low, high = timeline.envelope(now, width)
++        valid = np.isfinite(low)
++        peak = max(float(np.max(np.abs(low[valid]), initial=0)),
++                   float(np.max(np.abs(high[valid]), initial=0)))
++        scale = max(.005, peak*1.1)  # Visual gain only; never an audio threshold.
++        middle, gain = (top+bottom)/2, (bottom-top)/2/scale
++        c.delete('all')
++        for part in range(6):
++            x = left + (right-left)*part/5
++            c.create_line(x, top, x, bottom, fill='#e2e8f0')
++            label = 'now' if part == 5 else f'−{timeline.history*(1-part/5):g}s'
++            c.create_text(x, bottom+18, text=label, fill='#64748b', font=('Sans', 9))
++        for value in (-scale, 0., scale):
++            y = middle-value*gain
++            c.create_line(left, y, right, y, fill='#cbd5e1' if value == 0 else '#edf2f7')
++            c.create_text(left-7, y, text=f'{value:+.3f}', anchor='e', fill='#64748b', font=('Sans', 8))
++        # Separate contiguous runs so a dropped audio block never gets joined
++        # to the next block as if it were a continuous waveform.
++        columns = np.flatnonzero(valid)
++        for group in np.split(columns, np.flatnonzero(np.diff(columns) > 1)+1):
++            if not len(group):
++                continue
++            coordinates = np.column_stack((left+group, middle-low[group]*gain,
++                                            left+group, middle-high[group]*gain)).ravel().tolist()
++            c.create_line(*coordinates, fill='#334155', width=1, tags='waveform')
++        self.drawn_markers = []
++        # Draw blue dashed over red if onsets coincide; both remain visible.
++        for instrument in ('ride', 'hihat'):
++            for m in timeline.markers:
++                if m.instrument != instrument:
++                    continue
++                fraction = timeline.fraction(m.event_at, now)
++                if not 0 <= fraction <= 1:
++                    continue
++                x = left + fraction*(right-left)
++                color, row = COLORS[instrument], (22 if instrument == 'ride' else 66)
++                c.create_line(x, top-5, x, bottom, fill=color, width=2,
++                              dash=() if instrument == 'ride' else (5, 3), tags=instrument)
++                # Compact vertical labels stay readable at 200 ms swung-hit
++                # spacing; full horizontal names remain in the fixed legend.
++                c.create_text(x, row, text='Ride' if instrument == 'ride' else 'Hi-hat',
++                              fill=color, angle=90, font=('Sans', 9, 'bold'), tags=instrument)
++                self.drawn_markers.append(dict(instrument=instrument, event_at=m.event_at,
++                                               detected_at=m.detected_at, x=x, color=color))
++        delays = '  ·  '.join(f'{LABELS[k]} delay {timeline.delays[k]:.2f}s'
++                             for k in COLORS if timeline.delays[k] is not None)
++        self.status.set('  |  '.join(s for s in (detail, delays, 'Visual only · no audio saved') if s))
+--- /dev/null
++++ after/tests/test_audio_waveform.py
+@@ -0,0 +1,231 @@
++"""Visual-only waveform bounds, timing, event fan-out and launch isolation."""
++import ast
++import json
++from pathlib import Path
++import runpy
++import socket
++import sys
++import tempfile
++import time
++from types import ModuleType, SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++
++import numpy as np
++
++from camera_playback.audio import AudioReceiver
++from camera_playback.audio_bridge import forward_audio_message
++from camera_playback.audio_visual import MirroredAudioSender
++from camera_playback.audio_waveform import MicrophoneCapture, configure_capture_source
++from camera_playback.waveform import WaveformTimeline, capture_start, COLORS, MAX_MARKERS
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++def hit(instrument='ride', onset=100., delivered=100.8):
++    return dict(kind='hit', instrument=instrument, event_at=onset, detected_at=delivered,
++                score=.95, normality_score=80.)
++
++
++class TimelineTests(unittest.TestCase):
++    def test_late_marker_uses_original_onset_and_scrolls_with_audio(self):
++        t=WaveformTimeline(10.)
++        self.assertTrue(t.add_hit(hit(),100.85))
++        m=t.markers[0]
++        self.assertEqual(m.event_at,100.)
++        self.assertAlmostEqual(t.fraction(m.event_at,100.85),.915)
++        self.assertAlmostEqual(t.fraction(m.event_at,101.85),.815)
++        self.assertAlmostEqual(t.delays['ride'],.8)
++
++    def test_same_onset_keeps_both_instruments_and_correct_colors(self):
++        t=WaveformTimeline()
++        t.add_hit(hit(),101.)
++        t.add_hit(hit('hihat',delivered=100.6),101.)
++        self.assertEqual(len(t.markers),2)
++        self.assertEqual(COLORS,dict(ride='#dc2626',hihat='#2563eb'))
++        self.assertFalse(t.add_hit(hit(),101.))
++
++    def test_out_of_order_delayed_hits_prune_by_onset_not_receipt_order(self):
++        t=WaveformTimeline()
++        t.add_hit(hit(onset=105.,delivered=105.2),106.)
++        t.add_hit(hit('hihat',onset=100.,delivered=105.8),106.)
++        t.prune(111.)
++        self.assertEqual([m.event_at for m in t.markers],[105.])
++
++    def test_invalid_future_and_expired_markers_are_not_drawn_at_now(self):
++        t=WaveformTimeline()
++        for msg in (hit(onset=80.), hit(onset=float('nan')), hit(onset=110.),
++                    hit(delivered=110.),hit('other'),hit(onset=True)):
++            self.assertFalse(t.add_hit(msg,101.),msg)
++
++    def test_waveform_and_markers_have_hard_memory_bounds(self):
++        t=WaveformTimeline()
++        for i in range(5000):
++            t.add_audio(i*.02,np.zeros(320))
++        self.assertLessEqual(len(t.blocks),550)
++        for i in range(1000):
++            t.add_hit(hit(onset=100.+i*.001,delivered=101.1),102.)
++        self.assertEqual(len(t.markers),MAX_MARKERS)
++        t.prune(120.)
++        self.assertEqual(len(t.blocks),0)
++        self.assertEqual(len(t.markers),0)
++
++    def test_min_max_envelope_preserves_single_sample_transients(self):
++        t=WaveformTimeline()
++        samples=np.zeros(320,dtype=np.float32);samples[17]=.9;samples[18]=-.8
++        t.add_audio(100.,samples)
++        low,high=t.envelope(101.,1000)
++        self.assertAlmostEqual(np.max(high),.9,places=6)
++        self.assertAlmostEqual(np.min(low),-.8,places=6)
++        self.assertTrue(np.isinf(high[0]))  # Uncaptured time is not drawn as silence.
++
++    def test_absolute_capture_gaps_are_not_compressed(self):
++        t=WaveformTimeline()
++        t.add_audio(100.,np.ones(320))
++        t.add_audio(102.,np.ones(320))
++        low,_=t.envelope(103.,1000)
++        self.assertTrue(np.isfinite(low[700:703]).any())
++        self.assertTrue(np.isinf(low[750:850]).all())
++        self.assertTrue(np.isfinite(low[900:903]).any())
++
++    def test_adc_mapping_matches_st7_including_callback_delay(self):
++        source=ROOT.parent/'st7/cymbal_detector/audio_clock.py'
++        namespace=runpy.run_path(str(source))
++        for values in ((100.3,40.1,40.),(500.,300.,299.91)):
++            self.assertEqual(capture_start(*values),namespace['block_start_monotonic'](*values))
++        self.assertAlmostEqual(capture_start(100.3,40.1,40.),100.2)
++        for values in ((1.,0.,0.),(float('nan'),1.,1.),(5.,10.,8.)):
++            with self.assertRaises(ValueError):capture_start(*values)
++
++
++class CopyTests(unittest.TestCase):
++    def pair(self,tmp,instrument='ride'):
++        control=AudioReceiver(Path(tmp)/'control',instrument)
++        visual=AudioReceiver(Path(tmp)/'visual',instrument)
++        sender=MirroredAudioSender(control.path,instrument,visual.path)
++        for obj in (control,visual,sender):self.addCleanup(obj.close)
++        return control,visual,sender
++
++    def test_original_control_payload_and_visual_hit_are_identical(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            control,visual,sender=self.pair(tmp)
++            forward_audio_message(dict(event='HIT',event_monotonic=100.,score=.95,normality_score=80.),sender,100.8)
++            a,b=control.poll(),visual.poll()
++            self.assertEqual(a,b)
++            self.assertEqual(a[0]['event_at'],100.)
++            self.assertEqual(a[0]['detected_at'],100.8)
++            now=time.monotonic()
++            sender.status('ready','original');sender.progress(now-.5,now)
++            self.assertEqual([r['kind'] for r in control.poll()],['status','progress'])
++            self.assertEqual([r['kind'] for r in visual.poll()],['status'])
++            # Cleanup before TemporaryDirectory removes socket names.
++            control.close();visual.close();sender.close()
++
++    def test_closed_missing_or_failed_viewer_never_changes_control_delivery(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            control,visual,sender=self.pair(tmp)
++            visual.close()
++            sender.hit(100.,100.8,.95,80.)
++            self.assertEqual(len(control.poll()),1)
++            real=sender.visual_socket
++            for error in (BlockingIOError(),ConnectionRefusedError(),OSError('broken visual socket')):
++                sender.visual_socket=Mock();sender.visual_socket.sendto.side_effect=error
++                sender.hit(100.,100.8,.95,80.)
++                self.assertEqual(len(control.poll()),1)
++            sender.visual_socket=real
++            control.close();sender.close()
++
++    def test_unread_visual_queue_drops_copies_without_blocking_control(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            control,visual,sender=self.pair(tmp)
++            sender.visual_socket.setsockopt(socket.SOL_SOCKET,socket.SO_SNDBUF,2048)
++            start=time.monotonic()
++            for _ in range(100):
++                sender.hit(100.,100.8,.95,80.)
++                self.assertEqual(len(control.poll()),1)
++            self.assertLess(time.monotonic()-start,1.)
++            self.assertLess(len(visual.poll()),100)
++            control.close();visual.close();sender.close()
++
++    def test_hihat_copy_cannot_enter_ride_receiver(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            control,visual,sender=self.pair(tmp,'hihat')
++            sender.hit(100.,100.7,.95,80.)
++            self.assertEqual(visual.poll()[0]['instrument'],'hihat')
++            self.assertEqual(control.poll()[0]['instrument'],'hihat')
++            control.close();visual.close();sender.close()
++
++
++class CaptureTests(unittest.TestCase):
++    def test_capture_queue_bounded_and_keeps_adc_times_after_drop(self):
++        c=MicrophoneCapture()
++        for i in range(150):
++            with patch('camera_playback.audio_waveform.time.monotonic',return_value=100.+i*.02):
++                c.callback(np.ones((320,1)),320,SimpleNamespace(currentTime=20.,inputBufferAdcTime=19.9),False)
++        blocks=c.poll()
++        self.assertEqual(len(blocks),100)
++        self.assertEqual(c.dropped_blocks,50)
++        self.assertAlmostEqual(blocks[-1][0],102.88)
++
++    def test_bad_adc_clock_and_overflow_do_not_invent_audio(self):
++        c=MicrophoneCapture()
++        c.callback(np.ones((320,1)),320,SimpleNamespace(currentTime=0.,inputBufferAdcTime=0.),False)
++        c.callback(np.ones((320,1)),320,SimpleNamespace(currentTime=20.,inputBufferAdcTime=19.9),'overflow')
++        self.assertEqual(c.poll(),[])
++        self.assertEqual(c.dropped_blocks,2)
++
++    def test_capture_routing_is_read_only_and_explicit_not_default_source_change(self):
++        with patch('camera_playback.audio_waveform.subprocess.run',return_value=SimpleNamespace(stdout='1\ttonor-test\tPipeWire\n')) as run, \
++             patch.dict('os.environ',{},clear=True):
++            self.assertEqual(configure_capture_source('tonor-test'),'tonor-test')
++            run.assert_called_once_with(['pactl','list','short','sources'],check=True,capture_output=True,text=True)
++
++
++class LaunchTests(unittest.TestCase):
++    def graph(self,mode):
++        processes=[];handlers=[];actions=[]
++        modules={n:ModuleType(n) for n in ('launch','launch.actions','launch.event_handlers','launch.events','launch_ros','launch_ros.actions')}
++        def process(**kw):
++            p=SimpleNamespace(**kw);processes.append(p);return p
++        def description(items):
++            actions.extend(items);return SimpleNamespace(add_action=actions.append)
++        def handler(**kw):
++            handlers.append(kw);return kw
++        modules['launch'].LaunchDescription=description
++        modules['launch'].LaunchService=Mock(return_value=Mock(run=Mock(return_value=0)))
++        modules['launch.actions'].ExecuteProcess=process
++        modules['launch.actions'].EmitEvent=Mock()
++        modules['launch.actions'].RegisterEventHandler=lambda x:x
++        modules['launch.event_handlers'].OnProcessExit=handler
++        modules['launch.events'].Shutdown=Mock()
++        modules['launch_ros.actions'].Node=lambda **kw:SimpleNamespace(**kw)
++        with patch.dict(sys.modules,modules),patch.object(sys,'argv',['launch',*mode]), \
++             patch('pathlib.Path.is_file',return_value=True),patch('camera_playback.audio_bridge.detector_command'):
++            with self.assertRaises(SystemExit):runpy.run_path(str(ROOT/'launch_right_camera_playback.py'),run_name='__main__')
++        return actions,handlers
++
++    def test_visual_process_is_unwatched_and_copies_use_separate_sockets(self):
++        actions,handlers=self.graph(['--hardware'])
++        viewer=next(x for x in actions if 'camera_playback.audio_waveform' in getattr(x,'cmd',[]))
++        self.assertFalse(any(h['target_action'] is viewer for h in handlers))
++        bridges=[x for x in actions if 'camera_playback.audio_bridge' in getattr(x,'cmd',[])]
++        self.assertEqual(len(bridges),2)
++        for bridge,flag in zip(bridges,('--ride-socket','--hihat-socket')):
++            self.assertEqual(bridge.cmd[bridge.cmd.index('--visual-socket')+1],viewer.cmd[viewer.cmd.index(flag)+1])
++            self.assertNotEqual(bridge.cmd[bridge.cmd.index('--socket')+1],bridge.cmd[bridge.cmd.index('--visual-socket')+1])
++        app=next(x for x in actions if 'camera_playback.app' in getattr(x,'cmd',[]))
++        self.assertNotIn('--visual-socket',app.cmd)
++
++    def test_test_mode_still_has_no_capture_or_waveform_process(self):
++        actions,_=self.graph(['--test'])
++        self.assertFalse(any('camera_playback.audio_waveform' in getattr(x,'cmd',[]) for x in actions))
++
++    def test_viewer_has_no_control_imports_or_audio_file_writer(self):
++        for name in ('audio_waveform.py','waveform.py','audio_visual.py'):
++            tree=ast.parse((ROOT/'camera_playback'/name).read_text())
++            imports=[n.module or '' for n in ast.walk(tree) if isinstance(n,ast.ImportFrom)]
++            self.assertFalse(any(any(word in module for word in ('motors','app','hybrid','hihat','wave','soundfile'))
++                                 for module in imports if module not in ('waveform',)))
++
++
++if __name__=='__main__':unittest.main()

@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "physical": true,
+  "calibration_path": "playback_results/hihat_calibration/20261005T233429-d9cf185e/events.jsonl",
+  "swing_path": "/home/jason/Proyectos3/X5/playback_results/swing_verification/20261005T233429-0b99b0fc",
+  "calibration_angle": 90,
+  "closed_hold_seconds": 2.033775905962102,
+  "open_hold_seconds": 2.0281792719615623,
+  "background": {
+    "physical": true,
+    "calibration_angle": 90,
+    "load_started": 583427.913765863,
+    "loaded_at": 583466.278863399,
+    "load_seconds": 38.36509753600694,
+    "max_gui_gap_during_load": 0.148085359018296,
+    "heartbeats_during_load": 289,
+    "max_heartbeat_gap_during_load": 0.24287853902205825,
+    "status_replies_during_load": 73,
+    "hihat_fault": null,
+    "calibration_fault": null,
+    "final_phase": "RELAXED",
+    "arm_active": false
+  },
+  "ride_detected_degrees": 10,
+  "ride_swing_degrees": 10.5,
+  "swing_seconds": 5.037191116018221,
+  "encoder_strikes": 14,
+  "st7_matched_ride_strikes": 14,
+  "faults": [],
+  "center": {
+    "t": 583509.685613679,
+    "goal_rad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4
+    ],
+    "actual_rad": [
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.0005754177157246687,
+      0.00029659014262470307,
+      0.00019180590524214836,
+      1.399607690547036
+    ],
+    "max_error_deg": 0.07692768199212371,
+    "span_deg": 0.08791735084818501,
+    "settled_s": 0.6148388549918309
+  },
+  "relaxed_verified": true,
+  "disabled_all_16": true,
+  "models_unchanged": true,
+  "method": "Actual launch graph, camera, both ST7 models, arm and hi-hat. Test wrapper defers record3 selection until calibration succeeds and invokes existing bounded --verify-swing RUN/Center+Relax. No synthetic sensor data or altered motion parameters."
+}

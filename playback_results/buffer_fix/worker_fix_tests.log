@@ -1,0 +1,22 @@
+START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "RuntimeError: Recording GUI heartbeat lost"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 393965.704151437, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.600810621981509, "tolerance_deg": 0.05}
+.
+----------------------------------------------------------------------
+Ran 3 tests in 32.804s
+
+OK

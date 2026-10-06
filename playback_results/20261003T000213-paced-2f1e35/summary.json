@@ -1,0 +1,39 @@
+{
+  "backend": "physical",
+  "method": "paced",
+  "trajectory": {
+    "name": "paced",
+    "duration_s": 4.6,
+    "time_scale": 1.0000107610314102,
+    "peak_velocity_rad_s": 0.7004259754794453,
+    "peak_acceleration_rad_s2": 1.2932081638866952,
+    "peak_piecewise_jerk_rad_s3": 35.0920826560716,
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 100,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "gaussian_sigma_s": 0.1,
+    "original_recording_duration_s": 3.841315,
+    "recording_duration_ratio": 1.1975065830321128,
+    "timing_method": "arc-length acceleration-constrained LP, smoothed squared speed, endpoint ramps",
+    "comparison_note": "Timing-restricted 4.6 second path playback; original record3 is 3.841315 seconds",
+    "max_joint_deviation_deg": 1.3095279119163783,
+    "max_tcp_deviation_mm": 3.739411930677155,
+    "exact_first": true,
+    "exact_last": true,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  },
+  "success": false,
+  "error": "ValueError: Joint limit violation",
+  "endpoint": null,
+  "center": null,
+  "relaxed_verified": false,
+  "camera_error": null,
+  "video_frames": 0,
+  "gripper": "closed",
+  "source_sha256_after": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+}

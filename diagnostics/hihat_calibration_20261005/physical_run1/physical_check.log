@@ -1,0 +1,14 @@
+HIHAT CALIBRATION: {"kind": "notification_delivered", "at": 577974.029571856, "warning_seconds": 10.0}
+HIHAT CALIBRATION: {"kind": "open", "at": 577984.037660024, "phase": "INITIAL OPENING", "angle": null}
+HIHAT CALIBRATION: {"kind": "opened", "at": 577984.119175034, "phase": "INITIAL OPEN", "angle": null, "open_seconds": 2.0, "pos": 0}
+HIHAT CALIBRATION: {"kind": "configure", "at": 577986.126776179, "phase": "CONFIGURING", "angle": 90}
+HIHAT CALIBRATION: {"kind": "close", "at": 577986.137533907, "phase": "CLOSING", "angle": 90, "target_counts": 134}
+HIHAT CALIBRATION: {"kind": "closed", "at": 577986.669908185, "phase": "HOLDING CLOSED", "angle": 90, "hold_seconds": 2.0, "pos": 132}
+HIHAT CALIBRATION: {"kind": "hit", "at": 577987.047413844, "phase": "HOLDING CLOSED", "angle": 90, "onset": 577986.177159924, "detected_at": 577987.044295198}
+HIHAT CALIBRATION: {"kind": "open", "at": 577988.670047225, "phase": "OPENING", "angle": 90}
+HIHAT CALIBRATION: {"kind": "fault", "at": 577991.179447963, "phase": "OPENING", "angle": 90, "detail": "Hi-hat failed to return to open zero"}
+HIHAT CALIBRATION: {"kind": "open", "at": 577991.179447963, "phase": "FAULT OPENING", "angle": 90}
+HI-HAT CALIBRATION FAULT: Hi-hat failed to return to open zero
+HI-HAT CALIBRATION FAULT: Hi-hat failed to return to open zero
+HIHAT CALIBRATION: {"kind": "return_failed", "at": 577993.681635121, "phase": "FAULT", "angle": 90, "detail": "Hi-hat failed to return to open zero"}
+PHYSICAL RESULT: {"success": false, "physical": true, "selected_angle": null, "hit": {"version": 2, "kind": "hit", "event_at": 577986.177159924, "detected_at": 577987.044295198, "score": 0.99917, "normality_score": 85.8, "instrument": "hihat"}, "phase": "FAULT", "failure": "Hi-hat failed to return to open zero", "open_verified": false, "stop_ack": true, "arm_access": false, "synthetic_events": false, "detector_models": ["v2", "hihat_v1"], "errors": ["Hi-hat failed to return to open zero"], "elapsed": 24.164693625993095}

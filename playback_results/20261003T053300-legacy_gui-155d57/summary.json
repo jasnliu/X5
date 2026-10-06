@@ -1,0 +1,83 @@
+{
+  "backend": "physical",
+  "method": "legacy_gui",
+  "trajectory": {
+    "name": "legacy_gui",
+    "duration_s": 7.095750340668312,
+    "time_scale": 1.8472190748918826,
+    "peak_velocity_rad_s": 0.72,
+    "peak_acceleration_rad_s2": 18.412661475257476,
+    "peak_piecewise_jerk_rad_s3": 652.9941798704654,
+    "acceleration_continuous_into_hold": false,
+    "command_hz": null,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": null,
+    "captured_command_count": 220,
+    "captured_median_interval_s": 0.03224849997786805,
+    "captured_max_interval_s": 0.04877848899923265,
+    "timing_capture_sha256": "5defd5b388ab9a6dff48fd41c9776761b8b5930361b25d20bd6d712d7359bf6f",
+    "comparison_note": "Physical replay of unchanged GUI command timing captured in simulation; not live camera/audio workload",
+    "max_joint_deviation_deg": 0.49425452374896733,
+    "max_tcp_deviation_mm": 1.180586363160203,
+    "exact_first": true,
+    "exact_last": true,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  },
+  "success": true,
+  "error": null,
+  "endpoint": {
+    "t": 345755.687102222,
+    "goal_rad": [
+      -0.6055312428473343,
+      0.21194552529182964,
+      0.24416891737239688,
+      1.7329663538567175,
+      0.20476168513003543,
+      -0.30516319523918334,
+      0.6001606775005737
+    ],
+    "actual_rad": [
+      -0.6051476310368518,
+      0.21232913710231216,
+      0.2445525291828794,
+      1.7333499656672,
+      0.20476168513003543,
+      -0.3047795834287008,
+      0.6001606775005737
+    ],
+    "max_error_deg": 0.02197933771202081,
+    "settle_range_deg": 0.10989668856020582,
+    "settled_seconds": 0.6288464809767902
+  },
+  "center": {
+    "t": 345768.115103719,
+    "goal_rad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4
+    ],
+    "actual_rad": [
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00029659014262470307,
+      0.00019180590524214836,
+      1.4003749141680029
+    ],
+    "max_error_deg": 0.02148099950622766,
+    "settle_range_deg": 0.0439586754241434,
+    "settled_seconds": 0.602066412975546
+  },
+  "relaxed_verified": true,
+  "camera_error": null,
+  "video_frames": 893,
+  "gripper": "closed",
+  "original_position_gains": {},
+  "original_gains_restored": true,
+  "source_sha256_after": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+}

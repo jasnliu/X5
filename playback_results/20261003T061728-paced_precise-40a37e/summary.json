@@ -1,0 +1,109 @@
+{
+  "backend": "physical",
+  "method": "paced_precise",
+  "trajectory": {
+    "name": "paced_precise",
+    "duration_s": 4.8,
+    "time_scale": 1.011146586058411,
+    "peak_velocity_rad_s": 0.6927121372718876,
+    "peak_acceleration_rad_s2": 1.264880637963705,
+    "peak_piecewise_jerk_rad_s3": 37.964019929935475,
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "gaussian_sigma_s": 0.1,
+    "original_recording_duration_s": 3.841315,
+    "recording_duration_ratio": 1.2495720866422046,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "timing_method": "joint-specific velocity limits, arc-length acceleration-constrained LP",
+    "comparison_note": "4.8 seconds; only J4 needs the 0.8 CSP ceiling, others use 0.4",
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "endpoint_note": "Soft settle, guarded 0.5 s original-gain restoration ramp, then 0.05 degree endpoint verification; never relax here",
+    "max_joint_deviation_deg": 1.3095961535508114,
+    "max_tcp_deviation_mm": 3.7310170920397825,
+    "exact_first": true,
+    "exact_last": true,
+    "source_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+  },
+  "success": true,
+  "error": null,
+  "endpoint": {
+    "t": 348423.02063808,
+    "goal_rad": [
+      -0.6055312428473343,
+      0.21194552529182964,
+      0.24416891737239688,
+      1.7329663538567175,
+      0.20476168513003543,
+      -0.30516319523918334,
+      0.6001606775005737
+    ],
+    "actual_rad": [
+      -0.6055312428473343,
+      0.21232913710231216,
+      0.24416891737239688,
+      1.7329663538567175,
+      0.20514529694051795,
+      -0.30516319523918334,
+      0.6001606775005737
+    ],
+    "max_error_deg": 0.02197933771202081,
+    "settle_range_deg": 0.02197933771202081,
+    "settled_seconds": 0.6019654590054415,
+    "tolerance_deg": 0.05
+  },
+  "center": {
+    "t": 348435.438087457,
+    "goal_rad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4
+    ],
+    "actual_rad": [
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      0.00019180590524214836,
+      -8.702166785959364e-05,
+      0.00019180590524214836,
+      1.4003749141680029
+    ],
+    "max_error_deg": 0.02148099950622766,
+    "settle_range_deg": 0.021979337712122585,
+    "settled_seconds": 0.6014093629783019,
+    "tolerance_deg": 0.2
+  },
+  "relaxed_verified": true,
+  "camera_error": null,
+  "video_frames": 873,
+  "gripper": "closed",
+  "original_position_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "original_gains_restored": true,
+  "source_sha256_after": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e"
+}

@@ -1,0 +1,68 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-09-30-19-40-31-049333-jason-band37-139659
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [139662]
+[INFO] [rviz2-2]: process started with pid [139663]
+[INFO] [python3-3]: process started with pid [139664]
+[INFO] [python-4]: process started with pid [139665]
+[INFO] [python3-5]: process started with pid [139666]
+[robot_state_publisher-1] [INFO] [1790822431.124084875] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1790822431.455924621] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1790822431.456029864] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1790822431.472692724] [rviz2]: Stereo is NOT SUPPORTED
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162583.57696605, "phase": "READY", "status": "Recording preflight passed; waiting for camera and fresh encoders (ST7 is informational; ESP32 is not used)"}
+[python3-3] PHYSICAL AUDIT {"event": "start_authorized_playback", "at": 162583.579076216, "phase": "PLAYBACK PREFLIGHTED", "recording": "/home/jason/Proyectos3/X5/recordings/record3.json"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162583.620306551, "phase": "SETTING UP", "status": "Recording preflight passed; confirming all drives at their live poses, then centering with J7=80.2\u00b0 and opening gripper to \u22123\u00b0"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162586.152691088, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162588.789699563, "phase": "WAITING FOR LOAD", "status": "Centered with gripper open at \u22123\u00b0 \u2014 load the drumstick, then press Continue (the recording and pink-zone alignment run next)"}
+[python3-3] PHYSICAL AUDIT {"event": "skip_human_stick_loading", "at": 162588.791659138, "phase": "CLOSING GRIPPER", "detail": "Empty gripper; no strikes will be requested"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162588.825834167, "phase": "CLOSING GRIPPER", "status": "Closing gripper to +7\u00b0 \u2014 recording starts in 0.7 s"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162589.586903095, "phase": "MOVING TO RECORDING START", "status": "Gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162590.651635669, "phase": "RECORDING PLAYBACK", "status": "Playing recording: 0.00/7.10 s \u2022 camera observations 0"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162597.783809304, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 settling at its final pose"}
+[python3-3] PHYSICAL AUDIT {"event": "recording_physically_finished", "at": 162598.423672087, "phase": "CHECKING PLAYBACK END", "encoders_deg": [-34.67240524075155, 12.165563423617105, 14.011827791428889, 99.29165811416469, 11.731980363937698, -17.48456314993194, 34.408653188207], "target_deg": [-34.69438457846357, 12.143584085905085, 13.989848453716867, 99.29165811416469, 11.731980363937698, -17.48456314993194, 34.38667385049498]}
+[python3-3] PHYSICAL AUDIT {"event": "test_only_visual_acceptance_bypass", "at": 162598.424163105, "phase": "CHECKING PLAYBACK END", "detail": "No stick; using recorded endpoint for MIT hold, not claiming pink-zone detection"}
+[python3-3] PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference — arming MIT hold; the strike button becomes available after fresh position and velocity settle
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162598.452845526, "phase": "HARDWARE TEST SETTLING MIT HOLD", "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh position and velocity settle"}
+[python3-3] PHYSICAL AUDIT {"event": "fault_details", "at": 162599.22851303, "phase": "HARDWARE TEST SETTLING MIT HOLD", "message": "Motor 7: MIT mode readback missing", "encoders_deg": [-34.62844656532741, 12.165563423617105, 14.011827791428889, 99.40155480272489, 11.731980363937698, -17.462583812219922, -0.6483904625053771], "worker": "Status(phase='fault', ready=False, completed=0, sample=None, peak_drop=0.0, overshoot=0.0, error='Motor 7: MIT mode readback missing', rejected=None, last_gap=0.0, max_gap=0.0, feedback_age=0.0, hold_recoveries=0, commands_sent=0)"}
+[python3-3] PHYSICAL AUDIT FAULT Motor 7: MIT mode readback missing
+[python3-3] HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked — Motor 7: MIT mode readback missing
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162599.37665018, "phase": "HARDWARE TEST ISOLATED FAULT", "status": "HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked \u2014 Motor 7: MIT mode readback missing"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 162764.874053367, "phase": "CENTER RELAX RECENTERING", "status": "Center + Relax requested \u2014 returning from the current pose to customized right center, then disabling the right arm"}
+[ERROR] [python3-3]: process has died [pid 139664, exit code 1, cmd '/usr/bin/python3 /tmp/x5_live_mit_hold.py --detection-socket /tmp/x5-right-camera-playback-139659.sock --audio-socket /tmp/x5-right-camera-audio-139659.sock --esp-port /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0 --hardwaretest --recording /home/jason/Proyectos3/X5/recordings/record3.json'].
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1790822622.978230133] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1790822622.979637309] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20260930_194032_194915.mp4
+[python-4] Traceback (most recent call last):
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 204, in <module>
+[python-4]     raise SystemExit(main())
+[python-4]                      ^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 200, in main
+[python-4]     return base_camera.main()
+[python-4]            ^^^^^^^^^^^^^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_search/camera.py", line 145, in main
+[python-4]     ok, frame = camera.read()
+[python-4]                 ^^^^^^^^^^^^^
+[python-4] KeyboardInterrupt
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 139662]
+[INFO] [rviz2-2]: process has finished cleanly [pid 139663]
+[python3-5] {"status": "stopped", "captured_seconds": 189.7}
+[ERROR] [python-4]: process has died [pid 139665, exit code -2, cmd '/home/jason/Proyectos3/Y2/.venv/bin/python /home/jason/Proyectos3/X5/camera_playback/camera.py --socket /tmp/x5-right-camera-playback-139659.sock --root /home/jason/Proyectos3/Y2 --camera 0 --device auto --process-every 1'].
+[INFO] [python3-5]: process has finished cleanly [pid 139666]

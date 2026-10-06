@@ -1,0 +1,30 @@
+{
+  "limits": {
+    "acceleration": 80.0,
+    "control_timeout": 0.02,
+    "feedback_timeout": 0.02,
+    "hard_depth_deg": 12.0,
+    "held_joint_drift_deg": 0.75,
+    "hz": 500.0,
+    "jerk": 8000.0,
+    "torque": 3.0,
+    "torque_slew": 300.0,
+    "trial_timeout": 3.0,
+    "upper_excursion_deg": 0.2,
+    "velocity": 3.0
+  },
+  "rules": {
+    "acceptance_deg": 0.2,
+    "depth_match_deg": 0.1,
+    "maximum_approach_seconds": 0.8,
+    "maximum_cycle_seconds": 1.5,
+    "maximum_feedback_gap": 0.01,
+    "maximum_prezone_pause": 0.03,
+    "maximum_start_lateness": 0.02,
+    "maximum_upper_overshoot_deg": 0.15,
+    "minimum_entry_speed": 0.2,
+    "return_tolerance_deg": 0.15,
+    "settle_range_deg": 0.05,
+    "settle_seconds": 0.04
+  }
+}

@@ -1,0 +1,86 @@
+test_exact_endpoints (smooth_playback.test_playback.TrajectoryTests.test_exact_endpoints) ... ok
+test_legacy_baseline_exact (smooth_playback.test_playback.TrajectoryTests.test_legacy_baseline_exact) ... ok
+test_limits_corridor_and_dynamics (smooth_playback.test_playback.TrajectoryTests.test_limits_corridor_and_dynamics) ... ok
+test_matched_timing (smooth_playback.test_playback.TrajectoryTests.test_matched_timing) ... ok
+test_smooth_boundary_derivatives (smooth_playback.test_playback.TrajectoryTests.test_smooth_boundary_derivatives) ... ok
+test_transition_endpoint (smooth_playback.test_playback.TrajectoryTests.test_transition_endpoint) ... ok
+test_cancel_returns_center (smooth_playback.test_playback.WorkflowTests.test_cancel_returns_center) ... NTFY ACCEPTED 
+Movement in 10s
+Movement in 9s
+Movement in 8s
+Movement in 7s
+Movement in 6s
+Movement in 5s
+Movement in 4s
+Movement in 3s
+Movement in 2s
+Movement in 1s
+ENABLE AT LIVE POSE {"gripper_closed": true}
+CHECKING CENTER 
+CENTER {"duration_s": 1.0}
+CENTER SETTLED 
+CHECKING APPROACH START 
+APPROACH START {"duration_s": 1.0}
+APPROACH START SETTLED 
+PLAYBACK {"method": "fake", "duration_s": 1.0}
+ERROR {"error": "Cancelled: User requested controlled center + relax"}
+CONTROLLED RECOVERY 
+CHECKING RECENTER 
+RECENTER {"duration_s": 1.0}
+RECENTER SETTLED 
+RELAX {"center_evidence": {"t": 114.80799999999579, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.601999999998597}}
+RELAXED VERIFIED 
+ok
+test_complete_sequence (smooth_playback.test_playback.WorkflowTests.test_complete_sequence) ... NTFY ACCEPTED 
+Movement in 10s
+Movement in 9s
+Movement in 8s
+Movement in 7s
+Movement in 6s
+Movement in 5s
+Movement in 4s
+Movement in 3s
+Movement in 2s
+Movement in 1s
+ENABLE AT LIVE POSE {"gripper_closed": true}
+CHECKING CENTER 
+CENTER {"duration_s": 1.0}
+CENTER SETTLED 
+CHECKING APPROACH START 
+APPROACH START {"duration_s": 1.0}
+APPROACH START SETTLED 
+PLAYBACK {"method": "fake", "duration_s": 1.0}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 114.80799999999579, "goal_rad": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05], "actual_rad": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.601999999998597}
+CHECKING RECENTER 
+RECENTER {"duration_s": 1.1447142425533319}
+RECENTER SETTLED 
+RELAX {"center_evidence": {"t": 116.55999999999439, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.601999999998597}}
+RELAXED VERIFIED 
+ok
+test_failed_center_does_not_relax (smooth_playback.test_playback.WorkflowTests.test_failed_center_does_not_relax) ... NTFY ACCEPTED 
+Movement in 10s
+Movement in 9s
+Movement in 8s
+Movement in 7s
+Movement in 6s
+Movement in 5s
+Movement in 4s
+Movement in 3s
+Movement in 2s
+Movement in 1s
+ENABLE AT LIVE POSE {"gripper_closed": true}
+ERROR {"error": "RuntimeError: blocked center"}
+CONTROLLED RECOVERY 
+RECOVERY FAILED - NOT RELAXED {"error": "blocked center", "last_goal": null}
+ATTENTION: center return failed. NO RELAX command was sent. Drives may still hold. Inspect before any further operation.
+ok
+test_notification_failure_blocks_bus (smooth_playback.test_playback.WorkflowTests.test_notification_failure_blocks_bus) ... ERROR {"error": "RuntimeError: delivery failed"}
+ok
+test_relax_requires_permission (smooth_playback.test_playback.WorkflowTests.test_relax_requires_permission) ... ok
+test_transport_refuses_disable_away_from_center (smooth_playback.test_playback.WorkflowTests.test_transport_refuses_disable_away_from_center) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 19.349s
+
+OK

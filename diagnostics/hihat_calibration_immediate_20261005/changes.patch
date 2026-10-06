@@ -1,0 +1,214 @@
+--- before/README.md
++++ after/README.md
+@@ -522,9 +522,9 @@
+ 
+ ### Automatic hi-hat angle calibration (normal hardware only)
+ 
+-Immediately after launch, without pressing RUN, the program waits for hi-hat
+-ST7/TONOR and the ESP32 calibration-v2 protocol, delivers an ntfy movement
+-warning, then gives a 10-second countdown. The arm remains under its existing
++Immediately after launch, without pressing RUN, the program starts calibration
++as soon as hi-hat ST7/TONOR and the ESP32 calibration-v2 protocol are ready.
++There is **no ntfy alert or countdown**. The arm remains under its existing
+ RUN control. No startup calibration runs in `--test`, `--hardwaretest`, offline
+ preview, or recording-only mode.
+ 
+@@ -556,7 +556,7 @@
+ This requires the updated `esp32_hihat/motor_beat` firmware; normal launch never
+ flashes it automatically. Unsupported firmware fails closed before calibration
+ motion. `playback_results/hihat_calibration/<session>/events.jsonl` records
+-warning delivery, trials, encoder arrival, selected HIT, angle and faults.
++trials, encoder arrival, selected HIT, angle and faults.
+ The recording picker is temporarily disabled during calibration motion because
+ its preflight is synchronous; the UI layout and RUN workflow are otherwise unchanged.
+ 
+--- before/camera_playback/hihat_calibration_runtime.py
++++ after/camera_playback/hihat_calibration_runtime.py
+@@ -1,43 +1,21 @@
+ """Automatic background hi-hat calibration; never owns or commands arm motors."""
+ from datetime import datetime, timezone
+-import importlib.util
+ import json
+ from pathlib import Path
+-import queue
+-import threading
+ import time
+ import uuid
+ 
+ from .hihat_calibration import HiHatCalibration
+ 
+-WARNING_SECONDS = 10.0
+ STARTUP_TIMEOUT = 90.0
+ 
+ 
+-def notify_calibration():
+-    path = Path.home() / '.local/bin/codex-ntfy.py'
+-    spec = importlib.util.spec_from_file_location('hihat_calibration_ntfy', path)
+-    module = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(module)
+-    if not module.post_ntfy(
+-            'Automatic hi-hat calibration starts in 10 seconds: 90 to at most 115 degrees, '
+-            '5-degree steps, 2 seconds closed and 2 seconds open. Keep clear. '
+-            'The robot arm moves only if RUN is pressed.',
+-            'X5 hi-hat calibration: movement warning', 'warning,robot'):
+-        raise RuntimeError('ntfy delivery failed; hi-hat motion is blocked')
+-    module.play_sound('{"type":"agent-turn-complete"}')
+-
+-
+ class HiHatCalibrationRuntime:
+-    def __init__(self, app, *, notifier=notify_calibration, now=None, directory=None):
++    def __init__(self, app, *, now=None, directory=None):
+         self.app = app
+-        self.notifier = notifier
+         self.started_at = time.monotonic() if now is None else now
+         self.controller_ready_at = None
+         self.next_query = self.started_at
+-        self.warning_until = None
+-        self.notification = queue.Queue(maxsize=1)
+-        self.notification_started = False
+         self.failure_reported = False
+         self.wait_detail = 'waiting for ESP32 and hi-hat detector'
+         self.stream = None
+@@ -83,16 +61,6 @@
+     def feed(self, messages):
+         self.engine.feed(messages, time.monotonic())
+ 
+-    def _notify(self):
+-        # No GUI, serial, or arm access from this thread. It cannot initiate
+-        # motion after cancellation; only tick() can consume its result.
+-        try:
+-            self.notifier()
+-            result = (True, '')
+-        except Exception as exc:
+-            result = (False, str(exc))
+-        self.notification.put(result)
+-
+     def tick(self, now=None):
+         if self.closed:
+             return
+@@ -117,27 +85,14 @@
+             audio_ready = receiver is not None and receiver.ready(now)
+             if e.phase == 'WAITING':
+                 if now - self.started_at >= STARTUP_TIMEOUT:
+-                    raise RuntimeError('Hi-hat calibration startup timed out waiting for firmware, detector or notification')
++                    raise RuntimeError('Hi-hat calibration startup timed out waiting for firmware or detector')
+                 if receiver is None or receiver.state in {'error', 'stopped'}:
+                     raise RuntimeError('Hi-hat detector unavailable for startup calibration')
+                 if not (c.ready() and c.telemetry is not None and audio_ready):
+                     return
+-                if not self.notification_started:
+-                    self.notification_started = True
+-                    self.wait_detail = 'sending ntfy movement warning'
+-                    threading.Thread(target=self._notify, daemon=True, name='hihat-calibration-ntfy').start()
+-                if self.warning_until is None:
+-                    try:
+-                        ok, detail = self.notification.get_nowait()
+-                    except queue.Empty:
+-                        return
+-                    if not ok:
+-                        raise RuntimeError(detail)
+-                    self.warning_until = now + WARNING_SECONDS
+-                    self.log(dict(kind='notification_delivered', at=now, warning_seconds=WARNING_SECONDS))
+-                self.wait_detail = f'motion warning: {max(0, self.warning_until-now):.1f} s'
+-                if now >= self.warning_until:
+-                    e.start(now)
++                # User-requested automatic startup: no alert, background
++                # notifier, countdown, or extra delay once devices are ready.
++                e.start(now)
+             if e.ready:
+                 if c.telemetry_at is None or now - c.telemetry_at > 1.5:
+                     raise RuntimeError('Calibrated ESP32 status became stale')
+--- before/esp32_hihat/README.md
++++ after/esp32_hihat/README.md
+@@ -9,8 +9,9 @@
+ 
+ Normal hardware startup automatically calibrates before ride search. The host
+ verifies calibration-v2 support using `Q`; old firmware cannot silently continue
+-at its fixed angle. After an ntfy warning and countdown, it tries 90..115° in 5°
+-steps, holding closed for 2 s and open for 2 s. The first hi-hat detector HIT
++at its fixed angle. As soon as the controller and detector are ready, it tries
++90..115° in 5° steps, with no ntfy alert or countdown, holding closed for 2 s
++and open for 2 s. The first hi-hat detector HIT
+ selects the swing target; no HIT at 115° is a fault.
+ 
+ The protocol is:
+--- before/tests/test_hihat_calibration.py
++++ after/tests/test_hihat_calibration.py
+@@ -208,38 +208,39 @@
+         self.app = SimpleNamespace(hihat=self.c, bus=SimpleNamespace(active=False),
+             hihat_sound_monitor=SimpleNamespace(receiver=SimpleNamespace(state='ready',ready=lambda now: True)),
+             hihat_fault_detail=None, result_status=Mock(), result_label=Mock(), status=Mock(), fail=Mock())
+-        self.r = HiHatCalibrationRuntime(self.app, now=0., directory=self.temp.name, notifier=Mock())
++        self.r = HiHatCalibrationRuntime(self.app, now=0., directory=self.temp.name)
+         self.addCleanup(self.r.close)
+ 
+     def step(self, now):
+         self.c.now = self.c.telemetry_at = now
+         self.r.tick(now)
+ 
+-    def test_no_button_needed_but_notification_and_countdown_are_required(self):
+-        with patch('camera_playback.hihat_calibration_runtime.threading.Thread') as thread:
++    def test_first_ready_tick_starts_without_button_countdown_or_notification(self):
++        with patch('threading.Thread') as thread, patch('urllib.request.urlopen') as network:
+             self.step(.1)
+-            thread.return_value.start.assert_called_once()
+-        self.assertEqual(self.r.engine.phase, 'WAITING')
+-        self.assertNotIn('O', [cmd for _,cmd in self.c.commands])
+-        self.r.notification.put((True, ''))
+-        self.step(1.)
+-        self.step(10.99)
+-        self.assertEqual(self.r.engine.phase, 'WAITING')
+-        self.step(11.01)
++            thread.assert_not_called()
++            network.assert_not_called()
++        self.assertEqual(self.r.engine.phase, 'INITIAL OPENING')
++        self.assertIn((.1, 'O'), self.c.commands)
+         self.assertTrue(self.r.busy)
+         self.app.fail.assert_not_called()
+ 
+-    def test_notification_failure_blocks_all_motion(self):
+-        self.r.notification_started = True
+-        self.r.notification.put((False, 'ntfy failed'))
++    def test_controller_and_protocol_readiness_are_still_required(self):
++        self.c.state = 'starting'
+         self.step(.1)
+-        self.assertEqual(self.r.engine.phase, 'FAULT')
++        self.assertEqual(self.c.commands, [])
++        self.c.state = 'ready'
++        status, self.c.telemetry = self.c.telemetry, None
++        self.step(.2)
++        self.assertEqual(self.r.engine.phase, 'WAITING')
+         self.assertTrue(all(cmd == 'Q' for _,cmd in self.c.commands))
+-        self.assertIn('ntfy', self.app.hihat_fault_detail)
+-
+-    def test_cancel_before_notification_finishes_never_moves_later(self):
++        self.c.telemetry = status
++        self.step(.3)
++        self.assertEqual(self.r.engine.phase, 'INITIAL OPENING')
++        self.assertIn((.3, 'O'), self.c.commands)
++
++    def test_cancel_before_ready_never_moves_later(self):
+         self.r.cancel()
+-        self.r.notification.put((True,''))
+         self.step(20.)
+         self.assertEqual(self.c.commands, [])
+ 
+@@ -252,8 +253,7 @@
+ 
+     def test_failure_uses_existing_arm_safe_failure_path_once(self):
+         self.app.bus.active = True
+-        self.r.notification_started = True
+-        self.r.notification.put((False,'notification unavailable'))
++        self.app.hihat_sound_monitor.receiver.state = 'error'
+         self.step(1.)
+         self.step(2.)
+         self.app.fail.assert_called_once()
+@@ -262,7 +262,7 @@
+         self.app.hihat_sound_monitor.receiver.ready = lambda now: False
+         self.step(30.)
+         self.assertEqual(self.r.engine.phase, 'WAITING')
+-        self.assertFalse(self.r.notification_started)
++        self.assertTrue(all(cmd == 'Q' for _,cmd in self.c.commands))
+         self.step(91.)
+         self.assertIn('startup timed out', self.r.engine.failure)
+ 

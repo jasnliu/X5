@@ -554,3 +554,995 @@ mapping. All 59 offline tests pass. No physical motors were enabled or moved.
 
 Evidence: `diagnostics/right_gripper_workflow_offline_tests.txt` and
 `diagnostics/right_gripper_workflow_ui_check.txt`.
+
+## Standalone right Cartesian J2 redundancy fix — 2026-09-18
+
+The exact requested live target `(0.300, 0.050, 0.250) m` reproduced the fault.
+The original IK requested right J2 `-4.370°`; J2 stopped near `-1.286°` while the
+other six joints settled, leaving the measured TCP near
+`(0.30038, 0.02543, 0.24822) m` until the 30-second stage timeout disabled the
+right arm. A separate 60-batch state-query audit then confirmed all 16 motors
+disabled.
+
+The standalone right Cartesian initial and Update solvers now keep J2 at the
+custom center's `0°` value and solve the position-only target with the other six
+joints. This selection is conditioned on the standalone right manual-finish
+workflow: the left Cartesian program and `right_camera_cartesian` base retain
+their prior solver configuration. Motor transport, measured-joint correction,
+completion thresholds, zone/path checks, and gripper behavior were not changed.
+
+- The corrected goal was approximately J1 `+5.661°`, J2 `0°`, J3 `-7.657°`,
+  J4 `+18.967°`, J5 `-4.831°`, J6 `+0.890°`, and J7 `+80.214°`. Offline IK error
+  was below numerical reporting precision; outbound and center-return paths were
+  inside the buffered right zone.
+- The physical retest entered `HOLDING GOAL` at
+  `(0.30003, 0.04981, 0.25011) m`. Across the final one-second hold window, the
+  median was `(0.300197, 0.049808, 0.250160) m`; maximum absolute per-axis error
+  was `0.197 mm`.
+- End returned to the customized right center and the program confirmed all
+  right modes disabled. The live trace recorded every left mode as disabled and
+  no left command. An independent post-run audit captured 960 exact state-query
+  frames and again confirmed all motors disabled.
+- All 104 offline regression tests passed. Additional scope construction checks
+  confirmed centered-J2 IK only for `right_cartesian`, not left Cartesian or the
+  camera Cartesian base.
+
+Evidence: `diagnostics/right_cartesian_030_005_025_live_encoder.csv`,
+`diagnostics/right_cartesian_030_005_025_failure_post_query.json`,
+`diagnostics/right_cartesian_030_005_025_fixed_live_encoder.csv`,
+`diagnostics/right_cartesian_030_005_025_fixed_live_result.json`,
+`diagnostics/right_cartesian_030_005_025_fixed_post_query.json`,
+`diagnostics/right_cartesian_joint2_centered_full_tests.txt`, and
+`diagnostics/right_cartesian_joint2_centered_scope_check.txt`.
+
+## Right camera Cartesian default goal update — 2026-09-18
+
+The fixed `right_camera_cartesian` starting offset is now
+`(X,Y,Z) = (0.250, 0.000, 0.350) m`. The existing no-detection behavior still
+increments only Y by `0.010 m`. With the current right zone, offline preflight
+accepted 20 centered-J2 goals from Y `0.000` through `0.190 m`; Y `0.200 m` is
+the first rejected point. All 104 repository tests passed, and an offline Tk
+construction confirmed the new preview and label with motor transport absent.
+No CAN socket was opened and no physical movement was performed for this change.
+
+Evidence: `diagnostics/camera_search_new_default_tests.txt`,
+`diagnostics/camera_search_new_default_full_tests.txt`, and
+`diagnostics/camera_search_new_default_ui_check.txt`.
+
+## Right camera Cartesian infeasible-seed fix — 2026-09-18
+
+The candidate planner no longer sends a slightly out-of-range live encoder
+reading directly to SciPy as its initial IK point. The customized right center
+puts J7 exactly at its +1.4-rad URDF maximum, so ordinary encoder quantization
+could report J7 a few counts above that boundary. SciPy then raised `x0 is
+infeasible` before solving or commanding any candidate, making all directions
+appear to be skipped without visible arm movement.
+
+The planner now permits at most three encoder counts of discrepancy and clips
+only the numerical optimizer seed a negligible distance inside the bounds. It
+continues to use the original measured joint vector for candidate-transition,
+anchor-return, and center-return checks. A larger out-of-limit reading is still
+rejected and its joint-specific cause is reported. Planner skips are printed,
+and final all-skipped failure text now identifies the last actual rejection
+instead of calling it a normal non-improving search.
+
+- A regression injected a two-count J7 overshoot. The old raw SciPy call
+  reproduced `ValueError: x0 is infeasible`; the corrected planner solved the
+  +X candidate with effectively zero Cartesian error, kept the result within
+  all URDF limits, and left the measured safety anchor unchanged.
+- A separate test injected a six-count violation and confirmed it remained a
+  hard error rather than being clipped away.
+- All 107 repository unit tests passed. No CAN socket was opened and no physical
+  arm movement was performed for this change.
+
+Evidence: `diagnostics/camera_search_infeasible_seed_check.txt` and
+`diagnostics/camera_search_seed_clip_full_tests.txt`.
+
+## Query-only right-arm motion recorder — 2026-09-18
+
+A standalone right-arm recorder now launches an RViz encoder visualization and
+a separate Tk recording panel. Its hardware transport opens only `can0`, locks
+out this workspace's other CAN programs, and sends the exact state request to
+right IDs 1–8. Feedback must report every right motor disabled and fault-free.
+The application has no motor-control import or path for enable, disable,
+configuration, position, velocity, torque, zeroing, centering, or holding.
+
+Recordings may begin and end at arbitrary poses. They contain timestamped right
+J1–J7 radians, gripper opening, derived right TCP coordinates, units, UTC start,
+duration, joint order, model hash, and schema metadata. JSON saves are confined
+to `recordings/` and use flush, fsync, and atomic replacement. The 100,000-sample
+limit provides about 83 minutes at the nominal 20 Hz rate.
+
+Offline tests validate the JSON schema and atomic round trip, arbitrary first and
+last poses, timestamp/value rejection, enforced save folder, exact right-only
+state requests, absence of left samples, and launcher isolation. The offline Tk
+integration constructs the panel with CAN forbidden, records injected synthetic
+right feedback, and validates the saved file. Full RViz startup is checked
+separately. All 114 repository unit tests pass. No physical CAN interface was
+opened and no arm was moved.
+
+Evidence: `diagnostics/right_motion_recording_focused_tests.txt`,
+`diagnostics/right_motion_recording_ui_check.txt`,
+`diagnostics/right_motion_recording_rviz_check.txt`, and
+`diagnostics/right_motion_recording_offline.png`,
+`diagnostics/right_motion_recording_transport_audit.txt`, and
+`diagnostics/right_motion_recording_full_tests.txt`.
+
+## Recorded-path right camera alignment — 2026-09-18
+
+A separate `start_beat.sh` program now preflights and replays a
+saved right-arm JSON trajectory, then runs camera-guided Cartesian alignment
+from the recorded endpoint. It centers and opens the gripper first, waits for
+Continue, closes and retains the gripper command, moves to the recording's
+first pose, follows the time-scaled J1–J7 path, and settles at the final pose.
+
+Fresh camera observations collected during playback are paired with the actual
+encoder-derived TCP coordinates. Ending motion versus camera-center error is
+used only to reorder the six Cartesian test directions; no direction is
+removed. Alignment must reach an invisible centered box at 50% of the visible
+pink target's width and height before the hold begins, while the two-second hold
+continues to use the full visible pink rectangle.
+
+Offline validation covers recording schema/model/limit checks, complete
+recorded segments, center transitions, representative recovery returns, global
+speed scaling, tracking faults, endpoint J2 retention, playback-derived
+direction ordering, and distinct inner-acquisition/outer-hold behavior. The
+separate GUI was constructed and preflighted with CAN unavailable. All 127
+repository tests pass. SHA-256 comparison confirms that the original
+`camera_search/` package and right-camera Cartesian launch files were not
+changed. No CAN socket was opened and no physical arm movement was performed.
+
+Evidence: `diagnostics/right_camera_playback_focused_tests.txt`,
+`diagnostics/right_camera_playback_ui_check.txt`,
+`diagnostics/right_camera_playback_original_unchanged.txt`,
+`diagnostics/right_camera_playback_static_audit.txt`, and
+`diagnostics/right_camera_playback_full_tests.txt`.
+
+## Recorded-path default file — 2026-09-18
+
+The recorded-path camera launcher and direct application entry point now select
+`recordings/record1.json` by default. Passing `--recording` or using the file
+chooser still overrides that selection. The existing safety preflight remains
+unchanged. All 127 repository tests pass. The current `record1.json` was also
+checked offline and is selected correctly, but its contents are rejected by
+the unchanged safety preflight because sample 8 places J7 0.5710 degrees above
+the URDF limit. The recording and the safety threshold were not modified. No
+CAN interface was opened and no arm was moved.
+
+Evidence: `diagnostics/right_camera_playback_default_recording_tests.txt`,
+`diagnostics/right_camera_playback_default_recording_full_tests.txt`, and
+`diagnostics/right_camera_playback_default_recording_preflight.txt`.
+
+## Recorder joint-limit abort — 2026-09-18
+
+The query-only right-arm recorder now checks every incoming J1–J7 sample against
+the current URDF limits. A measurement beyond the limit and the shared
+three-encoder-count tolerance produces a modal warning with the joint and angle,
+stops recording, resets the complete in-memory take, clears its saved-path
+state, and disables Save. Starting is also blocked when the current pose is
+already outside a joint limit. The warning is recoverable after the user moves
+the limp arm back inside the limits; it does not open any motor-control path.
+
+Focused logic tests and an offline Tk integration verified the warning and that
+an earlier valid sample is erased when a later sample violates J7. No CAN socket
+was opened and no arm was moved. An offline regression over the existing
+`record1.json` confirms the new monitor would reject its first recorded sample
+for J7, preventing that unreplayable take from being saved. All 128 repository
+tests pass.
+
+Evidence: `diagnostics/right_motion_recording_limit_focused_tests.txt`,
+`diagnostics/right_motion_recording_limit_ui_check.txt`,
+`diagnostics/right_motion_recording_limit_full_tests.txt`, and
+`diagnostics/right_motion_recording_limit_record1_regression.txt`.
+
+## Playback cymbal-box change overlay — 2026-09-19
+
+The separate recorded-path camera process now overlays cymbal bounding-box
+dimension status in its processed preview. Consecutive processed detections are
+compared by width and height; changes of 4 pixels or less are ignored, while a
+change above 4 pixels in either dimension reports `CYMBAL BOX: CHANGING`.
+Baseline, stable, changing, and not-detected states show current dimensions and
+signed deltas where applicable.
+
+The monitor and drawing are confined to `camera_playback/camera.py`. It delegates
+the actual camera loop and datagram transmission to the unchanged original
+implementation, so the overlay itself sends no new protocol fields. The later
+strike feature independently applies the same threshold to existing cymbal-box
+coordinates in the controller. Focused offline tests cover the threshold boundary, significant changes,
+missing/reacquired detections, status text, and overlay drawing. No camera, CAN
+interface, or arm movement was used. A synthetic OpenCV render confirmed the
+two-line `CHANGING` overlay, and a local datagram regression confirms no visual
+status fields enter the controller protocol. All 130 repository tests pass, and
+SHA-256 checks confirm that the original camera Cartesian implementation remains
+unchanged.
+
+Evidence: `diagnostics/right_camera_playback_box_change_focused_tests.txt`,
+`diagnostics/right_camera_playback_box_change_full_tests.txt`,
+`diagnostics/right_camera_playback_box_change_overlay.png`, and
+`diagnostics/right_camera_playback_box_change_original_unchanged.txt`.
+
+## Playback J7 cymbal-strike phase — 2026-09-19
+
+After the inner-target acquisition and continuous two-second outer-pink-zone
+hold, the recorded-path program now preserves the actual reached pose instead
+of immediately centering. In a worker thread it generates cumulative J7-only
+targets 10 degrees below that anchor, then 20, 30, and so on. It retains only
+the consecutive depths whose complete strike path and sampled direct-center
+returns remain within buffered right zone1 and within the J7 URDF limit.
+
+Only right motor 7 can receive the new 2.0 rad/s speed setting; ordinary motion
+remains 0.4 rad/s, other motors cannot use the fast allowlist entry, and the
+left transport rejects it. The strike controller sends exact endpoints without
+correction overshoot, declares the endpoint immediately within 2 degrees, and
+then commands the preserved anchor without the ordinary settling delay.
+
+Every strike camera frame is compared using the existing greater-than-4-pixel
+cymbal width/height rule, but a hit cannot latch until actual J7 motion has
+started. A hit restores 0.4 rad/s before centering. Camera loss, zone breach,
+timeout, ordinary failure, and no-hit exhaustion also restore normal speed
+before center recovery; restoration failure disables rather than issuing a
+high-speed center command.
+
+Focused tests cover target increments and safe truncation, exact fast control,
+motion-gated camera changes, immediate reversal, async speed setup, hit speed
+restoration/recentering, and the two-second-hold transition. A real-model
+offline zone check at the standard camera-search anchor accepted 13 consecutive
+safe depths from 10 through 130 degrees and excluded the next interval. The
+offline GUI check passed, all 138 repository tests passed, and original camera
+Cartesian hashes remain unchanged. No CAN socket was opened and no arm moved.
+
+Evidence: `diagnostics/right_camera_playback_strike_focused_tests.txt`,
+`diagnostics/right_camera_playback_strike_ui_check.txt`,
+`diagnostics/right_camera_playback_strike_real_zone_check.txt`,
+`diagnostics/right_camera_playback_strike_static_audit.txt`,
+`diagnostics/right_camera_playback_strike_original_unchanged.txt`, and
+`diagnostics/right_camera_playback_strike_full_tests.txt`.
+
+## Isolated right-J7 ten-degree test — 2026-09-19
+
+Added `right_joint7_test`, `launch_right_joint7_test.py`, and
+`start_right_joint7_test.sh` as a camera-free, recording-free right-arm test.
+Its Start step uses the existing customized center (J1-J6 at zero and J7 at
++80.214091 degrees) and the existing -3 degree open-gripper target. Continue
+commands +7 degrees and requires the gripper encoder to remain within 0.75
+degree for 0.20 second before any J7 motion; a 3-second close timeout aborts.
+
+The motion uses the same `StrikeControl` and 2.0 rad/s right-J7-only speed as the
+camera-playback strike. It commands exactly one target at J7 -10 degrees from
+the custom center, immediately commands the exact custom center on arrival,
+restores the ordinary 0.4 rad/s speed, and disables all eight right motors.
+Only right J7 changes between the two joint goals.
+
+The real-model offline preflight sampled both directions at one-degree or finer
+spacing and accepted the whole buffered-zone path. Its endpoints were:
+
+- custom center TCP: `(0.17690550, -0.17009812, 0.20657841)` m;
+- J7-minus-10-degree TCP: `(0.16889363, -0.17009790, 0.17622447)` m.
+
+Nine focused tests cover the exact target, zone rejection, encoder-confirmed
+gripper closure, no J7 motion before confirmation, close timeout, speed-before-
+position ordering, immediate return, normal-speed restoration before disable,
+and launcher isolation. The offline Tk check passed, the complete repository
+suite passed all 147 tests, shell/Python static checks passed, and a timed
+offline launch brought up the panel, RViz, and robot-state publisher and shut
+them down cleanly. SHA-256 checks confirm that the original right-camera
+Cartesian implementation remains unchanged. No CAN interface was opened and no
+physical arm moved.
+
+Evidence: `diagnostics/right_joint7_test_focused_tests.txt`,
+`diagnostics/right_joint7_test_ui_check.txt`,
+`diagnostics/right_joint7_test_full_tests.txt`,
+`diagnostics/right_joint7_test_static_audit.txt`,
+`diagnostics/right_joint7_test_offline_launch.txt`, and
+`diagnostics/right_joint7_test_original_camera_unchanged.txt`.
+
+## Playback visible-goal and guaranteed strike round trips — 2026-09-19
+
+The recorded-path playback program now treats the complete visible pink target
+rectangle as success. Its robust post-playback measurement starts the two-second
+hold when the tip is anywhere in that rectangle. Cartesian correction begins
+only when the robust endpoint measurement is outside, and it stops as soon as a
+candidate enters the visible rectangle. The former smaller invisible acquisition
+rectangle was removed from the playback runtime and panel text.
+
+The strike state machine now guarantees a complete fast return to the preserved
+pink-zone anchor after every depth. For an 80-degree J7 anchor, the tested state
+sequence is `80→70→80`, then `80→60→80`, then `80→50→80`. The same rule continues
+for later safe 10-degree depths. The previous hit callback could interrupt a
+fast leg by immediately restoring normal speed and beginning center recovery.
+It now latches the camera hit, allows the commanded depth and fast anchor return
+to finish, and only then restores 0.4 rad/s and centers.
+
+The 23 playback-focused tests cover visible-edge acquisition versus outside
+correction, the two-second visible-zone hold, cumulative strike planning, exact
+multi-attempt round-trip ordering, immediate reversal, and hit latching through
+the fast return. The offline Tk integration passed and all 148 repository tests
+passed. Static checks confirmed the explicit `80→70→80`, `80→60→80`, and
+`80→50→80` sequence and found no playback-runtime inner-goal references. The
+original `right_camera_cartesian` program and the standalone `right_joint7_test`
+program retain their pre-change SHA-256 hashes. No CAN interface was opened and
+no physical arm moved.
+
+Evidence: `diagnostics/right_camera_playback_outer_roundtrip_focused_tests.txt`,
+`diagnostics/right_camera_playback_outer_roundtrip_ui_check.txt`,
+`diagnostics/right_camera_playback_outer_roundtrip_full_tests.txt`, and
+`diagnostics/right_camera_playback_outer_roundtrip_static_audit.txt`.
+
+## Learned 100 BPM cymbal striking — 2026-09-19
+
+After a discovery strike produces the qualifying cymbal-box change, the
+recorded-path program now remembers that attempt's cumulative J7 reduction. The
+discovery attempt still completes its fast return to the preserved pink-zone
+anchor. Instead of restoring normal speed and centering, the controller then
+repeats that exact `anchor→learned depth→anchor` trajectory indefinitely.
+
+Strike starts are scheduled 0.600 seconds apart, corresponding to 100 BPM. Each
+leg retains the existing exact endpoint `StrikeControl`, 2.0 rad/s right-J7-only
+speed, 2-degree reached threshold, stall monitor, timeout, and preflighted path.
+The controller never overlaps strokes: a new outbound command is issued only
+after the prior encoder-confirmed anchor return. If a physically deeper stroke
+takes longer than 0.600 seconds at 2.0 rad/s, the next stroke begins immediately
+after the return instead of interrupting that safety invariant.
+
+The control panel adds **Stop 100 BPM Striking: Center + Relax**. It is disabled
+until a hit depth is learned. A stop request during a stroke is latched until the
+current fast return completes; a request while waiting at the anchor acts
+immediately. Both paths restore J7 to 0.4 rad/s, return to the customized center,
+and relax. After learning, the loop no longer depends on the camera process and
+has no automatic time or strike-count limit. Encoder, zone, motor, Emergency
+Relax, and program-close safety paths remain active.
+
+The 27 playback-focused tests cover the 0.600-second schedule, learned-depth
+retention, camera independence, full fast return before repetition, stop during
+an active stroke, speed restoration, centering, and the previous visible-zone
+and discovery-round-trip behavior. The offline Tk integration passed and all
+152 repository tests passed. Static checks confirmed 100 BPM, the Stop policy,
+and unchanged SHA-256 hashes for the original `right_camera_cartesian` and
+standalone `right_joint7_test` programs. No CAN interface was opened and no
+physical arm moved.
+
+Evidence: `diagnostics/right_camera_playback_100bpm_focused_tests.txt`,
+`diagnostics/right_camera_playback_100bpm_ui_check.txt`,
+`diagnostics/right_camera_playback_100bpm_full_tests.txt`, and
+`diagnostics/right_camera_playback_100bpm_static_audit.txt`.
+
+## Right-arm recording video editor — 2026-09-20
+
+Added a separate offline editor for JSON files created by the right-arm motion
+recorder. The launcher starts only the editor panel, robot-state publisher, and
+RViz on isolated ROS domain 92; a static audit found no CAN observer, transport,
+or motor-controller references in the editor runtime or launcher.
+
+The editor requires an explicit selected file (or `--recording`), validates the
+right-arm v1 schema and current model identity, interpolates visual-only playback,
+and renders a video-style timeline. Its two sample-aligned handles shade the
+areas deleted from the start and end. Dragging either handle pauses playback and
+publishes that exact retained boundary pose to RViz. Save requires confirmation
+and atomically replaces the selected path; it rebases sample time, advances the
+UTC recording start, updates duration/count, and creates no second JSON or backup.
+
+Eleven recorder/editor focused tests passed, including exact in-place path use,
+time/timestamp rebasing, interpolation, validation, and a one-sample crop. The
+Tk integration simulated both trim-handle drags, checked both preview boundary
+states, saved a crop, and verified that the selected JSON remained the only file.
+All 157 repository tests passed. A bounded offline launch loaded
+`recordings/record1.json`, opened the editor, RViz, and robot-state publisher,
+and all three processes shut down cleanly after the timeout. The panel and RViz
+were visually inspected from screenshots. No CAN interface was opened and no
+physical arm moved.
+
+Evidence: `diagnostics/right_recording_editor_focused_tests.txt`,
+`diagnostics/right_recording_editor_ui_check.txt`,
+`diagnostics/right_recording_editor_static_audit.txt`,
+`diagnostics/right_recording_editor_full_tests.txt`,
+`diagnostics/right_recording_editor_offline_launch.txt`,
+`diagnostics/right_recording_editor_panel.png`, and
+`diagnostics/right_recording_editor_rviz.png`.
+
+## Playback five-degree strike discovery increments — 2026-09-20
+
+Changed only the recorded-path camera playback strike discovery sequence from
+cumulative 10-degree J7 reductions to cumulative 5-degree reductions. It now
+tries complete fast round trips at `anchor−5°`, `anchor−10°`, `anchor−15°`, and
+so on. Planning still stops before the first unsafe interval or J7 limit, every
+attempt still returns fully to the preserved pink-zone anchor, and a detected
+depth is still repeated at 100 BPM until Stop. The separate standalone
+`right_joint7_test` remains its original single ten-degree test.
+
+The shared `STRIKE_INCREMENT_DEGREES = 5` constant now drives planner radians,
+UI attempt depths, hit messages, and learned-depth reporting. On the existing
+real model/zone at the standard camera-search anchor, the offline preflight
+accepted 26 consecutive depths from 5 through 130 degrees and rejected the next
+interval. All 27 playback-focused tests and all 157 repository tests passed;
+the offline playback UI check also passed. No camera, CAN interface, or physical
+arm movement was used.
+
+Evidence: `diagnostics/right_camera_playback_5degree_focused_tests.txt`,
+`diagnostics/right_camera_playback_5degree_ui_check.txt`,
+`diagnostics/right_camera_playback_5degree_real_zone_check.txt`,
+`diagnostics/right_camera_playback_5degree_static_audit.txt`, and
+`diagnostics/right_camera_playback_5degree_full_tests.txt`.
+
+## Playback single-frame acceptance and immediate striking — 2026-09-20
+
+Changed only the recorded-path camera playback sequence after its final recorded
+pose settles. The next fresh simultaneous cymbal/direct-tip frame is now checked
+once against the larger visible pink rectangle. An inside result immediately
+establishes the strike anchor and baseline; there is no two-second hold. An
+outside result starts the existing playback-informed Cartesian hill climber,
+which now stops only at the restored invisible centered target occupying 50% of
+the visible rectangle's width and height. One new larger-pink confirmation then
+starts striking, again without a hold; an outside confirmation resumes finding.
+
+The old asynchronous all-depth center-return strike preflight and its second
+camera-availability gate were removed. After the accepted frame, the controller
+synchronously derives only the consecutive 5-degree J7 paths that remain in
+right zone1, switches J7 to the existing strike speed, and commands attempt one.
+At the standard real-model anchor, the offline calculation retained all 26
+attempts from 5 through 130 degrees and completed in about 0.121 seconds. The
+accepted frame supplies the cymbal-box baseline used by the unchanged
+consecutive-frame greater-than-4-pixel hit test.
+
+All 26 playback-focused tests and all 156 repository tests passed. The offline
+Tk integration passed, and static checks confirmed that no playback hold state,
+hold timer, or post-acceptance camera recheck remains. No camera, CAN interface,
+or physical arm movement was used.
+
+Evidence: `diagnostics/right_camera_playback_single_check_focused_tests.txt`,
+`diagnostics/right_camera_playback_single_check_ui_check.txt`,
+`diagnostics/right_camera_playback_single_check_plan_timing.txt`,
+`diagnostics/right_camera_playback_single_check_static_audit.txt`, and
+`diagnostics/right_camera_playback_single_check_full_tests.txt`.
+
+## ST7/eMeet single-hit camera playback — 2026-09-25
+
+Replaced camera-box motion as the recorded-path program's strike-success signal
+with the existing `/home/jason/Proyectos3/st7` neural cymbal-onset detector. The
+launcher now starts a supervised ST7 bridge, selects the stable eMeet M0
+PipeWire capture source, runs the selected `cymbal-fmn-tcn/best.pt` checkpoint,
+and sends readiness heartbeats plus timestamped `HIT` events to the ROS/Tk
+controller over a separate local datagram socket. Start and Continue remain
+disabled until the detector has opened the input and completed a two-second
+warm-up. A detector exit or stale heartbeat during the workflow uses the
+existing safe failure recovery.
+
+The cumulative strike search remains complete 5-degree round trips:
+`anchor→−5°→anchor`, then `anchor→−10°→anchor`, then
+`anchor→−15°→anchor`, and so on. After each return the anchor is held for up to
+1.25 seconds so ST7 lookahead can finalize the attempt. The bridge preserves
+estimated sound-onset timestamps, preventing a delayed event from one attempt
+from being assigned to the next. A qualifying sound hit is latched until the
+fast anchor return finishes; J7 then returns to normal speed, the arm centers,
+and the right motors relax. The former learned-depth 100 BPM loop and its Stop
+button were removed, so exactly one sound-confirmed hit ends the sequence.
+Camera-box motion remains only a clearly labeled preview diagnostic.
+
+The host audio audit found the connected source
+`alsa_input.usb-eMeet_Tech_eMeet_M0_000000000012-00.mono-fallback` as the
+current default, and sounddevice exposed `eMeet M0: USB Audio` plus the
+PipeWire input. A live bridge check opened the eMeet route at 16 kHz, captured
+2.2 seconds without overflow, and delivered the ready heartbeat. This verified
+the microphone/bridge path but did not create a real cymbal `HIT` event.
+
+The 34 focused playback tests cover audio protocol validation, stable eMeet
+selection, ST7 asset selection, attempt timestamp/motion gating, delayed sound
+decisions, 5-degree round trips, one-hit center/relax behavior, sound-process
+failure recovery, and absence of repeating-strike runtime state. The offline Tk
+integration passed. The complete repository suite passed all 165 tests. Static
+compilation/audits found no 100 BPM, continuous-strike, or camera-hit decision
+logic in the playback runtime. A bounded launch without `--hardware` started the
+control panel, processed camera, RViz, robot-state publisher, and live ST7
+listener together; it was then interrupted normally. The camera's temporary
+test recording was removed after the check. No CAN interface was opened and no
+physical arm moved.
+
+Evidence: `diagnostics/right_camera_playback_st7_focused_tests.txt`,
+`diagnostics/right_camera_playback_st7_ui_check.txt`,
+`diagnostics/right_camera_playback_st7_audio_check.txt`,
+`diagnostics/right_camera_playback_st7_static_audit.txt`, and
+`diagnostics/right_camera_playback_st7_full_tests.txt`, plus
+`diagnostics/right_camera_playback_st7_offline_launch.txt`.
+
+## ST7 normality-score tuning — 2026-09-25
+
+Updated the recorded-path launcher to use the scoring-enabled ST7 checkout at
+`/home/jason/st7`, outside `Proyectos3`. Startup now requires both
+`runs/cymbal-fmn-tcn/best.pt` and
+`runs/cymbal-normality/reference.npz`. The audio bridge refuses to report ready
+unless ST7's listening status says its normality scorer is enabled, and its
+version-2 local protocol requires a finite 0–100 `normality_score` on every
+forwarded hit.
+
+The original sound-onset discovery remains complete 5-degree anchor round
+trips. The first hit fixes depth `D`. Scores strictly greater than 80 finish the
+current return and then center and relax. Scores at or below 80 start one fixed,
+safe-zone-checked neighborhood in the exact order `D+2°`, `D+4°`, `D−2°`,
+`D−4°`. The window is never shifted beyond `D±4°`. Missing hits advance after
+the existing 1.25-second delayed-decision wait. The best scored depth is
+remembered and retried once if the bounded candidates are exhausted; failure to
+exceed 80 then uses the normal center-before-relax recovery. No accepted hit is
+repeated and no 100 BPM state was reintroduced.
+
+The 40 focused camera-playback tests passed. They include the exact
+`10° → 12°, 14°, 8°, 6°` ordering, ±4-degree bound, two-degree step, strict
+`>80` threshold, safe-candidate filtering, best-depth retry, timestamp gating,
+full anchor returns, accepted-hit center/relax behavior, outside-ST7 asset path,
+and mandatory normality protocol field. The complete repository suite passed
+all 171 tests, the updated offline Tk check passed, and compilation/static
+audits passed. The external ST7 suite passed all 9 tests; file-mode inference
+on `r32.wav` emitted normality scores 90.8, 96.0, and 85.2.
+
+A live bridge-only check selected the connected eMeet source
+`alsa_input.usb-eMeet_Tech_eMeet_M0_000000000012-00.mono-fallback`, opened it
+through PipeWire at 16 kHz, received ST7's
+`normality: {enabled: true, version: 1}` status, and reached the ready heartbeat
+after capturing 2.4 seconds without overflow. A bounded full launcher run
+without `--hardware` also started the control panel, camera, RViz, robot-state
+publisher, and scoring-enabled `/home/jason/st7` listener together. The camera
+recording created by that bounded diagnostic was deleted afterward. No CAN
+interface was opened and no physical arm moved.
+
+Evidence: `diagnostics/right_camera_playback_normality_focused_tests.txt`,
+`diagnostics/right_camera_playback_normality_full_tests.txt`,
+`diagnostics/right_camera_playback_normality_ui_check.txt`,
+`diagnostics/right_camera_playback_normality_static_audit.txt`,
+`diagnostics/right_camera_playback_normality_st7_tests.txt`,
+`diagnostics/right_camera_playback_normality_st7_file_check.txt`,
+`diagnostics/right_camera_playback_normality_live_audio_check.txt`, and
+`diagnostics/right_camera_playback_normality_offline_launch.txt`.
+
+## TONOR default microphone for camera playback — 2026-09-26
+
+Changed the recorded-path camera playback sound input from the eMeet M0 to the
+connected TONOR TD510. The launcher and audio bridge now default to
+`alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo`,
+fall back to the sole non-monitor source containing `TONOR` if that stable name
+changes, and report TONOR consistently in the control panel and process status.
+The detector checkpoint, normality artifact, thresholds, HIT protocol, and arm
+behavior were not changed.
+
+The host source list and default source both identified that exact TONOR input.
+A live bridge-only check selected it, opened it through PipeWire at 16 kHz mono,
+loaded normality version 1, reached the ready heartbeat, and stopped normally
+after capturing 2.2 seconds. No recording was saved. Shell/Python compilation,
+launcher help, static stale-name checks, and the offline Tk integration passed.
+The launcher retains `/home/jason/st7` as its preferred detector location but
+now falls back to the available `/home/jason/Proyectos3/st7` sibling checkout
+when the original location is absent. All 40 focused playback tests and all 171
+repository tests passed. No camera, CAN interface, or physical arm was used.
+
+## Highest-normality continuous 100 BPM playback — 2026-09-26
+
+Changed only the recorded-path `camera_playback` workflow after its first ST7
+sound detection. A first hit at depth `D` is now retained as the baseline, then
+every safe value in the fixed order `D−2°`, `D−4°`, `D+2°`, `D+4°` is
+tested as a complete anchor round trip. Missing-hit candidates advance after
+the existing delayed-decision wait. The window remains fixed, and after all
+candidates the scored depth with the highest normality is selected; there is no
+early threshold acceptance or final retry.
+
+The selected exact J7 target then repeats as anchor→target→anchor strokes with
+`STRIKE_BPM = 100.0` and a 0.600-second outbound-command period. Strokes never
+overlap: an encoder-confirmed return is required, and a slow stroke delays the
+next beat rather than issuing an unsafe overlapping target. During the loop,
+the panel button reads **STOP 100 BPM STRIKING: CENTER + RELAX**. A press while
+moving latches Stop, completes the active fast return, restores the ordinary
+0.4 rad/s J7 speed, centers, and relaxes; a press while waiting begins that
+center sequence immediately. Emergency Relax and existing stall, zone, motor,
+and program-close safeguards remain active.
+
+Offline tests verified the requested `10° → 8°, 6°, 12°, 14°` example,
+selection of 8° when it has the highest score, exact 0.600-second scheduling,
+fast down/return speed ordering, full return before another stroke, and safe
+Stop/center/relax behavior. All 47 focused playback tests and all 178 repository
+tests passed; the offline Tk UI and shell/Python compilation checks passed.
+No CAN interface, camera, or physical arm was used.
+
+## First-hit one-degree 100 BPM striking — 2026-09-26
+
+This supersedes the preceding highest-normality tuning behavior for the current
+recorded-path `camera_playback` workflow. Strike discovery now begins at 5
+degrees and increases J7 depth by exactly 1 degree per complete anchor round
+trip: 5°, 6°, 7°, and so on through the consecutive safe targets. A no-hit
+attempt advances by only 1 degree after the existing delayed-decision wait.
+
+The first timestamp-valid ST7 `HIT` fixes the target. The active search stroke
+still finishes its fast return to the preserved anchor for safety, then that
+exact detected target begins repeating at 100 BPM. There is no fine-tuning
+state, neighborhood search, score comparison, or movement above or below the
+first detected depth. ST7 may continue to carry its normality field for protocol
+compatibility, but `camera_playback/app.py` does not read it when accepting or
+selecting a strike depth.
+
+The existing non-overlapping 100 BPM loop and **STOP 100 BPM STRIKING: CENTER +
+RELAX** behavior remain intact: Stop finishes an active fast return, restores
+normal J7 speed, centers, and relaxes. Emergency Relax and the existing joint,
+safe-zone, stall, and timeout checks remain active.
+
+All 43 focused camera-playback tests and all 174 repository tests passed. The
+offline Tk UI check passed, Python compilation and shell syntax checks passed,
+and a static audit confirmed `STRIKE_START_DEGREES = 5`,
+`STRIKE_INCREMENT_DEGREES = 1`, and no remaining fine-tuning symbols in the
+runtime strike code. No CAN interface, camera, microphone, or physical arm was
+used for this verification.
+
+Evidence: `diagnostics/right_camera_playback_one_degree_focused_tests.txt`,
+`diagnostics/right_camera_playback_one_degree_full_tests.txt`,
+`diagnostics/right_camera_playback_one_degree_ui_check.txt`, and
+`diagnostics/right_camera_playback_one_degree_static_audit.txt`.
+
+## ESP32 hi-hat every-other-beat integration — 2026-09-27
+
+Copied the proven classic-ESP32 `motor_beat` firmware from
+`/home/jason/Proyectos3/esp-main` into `esp32_hihat/motor_beat/`; the source and
+copy have the same SHA-256
+`cc6df2ab7359b26f210ca01bdbf170c648086e71bbd8c58f21b597c8adcb1db8`.
+The copied firmware retains motor 2's 110-degree close/hold target, zero-degree
+return/release behavior, half-speed return, encoder control, and 400 ms serial
+watchdog. An offline Arduino compile for `esp32:esp32:esp32` succeeded.
+
+Added `camera_playback/hihat.py` and connected it directly to the existing arm
+beat transition. The launcher defaults to the currently connected CP2102's
+stable `/dev/serial/by-id/` path and uses the proven 115200 baud configuration.
+It verifies the expected `motor_beat` firmware response before enabling Start,
+sends `H` every 100 ms, and sends exactly one motor 2 command with each new arm
+outbound beat: `C`, `O`, `C`, `O`, and so on. Thus right J7 strikes every beat
+while motor 2 closes to 110 degrees every other beat and returns to zero on the
+intervening beats. The integrated runtime never sends motor 1's `K` command.
+
+The ordinary Stop control sends `O` immediately so motor 2 returns to zero while
+the arm completes its active return, centers, and relaxes. Emergency Relax and
+application shutdown send `S` to release the firmware outputs. A missing port,
+wrong/unresponsive firmware, serial write failure, or firmware fault prevents
+Start or stops continuous arm playback through the existing safe return and
+center path.
+
+The current device was confirmed query-only as the Silicon Labs CP2102 at
+`/dev/ttyUSB0`, reachable by the configured stable by-id link, with user
+read/write access. The real port was not opened and no serial motor command was
+sent during verification. Pseudo-terminal tests covered 115200-baud setup,
+firmware readiness, the exact `C/O/C/O` sequence, 110-degree constant, 100 ms
+heartbeat, stop/open behavior, Emergency `S`, missing-port handling, and fault
+latching. All 50 focused ESP/playback tests and all 181 repository tests passed;
+the offline Tk UI, launcher help, Python compilation, shell syntax, firmware
+compile, static command audit, and byte-for-byte firmware comparison passed.
+No CAN interface, camera, microphone, physical arm, or ESP32 motor was operated.
+
+Evidence: `diagnostics/right_camera_playback_esp_hihat_focused_tests.txt`,
+`diagnostics/right_camera_playback_esp_hihat_full_tests.txt`,
+`diagnostics/right_camera_playback_esp_hihat_ui_check.txt`,
+`diagnostics/right_camera_playback_esp_hihat_launcher_help.txt`,
+`diagnostics/right_camera_playback_esp_hihat_firmware_compile.txt`, and
+`diagnostics/right_camera_playback_esp_hihat_static_audit.txt`.
+
+## Pure-simulation 5-degree playback test mode — 2026-09-27
+
+Added a mutually exclusive `--test` mode to
+`start_beat.sh`. It cannot construct the real `Motors` class,
+does not open SocketCAN, and cannot command the physical arm or gripper. It
+shares the normal playback application and safety state machine through an
+in-memory `SimulatedMotors` substitute, while the launcher omits the Y2 camera
+process, ST7/TONOR audio process, and ESP32 hi-hat connection.
+
+Test mode simulates recording preflight, right-arm centering, gripper loading,
+recorded playback, joint-state feedback, zone enforcement, exact strike
+control, and Stop/Center/Relax in RViz. After the simulated recording endpoint
+settles, it assumes the endpoint is correctly positioned, validates the normal
+first 5-degree strike path, skips camera alignment and all hit-search attempts,
+and starts the same non-overlapping straight quarter-note 100 BPM loop at
+exactly 5 degrees. It does not issue any hi-hat command or introduce swing.
+
+The Tk integration check explicitly replaces the real CAN constructor with an
+exception and confirms that `--test` instead creates `SimulatedMotors`, which
+has no socket member. Launcher composition is also inspected without launching
+its actions to confirm that test mode contains no camera or audio child process.
+That integration then completes simulated center, gripper close, recorded
+playback, two fixed 5-degree 100 BPM strikes, Stop, recenter, and relax. All 55
+focused playback/hi-hat tests and all 186 repository tests passed, along with
+launcher help/mutual exclusion, Python compilation, shell syntax, and static
+launch audits. No CAN interface, camera, microphone, ESP32 serial port, or
+physical arm was used during these checks.
+
+Evidence: `diagnostics/right_camera_playback_test_mode_focused_tests.txt`,
+`diagnostics/right_camera_playback_test_mode_full_tests.txt`,
+`diagnostics/right_camera_playback_test_mode_ui_check.txt`,
+`diagnostics/right_camera_playback_test_mode_launcher_help.txt`, and
+`diagnostics/right_camera_playback_test_mode_static_audit.txt`.
+
+## Triplet swing ride rhythm — 2026-09-27
+
+Changed only the continuous ride rhythm after first-hit depth selection. The
+selected J7 depth and the test-mode 5-degree depth now use the same
+triplet-based 100 BPM swing scheduler. The first ride command is the extra
+pickup before beat 1. The sequence then plays beat 1, beat 2, the third-triplet
+extra after beat 2, beat 3, beat 4, and the third-triplet extra after beat 4.
+Starting at the pickup, its intended command gaps are 0.200, 0.600, 0.400,
+0.200, 0.600, 0.400, and 0.200 seconds before repeating.
+
+The ESP32 hi-hat behavior remains on the four main quarter-note beats. The
+pickup and ride extras do not advance or command the hi-hat; beats 1 through 4
+retain the existing `C`, `O`, `C`, `O` close/open sequence. Strike discovery,
+the chosen degree value, speeds, complete-return safety, Stop/Center/Relax, and
+all camera/audio behavior are unchanged. In particular, the return is not
+interrupted to force a short swing interval: when a full outbound-and-return
+stroke exceeds its 0.200, 0.400, or 0.600-second gap, the next ride event waits
+for the encoder-confirmed return.
+
+All 57 focused camera-playback/hi-hat tests and all 188 repository tests passed.
+The pure-simulation Tk integration completed center, recording playback, the
+5-degree swing pickup and beat 1, Stop, recenter, and relax while explicitly
+forbidding construction of the real CAN motor class. Static timing and hi-hat
+audits, in-memory Python compilation, and shell syntax checks also passed. No
+CAN interface, camera, microphone, ESP32 serial port, or physical arm was used.
+
+Evidence: `diagnostics/right_camera_playback_swing_focused_tests.txt`,
+`diagnostics/right_camera_playback_swing_full_tests.txt`,
+`diagnostics/right_camera_playback_swing_test_mode_ui_check.txt`, and
+`diagnostics/right_camera_playback_swing_static_audit.txt`.
+
+## Equal 3.5 rad/s cymbal-strike return speed — 2026-09-27
+
+Changed the recorded-path `camera_playback` J7 return limit from 2.0 rad/s to
+3.5 rad/s, matching its existing 3.5 rad/s downstroke limit. This applies both
+to the 5°, 6°, 7°… discovery round trips and to every continuous 100 BPM
+swing stroke. Target positions, swing scheduling, full-return-before-next-hit
+safety, hi-hat timing, and Stop/Center/Relax behavior are unchanged.
+
+The separate standalone `right_joint7_test` remains at its original 2.0 rad/s;
+its constant and direct-CAN allowlist were kept distinct so this playback-only
+speed change does not alter the neighboring test program.
+
+All 81 focused camera-playback, hi-hat, motor-command, and standalone-J7 tests
+passed, as did all 188 repository tests. The pure-simulation Tk sequence and
+static equal-speed/allowlist audits passed. No CAN interface, camera,
+microphone, ESP32 serial port, or physical arm was used.
+
+Evidence: `diagnostics/right_camera_playback_equal_strike_speed_focused_tests.txt`,
+`diagnostics/right_camera_playback_equal_strike_speed_full_tests.txt`,
+`diagnostics/right_camera_playback_equal_strike_speed_ui_check.txt`, and
+`diagnostics/right_camera_playback_equal_strike_speed_static_audit.txt`.
+
+## Two-rad/s interruptible swing returns — 2026-09-27
+
+This supersedes the immediately preceding equal-speed change. Restored the
+recorded-path cymbal return limit to 2.0 rad/s while retaining the 3.5 rad/s
+downstroke. Discovery attempts remain complete anchor round trips. During the
+continuous swing loop only, a return may now be reversed before reaching the
+anchor when the following strike deadline is too close.
+
+The opening pickup establishes the musical grid when its strike controller
+reports the target reached. Every later ride event is stored as a target-arrival
+deadline. On each 20 ms control update during a return or anchor wait, the
+program reads live J7 feedback and estimates the outbound requirement as the
+current distance from the fixed strike target divided by 3.5 rad/s, plus a
+40 ms command/control margin. It switches from the 2.0 rad/s return to the
+3.5 rad/s downstroke when that estimate reaches the remaining deadline time.
+The scheduled grid is retained rather than being shifted by a late stroke.
+
+An interrupted return requires at least 4° of measured rebound. This is twice
+the strike controller's 2° reached tolerance, ensuring that the new outbound
+controller cannot immediately declare success without moving. The partial path
+is strictly within the same target-to-anchor segment already validated for the
+full stroke. Longer 0.400 and 0.600-second swing gaps may still complete the
+full return. Stop disables further reversals, completes the current target and
+full 2.0 rad/s return, restores ordinary speed, centers, and relaxes.
+
+Because J7 may start its downstroke before the beat deadline, ESP32 hi-hat
+commands were separated from the outbound transition. They remain `C`, `O`,
+`C`, `O` on main quarter-note deadlines only; the pickup and ride extras still
+do not advance the hi-hat.
+
+All 83 focused playback, hi-hat, motor-command, and standalone-J7 tests passed,
+as did all 190 repository tests. The pure-simulation Tk sequence completed
+center, recording, swing, Stop, recenter, and relax while the real CAN
+constructor was explicitly forbidden. Static timing, speed, rebound, hi-hat,
+Python-compilation, and shell checks passed. No CAN interface, camera,
+microphone, ESP32 serial port, or physical arm was operated, so physical impact
+timing and the 40 ms margin still require live observation.
+
+Evidence: `diagnostics/right_camera_playback_interruptible_return_focused_tests.txt`,
+`diagnostics/right_camera_playback_interruptible_return_full_tests.txt`,
+`diagnostics/right_camera_playback_interruptible_return_ui_check.txt`, and
+`diagnostics/right_camera_playback_interruptible_return_static_audit.txt`.
+
+## Manual powered strike checkpoints and `start_beat.sh` rename — 2026-09-28
+
+Renamed the recorded-path shell entry point from
+`start_right_camera_playback.sh` to `start_beat.sh` and added a third mutually
+exclusive mode, `--hardwaretest`. The new mode launches the same real CAN arm,
+processed camera, TONOR/ST7 detector, and ESP32 paths as `--hardware`; it does
+not reuse the in-memory `--test` motor substitute.
+
+After normal centering, recording playback, and visible-pink acceptance,
+`--hardwaretest` plans the same safe 5°, 6°, 7°… J7 targets but holds the
+accepted anchor without issuing a strike command. A dedicated button displays
+**Attempt 5° hit** and authorizes exactly one full anchor-to-target-to-anchor
+attempt. ST7 detection and its timestamp validation remain automatic. A no-hit
+decision leaves the arm holding the returned anchor and changes the button to
+the next degree. A detected hit also finishes the return, then changes the
+button to **Continue to swing beat**; only that click starts the existing exact
+detected-depth swing/hi-hat loop. The ordinary `--hardware` automatic search
+and `--test` pure-simulation flow retain their previous branches.
+
+All 60 focused camera-playback tests and all 197 repository tests passed. The
+regular offline playback UI, new hardware-test checkpoint UI, and complete
+pure-simulation UI flow passed. Launcher help, mutual-exclusion checks, Python
+compilation, shell syntax, renamed-entry-point checks, and static launch/mode
+audits also passed. These were offline checks only: no CAN interface, physical
+arm, camera, microphone, or ESP32 serial device was opened or operated.
+
+Evidence: `diagnostics/right_camera_playback_hardwaretest_focused_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_full_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_ui_checks.txt`, and
+`diagnostics/right_camera_playback_hardwaretest_static_audit.txt`.
+
+## Editable one-shot `--hardwaretest` strikes with continuous ST7 log — 2026-09-28
+
+This supersedes the preceding `--hardwaretest` checkpoint workflow. The normal
+`--hardware` automatic 5°/6°/7° search and the pure-simulation `--test` flow
+remain unchanged. `--hardwaretest` still performs powered centering, recorded
+playback, and camera alignment, but no longer runs automatic depth discovery or
+enters the continuous swing loop.
+
+After visible-pink acceptance, the panel exposes an editable J7 strike-degree
+field. Decimal amounts are accepted. Every press revalidates the exact entered
+target against the J7 limit and the complete buffered safe-zone path, selects
+the ordinary 0.4 rad/s J7 speed before the position command, and performs
+exactly one anchor-to-target-to-anchor round trip. On return it enables the
+field and button again and does not issue another strike unless the user presses
+the button. The smaller endpoint tolerance scales below the entered movement so
+small valid entries cannot be declared reached at the anchor without moving.
+
+ST7/TONOR remains required and active throughout the manual strike section.
+Every incoming `HIT` updates a persistent GUI sound-log line and prints a
+terminal log entry containing the count, score, normality metadata, and current
+manual-strike phase. These events are informational only and do not trigger or
+repeat motion. Because this mode has no swing/hi-hat sequence, it does not open
+or require the ESP32 serial controller.
+
+All 63 focused camera-playback tests and all 200 repository tests passed. The
+ordinary offline playback UI, editable hardware-test UI and sound-log check,
+and complete pure-simulation UI flow passed. Launcher help, mutual exclusion,
+Python compilation, shell syntax, one-shot-state static checks, normal-speed
+command ordering, and stale-workflow audits passed. These were offline checks
+only: no CAN interface, physical arm, camera, microphone, or ESP32 serial device
+was opened or operated.
+
+Evidence:
+`diagnostics/right_camera_playback_hardwaretest_manual_focused_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_manual_full_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_manual_ui_checks.txt`, and
+`diagnostics/right_camera_playback_hardwaretest_manual_static_audit.txt`.
+
+## `--hardwaretest` ESP32-free preflight regression — 2026-09-28
+
+Fixed the powered hardware-test preflight crash reported as
+`AttributeError: 'NoneType' object has no attribute 'tick'`. Hardware-test mode
+intentionally does not construct an ESP32 hi-hat controller, so its delayed
+recording preflight now refreshes camera and ST7 state but calls `hihat.tick()`
+only when a controller exists. Normal `--hardware` still performs the same
+hi-hat refresh, and `--test` remains fully offline.
+
+Regression tests exercise both branches directly: hardware-test preflight with
+`hihat=None` proceeds to the shared arm-start transition, while normal hardware
+preflight still ticks its controller. All 65 focused camera-playback tests and
+all 202 repository tests passed, along with Python/shell syntax checks and the
+offline hardware-test UI check. No CAN frame, motor command, camera, microphone,
+or ESP32 serial operation was used during verification.
+
+Evidence:
+`diagnostics/right_camera_playback_hardwaretest_hihat_preflight_focused_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_hihat_preflight_full_tests.txt`,
+and
+`diagnostics/right_camera_playback_hardwaretest_hihat_preflight_ui_check.txt`.
+
+## `--hardwaretest` strike speeds matched to `--hardware` — 2026-09-28
+
+Changed each user-authorized one-shot hardware-test strike to use the same J7
+leg speeds as normal hardware striking: 3.5 rad/s from the pink-zone anchor to
+the entered strike target and 2.0 rad/s back to the anchor. The controller sets
+the applicable speed before each exact position command, scales the stage
+timeout using that leg's speed, and restores the ordinary 0.4 rad/s J7 setting
+after the completed return before waiting for another button press. The manual
+one-shot rule and motion-independent ST7 logging remain unchanged.
+
+Regression tests verify both speed-command/target-command orderings against the
+same shared constants used by `--hardware`, verify ordinary-speed restoration
+after the return, and preserve the normal-hardware and pure-simulation paths.
+All 65 focused camera-playback tests and all 202 repository tests passed, along
+with compilation, shell syntax, and the offline hardware-test UI check. No CAN
+frame, motor command, camera, microphone, or ESP32 serial operation was used.
+
+Evidence:
+`diagnostics/right_camera_playback_hardwaretest_matched_speeds_focused_tests.txt`,
+`diagnostics/right_camera_playback_hardwaretest_matched_speeds_full_tests.txt`,
+and
+`diagnostics/right_camera_playback_hardwaretest_matched_speeds_ui_check.txt`.
+
+## `start_beat.sh` single-frame pink-zone hill goal — 2026-09-29
+
+The recorded-playback camera controller used by `start_beat.sh` no longer has
+the smaller invisible inner rectangle as its hill-climber completion goal.
+After the recording endpoint is outside the visible pink rectangle, robust
+outside-zone samples still provide the smooth center-distance score used to
+choose safe Cartesian moves. At each settled hill pose, however, any one fresh
+directly observed stick-tip frame inside the complete visible pink rectangle
+immediately establishes the strike anchor and continues the selected hardware
+workflow. There is no timed hold, smaller target, or second confirmation.
+
+This change is confined to the separate `camera_playback` controller launched
+by `start_beat.sh`; the original `camera_search` program and its independent
+target-hold behavior remain unchanged. Regression coverage checks visible-edge
+acceptance during hill measurement, immediate transition into automatic strike
+planning, and continued outside-frame measurement. All 65 focused playback
+tests and all 202 repository tests passed. Python compilation, shell syntax,
+launcher help, stale inner-target runtime-text checks, and original-controller
+isolation checks also passed. These checks were offline only: no CAN interface,
+physical arm, camera, microphone, or ESP32 serial device was opened or operated.
+
+Evidence:
+`diagnostics/right_camera_playback_pink_single_frame_focused_tests.txt`,
+`diagnostics/right_camera_playback_pink_single_frame_full_tests.txt`, and
+`diagnostics/right_camera_playback_pink_single_frame_static_audit.txt`.
+
+## Faster playback-strike J7 reversal — 2026-09-29
+
+The `camera_playback` strike path launched by `start_beat.sh` now uses 3.5 rad/s
+for both the downward and return legs. Because the two legs share one speed,
+the reversal retains the already-selected firmware limit instead of inserting
+another speed-setting frame. The separate standalone `right_joint7_test`
+retains its original 2.0 rad/s speed.
+
+Active playback strike legs temporarily prioritize right-J7 state queries at
+the 20 ms GUI control-loop limit, or 50 Hz. The other 15 motor/gripper channels
+retain their existing 20 Hz request rate, and J7 returns to 20 Hz while waiting
+between strikes. This changes the steady state-query count from 320 to 350
+requests per second during an active leg, a 9.375% increase, rather than raising
+all 16 channels to 50 Hz.
+
+Every manual hardware-test, automatic discovery, and continuous-swing return
+now sends one motor-7 anchor-position frame immediately. It no longer sends
+seven J1–J7 position frames with J7 last. Regression tests also verify that an
+outbound-to-return transition at the common 3.5 rad/s speed does not issue a
+redundant speed frame, that only right J7 receives the priority query, and that
+ordinary motor feedback rates remain unchanged.
+
+All 82 focused centering/camera-playback tests and all 204 repository tests
+passed. The pure-simulation complete UI sequence and the offline editable
+hardware-test UI check passed. Python compilation, shell syntax, launcher help,
+speed/isolation checks, query-load checks, and all three J7-only return paths
+passed static validation. These were offline checks only: no CAN interface,
+physical arm, camera, microphone, or ESP32 serial device was opened or
+operated. The physical reduction in cymbal-contact dwell therefore remains to
+be confirmed with a controlled one-shot hardware test.
+
+Evidence:
+`diagnostics/right_camera_playback_fast_return_focused_tests.txt`,
+`diagnostics/right_camera_playback_fast_return_full_tests.txt`,
+`diagnostics/right_camera_playback_fast_return_test_mode_ui_check.txt`,
+`diagnostics/right_camera_playback_fast_return_hardwaretest_ui_check.txt`, and
+`diagnostics/right_camera_playback_fast_return_static_audit.txt`.
+## 2026-09-30: restored `--hardwaretest` playback/alignment with manual MIT strikes
+
+- Restored the recording selector, center/open/load/Continue/close workflow,
+  recorded playback, processed-camera alignment, and single-frame visible-pink
+  acceptance in `--hardwaretest`.
+- Kept the relative-degree manual J7 MIT freefall/rebound control at the accepted
+  pink-zone pose. ST7 runs as an informational logger; the ESP32 remains omitted.
+- Added hardware-test-only fault containment: a named right-drive fault disables
+  only that drive and holds the others; generic non-stall failures lock motion
+  with powered holds; `STALL: motor N` still immediately relaxes the whole right
+  arm. The MIT return now applies the existing 0.5-second stall criteria to J7.
+- Offline verification only; no CAN socket was opened and no physical motor was
+  commanded:
+  - 86 focused camera-playback tests passed.
+  - 234 complete repository tests passed.
+  - The offline Tk hardware-test UI check passed.
+  - Python compilation, `start_beat.sh` shell syntax, launcher help, and static
+    contract checks passed.
+- Evidence:
+  - `diagnostics/right_camera_playback_hardwaretest_restored_mit_focused_tests.txt`
+  - `diagnostics/right_camera_playback_hardwaretest_restored_mit_full_tests.txt`
+  - `diagnostics/right_camera_playback_hardwaretest_restored_mit_ui_check.txt`
+  - `diagnostics/right_camera_playback_hardwaretest_restored_mit_launcher_help.txt`
+  - `diagnostics/right_camera_playback_hardwaretest_restored_mit_static_audit.txt`

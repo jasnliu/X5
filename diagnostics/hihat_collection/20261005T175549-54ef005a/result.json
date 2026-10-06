@@ -1,0 +1,38 @@
+{
+  "success": false,
+  "error": "Joint limit violation; Accessory shutdown: {'error': 'RuntimeError: Collection parent heartbeat lost', 'shutdown_error': None, 'closures_commanded': 34, 'open_command_at': 563389.547624947, 'normal_open_return_wait_s': 1.5, 'release_ack': True, 'encoder_position_verified': False, 'finished_at': 563391.061029311}",
+  "recovery_error": "Joint limit violation; Accessory shutdown: {'error': 'RuntimeError: Collection parent heartbeat lost', 'shutdown_error': None, 'closures_commanded': 34, 'open_command_at': 563389.547624947, 'normal_open_return_wait_s': 1.5, 'release_ack': True, 'encoder_position_verified': False, 'finished_at': 563391.061029311}",
+  "center": null,
+  "relaxed_verified": false,
+  "blocks": 10,
+  "attempted_strikes": 10,
+  "endpoint": {
+    "t": 563327.280562646,
+    "goal_rad": [
+      -0.6055312428473343,
+      0.21194552529182964,
+      0.24416891737239688,
+      1.7329663538567175,
+      0.20476168513003543,
+      -0.30516319523918334,
+      0.6001606775005737
+    ],
+    "actual_rad": [
+      -0.6051476310368518,
+      0.21194552529182964,
+      0.24416891737239688,
+      1.7329663538567175,
+      0.20476168513003543,
+      -0.30516319523918334,
+      0.5997770656900894
+    ],
+    "max_error_deg": 0.021979337712122585,
+    "settle_range_deg": 0.02197933771202081,
+    "settled_seconds": 0.628671110025607,
+    "tolerance_deg": 0.05
+  },
+  "powered_at": 563303.478511054,
+  "finished_at": 563400.141766627,
+  "directory": "/home/jason/Proyectos3/X5/diagnostics/hihat_collection/20261005T175549-54ef005a",
+  "labels_created": false
+}

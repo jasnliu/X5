@@ -1,0 +1,301 @@
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/camera_search/device.py	2026-10-03 23:58:42.817356082 -0700
++++ /home/jason/Proyectos3/X5/camera_search/device.py	2026-10-04 00:17:23.938912926 -0700
+@@ -60,12 +60,38 @@
+     return found[0]
+ 
+ 
++def is_configured_camera(index):
++    """A numeric override pointing to this Gemini must keep its full FOV too."""
++    try:
++        return resolve_camera(DEFAULT_CAMERA) == index
++    except (RuntimeError, FileNotFoundError):
++        return False
++
++
++def full_fov_size(width=None, height=None):
++    """Only verified native 16:9 modes preserve this Gemini's entire RGB view."""
++    config = json.loads(CAMERA_CONFIG.read_text())
++    if width is None and height is None:
++        width, height = config['rgb_width'], config['rgb_height']
++    elif width is None:
++        width = height*16//9
++    elif height is None:
++        height = width*9//16
++    if [width, height] not in config['rgb_full_fov_sizes'] or width*9 != height*16:
++        choices = ', '.join(f'{w}x{h}' for w, h in config['rgb_full_fov_sizes'])
++        raise ValueError(f'Orbbec maximum RGB FOV requires a verified 16:9 mode: {choices}. '
++                         f'{width}x{height} is cropped or unsupported; no narrow-FOV fallback is allowed.')
++    return width, height
++
++
+ def open_camera(source=DEFAULT_CAMERA, *, cv2=None, width=None, height=None, fps=30):
+     """Open the selected color stream; return capture and resolved V4L index."""
+     if cv2 is None:
+         import cv2
+     index = resolve_camera(source)
+-    is_orbbec = source == DEFAULT_CAMERA
++    is_orbbec = source == DEFAULT_CAMERA or is_configured_camera(index)
++    if is_orbbec:
++        width, height = full_fov_size(width, height)
+     camera = (cv2.VideoCapture(index, cv2.CAP_V4L2) if is_orbbec
+               else cv2.VideoCapture(index))
+     try:
+@@ -81,8 +107,14 @@
+             camera.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+         if not camera.set(cv2.CAP_PROP_FPS, fps):
+             print(f'Warning: camera did not accept the {fps} FPS request.', flush=True)
++        if is_orbbec:
++            actual_size = (int(camera.get(cv2.CAP_PROP_FRAME_WIDTH)),
++                           int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT)))
++            if actual_size != (width, height):
++                raise RuntimeError(f'Orbbec full-FOV mode {width}x{height} was not accepted '
++                                   f'(received {actual_size[0]}x{actual_size[1]}); refusing cropped capture')
+         print(f'Camera: {source} -> /dev/video{index}'
+-              + (' (configured Orbbec Gemini 2 RGB)' if is_orbbec else ''), flush=True)
++              + (f' (Orbbec Gemini 2 RGB, full FOV, {width}x{height})' if is_orbbec else ''), flush=True)
+         return camera, index
+     except BaseException:
+         camera.release()
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/config/camera.json	2026-10-03 23:58:42.817356082 -0700
++++ /home/jason/Proyectos3/X5/config/camera.json	2026-10-04 00:17:23.938912926 -0700
+@@ -3,5 +3,8 @@
+   "vendor_id": "2bc5",
+   "product_id": "0670",
+   "serial": "AY6R463004K",
+-  "usb_interface": "04"
++  "usb_interface": "04",
++  "rgb_width": 1280,
++  "rgb_height": 720,
++  "rgb_full_fov_sizes": [[640, 360], [1280, 720], [1920, 1080]]
+ }
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/camera_search/camera.py	2026-10-03 23:58:42.817356082 -0700
++++ /home/jason/Proyectos3/X5/camera_search/camera.py	2026-10-04 00:17:23.938912926 -0700
+@@ -72,8 +72,10 @@
+     parser.add_argument("--imgsz", type=int, default=None)
+     parser.add_argument("--conf", type=float, default=None)
+     parser.add_argument("--device", default="auto")
+-    parser.add_argument("--width", type=int, default=None)
+-    parser.add_argument("--height", type=int, default=None)
++    parser.add_argument("--width", type=int, default=None,
++                        help="RGB width (Orbbec full-FOV default: 1280; omitted partner dimension inferred as 16:9)")
++    parser.add_argument("--height", type=int, default=None,
++                        help="RGB height (Orbbec full-FOV default: 720; cropped modes are rejected)")
+     parser.add_argument("--allow-low-light-fps", action="store_true")
+     parser.add_argument("--process-every", type=int, default=1)
+     parser.add_argument("--output", type=Path, default=None)
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/launch_right_camera_cartesian.py	2026-10-03 23:58:42.817356082 -0700
++++ /home/jason/Proyectos3/X5/launch_right_camera_cartesian.py	2026-10-04 00:17:23.938912926 -0700
+@@ -28,8 +28,10 @@
+     parser.add_argument("--preprocessing", choices=("local", "reference", "none"), default=None)
+     parser.add_argument("--lighting-profile", type=Path, default=None)
+     parser.add_argument("--no-normalization", action="store_true")
+-    parser.add_argument("--width", type=int, default=None)
+-    parser.add_argument("--height", type=int, default=None)
++    parser.add_argument("--width", type=int, default=None,
++                        help="RGB width (Orbbec full-FOV default: 1280; omitted partner dimension inferred as 16:9)")
++    parser.add_argument("--height", type=int, default=None,
++                        help="RGB height (Orbbec full-FOV default: 720; cropped modes are rejected)")
+     parser.add_argument("--allow-low-light-fps", action="store_true")
+     parser.add_argument("--process-every", type=int, default=1)
+     parser.add_argument("--output", type=Path, default=None)
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/launch_right_camera_playback.py	2026-10-03 23:58:42.818356148 -0700
++++ /home/jason/Proyectos3/X5/launch_right_camera_playback.py	2026-10-04 00:17:23.939912990 -0700
+@@ -61,8 +61,10 @@
+     parser.add_argument("--preprocessing", choices=("local", "reference", "none"), default=None)
+     parser.add_argument("--lighting-profile", type=Path, default=None)
+     parser.add_argument("--no-normalization", action="store_true")
+-    parser.add_argument("--width", type=int, default=None)
+-    parser.add_argument("--height", type=int, default=None)
++    parser.add_argument("--width", type=int, default=None,
++                        help="RGB width (Orbbec full-FOV default: 1280; omitted partner dimension inferred as 16:9)")
++    parser.add_argument("--height", type=int, default=None,
++                        help="RGB height (Orbbec full-FOV default: 720; cropped modes are rejected)")
+     parser.add_argument("--allow-low-light-fps", action="store_true")
+     parser.add_argument("--process-every", type=int, default=1)
+     parser.add_argument("--output", type=Path, default=None)
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/tests/test_camera_device.py	2026-10-04 00:00:38.865933313 -0700
++++ /home/jason/Proyectos3/X5/tests/test_camera_device.py	2026-10-04 00:18:52.819631480 -0700
+@@ -9,7 +9,8 @@
+ from unittest.mock import Mock, patch
+ 
+ from camera_search.device import (
+-    DEFAULT_CAMERA, add_camera_argument, camera_argument, open_camera, resolve_camera,
++    DEFAULT_CAMERA, add_camera_argument, camera_argument, full_fov_size,
++    is_configured_camera, open_camera, resolve_camera,
+ )
+ from camera_search.camera import _parser
+ 
+@@ -97,7 +98,13 @@
+ 
+     def fake_cv2(self):
+         cap = Mock()
+-        cap.isOpened.return_value = cap.set.return_value = True
++        cap.isOpened.return_value = True
++        properties = {3: 640, 4: 480, 5: 30, 6: 0}
++        def set_property(key, value):
++            properties[key] = value
++            return True
++        cap.set.side_effect = set_property
++        cap.get.side_effect = lambda key: properties[key]
+         return SimpleNamespace(VideoCapture=Mock(return_value=cap),
+                                CAP_V4L2=200, CAP_PROP_FOURCC=6, CAP_PROP_FRAME_WIDTH=3,
+                                CAP_PROP_FRAME_HEIGHT=4, CAP_PROP_FPS=5,
+@@ -117,21 +124,71 @@
+ 
+     def test_numeric_override_retains_original_backend_and_format_behavior(self):
+         cv2, cap = self.fake_cv2()
+-        open_camera(2, cv2=cv2)
++        with patch('camera_search.device.is_configured_camera', return_value=False):
++            open_camera(2, cv2=cv2)
+         cv2.VideoCapture.assert_called_once_with(2)
+         cv2.VideoWriter_fourcc.assert_not_called()
+ 
+     def test_failed_open_or_configuration_releases_camera(self):
+         cv2, cap = self.fake_cv2()
+         cap.isOpened.return_value = False
+-        with self.assertRaises(RuntimeError): open_camera(2, cv2=cv2)
++        with patch('camera_search.device.is_configured_camera', return_value=False):
++            with self.assertRaises(RuntimeError): open_camera(2, cv2=cv2)
+         cap.release.assert_called_once()
+         cv2, cap = self.fake_cv2()
++        cap.set.side_effect = None
+         cap.set.return_value = False
+         with patch('camera_search.device.resolve_camera', return_value=4):
+             with self.assertRaises(RuntimeError): open_camera(cv2=cv2)
+         cap.release.assert_called_once()
+ 
++    def test_full_fov_defaults_and_partial_dimensions(self):
++        self.assertEqual(full_fov_size(), (1280, 720))
++        self.assertEqual(full_fov_size(width=640), (640, 360))
++        self.assertEqual(full_fov_size(height=1080), (1920, 1080))
++        for size in [(640, 360), (1280, 720), (1920, 1080)]:
++            self.assertEqual(full_fov_size(*size), size)
++
++    def test_cropped_or_unsupported_sizes_fail_before_opening_camera(self):
++        for w, h in [(640, 480), (1280, 960), (800, 600), (None, 480), (0, 0)]:
++            cv2, cap = self.fake_cv2()
++            with patch('camera_search.device.resolve_camera', return_value=4):
++                with self.assertRaisesRegex(ValueError, 'maximum RGB FOV'):
++                    open_camera(cv2=cv2, width=w, height=h)
++            cv2.VideoCapture.assert_not_called()
++
++    def test_default_forces_full_sensor_view_instead_of_driver_default(self):
++        cv2, cap = self.fake_cv2()
++        with patch('camera_search.device.resolve_camera', return_value=4):
++            open_camera(cv2=cv2)
++        self.assertEqual(cap.get(cv2.CAP_PROP_FRAME_WIDTH), 1280)
++        self.assertEqual(cap.get(cv2.CAP_PROP_FRAME_HEIGHT), 720)
++
++    def test_silent_driver_resolution_fallback_is_rejected_and_released(self):
++        cv2, cap = self.fake_cv2()
++        cap.set.side_effect = None
++        cap.set.return_value = True  # Pretend success, but retain default 640x480.
++        with patch('camera_search.device.resolve_camera', return_value=4):
++            with self.assertRaisesRegex(RuntimeError, 'refusing cropped capture'):
++                open_camera(cv2=cv2)
++        cap.release.assert_called_once()
++
++    def test_numeric_selection_of_gemini_also_enforces_full_fov(self):
++        cv2, cap = self.fake_cv2()
++        with patch('camera_search.device.is_configured_camera', return_value=True):
++            open_camera(2, cv2=cv2)
++        cv2.VideoCapture.assert_called_once_with(2, cv2.CAP_V4L2)
++        self.assertEqual(cap.get(cv2.CAP_PROP_FRAME_WIDTH), 1280)
++        with patch('camera_search.device.is_configured_camera', return_value=True):
++            with self.assertRaises(ValueError): open_camera(2, cv2=cv2, width=640, height=480)
++
++    def test_numeric_identity_check_handles_absent_or_renumbered_gemini(self):
++        with patch('camera_search.device.resolve_camera', return_value=14):
++            self.assertTrue(is_configured_camera(14))
++            self.assertFalse(is_configured_camera(2))
++        with patch('camera_search.device.resolve_camera', side_effect=RuntimeError('absent')):
++            self.assertFalse(is_configured_camera(2))
++
+     def test_standalone_video_uses_shared_default_and_reports_open_errors(self):
+         from smooth_playback.hardware import Video
+         with patch('camera_search.device.open_camera', side_effect=RuntimeError('Missing Orbbec')):
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/tests/test_playback_transport.py	2026-10-03 12:10:38.024489316 -0700
++++ /home/jason/Proyectos3/X5/tests/test_playback_transport.py	2026-10-04 00:25:56.294769737 -0700
+@@ -65,9 +65,12 @@
+             bus.poll()
+         self.assertEqual(bus.last_query, 0.)
+         bus.playback_session.owns_feedback = True
+-        with patch.object(Motors, 'poll'):
++        # Verify query ownership, not host scheduling/GC within a 10 ms window.
++        # An exact clock value is stricter and deterministic under system load.
++        with patch.object(Motors, 'poll'), \
++                patch('camera_playback.playback_transport.time.monotonic', return_value=123.456):
+             bus.poll()
+-        self.assertLess(time.monotonic()-bus.last_query, .01)
++        self.assertEqual(bus.last_query, 123.456)
+ 
+     def test_no_disable_before_center_or_during_recording(self):
+         bus = self.bus()
+
+--- /home/jason/Proyectos3/X5/diagnostics/orbbec_fov/before/CAMERA_DEFAULT.md	2026-10-04 00:02:49.012506159 -0700
++++ /home/jason/Proyectos3/X5/CAMERA_DEFAULT.md	2026-10-04 00:24:25.932990237 -0700
+@@ -18,14 +18,40 @@
+ `config/camera.json` identifies the current Gemini by USB vendor/product,
+ serial **AY6R463004K**, and RGB interface **04**. `camera_search/device.py` resolves
+ its capture node at runtime, excluding the paired metadata node. The live-tested
+-node was `/dev/video4`, but that number is **not hardcoded** and may change after
+-reconnecting or adding cameras.
++node was initially `/dev/video4` and later `/dev/video2`, demonstrating why that
++number is **not hardcoded** and may change after reconnecting or adding cameras.
+ 
+ Depth and infrared are separate interfaces. Do not use the first Orbbec node or
+ the generic `/dev/v4l/by-id` link: on this camera those can select depth/IR rather
+-than RGB. The shared opener requests native color MJPEG and 30 FPS, compatible
+-with the currently observed USB 2 connection. Existing `--width`/`--height`
+-options remain available; without them the tested capture was 640x480.
++than RGB. The shared opener requests native color MJPEG, **1280x720 at 30 FPS**,
++compatible with the currently observed USB 2 connection. This is a **full-FOV
++16:9 mode**, replacing the cropped 640x480 driver default.
++
++## Maximum RGB field of view
++
++The shared configuration now explicitly selects the entire RGB view rather than
++accepting the driver's cropped 4:3 mode. Orbbec specifies approximately
++**86 degrees horizontal x 55 degrees vertical** for 16:9, compared with
++63 x 50 degrees in 4:3 ([manufacturer specification](https://www.orbbec.com.cn/index/Product/info.html?cate=38&id=51)).
++These are nominal manufacturer angles, not a new calibrated angular measurement.
++
++Live stationary-scene comparisons confirmed that **640x360, 1280x720, and
++1920x1080 show the same complete view**. 1280x720 is the default to retain that
++maximum FOV without the additional processing/storage cost of 1080p. The former
++640x480 frame covered only the middle two-thirds of the full image width and
++about eight-ninths of its height; it was not simply a lower-resolution full view.
++
++All X5 camera users share this policy, including standalone video capture. It
++also applies when a numeric `--camera N` points to the configured Gemini RGB node.
++For the Orbbec, `--width`/`--height` may select one of the three verified 16:9
++sizes; if only one dimension is supplied, the other is inferred at 16:9. Cropped
++or unverified sizes (including 640x480) are rejected before opening the camera.
++Actual driver resolution is checked after configuration; an unexpected fallback
++closes capture and reports an error instead of silently reducing FOV.
++
++This does not zoom out artificially, stretch or crop frames, change the lens,
++or substitute the wider depth/IR sensor for RGB. Normal camera/model coordinates
++use the complete captured image. The raw saved video has the same full coverage.
+ 
+ Existing numeric overrides still work on the camera launchers/processes:
+ 
+@@ -54,7 +80,11 @@
+ 
+ The shared selector has offline tests for device renumbering, identity matching,
+ depth/IR/metadata exclusion, no fallback, numeric overrides, all parser defaults,
+-capture cleanup, and standalone-video failure handling.
++capture cleanup, standalone-video failure handling, full-FOV defaults and partial
++dimensions, cropped-mode rejection, and driver-readback enforcement.
++
++Full-FOV comparisons and repeat live integration checks are retained separately
++under `diagnostics/orbbec_fov/`, preserving the original camera-default evidence.
+ 
+ The installed Orbbec SDK/Viewer was consulted only to identify the device and its
+ ownership of the streams; X5 continues to use its existing OpenCV/V4L2 pipeline.

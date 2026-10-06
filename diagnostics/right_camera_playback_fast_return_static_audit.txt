@@ -1,0 +1,17 @@
+== Python compile ==
+PASS
+== start_beat.sh syntax ==
+PASS
+== Fast-return constants and query load ==
+playback down/return=3.5/3.5 rad/s
+standalone J7 test=2.0 rad/s
+priority J7=50 Hz; other channels=20 Hz
+state-request increase=30/320 = 9.375%
+PASS
+== Immediate J7-only return paths ==
+690:            self.bus.set_right_joint7_position(desired[6])
+1569:            self.bus.set_right_joint7_position(desired[6])
+1821:            self.bus.set_right_joint7_position(desired[6])
+PASS
+== Launcher help ==
+PASS

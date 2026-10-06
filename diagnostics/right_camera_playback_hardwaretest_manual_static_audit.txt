@@ -1,0 +1,44 @@
+PASS: start_beat.sh remains the executable launcher and the old filename remains absent
+PASS: --hardware, --test, and --hardwaretest remain mutually exclusive
+PASS: --hardwaretest keeps camera/audio, uses editable exact-degree planning, and commands normal J7 speed
+PASS: each manual strike has one outbound and one return phase with no automatic repeat or swing transition
+PASS: ST7 hits update a dedicated background log and do not drive hardware-test motion
+PASS: --hardware and --test retain their separate automatic and simulation branches
+usage: launch_right_camera_playback.py [-h]
+                                       [--hardware | --test | --hardwaretest]
+                                       [--recording RECORDING]
+                                       [--camera CAMERA] [--model MODEL]
+                                       [--imgsz IMGSZ] [--conf CONF]
+                                       [--device DEVICE]
+                                       [--preprocessing {local,reference,none}]
+                                       [--lighting-profile LIGHTING_PROFILE]
+                                       [--no-normalization] [--width WIDTH]
+                                       [--height HEIGHT]
+                                       [--allow-low-light-fps]
+                                       [--process-every PROCESS_EVERY]
+                                       [--output OUTPUT]
+                                       [--audio-source AUDIO_SOURCE]
+                                       [--audio-device AUDIO_DEVICE]
+                                       [--esp-port ESP_PORT]
+
+Right recorded-path camera alignment
+
+options:
+  -h, --help            show this help message and exit
+  --hardware            run the complete camera, TONOR, ESP32, and physical-
+                        arm workflow
+  --test                pure simulation with no CAN, camera, microphone, or
+                        ESP32; animate playback and fixed 10-degree strikes in
+                        RViz
+  --hardwaretest        run the physical arm/camera/TONOR workflow, then
+                        accept an editable degree amount and perform one
+                        normal-speed strike per button press
+  --recording RECORDING
+                        right-arm recording (default: recordings/record1.json)
+  --camera CAMERA
+  --model MODEL
+  --imgsz IMGSZ
+  --conf CONF
+  --device DEVICE
+  --preprocessing {local,reference,none}
+  --lighting-profile LIGHTING_PROFILE

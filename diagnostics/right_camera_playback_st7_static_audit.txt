@@ -1,0 +1,16 @@
+PASS: Python compilation
+PASS: no camera-hit decision or repeating-strike runtime remains
+15:STRIKE_INCREMENT_DEGREES = 5
+17:ST7 = ROOT.parent / "st7"
+19:    "alsa_input.usb-eMeet_Tech_eMeet_M0_000000000012-00.mono-fallback"
+75:    "--audio-socket", str(audio_socket_path),
+99:    "/usr/bin/python3", "-m", "camera_playback.audio_bridge",
+54:STRIKE_SOUND_WAIT_SECONDS = 1.25
+448:                    self._process_sound_hit(message)
+563:                self._finish_successful_strike()
+566:            self.strike_sound_deadline = now + STRIKE_SOUND_WAIT_SECONDS
+570:                f"up to {STRIKE_SOUND_WAIT_SECONDS:.2f} s for ST7's sound decision"
+889:    def _process_sound_hit(self, message: dict) -> None:
+927:            self._finish_successful_strike()
+946:    def _finish_successful_strike(self) -> None:
+PASS: ST7/eMeet single-hit wiring present

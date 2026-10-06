@@ -1,0 +1,71 @@
+"""Small method interface. A strategy cannot command any joint except J7."""
+from dataclasses import dataclass, field
+import math
+from camera_playback.mit_strike import Command
+from ..config import TARGET
+
+
+@dataclass(frozen=True)
+class Definition:
+    id: str
+    label: str
+    family: str
+    description: str
+    defaults: dict
+    bounds: dict
+    factory: object = field(repr=False)
+
+    def parameters(self, overrides=None):
+        p = dict(self.defaults)
+        if overrides:
+            unknown = set(overrides)-set(p)
+            if unknown:
+                raise ValueError(f'Unknown {self.id} parameters: {sorted(unknown)}')
+            p.update(overrides)
+        for k, v in p.items():
+            lo, hi = self.bounds[k]
+            if isinstance(v, bool) or not isinstance(v, (float, int)) or not math.isfinite(v) or not lo <= v <= hi:
+                raise ValueError(f'{self.id}.{k} must be in [{lo}, {hi}]')
+        return p
+
+    def create(self, anchor, bias, overrides=None, target=TARGET):
+        if not math.isfinite(target) or target <= 0:raise ValueError('Invalid strike target')
+        return self.factory(anchor, bias, self.parameters(overrides), target)
+
+
+class Method:
+    phase = 'approach'
+    done = False
+
+    def __init__(self, anchor, bias, parameters, target=TARGET):
+        self.anchor, self.bias, self.p = anchor, bias, parameters
+        self.target = target
+        self.started = None
+
+    def start(self, now, history):
+        self.started = now
+
+    def tracking(self, reference, kp=None, kd=None):
+        x, v, a = reference
+        kp = self.p.get('kp', 40.) if kp is None else kp
+        kd = self.p.get('kd', 1.8) if kd is None else kd
+        load=self.p.get('load_torque',0.) or self.bias*self.p.get('bias_scale',1.)
+        torque = load-self.p.get('inertia', .02)*a-self.p.get('friction', .02)*v
+        return Command(self.anchor-x, -v, kp, kd, torque)
+
+    def hold(self):
+        return Command(self.anchor, 0, 40, 1.8, self.bias)
+
+    def reference(self, elapsed):
+        return self.curve.at(elapsed)
+
+    def update(self, sample, now):
+        t = now-self.started
+        self.done = t >= self.curve.duration
+        ref = self.reference(t)
+        self.phase = 'settling' if self.done else ('withdrawal' if ref[1] < 0 else 'approach')
+        return self.hold() if self.done else self.tracking(ref)
+
+
+TRACK = dict(kp=40., kd=1.8, inertia=.02, friction=.02,bias_scale=1.,load_torque=0.)
+TRACK_BOUNDS = dict(kp=(0., 80.), kd=(0., 4.), inertia=(.003, .06), friction=(0., .2),bias_scale=(.4,1.3),load_torque=(0.,2.))

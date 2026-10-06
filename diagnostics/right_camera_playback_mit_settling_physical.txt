@@ -1,0 +1,106 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-09-30-20-16-03-855160-jason-band37-148996
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [148999]
+[INFO] [rviz2-2]: process started with pid [149000]
+[INFO] [python3-3]: process started with pid [149001]
+[INFO] [python-4]: process started with pid [149002]
+[INFO] [python3-5]: process started with pid [149003]
+[robot_state_publisher-1] [INFO] [1790824563.927779548] [robot_state_publisher]: Robot initialized
+[rviz2-2] [INFO] [1790824564.250192546] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1790824564.250259886] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1790824564.264187648] [rviz2]: Stereo is NOT SUPPORTED
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/live_pose_best.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: requested 30 FPS; automatic low-light FPS reduction disabled.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "decoder": {"high_threshold": 0.3, "low_threshold": 0.075, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164716.221727743, "phase": "READY", "status": "Recording preflight passed; waiting for camera and fresh encoders (ST7 is informational; ESP32 is not used)"}
+[python3-3] PHYSICAL AUDIT {"event": "start_authorized_playback", "at": 164716.223832793, "phase": "PLAYBACK PREFLIGHTED", "recording": "/home/jason/Proyectos3/X5/recordings/record3.json"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164716.268083335, "phase": "SETTING UP", "status": "Recording preflight passed; confirming all drives at their live poses, then centering with J7=80.2\u00b0 and opening gripper to \u22123\u00b0"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164718.811807749, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164721.686864184, "phase": "WAITING FOR LOAD", "status": "Centered with gripper open at \u22123\u00b0 \u2014 load the drumstick, then press Continue (the recording and pink-zone alignment run next)"}
+[python3-3] PHYSICAL AUDIT {"event": "skip_human_stick_loading", "at": 164721.688388113, "phase": "CLOSING GRIPPER", "detail": "Empty gripper; three unloaded 1-degree button presses after readiness verification"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164721.724388524, "phase": "CLOSING GRIPPER", "status": "Closing gripper to +7\u00b0 \u2014 recording starts in 0.7 s"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164722.471387281, "phase": "MOVING TO RECORDING START", "status": "Gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164723.537184089, "phase": "RECORDING PLAYBACK", "status": "Playing recording: 0.00/7.10 s \u2022 camera observations 0"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164730.672473178, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 settling at its final pose"}
+[python3-3] PHYSICAL AUDIT {"event": "recording_physically_finished", "at": 164731.307162508, "phase": "CHECKING PLAYBACK END", "encoders_deg": [-34.69438457846357, 12.165563423617105, 14.011827791428889, 99.29165811416469, 11.731980363937698, -17.48456314993194, 34.38667385049498], "target_deg": [-34.69438457846357, 12.143584085905085, 13.989848453716867, 99.29165811416469, 11.731980363937698, -17.48456314993194, 34.38667385049498]}
+[python3-3] PHYSICAL AUDIT {"event": "test_only_visual_acceptance_bypass", "at": 164731.307598298, "phase": "CHECKING PLAYBACK END", "detail": "No stick; using recorded endpoint for MIT hold, not claiming pink-zone detection"}
+[python3-3] PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference — arming MIT hold; the strike button becomes available after fresh encoder positions stabilize
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164731.33705017, "phase": "HARDWARE TEST SETTLING MIT HOLD", "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"}
+[python3-3] PHYSICAL AUDIT {"event": "physical_mit_hold_started", "at": 164732.052239486, "phase": "HARDWARE TEST SETTLING MIT HOLD", "pid": 149244}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164732.052723469, "phase": "HARDWARE TEST SETTLING MIT HOLD", "elapsed": 0.0, "ready": false, "q_deg": 31.83707067589761, "velocity": -1.7699702449073058, "error_deg": -2.5496031745973653, "last_gap_ms": 10.154734016396105, "max_gap_ms": 10.154734016396105, "feedback_age_ms": 8.95833206595853, "hold_recoveries": 0, "commands_sent": 4, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164732.237671235, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "status": "PINK ZONE CONFIRMED ONCE (camera frame -1); holding the fixed pink-zone reference \u2014 arming MIT hold; the strike button becomes available after fresh encoder positions stabilize"}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164737.072511268, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 5.020332689018687, "ready": true, "q_deg": 34.38667385049498, "velocity": 0.006546120393679189, "error_deg": 0.0, "last_gap_ms": 9.95042102294974, "max_gap_ms": 14.015931985341012, "feedback_age_ms": 9.290484740631655, "hold_recoveries": 0, "commands_sent": 506, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164742.109152196, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 10.05694014299661, "ready": true, "q_deg": 34.38667385049498, "velocity": 0.022659647516590553, "error_deg": 0.0, "last_gap_ms": 9.962924988940358, "max_gap_ms": 14.015931985341012, "feedback_age_ms": 9.303448110586032, "hold_recoveries": 0, "commands_sent": 1009, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164747.126848323, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 15.074661859020125, "ready": true, "q_deg": 34.38667385049498, "velocity": 0.03877317463950192, "error_deg": 0.0, "last_gap_ms": 10.268925019772723, "max_gap_ms": 14.148126996587962, "feedback_age_ms": 9.107011603191495, "hold_recoveries": 0, "commands_sent": 1511, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164752.15523889, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 20.103057616011938, "ready": true, "q_deg": 34.38667385049498, "velocity": 0.07502861066605249, "error_deg": 0.0, "last_gap_ms": 9.833274991251528, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 7.2500672249589115, "hold_recoveries": 1, "commands_sent": 2012, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164757.168401825, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 25.116223937016912, "ready": true, "q_deg": 34.38667385049498, "velocity": -0.028702220187682315, "error_deg": 0.0, "last_gap_ms": 6.809732993133366, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 6.116385280620307, "hold_recoveries": 1, "commands_sent": 2514, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164762.187044563, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 30.134867507003946, "ready": true, "q_deg": 34.38667385049498, "velocity": -0.02568093385214354, "error_deg": 0.0, "last_gap_ms": 9.96478900196962, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.235438163159415, "hold_recoveries": 1, "commands_sent": 3015, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164767.198782008, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 35.14660393999657, "ready": true, "q_deg": 34.38667385049498, "velocity": -0.1153124284733309, "error_deg": 0.0, "last_gap_ms": 9.718963992781937, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.001735306810588, "hold_recoveries": 1, "commands_sent": 3517, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164772.221053284, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 40.168870367022464, "ready": true, "q_deg": 34.38667385049498, "velocity": -0.021652552071415698, "error_deg": 0.0, "last_gap_ms": 9.996529028285295, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.085222060093656, "hold_recoveries": 1, "commands_sent": 4019, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164777.236351946, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 45.18416832800722, "ready": true, "q_deg": 34.364694512782854, "velocity": -0.07100022888532465, "error_deg": -0.021979337712122585, "last_gap_ms": 9.757469000760466, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 6.40909667708911, "hold_recoveries": 1, "commands_sent": 4520, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164782.274083507, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 50.22189309500391, "ready": true, "q_deg": 34.38667385049498, "velocity": 0.049851224536510585, "error_deg": 0.0, "last_gap_ms": 9.9517630005721, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.212779928930104, "hold_recoveries": 1, "commands_sent": 5024, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164787.290370504, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 55.23818150500301, "ready": true, "q_deg": 34.38667385049498, "velocity": -0.0317235065232353, "error_deg": 0.0, "last_gap_ms": 10.290988022461534, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.607176791178063, "hold_recoveries": 1, "commands_sent": 5526, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_press", "at": 164792.083404458, "phase": "HARDWARE TEST J7 MIT FREEFALL", "number": 1}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164792.115527213, "phase": "HARDWARE TEST J7 MIT FREEFALL", "status": "MANUAL MIT STRIKE 1: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164792.153559235, "phase": "HARDWARE TEST J7 MIT REBOUND", "status": "MANUAL MIT STRIKE 1: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164792.245805009, "phase": "HARDWARE TEST SETTLING MIT HOLD", "status": "MANUAL MIT STRIKE 1: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] MIT strike complete: goal 1°, measured peak drop 0.945°, return overshoot 0.088°; encoder position stable — MIT remains enabled
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164792.281136783, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "status": "MIT strike complete: goal 1\u00b0, measured peak drop 0.945\u00b0, return overshoot 0.088\u00b0; encoder position stable \u2014 MIT remains enabled"}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_strike_completed", "at": 164792.281952546, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "number": 1, "peak_drop_deg": 0.9451115216181161, "overshoot_deg": 0.08791735084818501, "ready": true}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164792.321078748, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 60.268895390006946, "ready": true, "q_deg": 34.408653188207, "velocity": -0.017624170290687857, "error_deg": 0.02197933771202081, "last_gap_ms": 9.881778998533264, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.193462174152955, "hold_recoveries": 1, "commands_sent": 6090, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_press", "at": 164795.304149761, "phase": "HARDWARE TEST J7 MIT FREEFALL", "number": 2}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164795.335427717, "phase": "HARDWARE TEST J7 MIT FREEFALL", "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164795.375523259, "phase": "HARDWARE TEST J7 MIT REBOUND", "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164795.450661307, "phase": "HARDWARE TEST SETTLING MIT HOLD", "status": "MANUAL MIT STRIKE 2: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] MIT strike complete: goal 1°, measured peak drop 1.011°, return overshoot 0.088°; encoder position stable — MIT remains enabled
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164795.491455486, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "status": "MIT strike complete: goal 1\u00b0, measured peak drop 1.011\u00b0, return overshoot 0.088\u00b0; encoder position stable \u2014 MIT remains enabled"}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_strike_completed", "at": 164795.492269616, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "number": 2, "peak_drop_deg": 1.0110495347541786, "overshoot_deg": 0.08791735084818501, "ready": true}
+[python3-3] PHYSICAL AUDIT {"event": "mit_hold_measurement", "at": 164797.322284314, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "elapsed": 65.2700944240205, "ready": true, "q_deg": 34.408653188207, "velocity": -0.0045319295033152684, "error_deg": 0.02197933771202081, "last_gap_ms": 10.05694700870663, "max_gap_ms": 34.96553699369542, "feedback_age_ms": 9.389714599819854, "hold_recoveries": 1, "commands_sent": 6655, "error": null}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_press", "at": 164798.502605785, "phase": "HARDWARE TEST J7 MIT FREEFALL", "number": 3}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164798.534232453, "phase": "HARDWARE TEST J7 MIT FREEFALL", "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164798.571898429, "phase": "HARDWARE TEST J7 MIT REBOUND", "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164798.689732155, "phase": "HARDWARE TEST SETTLING MIT HOLD", "status": "MANUAL MIT STRIKE 3: 1\u00b0 maximum-drop goal; damped freefall, predictive catch, smooth return"}
+[python3-3] PHYSICAL AUDIT {"event": "physical_button_strike_completed", "at": 164798.691237879, "phase": "HARDWARE TEST SETTLING MIT HOLD", "number": 3, "peak_drop_deg": 1.0989668856023636, "overshoot_deg": 0.06593801313606243, "ready": true}
+[python3-3] MIT strike complete: goal 1°, measured peak drop 1.099°, return overshoot 0.066°; encoder position stable — MIT remains enabled
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164798.72748598, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "status": "MIT strike complete: goal 1\u00b0, measured peak drop 1.099\u00b0, return overshoot 0.066\u00b0; encoder position stable \u2014 MIT remains enabled"}
+[python3-3] PHYSICAL AUDIT {"event": "readiness_verification", "at": 164801.703921784, "phase": "HARDWARE TEST READY FOR MANUAL STRIKE", "checks": 1617, "disabled_checks": 0, "unready_checks": 0, "completed": 3, "errors": []}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164801.87270713, "phase": "HARDWARE TEST LEAVING MIT SESSION", "status": "Leaving MIT hold; confirming position mode before centering"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164802.049097494, "phase": "CENTER RELAX RECENTERING", "status": "CENTER RELAX RECENTERING"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164807.219958029, "phase": "RELAXING", "status": "Center + Relax complete; centered; right motors disabled \u2014 confirming disabled feedback"}
+[python3-3] PHYSICAL AUDIT {"event": "phase", "at": 164807.259914884, "phase": "RELAXED", "status": "Right motors disabled"}
+[python3-3] PHYSICAL AUDIT {"event": "PASS", "at": 164807.261127523, "phase": "RELAXED", "detail": "record3, steady enabled button, three actual 1-degree button presses, centered and relaxed", "states": {"('left', 1)": 0, "('left', 2)": 0, "('left', 3)": 0, "('left', 4)": 0, "('left', 5)": 0, "('left', 6)": 0, "('left', 7)": 0, "('left', 8)": 0, "('right', 1)": 0, "('right', 2)": 0, "('right', 3)": 0, "('right', 4)": 0, "('right', 5)": 0, "('right', 6)": 0, "('right', 7)": 0, "('right', 8)": 0}}
+[INFO] [python3-3]: process has finished cleanly [pid 149001]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1790824660.270423949] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1790824660.270661948] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20260930_201604_993942.mp4
+[python-4] Traceback (most recent call last):
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 204, in <module>
+[python-4]     raise SystemExit(main())
+[python-4]                      ^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_playback/camera.py", line 200, in main
+[python-4]     return base_camera.main()
+[python-4]            ^^^^^^^^^^^^^^^^^^
+[python-4]   File "/home/jason/Proyectos3/X5/camera_search/camera.py", line 145, in main
+[python-4]     ok, frame = camera.read()
+[python-4]                 ^^^^^^^^^^^^^
+[python-4] KeyboardInterrupt
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 148999]
+[INFO] [rviz2-2]: process has finished cleanly [pid 149000]
+[python3-5] {"status": "stopped", "captured_seconds": 94.4}
+[ERROR] [python-4]: process has died [pid 149002, exit code -2, cmd '/home/jason/Proyectos3/Y2/.venv/bin/python /home/jason/Proyectos3/X5/camera_playback/camera.py --socket /tmp/x5-right-camera-playback-148996.sock --root /home/jason/Proyectos3/Y2 --camera 0 --device auto --process-every 1'].
+[INFO] [python3-5]: process has finished cleanly [pid 149003]

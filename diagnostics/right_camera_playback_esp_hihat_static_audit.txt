@@ -1,0 +1,40 @@
+PASS: Python compilation and shell syntax checks
+PASS: copied firmware is byte-identical to esp-main motor_beat.ino
+
+Connected ESP32 serial identity (query only; port was not opened):
+lrwxrwxrwx 1 root root        13 Sep 26 14:07 /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0 -> ../../ttyUSB0
+crw-rw---- 1 root dialout 188, 0 Sep 27 20:20 /dev/ttyUSB0
+DEVNAME=/dev/ttyUSB0
+ID_MODEL=CP2102_USB_to_UART_Bridge_Controller
+ID_SERIAL=Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001
+ID_VENDOR=Silicon_Labs
+ID_USB_DRIVER=cp210x
+PASS: current user has read/write access to /dev/ttyUSB0
+
+Integrated constants and command sites:
+11:ESP_BAUD = 115200
+15:MOTOR2_TARGET_DEGREES = 110
+16:DEFAULT_ESP_PORT = (
+22:def find_esp_port(requested: str | Path | None = DEFAULT_ESP_PORT) -> str:
+76:    def __init__(self, port: str | Path | None = DEFAULT_ESP_PORT):
+116:        self.detail = f"Warming up ESP32 hi-hat on {self.port} at {ESP_BAUD} baud"
+140:        self._write(b"S")
+149:            f"ESP32 hi-hat ready on {self.port} at {ESP_BAUD} baud; "
+150:            f"motor 2 alternates 0°/{MOTOR2_TARGET_DEGREES}°"
+156:                self._write(b"S")
+189:                self._write(b"H")
+216:        command = b"C" if self.next_beat_closes else b"O"
+227:            self._write(b"O")
+235:            self._write(b"S")
+244:            os.write(self.fd, b"S")
+
+Launcher forwarding:
+14:from camera_playback.hihat import DEFAULT_ESP_PORT
+58:        "--esp-port", default=DEFAULT_ESP_PORT,
+88:    "--esp-port", args.esp_port,
+
+Motor-1 kick audit (runtime host must not contain a byte K command):
+PASS: no motor-1 K command in integrated runtime host
+
+cc6df2ab7359b26f210ca01bdbf170c648086e71bbd8c58f21b597c8adcb1db8  /home/jason/Proyectos3/esp-main/motor_beat/motor_beat.ino
+cc6df2ab7359b26f210ca01bdbf170c648086e71bbd8c58f21b597c8adcb1db8  esp32_hihat/motor_beat/motor_beat.ino

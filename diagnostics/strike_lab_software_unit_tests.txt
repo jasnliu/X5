@@ -1,0 +1,72 @@
+test_archive_preserves_source_parameters_trace_score_and_rescores (test_strike_lab.ArchiveAndCampaignTests.test_archive_preserves_source_parameters_trace_score_and_rescores) ... ok
+test_campaign_integer_budgets (test_strike_lab.ArchiveAndCampaignTests.test_campaign_integer_budgets) ... ok
+test_neighbors_keep_exact_ten_degree_contract (test_strike_lab.ArchiveAndCampaignTests.test_neighbors_keep_exact_ten_degree_contract) ... ok
+test_short_campaign_all_phases_and_saved_scheduling (test_strike_lab.ArchiveAndCampaignTests.test_short_campaign_all_phases_and_saved_scheduling) ... ok
+test_unique_sessions_do_not_overwrite (test_strike_lab.ArchiveAndCampaignTests.test_unique_sessions_do_not_overwrite) ... ok
+test_curve_rejection_preserved_and_not_executed (test_strike_lab.GuardTests.test_curve_rejection_preserved_and_not_executed) ... ok
+test_effective_torque_and_slew_are_shared_not_just_feedforward (test_strike_lab.GuardTests.test_effective_torque_and_slew_are_shared_not_just_feedforward) ... ok
+test_fault_relaxes_before_archiving_score (test_strike_lab.GuardTests.test_fault_relaxes_before_archiving_score) ... ok
+test_old_feedback_and_wrong_operating_state_rejected (test_strike_lab.GuardTests.test_old_feedback_and_wrong_operating_state_rejected) ... ok
+test_stability_uses_positions_not_noisy_velocity (test_strike_lab.GuardTests.test_stability_uses_positions_not_noisy_velocity) ... ok
+test_early_can_reply_does_not_accelerate_command_clock (test_strike_lab.HardwareAdapterTests.test_early_can_reply_does_not_accelerate_command_clock) ... ok
+test_notification_failure_prevents_bus_construction (test_strike_lab.HardwareAdapterTests.test_notification_failure_prevents_bus_construction) ... ok
+test_notification_precedes_connection_and_only_j7_changes_after_center (test_strike_lab.HardwareAdapterTests.test_notification_precedes_connection_and_only_j7_changes_after_center) ... ok
+test_spawned_simulator_prepares_executes_and_closes (test_strike_lab.HardwareAdapterTests.test_spawned_simulator_prepares_executes_and_closes) ... ok
+test_fallback_is_only_for_started_unrelaxed_dead_hardware_worker (test_strike_lab.IntegrityTests.test_fallback_is_only_for_started_unrelaxed_dead_hardware_worker) ... ok
+test_finish_unpauses_and_prevents_new_requests (test_strike_lab.IntegrityTests.test_finish_unpauses_and_prevents_new_requests) ... ok
+test_incomplete_attempt_is_kept_in_loaded_reports_and_rescores (test_strike_lab.IntegrityTests.test_incomplete_attempt_is_kept_in_loaded_reports_and_rescores) ... ok
+test_method_snapshot_is_immutable_after_trial (test_strike_lab.IntegrityTests.test_method_snapshot_is_immutable_after_trial) ... ok
+test_offline_lock_also_blocks_emergency_can_transport (test_strike_lab.IntegrityTests.test_offline_lock_also_blocks_emergency_can_transport) ... ok
+test_rescore_preserves_timing_failure (test_strike_lab.IntegrityTests.test_rescore_preserves_timing_failure) ... ok
+test_stop_event_aborts_and_retains_the_attempt (test_strike_lab.IntegrityTests.test_stop_event_aborts_and_retains_the_attempt) ... ok
+test_worker_terminal_interrupt_is_a_clean_stop_not_a_fault (test_strike_lab.IntegrityTests.test_worker_terminal_interrupt_is_a_clean_stop_not_a_fault) ... ok
+test_all_eight_families_and_nine_modes (test_strike_lab.MethodTests.test_all_eight_families_and_nine_modes) ... ok
+test_all_methods_three_repeated_nominal_synthetic_strikes (test_strike_lab.MethodTests.test_all_methods_three_repeated_nominal_synthetic_strikes) ... ok
+test_all_modes_work_at_a_different_fixed_anchor (test_strike_lab.MethodTests.test_all_modes_work_at_a_different_fixed_anchor) ... ok
+test_fast_mode_cannot_run_hardware (test_strike_lab.MethodTests.test_fast_mode_cannot_run_hardware) ... usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--fast] [--auto-run]
+                           [--exit-after-batch] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--fast] [--auto-run]
+                           [--exit-after-batch] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+ok
+test_fixed_curve_peaks_and_continuous_bottom (test_strike_lab.MethodTests.test_fixed_curve_peaks_and_continuous_bottom) ... ok
+test_hardware_is_opt_in_and_offline_lock_blocks_it (test_strike_lab.MethodTests.test_hardware_is_opt_in_and_offline_lock_blocks_it) ... ok
+test_other_programs_not_invoked_by_launcher (test_strike_lab.MethodTests.test_other_programs_not_invoked_by_launcher) ... ok
+test_parameter_validation (test_strike_lab.MethodTests.test_parameter_validation) ... ok
+test_synthetic_mismatch_is_not_hidden_as_success (test_strike_lab.MethodTests.test_synthetic_mismatch_is_not_hidden_as_success) ... ok
+test_target_not_a_tuning_parameter (test_strike_lab.MethodTests.test_target_not_a_tuning_parameter) ... ok
+test_trajectory_preflight_rejects_too_aggressive_reference (test_strike_lab.MethodTests.test_trajectory_preflight_rejects_too_aggressive_reference) ... ok
+test_any_failure_disqualifies_config_not_just_bad_trial (test_strike_lab.ScoringTests.test_any_failure_disqualifies_config_not_just_bad_trial) ... ok
+test_duplicate_encoder_samples_do_not_add_fake_time (test_strike_lab.ScoringTests.test_duplicate_encoder_samples_do_not_add_fake_time) ... ok
+test_equal_boundary_is_not_contact_and_reentries_count (test_strike_lab.ScoringTests.test_equal_boundary_is_not_contact_and_reentries_count) ... ok
+test_exact_zone_interpolation (test_strike_lab.ScoringTests.test_exact_zone_interpolation) ... ok
+test_failed_measured_strokes_are_not_omitted_from_statistics (test_strike_lab.ScoringTests.test_failed_measured_strokes_are_not_omitted_from_statistics) ... ok
+test_failed_return_stays_failed (test_strike_lab.ScoringTests.test_failed_return_stays_failed) ... ok
+test_feedback_gap_cannot_reduce_score_silently (test_strike_lab.ScoringTests.test_feedback_gap_cannot_reduce_score_silently) ... ok
+test_nine_degree_dab_cannot_win (test_strike_lab.ScoringTests.test_nine_degree_dab_cannot_win) ... ok
+test_no_winner_for_unmatched_depths (test_strike_lab.ScoringTests.test_no_winner_for_unmatched_depths) ... ok
+test_overshoot_counts_as_failure (test_strike_lab.ScoringTests.test_overshoot_counts_as_failure) ... ok
+test_parameter_and_backend_groups_never_pooled (test_strike_lab.ScoringTests.test_parameter_and_backend_groups_never_pooled) ... ok
+test_physical_winner_requires_completed_comparative_campaign (test_strike_lab.ScoringTests.test_physical_winner_requires_completed_comparative_campaign) ... ok
+test_rules_require_narrow_acceptance_and_real_settle_window (test_strike_lab.ScoringTests.test_rules_require_narrow_acceptance_and_real_settle_window) ... ok
+test_staging_near_threshold_rejected (test_strike_lab.ScoringTests.test_staging_near_threshold_rejected) ... ok
+test_stop_remains_a_failed_attempt (test_strike_lab.ScoringTests.test_stop_remains_a_failed_attempt) ... ok
+test_velocity_claim_cannot_fake_entry_speed (test_strike_lab.ScoringTests.test_velocity_claim_cannot_fake_entry_speed) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 2.839s
+
+OK

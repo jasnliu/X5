@@ -1,0 +1,25 @@
+STATIC CHECKS:
+Python compile: PASS
+STRIKE_BPM=100.0
+STRIKE_PERIOD_SECONDS=0.600
+Example learned depth 10 deg cycles: 80 -> 70 -> 80 every 0.600 s
+Stop policy: finish active fast return -> restore 0.4 rad/s -> center -> relax
+Original right_camera_cartesian hashes:
+camera_search/__init__.py: OK
+camera_search/app.py: OK
+camera_search/camera.py: OK
+camera_search/control.py: OK
+camera_search/hill_climb.py: OK
+camera_search/notify.py: OK
+camera_search/planner.py: OK
+camera_search/protocol.py: OK
+camera_search/vision.py: OK
+launch_right_camera_cartesian.py: OK
+start_right_camera_cartesian.sh: OK
+Standalone right_joint7_test hashes:
+right_joint7_test/__init__.py: OK
+right_joint7_test/app.py: OK
+right_joint7_test/plan.py: OK
+launch_right_joint7_test.py: OK
+start_right_joint7_test.sh: OK
+No hardware launch or CAN access performed.

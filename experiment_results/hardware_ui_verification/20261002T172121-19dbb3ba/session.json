@@ -1,0 +1,84 @@
+{
+  "backend": "hardware",
+  "calibration_notice": "Calibration is profile, posture, and load specific; see configuration provenance and hardware results.",
+  "extra": {
+    "options": {
+      "configuration": {
+        "path": "/home/jason/Proyectos3/X5/config/experiment_hardware_tuned.json",
+        "sha256": "94ec208a520dec1eced59c951d229aa4348ba3058cccda04b57d6a80a979c694"
+      },
+      "exit_after_batch": false,
+      "hardware": true,
+      "limits": {
+        "upper_excursion_deg": 0.6
+      },
+      "motion_notification": false,
+      "output": "/home/jason/Proyectos3/X5/experiment_results/hardware_ui_verification",
+      "plant": {},
+      "realtime": true,
+      "rules": {}
+    },
+    "plant": null
+  },
+  "limits": {
+    "acceleration": 80.0,
+    "control_timeout": 0.02,
+    "feedback_timeout": 0.02,
+    "hard_depth_deg": 12.0,
+    "held_joint_drift_deg": 0.75,
+    "hz": 500.0,
+    "jerk": 8000.0,
+    "torque": 3.0,
+    "torque_slew": 300.0,
+    "trial_timeout": 3.0,
+    "upper_excursion_deg": 0.6,
+    "velocity": 3.0
+  },
+  "rules": {
+    "acceptance_deg": 0.2,
+    "depth_match_deg": 0.1,
+    "maximum_approach_seconds": 0.8,
+    "maximum_cycle_seconds": 1.5,
+    "maximum_feedback_gap": 0.01,
+    "maximum_prezone_pause": 0.03,
+    "maximum_start_lateness": 0.02,
+    "maximum_upper_overshoot_deg": 0.15,
+    "minimum_entry_speed": 0.2,
+    "return_tolerance_deg": 0.15,
+    "settle_range_deg": 0.05,
+    "settle_seconds": 0.04
+  },
+  "source_id": "8c8437de440fb4e6",
+  "source_manifest": {
+    "camera_playback/mit_strike.py": "cde1839b5042c5b6c931d8489bd83294a3b31b6ab4de29e8152351fb936a8c79",
+    "centering/motors.py": "02a1a9d7c60ce305fd8e7d90236ded4183bb959719f6c86a4722abb889db0548",
+    "config/experiment.rviz": "2a319977c0aa915c52ee567c32ce7815863f3cc42b8f187116372f97a8e7b96e",
+    "experiment.sh": "f0500dc7e4becbcb202ccf3688d300f8a9ea8f3db17b8facf9b6783d64adee16",
+    "launch_experiment.py": "33da798d0ad29e9ac2f9c45bc456b6764e2bd099d896132737a91caa5aae10a1",
+    "model/openarmx.urdf": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "safe_zone/encoder.py": "473bbb009ed1f751780c76697a598c8f0b7f20eaca8d8e420a46e30345487b98",
+    "strike_lab/__init__.py": "3afc1f54eef96ea8ce8b931a0f1f95fa818c2d7ecdacae3e97944f7d5f378330",
+    "strike_lab/app.py": "889dfd7000f586dfe2c296e2967baa85b07baff03dda91e991923b25eefd356f",
+    "strike_lab/backends.py": "c03f3e8e191cb69cf9c15735c0afa5177348cfcc87fd496e02ad37cc8585b540",
+    "strike_lab/campaign.py": "3bff8236a07eecb61088e725ea7e81b19216c4a8be92ecd5dd729c5b1f423399",
+    "strike_lab/cli.py": "083c7d1a1cecbbe207532d999a80cf061ed74bce25d08493f3b2441c4ae685d7",
+    "strike_lab/config.py": "39dd24da7dfec1cb972984a337f02b9f33d3b2b01140489648fedc5b90fcf0e5",
+    "strike_lab/curves.py": "80cb06b76e7b170d73b0214e02d5745e49e7d6a8cded3a92739a50286385e2af",
+    "strike_lab/engine.py": "7c64790ecf90aaa6f3c786a0c9b657738941645d2d0c72b3f05a74bb3548d5da",
+    "strike_lab/jobs.py": "a1b1d838c24fe1935f6b9cf1d2563862e7c3364a89c40c98b7d4ee1676c79202",
+    "strike_lab/methods/__init__.py": "bca42e4f9f6196c1b2589ff8f38582b5bb88165562097fffa657c1cdc51d6bd4",
+    "strike_lab/methods/base.py": "d7b7898691e3135786a4250023ebe5d738f981187ba2739a3deda562a1a914f8",
+    "strike_lab/methods/baseline.py": "a8c8e1cd387e933216d6c5ee04eb87aa0b417496c413393c46e21974c1f0c0bd",
+    "strike_lab/methods/gravity.py": "fa5f3d4860277e8d8c0925c0034f6e0cbcfaa29ee1bd76857016b6a8dafc5576",
+    "strike_lab/methods/hybrid.py": "ebe78e33bdafc000e4f9907f17b3238480813d35ea0551d383d2a80790e3aa7d",
+    "strike_lab/methods/impedance.py": "4ac951d05c58bcd3019b2117a5d86a6c60f8ada1de3c50dcc7c810fe5d593e40",
+    "strike_lab/methods/optimized.py": "07bd2c369a617a76b74c37bca928d2ef2494e4e5b03210021e2188d2ddc8384c",
+    "strike_lab/methods/powered.py": "196d3a32126f80998471e0c374df9459fd59b531fd4fe199a1d1f9caf1c67480",
+    "strike_lab/methods/torque.py": "07ace2f31f9e17f8464b7362eeb1aaaf98f3d89c8b32e9b2d129529fc35249d8",
+    "strike_lab/runtime.py": "21c5c857a2c6781f73b3e289021e36ec13b2971bf99c91c647deaa7470a66b40",
+    "strike_lab/scoring.py": "f12329ccc7cb70c799afde4f0e49ba0c03792630fbe8b6d8e27fe31c7a875f16",
+    "strike_lab/storage.py": "1e0376fa204b378cef4dcf078927ccab305a895c8067c11c09ffc1c7d3a178f8"
+  },
+  "target_deg": 10.0,
+  "zone_deg": 9.0
+}

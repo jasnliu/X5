@@ -1,0 +1,10 @@
+HARDWARE: one RUN button → center + close gripper → recording → experiment hybrid J7 search → first-hit depth → 100 BPM hybrid swing with partial returns; --test/--hardwaretest unchanged
+ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+PASS: one actual RUN button press centers with +7° closed gripper and automatically enters recording; no Start control or loading pause
+PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 11°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+HYBRID first detected depth 5°: 100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases
+PASS: real App(hardware=True) selects hybrid, preserves first-hit depth, starts 100 BPM swing, and joins/restores/centers before simulated relax
+PASS: Tk widgets show hybrid; motor, microphone and ESP32 I/O were substituted; no physical hardware operated

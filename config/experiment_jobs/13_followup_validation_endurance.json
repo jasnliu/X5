@@ -1,0 +1,2338 @@
+[
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "validate",
+    "interval": 0.15
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 1.0,
+      "kp": 12,
+      "return_blend_start": 0.4,
+      "up_time": 0.23,
+      "load_torque": 0.692
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "bias_scale": 0.8,
+      "curvature": 4.5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "bias_scale": 0.8,
+      "duration": 0.42,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "repetitions": 10,
+    "stage": "endurance",
+    "intervals": [
+      0.5,
+      0.5,
+      0.8,
+      1.5,
+      0.65,
+      0.5,
+      2.0,
+      0.8,
+      0.5,
+      0.65
+    ]
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "repetitions": 30,
+    "stage": "extended_cadence",
+    "intervals": [
+      0.45,
+      0.45,
+      0.6,
+      1.5,
+      3.0,
+      5.0
+    ]
+  }
+]

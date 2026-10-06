@@ -1,0 +1,10 @@
+PASS: separate playback UI loaded/preflighted recording; offline only, no CAN or arm motion
+HARDWARE TEST SOUND LOG: ST7 HIT #1: score=0.980, normality=85.0, phase=strike moving out
+PASS: --hardwaretest UI accepts editable degrees and authorizes one strike per click
+PASS: the manual-strike section keeps a live, motion-independent ST7 hit log
+PASS: offline UI check opened no CAN socket and commanded no physical hardware
+J7 STRIKE LOW strike 1 [pickup (extra before beat 1)]: 10.00 deg down from anchor; lowest J7 encoder: 68.86 deg; commanded: 10 deg
+J7 STRIKE LOW strike 2 [beat 1]: 10.00 deg down from anchor; lowest J7 encoder: 68.86 deg; commanded: 10 deg
+PASS: --test UI uses only SimulatedMotors; real CAN constructor was forbidden
+PASS: camera, sound, ESP32, and all physical hardware are bypassed
+PASS: simulated center, recording, 10-degree 100 BPM swing, Stop, and Relax

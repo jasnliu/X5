@@ -3,9 +3,9 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import numpy as np
-from safe_zone.encoder import FRAME, EFF, PAYLOAD, request_frame, decode, Observer, RIGHT_JOINT5_ZERO_OFFSET, encoder_to_joint, joint_to_motor
+from safe_zone.encoder import FRAME, EFF, PAYLOAD, request_frame, decode, Observer, SingleArmObserver, RIGHT_JOINT5_ZERO_OFFSET, encoder_to_joint, joint_to_motor
 from safe_zone.geometry import Model, Zone, TCP, LEFT_TCP, RIGHT_TCP, MEMBERSHIP_BUFFER_M
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,6 +42,37 @@ class ProtocolTests(unittest.TestCase):
     def test_identical_buses_rejected_before_socket(self):
         with patch('socket.socket', side_effect=AssertionError('Must not open socket')):
             with self.assertRaises(ValueError): Observer('can0','can0')
+
+    def test_single_arm_observer_queries_only_right_ids_with_state_requests(self):
+        fake_socket = Mock()
+        feedback = []
+        for motor in range(1, 9):
+            cid = EFF | (2 << 24) | (motor << 8) | 0xfd
+            feedback.append(FRAME.pack(cid, 8, (32768).to_bytes(2, 'big') + bytes(6)))
+        fake_socket.recv.side_effect = [BlockingIOError()] + feedback
+        fake_socket.send.return_value = FRAME.size
+        with patch('safe_zone.encoder.socket.socket', return_value=fake_socket), \
+                patch('safe_zone.encoder.os.open', return_value=17), \
+                patch('safe_zone.encoder.os.close') as close_fd, \
+                patch('safe_zone.encoder.fcntl.flock'), \
+                patch('safe_zone.encoder.select.select', return_value=([fake_socket], [], [])):
+            observer = SingleArmObserver('right', 'can0')
+            state = observer.sample()
+            observer.close()
+        fake_socket.bind.assert_called_once_with(('can0',))
+        self.assertEqual([call.args[0] for call in fake_socket.send.call_args_list],
+                         [request_frame(motor) for motor in range(1, 9)])
+        self.assertEqual(set(state),
+                         {f'openarmx_right_joint{i}' for i in range(1, 8)} |
+                         {'openarmx_right_finger_joint1'})
+        self.assertFalse(any('left' in name for name in state))
+        self.assertEqual(observer.tx_count, 8)
+        close_fd.assert_called_once_with(17)
+
+    def test_single_arm_observer_rejects_bad_side_before_socket(self):
+        with patch('safe_zone.encoder.socket.socket', side_effect=AssertionError('Must not open socket')):
+            with self.assertRaises(ValueError):
+                SingleArmObserver('center', 'can0')
 
 class GeometryTests(unittest.TestCase):
     def setUp(self): self.z = Zone('test')

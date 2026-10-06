@@ -1,0 +1,10 @@
+PHASE   0.023s READY: offset=(+0.00000, +0.00000, +0.00000) status=Waiting for live encoders
+ACTION start exact goal (0.3, 0.05, 0.25)
+PHASE   1.620s IK SOLVED: offset=(+0.11898, +0.01079, +0.03142) status=IK solved — waiting for fresh encoders before enabling
+PHASE   1.643s SETTING UP: offset=(+0.11923, +0.01076, +0.03147) status=IK error 0.00 mm; joint goal: J1 → +5.1°, J2 → -4.4°, J3 → -2.3°, J4 → +18.9°, J5 → -1.5°, J6 → +0.3°, J7 → +80.2°; centering and opening gripper to −3°
+PHASE   3.505s CENTERING: offset=(+0.10429, +0.00005, +0.03289) status=CENTERING
+PHASE   6.039s WAITING FOR LOAD: offset=(+0.17764, -0.00018, +0.14956) status=Centered with gripper open at −3° — load the object, then press Continue
+ACTION continue: close gripper and move
+PHASE   6.071s CLOSING GRIPPER: offset=(+0.17764, -0.00018, +0.14956) status=Closing gripper to +7° — moving arm in 0.7 s
+PHASE   6.836s MOVING TO GOAL: offset=(+0.17765, -0.00018, +0.14962) status=Gripper closed at +7° — moving right arm to goal
+PHASE  36.842s FAULT: offset=(+0.30038, +0.02543, +0.24822) status=STOPPED: Position timeout; right motors disabled — confirming disabled feedback

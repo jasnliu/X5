@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/tests/smooth_recording_ui_check.py", line 34, in <module>
+    app = App(True, str(Path(directory)/'camera.sock'),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/app.py", line 386, in __init__
+    hihat_text = "Hi-hat ESP32: " + self.hihat.detail
+                 ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "Mock") to str

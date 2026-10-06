@@ -1,0 +1,48 @@
+test_all_selected_recordings_remain_supported_and_endpoint_exact (test_smooth_recording.SmoothRecordingTests.test_all_selected_recordings_remain_supported_and_endpoint_exact) ... ok
+test_both_modes_handoff_to_same_settling_and_alignment_without_relax (test_smooth_recording.SmoothRecordingTests.test_both_modes_handoff_to_same_settling_and_alignment_without_relax) ... ok
+test_close_joins_worker_before_parent_bus_cleanup (test_smooth_recording.SmoothRecordingTests.test_close_joins_worker_before_parent_bus_cleanup) ... ok
+test_error_or_unrestored_gains_never_advance_to_alignment (test_smooth_recording.SmoothRecordingTests.test_error_or_unrestored_gains_never_advance_to_alignment) ... Smooth playback settings handoff failed: readback failed
+ok
+test_physical_modes_use_new_loader_but_test_and_preview_do_not (test_smooth_recording.SmoothRecordingTests.test_physical_modes_use_new_loader_but_test_and_preview_do_not) ... ok
+test_record3_is_same_tested_physical_trajectory (test_smooth_recording.SmoothRecordingTests.test_record3_is_same_tested_physical_trajectory) ... ok
+test_recovery_stage_joins_worker_before_parent_targets (test_smooth_recording.SmoothRecordingTests.test_recovery_stage_joins_worker_before_parent_targets) ... ok
+test_single_frame_and_stationary_recordings (test_smooth_recording.SmoothRecordingTests.test_single_frame_and_stationary_recordings) ... ok
+test_spawned_worker_cancel_stops_and_restores_without_center_or_relax (test_smooth_recording.SmoothRecordingTests.test_spawned_worker_cancel_stops_and_restores_without_center_or_relax) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow"}
+CANCEL HOLD 
+ok
+test_spawned_worker_gui_watchdog (test_smooth_recording.SmoothRecordingTests.test_spawned_worker_gui_watchdog) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "RuntimeError: Recording GUI heartbeat lost"}
+CANCEL HOLD 
+ok
+test_spawned_worker_rejects_bad_mode_without_gain_writes (test_smooth_recording.SmoothRecordingTests.test_spawned_worker_rejects_bad_mode_without_gain_writes) ... ERROR {"error": "RuntimeError: Recording worker requires existing CSP mode"}
+ok
+test_spawned_worker_reports_unrestored_gains_instead_of_success (test_smooth_recording.SmoothRecordingTests.test_spawned_worker_reports_unrestored_gains_instead_of_success) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ERROR {"error": "RuntimeError: Injected gain restoration failure"}
+CANCEL HOLD 
+ok
+test_spawned_worker_runs_exact_method_without_gui_clock (test_smooth_recording.SmoothRecordingTests.test_spawned_worker_runs_exact_method_without_gui_clock) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 349723.680767412, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6002138170297258, "tolerance_deg": 0.05}
+/home/jason/Proyectos3/X5/tests/test_smooth_recording.py:294: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp03_8gr9a/trace.csv' mode='r' encoding='UTF-8'>
+  rows = list(csv.DictReader(open(Path(directory)/'trace.csv')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_transport_cannot_enable_disable_change_modes_or_touch_gripper_left (test_smooth_recording.SmoothRecordingTests.test_transport_cannot_enable_disable_change_modes_or_touch_gripper_left) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 57.472s
+
+OK

@@ -1,0 +1,830 @@
+[
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.36
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.33
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.012,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.012,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.36
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "cosine",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.012,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "duration": 0.33
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.21,
+      "up_time": 0.23,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "powered",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "down_time": 0.21,
+      "up_time": 0.23,
+      "curvature": 5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.22,
+      "up_time": 0.25,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.22,
+      "up_time": 0.25,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "impedance",
+    "parameters": {
+      "kp": 20,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "return_kp": 60,
+      "return_kd": 2.4
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.22,
+      "up_time": 0.25,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 3.5,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.22,
+      "up_time": 0.25,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.2,
+      "up_time": 0.22,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "optimized",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "curvature": 5.0,
+      "down_time": 0.19,
+      "up_time": 0.21,
+      "knot_fraction": 0.55,
+      "velocity_shape": 1.1
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.006,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 3.5,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.006,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 5.0,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 3.5,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 5.0,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 3.5,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "torque",
+    "parameters": {
+      "kp": 12,
+      "kd": 0.8,
+      "inertia": 0.01,
+      "friction": 0.08,
+      "bias_scale": 0.75,
+      "curvature": 5.0,
+      "down_time": 0.22,
+      "up_time": 0.25
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "gravity",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.15,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.2,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.15,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.2,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.15,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "variable_damping",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.2,
+      "brake": 60.0,
+      "end_kd": 0.15,
+      "ramp_start": 0.5
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.15,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "hybrid",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "friction": 0.08,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "return_time": 0.2,
+      "brake": 60.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "brake_accel": 60.0,
+      "return_accel": 30.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.04,
+      "brake_accel": 60.0,
+      "return_accel": 40.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "brake_accel": 60.0,
+      "return_accel": 30.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.08,
+      "brake_accel": 60.0,
+      "return_accel": 40.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "brake_accel": 60.0,
+      "return_accel": 30.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  },
+  {
+    "method": "baseline",
+    "parameters": {
+      "kp": 60,
+      "kd": 2.4,
+      "inertia": 0.008,
+      "bias_scale": 0.8,
+      "fall_kd": 0.12,
+      "brake_accel": 60.0,
+      "return_accel": 40.0
+    },
+    "repetitions": 3,
+    "stage": "hardware_refine_1"
+  }
+]

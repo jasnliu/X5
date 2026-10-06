@@ -1,0 +1,101 @@
+{
+  "success": true,
+  "physical": true,
+  "verification": "Actual ST7 search HIT accepted by ordinary controller; no independent audio analysis or injected detections",
+  "consecutive_passes": 2,
+  "runs": [
+    {
+      "result": "playback_results/swing_verification/20261005T035659-d45c7964/result.json",
+      "success": true,
+      "st7": {
+        "version": 2,
+        "kind": "hit",
+        "event_at": 512792.4633312249,
+        "detected_at": 512793.209404413,
+        "score": 0.719481,
+        "normality_score": 52.8,
+        "degrees": 12,
+        "released_at": 512792.371565223,
+        "returned_at": 512792.781380077
+      },
+      "swing_duration_s": 5.006945500033908,
+      "encoder_strokes": 14,
+      "faults": [],
+      "center": {
+        "t": 512804.284418755,
+        "goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4
+        ],
+        "actual_rad": [
+          0.00019180590524214836,
+          0.00019180590524214836,
+          0.00019180590524214836,
+          0.00019180590524214836,
+          0.00029659014262470307,
+          0.00019180590524214836,
+          1.399607690547036
+        ],
+        "max_error_deg": 0.05494834428010291,
+        "span_deg": 0.06593801313616421,
+        "settled_s": 0.632911992026493
+      },
+      "relaxed_verified": true,
+      "maximum_arrival_error_ms": 7.7829069923609495
+    },
+    {
+      "result": "playback_results/swing_verification/20261005T035845-e5973f8a/result.json",
+      "success": true,
+      "st7": {
+        "version": 2,
+        "kind": "hit",
+        "event_at": 512896.91362588905,
+        "detected_at": 512897.668482245,
+        "score": 0.689211,
+        "normality_score": 38.2,
+        "degrees": 11,
+        "released_at": 512896.822345179,
+        "returned_at": 512897.22441308
+      },
+      "swing_duration_s": 5.020636002998799,
+      "encoder_strokes": 14,
+      "faults": [],
+      "center": {
+        "t": 512908.738943985,
+        "goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4
+        ],
+        "actual_rad": [
+          0.0005754177157246687,
+          0.00019180590524214836,
+          -0.00019180590524214836,
+          0.0005754177157246687,
+          0.00029659014262470307,
+          0.00019180590524214836,
+          1.399607690547036
+        ],
+        "max_error_deg": 0.12088635741626712,
+        "span_deg": 0.10989668856020582,
+        "settled_s": 0.641861507028807
+      },
+      "relaxed_verified": true,
+      "maximum_arrival_error_ms": 34.77434499654919
+    }
+  ],
+  "model_and_thresholds_unchanged": true,
+  "audio_mapping_and_acceptance_window_unchanged": true,
+  "all_motors_disabled_final": true,
+  "final_query": "diagnostics/st7_handoff_20261004/query_final_disabled.json",
+  "unit_tests_passed": 469
+}

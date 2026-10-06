@@ -1,0 +1,119 @@
+{
+  "limits": {
+    "upper_excursion_deg": 0.6
+  },
+  "parameters": {
+    "powered": {
+      "bias_scale": 0.8,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.736
+    },
+    "impedance": {
+      "bias_scale": 0.8,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 0.8,
+      "kp": 20,
+      "return_kd": 2.4,
+      "return_kp": 60,
+      "up_time": 0.22,
+      "load_torque": 0.746
+    },
+    "optimized": {
+      "bias_scale": 0.8,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.4,
+      "knot_fraction": 0.5,
+      "kp": 60,
+      "up_time": 0.22,
+      "velocity_shape": 0.98,
+      "load_torque": 0.747
+    },
+    "gravity": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "variable_damping": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "end_kd": 0.12,
+      "fall_kd": 0.04,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kp": 60,
+      "latency": 0.004,
+      "ramp_start": 0.5,
+      "return_time": 0.22,
+      "load_torque": 0.744
+    },
+    "hybrid": {
+      "bias_scale": 0.8,
+      "brake": 60.0,
+      "fall_kd": 0.08,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "join_shape": 16.0,
+      "kd": 2.4,
+      "kick_time": 0.04,
+      "kick_torque": 0.3,
+      "kp": 60,
+      "latency": 0.004,
+      "return_time": 0.22,
+      "load_torque": 0.745
+    },
+    "baseline": {
+      "bias_scale": 0.8,
+      "brake_accel": 50.0,
+      "command_latency": 0.004,
+      "fall_kd": 0.08,
+      "inertia": 0.011,
+      "kd": 2.4,
+      "kp": 60,
+      "return_accel": 25.0,
+      "load_torque": 0.687
+    },
+    "cosine": {
+      "bias_scale": 0.8,
+      "duration": 0.4,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 2.6,
+      "kp": 60,
+      "load_torque": 0.723
+    },
+    "torque": {
+      "bias_scale": 0.7,
+      "curvature": 5,
+      "down_time": 0.2,
+      "friction": 0.08,
+      "inertia": 0.012,
+      "kd": 0.8,
+      "kp": 12,
+      "return_blend_start": 0.45,
+      "up_time": 0.24,
+      "load_torque": 0.692
+    }
+  }
+}

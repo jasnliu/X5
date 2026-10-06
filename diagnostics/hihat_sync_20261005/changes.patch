@@ -1,0 +1,730 @@
+--- diagnostics/hihat_sync_20261005/before/camera_playback/app.py	2026-10-05 12:04:18.237222645 -0700
++++ camera_playback/app.py	2026-10-05 13:44:49.110781873 -0700
+@@ -42,6 +42,7 @@
+ from .mit_strike import Joint7Session, StrikeSettings
+ from .hill import GuidedHillClimber
+ from .hihat import DEFAULT_ESP_PORT, HiHatController, MOTOR2_TARGET_DEGREES
++from .hihat_sync_runtime import HiHatSyncRuntime
+ from .planner import solve_playback_coordinate
+ from .simulation import SimulatedMotors
+ from .strike import (
+@@ -190,7 +191,7 @@
+             print('HARDWARE: one RUN button → center + close gripper → recording → '
+                   'experiment hybrid J7 search → first-hit depth → '
+                   '100 BPM hybrid swing with partial returns; ride v2 controls search; '
+-                  'hi-hat v1 sound is visual only; motion workflow unchanged', flush=True)
++                  'hi-hat v1 continuously tunes only hi-hat timing; ride motion unchanged', flush=True)
+         super().__init__(real_hardware, detection_socket)
+         if real_hardware and isinstance(self.bus, Motors):
+             self.bus = PlaybackMotors.adopt(self.bus, self.center_goal,
+@@ -206,6 +207,7 @@
+             None if self.test_mode or self.hardware_test_mode or self.recording_only
+             else HiHatController(esp_port)
+         )
++        self.hihat_sync = HiHatSyncRuntime(self) if self.hybrid_enabled else None
+         self.hihat_fault_detail = None
+         if real_hardware and self.hihat is not None and not self.hihat.connect():
+             self.hihat_fault_detail = self.hihat.detail
+@@ -412,6 +414,8 @@
+         self.sound_label.pack(fill="x", padx=20, pady=5, before=self.start_button)
+         self.hihat_sound_monitor = HiHatSoundMonitor(
+             self.root, hihat_audio_socket, before=self.start_button, disabled=self.test_mode)
++        if self.hihat_sync is not None:
++            self.hihat_sound_monitor.on_messages = lambda messages: self.hihat_sync.feed('hihat', messages)
+         if self.test_mode:
+             hihat_text = "Hi-hat ESP32: ignored in test mode — serial port not opened"
+         elif self.hardware_test_mode or self.recording_only:
+@@ -1055,6 +1059,9 @@
+             return
+         try:
+             messages = self.audio_receiver.poll()
++            sync = getattr(self, 'hihat_sync', None)
++            if sync is not None:
++                sync.feed('ride', messages)
+             now = time.monotonic()
+             for message in messages:
+                 if message.get("kind") == "hit" and message.get('instrument', 'ride') == 'ride':
+@@ -2560,6 +2567,9 @@
+         self._cancel_continuous_striking()
+ 
+     def _stop_hihat_sequence(self) -> None:
++        sync = getattr(self, 'hihat_sync', None)
++        if sync is not None:
++            sync.stop()
+         hihat = getattr(self, "hihat", None)
+         if hihat is None:
+             return
+--- diagnostics/hihat_sync_20261005/before/camera_playback/hihat.py	2026-09-27 20:37:16.473394868 -0700
++++ camera_playback/hihat.py	2026-10-05 13:44:49.109673539 -0700
+@@ -220,6 +220,17 @@
+         self.beat_count += 1
+         return command
+ 
++    def send_state(self, closed: bool) -> bytes:
++        """Explicit scheduled edge; same firmware targets as send_beat()."""
++        if not self.sequence_active or not self.ready():
++            raise RuntimeError("ESP32 hi-hat beat sequence is not active/ready")
++        command = b"C" if closed else b"O"
++        self._write(command)
++        self.motor2_closed = bool(closed)
++        self.next_beat_closes = not closed
++        self.beat_count += 1
++        return command
++
+     def stop_sequence(self) -> None:
+         if self.fd is not None and self.sequence_active:
+             # Return motor 2 to encoder zero; the firmware releases it once the
+--- diagnostics/hihat_sync_20261005/before/camera_playback/hybrid_workflow.py	2026-10-04 21:02:26.591062177 -0700
++++ camera_playback/hybrid_workflow.py	2026-10-05 13:44:49.111070759 -0700
+@@ -114,6 +114,9 @@
+     app.hybrid_main_count = app.hybrid_seen_bottoms = 0
+     app.hybrid_seen_closed = 0
+     app.hybrid_session.request('swing', math.radians(app.continuous_strike_degrees), events)
++    sync = getattr(app, 'hihat_sync', None)
++    if sync is not None:
++        sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+     app.status.set(f'HYBRID first detected depth {app.continuous_strike_degrees}°: '
+                    '100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases')
+     print(app.status.get(), flush=True)
+@@ -300,6 +303,13 @@
+                   f'measured peak {math.degrees(s.peak_drop):.3f}°; returned and settled', flush=True)
+             app.complete_stage(s.returned_at)
+     elif app.continuous_strike_active:
++        sync = getattr(app, 'hihat_sync', None)
++        if sync is not None and sync.active:
++            try:
++                sync.observe(s, now)
++            except Exception as exc:
++                request_stop(app, 'Hi-hat synchronization: '+str(exc))
++                return
+         app.continuous_strike_count = s.count
+         app.phase = ('100 BPM STRIKE WAITING' if s.phase == 'hold' else
+                      '100 BPM STRIKE MOVING OUT' if s.phase in ('drive', 'coast') else
+@@ -312,7 +322,10 @@
+             app.continuous_hihat_pending = True
+             app.continuous_current_event_at = s.main_at
+             app.continuous_current_swing_label = s.label
+-            app._send_pending_hihat(now)
++            if sync is None:
++                app._send_pending_hihat(now)
++            else:
++                app.continuous_hihat_pending = False
+         if s.bottoms > app.hybrid_seen_bottoms:
+             app.hybrid_seen_bottoms = s.bottoms
+             print(f'HYBRID swing {s.count} ({s.label}): target {app.continuous_strike_degrees}°; '
+--- diagnostics/hihat_sync_20261005/before/camera_playback/sound_monitor.py	2026-10-05 12:10:41.991071183 -0700
++++ camera_playback/sound_monitor.py	2026-10-05 13:44:49.110961178 -0700
+@@ -1,4 +1,4 @@
+-"""Hi-hat audio display only: no arm, motor, search or beat-control references."""
++"""Unchanged hi-hat display with an optional nonvisual event observer."""
+ from __future__ import annotations
+ 
+ import time
+@@ -40,6 +40,9 @@
+         if self.receiver is None:
+             return "Hi-hat sound v1: not connected — visual only", "#8a5a00", False
+         messages = self.receiver.poll()
++        observer = getattr(self, 'on_messages', None)
++        if observer is not None:
++            observer(messages)
+         # The receiver timestamps status at receipt. Sample display time after
+         # polling so a fresh heartbeat cannot look microscopically future-dated.
+         now = time.monotonic() if now is None else now
+--- diagnostics/hihat_sync_20261005/before/tests/test_hihat.py	2026-10-05 13:57:18.251444172 -0700
++++ tests/test_hihat.py	2026-10-05 13:48:40.178676367 -0700
+@@ -73,6 +73,20 @@
+         self.assertEqual(wire, b"HSCOCOOS")
+         self.assertNotIn(b"K", wire)
+ 
++    def test_explicit_sync_edges_open13_close24_without_target_changes(self):
++        self.make_ready()
++        self.drain()
++        self.controller.start_sequence()
++        commands = [self.controller.send_state(closed) for closed in (False, True, False, True)]
++        self.assertEqual(commands, [b"O", b"C", b"O", b"C"])
++        self.assertEqual(self.drain(), b"OCOC")
++        self.assertTrue(self.controller.motor2_closed)
++        self.assertEqual(self.controller.beat_count, 4)
++        self.controller.stop_sequence()
++        self.assertEqual(self.drain(), b"O")
++        with self.assertRaises(RuntimeError):
++            self.controller.send_state(True)
++
+     def test_firmware_ready_line_can_finish_warmup_early(self):
+         self.assertTrue(self.controller.connect(now=20.0))
+         os.write(self.master, b"READY motor_beat (2 motors)\r\n")
+--- diagnostics/hihat_sync_20261005/before/README.md	2026-10-05 12:12:40.399126358 -0700
++++ README.md	2026-10-05 13:48:28.645997527 -0700
+@@ -436,11 +436,14 @@
+ The launcher also starts **`models/hihat_v1`** (its own config, checkpoint and
+ normality reference) on the same TONOR source. A separate **Hi-hat sound v1**
+ panel flashes green for each detected closure and shows its count, last score
+-and normality. This is **visual only**, including while the arm is idle: hi-hat
+-audio never selects a J7 depth, changes timing, starts/stops the beat or gates
+-the RUN button. Its absence, crash or stale feedback is shown only in this
+-panel; the existing ride readiness/failure handling is unchanged. The ESP32
+-hi-hat motor status remains a separate control/safety indicator.
++and normality. The panel/layout is unchanged. In normal **--hardware** swing,
++a nonvisual servo now also uses hi-hat onsets to adjust **only hi-hat timing**.
++Hi-hat audio never selects a J7 depth, retimes the ride, starts/stops the beat
++or gates RUN. Missing/stale/ambiguous hi-hat detections freeze the last valid
++advance; existing ride readiness/failure handling is unchanged. The panel's
++legacy “visual only” wording is retained per the no-UI-changes requirement;
++background timing decisions are logged separately. ESP32 motor faults still
++use the existing controlled-stop safety path.
+ 
+ Ride and hi-hat use independent listener processes and Unix sockets, with
+ instrument-tagged messages checked at both the bridge and receiver. Each
+@@ -501,13 +504,45 @@
+ The integrated
+ 115200-baud ESP32 hi-hat remains on the main
+ quarter-note beats only; it receives no command on a ride extra. Its main-beat
+-commands remain `C`, `O`, `C`, `O`… at the beat deadlines rather than at an
+-early J7 reversal, alternating the exact 110° close/hold and 0° return/release
+-targets. The host never sends motor 1's `K` command because right J7 replaces
++commands in normal hardware mode are now `O`, `C`, `O`, `C`…: **OPEN on
++1/3, CLOSE on 2/4**. The exact 110° close/hold and 0° return/release targets
++are unchanged. Commands use the unchanged ride grid minus one signed hi-hat
++advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
+ motor 1. The ESP32 code is copied under
+ `esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
+ `/dev/serial/by-id/` path.
+ 
++### Background hi-hat synchronization (no ride offset)
++
++Only `--hardware` has the new servo. `--test`, `--hardwaretest`, data collectors,
++model assets/thresholds, the ride search and hybrid motion controller are unchanged.
++Both detectors' ADC-derived monotonic acoustic onsets share one internal timeline;
++notification delays never become timing offsets. The read-only ride pickup/grid
++starts a 5 ms host callback scheduler; no command is sent on the pickup or extras.
++
++A closure on beat 2/4 is matched against one unambiguous ride onset within
++140 ms of that scheduled beat, plus a neighboring ride-grid detection. One
++hi-hat onset must occur within 450 ms of its actual close command. Both detector
++watermarks must finalize the entire matching window. Duplicates, missing or
++ambiguous events, stale sources and corrections outside the ±250 ms safety
++bound do not change the advance. This cannot eliminate classifier cross-talk:
++a missing real ride plus a false ride response to a hi-hat can still be ambiguous
++in reality even when the detector output looks unique. Better models may be needed.
++
++The estimate uses the **actual advance used for that historical command** plus
++`hihat_onset - ride_onset`, avoiding repeated integration of delayed errors.
++After three valid pairs, a rolling five-estimate median drives smoothed changes
++(maximum 10 ms per update, 15 ms deadband). Every close and following open share
++a latched advance, preserving their 600 ms separation. New pairs change by at
++most 10 ms; already scheduled edges never jump. Missed deadlines cause the
++existing controlled stop, never a burst or an airborne arm release. No guarantee
++of perfect acoustic synchronization is made at the models' finite time resolution.
++
++Each swing writes `playback_results/hihat_sync/<session>/timeline.jsonl` with
++common-clock detector onsets, beat IDs, actual commands, applied advances,
++accepted timing errors and rejected-pair reasons. No new UI or launch action is
++required. These logs are diagnostics, not training labels.
++
+ This automatic arm-and-hi-hat loop belongs to `--hardware`; its arm and hi-hat
+ continue until the user presses **Stop 100 BPM striking:
+ Center + Relax**. Stop finishes any
+--- /dev/null	2026-09-28 22:30:58.821296986 -0700
++++ camera_playback/hihat_sync.py	2026-10-05 13:44:02.327725683 -0700
+@@ -0,0 +1,199 @@
++"""Hi-hat-only acoustic phase servo; no ride controller or motor imports.
++
++All times are host monotonic seconds. Detector delivery times NEVER stand in
++for acoustic onsets. Positive advance sends earlier. The ride grid is read-only.
++"""
++from collections import deque
++from dataclasses import dataclass
++import math
++import statistics
++
++
++MAX_ADVANCE = .250
++MAX_STEP = .010
++DEADBAND = .015
++RIDE_GATE = .140
++CLOSURE_LATENCY_MAX = .450
++MAX_LATENESS = .080
++MAX_PAIR_AGE = 6.
++
++
++class TimingFault(RuntimeError):
++    pass
++
++
++@dataclass
++class Closure:
++    index: int
++    target: float
++    commanded: float
++    advance: float
++
++
++class HiHatSynchronizer:
++    """Deterministic scheduler + conservative event pairing, tested without I/O.
++
++    send(closed) executes ONE edge, returning its actual monotonic send time.
++    A CLOSE and following OPEN share a latched advance, preserving closed time.
++    Updates never re-time an already queued edge. Open duration changes by at
++    most MAX_STEP between successive pairs. No catch-up commands are sent.
++    """
++    def __init__(self, send, log=lambda row: None, period=.6):
++        if not math.isfinite(period) or period < 2*MAX_ADVANCE:
++            raise ValueError('Unsupported hi-hat beat period')
++        self.send, self.log, self.period = send, log, period
++        self.active = False
++        self.advance = 0.
++        self.epoch = None
++        self.index = 0
++        self.pair_advance = 0.
++        self.events = {'ride': deque(maxlen=512), 'hihat': deque(maxlen=512)}
++        self.watermarks = {'ride': None, 'hihat': None}
++        self.progress_at = {'ride': -math.inf, 'hihat': -math.inf}
++        self.pending = deque()
++        self.estimates = deque(maxlen=5)
++        self.last_estimate_at = None
++        self.last_pair_advance = 0.
++        self.started = 0.
++        self.last_commanded = None
++        self.matches = self.skips = 0
++
++    def start(self, now):
++        self.active = True
++        self.started = now
++        self.log(dict(kind='start', at=now, advance=0., period=self.period,
++                      close_beats=[2, 4], open_beats=[1, 3]))
++
++    def stop(self, now):
++        if self.active:
++            self.log(dict(kind='stop', at=now, advance=self.advance,
++                          matches=self.matches, skips=self.skips))
++        self.active = False
++        self.pending.clear()
++
++    def set_epoch(self, epoch, now):
++        if self.epoch is None and self.active:
++            if not math.isfinite(epoch) or epoch < now-MAX_LATENESS:
++                raise TimingFault('Hi-hat grid arrived too late; refusing catch-up')
++            self.epoch = epoch
++            self.log(dict(kind='grid', at=now, beat1=epoch))
++
++    def feed(self, instrument, messages, now):
++        if not self.active or instrument not in self.events:
++            return
++        for m in messages:
++            if m.get('instrument', 'ride') != instrument:
++                continue
++            if m.get('kind') == 'progress':
++                value = m.get('finalized_at')
++                old = self.watermarks[instrument]
++                if (isinstance(value, (int, float)) and math.isfinite(value)
++                        and value <= now+.05 and (old is None or value >= old)):
++                    self.watermarks[instrument] = value
++                    self.progress_at[instrument] = now
++                continue
++            if m.get('kind') != 'hit':
++                continue
++            at = m.get('event_at')
++            if (not isinstance(at, (int, float)) or not math.isfinite(at)
++                    or not self.started <= at <= now+.05 or now-at > MAX_PAIR_AGE):
++                continue
++            if any(abs(e['event_at']-at) < .003 for e in self.events[instrument]):
++                continue
++            event = dict(m)
++            self.events[instrument].append(event)
++            self.log(dict(kind='onset', instrument=instrument, event_at=at,
++                          received_at=now, score=m.get('score')))
++
++    def _within(self, instrument, lo, hi):
++        return [e for e in self.events[instrument] if lo <= e['event_at'] <= hi]
++
++    def _skip(self, c, reason, now):
++        self.skips += 1
++        # Do not combine old calibration with a later sparse/new sound regime.
++        self.estimates.clear()
++        self.log(dict(kind='skip', index=c.index, target=c.target, at=now, reason=reason))
++
++    def evaluate(self, now, available):
++        """Consume each closure only after BOTH acoustic windows are finalized."""
++        while self.pending:
++            c = self.pending[0]
++            if now-c.target > MAX_PAIR_AGE:
++                self.pending.popleft()
++                self._skip(c, 'detector timeout', now)
++                continue
++            end = max(c.target+self.period*2/3+RIDE_GATE,
++                      c.commanded+CLOSURE_LATENCY_MAX)
++            if not all(available.get(k, False) and self.watermarks[k] is not None
++                       and self.watermarks[k] >= end and now-self.progress_at[k] <= 2.
++                       for k in self.events):
++                break
++            self.pending.popleft()
++            rides = self._within('ride', c.target-RIDE_GATE, c.target+RIDE_GATE)
++            hats = self._within('hihat', c.commanded, c.commanded+CLOSURE_LATENCY_MAX)
++            # Check another ride-only grid position, not just a possible hi-hat
++            # cross-response. Do not veto genuine simultaneous detections.
++            neighbors = (self._within('ride', c.target-self.period-RIDE_GATE,
++                                      c.target-self.period+RIDE_GATE)
++                         + self._within('ride', c.target+self.period*2/3-RIDE_GATE,
++                                        c.target+self.period*2/3+RIDE_GATE))
++            if len(rides) != 1 or len(hats) != 1 or not neighbors:
++                self._skip(c, f'ambiguous/missing: ride={len(rides)}, hihat={len(hats)}, '
++                           f'neighbor_ride={len(neighbors)}', now)
++                continue
++            ride, hat = rides[0]['event_at'], hats[0]['event_at']
++            error = hat-ride
++            actual_advance = c.target-c.commanded
++            estimate = actual_advance+error
++            if abs(estimate) > MAX_ADVANCE:
++                self._skip(c, 'required advance outside signed safety bound', now)
++                continue
++            if self.last_estimate_at is not None and now-self.last_estimate_at > MAX_PAIR_AGE:
++                self.estimates.clear()
++            self.last_estimate_at = now
++            self.estimates.append(estimate)
++            before = self.advance
++            if len(self.estimates) >= 3:
++                desired = statistics.median(self.estimates)
++                residual = desired-self.advance
++                if abs(residual) > DEADBAND:
++                    self.advance = max(-MAX_ADVANCE, min(MAX_ADVANCE,
++                        self.advance+max(-MAX_STEP, min(MAX_STEP, .35*residual))))
++            self.matches += 1
++            self.log(dict(kind='match', at=now, index=c.index, target=c.target,
++                          ride_onset=ride, hihat_onset=hat, error=error,
++                          commanded=c.commanded, advance_used=c.advance,
++                          actual_advance=actual_advance, estimate=estimate,
++                          advance_before=before, advance=self.advance))
++
++    def tick(self, now, available):
++        if not self.active:
++            return
++        self.evaluate(now, available)
++        if self.epoch is None:
++            return
++        target = self.epoch+self.index*self.period
++        advance = 0. if self.index == 0 else self.pair_advance
++        due = target-advance
++        if now < due:
++            return
++        if now-due > MAX_LATENESS:
++            raise TimingFault('Hi-hat deadline missed; refusing catch-up burst')
++        closed = self.index % 2 == 1  # OPEN 1/3, CLOSE 2/4, no pickup command.
++        actual = self.send(closed)
++        if not math.isfinite(actual) or actual < now-.001 or actual-due > MAX_LATENESS:
++            raise TimingFault('Hi-hat serial delivery missed deadline')
++        self.log(dict(kind='command', at=actual, index=self.index,
++                      beat=self.index % 4+1, closed=closed, target=target,
++                      due=due, advance=advance, lateness=actual-due))
++        if closed:
++            self.pending.append(Closure(self.index, target, actual, advance))
++        else:
++            # Lock the NEXT close and its following open together. Even if
++            # several delayed observations arrive together, edge timing moves
++            # by no more than 10 ms per pair.
++            self.pair_advance = self.last_pair_advance+max(-MAX_STEP,
++                min(MAX_STEP, self.advance-self.last_pair_advance))
++            self.last_pair_advance = self.pair_advance
++        self.index += 1
++        self.last_commanded = actual
+--- /dev/null	2026-09-28 22:30:58.821296986 -0700
++++ camera_playback/hihat_sync_runtime.py	2026-10-05 13:44:49.093503513 -0700
+@@ -0,0 +1,103 @@
++"""Nonvisual Tk background adapter. Never commands or retimes the ride arm."""
++from datetime import datetime, timezone
++import json
++from pathlib import Path
++import time
++import uuid
++
++from .hihat_sync import HiHatSynchronizer, TimingFault
++
++
++class HiHatSyncRuntime:
++    def __init__(self, app):
++        self.app = app
++        self.engine = None
++        self.after_id = None
++        self.stream = None
++        self.directory = None
++        self.last_observed = None
++
++    @property
++    def active(self):
++        return self.engine is not None and self.engine.active
++
++    def log(self, row):
++        if self.stream is not None:
++            try:
++                self.stream.write(json.dumps(row, allow_nan=False)+'\n')
++            except OSError:
++                # Diagnostics must not disrupt motor supervision.
++                self.stream.close()
++                self.stream = None
++        if row['kind'] in {'start', 'grid', 'match', 'skip', 'stop', 'fault'}:
++            print('HIHAT SYNC: '+json.dumps(row, allow_nan=False), flush=True)
++
++    def send(self, closed):
++        self.app.hihat.send_state(closed)
++        return time.monotonic()
++
++    def start(self, period):
++        self.stop()
++        self.directory = Path(__file__).resolve().parents[1]/'playback_results'/'hihat_sync'/(
++            datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')+'-'+uuid.uuid4().hex[:8])
++        try:
++            self.directory.mkdir(parents=True)
++            self.stream = (self.directory/'timeline.jsonl').open('w', buffering=1)
++        except OSError as exc:
++            print('HIHAT SYNC: timeline file unavailable: '+str(exc), flush=True)
++        self.engine = HiHatSynchronizer(self.send, self.log, period)
++        self.engine.start(time.monotonic())
++        self.last_observed = time.monotonic()
++        self.after_id = self.app.root.after(5, self.tick)
++
++    def observe(self, status, now):
++        if not self.active or not status.swing:
++            return
++        self.last_observed = now
++        if self.engine.epoch is None:
++            if status.count == 1 and status.bottoms == 1 and status.bottom_at is not None:
++                # Unchanged worker establishes its grid at the pickup bottom.
++                # The following beat 1 is one triplet subdivision later.
++                self.engine.set_epoch(status.bottom_at+self.engine.period/3, now)
++            elif status.main_at is not None and status.main_count:
++                self.engine.set_epoch(status.main_at-(status.main_count-1)*self.engine.period, now)
++
++    def feed(self, instrument, messages):
++        if self.active:
++            self.engine.feed(instrument, messages, time.monotonic())
++
++    def tick(self):
++        self.after_id = None
++        if not self.active:
++            return
++        a, now = self.app, time.monotonic()
++        try:
++            if not a.continuous_strike_active or a.continuous_stop_requested:
++                self.stop()
++                return
++            if now-self.last_observed > .15:
++                raise TimingFault('Ride status stale; cancelling future hi-hat edges')
++            monitor = getattr(a, 'hihat_sound_monitor', None)
++            receiver = getattr(monitor, 'receiver', None)
++            available = dict(ride=a.audio_receiver.ready(now),
++                             hihat=receiver is not None and receiver.ready(now))
++            self.engine.tick(now, available)
++        except Exception as exc:
++            self.log(dict(kind='fault', at=now, detail=str(exc)))
++            self.stop()
++            # Existing stop finishes the hybrid return then verifies center;
++            # no disable/relax is performed here.
++            a._request_continuous_stop()
++            return
++        if self.active:
++            self.after_id = a.root.after(5, self.tick)
++
++    def stop(self):
++        if self.after_id is not None:
++            self.app.root.after_cancel(self.after_id)
++            self.after_id = None
++        if self.engine is not None:
++            self.engine.stop(time.monotonic())
++        if self.stream is not None:
++            self.stream.close()
++            self.stream = None
+--- /dev/null	2026-09-28 22:30:58.821296986 -0700
++++ tests/test_hihat_sync.py	2026-10-05 13:46:03.323915646 -0700
+@@ -0,0 +1,193 @@
++"""No device access: acoustic servo, delayed delivery, signed edges and isolation."""
++import math
++import unittest
++from types import SimpleNamespace
++from unittest.mock import Mock, patch
++
++from camera_playback.hihat_sync import HiHatSynchronizer, TimingFault, MAX_STEP
++from camera_playback.hihat_sync_runtime import HiHatSyncRuntime
++from camera_playback.hybrid_strike import HybridStatus
++from camera_playback import hybrid_workflow as hw
++from camera_playback.app import App, SWING_EVENTS
++from test_hybrid_workflow import app_fixture
++
++
++class SyncTests(unittest.TestCase):
++    def engine(self):
++        self.now = 10.
++        self.rows = []
++        self.sent = []
++        def send(closed):
++            self.sent.append((self.now, closed))
++            return self.now
++        e = HiHatSynchronizer(send, self.rows.append)
++        e.start(10.)
++        e.set_epoch(10.2, 10.)
++        return e
++
++    def tick(self, e, at):
++        self.now = at
++        e.tick(at, {'ride': True, 'hihat': True})
++
++    def hit(self, e, instrument, at, delivered):
++        e.feed(instrument, [dict(kind='hit', instrument=instrument,
++               event_at=at, detected_at=delivered, score=.99)], delivered)
++
++    def watermarks(self, e, at, now):
++        for k in ('ride', 'hihat'):
++            e.feed(k, [dict(instrument=k, kind='progress', finalized_at=at)], now)
++
++    def test_zero_open13_close24_and_no_pickup(self):
++        e=self.engine()
++        self.tick(e, 10.1)
++        self.assertFalse(self.sent)
++        for at in (10.2,10.8,11.4,12.):self.tick(e, at+1e-9)
++        self.assertEqual([closed for at,closed in self.sent], [False,True,False,True])
++        self.assertEqual(e.advance, 0.)
++
++    def test_signed_advance_moves_close_AND_following_open_not_ride_grid(self):
++        for sign in (-1,1):
++            e=self.engine()
++            e.advance=sign*.1
++            self.tick(e,10.2)
++            self.assertAlmostEqual(e.pair_advance, sign*MAX_STEP)
++            due=10.8-e.pair_advance
++            self.tick(e,due-.001);self.assertEqual(len(self.sent),1)
++            self.tick(e,due+1e-9)
++            e.advance=-sign*.2  # cannot change paired open
++            self.tick(e,due+.6+1e-9)
++            self.assertAlmostEqual(self.sent[2][0]-self.sent[1][0],.6)
++            self.assertEqual(e.epoch,10.2)
++
++    def test_late_command_never_catches_up_and_stop_cancels(self):
++        e=self.engine()
++        with self.assertRaises(TimingFault):self.tick(e,10.5)
++        self.assertFalse(self.sent)
++        e.stop(10.5);self.tick(e,12.)
++        self.assertFalse(self.sent)
++
++    def test_stale_epoch_rejected(self):
++        e=HiHatSynchronizer(Mock());e.start(10.)
++        with self.assertRaises(TimingFault):e.set_epoch(9.,10.)
++
++    def one_pair(self):
++        e=self.engine()
++        self.tick(e,10.2);self.tick(e,10.8+1e-9)
++        self.hit(e,'ride',10.2,11.4)
++        self.hit(e,'ride',10.78,11.4)
++        self.hit(e,'hihat',10.91,11.4)
++        return e
++
++    def test_delivery_order_watermarks_and_duplicates(self):
++        e=self.one_pair()
++        self.hit(e,'ride',10.78,11.5)
++        self.assertEqual(len(e.events['ride']),2)
++        e.evaluate(11.5,{'ride':True,'hihat':True})
++        self.assertEqual(e.matches,0)
++        e.feed('ride',[dict(kind='progress', finalized_at=11.4)],11.5)
++        e.evaluate(11.5,{'ride':True,'hihat':True})
++        self.assertEqual(e.matches,0)
++        self.watermarks(e,11.4,11.5)
++        e.evaluate(11.5,{'ride':True,'hihat':True})
++        self.assertEqual(e.matches,1)
++        row=[r for r in self.rows if r['kind']=='match'][0]
++        self.assertAlmostEqual(row['error'],.13)
++        self.assertEqual(e.advance,0.)  # require multiple observations
++        e.evaluate(12.,{'ride':True,'hihat':True});self.assertEqual(e.matches,1)
++
++    def test_missing_ambiguous_or_cross_responsive_reference_freezes(self):
++        for extra in ('ride','hihat'):
++            e=self.one_pair()
++            self.hit(e,extra,10.92,11.4)
++            self.watermarks(e,11.4,11.5)
++            e.evaluate(11.5,{'ride':True,'hihat':True})
++            self.assertEqual(e.matches,0);self.assertEqual(e.advance,0.)
++            self.assertEqual(e.skips,1)
++
++    def test_unavailable_or_stale_detector_freezes_and_expires(self):
++        e=self.one_pair();self.watermarks(e,11.4,11.5)
++        e.advance=.07
++        e.evaluate(11.5,{'ride':True,'hihat':False})
++        self.assertEqual(e.matches,0);self.assertEqual(e.advance,.07)
++        e.evaluate(18.,{'ride':True,'hihat':False})
++        self.assertEqual(len(e.pending),0);self.assertEqual(e.advance,.07)
++
++    def test_bad_and_wrong_instrument_timestamps_are_ignored(self):
++        e=self.engine()
++        for at in (float('nan'),float('inf'),9.,100.):self.hit(e,'ride',at,11.)
++        e.feed('ride',[dict(instrument='hihat',kind='hit',event_at=10.4)],11.)
++        self.assertEqual(len(e.events['ride']),0)
++
++    def simulation(self, latency, ride_shift, delivery_delay):
++        e=self.engine()
++        pending=[];ride_index=0;closed_index=0
++        ride_times=[10.2+bar*2.4+offset+ride_shift for bar in range(30)
++                    for offset in (0,.6,1.,1.2,1.8,2.2)]
++        for step in range(28001):
++            now=10.+step*.002
++            while ride_index < len(ride_times) and ride_times[ride_index] <= now:
++                onset=ride_times[ride_index];ride_index+=1
++                pending.append((onset+delivery_delay,'ride',onset))
++            while closed_index < len(self.sent):
++                command,closed=self.sent[closed_index];closed_index+=1
++                if closed:pending.append((command+latency+delivery_delay+.31,'hihat',command+latency))
++            ready=[p for p in pending if p[0]<=now]
++            pending=[p for p in pending if p[0]>now]
++            for _,k,onset in reversed(ready):self.hit(e,k,onset,now)
++            # Each listener's watermark follows its own event delivery lag.
++            for k,lag in [('ride',delivery_delay),('hihat',delivery_delay+.31)]:
++                e.feed(k,[dict(instrument=k,kind='progress',finalized_at=now-lag-.002)],now)
++            self.tick(e,now)
++        matches=[r for r in self.rows if r['kind']=='match']
++        self.assertGreater(len(matches),30)
++        self.assertLess(abs(sum(r['error'] for r in matches[-8:])/8),.020)
++        self.assertLess(abs(e.advance-(latency-ride_shift)),.020)
++        commands=[r for r in self.rows if r['kind']=='command']
++        for c in commands:self.assertAlmostEqual(c['target'],10.2+c['index']*.6)
++        for c,o in zip(commands[1::2],commands[2::2]):
++            self.assertAlmostEqual(c['advance'],o['advance'])
++        return e,matches
++
++    def test_delayed_positive_feedback_converges_without_moving_ride(self):
++        self.simulation(.110,-.025,1.1)
++
++    def test_negative_advance_converges_and_is_not_clamped_to_zero(self):
++        self.simulation(.030,.110,.7)
++
++    def test_long_notification_delay_does_not_repeatedly_integrate_old_error(self):
++        self.simulation(.070,-.030,2.4)
++
++    def test_real_workflow_hands_schedule_to_sync_and_suppresses_legacy_double_send(self):
++        a=app_fixture();a.hihat_sync=Mock(active=True)
++        a.continuous_strike_active=True;a.strike_active=False
++        a.continuous_strike_degrees=10
++        hw.start_swing(a,SWING_EVENTS)
++        a.hihat_sync.start.assert_called_once_with(.6)
++        a.hybrid_session.status=HybridStatus(swing=True, main_count=1, main_at=10.,at=10.)
++        hw.tick(a,10.)
++        a.hihat_sync.observe.assert_called_once()
++        a.hihat.send_beat.assert_not_called()
++        a._stop_hihat_sequence()
++        a.hihat_sync.stop.assert_called_once()
++        a.hihat.stop_sequence.assert_called_once()
++
++    def test_runtime_seeds_only_from_unmodified_ride_epoch_and_resets(self):
++        a=SimpleNamespace(root=Mock(),hihat=Mock())
++        r=HiHatSyncRuntime(a);r.engine=self.engine();r.engine.epoch=None
++        r.observe(HybridStatus(swing=True,count=1,bottoms=1,bottom_at=10.5),10.51)
++        self.assertAlmostEqual(r.engine.epoch,10.7)
++        r.observe(HybridStatus(swing=True,count=3,bottoms=2,bottom_at=11.),11.01)
++        self.assertAlmostEqual(r.engine.epoch,10.7)
++        r.stop();self.assertFalse(r.active)
++
++    def test_runtime_fault_uses_controlled_stop_not_motor_release(self):
++        a=SimpleNamespace(root=Mock(),hihat=Mock(),continuous_strike_active=True,
++                          continuous_stop_requested=False,_request_continuous_stop=Mock())
++        r=HiHatSyncRuntime(a);r.engine=self.engine();r.last_observed=1.
++        with patch('camera_playback.hihat_sync_runtime.time.monotonic',return_value=10.):r.tick()
++        a._request_continuous_stop.assert_called_once()
++        a.hihat.release_all.assert_not_called()
++        self.assertFalse(r.active)
++
++
++if __name__=='__main__':unittest.main()

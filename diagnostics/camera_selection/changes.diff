@@ -1,0 +1,183 @@
+--- diagnostics/camera_selection/before/camera_search/device.py	2026-10-04 00:17:23.938912926 -0700
++++ camera_search/device.py	2026-10-04 10:11:49.145882782 -0700
+@@ -2,6 +2,7 @@
+ import argparse
+ import json
+ from pathlib import Path
++import re
+ 
+ 
+ DEFAULT_CAMERA = 'orbbec'
+@@ -9,21 +10,26 @@
+ 
+ 
+ def camera_argument(value):
+-    """Keep numeric --camera overrides, plus a stable default camera selector."""
++    """Local camera selector only; never interpret videos/URLs as live cameras."""
+     if value == DEFAULT_CAMERA:
+         return value
++    if isinstance(value, str) and re.fullmatch(
++            r'/dev/(?:video[0-9]+|v4l/(?:by-id|by-path)/[^/]+)', value):
++        return value
+     try:
+         number = int(value)
+         if number >= 0:
+             return number
+     except (TypeError, ValueError):
+         pass
+-    raise argparse.ArgumentTypeError('camera must be "orbbec" or a nonnegative camera index')
++    raise argparse.ArgumentTypeError(
++        'camera must be "orbbec", a nonnegative index, /dev/videoN, '
++        'or a /dev/v4l/by-id/ or by-path/ device link')
+ 
+ 
+ def add_camera_argument(parser):
+     parser.add_argument('--camera', type=camera_argument, default=DEFAULT_CAMERA,
+-                        help='orbbec (default: configured Gemini 2 RGB), or an explicit numeric index')
++                        help='orbbec (default), camera index N, /dev/videoN, or a stable /dev/v4l/by-id/ or by-path/ link')
+ 
+ 
+ def resolve_camera(source=DEFAULT_CAMERA, *, sysfs=Path('/sys/class/video4linux'),
+@@ -37,6 +43,14 @@
+     """
+     source = camera_argument(source)
+     if source != DEFAULT_CAMERA:
++        if isinstance(source, str):
++            try:
++                target = Path(source).resolve(strict=True)
++            except (OSError, RuntimeError) as exc:
++                raise RuntimeError(f'Camera device path unavailable: {source}: {exc}') from exc
++            if target.parent != Path('/dev') or not re.fullmatch(r'video[0-9]+', target.name):
++                raise RuntimeError(f'Camera path must resolve to a local /dev/videoN device: {source}')
++            return int(target.name.removeprefix('video'))
+         return source
+     config = json.loads(Path(config_path).read_text())
+     found = []
+
+--- diagnostics/camera_selection/before/launch_right_camera_playback.py	2026-10-04 00:17:23.939912990 -0700
++++ launch_right_camera_playback.py	2026-10-04 10:11:49.146882840 -0700
+@@ -13,6 +13,7 @@
+ 
+ from camera_playback.hihat import DEFAULT_ESP_PORT
+ from camera_search.device import add_camera_argument
++from camera_playback.camera_selection import choose_camera, list_cameras, print_cameras
+ 
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -49,7 +50,12 @@
+         "--recording", type=Path, default=ROOT / "recordings/record1.json",
+         help="right-arm recording (default: recordings/record1.json)",
+     )
+-    add_camera_argument(parser)
++    camera_choice = parser.add_mutually_exclusive_group()
++    add_camera_argument(camera_choice)
++    camera_choice.add_argument('--select-camera', action='store_true',
++                               help='choose a connected camera interactively before any controllers launch')
++    parser.add_argument('--list-cameras', action='store_true',
++                        help='list connected camera names, indices and stable paths, then exit without launching hardware')
+     parser.add_argument("--recording-only", action="store_true",
+                         help="physical no-strike test: recording, verified center, then relax; never align or strike")
+     parser.add_argument("--auto-run", action="store_true",
+@@ -89,6 +95,8 @@
+     parser.add_argument("--mit-latency-ms", type=float, default=None,
+                         help="hardwaretest only: command/actuation delay estimate, ms (default 4)")
+     args = parser.parse_args()
++    if args.test and args.select_camera:
++        parser.error('--select-camera is unavailable in --test, which deliberately uses no camera')
+     if args.recording_only and not (args.hardware or args.hardwaretest):
+         parser.error("--recording-only requires --hardware or --hardwaretest")
+     if args.auto_run and not args.recording_only:
+@@ -105,6 +113,14 @@
+ 
+ 
+ args = parse_args()
++if args.list_cameras:
++    print_cameras(list_cameras())
++    raise SystemExit(0)
++if args.select_camera:
++    try:
++        args.camera = choose_camera()
++    except RuntimeError as exc:
++        raise SystemExit(str(exc)) from None
+ perception_enabled = not args.test
+ venv_python = Y2 / ".venv/bin/python"
+ detector_source = Y2 / "realtime_detector.py"
+
+--- diagnostics/camera_selection/before/RIGHT_CAMERA_PLAYBACK.md	2026-10-04 00:02:49.013506227 -0700
++++ RIGHT_CAMERA_PLAYBACK.md	2026-10-04 10:15:24.649366063 -0700
+@@ -7,8 +7,54 @@
+ camera detector and a separate post-playback Cartesian hill climber.
+ 
+ Both hardware modes default to the configured **Orbbec Gemini 2 RGB**, selected
+-by USB identity. `--camera N` remains an explicit override. Close OrbbecViewer
+-before launch; see [shared camera defaults](CAMERA_DEFAULT.md).
++by USB identity. You can choose another camera by index, device path, or an
++interactive startup picker. Close other camera programs before launch;
++see [shared camera defaults](CAMERA_DEFAULT.md).
++
++## Choose the camera input
++
++List connected camera names, indices, and stable device paths **without starting
++any camera stream or arm controller**:
++
++```bash
++./start_beat.sh --list-cameras
++```
++
++Select interactively before the program starts:
++
++```bash
++./start_beat.sh --hardware --select-camera
++./start_beat.sh --hardwaretest --select-camera
++```
++
++Type a listed camera number or device path; `q` cancels without launching
++controllers. Pressing Enter selects the configured Orbbec if it is connected.
++The picker requires an interactive terminal; otherwise use `--camera` directly:
++
++```bash
++./start_beat.sh --hardware --camera 0
++./start_beat.sh --hardwaretest --camera /dev/video0
++./start_beat.sh --hardware --camera /dev/v4l/by-id/usb-046d_Logitech_Webcam_C925e_A26952DF-video-index0
++./start_beat.sh --hardwaretest --camera orbbec
++```
++
++Camera numbers can change after reconnecting. Prefer the exact stable path
++printed by `--list-cameras` for an ordinary USB webcam, or `orbbec` for the
++configured Gemini RGB interface. The picker prefers these stable selectors too.
++USB-by-path links are also accepted, but depend on which physical USB port is used.
++
++These choices work in **both hardware modes and the no-hardware preview**
++(omit the mode flag for the latter), including `--recording-only` when used with
++a hardware mode. `--test` stays camera-free and rejects `--select-camera`.
++`--camera` and `--select-camera` cannot be combined. Selection applies only to
++this launch; it does not overwrite the shared default or switch cameras during
++active arm control.
++
++`--width` and `--height` still customize capture resolution. The configured
++Orbbec retains its full-FOV requirements even when selected by a device path.
++Other cameras retain their own existing resolution behavior; no Orbbec-specific
++mode restriction is applied to them. Only local live video devices are supported,
++not video files or network URLs that could provide stale/non-live arm feedback.
+ 
+ ## Start
+ 
+
+--- diagnostics/camera_selection/before/CAMERA_DEFAULT.md	2026-10-04 00:24:25.932990237 -0700
++++ CAMERA_DEFAULT.md	2026-10-04 10:14:57.876815202 -0700
+@@ -61,6 +61,15 @@
+ ./start_right_camera_cartesian.sh --camera orbbec
+ ```
+ 
++`start_beat.sh` additionally provides `--list-cameras` (list names, indices and
++stable paths, then exit without launching controllers) and `--select-camera`
++(interactive terminal picker before launch). All its camera-using modes support
++these choices. For a stable ordinary-webcam selection, `--camera` also accepts
++`/dev/videoN`, `/dev/v4l/by-id/...`, and `/dev/v4l/by-path/...` device paths.
++Paths are resolved to live local video nodes; the configured Gemini's full-FOV
++policy is preserved even through a path override. See
++[camera-selection examples](RIGHT_CAMERA_PLAYBACK.md#choose-the-camera-input).
++
+ These are normal program commands, **not camera-only tests**; hardware modes
+ retain their original motor workflow. To change the default physical device
+ later, update `config/camera.json` after identifying its actual RGB interface.

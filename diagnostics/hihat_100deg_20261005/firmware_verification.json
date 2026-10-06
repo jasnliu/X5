@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "port": "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",
+  "close_degrees": 100,
+  "encoder_target_counts": 149,
+  "readback": [
+    "ets Jul 29 2019 12:21:46",
+    "rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)",
+    "configsip: 0, SPIWP:0xee",
+    "clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00",
+    "mode:DIO, clock div:1",
+    "load:0x3fff0030,len:4876",
+    "ho 0 tail 12 room 4",
+    "load:0x40078000,len:16532",
+    "load:0x40080400,len:3500",
+    "entry 0x400805b4",
+    "READY motor_beat (2 motors)",
+    "Motor2 targets: keys 100 deg=149 counts, beat 100 deg=149 counts",
+    "Cmds: K=motor1 kick  J=motor2 100  C=motor2 100  O=motor2 open  H=beat  S=stop(all)",
+    "STOP -- all motors released."
+  ],
+  "commands_sent": [
+    "S"
+  ],
+  "normal_reset": true,
+  "closure_command_sent": false,
+  "physical_angle_measured": false
+}

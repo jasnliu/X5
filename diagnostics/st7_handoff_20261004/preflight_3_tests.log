@@ -1,0 +1,25 @@
+<Mock name='mock.get()' id='130511543287344'>
+.<Mock name='mock.get()' id='130511509025472'>
+..<Mock name='mock.get()' id='130511538339232'>
+.HYBRID search −5°: measured peak 5.000°; returned and settled
+.HYBRID swing 1 (pickup): target 5°; arrival error +0.0 ms; partial returns 0
+HYBRID swing 2 (beat 1): target 5°; arrival error +0.0 ms; partial returns 0
+..HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+.ST7 HIT NOT SELECTED: {"reason": "onset follows this completed return", "phase": "STRIKE MOVING OUT", "onset": 10.6, "detected_at": null, "release": 10.0, "returned": 10.4}
+.<Mock name='mock.get()' id='130511543913792'>
+.ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "STRIKE WAITING FOR SOUND", "onset": 10.2, "detected_at": null, "release": null, "returned": null}
+.ST7 HIT NOT SELECTED: {"reason": "onset precedes this release", "phase": "STRIKE MOVING OUT", "onset": 9.0, "detected_at": null, "release": 10.0, "returned": null}
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+<Mock name='mock.get()' id='130511538643232'>
+.<Mock name='mock.get()' id='130511516334464'>
+.<Mock name='mock.get()' id='130511582204304'>
+..<Mock name='mock.get()' id='130511526101216'>
+.......MAJOR FAULT EMERGENCY RELAX: STALL: motor 4
+..CENTER VERIFIED BEFORE RELAX: {"t": 512725.797251319, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 512725.798017946, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+........
+----------------------------------------------------------------------
+Ran 33 tests in 0.051s
+
+OK

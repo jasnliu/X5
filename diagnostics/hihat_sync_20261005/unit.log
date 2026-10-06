@@ -1,0 +1,21 @@
+test_bad_and_wrong_instrument_timestamps_are_ignored (test_hihat_sync.SyncTests.test_bad_and_wrong_instrument_timestamps_are_ignored) ... ok
+test_delayed_positive_feedback_converges_without_moving_ride (test_hihat_sync.SyncTests.test_delayed_positive_feedback_converges_without_moving_ride) ... ok
+test_delivery_order_watermarks_and_duplicates (test_hihat_sync.SyncTests.test_delivery_order_watermarks_and_duplicates) ... ok
+test_late_command_never_catches_up_and_stop_cancels (test_hihat_sync.SyncTests.test_late_command_never_catches_up_and_stop_cancels) ... ok
+test_long_notification_delay_does_not_repeatedly_integrate_old_error (test_hihat_sync.SyncTests.test_long_notification_delay_does_not_repeatedly_integrate_old_error) ... ok
+test_missing_ambiguous_or_cross_responsive_reference_freezes (test_hihat_sync.SyncTests.test_missing_ambiguous_or_cross_responsive_reference_freezes) ... ok
+test_negative_advance_converges_and_is_not_clamped_to_zero (test_hihat_sync.SyncTests.test_negative_advance_converges_and_is_not_clamped_to_zero) ... ok
+test_real_workflow_hands_schedule_to_sync_and_suppresses_legacy_double_send (test_hihat_sync.SyncTests.test_real_workflow_hands_schedule_to_sync_and_suppresses_legacy_double_send) ... <Mock name='mock.get()' id='123250582731616'>
+ok
+test_runtime_fault_uses_controlled_stop_not_motor_release (test_hihat_sync.SyncTests.test_runtime_fault_uses_controlled_stop_not_motor_release) ... HIHAT SYNC: {"kind": "fault", "at": 10.0, "detail": "Ride status stale; cancelling future hi-hat edges"}
+ok
+test_runtime_seeds_only_from_unmodified_ride_epoch_and_resets (test_hihat_sync.SyncTests.test_runtime_seeds_only_from_unmodified_ride_epoch_and_resets) ... ok
+test_signed_advance_moves_close_AND_following_open_not_ride_grid (test_hihat_sync.SyncTests.test_signed_advance_moves_close_AND_following_open_not_ride_grid) ... ok
+test_stale_epoch_rejected (test_hihat_sync.SyncTests.test_stale_epoch_rejected) ... ok
+test_unavailable_or_stale_detector_freezes_and_expires (test_hihat_sync.SyncTests.test_unavailable_or_stale_detector_freezes_and_expires) ... ok
+test_zero_open13_close24_and_no_pickup (test_hihat_sync.SyncTests.test_zero_open13_close24_and_no_pickup) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.162s
+
+OK

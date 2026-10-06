@@ -1,0 +1,26 @@
+test_all_camera_parsers_share_default_and_preserve_override (test_camera_device.CameraDeviceTests.test_all_camera_parsers_share_default_and_preserve_override) ... ok
+test_cropped_or_unsupported_sizes_fail_before_opening_camera (test_camera_device.CameraDeviceTests.test_cropped_or_unsupported_sizes_fail_before_opening_camera) ... ok
+test_default_forces_full_sensor_view_instead_of_driver_default (test_camera_device.CameraDeviceTests.test_default_forces_full_sensor_view_instead_of_driver_default) ... Camera: orbbec -> /dev/video4 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+ok
+test_default_opens_resolved_rgb_with_mjpeg_and_requested_dimensions (test_camera_device.CameraDeviceTests.test_default_opens_resolved_rgb_with_mjpeg_and_requested_dimensions) ... Camera: orbbec -> /dev/video14 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+ok
+test_failed_open_or_configuration_releases_camera (test_camera_device.CameraDeviceTests.test_failed_open_or_configuration_releases_camera) ... ok
+test_full_fov_defaults_and_partial_dimensions (test_camera_device.CameraDeviceTests.test_full_fov_defaults_and_partial_dimensions) ... ok
+test_invalid_camera_argument (test_camera_device.CameraDeviceTests.test_invalid_camera_argument) ... ok
+test_metadata_only_and_ambiguous_capture_are_rejected (test_camera_device.CameraDeviceTests.test_metadata_only_and_ambiguous_capture_are_rejected) ... ok
+test_missing_camera_does_not_fall_back (test_camera_device.CameraDeviceTests.test_missing_camera_does_not_fall_back) ... ok
+test_numeric_identity_check_handles_absent_or_renumbered_gemini (test_camera_device.CameraDeviceTests.test_numeric_identity_check_handles_absent_or_renumbered_gemini) ... ok
+test_numeric_override_does_not_enumerate_default_camera (test_camera_device.CameraDeviceTests.test_numeric_override_does_not_enumerate_default_camera) ... ok
+test_numeric_override_retains_original_backend_and_format_behavior (test_camera_device.CameraDeviceTests.test_numeric_override_retains_original_backend_and_format_behavior) ... Camera: 2 -> /dev/video2
+ok
+test_numeric_selection_of_gemini_also_enforces_full_fov (test_camera_device.CameraDeviceTests.test_numeric_selection_of_gemini_also_enforces_full_fov) ... Camera: 2 -> /dev/video2 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+ok
+test_selection_survives_video_number_change (test_camera_device.CameraDeviceTests.test_selection_survives_video_number_change) ... ok
+test_selects_rgb_not_depth_ir_metadata_or_another_camera (test_camera_device.CameraDeviceTests.test_selects_rgb_not_depth_ir_metadata_or_another_camera) ... ok
+test_silent_driver_resolution_fallback_is_rejected_and_released (test_camera_device.CameraDeviceTests.test_silent_driver_resolution_fallback_is_rejected_and_released) ... ok
+test_standalone_video_uses_shared_default_and_reports_open_errors (test_camera_device.CameraDeviceTests.test_standalone_video_uses_shared_default_and_reports_open_errors) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.197s
+
+OK

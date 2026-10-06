@@ -1,0 +1,44 @@
+usage: launch_right_camera_playback.py [-h] [--hardware]
+                                       [--recording RECORDING]
+                                       [--camera CAMERA] [--model MODEL]
+                                       [--imgsz IMGSZ] [--conf CONF]
+                                       [--device DEVICE]
+                                       [--preprocessing {local,reference,none}]
+                                       [--lighting-profile LIGHTING_PROFILE]
+                                       [--no-normalization] [--width WIDTH]
+                                       [--height HEIGHT]
+                                       [--allow-low-light-fps]
+                                       [--process-every PROCESS_EVERY]
+                                       [--output OUTPUT]
+                                       [--audio-source AUDIO_SOURCE]
+                                       [--audio-device AUDIO_DEVICE]
+                                       [--esp-port ESP_PORT]
+
+Right recorded-path camera alignment
+
+options:
+  -h, --help            show this help message and exit
+  --hardware
+  --recording RECORDING
+                        right-arm recording (default: recordings/record1.json)
+  --camera CAMERA
+  --model MODEL
+  --imgsz IMGSZ
+  --conf CONF
+  --device DEVICE
+  --preprocessing {local,reference,none}
+  --lighting-profile LIGHTING_PROFILE
+  --no-normalization
+  --width WIDTH
+  --height HEIGHT
+  --allow-low-light-fps
+  --process-every PROCESS_EVERY
+  --output OUTPUT
+  --audio-source AUDIO_SOURCE
+                        stable PipeWire/PulseAudio TONOR TD510 capture-source
+                        name
+  --audio-device AUDIO_DEVICE
+                        sounddevice input used by ST7 after selecting the
+                        TONOR source
+  --esp-port ESP_PORT   ESP32 motor_beat serial port (default: connected
+                        CP2102 by-id path)

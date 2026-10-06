@@ -1,0 +1,15 @@
+{
+  "capture_completed_before_shutdown_issue": true,
+  "last_capture_monotonic": 563387.54632161,
+  "completed_new_examples": 40,
+  "completed_closure_commands": 34,
+  "completed_ride_releases": 10,
+  "original_result_sha256": "ff67d56528fdb6ecb0f73d56f09557af7d160ce2d2de15405e08d40bd3aee3fc",
+  "issues": [
+    "All 40 capture blocks completed before cleanup errors. The original collector result remains success:false.",
+    "During the subsequent arm return a small J7 overshoot near center triggered Joint limit violation; the center-before-relax guard prevented disabling without its measured settle proof.",
+    "The hi-hat parent-heartbeat timeout occurred after the last captured block, during arm return. Its worker independently sent O, waited 1.5 seconds, sent S and received release acknowledgement. No encoder-position proof is available for the hi-hat.",
+    "After ntfy warning, bounded near-center recovery verified center for 0.646 seconds, then relaxed the arm. A separate audited state-only query confirmed all 16 motors disabled and fault-free.",
+    "Onset analysis and label export occurred only after this safe shutdown. Automatic cleanup code was then corrected and regression tested offline, without another physical batch."
+  ]
+}

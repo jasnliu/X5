@@ -1,0 +1,288 @@
+{
+  "verified_at_utc": "2026-10-04T07:28:33.587647+00:00",
+  "offline_audit": true,
+  "default_size": [
+    1280,
+    720
+  ],
+  "maximum_rgb_fov": true,
+  "nominal_manufacturer_rgb_fov_degrees": [
+    86,
+    55
+  ],
+  "source": "https://www.orbbec.com.cn/index/Product/info.html?cate=38&id=51",
+  "angular_calibration_performed": false,
+  "relative_coverage": [
+    {
+      "size": [
+        640,
+        480
+      ],
+      "inliers": 505,
+      "transform": [
+        [
+          1.9998199225215136,
+          6.422897343726672e-05,
+          320.2716544173873
+        ],
+        [
+          -6.422897343726672e-05,
+          1.9998199225215136,
+          60.30167472305426
+        ]
+      ],
+      "corners_in_1920x1080": [
+        [
+          320.27166748046875,
+          60.301673889160156
+        ],
+        [
+          1600.156494140625,
+          60.26056671142578
+        ],
+        [
+          1600.187255859375,
+          1020.1741333007812
+        ],
+        [
+          320.302490234375,
+          1020.2152099609375
+        ]
+      ],
+      "relative_width": 0.6666226704915365,
+      "relative_height": 0.8888468989619502
+    },
+    {
+      "size": [
+        640,
+        360
+      ],
+      "inliers": 343,
+      "transform": [
+        [
+          3.000079390985466,
+          -0.00014616232297564124,
+          -0.123966528246484
+        ],
+        [
+          0.00014616232297564124,
+          3.000079390985466,
+          -0.21146239171595288
+        ]
+      ],
+      "corners_in_1920x1080": [
+        [
+          -0.1239665299654007,
+          -0.21146239340305328
+        ],
+        [
+          1919.9267578125,
+          -0.11791850626468658
+        ],
+        [
+          1919.8741455078125,
+          1079.91064453125
+        ],
+        [
+          -0.17658495903015137,
+          1079.817138671875
+        ]
+      ],
+      "relative_width": 1.000053850809733,
+      "relative_height": 1.0001130280671295
+    },
+    {
+      "size": [
+        1280,
+        720
+      ],
+      "inliers": 951,
+      "transform": [
+        [
+          1.5000645361623495,
+          -4.140664829459506e-05,
+          0.5135468961057674
+        ],
+        [
+          4.140664829459506e-05,
+          1.5000645361623495,
+          0.5134718820767427
+        ]
+      ],
+      "corners_in_1920x1080": [
+        [
+          0.513546884059906,
+          0.5134719014167786
+        ],
+        [
+          1920.5960693359375,
+          0.5664724111557007
+        ],
+        [
+          1920.5662841796875,
+          1080.61279296875
+        ],
+        [
+          0.4837341010570526,
+          1080.559814453125
+        ]
+      ],
+      "relative_width": 1.0000584920247395,
+      "relative_height": 1.0000920048466435
+    }
+  ],
+  "live_modes": [
+    {
+      "width": 640,
+      "height": 480,
+      "frames": 90,
+      "elapsed_s": 3.0005822769599035,
+      "fps": 29.994178360336512,
+      "reported_fps": 30.0
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "frames": 91,
+      "elapsed_s": 3.0322934209834784,
+      "fps": 30.010288374561565,
+      "reported_fps": 30.0
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "frames": 90,
+      "elapsed_s": 3.001673231017776,
+      "fps": 29.98327701696022,
+      "reported_fps": 30.0
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "frames": 91,
+      "elapsed_s": 3.0315658150357194,
+      "fps": 30.017491142255736,
+      "reported_fps": 30.0
+    }
+  ],
+  "live_pipelines": {
+    "search": {
+      "mode": "search",
+      "exit_code": 0,
+      "physical_camera": true,
+      "can_forbidden": true,
+      "default_camera_used": true,
+      "display_frames": 298,
+      "processed_frame_messages": 271,
+      "elapsed_display_s": 10.033134152006824,
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "video_bytes": 1942968
+    },
+    "playback": {
+      "mode": "playback",
+      "exit_code": 0,
+      "physical_camera": true,
+      "can_forbidden": true,
+      "default_camera_used": true,
+      "display_frames": 299,
+      "processed_frame_messages": 270,
+      "elapsed_display_s": 10.04099337302614,
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "video_bytes": 1953442
+    }
+  },
+  "standalone_video": {
+    "physical_camera": true,
+    "can_forbidden": true,
+    "default_camera_used": true,
+    "frames": 91,
+    "span_s": 3.001053707965184,
+    "image_shape": [
+      720,
+      1280,
+      3
+    ],
+    "error": null
+  },
+  "regressions_passed": 402,
+  "final_scene_lighting": {
+    "controls": [
+      {
+        "id": 9963776,
+        "unsupported_errno": 22
+      },
+      {
+        "id": 9963795,
+        "unsupported_errno": 22
+      },
+      {
+        "id": 10094849,
+        "name": "Auto Exposure",
+        "minimum": 0,
+        "maximum": 3,
+        "default": 0,
+        "value": 0
+      },
+      {
+        "id": 10094850,
+        "name": "Exposure Time, Absolute",
+        "minimum": 0,
+        "maximum": 33000,
+        "default": 10000,
+        "value": 24146
+      },
+      {
+        "id": 10094851,
+        "unsupported_errno": 22
+      }
+    ],
+    "frames": [
+      {
+        "size": [
+          640,
+          480
+        ],
+        "mean": 3.0189778645833334,
+        "maximum": 137
+      },
+      {
+        "size": [
+          1280,
+          720
+        ],
+        "mean": 3.148351417824074,
+        "maximum": 144
+      }
+    ]
+  },
+  "arm_movement": false,
+  "protected_unchanged": {
+    "recordings/record2.json": "305d32e9dc1c99d655341542737e4631fd5726e841e289e1d49c8ee4f6aae681",
+    "recordings/record3.json": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "recordings/record1.json": "067badcaf98f98f2631e44b8be5eac3480cfef39aa2f7f6c8e01478a1c30f90e",
+    "centering/motors.py": "02a1a9d7c60ce305fd8e7d90236ded4183bb959719f6c86a4722abb889db0548",
+    "camera_playback/app.py": "4f56739761bc24e165d931965601ba4a26c3ea2167762a71489d8ccac540c387",
+    "camera_playback/smooth_recording_worker.py": "78eac919c0cfecfa16fe105fdb767b12fe9b4e533c92fcf97f89e9b18d541828",
+    "smooth_playback/runner.py": "0126b42ea308c93f4e8ee57b3f45ee471192d469a2fdd52b5f7d41f1bc4f2c8e",
+    "smooth_playback/hardware.py": "aff04909eefca3b42929b252a5a3e21613236f3efaf4916bc553bf9181e8787a",
+    "start_beat.sh": "de3669442d81f427c185849f043a0a640a0f110dbc8afd1d9fa62e9e1e206c6b"
+  },
+  "final_hashes": {
+    "camera_search/device.py": "d73df72a6649021b79ed54a2f3c2951aec4861ddc2a4753f5ae4b717a41583a4",
+    "config/camera.json": "d795f81f2ff0d870b3290f3d940e3f990130d004cd764e2d515ac4305b601b4b",
+    "camera_search/camera.py": "491c9bf804f0beb5ee8c48b7603fae92f5c8b162954e0998f8eddb67925d07f5",
+    "launch_right_camera_cartesian.py": "c23e1837e360f0eb74537084a261f40d7b570a1f0c2b701007c10ccb8f483f3c",
+    "launch_right_camera_playback.py": "55c7dc18f95db4c2be2d60bddf70e5a5b5f917a869221d9ce0802a0a52bf4632",
+    "tests/test_camera_device.py": "4c0d1a842ef85b413a5afa7ed5875804171b494e69692901d0a608dc590495a4",
+    "tests/test_playback_transport.py": "d85a0218b2a199e4e8e3c487c8d728cfa11048e72da42b2983f4d8a4c1ff3498",
+    "CAMERA_DEFAULT.md": "45135a4cd502a5d5d06a17a3ea92ad79d1525419494824615a144463bd73c904"
+  }
+}
