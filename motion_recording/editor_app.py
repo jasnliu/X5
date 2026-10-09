@@ -1,8 +1,9 @@
-"""Video-editor-style Tk/ROS preview and crop UI for right-arm recordings."""
+"""Video-editor-style Tk/ROS preview and crop UI for left/right recordings."""
 from __future__ import annotations
 
 import argparse
 import math
+from safe_zone.gripper_feedback import gripper_feedback_text
 from pathlib import Path
 import signal
 import time
@@ -13,13 +14,13 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
-from safe_zone.geometry import Model, RIGHT_TCP
+from safe_zone.geometry import LEFT_TCP, Model, RIGHT_TCP
 from .editor import EditableRecording
-from .recording import GRIPPER_NAME, JOINT_NAMES
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RECORDINGS_DIR = ROOT / "recordings"
+RIGHT_RECORDINGS_DIR = ROOT / "recordings"
+LEFT_RECORDINGS_DIR = ROOT / "left_recordings"
 TIMELINE_MARGIN = 44
 TIMELINE_Y = 50
 TIMELINE_HEIGHT = 22
@@ -37,8 +38,9 @@ class App:
 
     def __init__(self, recording_path=None, show_initial_dialog: bool = True):
         self.model = Model(ROOT / "model/openarmx.urdf")
-        RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
-        self.node = Node("right_arm_recording_editor")
+        RIGHT_RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
+        LEFT_RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
+        self.node = Node("arm_recording_editor")
         self.publisher = self.node.create_publisher(JointState, "/joint_states", 10)
         self.clip: EditableRecording | None = None
         self.trim_start_index = 0
@@ -53,7 +55,7 @@ class App:
         self.closed = False
 
         self.root = tk.Tk()
-        self.root.title("OpenArmX RIGHT recording video editor — SIMULATION ONLY")
+        self.root.title("OpenArmX recording video editor — SIMULATION ONLY")
         self.root.minsize(760, 600)
         self.file_text = tk.StringVar(value="No recording selected")
         self.time_text = tk.StringVar(value="--:--.--- / --:--.---")
@@ -65,7 +67,7 @@ class App:
 
         tk.Label(
             self.root,
-            text="RIGHT ARM RECORDING EDITOR",
+            text="LEFT / RIGHT ARM RECORDING EDITOR",
             font=("Sans", 17, "bold"),
         ).pack(padx=20, pady=(15, 4))
         tk.Label(
@@ -199,12 +201,14 @@ class App:
                 "Selecting another recording will discard the current unsaved crop handles. Continue?",
                 parent=self.root):
             return
-        initial = self.clip.source.parent if self.clip is not None else RECORDINGS_DIR
+        # Start at the common parent so both recordings/ (right) and
+        # left_recordings/ are immediately available in the chooser.
+        initial = self.clip.source.parent if self.clip is not None else ROOT
         selected = filedialog.askopenfilename(
             parent=self.root,
-            title="Select a right-arm recording to edit",
+            title="Select a left- or right-arm recording to edit",
             initialdir=initial,
-            filetypes=[("OpenArmX right motion JSON", "*.json")],
+            filetypes=[("OpenArmX motion JSON", "*.json")],
         )
         if selected:
             self.load_recording(selected, show_error=True)
@@ -227,7 +231,7 @@ class App:
         self.dirty = False
         self.file_text.set(str(clip.source))
         self.root.title(
-            f"OpenArmX RIGHT recording editor — {clip.source.name} — SIMULATION ONLY"
+            f"OpenArmX {clip.arm.upper()} recording editor — {clip.source.name} — SIMULATION ONLY"
         )
         self.status_text.set(
             f"Loaded {clip.sample_count} samples. Play, scrub, or drag the crop handles; "
@@ -419,17 +423,21 @@ class App:
             f"({kept_samples}/{self.clip.sample_count} samples)  |  Delete end: {removed_end:.3f} s"
         )
         state = self.preview or self.clip.state_at(self.playhead_s)
-        values = {name: value for name, value in zip(JOINT_NAMES, state.positions_rad)}
-        values[GRIPPER_NAME] = state.gripper_opening_m
+        values = {
+            name: value for name, value in zip(self.clip.joint_names, state.positions_rad)
+        }
+        values[self.clip.gripper_name] = state.gripper_opening_m
         all_values = {name: 0.0 for name in self.model.names}
         all_values.update(values)
-        tcp = self.model.transforms(all_values)[RIGHT_TCP][:3, 3]
+        tcp_name = LEFT_TCP if self.clip.arm == "left" else RIGHT_TCP
+        tcp = self.model.transforms(all_values)[tcp_name][:3, 3]
         degrees = [math.degrees(value) for value in state.positions_rad]
         self.pose_text.set(
-            "Preview right joint degrees:\n" +
+            f"Preview {self.clip.arm} joint degrees:\n" +
             "  ".join(f"J{i + 1}: {value:+7.2f}" for i, value in enumerate(degrees)) +
             f"\nTCP meters: X={tcp[0]:+.4f}  Y={tcp[1]:+.4f}  Z={tcp[2]:+.4f}" +
-            f"   Gripper: {state.gripper_opening_m * 1000:.1f} mm"
+            '\nNearest recorded sample — ' + gripper_feedback_text(
+                self.clip.raw_gripper_at(self.playhead_s))
         )
         for widget in (
             self.to_start_button, self.play_button, self.stop_button,
@@ -443,8 +451,8 @@ class App:
         if self.clip is None or self.preview is None:
             return
         state = {name: 0.0 for name in self.model.names}
-        state.update(dict(zip(JOINT_NAMES, self.preview.positions_rad)))
-        state[GRIPPER_NAME] = self.preview.gripper_opening_m
+        state.update(dict(zip(self.clip.joint_names, self.preview.positions_rad)))
+        state[self.clip.gripper_name] = self.preview.gripper_opening_m
         message = JointState()
         message.header.stamp = self.node.get_clock().now().to_msg()
         message.name = list(state)
@@ -525,11 +533,11 @@ class App:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Offline RViz video-style crop editor for OpenArmX right-arm recordings"
+        description="Offline RViz video-style crop editor for OpenArmX left/right recordings"
     )
     parser.add_argument(
         "--recording",
-        help="optional right-arm JSON to open immediately; otherwise a chooser opens at startup",
+        help="optional left- or right-arm JSON to open immediately; otherwise a chooser opens at startup",
     )
     args = parser.parse_args()
     rclpy.init(args=[])

@@ -1,0 +1,53 @@
+test_blocking_preflight_finishes_before_mit_clock_and_joint_dispatch (tests.test_right_center_restore.RightCenterRestoreTests.test_blocking_preflight_finishes_before_mit_clock_and_joint_dispatch) ... <Mock name='mock.get()' id='128910787754560'>
+ok
+test_dual_monitor_never_sends_right_updates_and_keeps_old_extra_control (tests.test_right_center_restore.RightCenterRestoreTests.test_dual_monitor_never_sends_right_updates_and_keeps_old_extra_control) ... ok
+test_exact_old_target_frames_and_cadence_in_csp_and_mit (tests.test_right_center_restore.RightCenterRestoreTests.test_exact_old_target_frames_and_cadence_in_csp_and_mit) ... ok
+test_no_more_right_targets_after_its_independent_relax (tests.test_right_center_restore.RightCenterRestoreTests.test_no_more_right_targets_after_its_independent_relax) ... ok
+test_right_keeps_original_one_encoder_count_reached_hysteresis (tests.test_right_center_restore.RightCenterRestoreTests.test_right_keeps_original_one_encoder_count_reached_hysteresis) ... ok
+test_app_run_blocked_without_left_pass_and_return_hook_is_dual (tests.test_dual_recording.DualRecordingTests.test_app_run_blocked_without_left_pass_and_return_hook_is_dual) ... ok
+test_center_dispatches_both_then_relaxes_each_only_at_own_center (tests.test_dual_recording.DualRecordingTests.test_center_dispatches_both_then_relaxes_each_only_at_own_center) ... ok
+test_defaults_and_left_schema_are_correct (tests.test_dual_recording.DualRecordingTests.test_defaults_and_left_schema_are_correct) ... ok
+test_failed_left_worker_never_starts_right (tests.test_dual_recording.DualRecordingTests.test_failed_left_worker_never_starts_right) ... ok
+test_left_cache_is_exact_and_cannot_accept_right_recording (tests.test_dual_recording.DualRecordingTests.test_left_cache_is_exact_and_cannot_accept_right_recording) ... ok
+test_left_plays_first_gripper_fixed_right_waits_then_endpoint_holds (tests.test_dual_recording.DualRecordingTests.test_left_plays_first_gripper_fixed_right_waits_then_endpoint_holds) ... ok
+test_per_side_disable_does_not_release_other_arm (tests.test_dual_recording.DualRecordingTests.test_per_side_disable_does_not_release_other_arm) ... ok
+test_spawned_left_worker_exact_endpoint_restored_gains_no_other_commands (tests.test_dual_recording.DualRecordingTests.test_spawned_left_worker_exact_endpoint_restored_gains_no_other_commands) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 8.147489909054581}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 685891.914357904, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6012876949971542, "tolerance_deg": 0.05}
+ok
+test_stop_joins_left_worker_before_center_targets (tests.test_dual_recording.DualRecordingTests.test_stop_joins_left_worker_before_center_targets) ... ok
+test_worker_only_writes_selected_left_joints_never_gripper_or_other_arm (tests.test_dual_recording.DualRecordingTests.test_worker_only_writes_selected_left_joints_never_gripper_or_other_arm) ... ok
+test_gui_delay_does_not_cause_catch_up_jump (tests.test_mit_center_return.MitCenterTests.test_gui_delay_does_not_cause_catch_up_jump) ... ok
+test_normal_exit_joins_then_centers_without_mode_switch_or_disable (tests.test_mit_center_return.MitCenterTests.test_normal_exit_joins_then_centers_without_mode_switch_or_disable) ... <Mock name='mock.get()' id='128910780908992'>
+ok
+test_reference_reaches_center_without_fast_jump (tests.test_mit_center_return.MitCenterTests.test_reference_reaches_center_without_fast_jump) ... ok
+test_unknown_mode_never_moves_or_disables (tests.test_mit_center_return.MitCenterTests.test_unknown_mode_never_moves_or_disables) ... ok
+test_duplicate_gui_queries_are_suppressed_only_after_worker_is_ready (tests.test_playback_transport.TransportTests.test_duplicate_gui_queries_are_suppressed_only_after_worker_is_ready) ... ok
+test_fatal_errors_and_short_writes_are_not_retried (tests.test_playback_transport.TransportTests.test_fatal_errors_and_short_writes_are_not_retried) ... ok
+test_geometry_preflight_refresh_never_disables_and_restores_active_check (tests.test_playback_transport.TransportTests.test_geometry_preflight_refresh_never_disables_and_restores_active_check) ... ok
+test_initial_disable_of_already_relaxed_drive_is_not_a_relaxation (tests.test_playback_transport.TransportTests.test_initial_disable_of_already_relaxed_drive_is_not_a_relaxation) ... ok
+test_major_stall_exception_can_disable_away_from_center (tests.test_playback_transport.TransportTests.test_major_stall_exception_can_disable_away_from_center) ... MAJOR FAULT EMERGENCY RELAX: STALL: motor 4
+ok
+test_no_disable_before_center_or_during_recording (tests.test_playback_transport.TransportTests.test_no_disable_before_center_or_during_recording) ... ok
+test_normal_center_return_keeps_mit_mode_and_never_disables_off_center (tests.test_playback_transport.TransportTests.test_normal_center_return_keeps_mit_mode_and_never_disables_off_center) ... CENTER VERIFIED BEFORE RELAX: {"t": 685892.03375682, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+ok
+test_normal_hybrid_can_use_mit_but_cannot_relax_away_from_center (tests.test_playback_transport.TransportTests.test_normal_hybrid_can_use_mit_but_cannot_relax_away_from_center) ... CENTER VERIFIED BEFORE RELAX: {"t": 685892.034663327, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+ok
+test_only_verified_center_can_disable (tests.test_playback_transport.TransportTests.test_only_verified_center_can_disable) ... CENTER VERIFIED BEFORE RELAX: {"t": 685892.035474741, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+ok
+test_persistent_pressure_is_bounded_and_not_silenced (tests.test_playback_transport.TransportTests.test_persistent_pressure_is_bounded_and_not_silenced) ... ok
+test_recording_only_alignment_and_relax_route_through_verified_return (tests.test_playback_transport.TransportTests.test_recording_only_alignment_and_relax_route_through_verified_return) ... ok
+test_recording_only_closes_gripper_then_approaches_without_a_cymbal (tests.test_playback_transport.TransportTests.test_recording_only_closes_gripper_then_approaches_without_a_cymbal) ... ok
+test_recording_only_does_not_require_a_cymbal_for_preflight (tests.test_playback_transport.TransportTests.test_recording_only_does_not_require_a_cymbal_for_preflight) ... ok
+test_recording_only_forbids_mit_and_strike_entrypoints (tests.test_playback_transport.TransportTests.test_recording_only_forbids_mit_and_strike_entrypoints) ... ok
+test_retries_enobufs_and_eagain_without_dropping_packet (tests.test_playback_transport.TransportTests.test_retries_enobufs_and_eagain_without_dropping_packet) ... ok
+test_stale_or_unsettled_center_never_disables (tests.test_playback_transport.TransportTests.test_stale_or_unsettled_center_never_disables) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 30.666s
+
+OK

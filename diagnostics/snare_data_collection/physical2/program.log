@@ -1,0 +1,332 @@
+761127.836779 LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+761127.836905 LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+761127.836919 LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+761130.025262 Session: /home/jason/Proyectos3/X5/diagnostics/snare_data_collection/20261008T005622-development-4ebb64e9
+761130.712656 Motion in 10s
+761131.712749 Motion in 9s
+761132.712881 Motion in 8s
+761133.713072 Motion in 7s
+761134.713176 Motion in 6s
+761135.713423 Motion in 5s
+761136.713484 Motion in 4s
+761137.713680 Motion in 3s
+761138.713805 Motion in 2s
+761139.713923 Motion in 1s
+761141.583820 INITIAL CENTER PATH VERIFIED {"outside_buffer_mm": 0.0, "recovery_only": false}
+761141.834921 CHECKING INITIAL RIGHT CENTER 
+761142.052630 INITIAL RIGHT CENTER {"duration_s": 6.070201378216658}
+761148.133376 INITIAL RIGHT CENTER SETTLED 
+761148.734192 INITIAL LEFT CENTER 
+761149.379361 LEFT MIT CENTER VERIFIED 
+761150.100441 RIGHT MIT CENTER VERIFIED 
+761152.538180 CHECKING RECORD3 START 
+761152.649251 RECORD3 START {"duration_s": 1.8038252703571256}
+761154.461250 RECORD3 START SETTLED 
+761155.062755 START HOLD 
+761155.665945 TEMPORARY POSITION GAINS 
+761155.715296 PLAYBACK RECORD3 {"duration_s": 4.8, "j7_mode": "powered MIT"}
+761160.519097 ENDPOINT SOFT HOLD 
+761162.505105 ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+761163.059146 ENDPOINT HOLD 
+761164.425153 RECORD3 ENDPOINT VERIFIED {"t": 761164.423899029, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6051476310368518, 0.21232913710231216, 0.24416891737239688, 1.7333499656672, 0.20514529694051795, -0.3047795834287008, 0.5997770656900894], "max_error_deg": 0.021979337712122585, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6271721770754084, "tolerance_deg": 0.05}
+761164.494971 LEFT RECORDING START {"duration_s": 2.676719909753774}
+761167.177621 LEFT RECORDING START SETTLED 
+761167.781425 LEFT RECORDING 
+761179.455578 LEFT ENDPOINT VERIFIED 
+761182.304343 SNARE ANCHOR VERIFIED 
+761182.906175 CAPTURING {"kind": "snare_both", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.0, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 1}
+761184.913819 STRIKE REQUEST {"block": 1, "instrument": "snare", "due": 761184.905525582}
+761185.156911 STRIKE REQUEST {"block": 1, "instrument": "ride", "due": 761185.155525582}
+761189.406956 CAPTURED {"block": 1, "kind": "snare_both", "snare_hits": 1}
+761189.407053 SNARE ANCHOR VERIFIED 
+761190.008918 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 11.5, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 2}
+761191.659443 STRIKE REQUEST {"block": 2, "instrument": "ride", "due": 761191.658736809}
+761192.015170 STRIKE REQUEST {"block": 2, "instrument": "snare", "due": 761192.008736809}
+761196.510164 CAPTURED {"block": 2, "kind": "snare_ride", "snare_hits": 1}
+761196.510243 SNARE ANCHOR VERIFIED 
+761197.111927 CAPTURING {"kind": "ride_hihat", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 10.0, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 3}
+761199.361890 STRIKE REQUEST {"block": 3, "instrument": "ride", "due": 761199.3614112}
+761203.612369 CAPTURED {"block": 3, "kind": "ride_hihat", "snare_hits": 0}
+761203.612436 SNARE ANCHOR VERIFIED 
+761204.214839 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 4}
+761206.221155 STRIKE REQUEST {"block": 4, "instrument": "snare", "due": 761206.214670425}
+761210.715982 CAPTURED {"block": 4, "kind": "snare_only", "snare_hits": 1}
+761210.716066 SNARE ANCHOR VERIFIED 
+761211.319576 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 5}
+761213.328256 STRIKE REQUEST {"block": 5, "instrument": "snare", "due": 761213.319403415}
+761217.820348 CAPTURED {"block": 5, "kind": "snare_only", "snare_hits": 1}
+761217.820487 SNARE ANCHOR VERIFIED 
+761218.421771 CAPTURING {"kind": "ride_hihat", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 10.5, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 6}
+761220.072910 STRIKE REQUEST {"block": 6, "instrument": "ride", "due": 761220.071525743}
+761224.923558 CAPTURED {"block": 6, "kind": "ride_hihat", "snare_hits": 0}
+761224.923906 SNARE ANCHOR VERIFIED 
+761225.526523 CAPTURING {"kind": "background", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 7}
+761232.027221 CAPTURED {"block": 7, "kind": "background", "snare_hits": 0}
+761232.027416 SNARE ANCHOR VERIFIED 
+761232.630073 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 8}
+761234.638163 STRIKE REQUEST {"block": 8, "instrument": "snare", "due": 761234.629550492}
+761239.135012 CAPTURED {"block": 8, "kind": "snare_hihat", "snare_hits": 1}
+761239.135216 SNARE ANCHOR VERIFIED 
+761239.739092 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 9}
+761241.745095 STRIKE REQUEST {"block": 9, "instrument": "snare", "due": 761241.738869209}
+761246.241681 CAPTURED {"block": 9, "kind": "snare_only", "snare_hits": 1}
+761246.241746 SNARE ANCHOR VERIFIED 
+761246.844709 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 10}
+761248.849960 STRIKE REQUEST {"block": 10, "instrument": "snare", "due": 761248.844421223}
+761253.345363 CAPTURED {"block": 10, "kind": "snare_only", "snare_hits": 1}
+761253.345430 SNARE ANCHOR VERIFIED 
+761253.947671 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 11}
+761255.953961 STRIKE REQUEST {"block": 11, "instrument": "snare", "due": 761255.947122348}
+761260.449354 CAPTURED {"block": 11, "kind": "snare_hihat", "snare_hits": 1}
+761260.449507 SNARE ANCHOR VERIFIED 
+761261.051616 CAPTURING {"kind": "ride_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 11.0, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 12}
+761263.302077 STRIKE REQUEST {"block": 12, "instrument": "ride", "due": 761263.301394639}
+761267.553368 CAPTURED {"block": 12, "kind": "ride_only", "snare_hits": 0}
+761267.553546 SNARE ANCHOR VERIFIED 
+761268.155357 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 13}
+761270.164582 STRIKE REQUEST {"block": 13, "instrument": "snare", "due": 761270.154964344}
+761274.657016 CAPTURED {"block": 13, "kind": "snare_hihat", "snare_hits": 1}
+761274.657117 SNARE ANCHOR VERIFIED 
+761275.258710 CAPTURING {"kind": "hihat_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 14}
+761281.759883 CAPTURED {"block": 14, "kind": "hihat_only", "snare_hits": 0}
+761281.760060 SNARE ANCHOR VERIFIED 
+761282.362176 CAPTURING {"kind": "hihat_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 15}
+761288.863763 CAPTURED {"block": 15, "kind": "hihat_only", "snare_hits": 0}
+761288.863890 SNARE ANCHOR VERIFIED 
+761289.466442 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 2, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 7.5, "block": 16}
+761291.476254 STRIKE REQUEST {"block": 16, "instrument": "snare", "due": 761291.46616405}
+761292.673437 STRIKE REQUEST {"block": 16, "instrument": "snare", "due": 761292.66616405}
+761296.970126 CAPTURED {"block": 16, "kind": "snare_only", "snare_hits": 2}
+761296.970373 SNARE ANCHOR VERIFIED 
+761297.574257 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 17}
+761299.580555 STRIKE REQUEST {"block": 17, "instrument": "snare", "due": 761299.573723036}
+761304.078908 CAPTURED {"block": 17, "kind": "snare_hihat", "snare_hits": 1}
+761304.079098 SNARE ANCHOR VERIFIED 
+761304.681580 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 18}
+761306.690852 STRIKE REQUEST {"block": 18, "instrument": "snare", "due": 761306.68126536}
+761311.183561 CAPTURED {"block": 18, "kind": "snare_only", "snare_hits": 1}
+761311.183797 SNARE ANCHOR VERIFIED 
+761311.786349 CAPTURING {"kind": "background", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 19}
+761318.290119 CAPTURED {"block": 19, "kind": "background", "snare_hits": 0}
+761318.290281 SNARE ANCHOR VERIFIED 
+761318.891958 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 11.0, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 20}
+761320.898851 STRIKE REQUEST {"block": 20, "instrument": "snare", "due": 761320.891686366}
+761321.142394 STRIKE REQUEST {"block": 20, "instrument": "ride", "due": 761321.141686366}
+761325.393114 CAPTURED {"block": 20, "kind": "snare_ride", "snare_hits": 1}
+761325.393198 SNARE ANCHOR VERIFIED 
+761325.994856 CAPTURING {"kind": "ride_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 11.5, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 21}
+761327.995661 STRIKE REQUEST {"block": 21, "instrument": "ride", "due": 761327.994514868}
+761332.498830 CAPTURED {"block": 21, "kind": "ride_only", "snare_hits": 0}
+761332.499037 SNARE ANCHOR VERIFIED 
+761333.103414 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 12.0, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 22}
+761335.104583 STRIKE REQUEST {"block": 22, "instrument": "ride", "due": 761335.103177877}
+761335.111557 STRIKE REQUEST {"block": 22, "instrument": "snare", "due": 761335.103177877}
+761339.605846 CAPTURED {"block": 22, "kind": "snare_ride", "snare_hits": 1}
+761339.606009 SNARE ANCHOR VERIFIED 
+761340.207914 CAPTURING {"kind": "ride_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 10.5, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 23}
+761342.208601 STRIKE REQUEST {"block": 23, "instrument": "ride", "due": 761342.207684411}
+761346.711021 CAPTURED {"block": 23, "kind": "ride_only", "snare_hits": 0}
+761346.711177 SNARE ANCHOR VERIFIED 
+761347.313770 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.0, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 24}
+761349.321020 STRIKE REQUEST {"block": 24, "instrument": "snare", "due": 761349.313527808}
+761349.564203 STRIKE REQUEST {"block": 24, "instrument": "ride", "due": 761349.563527808}
+761353.817475 CAPTURED {"block": 24, "kind": "snare_ride", "snare_hits": 1}
+761353.817671 SNARE ANCHOR VERIFIED 
+761354.418711 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 25}
+761356.425641 STRIKE REQUEST {"block": 25, "instrument": "snare", "due": 761356.418477612}
+761360.919851 CAPTURED {"block": 25, "kind": "snare_only", "snare_hits": 1}
+761360.919940 SNARE ANCHOR VERIFIED 
+761361.522868 CAPTURING {"kind": "snare_both", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.5, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 26}
+761363.172931 STRIKE REQUEST {"block": 26, "instrument": "ride", "due": 761363.1725775481}
+761363.528284 STRIKE REQUEST {"block": 26, "instrument": "snare", "due": 761363.522577548}
+761368.025884 CAPTURED {"block": 26, "kind": "snare_both", "snare_hits": 1}
+761368.026070 SNARE ANCHOR VERIFIED 
+761368.627720 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.5, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 27}
+761370.279104 STRIKE REQUEST {"block": 27, "instrument": "ride", "due": 761370.277554538}
+761370.634066 STRIKE REQUEST {"block": 27, "instrument": "snare", "due": 761370.627554538}
+761375.128988 CAPTURED {"block": 27, "kind": "snare_ride", "snare_hits": 1}
+761375.129153 SNARE ANCHOR VERIFIED 
+761375.730809 CAPTURING {"kind": "hihat_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 28}
+761382.233914 CAPTURED {"block": 28, "kind": "hihat_only", "snare_hits": 0}
+761382.234056 SNARE ANCHOR VERIFIED 
+761382.836137 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 29}
+761384.844422 STRIKE REQUEST {"block": 29, "instrument": "snare", "due": 761384.835944613}
+761389.338253 CAPTURED {"block": 29, "kind": "snare_only", "snare_hits": 1}
+761389.338386 SNARE ANCHOR VERIFIED 
+761389.940243 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 30}
+761391.946695 STRIKE REQUEST {"block": 30, "instrument": "snare", "due": 761391.939740021}
+761396.441698 CAPTURED {"block": 30, "kind": "snare_hihat", "snare_hits": 1}
+761396.441863 SNARE ANCHOR VERIFIED 
+761397.045146 CAPTURING {"kind": "ride_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 12.0, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 31}
+761399.296540 STRIKE REQUEST {"block": 31, "instrument": "ride", "due": 761399.294981478}
+761403.548960 CAPTURED {"block": 31, "kind": "ride_only", "snare_hits": 0}
+761403.549096 SNARE ANCHOR VERIFIED 
+761404.151580 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 32}
+761406.157918 STRIKE REQUEST {"block": 32, "instrument": "snare", "due": 761406.151320922}
+761410.655758 CAPTURED {"block": 32, "kind": "snare_hihat", "snare_hits": 1}
+761410.655953 SNARE ANCHOR VERIFIED 
+761411.258190 CAPTURING {"kind": "ride_hihat", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 12.0, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 33}
+761413.261342 STRIKE REQUEST {"block": 33, "instrument": "ride", "due": 761413.25762146}
+761417.758940 CAPTURED {"block": 33, "kind": "ride_hihat", "snare_hits": 0}
+761417.759021 SNARE ANCHOR VERIFIED 
+761418.361898 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 34}
+761420.367259 STRIKE REQUEST {"block": 34, "instrument": "snare", "due": 761420.361261779}
+761424.864411 CAPTURED {"block": 34, "kind": "snare_only", "snare_hits": 1}
+761424.864569 SNARE ANCHOR VERIFIED 
+761425.465450 CAPTURING {"kind": "background", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 35}
+761431.967245 CAPTURED {"block": 35, "kind": "background", "snare_hits": 0}
+761431.967320 SNARE ANCHOR VERIFIED 
+761432.572338 CAPTURING {"kind": "snare_ride", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 11.0, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 36}
+761434.574471 STRIKE REQUEST {"block": 36, "instrument": "ride", "due": 761434.571984696}
+761434.582915 STRIKE REQUEST {"block": 36, "instrument": "snare", "due": 761434.571984696}
+761439.076891 CAPTURED {"block": 36, "kind": "snare_ride", "snare_hits": 1}
+761439.077048 SNARE ANCHOR VERIFIED 
+761439.679245 CAPTURING {"kind": "snare_both", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 12.0, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 37}
+761441.679102 STRIKE REQUEST {"block": 37, "instrument": "ride", "due": 761441.67889927}
+761441.685658 STRIKE REQUEST {"block": 37, "instrument": "snare", "due": 761441.67889927}
+761446.182142 CAPTURED {"block": 37, "kind": "snare_both", "snare_hits": 1}
+761446.182203 SNARE ANCHOR VERIFIED 
+761446.783282 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 2, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 7.5, "block": 38}
+761448.789037 STRIKE REQUEST {"block": 38, "instrument": "snare", "due": 761448.783013929}
+761449.989926 STRIKE REQUEST {"block": 38, "instrument": "snare", "due": 761449.983013929}
+761454.286049 CAPTURED {"block": 38, "kind": "snare_only", "snare_hits": 2}
+761454.286185 SNARE ANCHOR VERIFIED 
+761454.887820 CAPTURING {"kind": "snare_hihat", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 39}
+761456.894233 STRIKE REQUEST {"block": 39, "instrument": "snare", "due": 761456.88727885}
+761461.389095 CAPTURED {"block": 39, "kind": "snare_hihat", "snare_hits": 1}
+761461.389153 SNARE ANCHOR VERIFIED 
+761461.992404 CAPTURING {"kind": "hihat_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 40}
+761468.495109 CAPTURED {"block": 40, "kind": "hihat_only", "snare_hits": 0}
+761468.495180 SNARE ANCHOR VERIFIED 
+761469.097156 CAPTURING {"kind": "ride_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 10.0, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 41}
+761470.748423 STRIKE REQUEST {"block": 41, "instrument": "ride", "due": 761470.746934987}
+761475.599308 CAPTURED {"block": 41, "kind": "ride_only", "snare_hits": 0}
+761475.599474 SNARE ANCHOR VERIFIED 
+761476.202323 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 2, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 7.5, "block": 42}
+761478.209507 STRIKE REQUEST {"block": 42, "instrument": "snare", "due": 761478.202141431}
+761479.412024 STRIKE REQUEST {"block": 42, "instrument": "snare", "due": 761479.402141431}
+761483.704547 CAPTURED {"block": 42, "kind": "snare_only", "snare_hits": 2}
+761483.704690 SNARE ANCHOR VERIFIED 
+761484.307231 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 43}
+761486.315948 STRIKE REQUEST {"block": 43, "instrument": "snare", "due": 761486.306981397}
+761490.810383 CAPTURED {"block": 43, "kind": "snare_only", "snare_hits": 1}
+761490.810520 SNARE ANCHOR VERIFIED 
+761491.411986 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 44}
+761493.418667 STRIKE REQUEST {"block": 44, "instrument": "snare", "due": 761493.411755744}
+761497.913317 CAPTURED {"block": 44, "kind": "snare_only", "snare_hits": 1}
+761497.913368 SNARE ANCHOR VERIFIED 
+761498.516574 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 45}
+761500.522797 STRIKE REQUEST {"block": 45, "instrument": "snare", "due": 761500.516425746}
+761505.019014 CAPTURED {"block": 45, "kind": "snare_only", "snare_hits": 1}
+761505.019087 SNARE ANCHOR VERIFIED 
+761505.621126 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 46}
+761507.627235 STRIKE REQUEST {"block": 46, "instrument": "snare", "due": 761507.620810232}
+761512.123527 CAPTURED {"block": 46, "kind": "snare_only", "snare_hits": 1}
+761512.123602 SNARE ANCHOR VERIFIED 
+761512.724593 CAPTURING {"kind": "hihat_only", "split": "development", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 47}
+761519.225992 CAPTURED {"block": 47, "kind": "hihat_only", "snare_hits": 0}
+761519.226054 SNARE ANCHOR VERIFIED 
+761519.827070 CAPTURING {"kind": "snare_only", "split": "development", "snare_hits": 2, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 7.5, "block": 48}
+761521.833813 STRIKE REQUEST {"block": 48, "instrument": "snare", "due": 761521.826836625}
+761523.032466 STRIKE REQUEST {"block": 48, "instrument": "snare", "due": 761523.026836625}
+761527.331312 CAPTURED {"block": 48, "kind": "snare_only", "snare_hits": 2}
+761527.331516 FINITE BATCH COMPLETE {"clips": 48}
+761527.510561 LEFT CENTER BEFORE RELAX {"duration_s": 7.766854747735664}
+761535.278168 LEFT CENTER BEFORE RELAX SETTLED 
+761536.368528 CENTER BEFORE RELAX {"j7_mode": 0, "duration_s": 11.60725423437857}
+761547.976760 CENTER SETTLED 
+761548.595429 CENTER VERIFIED BEFORE RELAX: {"t": 761548.595262422, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6474228990264237}
+761548.619217 RELAXED VERIFIED {"center": {"t": 761548.595262422, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6474228990264237}}
+761548.619441 HIHAT OPEN RETURN AND RELEASE ACK {"error": null, "shutdown_error": null, "closures_commanded": 18, "open_command_at": 761527.331609046, "normal_open_return_wait_s": 1.5, "release_ack": true, "encoder_position_verified": false, "finished_at": 761528.84424755}
+761548.851818 COLLECTION RESULT {"success": true, "error": null, "recovery_error": null, "relaxed_verified": true, "clips": 48, "snare_hits": 36, "center": {"t": 761548.578352132, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -8.702166785959364e-05, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.022477675917915732, "settle_range_deg": 0.0439586754241434, "settled_seconds": 0.6010482909623533, "tolerance_deg": 0.2}, "finished_at": 761548.851628995, "labels_created": false}
+761548.852716 Session: /home/jason/Proyectos3/X5/diagnostics/snare_data_collection/20261008T010321-test-40bddeb3
+761549.439462 Motion in 10s
+761550.439678 Motion in 9s
+761551.439783 Motion in 8s
+761552.439991 Motion in 7s
+761553.440100 Motion in 6s
+761554.440247 Motion in 5s
+761555.440413 Motion in 4s
+761556.440546 Motion in 3s
+761557.440643 Motion in 2s
+761558.440817 Motion in 1s
+761560.324873 INITIAL CENTER PATH VERIFIED {"outside_buffer_mm": 0.0, "recovery_only": false}
+761560.578590 CHECKING INITIAL RIGHT CENTER 
+761560.778263 INITIAL RIGHT CENTER {"duration_s": 6.023962454631664}
+761566.808760 INITIAL RIGHT CENTER SETTLED 
+761567.411175 INITIAL LEFT CENTER 
+761568.052042 LEFT MIT CENTER VERIFIED 
+761568.777862 RIGHT MIT CENTER VERIFIED 
+761571.322520 CHECKING RECORD3 START 
+761571.431590 RECORD3 START {"duration_s": 1.8038252703571256}
+761573.242409 RECORD3 START SETTLED 
+761573.844038 START HOLD 
+761574.445135 TEMPORARY POSITION GAINS 
+761574.493195 PLAYBACK RECORD3 {"duration_s": 4.8, "j7_mode": "powered MIT"}
+761579.296508 ENDPOINT SOFT HOLD 
+761581.440477 ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+761581.999905 ENDPOINT HOLD 
+761583.376813 RECORD3 ENDPOINT VERIFIED {"t": 761583.375962957, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6051476310368518, 0.21232913710231216, 0.2445525291828794, 1.7333499656672, 0.20476168513003543, -0.30516319523918334, 0.5997770656900894], "max_error_deg": 0.021979337712122585, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6297457889886573, "tolerance_deg": 0.05}
+761583.440853 LEFT RECORDING START {"duration_s": 2.676719909753774}
+761586.118557 LEFT RECORDING START SETTLED 
+761587.801857 LEFT RECORDING 
+761599.476204 LEFT ENDPOINT VERIFIED 
+761602.318235 SNARE ANCHOR VERIFIED 
+761602.919769 CAPTURING {"kind": "snare_ride", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.0, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 49}
+761604.571102 STRIKE REQUEST {"block": 49, "instrument": "ride", "due": 761604.569571582}
+761604.926193 STRIKE REQUEST {"block": 49, "instrument": "snare", "due": 761604.919571582}
+761609.420805 CAPTURED {"block": 49, "kind": "snare_ride", "snare_hits": 1}
+761609.420854 SNARE ANCHOR VERIFIED 
+761610.024354 CAPTURING {"kind": "snare_both", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 11.5, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 50}
+761611.675482 STRIKE REQUEST {"block": 50, "instrument": "ride", "due": 761611.673853509}
+761612.031519 STRIKE REQUEST {"block": 50, "instrument": "snare", "due": 761612.023853509}
+761616.525205 CAPTURED {"block": 50, "kind": "snare_both", "snare_hits": 1}
+761616.525407 SNARE ANCHOR VERIFIED 
+761617.127757 CAPTURING {"kind": "snare_only", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 51}
+761619.137127 STRIKE REQUEST {"block": 51, "instrument": "snare", "due": 761619.12753323}
+761623.630071 CAPTURED {"block": 51, "kind": "snare_only", "snare_hits": 1}
+761623.630249 SNARE ANCHOR VERIFIED 
+761624.235155 CAPTURING {"kind": "snare_ride", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 1, "ride_depth_deg": 10.5, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 52}
+761626.235796 STRIKE REQUEST {"block": 52, "instrument": "ride", "due": 761626.234899196}
+761626.246382 STRIKE REQUEST {"block": 52, "instrument": "snare", "due": 761626.234899196}
+761630.737889 CAPTURED {"block": 52, "kind": "snare_ride", "snare_hits": 1}
+761630.738091 SNARE ANCHOR VERIFIED 
+761631.340677 CAPTURING {"kind": "snare_only", "split": "test", "snare_hits": 2, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 7.5, "block": 53}
+761633.350213 STRIKE REQUEST {"block": 53, "instrument": "snare", "due": 761633.340455269}
+761634.548640 STRIKE REQUEST {"block": 53, "instrument": "snare", "due": 761634.5404552689}
+761638.841896 CAPTURED {"block": 53, "kind": "snare_only", "snare_hits": 2}
+761638.841966 SNARE ANCHOR VERIFIED 
+761639.444607 CAPTURING {"kind": "ride_hihat", "split": "test", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 11.5, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 54}
+761641.094647 STRIKE REQUEST {"block": 54, "instrument": "ride", "due": 761641.094230604}
+761645.946406 CAPTURED {"block": 54, "kind": "ride_hihat", "snare_hits": 0}
+761645.946594 SNARE ANCHOR VERIFIED 
+761646.549241 CAPTURING {"kind": "snare_hihat", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 55}
+761648.555842 STRIKE REQUEST {"block": 55, "instrument": "snare", "due": 761648.548986607}
+761653.050148 CAPTURED {"block": 55, "kind": "snare_hihat", "snare_hits": 1}
+761653.050203 SNARE ANCHOR VERIFIED 
+761653.652301 CAPTURING {"kind": "hihat_only", "split": "test", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 1, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 56}
+761660.155761 CAPTURED {"block": 56, "kind": "hihat_only", "snare_hits": 0}
+761660.155921 SNARE ANCHOR VERIFIED 
+761660.757935 CAPTURING {"kind": "snare_only", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.25, "hihat_offset_s": 0.25, "duration_s": 6.5, "block": 57}
+761662.766387 STRIKE REQUEST {"block": 57, "instrument": "snare", "due": 761662.757659184}
+761667.258724 CAPTURED {"block": 57, "kind": "snare_only", "snare_hits": 1}
+761667.258898 SNARE ANCHOR VERIFIED 
+761667.861184 CAPTURING {"kind": "background", "split": "test", "snare_hits": 0, "snare_degrees": null, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 58}
+761674.363457 CAPTURED {"block": 58, "kind": "background", "snare_hits": 0}
+761674.363671 SNARE ANCHOR VERIFIED 
+761674.965545 CAPTURING {"kind": "snare_only", "split": "test", "snare_hits": 1, "snare_degrees": 11.0, "ride_hits": 0, "ride_depth_deg": null, "hihat_closures": 0, "ride_offset_s": 0.0, "hihat_offset_s": -0.3, "duration_s": 6.5, "block": 59}
+761676.971992 STRIKE REQUEST {"block": 59, "instrument": "snare", "due": 761676.965208522}
+761681.466942 CAPTURED {"block": 59, "kind": "snare_only", "snare_hits": 1}
+761681.467037 SNARE ANCHOR VERIFIED 
+761682.067976 CAPTURING {"kind": "ride_only", "split": "test", "snare_hits": 0, "snare_degrees": null, "ride_hits": 1, "ride_depth_deg": 11.0, "hihat_closures": 0, "ride_offset_s": -0.35, "hihat_offset_s": 0.0, "duration_s": 6.5, "block": 60}
+761683.718460 STRIKE REQUEST {"block": 60, "instrument": "ride", "due": 761683.71778837}
+761688.571920 CAPTURED {"block": 60, "kind": "ride_only", "snare_hits": 0}
+761688.572047 FINITE BATCH COMPLETE {"clips": 12}
+761688.751655 LEFT CENTER BEFORE RELAX {"duration_s": 7.769423576823717}
+761696.531184 LEFT CENTER BEFORE RELAX SETTLED 
+761697.634445 CENTER BEFORE RELAX {"j7_mode": 0, "duration_s": 11.604685405290518}
+761709.242716 CENTER SETTLED 
+761709.865930 CENTER VERIFIED BEFORE RELAX: {"t": 761709.86578425, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6465562989469618}
+761709.881842 RELAXED VERIFIED {"center": {"t": 761709.86578425, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6465562989469618}}
+761709.882043 HIHAT OPEN RETURN AND RELEASE ACK {"error": null, "shutdown_error": null, "closures_commanded": 4, "open_command_at": 761688.57297978, "normal_open_return_wait_s": 1.5, "release_ack": true, "encoder_position_verified": false, "finished_at": 761690.087503523}
+761710.081844 COLLECTION RESULT {"success": true, "error": null, "recovery_error": null, "relaxed_verified": true, "clips": 12, "snare_hits": 9, "center": {"t": 761709.843824523, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.022477675917915732, "settle_range_deg": 0.0439586754241434, "settled_seconds": 0.6005350870545954, "tolerance_deg": 0.2}, "finished_at": 761710.081553065, "labels_created": false}

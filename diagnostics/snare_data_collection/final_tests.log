@@ -1,0 +1,96 @@
+test_accessory_stop_precedes_left_center_and_right_relax (test_hihat_collection.HiHatCollectionTests.test_accessory_stop_precedes_left_center_and_right_relax) ... ok
+test_async_stop_does_not_need_parent_heartbeat_during_arm_return (test_hihat_collection.HiHatCollectionTests.test_async_stop_does_not_need_parent_heartbeat_during_arm_return) ... ok
+test_collection_angle_is_local_90_not_legacy_100 (test_hihat_collection.HiHatCollectionTests.test_collection_angle_is_local_90_not_legacy_100) ... ok
+test_commands_preserve_timing_use_calibrated_edge (test_hihat_collection.HiHatCollectionTests.test_commands_preserve_timing_use_calibrated_edge) ... ok
+test_exact_snare_plan (test_hihat_collection.HiHatCollectionTests.test_exact_snare_plan) ... ok
+test_near_center_still_rejects_departure_and_feedback_failures (test_hihat_collection.HiHatCollectionTests.test_near_center_still_rejects_departure_and_feedback_failures) ... ok
+test_parent_failure_still_opens_before_releasing_fake_serial (test_hihat_collection.HiHatCollectionTests.test_parent_failure_still_opens_before_releasing_fake_serial) ... ok
+test_real_worker_finite_cycles_and_normal_shutdown_fake_serial (test_hihat_collection.HiHatCollectionTests.test_real_worker_finite_cycles_and_normal_shutdown_fake_serial) ... ok
+test_return_can_enter_bounded_center_region_during_motion (test_hihat_collection.HiHatCollectionTests.test_return_can_enter_bounded_center_region_during_motion) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 9.632s
+
+OK
+test_archived_ride_negative_keeps_provenance_and_empty_labels (test_hihat_export.CollectionExportTests.test_archived_ride_negative_keeps_provenance_and_empty_labels) ... ok
+test_both_center_and_fault_free_capture_required (test_hihat_export.CollectionExportTests.test_both_center_and_fault_free_capture_required) ... ok
+test_labels_negatives_append_and_no_duplicates (test_hihat_export.CollectionExportTests.test_labels_negatives_append_and_no_duplicates) ... ok
+test_missing_snare_and_incomplete_review_rejected (test_hihat_export.CollectionExportTests.test_missing_snare_and_incomplete_review_rejected) ... ok
+test_preexisting_file_never_overwritten (test_hihat_export.CollectionExportTests.test_preexisting_file_never_overwritten) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.020s
+
+OK
+test_accepts_only_fresh_stationary_center (test_data_center_guard.CenterGuardTests.test_accepts_only_fresh_stationary_center) ... ok
+test_offcenter_left_disable_blocked_at_frame_level (test_data_center_guard.CenterGuardTests.test_offcenter_left_disable_blocked_at_frame_level) ... ok
+test_original_ride_session_sets_owner_key_for_safe_stop (test_data_center_guard.CenterGuardTests.test_original_ride_session_sets_owner_key_for_safe_stop) ... ok
+test_setup_holds_live_right_pose_before_synchronized_center (test_data_center_guard.CenterGuardTests.test_setup_holds_live_right_pose_before_synchronized_center) ... ok
+test_snare_depth_is_fixed_in_implementation (test_data_center_guard.CenterGuardTests.test_snare_depth_is_fixed_in_implementation) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
+OK
+test_balanced_bounded_plan (test_x5_collection.CollectionTests.test_balanced_bounded_plan) ... ok
+test_center_only_mode_entry_refuses_before_opening_can (test_x5_collection.CollectionTests.test_center_only_mode_entry_refuses_before_opening_can) ... ok
+test_disallowed_depths_and_counts (test_x5_collection.CollectionTests.test_disallowed_depths_and_counts) ... ok
+test_finite_controller_all_depths_never_third_hit (test_x5_collection.CollectionTests.test_finite_controller_all_depths_never_third_hit) ... ok
+test_measured_corridor_still_aborts (test_x5_collection.CollectionTests.test_measured_corridor_still_aborts) ... ok
+test_mit_recording_reference_is_bounded (test_x5_collection.CollectionTests.test_mit_recording_reference_is_bounded) ... ok
+test_outside_start_only_allows_small_inward_center_recovery (test_x5_collection.CollectionTests.test_outside_start_only_allows_small_inward_center_recovery) ... ok
+test_powered_transfer_never_disables_or_enables (test_x5_collection.CollectionTests.test_powered_transfer_never_disables_or_enables) ... ok
+test_stationary_setup_retries_transient_queue_pressure (test_x5_collection.CollectionTests.test_stationary_setup_retries_transient_queue_pressure) ... ok
+test_incomplete_double_is_not_exported_as_mislabeled_training_data (test_x5_collection_export.ExportTests.test_incomplete_double_is_not_exported_as_mislabeled_training_data) ... ok
+test_refuses_labeling_before_verified_relax (test_x5_collection_export.ExportTests.test_refuses_labeling_before_verified_relax) ... ok
+test_st7_wav_csv_style_and_separate_double_rows (test_x5_collection_export.ExportTests.test_st7_wav_csv_style_and_separate_double_rows) ... ok
+test_variable_clip_margins_and_rounding_match_manifest (test_x5_collection_export.ExportTests.test_variable_clip_margins_and_rounding_match_manifest) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.915s
+
+OK
+test_cached_disabled_feedback_cannot_confirm_relax (test_snare_csp_restore.SnareCspRestoreTests.test_cached_disabled_feedback_cannot_confirm_relax) ... ok
+test_failed_setup_write_is_not_swallowed (test_snare_csp_restore.SnareCspRestoreTests.test_failed_setup_write_is_not_swallowed) ... ok
+test_fresh_running_but_wrong_mode_does_not_confirm (test_snare_csp_restore.SnareCspRestoreTests.test_fresh_running_but_wrong_mode_does_not_confirm) ... ok
+test_old_running_sample_cannot_skip_handoff (test_snare_csp_restore.SnareCspRestoreTests.test_old_running_sample_cannot_skip_handoff) ... ok
+test_relax_waits_for_fresh_disabled_feedback (test_snare_csp_restore.SnareCspRestoreTests.test_relax_waits_for_fresh_disabled_feedback) ... ok
+test_setup_timeout_is_bounded (test_snare_csp_restore.SnareCspRestoreTests.test_setup_timeout_is_bounded) ... ok
+test_stale_running_and_stale_csp_do_not_confirm (test_snare_csp_restore.SnareCspRestoreTests.test_stale_running_and_stale_csp_do_not_confirm) ... ok
+test_stopped_after_enable_does_not_confirm (test_snare_csp_restore.SnareCspRestoreTests.test_stopped_after_enable_does_not_confirm) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.028s
+
+OK
+test_all_seven_receive_only_zero_goals_right_untouched (test_centering.DirectCenterTests.test_all_seven_receive_only_zero_goals_right_untouched) ... ok
+test_cancel_pending_sequence_prevents_enable (test_centering.DirectCenterTests.test_cancel_pending_sequence_prevents_enable) ... ok
+test_confirmed_center_command_error_identifies_motor_and_step (test_centering.DirectCenterTests.test_confirmed_center_command_error_identifies_motor_and_step) ... ok
+test_confirmed_center_preloads_live_pose_and_confirms_every_drive (test_centering.DirectCenterTests.test_confirmed_center_preloads_live_pose_and_confirms_every_drive) ... ok
+test_confirmed_center_retries_j7_then_aborts_without_center_target (test_centering.DirectCenterTests.test_confirmed_center_retries_j7_then_aborts_without_center_target) ... ok
+test_custom_right_gripper_maps_open_and_closed_into_rviz (test_centering.DirectCenterTests.test_custom_right_gripper_maps_open_and_closed_into_rviz) ... ok
+test_fast_speed_is_allowlisted_only_for_active_right_joint7 (test_centering.DirectCenterTests.test_fast_speed_is_allowlisted_only_for_active_right_joint7) ... ok
+test_full_can_queue_is_retried (test_centering.DirectCenterTests.test_full_can_queue_is_retried) ... ok
+test_gripper_and_recalibration_blocked (test_centering.DirectCenterTests.test_gripper_and_recalibration_blocked) ... ok
+test_hardware_test_session_exit_restores_csp_at_stationary_anchor (test_centering.DirectCenterTests.test_hardware_test_session_exit_restores_csp_at_stationary_anchor) ... ok
+test_initial_unrelaxed_or_missing_feedback_blocks_enable (test_centering.DirectCenterTests.test_initial_unrelaxed_or_missing_feedback_blocks_enable) ... ok
+test_isolating_one_drive_leaves_other_right_drives_commandable (test_centering.DirectCenterTests.test_isolating_one_drive_leaves_other_right_drives_commandable) ... ok
+test_left_joint6_mit_packet_is_permitted_and_self_consistent (test_centering.DirectCenterTests.test_left_joint6_mit_packet_is_permitted_and_self_consistent) ... ok
+test_playback_speed_is_allowlisted_only_for_active_right_arm (test_centering.DirectCenterTests.test_playback_speed_is_allowlisted_only_for_active_right_arm) ... ok
+test_relax_every_left_motor_even_with_failure (test_centering.DirectCenterTests.test_relax_every_left_motor_even_with_failure) ... ok
+test_right_cartesian_gripper_closes_to_displayed_positive_seven (test_centering.DirectCenterTests.test_right_cartesian_gripper_closes_to_displayed_positive_seven) ... ok
+test_right_cartesian_gripper_setup_uses_only_small_degree_targets (test_centering.DirectCenterTests.test_right_cartesian_gripper_setup_uses_only_small_degree_targets) ... ok
+test_right_center_uses_only_right_ids_and_joint7_positive_limit (test_centering.DirectCenterTests.test_right_center_uses_only_right_ids_and_joint7_positive_limit) ... ok
+test_right_control_requires_left_relaxed_and_relaxes_only_right (test_centering.DirectCenterTests.test_right_control_requires_left_relaxed_and_relaxes_only_right) ... ok
+test_right_joint5_command_applies_offset_and_no_other_joint_changes (test_centering.DirectCenterTests.test_right_joint5_command_applies_offset_and_no_other_joint_changes) ... ok
+test_right_joint7_csp_reassert_enables_holds_and_queries (test_centering.DirectCenterTests.test_right_joint7_csp_reassert_enables_holds_and_queries) ... ok
+test_right_joint7_mit_packet_matches_installed_openarmx_sdk (test_centering.DirectCenterTests.test_right_joint7_mit_packet_matches_installed_openarmx_sdk) ... ok
+test_right_joint7_position_uses_one_immediate_motor7_frame (test_centering.DirectCenterTests.test_right_joint7_position_uses_one_immediate_motor7_frame) ... ok
+test_sdk_csp_bytes (test_centering.DirectCenterTests.test_sdk_csp_bytes) ... ok
+test_strike_priority_queries_only_right_j7_at_fifty_hz (test_centering.DirectCenterTests.test_strike_priority_queries_only_right_j7_at_fifty_hz) ... ok
+test_unknown_mode_fault_hold_targets_same_j7_pose_in_mit_and_csp (test_centering.DirectCenterTests.test_unknown_mode_fault_hold_targets_same_j7_pose_in_mit_and_csp) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.014s
+
+OK

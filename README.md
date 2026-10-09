@@ -280,50 +280,150 @@ window. The processed preview draws a 3-by-3 grid over the strongest cymbal box
 and highlights its center rectangle as `CYMBAL TARGET`; that center cell is now
 the visual alignment goal. The original `start_right_cartesian.sh` is unchanged.
 
-## Query-only right-arm motion recorder
+## Query-only left/right motion recorder
 
-See [RIGHT_RECORDING.md](RIGHT_RECORDING.md). Run:
-
-```bash
-./start_right_recording.sh --hardware
-```
-
-This opens RViz and a separate recording panel. With right motors 1–8 already
-disabled, the user can support and manually guide the limp arm from any starting
-pose to any ending pose. The program queries only `can0`, never enables, disables,
-holds, centers, or commands a motor, and records seven right joint positions,
-right gripper opening, TCP position, and sample times at approximately 20 Hz.
-The left CAN bus is not opened or recorded. JSON files are atomically saved only
-under `recordings/`; offline launch without `--hardware` is view-only. If an
-active recording exceeds a J1–J7 URDF limit, the recorder shows a warning and
-aborts and discards the complete take.
-
-## Right-arm recording video editor
-
-See [RIGHT_RECORDING_EDITOR.md](RIGHT_RECORDING_EDITOR.md). Run:
+See [RECORDING.md](RECORDING.md). Select exactly one arm and opt into hardware:
 
 ```bash
-./start_right_recording_editor.sh
+./start_recording.sh --right --hardware
+./start_recording.sh --left --hardware
 ```
 
-This separate program opens an RViz simulation and a video-style playback/crop
-panel. Select a right-arm recording JSON at startup, play or scrub its timeline,
-and drag sample-aligned START and END handles. RViz previews the applicable
-boundary pose while either handle is dragged. The save button shows an explicit
-warning and then atomically overwrites that same selected JSON; there is no Save
-As operation and no new recording or backup file. The editor never opens CAN or
-commands physical hardware.
+The selected arm must already be disabled and physically supported. Right mode
+queries only `can0` and saves under `recordings/`; left mode queries only `can1`
+and saves under `left_recordings/`. The recorder never enables, disables, holds,
+centers, or commands a motor. Launching without `--hardware` is an offline
+preview. Joint-limit violations abort and discard the complete active take.
+
+## Left/right recording video editor
+
+See [RECORDING_EDITOR.md](RECORDING_EDITOR.md). Run:
+
+```bash
+./start_recording_editor.sh
+```
+
+The editor accepts compatible recordings from both `recordings/` and
+`left_recordings/`, and previews the arm identified by each JSON file. It can
+play, scrub, and crop the timeline, then atomically overwrite that exact selected
+file after confirmation. It never opens CAN or commands physical hardware.
 
 ## Recorded-path right camera alignment
 
 See [RIGHT_CAMERA_PLAYBACK.md](RIGHT_CAMERA_PLAYBACK.md). This is a separate
 program; the original `right_camera_cartesian` program remains unchanged.
-It loads `recordings/record1.json` by default.
+Defaults: right `recordings/record3.json`, left `left_recordings/record1.json`.
+Normal beat playback centers both arms, plays the left recording first, holds its
+endpoint, then plays the right recording and continues the right-only beat
+workflow. Each selector has a persistent preflight cache. Center + Relax returns
+both arms together and disables each after its own verified center arrival.
+The left gripper retains its centered closed position; recorded gripper values
+are not replayed. This two-recording addition is verified offline only.
 
 ```bash
 ./start_beat.sh --hardware \
   --recording recordings/right_motion_YYYYMMDD_HHMMSS.json
 ```
+
+### Random left snare in the main beat
+
+Normal `./start_beat.sh` hardware playback adds **one or two left-J6 snare hits
+per measure**, with a 50/50 random choice of count. Each measure is still **four
+quarter notes long**, split into **eight straight eighth-note positions**
+(`1 & 2 & 3 & 4 &`, logged as slots 1–8). The positions are sampled uniformly
+from feasible combinations, with no duplicate slot. The opening ride pickup
+and triplet extras do not change this grid or the measure length.
+
+Chosen hits must be separated by the complete strike/return duration plus
+settling and the existing 30 ms scheduling margin. This is checked **within
+the bar and across bar boundaries**. At 100–120 BPM, adjacent eighth notes are
+too close, so the scheduler leaves at least one eighth-note slot between hits;
+at slower tempos adjacent eighths are allowed if the full return fits. Every
+bar still has one or two hits; strokes are not truncated, dropped, or shifted
+off their chosen eighth-note grid position to fit.
+The strike is always **+11°**, using `snare_lab.motion.build_method` and the same
+powered tuning, curved acceleration, and **unchanged 0.220 s return** as
+`./snare.sh --11`. It is not a hybrid ride strike or a new snare trajectory.
+
+A separate 500 Hz process owns left J6. It schedules the reference bottom on
+the existing ride grid (about 0.147 s descent lead); this is commanded timing,
+not a claim of acoustically measured contact synchronization. The hi-hat's
+angle/calibration and the ride's search, depth, and rhythm remain unchanged.
+No snare hits occur during setup, recordings, calibration, or ride search.
+
+Left J6 changes to MIT **only at verified center**, before left playback. The
+existing 200 Hz recording worker passes its J6 targets to that powered owner;
+all other recorded joints retain their original CSP playback. J6 remains
+powered through the recording, beat, reverse recording, and center. Normal
+Stop cancels future snare hits, finishes any current full return, then centers
+both arms and joins the left writer before disabling the independently
+verified centered arm. Faults do not authorize an off-center disable; the
+explicit severe-emergency path still stops all writers before shutdown.
+
+`--test` visualizes the same 11° reference and random-measure scheduler using
+only in-memory simulation. It remains camera/microphone/serial/CAN-free.
+`--hardwaretest`, `--recording-only`, standalone `snare.sh`, the data collector,
+and saved datasets/recordings are unchanged. The physical center → both
+recordings → left reverse/right center → both verified centers → relax sequence
+passed with the snare mode prepared and **no beat/strikes**, with zero control
+or motor faults. Evidence: `diagnostics/snare_beat_physical_fix/RESULTS.md`.
+This is not a physical full-band beat/strike verification.
+
+### Physical playback check without a beat
+
+```bash
+./start_beat.sh --hardware --camera /dev/video4 --verify-playback
+```
+
+**Moves the physical robot automatically when ready.** Keep clear and send the
+robot-motion warning before launching. This runs the normal readiness checks,
+both-arm centering, centered snare-mode setup, and both selected recordings.
+It skips alignment/search/beat, reverses the left recording, returns both arms
+to their measured centers, and only then relaxes. It saves encoder/status
+telemetry and a pass/fail result under
+`playback_results/dual_playback_verification/`. A fault is a failed test, not
+permission to relax an off-center arm. This is not full-band strike validation.
+
+Transient CAN TX-queue pressure in the dedicated left-J6 worker now causes a
+fresh-feedback trajectory recomputation, not replay of a stale command or an
+immediate abort. Persistent congestion and actual drive/timing faults still
+stop the workflow; the control and feedback deadlines are unchanged.
+On the center leg only, a joint whose center is exactly at its modeled stop
+uses the existing 0.20° measured-center allowance for small servo overshoot.
+Recording/strike/command limits and the actual TCP-zone checks remain strict.
+The final left-center leg uses a smooth rest-to-rest path to avoid a sudden
+step at the J4 boundary. Worker startup/shutdown refreshes measured feedback;
+after the snare worker joins, a new center-settling window is required before
+disabling. The GUI resumes its own queries when a worker stops supplying them.
+
+### Editable beat tempo
+
+Set **Beat BPM** in the control panel before pressing **RUN** (or **Start** in
+`--test`). The default is **100 BPM**. The snare-enabled beat accepts decimal
+values from **20 to 120 BPM**. The random snare eighth-note combinations are
+filtered for full-return spacing, including between measures. The underlying ride-only
+clock still supports 20–180 BPM. Blank, nonnumeric, nonfinite, or out-of-range entries disable starting.
+The box is locked from Start/RUN until the arm has completed **Center + Relax**;
+change the tempo before the next run, not in the middle of a stroke.
+
+Both the ride swing grid and the hi-hat use `quarter_note_seconds = 60 / BPM`.
+The ride retains its pickup and 2:1 triplet swing. The hi-hat still **opens on
+beats 1 and 3** and **closes on beats 2 and 4**, at its calibrated angle. Its
+acoustic timing adjustment shifts both CLOSE and following OPEN together until
+two consecutive closure/ride matches are within 15 ms; then the applied offset
+is locked for the rest of that run. The ride has no offset. At faster tempos the signed advance is
+capped at the smaller of 250 ms and half a beat, with a proportionately bounded
+ride-onset matching window. At 100 BPM all timing defaults are unchanged.
+
+**Estimated practical upper tempo: roughly 120 BPM**, not a hardware-verified
+limit. The shortest ride spacing is `20 / BPM` seconds (167 ms at 120 BPM), and
+the existing short rebound alone takes 110 ms before allowing for the next
+stroke. The snare-enabled 120 BPM ceiling is a scheduling guard, not a promise
+that the physical arm/hi-hat can keep up. Existing rebound, motion, encoder, and missed-deadline safeguards remain;
+an excessive tempo can still produce a controlled stop. Calibration holds,
+recording playback speed, strike depth/boost, model settings, and motor tuning
+are not scaled by BPM. Manual `--hardwaretest` and recording-only modes have no
+BPM box because they do not play a continuous beat.
 
 A pure simulation test is also available:
 
@@ -334,10 +434,10 @@ A pure simulation test is also available:
 This test mode never constructs the real motor controller, never opens CAN, and
 does not start or require the camera, ST7/TONOR microphone, or ESP32 hi-hat. An
 in-memory arm is animated in RViz through centering, the selected recording,
-and the safe 10-degree J7 target in the same triplet-based 100 BPM swing ride
+and the safe 10-degree J7 target in the same triplet-based, user-tempo swing ride (100 BPM by default)
 used by hardware mode. It performs no strike-depth search and sends no hi-hat
 commands. The
-same **Stop 100 BPM striking: Center + Relax** sequence centers and relaxes only
+same **Stop [BPM] striking: Center + Relax** sequence centers and relaxes only
 the simulated arm. The three modes are mutually exclusive.
 
 A manual powered test mode is also available:
@@ -420,10 +520,13 @@ of that limit, and settles at the recorded endpoint. It restores the ordinary
 0.4 rad/s setting after the endpoint is physically reached and before any
 alignment, recovery, or centering. Camera observations collected during
 playback reorder but never eliminate the six Cartesian search directions.
-Post-playback alignment
-checks one fresh tip and accepts the recording endpoint immediately when it is
-anywhere inside the larger visible pink rectangle. If outside, Cartesian
-correction keeps using robust outside-zone measurements to choose its next
+Post-playback alignment checks **all directly observed stick tips** in a fresh
+frame and accepts the recording endpoint if **any** tip is inside the visible
+pink rectangle, regardless of stick detection confidence. An outside snare
+stick cannot veto an inside ride stick. If all tips are outside, the tip nearest
+the pink rectangle's center supplies the hill-climber score; Cartesian
+correction adjusts **only the right (ride) arm**, never the left snare arm.
+It keeps using robust outside-zone measurements to choose its next
 move, but the first fresh tip detection anywhere inside the visible pink
 rectangle immediately completes alignment. There is no smaller invisible goal,
 second confirmation, or timed hold. The launcher starts the scoring-enabled ST7 cymbal-sound
@@ -480,9 +583,9 @@ unsafe boosted target causes a controlled Center + Relax, not widened limits.
 No normality-based selection, detector changes or additional search are used.
 `--test` and `--hardwaretest` are unchanged, as is hi-hat synchronization.
 
-That boosted depth then plays hybrid strokes in the existing 100 BPM triplet
-swing: opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
-spacing from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
+That boosted depth then plays hybrid strokes in the existing triplet
+swing at the selected BPM (default 100): opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
+spacing at the default 100 BPM from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
 A separate 500 Hz J7 worker reuses `strike_lab.methods.hybrid` and
 `config/experiment_hardware_tuned.json`; Tk never clocks the catch. It predicts
 release timing from measured position/velocity and the hybrid impulse/load
@@ -502,9 +605,23 @@ See [ST7 physical verification](diagnostics/st7_handoff_20261004/VERIFICATION.md
 The normal return keeps J7 powered in MIT while centering (0.35 rad/s bounded
 reference); it does not disable J7 to change modes at the cymbal. An off-center
 CSP handoff was found to drop J7 and produce an unintended, correctly rejected hit.
-Normal hardware now guards every whole-arm relax, including window close and
-Ctrl-C: all seven joints must be within 0.20° of center and settled for 0.6 s
-before disabling. A detected stall/overheating remains a major-fault exception.
+Normal **Center + Relax** retains the 0.20°/0.6 s settled-center checks, with
+both arms returning together and each disabling after its own verified arrival.
+**EMERGENCY RELAX (NO CENTER)** (also Escape) is separate: it stops the owned motor writers,
+then attempts to disable both arms without moving them to center or waiting for
+center evidence. Stall/overheating uses this same emergency path. Restart is
+required after an emergency stop; interrupted playback gains are not assumed
+restored. Torque release may let the arms fall: keep clear and retain access to
+the physical power cutoff. Software cannot guarantee disable if communication fails.
+
+First window close/Ctrl-C requests the normal centered shutdown. A repeated
+close/Ctrl-C requests emergency disable and exit; a 35-second graceful-shutdown
+deadline also escalates to an emergency disable attempt rather than waiting
+forever for powered-off encoders. Exiting is **not proof of physical disable**.
+Hi-hat status queries and heartbeats are serviced independently of GUI path
+checks. The original 1.5-second status timeout remains enforced. A hi-hat fault
+during arm return is reported and releases the hi-hat output, but does not
+cancel the arm-return controller; arm feedback, zone and stall checks remain.
 `--test` retains its existing powered simulation; `--hardwaretest` retains its
 separate manual gravity/catch controller.
 
@@ -592,22 +709,42 @@ notification delays never become timing offsets. The read-only ride pickup/grid
 starts a 5 ms host callback scheduler; no command is sent on the pickup or extras.
 
 A closure on beat 2/4 is matched against one unambiguous ride onset within
-140 ms of that scheduled beat, plus a neighboring ride-grid detection. One
-hi-hat onset must occur within 450 ms of its actual close command. Both detector
+a window around that scheduled beat (the smaller of 140 ms and one third of
+a beat), plus a neighboring ride-grid detection. One hi-hat onset must occur within 450 ms of its actual close command. Both detector
 watermarks must finalize the entire matching window. Duplicates, missing or
-ambiguous events, stale sources and corrections outside the ±250 ms safety
-bound do not change the advance. This cannot eliminate classifier cross-talk:
+ambiguous events, stale sources and corrections outside the signed safety
+bound (the smaller of 250 ms and half a beat) do not change the advance.
+This cannot eliminate classifier cross-talk:
 a missing real ride plus a false ride response to a hi-hat can still be ambiguous
 in reality even when the detector output looks unique. Better models may be needed.
 
 The estimate uses the **actual advance used for that historical command** plus
 `hihat_onset - ride_onset`, avoiding repeated integration of delayed errors.
-After three valid pairs, a rolling five-estimate median drives smoothed changes
-(maximum 10 ms per update, 15 ms deadband). Every close and following open share
-a latched advance, preserving their 600 ms separation. New pairs change by at
-most 10 ms; already scheduled edges never jump. Missed deadlines cause the
+After **two consecutive valid estimates agree within 20 ms**, the controller
+applies the **full absolute correction**, using a rolling three-estimate median
+(the first update uses the two available estimates). The 15 ms deadband remains.
+Disagreeing estimates do not update the correction; missing/ambiguous pairs
+clear the confirmation history. This replaces the old three-pair wait and
+35%-gain, 10 ms incremental adjustments. Every close and following open share
+a latched advance, preserving their one-quarter-note separation (600 ms at
+100 BPM). New pairs can shift by up to **150 ms or one quarter of a beat,
+whichever is smaller** (150 ms at 100 BPM, 125 ms at 120 BPM), leaving at least
+three quarters of a beat of scheduled open time. A confirmed 100 ms offset can
+therefore be applied in one upcoming pair instead of many 10 ms steps. The
+total signed advance bound is unchanged. Already scheduled edges never jump,
+and delayed batches cannot compound the same historical error. Missed deadlines cause the
 existing controlled stop, never a burst or an airborne arm release. No guarantee
 of perfect acoustic synchronization is made at the models' finite time resolution.
+
+**Offset checkpoint:** when the actual hi-hat/ride acoustic onset difference
+is at most **15 ms twice consecutively**, at the same currently applied offset,
+the controller logs `HIHAT SYNC: {"kind": "locked", ...}` with the offset value.
+That offset then stays **constant for the rest of the swing run**: later drift,
+outliers, or missing detections cannot resume automatic adjustment. Missing,
+ambiguous, or out-of-tolerance matches break the consecutive-success streak
+before locking. Delayed good detections from an older offset cannot certify a
+new one. A new run starts unlocked at zero and learns afresh; no offset is saved
+across runs. Audio availability and command-deadline supervision remain active.
 
 Each swing writes `playback_results/hihat_sync/<session>/timeline.jsonl` with
 common-clock detector onsets, beat IDs, actual commands, applied advances,
@@ -615,7 +752,7 @@ accepted timing errors and rejected-pair reasons. No new UI or launch action is
 required. These logs are diagnostics, not training labels.
 
 This automatic arm-and-hi-hat loop belongs to `--hardware`; its arm and hi-hat
-continue until the user presses **Stop 100 BPM striking:
+continue until the user presses **Stop [BPM] striking:
 Center + Relax**. Stop finishes any
 active hybrid return and settled anchor, tells the hi-hat to return to 0°,
 joins the worker, restores and confirms position mode at normal speed, then
@@ -626,16 +763,16 @@ the worker before disabling motors. The camera box-motion
 overlay is retained only as a visual diagnostic and never decides a hit. This
 behavior is confined to the recorded-path playback program.
 
-## Separate hi-hat sound data collection
+## Instrument sound data collection
 
-See [HIHAT_DATA_COLLECTION.md](HIHAT_DATA_COLLECTION.md) for the finite collector
-`collect_hihat_data.sh`, its offline-only `--check`, and separate offline labeling
-program `label_hihat_data.py`. The collected hi-hat WAV/CSV pairs live under
-`X5data/hihat/recording` and `X5data/hihat/timestamp`; existing ride data has moved
-unchanged to `X5data/ride/recordings` and `X5data/ride/timestamps`. Mixed ride/hi-hat
-closures remain positive for the new hi-hat target. No model training or merging
-into ST7 is performed. The first batch needed verified post-capture center
-recovery; see the linked verification report before rerunning physical collection.
+The former hi-hat collector is now `collect_data.sh`, adapted in place for the
+60-clip snare dataset with ride and hi-hat mixtures. Snare strikes are fixed at
+11 degrees, hi-hat at 90 degrees, and ride varies over 10–12 degrees. Both arms
+must be verified centered before relaxation. `--check` opens no hardware.
+
+See [collection instructions](HIHAT_DATA_COLLECTION.md). Reviewed output goes to
+`X5data/snare/recordings/rN.wav` and `X5data/snare/timestamps/tN.csv` through
+`label_data.py`. Existing ride/hi-hat data are preserved.
 
 ## Isolated right-J7 ten-degree test
 
@@ -671,3 +808,51 @@ The unloaded real-arm comparison and calibrated profiles are documented in
 [EXPERIMENT_RESULTS.md](EXPERIMENT_RESULTS.md); those centered/no-stick results
 are not a calibration of the new record3 posture or attached stick. The graph
 measures encoder-zone timing, not actual cymbal contact or sound quality.
+
+## Standalone left-J6 snare strike
+
+`snare.sh` runs the separate powered snare strike, using simulation by default.
+Set its positive J6 excursion beyond the left recording endpoint with a numeric
+option; the two dashes do **not** indicate a negative angle:
+
+```bash
+./snare.sh                # default +10 degrees, simulation
+./snare.sh --10           # +10 degrees, simulation
+./snare.sh --11           # +11 degrees, simulation
+./snare.sh --11.5         # +11.5 degrees, simulation
+./snare.sh --hardware --10 # PHYSICAL MOTION: only with the arm safely prepared
+```
+
+The existing `--degrees 11.5` spelling also works. Specify only one depth.
+There is no fixed 12° snare depth cap. The maximum is the remaining **positive
+left-J6 rotation from the selected recording endpoint to its URDF upper limit**.
+The current model's J6 range is −0.75 to +0.75 rad (about ±42.97°); the maximum
+excursion therefore changes with the selected recording. The minimum remains
+0.5°, and the default remains +10°. Requests beyond the joint limit are rejected,
+not clipped. Measured and commanded strike positions remain supervised.
+
+Path, torque, speed, acceleration and jerk checks remain enforced. Larger powered
+strokes take longer only as needed to satisfy the existing dynamic limits.
+The downward stroke now uses **curved acceleration**, building speed toward
+roughly 70% of its travel before a short, smooth braking segment. It targets a
+moderate **20% higher peak reference speed** than the previous faster descent,
+reduced as needed to fit the unchanged speed, acceleration and jerk limits.
+If no new shape fits, it retains the previous validated descent and reports that.
+The **return trajectory and timing are unchanged at each selected depth**.
+At the default 10°, the downward reference is approximately **146 ms** (previously
+160 ms), peak speed is approximately **130°/s** (previously 108°/s), and return
+remains **220 ms**. Both segment joins match position, velocity and acceleration.
+No torque limit, positioning/playback speed, or strike depth is increased.
+The trajectory still stops at the selected depth; it does not drive beyond that
+depth into the drum. These are reference calculations, not measured contact speed
+or a physical safety certification.
+Reference-curve checks run before hardware is
+opened. A joint-valid depth can still be rejected by the taught TCP envelope.
+The strike direction, return sequence and right-arm ride experiment limits are
+unchanged. The URDF range is a software model limit, not a new physical calibration.
+
+After the strike, reverse playback waits for confirmed J6 CSP mode and fresh,
+stable running feedback, rather than accepting a cached pre-transition state.
+Normal completion also requires fresh disabled feedback after final centering.
+The [CSP handoff verification report](diagnostics/snare_csp_restore_20261007/RESULTS.md)
+records one complete physical 10° run with zero motor faults or recovery retries.

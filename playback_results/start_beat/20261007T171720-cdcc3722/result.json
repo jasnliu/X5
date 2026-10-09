@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "error": null,
+  "cleanup_error": null,
+  "endpoint": {
+    "t": 733598.740238054,
+    "goal_rad": [
+      -0.013234607461662051,
+      -0.12524925612268234,
+      -0.2813792629892422,
+      0.07269443808651843,
+      -0.8587150377660784,
+      0.018221560997940145,
+      -1.1602339208056751
+    ],
+    "actual_rad": [
+      -0.012850995651179531,
+      -0.12524925612268234,
+      -0.2813792629892422,
+      0.07307804989700095,
+      -0.8583314259555959,
+      0.018605172808422665,
+      -1.1602339208056751
+    ],
+    "max_error_deg": 0.02197933771202081,
+    "settle_range_deg": 0.021979337712122585,
+    "settled_seconds": 0.6007630249951035,
+    "tolerance_deg": 0.05
+  },
+  "gains_restored": true,
+  "original_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "method": {
+    "name": "paced_precise",
+    "duration_s": 8.147489909054581,
+    "time_scale": 1.2495720866422046,
+    "peak_velocity_rad_s": 0.25059609893461116,
+    "peak_acceleration_rad_s2": 0.740155031592358,
+    "peak_piecewise_jerk_rad_s3": 12.462038441715807,
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "max_joint_deviation_deg": 1.223367370047232,
+    "max_tcp_deviation_mm": 3.963131216228757,
+    "exact_first": true,
+    "exact_last": true,
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "gaussian_sigma_s": 0.1,
+    "smoothing_search": [
+      {
+        "sigma": 0.14,
+        "accepted": false,
+        "reason": "Joint corridor 1.7934 deg > 1.5 deg"
+      },
+      {
+        "sigma": 0.1,
+        "accepted": true
+      }
+    ],
+    "original_recording_duration_s": 6.520224,
+    "recording_duration_ratio": 1.2495720866422046,
+    "source_sha256": "43cea02c6a111fe2f0e468386cb6b1b4f8136690d0ed96d92367b2d609a8fd57"
+  },
+  "transport": {
+    "left": {
+      "retries": 8783,
+      "maximum_wait_s": 0.0035051109734922647
+    },
+    "right": {
+      "retries": 0,
+      "maximum_wait_s": 7.688801269978285e-05
+    }
+  }
+}

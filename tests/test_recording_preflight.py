@@ -146,7 +146,7 @@ class AppTests(unittest.TestCase):
 
 class StatusSafetyTests(unittest.TestCase):
     def fixture(self, stamp):
-        c=Mock(state='ready',telemetry_at=stamp,telemetry={'angle':90})
+        c=Mock(state='ready',telemetry_at=stamp,telemetry={'angle':90},service_running=False)
         c.ready.return_value=True
         app=SimpleNamespace(hihat=c,hihat_sound_monitor=SimpleNamespace(receiver=Mock()),
             bus=SimpleNamespace(active=False),result_status=Mock(),result_label=Mock(),status=Mock())

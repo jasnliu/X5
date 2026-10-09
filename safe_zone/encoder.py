@@ -9,6 +9,7 @@ import select
 import socket
 import struct
 import time
+from .gripper_feedback import EncoderState, motor8_feedback
 
 FRAME = struct.Struct('=IB3x8s')
 EFF = 0x80000000
@@ -55,7 +56,7 @@ class SingleArmObserver:
 
     This is deliberately separate from the dual-arm ``Observer`` used by the
     safe-zone recorder.  It has the same state-only packet and decoding rules,
-    but is suitable for right-arm-only motion capture.
+    but is suitable for isolated left- or right-arm motion capture.
     """
 
     def __init__(self, side='right', bus='can0'):
@@ -96,15 +97,20 @@ class SingleArmObserver:
                 raise RuntimeError('Short CAN write')
             self.tx_count += 1
         readings = {}
+        gripper_feedback = {}
         deadline = time.monotonic() + .15
         while time.monotonic() < deadline:
             ready, _, _ = select.select(
                 [self.socket], [], [], max(0, deadline - time.monotonic())
             )
             if self.socket in ready:
-                value = decode(self.socket.recv(16))
+                frame = self.socket.recv(16)
+                value = decode(frame)
                 if value:
                     readings[value[0]] = value[1]
+                    if value[0] == 8:
+                        gripper_feedback[self.side] = motor8_feedback(
+                            int.from_bytes(FRAME.unpack(frame)[2][:2], 'big'))
             if len(readings) == 8:
                 joints = {
                     f'openarmx_{self.side}_joint{i}':
@@ -114,7 +120,7 @@ class SingleArmObserver:
                 joints[f'openarmx_{self.side}_finger_joint1'] = max(
                     0., min(.044, -.044 * readings[8] / 1.0472)
                 )
-                return joints
+                return EncoderState(joints, motor8_feedback=gripper_feedback)
         missing = sorted(set(range(1, 9)) - readings.keys())
         raise RuntimeError(f'Missing fresh {self.side} feedback: {missing}')
 
@@ -161,19 +167,25 @@ class Observer:
                 if s.send(frame) != 16: raise RuntimeError('Short CAN write')
                 self.tx_count += 1
         state = {side: {} for side in self.sockets}
+        gripper_feedback = {}
         deadline = time.monotonic() + .15
         while time.monotonic() < deadline:
             ready, _, _ = select.select(list(self.sockets.values()), [], [], max(0, deadline-time.monotonic()))
             for side, s in self.sockets.items():
                 if s in ready:
-                    value = decode(s.recv(16))
-                    if value: state[side][value[0]] = value[1]
+                    frame = s.recv(16)
+                    value = decode(frame)
+                    if value:
+                        state[side][value[0]] = value[1]
+                        if value[0] == 8:
+                            gripper_feedback[side] = motor8_feedback(
+                                int.from_bytes(FRAME.unpack(frame)[2][:2], 'big'))
             if all(len(v) == 8 for v in state.values()):
                 q = {}
                 for side, readings in state.items():
                     q.update({f'openarmx_{side}_joint{i}': encoder_to_joint(side, i, readings[i]) for i in range(1, 8)})
                     q[f'openarmx_{side}_finger_joint1'] = max(0., min(.044, -.044 * readings[8] / 1.0472))
-                return q
+                return EncoderState(q, motor8_feedback=gripper_feedback)
         raise RuntimeError('Missing fresh feedback: ' + str({k: sorted(set(range(1,9))-v.keys()) for k,v in state.items()}))
 
     def close(self):

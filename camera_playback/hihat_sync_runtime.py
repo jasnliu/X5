@@ -29,7 +29,7 @@ class HiHatSyncRuntime:
                 # Diagnostics must not disrupt motor supervision.
                 self.stream.close()
                 self.stream = None
-        if row['kind'] in {'start', 'grid', 'match', 'skip', 'stop', 'fault'}:
+        if row['kind'] in {'start', 'grid', 'match', 'skip', 'locked', 'stop', 'fault'}:
             print('HIHAT SYNC: '+json.dumps(row, allow_nan=False), flush=True)
 
     def send(self, closed):

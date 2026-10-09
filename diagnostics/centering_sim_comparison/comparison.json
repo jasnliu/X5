@@ -1,0 +1,211 @@
+{
+  "cases": [
+    {
+      "case": "csp_feedback_fault_record3",
+      "poses": 158,
+      "commands": 222,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "csp_jitter_record3",
+      "poses": 143,
+      "commands": 190,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "csp_normal_record3",
+      "poses": 159,
+      "commands": 208,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "csp_send_fault_record3",
+      "poses": 159,
+      "commands": 215,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_deadline_fault_record3",
+      "poses": 159,
+      "commands": 343,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [
+        {
+          "t": -0.316,
+          "kind": 1,
+          "motor": 7,
+          "frame": "07ff7f81080000007bee7fff051e1999"
+        },
+        {
+          "t": -0.316,
+          "kind": 18,
+          "motor": 7,
+          "frame": "07fd009208000000167000006c84ccbe"
+        }
+      ],
+      "reference_pre_center_commands": [
+        {
+          "t": 0.0,
+          "kind": 1,
+          "motor": 7,
+          "frame": "07ff7f81080000007bee7fff051e1999"
+        },
+        {
+          "t": 0.0,
+          "kind": 18,
+          "motor": 7,
+          "frame": "07fd009208000000167000006c84ccbe"
+        }
+      ],
+      "completed_both": true
+    },
+    {
+      "case": "mit_feedback_fault_record3",
+      "poses": 158,
+      "commands": 354,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_jitter_record3",
+      "poses": 143,
+      "commands": 311,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_normal_record1",
+      "poses": 43,
+      "commands": 102,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 1.34375,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_normal_record2",
+      "poses": 116,
+      "commands": 253,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 3.625,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_normal_record3",
+      "poses": 159,
+      "commands": 343,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_post_strike_record3",
+      "poses": 159,
+      "commands": 343,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    },
+    {
+      "case": "mit_send_fault_record3",
+      "poses": 158,
+      "commands": 354,
+      "maximum_joint_difference_degrees": 0.0,
+      "right_disable_seconds": 4.96875,
+      "current_pre_center_commands": [],
+      "reference_pre_center_commands": [],
+      "completed_both": true
+    }
+  ],
+  "exact_matches": 12,
+  "tested_joints": "right J1-J7",
+  "simulated_positions_compared": 1714,
+  "center_command_frames_compared": 3238,
+  "maximum_joint_difference_degrees": 0.0,
+  "launchers": {
+    "start_beat.sh": {
+      "completed": true,
+      "test_mode": true,
+      "bus": "SimulatedMotors",
+      "root": "/home/jason/Proyectos3/X5",
+      "final_phase": "RELAXED",
+      "right_final": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4
+      ],
+      "center_goal": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4
+      ]
+    },
+    "start_beatTest.sh": {
+      "completed": true,
+      "test_mode": true,
+      "bus": "SimulatedMotors",
+      "root": "/home/jason/Proyectos3/X5_beatTest",
+      "final_phase": "RELAXED",
+      "right_final": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4
+      ],
+      "center_goal": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4
+      ]
+    }
+  },
+  "regression_tests": 681,
+  "protected_files_unchanged": 309,
+  "physical_hardware_used": false,
+  "boundary": "Deterministic finite-speed simulated feedback; not physical dynamics or clearance validation."
+}

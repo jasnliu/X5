@@ -1,0 +1,109 @@
+{
+  "success": true,
+  "physical": true,
+  "beat_skipped": true,
+  "started": true,
+  "right_endpoint_reached": true,
+  "left_recording_complete": true,
+  "snare_mode_prepared": true,
+  "faults": [],
+  "phases": [
+    {
+      "at": 771614.188665875,
+      "phase": "READY",
+      "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"
+    },
+    {
+      "at": 771729.820732924,
+      "phase": "PLAYBACK PREFLIGHTED",
+      "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"
+    },
+    {
+      "at": 771729.877919728,
+      "phase": "SETTING UP",
+      "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"
+    },
+    {
+      "at": 771732.764545088,
+      "phase": "CENTERING",
+      "status": "CENTERING"
+    },
+    {
+      "at": 771735.651787493,
+      "phase": "LEFT SNARE ARMING AT CENTER",
+      "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+    },
+    {
+      "at": 771736.986914234,
+      "phase": "LEFT MOVING TO RECORDING START",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 771739.726928922,
+      "phase": "LEFT RECORDING PLAYBACK",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 771749.852221864,
+      "phase": "LEFT RECORDING END HOLD",
+      "status": "Left recording complete \u2014 holding its endpoint before right playback"
+    },
+    {
+      "at": 771750.510978982,
+      "phase": "MOVING TO RECORDING START",
+      "status": "Left holds its endpoint; right arm moves to its recording start"
+    },
+    {
+      "at": 771753.02175031,
+      "phase": "RECORDING PLAYBACK",
+      "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"
+    },
+    {
+      "at": 771760.61532385,
+      "phase": "SETTLING RECORDING END",
+      "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"
+    },
+    {
+      "at": 771762.167057101,
+      "phase": "CENTER RELAX RECENTERING",
+      "status": "Center + Relax: BOTH arms return together; each relaxes at its own verified center"
+    },
+    {
+      "at": 771780.458945025,
+      "phase": "RELAXING",
+      "status": "Both arms centered and individually relaxed \u2014 confirming disabled feedback"
+    },
+    {
+      "at": 771780.498030824,
+      "phase": "RELAXED",
+      "status": "Left + right motors disabled"
+    }
+  ],
+  "disabled_proofs": {
+    "right": {
+      "at": 771767.662101087,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00029659014262470307,
+        0.00019180590524214836,
+        1.4003749141680029
+      ]
+    },
+    "left": {
+      "at": 771780.376531631,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        -0.8725250629434651,
+        -0.00019180590524214836,
+        0.00019180590524214836
+      ]
+    }
+  },
+  "all_16_disabled": true
+}

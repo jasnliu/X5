@@ -1,0 +1,130 @@
+{
+  "method": "Offline broadband onset proposals followed by assistant visual review of all waveforms, spectrograms, and enlarged onset windows. Three overlap-triggered proposals refined against the first 14 ms of isolated snare block 4 (waveform correlations 0.959-0.970), then visually rechecked. No trained detector and no motor timestamps used as labels.",
+  "examples": [
+    {
+      "block": 49,
+      "accepted": true,
+      "clip_start_seconds": 53.7915625,
+      "clip_end_seconds": 60.2923125,
+      "onsets_raw_seconds": [
+        55.935625
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 50,
+      "accepted": true,
+      "clip_start_seconds": 60.8958125,
+      "clip_end_seconds": 67.3965625,
+      "onsets_raw_seconds": [
+        63.0405625
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 51,
+      "accepted": true,
+      "clip_start_seconds": 67.9995,
+      "clip_end_seconds": 74.5006875,
+      "onsets_raw_seconds": [
+        70.1434375
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 52,
+      "accepted": true,
+      "clip_start_seconds": 75.106875,
+      "clip_end_seconds": 81.6070625,
+      "onsets_raw_seconds": [
+        77.2515
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 53,
+      "accepted": true,
+      "clip_start_seconds": 82.2124375,
+      "clip_end_seconds": 89.7133125,
+      "onsets_raw_seconds": [
+        84.355375,
+        85.5536875
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 54,
+      "accepted": true,
+      "clip_start_seconds": 90.3161875,
+      "clip_end_seconds": 96.8174375,
+      "onsets_raw_seconds": [],
+      "notes": "Reviewed no-snare negative: no snare attack labeled."
+    },
+    {
+      "block": 55,
+      "accepted": true,
+      "clip_start_seconds": 97.421,
+      "clip_end_seconds": 103.9215625,
+      "onsets_raw_seconds": [
+        99.562
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 56,
+      "accepted": true,
+      "clip_start_seconds": 104.5240625,
+      "clip_end_seconds": 111.0249375,
+      "onsets_raw_seconds": [],
+      "notes": "Reviewed no-snare negative: no snare attack labeled."
+    },
+    {
+      "block": 57,
+      "accepted": true,
+      "clip_start_seconds": 111.629625,
+      "clip_end_seconds": 118.1299375,
+      "onsets_raw_seconds": [
+        113.7680625
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 58,
+      "accepted": true,
+      "clip_start_seconds": 118.732875,
+      "clip_end_seconds": 125.2336875,
+      "onsets_raw_seconds": [],
+      "notes": "Reviewed no-snare negative: no snare attack labeled."
+    },
+    {
+      "block": 59,
+      "accepted": true,
+      "clip_start_seconds": 125.8371875,
+      "clip_end_seconds": 132.337625,
+      "onsets_raw_seconds": [
+        127.975125
+      ],
+      "notes": "Waveform/spectrogram and attack window visually reviewed; snare-only timestamps, including mixtures. No auditory or independent human audit."
+    },
+    {
+      "block": 60,
+      "accepted": true,
+      "clip_start_seconds": 132.93975,
+      "clip_end_seconds": 139.4409375,
+      "onsets_raw_seconds": [],
+      "notes": "Reviewed no-snare negative: no snare attack labeled."
+    }
+  ],
+  "label_status": "draft_visual_signal_review",
+  "human_verified": false,
+  "auditory_review_performed": false,
+  "target": "snare_hit",
+  "motor_timestamps_are_labels": false,
+  "timing_note": "First clear snare acoustic attack. Six decimals encode sample positions, not sub-millisecond semantic certainty. Command/ADC clock drift affects search windows only; labels come from WAV samples.",
+  "reviewed_plots": [
+    "review_page_1.png",
+    "review_page_2.png",
+    "onset_details_1.png",
+    "../corrected_mixture_onsets.png"
+  ]
+}

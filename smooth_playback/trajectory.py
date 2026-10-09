@@ -28,7 +28,8 @@ class Geometry:
         self.center = np.array([0.] * 6 + [self.upper[6]])
 
     def tcp(self, q):
-        return self.model.transforms({f'openarmx_right_joint{i+1}': float(v) for i,v in enumerate(q)})[RIGHT_TCP][:3,3]
+        side = getattr(self, 'side', 'right')
+        return self.model.transforms({f'openarmx_{side}_joint{i+1}': float(v) for i,v in enumerate(q)})[f'openarmx_{side}_hand_tcp'][:3,3]
 
     def check(self, q, measured=False):
         q = np.asarray(q)

@@ -5,6 +5,8 @@ import math
 import time
 
 import numpy as np
+from safe_zone.gripper_feedback import motor8_feedback
+from .left_hold import LEFT_CENTER, LEFT_GRIPPER_TARGET, LeftCenterMonitor
 
 from centering.motors import (
     MAX_RIGHT_JOINT7_FEEDBACK_HZ,
@@ -30,6 +32,14 @@ class SimulatedMotors:
         self.closed = False
         self._joints = joints.copy()
         self._targets = joints.copy()
+        self._left_joints = np.zeros(7)
+        self._left_gripper = 0.
+        self._left_targets = LEFT_CENTER.copy()
+        self.left_playback_active = False
+        self.center_disabled = {}
+        self.dual_center_history = None
+        self.left_monitor = None
+        self.snare_simulation = None
         self._speeds = np.full(7, SPEED, dtype=float)
         self._gripper = float(initial_gripper)
         self._gripper_target = float(initial_gripper)
@@ -39,9 +49,15 @@ class SimulatedMotors:
         self._refresh_states(self._last_poll)
 
     def _refresh_states(self, now: float) -> None:
-        mode = 1 if self.active else 0
+        self.motor8_feedback = {
+            side: motor8_feedback(round((-q + 12.57) * 65535 / 25.14))
+            for side, q in (('left', self._left_gripper), ('right', self._gripper))
+        }
+        mode = 1 if self.active and 'right' not in self.center_disabled else 0
         self.states = {
-            **{("left", index): (0.0, 0, now) for index in range(1, 9)},
+            **{("left", index): (float(self._left_joints[index - 1]),
+                                 2 if self.active and 'left' not in self.center_disabled else 0, now) for index in range(1, 8)},
+            ("left", 8): (self._left_gripper, 2 if self.active and 'left' not in self.center_disabled else 0, now),
             **{("right", index): (float(self._joints[index - 1]), mode, now)
                for index in range(1, 8)},
             ("right", 8): (float(self._gripper), mode, now),
@@ -59,7 +75,14 @@ class SimulatedMotors:
         now = time.monotonic()
         elapsed = min(max(0.0, now - self._last_poll), 0.1)
         self._last_poll = now
-        if self.active:
+        if self.active and 'left' not in self.center_disabled:
+            self._left_gripper = float(self._advance(
+                np.array([self._left_gripper]), np.array([LEFT_GRIPPER_TARGET]),
+                np.array([SPEED]), elapsed,
+            )[0])
+            self._left_joints = self._advance(
+                self._left_joints, self._left_targets, np.full(7, .8 if self.left_playback_active else SPEED), elapsed)
+        if self.active and "right" not in self.center_disabled:
             self._joints = self._advance(
                 self._joints, self._targets, self._speeds, elapsed
             )
@@ -67,17 +90,30 @@ class SimulatedMotors:
                 np.array([self._gripper]), np.array([self._gripper_target]),
                 np.array([SPEED]), elapsed,
             )[0])
+        if self.active and self.snare_simulation is not None:
+            self.snare_simulation.update_pose(now)
         self._refresh_states(now)
+        if self.active and self.dual_center_history is not None:
+            for side, history in self.dual_center_history.items():
+                if side in self.center_disabled:
+                    continue
+                q = self._left_joints if side == 'left' else self._joints
+                history.append((now, q.copy()))
+                while history and now-history[0][0] > .65:
+                    history.popleft()
+        if self.active and self.left_monitor is not None:
+            self.left_monitor.update(self.states, now)
 
     def fresh(self) -> bool:
         return not self.closed
 
     def positions(self) -> dict[str, float]:
         positions = {
-            **{f"openarmx_left_joint{i}": 0.0 for i in range(1, 8)},
+            **{f"openarmx_left_joint{i + 1}": float(q)
+               for i, q in enumerate(self._left_joints)},
             **{f"openarmx_right_joint{i + 1}": float(self._joints[i])
                for i in range(7)},
-            "openarmx_left_finger_joint1": 0.0,
+            "openarmx_left_finger_joint1": max(0., min(.044, .044 * self._left_gripper / 1.0472)),
         }
         fraction = (
             (RIGHT_GRIPPER_CLOSED - self._gripper)
@@ -98,12 +134,70 @@ class SimulatedMotors:
                     or not RIGHT_GRIPPER_OPEN <= gripper_target <= RIGHT_GRIPPER_CLOSED):
                 raise RuntimeError("Invalid simulated gripper target")
         self.active = True
+        self.center_disabled = {}
+        self.dual_center_history = None
+        self._left_targets = LEFT_CENTER.copy()
+        self.left_monitor = LeftCenterMonitor(time.monotonic())
         self._speeds.fill(SPEED)
         self._targets = target.copy()
+        self.center_goal = target.copy()
         if gripper_target is not None:
             self._gripper_target = gripper_target
         self._refresh_states(time.monotonic())
         yield
+
+    def left_center_ready(self):
+        return (self.left_monitor is not None and np.array_equal(self.left_monitor.goal, LEFT_CENTER)
+                and self.left_monitor.ready
+                and not self.left_monitor.fault)
+
+    def set_left_hold(self, target):
+        self._left_targets = np.asarray(target).copy()
+        self.left_playback_active = False
+        self.left_monitor = LeftCenterMonitor(time.monotonic(), target)
+
+    def left_hold_ready(self):
+        return self.left_monitor is not None and self.left_monitor.ready and not self.left_monitor.fault
+
+    def begin_left_playback(self):
+        if not self.left_hold_ready():
+            raise RuntimeError('Left start not reached')
+        self.left_monitor = None
+        self.left_playback_active = True
+
+    def set_left_positions(self, target):
+        if not self.left_playback_active:
+            raise RuntimeError('No left recording owns targets')
+        self._left_targets = np.asarray(target).copy()
+
+    def begin_dual_center(self, right_start=None, left_target=None):
+        from collections import deque
+        self.dual_center_history = {side: deque() for side in ('left', 'right')}
+        if 'left' not in self.center_disabled:
+            self.set_left_hold(LEFT_CENTER if left_target is None else left_target)
+        if 'right' not in self.center_disabled:
+            if right_start is None:
+                self.set_positions(self.center_goal)
+            else:
+                right_start()
+
+    def disable_centered_side(self, side):
+        goal = LEFT_CENTER if side == 'left' else self.center_goal
+        q = self._left_joints if side == 'left' else self._joints
+        history = self.dual_center_history[side]
+        if len(history) < 2 or history[-1][0]-history[0][0] < .6:
+            raise RuntimeError('Center not settled yet')
+        values = np.array([q for _, q in history])
+        if (np.max(np.abs(q-goal)) > math.radians(.20)
+                or np.max(np.abs(values-goal)) > math.radians(.20)
+                or np.max(np.ptp(values, axis=0)) > math.radians(.12)):
+            raise RuntimeError('Center not settled yet')
+        self.center_disabled[side] = time.monotonic()
+        if side == 'left':
+            if self.snare_simulation is not None:
+                self.snare_simulation.stop()
+            self.left_monitor = None
+        self._refresh_states(time.monotonic())
 
     def set_positions(self, joints) -> None:
         joints = np.asarray(joints, dtype=float)
@@ -149,6 +243,7 @@ class SimulatedMotors:
 
     def relax(self) -> None:
         self.active = False
+        self.left_monitor = None
         self.right_joint7_feedback_hz = None
         self._targets = self._joints.copy()
         self._gripper_target = self._gripper

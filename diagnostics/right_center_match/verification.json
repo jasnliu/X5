@@ -1,0 +1,49 @@
+{
+  "original_program_unchanged": true,
+  "protected_files_verified": 282,
+  "reference_root": "/home/jason/Proyectos3/X5_beatTest",
+  "shared_original_control_files_byte_identical": [
+    "goal_motion/app.py",
+    "goal_motion/control.py",
+    "camera_search/app.py",
+    "camera_search/control.py",
+    "centering/motors.py",
+    "camera_playback/mit_center_return.py"
+  ],
+  "changes": [
+    "Right return uses original inherited begin_stage/main tick/complete_stage rather than a second coordinator update loop",
+    "Original right safety and gripper maintenance retained during return",
+    "Blocking return preparation precedes MIT clock initialization",
+    "Left motion targets and independent center/relax retained"
+  ],
+  "comparison": {
+    "csp": {
+      "movement_frames_byte_identical": 208,
+      "pose_samples": 159,
+      "max_joint_pose_difference_rad": 0.0,
+      "time_to_right_disable_s": 4.96875,
+      "mit_start_to_j1_dispatch_s": null
+    },
+    "mit": {
+      "movement_frames_byte_identical": 343,
+      "pose_samples": 159,
+      "max_joint_pose_difference_rad": 0.0,
+      "time_to_right_disable_s": 4.96875,
+      "mit_start_to_j1_dispatch_s": 0.0
+    },
+    "startup": {
+      "frames_byte_identical": 71,
+      "dispatch_ticks_identical": true
+    }
+  },
+  "full_tests_passed": 668,
+  "dual_recording_ui": "PASS",
+  "physical_devices_opened": false,
+  "physical_movement_performed": false,
+  "physical_obstacle_clearance_verified": false,
+  "comparison_condition": "Same recording (record3.json) and same initial right pose in both programs",
+  "defaults_unchanged": {
+    "start_beat.sh": "recordings/record3.json",
+    "start_beatTest.sh": "recordings/record1.json"
+  }
+}

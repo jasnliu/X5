@@ -30,7 +30,7 @@ class CaptureSocket:
     def recv(self,n):
         frame=self.sock.recv(n)
         now=time.monotonic();cid,dlc,data=FRAME.unpack(frame)
-        if cid&EFF and not cid&0x60000000 and (cid>>24)&31==17 and dlc==8 and data[:2]==b'\x1e\x70':
+        if self.side==self.owner.control_side and cid&EFF and not cid&0x60000000 and (cid>>24)&31==17 and dlc==8 and data[:2]==b'\x1e\x70':
             self.owner.parameter_values[(cid>>8)&255]=(struct.unpack('<f',data[4:])[0],now)
         if cid&EFF and not cid&0x60000000 and (cid>>24)&31==2 and dlc==8:
             i=(cid>>8)&255
@@ -60,7 +60,7 @@ class AuditedMotors(Motors):
     def _send(self,side,frame):
         cid,_,data=FRAME.unpack(frame);kind=(cid>>24)&31;motor=cid&255
         if kind in (17,18) and data[:2]==b'\x1e\x70':
-            if side!='right' or motor not in range(1,8):raise RuntimeError('Gain access is right-arm-only')
+            if side!=self.control_side or motor not in range(1,8):raise RuntimeError('Gain access is selected-arm-only')
             if kind==18:
                 value=struct.unpack('<f',data[4:])[0];original=self.gains_original.get(motor)
                 if original is None or not math.isfinite(value) or not original*.125<=value<=original:
@@ -75,10 +75,10 @@ class AuditedMotors(Motors):
             self.command_file.write(json.dumps(dict(t=time.monotonic(),phase=self.phase,side=side,kind=kind,motor=motor,frame=frame.hex()))+'\n')
             return
         if kind==4 and not self.center_permission:
-            state=self.states.get(('right',motor))
+            state=self.states.get((self.control_side,motor))
             if state is None or state[1]!=0:
                 raise RuntimeError('REFUSED disable: arm has not reached verified center')
-        if side!='right':raise RuntimeError('Left-arm control prohibited')
+        if side!=self.control_side:raise RuntimeError('Other-arm control prohibited')
         if motor==8 and not self.control_gripper:raise RuntimeError('Gripper is untouched')
         super()._send(side,frame)
         self.command_file.write(json.dumps(dict(t=time.monotonic(),phase=self.phase,side=side,kind=kind,motor=motor,frame=frame.hex()))+'\n')
@@ -89,7 +89,8 @@ class AuditedMotors(Motors):
         self.last_query=time.monotonic()
         super().poll()
         now=time.monotonic()
-        for side,period,attribute in (('right',.01,'right_query'),('left',.05,'left_query')):
+        for side,period,attribute in (('right',.01 if self.control_side=='right' else .05,'right_query'),
+                                      ('left',.01 if self.control_side=='left' else .05,'left_query')):
             if now-getattr(self,attribute)<period:continue
             setattr(self,attribute,now)
             for i in range(1,9):

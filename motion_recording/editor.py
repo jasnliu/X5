@@ -16,7 +16,8 @@ from pathlib import Path
 import stat
 import tempfile
 
-from .recording import GRIPPER_NAME, JOINT_NAMES, MAX_SAMPLES, SCHEMA
+from .recording import MAX_SAMPLES, SCHEMAS, gripper_name, joint_names
+from safe_zone.gripper_feedback import motor8_feedback
 
 
 MAX_RECORDING_BYTES = 80_000_000
@@ -61,17 +62,20 @@ class PreviewState:
 class EditableRecording:
     """A validated recorder JSON file with sample-aligned crop operations."""
 
-    def __init__(self, source: Path, payload: dict, times: tuple[float, ...]):
+    def __init__(self, source: Path, payload: dict, times: tuple[float, ...], arm: str):
         self.source = source
         self.payload = payload
         self.samples = payload["samples"]
         self.times = times
+        self.arm = arm
+        self.joint_names = joint_names(arm)
+        self.gripper_name = gripper_name(arm)
 
     @classmethod
     def load(cls, path, model_sha256: str) -> "EditableRecording":
         source = Path(path).expanduser().resolve()
         if source.suffix.lower() != ".json":
-            raise ValueError("Select a .json right-arm recording")
+            raise ValueError("Select a .json arm recording")
         if not source.is_file():
             raise ValueError("Recording file does not exist")
         if source.stat().st_size > MAX_RECORDING_BYTES:
@@ -81,14 +85,16 @@ class EditableRecording:
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
             raise ValueError("Recording JSON could not be read: " + str(exc)) from None
 
-        if not isinstance(payload, dict) or payload.get("schema") != SCHEMA:
-            raise ValueError(f"Recording must use schema {SCHEMA}")
-        if payload.get("arm") != "right":
-            raise ValueError("Recording is not for the right arm")
+        arm = payload.get("arm") if isinstance(payload, dict) else None
+        if arm not in SCHEMAS or payload.get("schema") != SCHEMAS[arm]:
+            choices = " or ".join(SCHEMAS.values())
+            raise ValueError(f"Recording must use schema {choices}")
+        names = joint_names(arm)
+        gripper = gripper_name(arm)
         if payload.get("model_sha256") != model_sha256:
             raise ValueError("Recording robot-model hash does not match this workspace")
-        if (payload.get("joint_order") != list(JOINT_NAMES)
-                or payload.get("gripper_name") != GRIPPER_NAME):
+        if (payload.get("joint_order") != list(names)
+                or payload.get("gripper_name") != gripper):
             raise ValueError("Recording joint order is incompatible")
         expected_units = {
             "time_unit": "s",
@@ -111,7 +117,7 @@ class EditableRecording:
             stamp = _finite_float(sample.get("time_s"), f"sample {index} time")
             positions = sample.get("positions_rad")
             tcp = sample.get("tcp_position_m")
-            if not isinstance(positions, list) or len(positions) != len(JOINT_NAMES):
+            if not isinstance(positions, list) or len(positions) != len(names):
                 raise ValueError(f"Recording sample {index} must contain seven joint positions")
             if not isinstance(tcp, list) or len(tcp) != 3:
                 raise ValueError(f"Recording sample {index} must contain a three-value TCP position")
@@ -124,6 +130,10 @@ class EditableRecording:
             )
             if gripper < 0.0 or gripper > .044:
                 raise ValueError("Recording gripper opening is outside 0 to 44 mm")
+            if 'motor8_encoder_count' in sample or 'motor8_raw_rad' in sample:
+                raw = motor8_feedback(sample.get('motor8_encoder_count'))
+                if _finite_float(sample.get('motor8_raw_rad'), 'motor 8 raw angle') != raw['raw_rad']:
+                    raise ValueError('Motor 8 raw angle does not match the recorded wire count')
             times.append(stamp)
 
         if abs(times[0]) > 1e-6 or any(
@@ -133,7 +143,7 @@ class EditableRecording:
         if abs(duration - times[-1]) > 1e-5:
             raise ValueError("Recording duration does not match its final sample")
         _shift_utc_timestamp(payload.get("started_at_utc"), 0.0)
-        return cls(source, payload, tuple(times))
+        return cls(source, payload, tuple(times), arm)
 
     @property
     def sample_count(self) -> int:
@@ -193,6 +203,13 @@ class EditableRecording:
         )
         return PreviewState(target, positions, gripper, tcp)
 
+    def raw_gripper_at(self, time_s):
+        """Exact nearest recorded sample, never an interpolated width estimate."""
+        sample = self.samples[self.nearest_index(time_s)]
+        if 'motor8_encoder_count' not in sample:
+            return None  # Clipped legacy widths cannot recover raw feedback.
+        return motor8_feedback(sample['motor8_encoder_count'])
+
     def cropped_payload(self, start_index: int, end_index: int) -> dict:
         """Build a schema-compatible payload retaining both boundary samples."""
         if not (0 <= start_index <= end_index < self.sample_count):
@@ -219,7 +236,7 @@ class EditableRecording:
         destination = self.source
         original_mode = stat.S_IMODE(destination.stat().st_mode)
         fd, temporary = tempfile.mkstemp(
-            dir=destination.parent, prefix=".right-motion-edit-", suffix=".tmp"
+            dir=destination.parent, prefix=f".{self.arm}-motion-edit-", suffix=".tmp"
         )
         try:
             os.fchmod(fd, original_mode)

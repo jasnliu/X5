@@ -4,7 +4,9 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-from camera_playback.hihat_sync import HiHatSynchronizer, TimingFault, MAX_STEP
+from camera_playback.hihat_sync import (
+    Closure, HiHatSynchronizer, TimingFault,
+)
 from camera_playback.hihat_sync_runtime import HiHatSyncRuntime
 from camera_playback.hybrid_strike import HybridStatus
 from camera_playback import hybrid_workflow as hw
@@ -50,7 +52,7 @@ class SyncTests(unittest.TestCase):
             e=self.engine()
             e.advance=sign*.1
             self.tick(e,10.2)
-            self.assertAlmostEqual(e.pair_advance, sign*MAX_STEP)
+            self.assertAlmostEqual(e.pair_advance, sign*.1)
             due=10.8-e.pair_advance
             self.tick(e,due-.001);self.assertEqual(len(self.sent),1)
             self.tick(e,due+1e-9)
@@ -118,6 +120,209 @@ class SyncTests(unittest.TestCase):
         e.feed('ride',[dict(instrument='hihat',kind='hit',event_at=10.4)],11.)
         self.assertEqual(len(e.events['ride']),0)
 
+    def matched_estimate(self, e, estimate, pair, used_advance=0., actual_advance=None):
+        """Real event-pairing path, including command latency and watermarks."""
+        target = 20. + pair*1.2
+        actual_advance = used_advance if actual_advance is None else actual_advance
+        command = target-actual_advance
+        ride_shift = .10 if estimate < 0 else 0.
+        now = target+1.
+        before = e.matches
+        e.pending.append(Closure(2*pair+1, target, command, used_advance))
+        self.hit(e, 'ride', target-.6+ride_shift, now)
+        self.hit(e, 'ride', target+ride_shift, now)
+        self.hit(e, 'hihat', command+estimate+ride_shift, now)
+        self.watermarks(e, now, now)
+        e.evaluate(now, {'ride': True, 'hihat': True})
+        self.assertEqual(e.matches, before+1)
+
+    def test_two_small_actual_errors_lock_current_offset_not_an_estimate(self):
+        e = self.engine()
+        e.advance = e.pair_advance = .1
+        self.matched_estimate(e, .114, 0, used_advance=.1)
+        self.assertFalse(e.locked)
+        self.assertEqual(e.good_matches, 1)
+        self.matched_estimate(e, .086, 1, used_advance=.1)
+        self.assertTrue(e.locked)
+        self.assertEqual(e.advance, .1)
+        locks = [r for r in self.rows if r['kind'] == 'locked']
+        self.assertEqual(len(locks), 1)
+        self.assertEqual(locks[0]['consecutive_matches'], 2)
+
+    def test_good_bad_good_good_requires_two_consecutive_hits(self):
+        e = self.engine()
+        e.advance = e.pair_advance = .1
+        for i, estimate in enumerate((.105, .145, .106, .107)):
+            self.matched_estimate(e, estimate, i, used_advance=.1)
+            self.assertEqual(e.locked, i == 3)
+
+    def test_missing_pair_and_nonconsecutive_indices_break_lock_streak(self):
+        for explicit_skip in (False, True):
+            with self.subTest(explicit_skip=explicit_skip):
+                e = self.engine()
+                e.advance = e.pair_advance = .1
+                self.matched_estimate(e, .1, 0, used_advance=.1)
+                if explicit_skip:
+                    e._skip(Closure(3, 21.2, 21.1, .1), 'missing onset', 22.2)
+                self.matched_estimate(e, .1, 2, used_advance=.1)
+                self.assertFalse(e.locked)
+                self.matched_estimate(e, .1, 3, used_advance=.1)
+                self.assertTrue(e.locked)
+
+    def test_delayed_hits_cannot_lock_a_new_or_still_ramping_offset(self):
+        e = self.engine()
+        e.advance = e.pair_advance = .2
+        for i in range(2):
+            self.matched_estimate(e, .1, i, used_advance=.1)
+            self.assertFalse(e.locked)
+        # The absolute estimator may now request .1, but the in-flight pair is .2.
+        self.assertAlmostEqual(e.advance, .1)
+        self.assertEqual(e.pair_advance, .2)
+        self.matched_estimate(e, .1, 2, used_advance=.1)
+        self.assertFalse(e.locked)
+
+    def test_different_applied_offsets_do_not_share_one_lock_streak(self):
+        e = self.engine()
+        e.advance = e.pair_advance = .1
+        self.matched_estimate(e, .1, 0, used_advance=.1)
+        e.advance = e.pair_advance = .12
+        self.matched_estimate(e, .12, 1, used_advance=.12)
+        self.assertFalse(e.locked)
+        self.assertEqual(e.good_matches, 1)
+        self.matched_estimate(e, .12, 2, used_advance=.12)
+        self.assertTrue(e.locked)
+
+    def test_locked_offset_stays_constant_despite_drift_outliers_and_missing_hits(self):
+        for advance in (.1, -.08, 0.):
+            with self.subTest(advance=advance):
+                e = self.engine()
+                e.advance = e.pair_advance = advance
+                for i in range(2):
+                    self.matched_estimate(e, advance, i, used_advance=advance)
+                self.assertTrue(e.locked)
+                e._skip(Closure(5, 22.4, 22.4, advance), 'missing onset', 23.4)
+                for i, estimate in enumerate((.22, .22, -.08, -.08, .15, .15), 3):
+                    self.matched_estimate(e, estimate, i, used_advance=advance)
+                    self.assertEqual(e.advance, advance)
+                    self.assertTrue(e.locked)
+                self.assertEqual(len([r for r in self.rows if r['kind'] == 'locked']), 1)
+
+    def test_new_run_starts_unlocked_with_zero_offset(self):
+        e = self.engine()
+        e.advance = e.pair_advance = .1
+        for i in range(2):
+            self.matched_estimate(e, .1, i, used_advance=.1)
+        self.assertTrue(e.locked)
+        e.stop(24.)
+        # Runtime.start creates a new synchronizer for every new swing run.
+        fresh = HiHatSynchronizer(Mock())
+        fresh.start(25.)
+        self.assertFalse(fresh.locked)
+        self.assertEqual(fresh.advance, 0.)
+        self.assertEqual(fresh.good_matches, 0)
+
+    def test_slow_tempo_consecutive_good_hits_lock_despite_delivery_jitter(self):
+        rows = []
+        e = HiHatSynchronizer(Mock(), rows.append, period=3.)  # 20 BPM
+        e.start(10.)
+        for index, target, delivered in ((1, 13., 15.2), (3, 19., 21.3)):
+            e.pending.append(Closure(index, target, target, 0.))
+            self.hit(e, 'ride', target-3., delivered)
+            self.hit(e, 'ride', target, delivered)
+            self.hit(e, 'hihat', target+.005, delivered)
+            self.watermarks(e, delivered, delivered)
+            e.evaluate(delivered, {'ride': True, 'hihat': True})
+        self.assertEqual(e.matches, 2)
+        self.assertTrue(e.locked)
+        self.assertEqual(e.advance, 0.)
+
+    def test_two_agreeing_pairs_apply_full_signed_offset_without_ten_ms_steps(self):
+        for offset in (.1, -.08, .24):
+            with self.subTest(offset=offset):
+                e = self.engine()
+                self.matched_estimate(e, offset, 0)
+                self.assertEqual(e.advance, 0.)
+                self.matched_estimate(e, offset, 1)
+                self.assertAlmostEqual(e.advance, offset)
+                self.assertTrue(self.rows[-1]['estimate_confirmed'])
+                self.assertAlmostEqual(self.rows[-1]['desired_advance'], offset)
+
+    def test_conflicting_measurements_and_isolated_outlier_cannot_change_offset(self):
+        e = self.engine()
+        for i, estimate in enumerate((.1, .1, .23, .1, .1, -.08, .1, -.08, .1)):
+            self.matched_estimate(e, estimate, i, used_advance=.1)
+            self.assertAlmostEqual(e.advance, 0. if i == 0 else .1)
+
+    def test_real_offset_change_or_direction_reversal_is_confirmed_in_two_pairs(self):
+        e = self.engine()
+        for i, (estimate, expected) in enumerate((
+                (.1, 0.), (.1, .1), (-.08, .1), (-.08, -.08), (.18, -.08), (.18, .18))):
+            self.matched_estimate(e, estimate, i, used_advance=e.advance)
+            self.assertAlmostEqual(e.advance, expected)
+
+    def test_jitter_inside_deadband_does_not_chase_each_detection(self):
+        e = self.engine()
+        self.matched_estimate(e, .1, 0)
+        self.matched_estimate(e, .1, 1)
+        for i in range(2, 30):
+            self.matched_estimate(e, .1+(.008 if i % 2 else -.008), i, used_advance=.1)
+            self.assertAlmostEqual(e.advance, .1)
+
+    def test_actual_historical_send_time_prevents_delayed_error_accumulation(self):
+        e = self.engine()
+        for i, actual in enumerate((-.02, -.02, .02, .1, .08, .1, .02)):
+            self.matched_estimate(e, .1, i, used_advance=.1, actual_advance=actual)
+            self.assertAlmostEqual(e.advance, 0. if i == 0 else .1)
+
+    def test_skipped_pair_discards_unconfirmed_estimate(self):
+        e = self.engine()
+        self.matched_estimate(e, .1, 0)
+        e._skip(Closure(2, 22., 22., 0.), 'missing onset', 22.5)
+        self.matched_estimate(e, .1, 1)
+        self.assertEqual(e.advance, 0.)
+        self.matched_estimate(e, .1, 2)
+        self.assertAlmostEqual(e.advance, .1)
+
+    def test_extreme_estimate_never_changes_signed_bound(self):
+        e = self.engine()
+        for i in range(2):
+            self.matched_estimate(e, .1, i)
+        target = 25.
+        e.pending.append(Closure(5, target, target, .1))
+        self.hit(e, 'ride', target, 26.)
+        self.hit(e, 'ride', target-.6, 26.)
+        self.hit(e, 'hihat', target+.3, 26.)
+        self.watermarks(e, 26., 26.)
+        e.evaluate(26., {'ride': True, 'hihat': True})
+        self.assertEqual(e.skips, 1)
+        self.assertAlmostEqual(e.advance, .1)
+        self.assertFalse(e.estimates)
+
+    def test_large_signed_reversals_keep_edges_ordered_and_close_open_duration(self):
+        for bpm in (20, 60, 100, 120, 180):
+            with self.subTest(bpm=bpm):
+                period = 60/bpm
+                now = 10.
+                rows = []
+                e = HiHatSynchronizer(lambda closed: now, rows.append, period)
+                e.start(now)
+                e.set_epoch(10.2, now)
+                for index in range(18):
+                    e.advance = e.max_advance * (1 if (index//4) % 2 else -1)
+                    now = e.epoch+index*period-(0. if index == 0 else e.pair_advance)
+                    e.tick(now, {})
+                commands = [r for r in rows if r['kind'] == 'command']
+                self.assertEqual(len(commands), 18)
+                for first, second in zip(commands, commands[1:]):
+                    self.assertGreater(second['at'], first['at'])
+                    if first['closed']:
+                        self.assertAlmostEqual(second['at']-first['at'], period)
+                    else:
+                        self.assertGreaterEqual(second['at']-first['at'], period*.75-1e-9)
+                        self.assertLessEqual(abs(second['advance']-first['advance']),
+                                             e.max_step+1e-9)
+                self.assertEqual(e.epoch, 10.2)
+
     def simulation(self, latency, ride_shift, delivery_delay):
         e=self.engine()
         pending=[];ride_index=0;closed_index=0
@@ -149,13 +354,34 @@ class SyncTests(unittest.TestCase):
         return e,matches
 
     def test_delayed_positive_feedback_converges_without_moving_ride(self):
-        self.simulation(.110,-.025,1.1)
+        e, matches = self.simulation(.110,-.025,1.1)
+        self.assertTrue(e.locked)
+        locks = [r for r in self.rows if r['kind'] == 'locked']
+        self.assertEqual(len(locks), 1)
+        after_lock = [r for r in matches if r['at'] >= locks[0]['at']]
+        self.assertTrue(all(r['advance'] == locks[0]['advance'] for r in after_lock))
+        later_commands = [r for r in self.rows if r['kind'] == 'command'
+                          and r['at'] >= locks[0]['at']]
+        self.assertTrue(later_commands)
+        self.assertTrue(all(r['advance'] == locks[0]['advance'] for r in later_commands))
+
+    def test_100ms_offset_is_applied_in_one_correction_by_fourth_closure(self):
+        e, _ = self.simulation(.100, 0., .3)
+        closes = [r for r in self.rows if r['kind'] == 'command' and r['closed']]
+        self.assertAlmostEqual(closes[3]['advance'], .100)
+        self.assertAlmostEqual(e.advance, .100)
+        for command in closes:
+            self.assertTrue(abs(command['advance']) < 1e-8
+                            or abs(command['advance']-.100) < 1e-8)
 
     def test_negative_advance_converges_and_is_not_clamped_to_zero(self):
         self.simulation(.030,.110,.7)
 
     def test_long_notification_delay_does_not_repeatedly_integrate_old_error(self):
         self.simulation(.070,-.030,2.4)
+        advances = [r['advance'] for r in self.rows if r['kind'] == 'command']
+        self.assertLessEqual(max(advances), .100+1e-8)
+        self.assertGreaterEqual(min(advances), 0.)
 
     def test_real_workflow_hands_schedule_to_sync_and_suppresses_legacy_double_send(self):
         a=app_fixture();a.hihat_sync=Mock(active=True)

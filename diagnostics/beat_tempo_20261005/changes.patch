@@ -1,0 +1,1070 @@
+--- a/README.md
++++ b/README.md
+@@ -325,6 +325,32 @@
+   --recording recordings/right_motion_YYYYMMDD_HHMMSS.json
+ ```
+ 
++### Editable beat tempo
++
++Set **Beat BPM** in the control panel before pressing **RUN** (or **Start** in
++`--test`). The default is **100 BPM**; decimal values from **20 to 180** are
++accepted. Blank, nonnumeric, nonfinite, or out-of-range entries disable starting.
++The box is locked from Start/RUN until the arm has completed **Center + Relax**;
++change the tempo before the next run, not in the middle of a stroke.
++
++Both the ride swing grid and the hi-hat use `quarter_note_seconds = 60 / BPM`.
++The ride retains its pickup and 2:1 triplet swing. The hi-hat still **opens on
++beats 1 and 3** and **closes on beats 2 and 4**, at its calibrated angle. Its
++continuous acoustic timing adjustment still shifts both CLOSE and following
++OPEN together; the ride has no offset. At faster tempos the signed advance is
++capped at the smaller of 250 ms and half a beat, with a proportionately bounded
++ride-onset matching window. At 100 BPM all timing defaults are unchanged.
++
++**Estimated practical upper tempo: roughly 120 BPM**, not a hardware-verified
++limit. The shortest ride spacing is `20 / BPM` seconds (167 ms at 120 BPM), and
++the existing short rebound alone takes 110 ms before allowing for the next
++stroke. The 180 BPM input ceiling is not a promise that the arm/hi-hat can keep
++up. Existing rebound, motion, encoder, and missed-deadline safeguards remain;
++an excessive tempo can still produce a controlled stop. Calibration holds,
++recording playback speed, strike depth/boost, model settings, and motor tuning
++are not scaled by BPM. Manual `--hardwaretest` and recording-only modes have no
++BPM box because they do not play a continuous beat.
++
+ A pure simulation test is also available:
+ 
+ ```bash
+@@ -334,10 +360,10 @@
+ This test mode never constructs the real motor controller, never opens CAN, and
+ does not start or require the camera, ST7/TONOR microphone, or ESP32 hi-hat. An
+ in-memory arm is animated in RViz through centering, the selected recording,
+-and the safe 10-degree J7 target in the same triplet-based 100 BPM swing ride
++and the safe 10-degree J7 target in the same triplet-based, user-tempo swing ride (100 BPM by default)
+ used by hardware mode. It performs no strike-depth search and sends no hi-hat
+ commands. The
+-same **Stop 100 BPM striking: Center + Relax** sequence centers and relaxes only
++same **Stop [BPM] striking: Center + Relax** sequence centers and relaxes only
+ the simulated arm. The three modes are mutually exclusive.
+ 
+ A manual powered test mode is also available:
+@@ -480,9 +506,9 @@
+ No normality-based selection, detector changes or additional search are used.
+ `--test` and `--hardwaretest` are unchanged, as is hi-hat synchronization.
+ 
+-That boosted depth then plays hybrid strokes in the existing 100 BPM triplet
+-swing: opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
+-spacing from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
++That boosted depth then plays hybrid strokes in the existing triplet
++swing at the selected BPM (default 100): opening pickup, beat 1, beat 2 + extra, beat 3, beat 4 + extra. Target
++spacing at the default 100 BPM from the pickup is 0.200, 0.600, 0.400, 0.200, 0.600, 0.400 seconds.
+ A separate 500 Hz J7 worker reuses `strike_lab.methods.hybrid` and
+ `config/experiment_hardware_tuned.json`; Tk never clocks the catch. It predicts
+ release timing from measured position/velocity and the hybrid impulse/load
+@@ -592,11 +618,12 @@
+ starts a 5 ms host callback scheduler; no command is sent on the pickup or extras.
+ 
+ A closure on beat 2/4 is matched against one unambiguous ride onset within
+-140 ms of that scheduled beat, plus a neighboring ride-grid detection. One
+-hi-hat onset must occur within 450 ms of its actual close command. Both detector
++a window around that scheduled beat (the smaller of 140 ms and one third of
++a beat), plus a neighboring ride-grid detection. One hi-hat onset must occur within 450 ms of its actual close command. Both detector
+ watermarks must finalize the entire matching window. Duplicates, missing or
+-ambiguous events, stale sources and corrections outside the ±250 ms safety
+-bound do not change the advance. This cannot eliminate classifier cross-talk:
++ambiguous events, stale sources and corrections outside the signed safety
++bound (the smaller of 250 ms and half a beat) do not change the advance.
++This cannot eliminate classifier cross-talk:
+ a missing real ride plus a false ride response to a hi-hat can still be ambiguous
+ in reality even when the detector output looks unique. Better models may be needed.
+ 
+@@ -604,8 +631,8 @@
+ `hihat_onset - ride_onset`, avoiding repeated integration of delayed errors.
+ After three valid pairs, a rolling five-estimate median drives smoothed changes
+ (maximum 10 ms per update, 15 ms deadband). Every close and following open share
+-a latched advance, preserving their 600 ms separation. New pairs change by at
+-most 10 ms; already scheduled edges never jump. Missed deadlines cause the
++a latched advance, preserving their one-quarter-note separation (600 ms at
++100 BPM). New pairs change by at most 10 ms; already scheduled edges never jump. Missed deadlines cause the
+ existing controlled stop, never a burst or an airborne arm release. No guarantee
+ of perfect acoustic synchronization is made at the models' finite time resolution.
+ 
+@@ -615,7 +642,7 @@
+ required. These logs are diagnostics, not training labels.
+ 
+ This automatic arm-and-hi-hat loop belongs to `--hardware`; its arm and hi-hat
+-continue until the user presses **Stop 100 BPM striking:
++continue until the user presses **Stop [BPM] striking:
+ Center + Relax**. Stop finishes any
+ active hybrid return and settled anchor, tells the hi-hat to return to 0°,
+ joins the worker, restores and confirms position mode at normal speed, then
+--- a/RIGHT_CAMERA_PLAYBACK.md
++++ b/RIGHT_CAMERA_PLAYBACK.md
+@@ -90,7 +90,7 @@
+ in RViz.
+ 
+ Test mode uses an in-memory motor substitute behind the shared recording loader,
+-path preflight, centering, recorded playback, 100 BPM swing pattern, safe-zone
++path preflight, centering, recorded playback, editable-BPM swing pattern, safe-zone
+ checks, and Stop/Center/Relax workflow. It retains the original Start →
+ center/open → load/Continue → close sequence; only normal `--hardware` uses the
+ new single RUN button without a loading pause.
+@@ -98,7 +98,7 @@
+ the experiment hybrid method in a separate worker. Once the simulated recorded endpoint settles, it assumes
+ that pose is the correct cymbal anchor, safely derives the 10-degree J7 target,
+ skips camera alignment and every hit-search attempt, and immediately repeats
+-exactly 10 degrees in the same triplet-based 100 BPM swing ride as hardware
++exactly 10 degrees in the same triplet-based swing ride at the selected BPM (default 100) as hardware
+ mode. It starts with the extra pickup before beat 1. It sends no hi-hat command.
+ 
+ ### Playback-aligned MIT hardware test mode
+@@ -278,7 +278,7 @@
+ active playback/alignment/strike workflow, restores the ordinary motor speed if
+ playback or a strike was active, moves from the current pose to the customized
+ right center, and disables the right arm and gripper only after the center is
+-reached. During continuous striking its label changes to **Stop 100 BPM
++reached. During continuous striking its label changes to **Stop [BPM]
+ striking: Center + Relax**; an active stroke finishes its return before the
+ center command.
+ 
+@@ -347,19 +347,19 @@
+ 14. The first detected hit fixes the strike depth `D`. Do not test above or
+     below `D`, do not run a fine-tuning phase, and do not use `normality_score`
+     to select the depth.
+-15. Repeat that exact first-detected depth in a triplet-based swing ride at 100
+-    BPM. In `--hardware`, start immediately with
++15. Repeat the first-detected depth plus the existing 0.5° hardware boost in a
++    triplet-based swing ride at the selected BPM (default 100). In `--hardware`, start immediately with
+     the extra pickup before beat 1, then play beat 1, beat 2 + its swung extra,
+     beat 3, and beat 4 + its swung extra. Starting at the pickup, the intended
+-    strike-target deadlines are 0.200, 0.600, 0.400, 0.200, 0.600, 0.400, and
++    strike-target deadline intervals at 100 BPM are 0.200, 0.600, 0.400, 0.200, 0.600, 0.400, and
+     0.200 seconds before repeating. Use the experiment hybrid impulse/coast/catch
+     and return. For short pairs, make a smooth partial rebound and release again
+     only when the encoder is at least 4° above the same absolute low target. Only the four main
+     quarter-note beats advance motor 2's existing alternating hi-hat sequence:
+-    close to 110° on beats 1 and 3, and return to 0° on beats 2 and 4. The
++    open at 0° on beats 1 and 3, and close to the calibrated angle on beats 2 and 4. The
+     ride extras send no hi-hat command. No motor-1 `K` command is sent.
+ 16. Continue indefinitely until the user presses
+-    **Stop 100 BPM striking: Center + Relax**. If Stop is pressed during a
++    **Stop [BPM] striking: Center + Relax**. If Stop is pressed during a
+     stroke, finish its hybrid return and settle at the anchor, join the worker,
+     restore/confirm position mode at 0.4 rad/s, move to the
+     customized center, and relax the right arm.
+@@ -368,7 +368,7 @@
+ startup is unchanged. Steps 8 through 14 are replaced by one transition: after the
+ recorded endpoint settles and normal playback speed is restored, the endpoint is
+ accepted as the strike anchor and the safe 10-degree target is passed
+-directly to the same step-15 100 BPM loop. Camera, ST7/TONOR, and ESP32 readiness
++directly to the same step-15 selected-tempo loop. Camera, ST7/TONOR, and ESP32 readiness
+ are not required.
+ 
+ In `--hardwaretest` mode, recording preflight and the original Start →
+@@ -476,21 +476,25 @@
+ A detected hit is latched rather than interrupting a hybrid stroke: the arm reaches
+ that attempt's target and performs its full hybrid return to the exact preserved
+ anchor first. In `--hardware`, it then immediately selects that first detected
+-degree value and plays it in the 100 BPM swing ride. There is no fine-tuning phase, no test above
++degree value plus 0.5° and plays it in the selected-tempo swing ride (default 100 BPM). There is no fine-tuning phase, no test above
+ or below the detected value, and `normality_score` does not participate in
+ target selection.
+ 
+ The ride begins with the extra pickup immediately before beat 1. Its repeating
+ bar is beat 1; beat 2 plus the third triplet partial; beat 3; beat 4 plus the
+-third triplet partial. At 100 BPM a quarter note is 0.600 seconds and one
++third triplet partial. Set **Beat BPM** before RUN/Start; see the
++[tempo controls and estimated upper limit](README.md#editable-beat-tempo).
++The box is locked until Center + Relax completes. At 100 BPM a quarter note is 0.600 seconds and one
+ triplet partial is 0.200 seconds, producing the repeating
+-0.600/0.400/0.200/0.600/0.400/0.200 spacing after beat 1.
++0.600/0.400/0.200/0.600/0.400/0.200 spacing after beat 1. Every interval
++scales by `100 / selected_BPM`; individual stroke dynamics and calibration
++hold durations do not change.
+ 
+ The integrated ESP32 controller remains on the main quarter-note beats and is
+ not advanced by the pickup or either ride extra. The firmware's encoder zero is
+-the open position. Beat 1 sends `C` to close and hold at its exact 110° target;
+-beat 2 sends `O` to return to encoder zero and release; beats 3 and 4 repeat
+-`C`, `O`. Thus the hi-hat still closes every other main beat even though right
++the open position. Beats 1 and 3 send `O` to open at encoder zero; beats
++2 and 4 send `B` to close at the angle found during startup calibration.
++The same learned signed advance applies to CLOSE and its following OPEN. Thus the hi-hat still closes every other main beat even though right
+ J7 adds the swung ride notes. The controller sends a 100 ms `H` heartbeat for
+ the firmware's 400 ms watchdog and never sends `K`, so firmware motor 1 stays
+ released and is rhythmically replaced by right J7.
+--- a/launch_right_camera_playback.py
++++ b/launch_right_camera_playback.py
+@@ -31,7 +31,7 @@
+     mode = parser.add_mutually_exclusive_group()
+     mode.add_argument(
+         "--hardware", action="store_true",
+-        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, 100 BPM swing (camera/TONOR/ESP32)",
++        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, editable BPM swing (default 100; camera/TONOR/ESP32)",
+     )
+     mode.add_argument(
+         "--test", action="store_true",
+--- a/camera_playback/app.py
++++ b/camera_playback/app.py
+@@ -37,6 +37,10 @@
+ from goal_motion.control import STALL_ERROR, STALL_MOVEMENT, TOLERANCE
+ from safe_zone.geometry import MEMBERSHIP_BUFFER_M
+ 
++from .tempo import (
++    MIN_BPM, MAX_BPM, ESTIMATED_PRACTICAL_MAX_BPM, parse_bpm, swing_events,
++    CONTINUOUS_WAIT_PHASE, CONTINUOUS_OUT_PHASE, CONTINUOUS_RETURN_PHASE,
++)
+ from .audio import AudioReceiver
+ from .sound_monitor import HiHatSoundMonitor
+ from .mit_strike import Joint7Session, StrikeSettings
+@@ -95,14 +99,7 @@
+ # next ride hit).  Starting at the final entry creates the requested pickup
+ # immediately before beat 1.
+ SWING_TRIPLET_SECONDS = STRIKE_PERIOD_SECONDS / 3.0
+-SWING_EVENTS = (
+-    ("beat 1", True, STRIKE_PERIOD_SECONDS),
+-    ("beat 2", True, 2.0 * SWING_TRIPLET_SECONDS),
+-    ("extra after beat 2", False, SWING_TRIPLET_SECONDS),
+-    ("beat 3", True, STRIKE_PERIOD_SECONDS),
+-    ("beat 4", True, 2.0 * SWING_TRIPLET_SECONDS),
+-    ("extra after beat 4", False, SWING_TRIPLET_SECONDS),
+-)
++SWING_EVENTS = swing_events(STRIKE_BPM)  # Default only; each App owns its tempo.
+ SWING_PICKUP_INDEX = len(SWING_EVENTS) - 1
+ # Continuous swing hits are scheduled as target-arrival deadlines rather than
+ # as outbound-command times.  While J7 is returning, the live encoder distance
+@@ -113,9 +110,6 @@
+ # travel through that full tolerance band instead of completing immediately.
+ CONTINUOUS_STRIKE_LEAD_SECONDS = 0.04
+ CONTINUOUS_MIN_REBOUND_RAD = 2.0 * STRIKE_REACHED_TOLERANCE_RAD
+-CONTINUOUS_WAIT_PHASE = "100 BPM STRIKE WAITING"
+-CONTINUOUS_OUT_PHASE = "100 BPM STRIKE MOVING OUT"
+-CONTINUOUS_RETURN_PHASE = "100 BPM STRIKE RETURNING"
+ CENTER_RELAX_PHASE = "CENTER RELAX RECENTERING"
+ HIHAT_CALIBRATION_WAIT_PHASE = "WAITING FOR HI-HAT CALIBRATION"
+ HARDWARE_TEST_READY_PHASE = "HARDWARE TEST READY FOR MANUAL STRIKE"
+@@ -183,6 +177,7 @@
+                  hardware_test_settings: StrikeSettings | None = None,
+                  recording_only: bool = False, auto_run: bool = False,
+                  hihat_audio_socket: str | None = None):
++        self._strike_bpm = STRIKE_BPM
+         self.recording_only = bool(recording_only)
+         self.recording_only_result = None
+         if auto_run and not recording_only:
+@@ -210,7 +205,7 @@
+                   'one RUN button → center + close gripper → recording → '
+                   'wait for hi-hat calibration → '
+                   'experiment hybrid J7 search → first-hit depth +0.5° → '
+-                  '100 BPM hybrid swing with partial returns; ride v2 controls search; '
++                  'user-selected BPM (default 100) hybrid swing with partial returns; ride v2 controls search; '
+                   'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
+         super().__init__(real_hardware, detection_socket)
+         if real_hardware and isinstance(self.bus, Motors):
+@@ -424,6 +419,7 @@
+             command=self.choose_recording,
+         )
+         self.recording_button.pack(fill="x", padx=20, pady=4, before=self.start_button)
++        self._create_tempo_controls()
+         self.sound_status = tk.StringVar(value=(
+             "Sound: ignored in test mode — ST7/TONOR not started"
+             if self.test_mode else
+@@ -514,6 +510,65 @@
+             print('NO-STRIKE RECORDING-ONLY MODE; evidence: '+str(self.recording_only_directory), flush=True)
+             if auto_run:
+                 self.root.after(100, lambda: recording_only_control.auto_tick(self))
++
++    @property
++    def strike_bpm(self):
++        return getattr(self, '_strike_bpm', STRIKE_BPM)
++
++    @property
++    def swing_events(self):
++        return swing_events(self.strike_bpm)
++
++    def _create_tempo_controls(self):
++        # No tempo control in one-shot MIT tests or no-strike playback.
++        if self.hardware_test_mode or self.recording_only:
++            return
++        self.tempo_header_template = self.header.cget('text')
++        self.tempo_continue_template = self.continue_button.cget('text')
++        self.tempo_frame = tk.Frame(self.root)
++        self.tempo_frame.columnconfigure(2, weight=1)
++        tk.Label(self.tempo_frame, text='Beat BPM:', font=('Sans', 12, 'bold')).grid(
++            row=0, column=0, sticky='w', padx=(0, 8))
++        self.bpm_text = tk.StringVar(value=f'{self.strike_bpm:g}')
++        self.bpm_entry = tk.Entry(self.tempo_frame, textvariable=self.bpm_text,
++                                  width=8, justify='center', font=('Sans', 13))
++        self.bpm_entry.grid(row=0, column=1, sticky='w')
++        self.tempo_hint = tk.Label(self.tempo_frame, wraplength=480, justify='left')
++        self.tempo_hint.grid(row=0, column=2, sticky='w', padx=(10, 0))
++        self.tempo_frame.pack(fill='x', padx=20, pady=4, before=self.start_button)
++        self.bpm_text.trace_add('write', lambda *_: self._refresh_buttons())
++
++    def _tempo_editable(self):
++        return (self.phase in ('READY', 'RELAXED')
++                and not (self.bus and self.bus.active))
++
++    def _apply_selected_tempo(self):
++        value = getattr(self, 'bpm_text', None)
++        self._strike_bpm = parse_bpm(value.get() if value is not None else self.strike_bpm)
++
++    def _refresh_tempo_controls(self):
++        if getattr(self, 'bpm_entry', None) is None:
++            return True
++        editable = self._tempo_editable()
++        self.bpm_entry.config(state='normal' if editable else 'disabled')
++        if not editable:
++            self.tempo_hint.config(text=f'{self.strike_bpm:g} BPM locked for this run; '
++                                   'Center + Relax before changing.', fg='#555555')
++            return True
++        try:
++            self._apply_selected_tempo()
++        except ValueError as exc:
++            self.tempo_hint.config(text=str(exc), fg='#b00020')
++            return False
++        self.tempo_hint.config(
++            text=f'{MIN_BPM:g}–{MAX_BPM:g} BPM; estimated practical upper '
++                 f'~{ESTIMATED_PRACTICAL_MAX_BPM:g}. Set before Start/RUN.',
++            fg='#8a5a00' if self.strike_bpm > ESTIMATED_PRACTICAL_MAX_BPM else '#555555')
++        tempo = f'{self.strike_bpm:g} BPM'
++        self.header.config(text=self.tempo_header_template.replace('100 BPM', tempo))
++        if not getattr(self, 'single_run_mode', False):
++            self.continue_button.config(text=self.tempo_continue_template.replace('100 BPM', tempo))
++        return True
+ 
+     def choose_recording(self) -> None:
+         if getattr(self, 'recording_preflight', None) is not None:
+@@ -711,11 +766,12 @@
+             calibration = getattr(self, 'hihat_calibration', None)
+             selectable = selectable and not (calibration is not None and calibration.busy)
+             selector.config(state="normal" if selectable else "disabled")
++        tempo_ready = self._refresh_tempo_controls()
+         self._refresh_hardware_test_controls()
+         continuous = getattr(self, "continuous_strike_active", False)
+         stop_requested = getattr(self, "continuous_stop_requested", False)
+         self.center_relax_button.config(
+-            text=("STOP 100 BPM STRIKING: CENTER + RELAX"
++            text=(f"STOP {self.strike_bpm:g} BPM STRIKING: CENTER + RELAX"
+                   if continuous else "CENTER + RELAX")
+         )
+         if not self.hardware or not self.bus:
+@@ -730,7 +786,7 @@
+         recording_ready = self.playback_trajectory is not None
+         ready_to_run = (not getattr(self, 'close_requested', False)
+                         and self.phase in ("READY", "RELAXED") and bus_fresh
+-                        and camera_ready and sound_ready and hihat_ready and recording_ready)
++                        and camera_ready and sound_ready and hihat_ready and recording_ready and tempo_ready)
+         self.start_button.config(
+             state="normal" if ready_to_run and not getattr(self, 'single_run_mode', False) else "disabled"
+         )
+@@ -946,6 +1002,11 @@
+             self.status.set("Cannot start: select and preflight a right-arm recording")
+             return
+         if self.phase not in ("READY", "RELAXED") or not self.bus.fresh():
++            return
++        try:
++            self._apply_selected_tempo()
++        except ValueError as exc:
++            self.status.set('Cannot start: ' + str(exc))
+             return
+         required_support_fault = (
+             self.support_fault_detail
+@@ -1002,7 +1063,7 @@
+                     "ESP32 hi-hat, and encoders before centering"
+                 )
+         self.status.set(preflight_status)
+-        if getattr(self, 'single_run_mode', False):
++        if getattr(self, 'single_run_mode', False) or getattr(self, 'bpm_entry', None) is not None:
+             self._refresh_buttons()
+         self.root.after(20, self._start_preflighted_recording)
+ 
+@@ -1293,7 +1354,7 @@
+                     self.hihat_fault_detail = self.hihat.detail
+                     if first_fault and getattr(self, "continuous_strike_active", False):
+                         self.status.set(
+-                            "ESP32 hi-hat fault — stopping 100 BPM striking, then "
++                            f"ESP32 hi-hat fault — stopping {self.strike_bpm:g} BPM striking, then "
+                             "centering and relaxing: " + self.hihat.detail
+                         )
+                         self._request_continuous_stop()
+@@ -1553,7 +1614,7 @@
+             if self.continuous_stop_requested:
+                 self._finish_continuous_striking()
+             else:
+-                next_label = SWING_EVENTS[self.continuous_swing_index][0]
++                next_label = self.swing_events[self.continuous_swing_index][0]
+                 self.status.set(
+                     f"Swing strike {self.continuous_strike_count} returned to "
+                     f"the pink-zone pose; {next_label} in "
+@@ -2179,7 +2240,7 @@
+             evidence.selected(message, amount, started_at, self.strike_attempt_returned_at)
+         # A hit never interrupts a strike leg. Finish the commanded depth and
+         # the same return to the preserved anchor used by a no-hit
+-        # attempt. Only after that return is reached may the 100 BPM loop begin.
++        # attempt. Only after that return is reached may the swing loop begin.
+         # This guarantees anchor -> depth -> anchor for every search attempt.
+         self.strike_hit_pending = {
+             "message": hit_message,
+@@ -2281,18 +2342,18 @@
+             message = (
+                 f"TEST DEFAULT: camera and sound bypassed; J7 "
+                 f"−{self.continuous_strike_degrees:g}° swing at "
+-                f"{STRIKE_BPM:.0f} BPM until Stop"
++                f"{self.strike_bpm:g} BPM until Stop"
+             )
+         elif hybrid_control.enabled(self):
+             message = (
+                 f"SWING STRIKE: J7 −{self.continuous_strike_degrees:g}° "
+                 f"(first detected +{hybrid_control.SWING_DEPTH_BOOST_DEG:g}°); "
+-                f"starting triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
++                f"starting triplet swing at {self.strike_bpm:g} BPM until Stop"
+             )
+         else:
+             message = (
+                 f"FIRST DETECTED STRIKE: J7 −{self.continuous_strike_degrees:g}°; starting "
+-                f"triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
++                f"triplet swing at {self.strike_bpm:g} BPM until Stop"
+             )
+         self.result_status.set(message)
+         self.result_label.config(fg="#087f23")
+@@ -2301,7 +2362,7 @@
+ 
+         if hybrid_control.enabled(self):
+             try:
+-                hybrid_control.start_swing(self, SWING_EVENTS)
++                hybrid_control.start_swing(self, self.swing_events)
+             except Exception as exc:
+                 self.fail('Could not start hybrid swing: '+str(exc))
+ 
+@@ -2332,7 +2393,7 @@
+         if remaining > outbound_seconds or not rebound_ready:
+             next_label = ("pickup (extra before beat 1)"
+                           if self.continuous_first_swing_hit else
+-                          SWING_EVENTS[self.continuous_swing_index][0])
++                          self.swing_events[self.continuous_swing_index][0])
+             if not rebound_ready:
+                 detail = (
+                     f"returning at {RIGHT_STRIKE_RETURN_SPEED:.1f} rad/s; "
+@@ -2347,7 +2408,7 @@
+             else:
+                 detail = "waiting at the full anchor"
+             self.status.set(
+-                f"100 BPM swing J7 −{self.continuous_strike_degrees:g}°; "
++                f"{self.strike_bpm:g} BPM swing J7 −{self.continuous_strike_degrees:g}°; "
+                 f"{detail}; {next_label} deadline in {max(0.0, remaining):.2f} s"
+             )
+             return
+@@ -2406,14 +2467,14 @@
+                        if not main_beat else
+                        "hi-hat command scheduled at the main-beat deadline"))
+             self.status.set(
+-                f"100 BPM swing {swing_label}, strike {self.continuous_strike_count}: J7 "
++                f"{self.strike_bpm:g} BPM swing {swing_label}, strike {self.continuous_strike_count}: J7 "
+                 f"−{self.continuous_strike_degrees:g}°; {detail}"
+             )
+         else:
+             anchor_name = ("recording endpoint" if getattr(self, "test_mode", False)
+                            else "pink-zone pose")
+             self.status.set(
+-                f"100 BPM swing {swing_label}, strike "
++                f"{self.strike_bpm:g} BPM swing {swing_label}, strike "
+                 f"{self.continuous_strike_count}: target reached; "
+                 f"returning to the {anchor_name}"
+             )
+@@ -2488,11 +2549,11 @@
+     def _take_next_swing_event(self):
+         """Return and advance the next ride event in the repeating swing bar."""
+         index = self.continuous_swing_index
+-        label, main_beat, interval = SWING_EVENTS[index]
++        label, main_beat, interval = self.swing_events[index]
+         if self.continuous_first_swing_hit:
+             label = "pickup (extra before beat 1)"
+             self.continuous_first_swing_hit = False
+-        self.continuous_swing_index = (index + 1) % len(SWING_EVENTS)
++        self.continuous_swing_index = (index + 1) % len(self.swing_events)
+         self.continuous_current_swing_label = label
+         self.continuous_current_interval_seconds = interval
+         return label, main_beat, interval
+@@ -2523,7 +2584,7 @@
+             amount = MOTOR2_TARGET_DEGREES
+         detail = f"CLOSE {amount}°" if command in (b"C", b"B") else "OPEN 0°"
+         self.status.set(
+-            f"100 BPM swing {self.continuous_current_swing_label}: "
++            f"{self.strike_bpm:g} BPM swing {self.continuous_current_swing_label}: "
+             f"hi-hat motor 2 {detail} on the main-beat deadline"
+         )
+         return True
+@@ -2551,15 +2612,15 @@
+         self.continuous_strike_active = False
+         self.continuous_stop_requested = False
+         self.control = None
+-        if not self._restore_strike_speed("100 BPM striking stopped by user"):
++        if not self._restore_strike_speed(f"{self.strike_bpm:g} BPM striking stopped by user"):
+             return
+         try:
+             self.begin_stage(CENTER_RELAX_PHASE, self.center_goal)
+         except Exception as exc:
+-            self.fail("100 BPM Stop + Center command failed: " + str(exc))
++            self.fail(f"{self.strike_bpm:g} BPM Stop + Center command failed: " + str(exc))
+             return
+         self.status.set(
+-            "100 BPM striking stopped — returning to customized right center, "
++            f"{self.strike_bpm:g} BPM striking stopped — returning to customized right center, "
+             "then relaxing"
+         )
+ 
+--- a/camera_playback/hihat.py
++++ b/camera_playback/hihat.py
+@@ -1,4 +1,4 @@
+-"""USB-serial control for the ESP32 hi-hat motor used during 100 BPM playback."""
++"""USB-serial control for the ESP32 hi-hat motor used during user-tempo swing playback."""
+ from __future__ import annotations
+ 
+ import glob
+--- a/camera_playback/hihat_sync.py
++++ b/camera_playback/hihat_sync.py
+@@ -39,9 +39,13 @@
+     most MAX_STEP between successive pairs. No catch-up commands are sent.
+     """
+     def __init__(self, send, log=lambda row: None, period=.6):
+-        if not math.isfinite(period) or period < 2*MAX_ADVANCE:
++        if not math.isfinite(period) or period <= 2*MAX_STEP:
+             raise ValueError('Unsupported hi-hat beat period')
+         self.send, self.log, self.period = send, log, period
++        # Preserve the 100 BPM bounds. At faster tempos, keep the advance
++        # within half a beat and onset gates away from neighboring ride notes.
++        self.max_advance = min(MAX_ADVANCE, period / 2.)
++        self.ride_gate = min(RIDE_GATE, period / 3.)
+         self.active = False
+         self.advance = 0.
+         self.epoch = None
+@@ -122,21 +126,21 @@
+                 self.pending.popleft()
+                 self._skip(c, 'detector timeout', now)
+                 continue
+-            end = max(c.target+self.period*2/3+RIDE_GATE,
++            end = max(c.target+self.period*2/3+self.ride_gate,
+                       c.commanded+CLOSURE_LATENCY_MAX)
+             if not all(available.get(k, False) and self.watermarks[k] is not None
+                        and self.watermarks[k] >= end and now-self.progress_at[k] <= 2.
+                        for k in self.events):
+                 break
+             self.pending.popleft()
+-            rides = self._within('ride', c.target-RIDE_GATE, c.target+RIDE_GATE)
++            rides = self._within('ride', c.target-self.ride_gate, c.target+self.ride_gate)
+             hats = self._within('hihat', c.commanded, c.commanded+CLOSURE_LATENCY_MAX)
+             # Check another ride-only grid position, not just a possible hi-hat
+             # cross-response. Do not veto genuine simultaneous detections.
+-            neighbors = (self._within('ride', c.target-self.period-RIDE_GATE,
+-                                      c.target-self.period+RIDE_GATE)
+-                         + self._within('ride', c.target+self.period*2/3-RIDE_GATE,
+-                                        c.target+self.period*2/3+RIDE_GATE))
++            neighbors = (self._within('ride', c.target-self.period-self.ride_gate,
++                                      c.target-self.period+self.ride_gate)
++                         + self._within('ride', c.target+self.period*2/3-self.ride_gate,
++                                        c.target+self.period*2/3+self.ride_gate))
+             if len(rides) != 1 or len(hats) != 1 or not neighbors:
+                 self._skip(c, f'ambiguous/missing: ride={len(rides)}, hihat={len(hats)}, '
+                            f'neighbor_ride={len(neighbors)}', now)
+@@ -145,7 +149,7 @@
+             error = hat-ride
+             actual_advance = c.target-c.commanded
+             estimate = actual_advance+error
+-            if abs(estimate) > MAX_ADVANCE:
++            if abs(estimate) > self.max_advance:
+                 self._skip(c, 'required advance outside signed safety bound', now)
+                 continue
+             if self.last_estimate_at is not None and now-self.last_estimate_at > MAX_PAIR_AGE:
+@@ -157,7 +161,7 @@
+                 desired = statistics.median(self.estimates)
+                 residual = desired-self.advance
+                 if abs(residual) > DEADBAND:
+-                    self.advance = max(-MAX_ADVANCE, min(MAX_ADVANCE,
++                    self.advance = max(-self.max_advance, min(self.max_advance,
+                         self.advance+max(-MAX_STEP, min(MAX_STEP, .35*residual))))
+             self.matches += 1
+             self.log(dict(kind='match', at=now, index=c.index, target=c.target,
+--- a/camera_playback/hybrid_strike.py
++++ b/camera_playback/hybrid_strike.py
+@@ -18,6 +18,7 @@
+ import socket
+ import time
+ 
++from .tempo import MAX_BPM
+ from .mit_strike import (Command, Joint7Channel, Joint7Session, Joint7Worker,
+                          Status, StrikeSettings)
+ from strike_lab.config import Limits, Rules, StrikeGoal
+@@ -111,7 +112,9 @@
+         self.validate_depth(amount)
+         if not self.status.ready or self.method or self.search_pending is not None:
+             raise ValueError('Hybrid swing must start at the settled search anchor')
+-        if not events or any(not math.isfinite(e[2]) or e[2] < .2-1e-9 for e in events):
++        # Accept the UI tempo range; this changes only grid validation.
++        # Rebound, stroke duration, feedback and lateness checks remain intact.
++        if not events or any(not math.isfinite(e[2]) or e[2] < 20.0/MAX_BPM-1e-9 for e in events):
+             raise ValueError('Invalid hybrid swing grid')
+         self.events = tuple(events)
+         self.event_index = len(events)-1  # Opening pickup, as in the powered beat.
+--- a/camera_playback/hybrid_workflow.py
++++ b/camera_playback/hybrid_workflow.py
+@@ -9,6 +9,7 @@
+ from safe_zone.geometry import MEMBERSHIP_BUFFER_M
+ from strike_lab.config import StrikeGoal
+ from .hybrid_strike import HybridSession, load_tuning
++from .tempo import (CONTINUOUS_WAIT_PHASE, CONTINUOUS_OUT_PHASE, CONTINUOUS_RETURN_PHASE)
+ from .playback_transport import PlaybackMotors
+ from .recording_only import refresh_feedback
+ from .strike import StrikePlan, _path_inside
+@@ -75,7 +76,7 @@
+     print(f'HYBRID J7: experiment hardware tuning; kick {parameters["kick_torque"]:g} Nm / '
+           f'{parameters["kick_time"]*1000:g} ms; {limits.hz:g} Hz; '
+           f'search 5° through {5+len(targets)-1}°; hard corridor {limits.hard_depth_deg:g}°; fixed camera anchor; '
+-          '100 BPM swing permits partial returns after 4° rebound', flush=True)
++          f'{app.strike_bpm:g} BPM swing permits partial returns after 4° rebound', flush=True)
+ 
+ 
+ def begin_search(app):
+@@ -134,7 +135,7 @@
+         sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+     app.status.set(f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
+                    f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
+-                   '100 BPM swing + hi-hat; 4° minimum rebound before partial-return releases')
++                   f'{app.strike_bpm:g} BPM swing + hi-hat; 4° minimum rebound before partial-return releases')
+     print(app.status.get(), flush=True)
+ 
+ 
+@@ -327,9 +328,9 @@
+                 request_stop(app, 'Hi-hat synchronization: '+str(exc))
+                 return
+         app.continuous_strike_count = s.count
+-        app.phase = ('100 BPM STRIKE WAITING' if s.phase == 'hold' else
+-                     '100 BPM STRIKE MOVING OUT' if s.phase in ('drive', 'coast') else
+-                     '100 BPM STRIKE RETURNING')
++        app.phase = (CONTINUOUS_WAIT_PHASE if s.phase == 'hold' else
++                     CONTINUOUS_OUT_PHASE if s.phase in ('drive', 'coast') else
++                     CONTINUOUS_RETURN_PHASE)
+         if s.main_count > app.hybrid_main_count:
+             if s.main_count != app.hybrid_main_count+1 or now-s.main_at > .080:
+                 request_stop(app, 'Hi-hat deadline missed; refusing a catch-up burst')
+--- /dev/null
++++ b/camera_playback/tempo.py
+@@ -0,0 +1,38 @@
++"""Beat tempo only: never scale calibration, playback or individual motor strokes."""
++import math
++
++DEFAULT_BPM = 100.0
++MIN_BPM = 20.0
++MAX_BPM = 180.0
++# Engineering estimate, not a physical safety/success guarantee. The shortest
++# ride gap is 20/BPM seconds; the existing partial rebound alone takes 110 ms,
++# before allowing for the next downstroke/catch and real feedback overhead.
++ESTIMATED_PRACTICAL_MAX_BPM = 120.0
++
++CONTINUOUS_WAIT_PHASE = 'SWING STRIKE WAITING'
++CONTINUOUS_OUT_PHASE = 'SWING STRIKE MOVING OUT'
++CONTINUOUS_RETURN_PHASE = 'SWING STRIKE RETURNING'
++
++
++def parse_bpm(value):
++    try:
++        bpm = float(value)
++    except (TypeError, ValueError, OverflowError):
++        raise ValueError(f'Enter a BPM from {MIN_BPM:g} to {MAX_BPM:g}') from None
++    if isinstance(value, bool) or not math.isfinite(bpm) or not MIN_BPM <= bpm <= MAX_BPM:
++        raise ValueError(f'Enter a finite BPM from {MIN_BPM:g} to {MAX_BPM:g}')
++    return bpm
++
++
++def swing_events(bpm=DEFAULT_BPM):
++    """Same six-event triplet bar, scaled by the selected quarter-note BPM."""
++    period = 60.0 / parse_bpm(bpm)
++    triplet = period / 3.0
++    return (
++        ('beat 1', True, period),
++        ('beat 2', True, 2.0 * triplet),
++        ('extra after beat 2', False, triplet),
++        ('beat 3', True, period),
++        ('beat 4', True, 2.0 * triplet),
++        ('extra after beat 4', False, triplet),
++    )
+--- /dev/null
++++ b/tests/test_beat_tempo.py
+@@ -0,0 +1,224 @@
++"""Tempo regression tests: no CAN, microphone, camera or serial hardware."""
++import math
++import unittest
++from unittest.mock import Mock, patch
++
++import numpy as np
++
++from camera_playback.app import App, SWING_EVENTS, SWING_PICKUP_INDEX
++from camera_playback.tempo import parse_bpm, swing_events, MIN_BPM, MAX_BPM
++from camera_playback.hihat_sync import HiHatSynchronizer, MAX_ADVANCE, RIDE_GATE
++from camera_playback.hihat_sync_runtime import HiHatSyncRuntime
++from camera_playback.hybrid_strike import HybridStatus
++from test_hybrid_workflow import app_fixture
++from test_hybrid_strike import Harness
++
++
++class TempoTests(unittest.TestCase):
++    def test_default_pattern_unchanged(self):
++        self.assertEqual(swing_events(), SWING_EVENTS)
++        np.testing.assert_allclose([e[2] for e in SWING_EVENTS], [.6, .4, .2, .6, .4, .2])
++
++    def test_validation_including_fractional_bpm(self):
++        for value in (' 87.5 ', '100', MIN_BPM, MAX_BPM):
++            self.assertEqual(parse_bpm(value), float(value))
++        for value in ('', '-', 'abc', 'nan', 'inf', '-inf', 0, -20, 19.9, 180.1, True, None):
++            with self.subTest(value=value), self.assertRaises(ValueError):
++                parse_bpm(value)
++
++    def test_every_bar_and_short_triplet_scale(self):
++        for bpm in (20, 60, 87.5, 100, 120, 150, 180):
++            with self.subTest(bpm=bpm):
++                e = swing_events(bpm)
++                self.assertEqual([x[:2] for x in e], [x[:2] for x in SWING_EVENTS])
++                self.assertAlmostEqual(sum(x[2] for x in e), 4*60/bpm)
++                self.assertAlmostEqual(e[-1][2], 20/bpm)
++                self.assertAlmostEqual(e[1][2], 2*e[2][2])
++
++    def test_simulation_uses_selected_event_intervals_including_pickup(self):
++        a = App.__new__(App)
++        a._strike_bpm = 87.5
++        a.continuous_swing_index = SWING_PICKUP_INDEX
++        a.continuous_first_swing_hit = True
++        e = [a._take_next_swing_event() for _ in range(13)]
++        self.assertEqual(e[0][0], 'pickup (extra before beat 1)')
++        for i, row in enumerate(e):
++            self.assertAlmostEqual(row[2], swing_events(87.5)[(i-1)%6][2])
++        self.assertEqual(sum(row[1] for row in e[:7]), 4)
++
++    def test_instances_do_not_mutate_default_or_each_other(self):
++        a, b = App.__new__(App), App.__new__(App)
++        a._strike_bpm, b._strike_bpm = 80, 120
++        self.assertEqual(a.swing_events, swing_events(80))
++        self.assertEqual(b.swing_events, swing_events(120))
++        self.assertEqual(SWING_EVENTS, swing_events(100))
++
++    def test_selected_tempo_reaches_hybrid_and_hihat_not_search(self):
++        for bpm in (60, 87.5, 120, 180):
++            with self.subTest(bpm=bpm):
++                a = app_fixture()
++                a._strike_bpm = bpm
++                a.hihat_sync = Mock()
++                a._begin_strike_attempt()
++                a.hybrid_session.request.assert_called_once_with('search', math.radians(5))
++                a.hybrid_session.request.reset_mock()
++                target = a.strike_plan.anchor_joints.copy()
++                target[6] -= math.radians(10.5)
++                a._begin_continuous_striking(10.5, target)
++                a.hybrid_session.request.assert_called_once_with('swing', math.radians(10.5), swing_events(bpm))
++                self.assertAlmostEqual(a.hihat_sync.start.call_args.args[0], 60/bpm)
++                self.assertEqual(a.continuous_strike_degrees, 10.5)
++                self.assertIn(f'{bpm:g} BPM', a.result_status.set.call_args.args[0])
++                a.bus.set_positions.assert_not_called()
++
++    def test_input_editing_is_locked_for_all_active_phases(self):
++        a = App.__new__(App)
++        a.bus = Mock(active=False)
++        for phase in ('READY', 'RELAXED'):
++            a.phase = phase
++            self.assertTrue(a._tempo_editable())
++        for phase in ('PLAYBACK PREFLIGHTED', 'CENTERING', 'WAITING FOR LOAD', 'STRIKE MOVING OUT',
++                      'SWING STRIKE RETURNING', 'CENTER RELAX RECENTERING'):
++            a.phase = phase
++            self.assertFalse(a._tempo_editable())
++        a.phase = 'READY'; a.bus.active = True
++        self.assertFalse(a._tempo_editable())
++
++    def test_invalid_input_rejected_by_start_before_preparation(self):
++        a = App.__new__(App)
++        a.hardware = True; a.playback_trajectory = Mock()
++        a.phase = 'READY'; a.bus = Mock(active=False)
++        a.bus.fresh.return_value = True
++        a.bpm_text = Mock(); a.bpm_text.get.return_value = 'nan'
++        a.status = Mock(); a.root = Mock()
++        a.start()
++        self.assertIn('Cannot start:', a.status.set.call_args.args[0])
++        a.bus.center.assert_not_called(); a.root.after.assert_not_called()
++        self.assertEqual(a.phase, 'READY')
++
++    def test_disabled_widget_changes_cannot_retime_current_run(self):
++        a = App.__new__(App)
++        a._strike_bpm = 85; a.phase = 'SWING STRIKE RETURNING'; a.bus = Mock(active=True)
++        a.bpm_entry = Mock(); a.tempo_hint = Mock()
++        a.bpm_text = Mock(); a.bpm_text.get.return_value = '150'
++        self.assertTrue(a._refresh_tempo_controls())
++        self.assertEqual(a.strike_bpm, 85)
++        a.bpm_text.get.assert_not_called()
++        a.bpm_entry.config.assert_called_once_with(state='disabled')
++
++    def test_real_hybrid_controller_scaled_grid_without_changing_stroke_tuning(self):
++        for bpm in (60, 87.5, 120):
++            with self.subTest(bpm=bpm):
++                h = Harness(10)
++                parameters = h.p.copy()
++                h.until(lambda s: s.completed == 1)
++                h.c.request_swing(math.radians(10.5), swing_events(bpm))
++                main, scheduled = [], []
++                bottoms = mains = 0
++                for _ in range(9000):
++                    h.tick(); s = h.c.status
++                    if s.bottoms > bottoms:
++                        scheduled.append(s.scheduled_at if s.scheduled_at is not None else s.bottom_at)
++                        bottoms = s.bottoms
++                    if s.main_count > mains:
++                        main.append(s.main_at); mains = s.main_count
++                    if s.bottoms >= 13:
++                        break
++                self.assertGreaterEqual(s.bottoms, 13)
++                self.assertIsNone(s.error)
++                self.assertEqual(h.p, parameters)
++                for i, (a,b) in enumerate(zip(scheduled, scheduled[1:])):
++                    self.assertAlmostEqual(b-a, swing_events(bpm)[(i-1)%6][2])
++                for a,b in zip(main, main[1:]):
++                    self.assertAlmostEqual(b-a, 60/bpm)
++                h.c.stop_swing()
++                h.until(lambda s: s.ready and not s.swing)
++
++
++class HiHatTempoTests(unittest.TestCase):
++    def test_default_bounds_unchanged_faster_tempo_bounds_scale(self):
++        for bpm in (20, 100, 120, 150, 180):
++            period = 60/bpm
++            e = HiHatSynchronizer(Mock(), period=period)
++            self.assertEqual(e.max_advance, min(MAX_ADVANCE, period/2))
++            self.assertEqual(e.ride_gate, min(RIDE_GATE, period/3))
++        with self.assertRaises(ValueError):
++            HiHatSynchronizer(Mock(), period=float('nan'))
++
++    def test_opens_1_3_closes_2_4_and_signed_advance_preserves_closed_duration(self):
++        for bpm in (20, 60, 87.5, 120, 150, 180):
++            for sign in (-1, 0, 1):
++                period = 60/bpm
++                sent, rows = [], []
++                now = 10.
++                def send(closed):
++                    sent.append((now, closed))
++                    return now
++                e = HiHatSynchronizer(send, rows.append, period)
++                e.start(10.); e.set_epoch(10.2, 10.)
++                e.advance = sign*.08
++                for index in range(12):
++                    advance = 0 if index == 0 else e.pair_advance
++                    now = 10.2+index*period-advance+1e-9
++                    e.tick(now, {})
++                self.assertEqual([s[1] for s in sent], [False, True]*6)
++                commands = [r for r in rows if r['kind']=='command']
++                for c in commands:
++                    self.assertAlmostEqual(c['target'], 10.2+c['index']*period)
++                    self.assertEqual(c['closed'], c['beat'] in (2,4))
++                for close,opened in zip(commands[1::2], commands[2::2]):
++                    self.assertEqual(close['advance'], opened['advance'])
++                    self.assertAlmostEqual(opened['at']-close['at'], period)
++
++    def test_continuous_audio_feedback_converges_at_multiple_tempos(self):
++        for bpm in (60, 120, 180):
++            for latency, ride_shift in ((.110, -.025), (.030, .070)):
++                with self.subTest(bpm=bpm, latency=latency):
++                    period = 60/bpm
++                    now = 10.
++                    sent, rows, pending = [], [], []
++                    def send(closed):
++                        sent.append((now, closed))
++                        return now
++                    e = HiHatSynchronizer(send, rows.append, period)
++                    e.start(now); e.set_epoch(10.2, now)
++                    ride_times = [10.2+bar*4*period+offset*period+ride_shift
++                                  for bar in range(50) for offset in (0,1,5/3,2,3,11/3)]
++                    ri = ci = 0
++                    duration = max(60, 60*period)
++                    for step in range(int(duration/.005)):
++                        now = 10.+step*.005
++                        while ri < len(ride_times) and ride_times[ri] <= now:
++                            onset = ride_times[ri]; ri += 1
++                            pending.append((onset+.7, 'ride', onset))
++                        while ci < len(sent):
++                            command, closed = sent[ci]; ci += 1
++                            if closed:
++                                pending.append((command+latency+1., 'hihat', command+latency))
++                        ready = [p for p in pending if p[0] <= now]
++                        pending = [p for p in pending if p[0] > now]
++                        for _, instrument, onset in reversed(ready):
++                            e.feed(instrument, [dict(kind='hit', instrument=instrument,
++                                   event_at=onset, score=.99)], now)
++                        for instrument, lag in [('ride', .7), ('hihat', 1.)]:
++                            e.feed(instrument, [dict(kind='progress', instrument=instrument,
++                                   finalized_at=now-lag-.005)], now)
++                        e.tick(now, {'ride': True, 'hihat': True})
++                    matches = [r for r in rows if r['kind']=='match']
++                    self.assertGreater(len(matches), 20)
++                    self.assertLess(abs(e.advance-(latency-ride_shift)), .025)
++                    self.assertLess(abs(sum(r['error'] for r in matches[-5:])/5), .025)
++                    self.assertEqual(e.epoch, 10.2)  # Read-only ride reference.
++
++    def test_runtime_pickup_to_beat1_scales_with_bpm(self):
++        for bpm in (60, 120, 180):
++            a = Mock()
++            r = HiHatSyncRuntime(a)
++            r.engine = HiHatSynchronizer(Mock(), period=60/bpm)
++            r.engine.start(10.)
++            r.observe(HybridStatus(swing=True, count=1, bottoms=1, bottom_at=10.5), 10.51)
++            self.assertAlmostEqual(r.engine.epoch, 10.5+20/bpm)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ b/tests/beat_tempo_ui_check.py
+@@ -0,0 +1,153 @@
++"""Editable BPM Tk regression, complete simulated run; never opens real CAN."""
++from pathlib import Path
++import tempfile
++import time
++from unittest.mock import patch
++
++import numpy as np
++import rclpy
++from PIL import ImageGrab
++from camera_playback.tempo import swing_events
++
++from camera_playback.app import App
++from camera_playback.simulation import SimulatedMotors
++from camera_search.planner import INITIAL_OFFSET, solve_search_coordinate
++from cartesian_goal.ik import CartesianIK
++from centering.motors import SPEED
++from motion_recording.recording import MotionRecording
++from safe_zone.geometry import Model, RIGHT_TCP, Zone
++
++
++ROOT = Path(__file__).resolve().parents[1]
++model = Model(ROOT / "model/openarmx.urdf")
++zone = Zone.load(ROOT / "right_zones/zone1.json", model.digest, RIGHT_TCP)
++joints = {joint.get("name"): joint for joint in model.joints}
++limits = [joints[f"openarmx_right_joint{i}"].find("limit") for i in range(1, 8)]
++lower = np.array([float(limit.get("lower")) for limit in limits])
++upper = np.array([float(limit.get("upper")) for limit in limits])
++center = np.zeros(7)
++center[6] = upper[6]
++ik = CartesianIK(model, zone, lower, upper, SPEED, "right", RIGHT_TCP, center, np.zeros(7))
++first = solve_search_coordinate(ik, INITIAL_OFFSET, center).joints
++second = solve_search_coordinate(ik, INITIAL_OFFSET + np.array([.01, 0, 0]), first).joints
++
++
++with tempfile.TemporaryDirectory() as directory:
++    directory = Path(directory)
++    recording = MotionRecording(model.digest)
++    recording.start("2026-09-27T12:00:00.000Z")
++    for stamp, values in ((1.0, first), (1.5, second)):
++        state = {
++            **{f"openarmx_right_joint{i + 1}": float(values[i]) for i in range(7)},
++            "openarmx_right_finger_joint1": .02,
++        }
++        recording.add(stamp, state, ik.position(values))
++    recording.stop()
++    recording_path = recording.save(directory / "test_mode_path.json")
++
++    app = None
++    rclpy.init(args=[])
++    try:
++        with patch("goal_motion.app.Motors",
++                   side_effect=AssertionError("real CAN Motors must not be constructed")):
++            app = App(
++                False,
++                str(directory / "detections.sock"),
++                str(directory / "audio.sock"),
++                recording_path,
++                test_mode=True,
++            )
++        app.root.geometry("+40+40")
++        assert app.hardware is True
++        assert app.test_mode is True
++        assert isinstance(app.bus, SimulatedMotors)
++        assert not hasattr(app.bus, "sockets")
++        assert app.hihat is None
++        assert "PURE SIMULATION" in app.root.title()
++        assert "fixed 10° swing" in app.header.cget("text")
++        assert "FIXED 10° SWING AT 100 BPM" in app.continue_button.cget("text")
++        assert "ignored in test mode" in app.sound_status.get()
++        assert "ignored in test mode" in app.hihat_status.get()
++        assert app.loading_status.get() == ""
++        assert app.loading_label.winfo_manager() == ""
++        assert str(app.start_button.cget("state")) == "normal"
++        assert app._camera_ready_for_start()
++        assert app._sound_ready_for_start()
++        assert app._hihat_ready_for_start()
++
++        def wait_for(predicate, seconds, description):
++            deadline = time.monotonic() + seconds
++            while time.monotonic() < deadline:
++                app.root.update()
++                if predicate():
++                    return
++                time.sleep(.005)
++            raise AssertionError(
++                f"timed out waiting for {description}; phase={app.phase}; "
++                f"status={app.status.get()}"
++            )
++
++        # Use the real text box and its write trace, not a bypassed setter.
++        def enter(text):
++            app.bpm_entry.delete(0, 'end')
++            app.bpm_entry.insert(0, text)
++            app.root.update_idletasks()
++
++        def screenshot(name):
++            app.root.update()
++            time.sleep(.08)
++            app.root.update()
++            box = (app.root.winfo_rootx(), app.root.winfo_rooty(),
++                   app.root.winfo_rootx()+app.root.winfo_width(),
++                   app.root.winfo_rooty()+app.root.winfo_height())
++            ImageGrab.grab(bbox=box).save(ROOT/'diagnostics/beat_tempo_20261005'/name)
++
++        enter('nan')
++        assert str(app.start_button.cget('state')) == 'disabled'
++        assert 'finite BPM' in app.tempo_hint.cget('text')
++        enter('87.5')
++        assert app.strike_bpm == 87.5
++        assert app.swing_events == swing_events(87.5)
++        assert '87.5 BPM' in app.header.cget('text')
++        assert '87.5 BPM' in app.continue_button.cget('text')
++        assert str(app.start_button.cget('state')) == 'normal'
++        screenshot('bpm_ready.png')
++        app.start()
++        assert str(app.bpm_entry.cget('state')) == 'disabled' 
++        wait_for(lambda: app.phase == "WAITING FOR LOAD", 10.0, "simulated center")
++        app.continue_motion()
++        wait_for(lambda: app.continuous_strike_active, 20.0,
++                 "recording and fixed 10-degree striking")
++        assert app.continuous_strike_degrees == 10
++        assert str(app.bpm_entry.cget('state')) == 'disabled'
++        assert '87.5 BPM' in app.center_relax_button.cget('text')
++        assert app.strike_bpm == 87.5
++        screenshot('bpm_locked.png')
++        wait_for(lambda: app.continuous_strike_count >= 2, 3.0,
++                 "swing pickup plus beat 1 in simulation")
++        app.center_relax()
++        wait_for(lambda: app.phase == "RELAXED", 15.0,
++                 "simulated Stop, Center, and Relax")
++        assert app.bus.active is False
++        app._refresh_buttons()
++        assert str(app.bpm_entry.cget('state')) == 'normal'
++        enter('120')
++        assert app.strike_bpm == 120
++        assert app.swing_events == swing_events(120)
++    finally:
++        if app is not None:
++            app._cancel_planning()
++            app.planner_executor.shutdown(wait=False, cancel_futures=True)
++            app.receiver.close()
++            app.audio_receiver.close()
++            app.bus.close()
++            app.root.destroy()
++            app.node.destroy_node()
++        if rclpy.ok():
++            rclpy.shutdown()
++
++print("PASS: --test UI uses only SimulatedMotors; real CAN constructor was forbidden")
++print("PASS: camera, sound, ESP32, and all physical hardware are bypassed")
++print("PASS: simulated center, recording, 10-degree 87.5 BPM swing, Stop, and Relax")
++
++print("PASS: actual BPM textbox validates, locks during run, and unlocks after Center + Relax")

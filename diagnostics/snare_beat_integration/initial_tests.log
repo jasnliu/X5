@@ -1,0 +1,54 @@
+<Mock name='mock.get()' id='123173518049984'>
+.<Mock name='mock.get()' id='123173517867968'>
+..<Mock name='mock.get()' id='123173518261280'>
+.HYBRID search −5°: measured peak 5.000°; returned and settled
+.HYBRID swing 1 (pickup): target 5°; arrival error +0.0 ms; partial returns 0
+HYBRID swing 2 (beat 1): target 5°; arrival error +0.0 ms; partial returns 0
+..HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; hard corridor 13°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+.ST7 HIT NOT SELECTED: {"reason": "onset follows this completed return", "phase": "STRIKE MOVING OUT", "onset": 10.6, "detected_at": null, "release": 10.0, "returned": 10.4}
+.<Mock name='mock.get()' id='123173495065440'>
+.ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "STRIKE WAITING FOR SOUND", "onset": 10.2, "detected_at": null, "release": null, "returned": null}
+.ST7 HIT NOT SELECTED: {"reason": "onset precedes this release", "phase": "STRIKE MOVING OUT", "onset": 9.0, "detected_at": null, "release": 10.0, "returned": null}
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='123173508963824'>
+.<Mock name='mock.get()' id='123173557869968'>
+.<Mock name='mock.get()' id='123173494979568'>
+.................LEFT RETURN: playing selected recording backward to its start
+LEFT RETURN: recording start verified; centering, then relaxing
+..DUAL ARM FAULT: left failure; Left playback settings not restored: unverified gains; powered hold, NOT relaxed
+....START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 7.591406588629155}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 767733.166538545, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6018570610322058, "tolerance_deg": 0.05}
+..................LEFT RETURN: playing selected recording backward to its start
+LEFT RETURN: recording start verified; centering, then relaxing
+..START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 7.591406588629155}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 767756.084131912, "goal_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4728015564202348, 0.07039276722362153, -0.0692419317921722], "actual_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4728015564202348, 0.07039276722362153, -0.0692419317921722], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6016284979414195, "tolerance_deg": 0.05}
+..........E
+======================================================================
+ERROR: test_beat_tempo (unittest.loader._FailedTest.test_beat_tempo)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_beat_tempo
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_beat_tempo.py", line 13, in <module>
+    from test_hybrid_workflow import app_fixture
+ModuleNotFoundError: No module named 'test_hybrid_workflow'
+
+
+----------------------------------------------------------------------
+Ran 67 tests in 58.637s
+
+FAILED (errors=1)

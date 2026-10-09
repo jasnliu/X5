@@ -25,6 +25,10 @@ def has_required_detection(detections: list[dict[str, Any]]) -> bool:
 
 
 class DetectionSender:
+    # Playback overrides selection without changing the standalone search or
+    # the validated, freshness-gated single-tip wire format.
+    select_stick = staticmethod(select_observed_stick)
+
     def __init__(self, path: str | Path):
         self.path = str(path)
         self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
@@ -50,7 +54,7 @@ class DetectionSender:
     def frame(self, frame_id: int, captured_at: float,
               detections: list[dict[str, Any]]) -> None:
         sticks = [d for d in detections if d.get("class_id") == 1]
-        observed_stick = select_observed_stick(detections)
+        observed_stick = self.select_stick(detections)
         cymbal = cymbal_grid_geometry(detections)
         age = time.monotonic() - float(captured_at)
         fresh = 0 <= age <= CAMERA_FRESH_SECONDS

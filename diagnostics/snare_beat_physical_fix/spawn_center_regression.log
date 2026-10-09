@@ -1,0 +1,30 @@
+..F.....                                                                 [100%]
+=================================== FAILURES ===================================
+_ LeftReverseReturnTests.test_final_center_is_smooth_legal_and_does_not_catch_up_after_gui_delay _
+
+self = <test_left_reverse_return.LeftReverseReturnTests testMethod=test_final_center_is_smooth_legal_and_does_not_catch_up_after_gui_delay>
+
+    def test_final_center_is_smooth_legal_and_does_not_catch_up_after_gui_delay(self):
+        a,d,bus=self.simulation(self.f.legacy.first_joints)
+        r=LeftReturn(d,0.)
+        r.phase='VERIFY RECORDING START';r.control=Mock()
+        d.return_controls={}
+        bus.left_hold_ready=lambda:True
+        r.tick(100.)
+        self.assertEqual(r.phase,'CENTER')
+        self.assertNotIn('left',d.return_controls)
+        r.tick(101.) # One-second scheduling gap must not jump a whole second.
+        self.assertAlmostEqual(r.center_elapsed,.04)
+        self.assertLess(np.max(np.abs(bus._left_targets-self.f.legacy.first_joints)),.001)
+        now=101.
+        while r.center_at is not None:
+            now+=.02;r.tick(now)
+>           self.f.left_g.check(bus._left_targets)
+E           AttributeError: 'DualRecordingTests' object has no attribute 'left_g'. Did you mean: 'left'?
+
+tests/test_left_reverse_return.py:96: AttributeError
+----------------------------- Captured stdout call -----------------------------
+LEFT RETURN: recording start verified; centering, then relaxing
+=========================== short test summary info ============================
+FAILED tests/test_left_reverse_return.py::LeftReverseReturnTests::test_final_center_is_smooth_legal_and_does_not_catch_up_after_gui_delay
+1 failed, 7 passed in 23.78s

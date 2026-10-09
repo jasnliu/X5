@@ -1,0 +1,32 @@
+.......LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+......START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 7.591406588629155}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 767929.922376124, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6014460709411651, "tolerance_deg": 0.05}
+START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 7.591406588629155}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 767940.323256229, "goal_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4728015564202348, 0.07039276722362153, -0.0692419317921722], "actual_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4728015564202348, 0.07039276722362153, -0.0692419317921722], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6017695890041068, "tolerance_deg": 0.05}
+............<Mock name='mock.get()' id='135357883517216'>
+<Mock name='mock.get()' id='135357880266064'>
+<Mock name='mock.get()' id='135357920066448'>
+<Mock name='mock.get()' id='135357883910768'>
+....ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+.............MAJOR FAULT EMERGENCY RELAX: STALL: motor 4
+..CENTER VERIFIED BEFORE RELAX: {"t": 767940.900865453, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 767940.902722969, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 767940.903463402, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.........<Mock name='mock.get()' id='135357880608064'>
+...
+----------------------------------------------------------------------
+Ran 58 tests in 28.902s
+
+OK

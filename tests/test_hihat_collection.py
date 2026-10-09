@@ -13,7 +13,7 @@ from types import SimpleNamespace
 from unittest.mock import patch
 import numpy as np
 
-from hihat_collection.plan import make_plan,cycle_commands,CLOSE_DEGREES
+from hihat_collection.plan import make_plan,cycle_commands,CLOSE_DEGREES,COUNTS
 from camera_playback.hihat import MOTOR2_TARGET_DEGREES
 from hihat_collection.control import HiHatSession
 from hihat_collection.collect import HiHatCollector
@@ -22,23 +22,26 @@ from smooth_playback.runner import Runner
 
 
 class HiHatCollectionTests(unittest.TestCase):
-    def test_collection_matches_current_100_degree_swing_target(self):
-        self.assertEqual(CLOSE_DEGREES, 100)
-        self.assertEqual(CLOSE_DEGREES, MOTOR2_TARGET_DEGREES)
+    def test_collection_angle_is_local_90_not_legacy_100(self):
+        self.assertEqual(CLOSE_DEGREES, 90)
+        self.assertEqual(MOTOR2_TARGET_DEGREES, 100)
 
-    def test_finite_balanced_plan(self):
+    def test_exact_snare_plan(self):
+        from collections import Counter
         p=make_plan()
-        self.assertEqual(len(p['clean']),20)
-        self.assertEqual(sum(r['closures'] for r in p['clean']),24)
-        self.assertEqual(len(p['mixed']),10)
-        self.assertEqual(p['background_count'],10)
-        self.assertEqual(len(set(p['ride_negative_ids'])),20)
-        for depth in (10,10.5,11,11.5,12):
-            self.assertEqual(sum(r['depth_deg']==depth for r in p['mixed']),2)
+        self.assertEqual(Counter(r['kind'] for r in p),COUNTS)
+        self.assertEqual(sum(r['snare_hits'] for r in p),45)
+        self.assertEqual(sum(r['snare_hits']>0 for r in p),40)
+        self.assertEqual(sum(r['snare_hits']==2 for r in p),5)
+        self.assertEqual(sum(r['split']=='test' for r in p),12)
+        self.assertEqual(set(r['snare_degrees'] for r in p if r['snare_hits']),{11.})
+        self.assertEqual(set(r['ride_depth_deg'] for r in p if r['ride_hits']),{10.,10.5,11.,11.5,12.})
+        self.assertEqual([r['block'] for r in p],list(range(1,61)))
+        self.assertEqual(p,make_plan())
 
-    def test_commands_preserve_swing_timing(self):
-        self.assertEqual(cycle_commands(10.,1),[(10.,b'C'),(10.6,b'O')])
-        self.assertEqual(cycle_commands(10.,2),[(10.,b'C'),(10.6,b'O'),(11.2,b'C'),(11.799999999999999,b'O')])
+    def test_commands_preserve_timing_use_calibrated_edge(self):
+        self.assertEqual(cycle_commands(10.,1),[(10.,b'B'),(10.6,b'O')])
+        self.assertEqual(cycle_commands(10.,2),[(10.,b'B'),(10.6,b'O'),(11.2,b'B'),(11.799999999999999,b'O')])
         for n in (0,3,30):
             with self.assertRaises(ValueError):cycle_commands(1.,n)
 
@@ -46,9 +49,13 @@ class HiHatCollectionTests(unittest.TestCase):
         master,slave=pty.openpty();port=os.ttyname(slave)
         observed=[];stop=threading.Event()
         def firmware():
+            buffer=bytearray()
             while not stop.is_set():
                 if not select.select([master],[],[],.02)[0]:continue
                 for command in os.read(master,256):
+                    buffer.append(command)
+                    if buffer.endswith(b'A90\n'):
+                        os.write(master,b'ANGLE degrees=90 counts=134\r\n')
                     observed.append((time.monotonic(),chr(command)))
                     if command==ord('S'):os.write(master,b'STOP -- all motors released.\r\n')
         thread=threading.Thread(target=firmware);thread.start()
@@ -79,8 +86,8 @@ class HiHatCollectionTests(unittest.TestCase):
                     else:
                         self.assertIsNone(result['error'])
                         self.assertEqual(result['closures_commanded'],2)
-                        beats=[(t,c) for t,c in observed if c in 'CO']
-                        self.assertEqual([c for t,c in beats],['C','O','C','O','O'])
+                        beats=[(t,c) for t,c in observed if c in 'BO']
+                        self.assertEqual([c for t,c in beats],['B','O','B','O','O'])
                         self.assertAlmostEqual(beats[1][0]-beats[0][0],.6,delta=.08)
                         self.assertAlmostEqual(beats[2][0]-beats[0][0],1.2,delta=.08)
                     self.assertNotIn('K',[c for _,c in observed])
@@ -99,18 +106,21 @@ class HiHatCollectionTests(unittest.TestCase):
     def test_async_stop_does_not_need_parent_heartbeat_during_arm_return(self):
         self.exercise_worker(async_stop=True)
 
-    def test_accessory_stop_is_requested_before_arm_recovery(self):
+    def test_accessory_stop_precedes_left_center_and_right_relax(self):
         collector=object.__new__(HiHatCollector);calls=[]
         collector.hihat=SimpleNamespace(request_stop=lambda:calls.append('hihat-stop'))
-        with patch.object(Collector,'center_and_relax',side_effect=lambda:calls.append('arm-center')):
+        collector.hybrid=None;collector.left_ready=True
+        collector.bus=SimpleNamespace(cancel_snare=lambda:calls.append('cancel-snare'))
+        collector.left_move=lambda *args:calls.append('left-center')
+        with patch.object(Collector,'center_and_relax',side_effect=lambda:calls.append('right-center-relax')):
             collector.center_and_relax()
-        self.assertEqual(calls,['hihat-stop','arm-center'])
+        self.assertEqual(calls,['hihat-stop','cancel-snare','left-center','right-center-relax'])
 
     def make_poll_collector(self,recovering=True):
         c=object.__new__(HiHatCollector)
         c.recovering=recovering;c.near_center_recovery=False;c.startup_recovery=False
         c.g=SimpleNamespace(center=np.array([0.,0.,0.,0.,0.,0.,1.4]))
-        c.hihat=None
+        c.hihat=None;c.left_ready=False
         return c
 
     def test_return_can_enter_bounded_center_region_during_motion(self):

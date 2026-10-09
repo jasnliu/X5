@@ -18,6 +18,7 @@ import queue
 import socket
 import time
 
+from .tempo import MAX_BPM
 from .mit_strike import (Command, Joint7Channel, Joint7Session, Joint7Worker,
                          Status, StrikeSettings)
 from strike_lab.config import Limits, Rules, StrikeGoal
@@ -111,7 +112,9 @@ class HybridController:
         self.validate_depth(amount)
         if not self.status.ready or self.method or self.search_pending is not None:
             raise ValueError('Hybrid swing must start at the settled search anchor')
-        if not events or any(not math.isfinite(e[2]) or e[2] < .2-1e-9 for e in events):
+        # Accept the UI tempo range; this changes only grid validation.
+        # Rebound, stroke duration, feedback and lateness checks remain intact.
+        if not events or any(not math.isfinite(e[2]) or e[2] < 20.0/MAX_BPM-1e-9 for e in events):
             raise ValueError('Invalid hybrid swing grid')
         self.events = tuple(events)
         self.event_index = len(events)-1  # Opening pickup, as in the powered beat.
@@ -344,8 +347,12 @@ class HybridController:
 
 
 def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
-                requests, stop, heartbeat, sender, channel_factory):
-    """Only process allowed to command J7 while the hybrid session is alive."""
+                requests, stop, heartbeat, sender, channel_factory, motor=7, sign=1.0, snare_clock=None):
+    """Only process allowed to command J7 (or, for the left arm, J6) while the
+    hybrid session is alive. `anchor`/`lower`/`upper` are already in this
+    session's internal strike convention (see Command.frame()'s docstring);
+    HybridController's math is unchanged either way. `motor`/`sign` are used
+    only where a raw Command/frame actually reaches the wire."""
     channel = None
     controller = HybridController(anchor, lower, upper, parameters, rules, limits)
     last_publish = last_send = None
@@ -366,7 +373,8 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
         channel = channel_factory(interface)
         helper = Joint7Worker(interface, anchor, lower, upper, StrikeSettings(),
                               requests, stop, lambda s: publish(HybridStatus(
-                                  phase=s.phase, sample=s.sample, at=time.monotonic()), True))
+                                  phase=s.phase, sample=s.sample, at=time.monotonic()), True),
+                              motor=motor, sign=sign)
         helper._prepare(channel)
         controller.bias = helper.controller.bias
         last_torque = controller.bias
@@ -399,6 +407,14 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
                 controller.status = replace(controller.status, request_id=request_id)
             sample = channel.sample
             command = controller.update(sample, now)
+            # Publish the EXISTING ride grid, not a second clock or GUI beat
+            # count. Snare can lead beat 1 by its exact reference descent time.
+            if snare_clock is not None and controller.status.swing:
+                with snare_clock.get_lock():
+                    if (snare_clock[2] and not snare_clock[0]
+                            and controller.status.bottoms == 1
+                            and controller.status.bottom_at is not None):
+                        snare_clock[0] = controller.status.bottom_at + snare_clock[1]/3.
             before = time.monotonic()
             if (before-sample.at > limits.feedback_timeout or
                     before-last_send > limits.control_timeout) and controller.method:
@@ -408,7 +424,7 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
                 raise RuntimeError('Hybrid command exceeds validated corridor')
             if stop.is_set():
                 break
-            channel.send(command.frame())
+            channel.send(command.frame(motor, sign))
             last_send, last_torque = time.monotonic(), torque
             publish(controller.status)
             priming = controller.search_pending is not None or controller.swing_pending is not None
@@ -423,7 +439,7 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
         if channel is not None and channel.sample is not None and not stop.is_set():
             try:
                 q = min(upper, max(lower, channel.sample.position))
-                channel.send(Command(q, 0, 40, 1.8, max(-2., min(2., controller.bias))).frame())
+                channel.send(Command(q, 0, 40, 1.8, max(-2., min(2., controller.bias))).frame(motor, sign))
             except Exception:
                 pass
     finally:
@@ -435,11 +451,22 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
 class HybridSession(Joint7Session):
     """Reuse the established joined ownership/IPC lifecycle, not its strategy."""
 
-    def __init__(self, bus, anchor, lower, upper, tuning=None, channel_factory=Joint7Channel):
-        if os.environ.get('STRIKE_LAB_OFFLINE_ONLY') == '1' and channel_factory is Joint7Channel:
+    def __init__(self, bus, anchor, lower, upper, tuning=None, channel_factory=Joint7Channel,
+                 motor=7, sign=1.0, snare_clock=None):
+        """`anchor`/`lower`/`upper` are already in this session's internal
+        strike convention — see Command.frame()'s docstring in mit_strike.py.
+        Defaults (motor=7, sign=1.0) reproduce the original right-J7-only
+        ride-cymbal behavior exactly; a left-arm snare session passes
+        motor=6, sign=-1.0 (and a bus with control_side='left')."""
+        if motor not in (6, 7):
+            raise ValueError('Hybrid strike is J6/J7-only')
+        if (os.environ.get('STRIKE_LAB_OFFLINE_ONLY') == '1'
+                and isinstance(channel_factory, type) and issubclass(channel_factory, Joint7Channel)):
             raise RuntimeError('Physical hybrid transport forbidden in offline tests')
-        if bus.control_side != 'right' or not bus.active or bus.right_joint7_session is not None:
-            raise RuntimeError('Hybrid requires an active, unowned right J7')
+        self.session_attr = f'{bus.control_side}_joint{motor}_session'
+        if (bus.control_side not in ('left', 'right') or not bus.active
+                or getattr(bus, self.session_attr, None) is not None):
+            raise RuntimeError('Hybrid requires an active, unowned J6/J7 on its own side')
         parameters, rules, limits = tuning or load_tuning()
         self.controller = HybridController(anchor, lower, upper, parameters, rules, limits)
         self.bus = bus
@@ -455,13 +482,14 @@ class HybridSession(Joint7Session):
         sender.setblocking(False)
         self._status = HybridStatus()
         self.process = ctx.Process(target=_run_hybrid, name='j7-hybrid-beat', args=(
-            bus.sockets['right'].getsockname()[0], anchor, lower, upper, parameters,
-            rules, limits, self.requests, self.stop_event, self.heartbeat, sender, channel_factory))
-        bus.right_joint7_session = self
+            bus.sockets[bus.control_side].getsockname()[0], anchor, lower, upper, parameters,
+            rules, limits, self.requests, self.stop_event, self.heartbeat, sender, channel_factory,
+            motor, sign, snare_clock))
+        setattr(bus, self.session_attr, self)
         try:
             self.process.start()
         except Exception:
-            bus.right_joint7_session = None
+            setattr(bus, self.session_attr, None)
             self.receiver.close()
             self.requests.close()
             raise

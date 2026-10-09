@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "error": null,
+  "cleanup_error": null,
+  "endpoint": {
+    "t": 778483.25374866,
+    "goal_rad": [
+      -0.013234607461662051,
+      -0.12524925612268234,
+      -0.2813792629892422,
+      0.07269443808651843,
+      -0.8587150377660784,
+      0.018221560997940145,
+      -1.1602339208056751
+    ],
+    "actual_rad": [
+      -0.012850995651179531,
+      -0.12524925612268234,
+      -0.2809956511787579,
+      0.07307804989700095,
+      -0.8587150377660784,
+      0.018221560997940145,
+      -1.1598503089951926
+    ],
+    "max_error_deg": 0.021979337712122585,
+    "settle_range_deg": 0.021979337712122585,
+    "settled_seconds": 0.6023218010086566,
+    "tolerance_deg": 0.05
+  },
+  "gains_restored": true,
+  "original_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "method": {
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "duration_s": 7.591406588629155,
+    "exact_first": true,
+    "exact_last": true,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "firmware_speed_rad_s": 0.8,
+    "gaussian_sigma_s": 0.1,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "max_joint_deviation_deg": 1.2842536078087965,
+    "max_tcp_deviation_mm": 3.9090048918573657,
+    "name": "paced_precise",
+    "original_recording_duration_s": 6.075205,
+    "peak_acceleration_rad_s2": 0.7937752740430105,
+    "peak_piecewise_jerk_rad_s3": 15.81865291320067,
+    "peak_velocity_rad_s": 0.2663079464893924,
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "recording_duration_ratio": 1.2495720866422046,
+    "smoothing_search": [
+      {
+        "accepted": false,
+        "reason": "Joint corridor 1.8107 deg > 1.5 deg",
+        "sigma": 0.14
+      },
+      {
+        "accepted": true,
+        "sigma": 0.1
+      }
+    ],
+    "source_sha256": "f7481678e48b4296cb4517dba3ff6b400b3655cccb58fbd38b439345b481c268",
+    "time_scale": 1.2495720866422046
+  },
+  "transport": {
+    "left": {
+      "retries": 10989,
+      "maximum_wait_s": 0.005816055927425623
+    },
+    "right": {
+      "retries": 0,
+      "maximum_wait_s": 0.0003334799548611045
+    }
+  }
+}

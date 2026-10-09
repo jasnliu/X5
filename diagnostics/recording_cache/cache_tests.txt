@@ -1,0 +1,23 @@
+test_all_geometry_settings_and_versions_invalidate (tests.test_recording_cache.RecordingCacheTests.test_all_geometry_settings_and_versions_invalidate) ... ok
+test_atomic_write_failure_keeps_previous_entry_and_cleans_temp (tests.test_recording_cache.RecordingCacheTests.test_atomic_write_failure_keeps_previous_entry_and_cleans_temp) ... ok
+test_background_worker_uses_cache_without_changing_queue_contract (tests.test_recording_cache.RecordingCacheTests.test_background_worker_uses_cache_without_changing_queue_contract) ... ok
+test_cache_io_failure_does_not_change_success_or_original_error (tests.test_recording_cache.RecordingCacheTests.test_cache_io_failure_does_not_change_success_or_original_error) ... ok
+test_cache_survives_fresh_python_process (tests.test_recording_cache.RecordingCacheTests.test_cache_survives_fresh_python_process) ... ok
+test_changed_code_after_restart_gets_new_key (tests.test_recording_cache.RecordingCacheTests.test_changed_code_after_restart_gets_new_key) ... ok
+test_changed_contents_same_size_and_mtime_cannot_inherit_pass (tests.test_recording_cache.RecordingCacheTests.test_changed_contents_same_size_and_mtime_cannot_inherit_pass) ... ok
+test_changed_setting_runs_original_loader_not_cached_result (tests.test_recording_cache.RecordingCacheTests.test_changed_setting_runs_original_loader_not_cached_result) ... ok
+test_cold_runs_exact_loader_then_hit_restores_exact_result (tests.test_recording_cache.RecordingCacheTests.test_cold_runs_exact_loader_then_hit_restores_exact_result) ... ok
+test_corrupt_stale_and_incomplete_entries_fall_back (tests.test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) ... ok
+test_default_location_honors_xdg (tests.test_recording_cache.RecordingCacheTests.test_default_location_honors_xdg) ... ok
+test_failed_preflight_never_writes_pass (tests.test_recording_cache.RecordingCacheTests.test_failed_preflight_never_writes_pass) ... ok
+test_inputs_changed_during_cache_read_force_original_preflight (tests.test_recording_cache.RecordingCacheTests.test_inputs_changed_during_cache_read_force_original_preflight) ... ok
+test_inputs_changed_during_validation_are_not_cached (tests.test_recording_cache.RecordingCacheTests.test_inputs_changed_during_validation_are_not_cached) ... ok
+test_live_code_edit_disables_cache_until_restart (tests.test_recording_cache.RecordingCacheTests.test_live_code_edit_disables_cache_until_restart) ... ok
+test_simulation_and_hardware_caches_are_separate_and_exact (tests.test_recording_cache.RecordingCacheTests.test_simulation_and_hardware_caches_are_separate_and_exact) ... ok
+test_single_frame_and_stationary_roundtrip_preserve_shapes (tests.test_recording_cache.RecordingCacheTests.test_single_frame_and_stationary_roundtrip_preserve_shapes) ... ok
+test_source_missing_or_renamed_non_json_still_runs_original_errors (tests.test_recording_cache.RecordingCacheTests.test_source_missing_or_renamed_non_json_still_runs_original_errors) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 12.676s
+
+OK

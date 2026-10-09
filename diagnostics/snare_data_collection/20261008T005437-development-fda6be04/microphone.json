@@ -1,0 +1,178 @@
+{
+  "source": {
+    "index": 4990,
+    "state": "SUSPENDED",
+    "name": "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo",
+    "description": "TONOR TD510 Dynamic Mic Analog Stereo",
+    "driver": "PipeWire",
+    "sample_specification": "s24le 2ch 48000Hz",
+    "channel_map": "front-left,front-right",
+    "owner_module": 4294967295,
+    "mute": false,
+    "volume": {
+      "front-left": {
+        "value": 65536,
+        "value_percent": "100%",
+        "db": "0.00 dB"
+      },
+      "front-right": {
+        "value": 65536,
+        "value_percent": "100%",
+        "db": "0.00 dB"
+      }
+    },
+    "balance": 0.0,
+    "base_volume": {
+      "value": 65536,
+      "value_percent": "100%",
+      "db": "0.00 dB"
+    },
+    "monitor_source": "",
+    "latency": {
+      "actual": 0.0,
+      "configured": 0.0
+    },
+    "flags": [
+      "HARDWARE",
+      "HW_MUTE_CTRL",
+      "HW_VOLUME_CTRL",
+      "DECIBEL_VOLUME",
+      "LATENCY"
+    ],
+    "properties": {
+      "alsa.card": "1",
+      "alsa.card_name": "TONOR TD510 Dynamic Mic",
+      "alsa.class": "generic",
+      "alsa.components": "USB31b2:0011",
+      "alsa.device": "0",
+      "alsa.driver_name": "snd_usb_audio",
+      "alsa.id": "Mic",
+      "alsa.long_card_name": "TONOR TONOR TD510 Dynamic Mic at usb-0000:07:00.4-1.1.2, full speed",
+      "alsa.mixer_name": "USB Mixer",
+      "alsa.name": "USB Audio",
+      "alsa.resolution_bits": "16",
+      "alsa.subclass": "generic-mix",
+      "alsa.subdevice": "0",
+      "alsa.subdevice_name": "subdevice #0",
+      "api.alsa.card.longname": "TONOR TONOR TD510 Dynamic Mic at usb-0000:07:00.4-1.1.2, full speed",
+      "api.alsa.card.name": "TONOR TD510 Dynamic Mic",
+      "api.alsa.path": "front:1",
+      "api.alsa.pcm.card": "1",
+      "api.alsa.pcm.stream": "capture",
+      "audio.channels": "2",
+      "audio.position": "FL,FR",
+      "card.profile.device": "0",
+      "device.api": "alsa",
+      "device.class": "sound",
+      "device.id": "86",
+      "device.profile.description": "Analog Stereo",
+      "device.profile.name": "analog-stereo",
+      "device.routes": "1",
+      "factory.name": "api.alsa.pcm.source",
+      "media.class": "Audio/Source",
+      "device.description": "TONOR TD510 Dynamic Mic",
+      "node.name": "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo",
+      "node.nick": "TONOR TD510 Dynamic Mic",
+      "node.pause-on-idle": "false",
+      "object.path": "alsa:pcm:1:front:1:capture",
+      "priority.driver": "2009",
+      "priority.session": "2009",
+      "factory.id": "18",
+      "clock.quantum-limit": "8192",
+      "client.id": "35",
+      "node.driver": "true",
+      "factory.mode": "split",
+      "audio.adapt.follower": "",
+      "library.name": "audioconvert/libspa-audioconvert",
+      "object.id": "69",
+      "object.serial": "4990",
+      "api.acp.auto-port": "false",
+      "api.acp.auto-profile": "false",
+      "api.alsa.card": "1",
+      "api.alsa.use-acp": "true",
+      "api.dbus.ReserveDevice1": "Audio1",
+      "device.bus": "usb",
+      "device.bus-id": "usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00",
+      "device.bus_path": "pci-0000:07:00.4-usb-0:1.1.2:1.0",
+      "device.enum.api": "udev",
+      "device.icon_name": "audio-card-analog-usb",
+      "device.name": "alsa_card.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00",
+      "device.nick": "TONOR TD510 Dynamic Mic",
+      "device.plugged.usec": "597468262866",
+      "device.product.id": "0x0011",
+      "device.product.name": "TONOR TD510 Dynamic Mic",
+      "device.serial": "TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135",
+      "device.subsystem": "sound",
+      "sysfs.path": "/devices/pci0000:00/0000:00:08.3/0000:07:00.4/usb7/7-1/7-1.1/7-1.1.2/7-1.1.2:1.0/sound/card1",
+      "device.vendor.id": "0x31b2",
+      "device.vendor.name": "TONOR",
+      "device.string": "1"
+    },
+    "ports": [
+      {
+        "name": "analog-input-mic",
+        "description": "Microphone",
+        "type": "Mic",
+        "priority": 8700,
+        "availability_group": "",
+        "availability": "availability unknown"
+      }
+    ],
+    "active_port": "analog-input-mic",
+    "formats": [
+      "pcm"
+    ]
+  },
+  "streams": [
+    {
+      "index": 7995,
+      "driver": "PipeWire",
+      "owner_module": null,
+      "client": "7994",
+      "source": 4990,
+      "sample_specification": "s16le 1ch 16000Hz",
+      "channel_map": "mono",
+      "format": "pcm, format.sample_format = \"\\\"s16le\\\"\"  format.rate = \"16000\"  format.channels = \"1\"  format.channel_map = \"\\\"mono\\\"\"",
+      "corked": false,
+      "mute": false,
+      "volume": {
+        "mono": {
+          "value": 65536,
+          "value_percent": "100%",
+          "db": "0.00 dB"
+        }
+      },
+      "balance": 0.0,
+      "buffer_latency_usec": 0.0,
+      "source_latency_usec": 0.0,
+      "resample_method": "PipeWire",
+      "properties": {
+        "remote.name": "pipewire-0",
+        "application.name": "X5data-20261008T005437-development-fda6be04",
+        "node.name": "alsa_capture.python3.12",
+        "device.description": "ALSA Capture [python3.12]",
+        "media.name": "ALSA Capture",
+        "media.type": "Audio",
+        "media.category": "Capture",
+        "node.latency": "320/16000",
+        "node.rate": "1/16000",
+        "stream.is-live": "true",
+        "node.want-driver": "true",
+        "node.autoconnect": "true",
+        "media.class": "Stream/Input/Audio",
+        "target.object": "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo",
+        "adapt.follower.spa-node": "",
+        "object.register": "false",
+        "factory.id": "8",
+        "clock.quantum-limit": "8192",
+        "factory.mode": "merge",
+        "audio.adapt.follower": "",
+        "library.name": "audioconvert/libspa-audioconvert",
+        "client.id": "108",
+        "object.id": "83",
+        "object.serial": "7995",
+        "module-stream-restore.id": "source-output-by-application-name:X5data-20261008T005437-development-fda6be04"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "success": false,
+  "physical": true,
+  "beat_skipped": true,
+  "started": true,
+  "right_endpoint_reached": false,
+  "left_recording_complete": false,
+  "snare_mode_prepared": true,
+  "faults": [
+    {
+      "at": 769597.583824743,
+      "source": "fail",
+      "phase": "LEFT RECORDING PLAYBACK",
+      "message": "Left snare: [Errno 105] No buffer space available; powered hold, NOT relaxed",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 184, in tick\n    self.extra_control(time.monotonic())\n  File \"/home/jason/Proyectos3/X5/camera_playback/app.py\", line 1517, in extra_control\n    if getattr(self, \"dual\", None) is not None and self.dual.tick(now):\n                                                   ^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 182, in tick\n    snare.tick(self, now)\n  File \"/home/jason/Proyectos3/X5/camera_playback/snare_workflow.py\", line 84, in tick\n    raise RuntimeError('Left snare: '+state.error+'; powered hold, NOT relaxed')\nRuntimeError: Left snare: [Errno 105] No buffer space available; powered hold, NOT relaxed\n"
+    }
+  ],
+  "phases": [
+    {
+      "at": 769472.090975743,
+      "phase": "READY",
+      "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"
+    },
+    {
+      "at": 769587.16071058,
+      "phase": "PLAYBACK PREFLIGHTED",
+      "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"
+    },
+    {
+      "at": 769587.211731549,
+      "phase": "SETTING UP",
+      "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"
+    },
+    {
+      "at": 769590.112507772,
+      "phase": "CENTERING",
+      "status": "CENTERING"
+    },
+    {
+      "at": 769593.179941343,
+      "phase": "LEFT SNARE ARMING AT CENTER",
+      "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+    },
+    {
+      "at": 769594.545313639,
+      "phase": "LEFT MOVING TO RECORDING START",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 769596.999443632,
+      "phase": "LEFT RECORDING PLAYBACK",
+      "status": "Left powered J6 ready; moving to recording start"
+    }
+  ],
+  "disabled_proofs": {},
+  "all_16_disabled": false
+}

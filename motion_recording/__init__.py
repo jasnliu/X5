@@ -1,1 +1,1 @@
-"""Query-only right-arm motion recording."""
+"""Query-only single-arm motion recording."""

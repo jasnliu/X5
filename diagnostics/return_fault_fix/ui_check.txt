@@ -1,0 +1,5 @@
+HARDWARE: automatic hi-hat calibration 90°..115° in 5° steps; one RUN button → center + close gripper → recording → wait for hi-hat calibration → experiment hybrid J7 search → first-hit depth +0.5° → user-selected BPM (default 100) hybrid swing with partial returns; ride v2 controls search; hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged
+PASS: normal UI loads both smooth defaults, shows separate selectors, retains readiness gate; zero motor packets; no physical devices
+EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+MAJOR FAULT EMERGENCY RELAX: Operator emergency stop
+PASS: actual Emergency Relax button sends only 24 disable frames per fake arm, no centering targets; restart latched

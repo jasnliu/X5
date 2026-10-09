@@ -68,15 +68,22 @@ class Command:
     kd: float
     torque: float = 0.0
 
-    def frame(self):
-        # Displayed right-J7 coordinates have the opposite motor sign.
+    def frame(self, motor=7, sign=1.0):
+        # Displayed joint coordinates have the opposite raw motor sign
+        # (matches safe_zone.encoder's uniform encoder_to_joint/joint_to_motor
+        # convention). `sign` additionally flips strike direction for a joint
+        # where "struck" means an INCREASING displayed value (e.g. left J6,
+        # sign=-1.0) instead of decreasing (right J7, default sign=+1.0) —
+        # applied here, at the hardware I/O boundary, so StrikeController/
+        # HybridController's internal math never needs to know the
+        # difference; they always see "falling = decreasing position".
         values = (self.position, self.velocity, self.kp, self.kd, self.torque)
         if not all(math.isfinite(v) for v in values):
             raise ValueError("Non-finite J7 command")
         if abs(self.position) > 3.5 or abs(self.velocity) > 33 or abs(self.torque) > 14:
             raise ValueError("J7 command exceeds drive range")
-        return motion_control_packet(7, -self.position, -self.velocity,
-                                     self.kp, self.kd, -self.torque)
+        return motion_control_packet(motor, -sign*self.position, -sign*self.velocity,
+                                     self.kp, self.kd, -sign*self.torque)
 
 
 @dataclass(frozen=True)
@@ -303,14 +310,21 @@ class StrikeController:
 
 
 class Joint7Channel:
-    """Private right-J7 receiver. Other joints remain on the existing bus loop."""
+    """Private single-motor receiver. Other joints remain on the existing bus loop.
+
+    Defaults (motor=7, sign=1.0) reproduce the original right-J7-only
+    behavior exactly. A left-arm strike joint passes motor=6, sign=-1.0.
+    """
     timestamp_option = getattr(socket, "SO_TIMESTAMPNS", 35)  # Linux LP64
 
-    def __init__(self, interface):
+    def __init__(self, interface, motor=7, sign=1.0):
+        if motor not in (6, 7):
+            raise ValueError("J6/J7 strike channel only")
+        self.motor, self.sign = motor, float(sign)
         self.socket = socket.socket(socket.PF_CAN, socket.SOCK_RAW, socket.CAN_RAW)
         try:
             mask = EFF | 0x40000000 | (31 << 24) | (255 << 8)
-            filters = b"".join(struct.pack("=II", EFF | kind << 24 | 7 << 8, mask)
+            filters = b"".join(struct.pack("=II", EFF | kind << 24 | self.motor << 8, mask)
                                for kind in (2, 17, 21))
             self.socket.setsockopt(socket.SOL_CAN_RAW, 1, filters)
             self.socket.setsockopt(socket.SOL_CAN_RAW, 2, struct.pack("=I", 0x1fffffff))
@@ -352,20 +366,23 @@ class Joint7Channel:
         if cid & 0x60000000:
             raise RuntimeError("J7 CAN transport error")
         kind, motor = (cid >> 24) & 31, (cid >> 8) & 255
-        if not cid & EFF or motor != 7:
+        if not cid & EFF or motor != self.motor:
             return
         if kind == 21 or (kind == 2 and (cid >> 16) & 63):
-            raise RuntimeError("Motor 7: drive fault")
+            raise RuntimeError(f"Motor {self.motor}: drive fault")
         if dlc != 8:
-            raise RuntimeError("Short J7 feedback")
+            raise RuntimeError("Short J6/J7 feedback")
         if kind == 17 and data[:2] == b'\x05\x70':
             self.mode, self.mode_at = data[4], at
         elif kind == 2:
             if int.from_bytes(data[6:8], "big") * 0.1 >= 65:
-                raise RuntimeError("Motor 7: too hot")
-            q = -(int.from_bytes(data[:2], "big") / 65535*25.14 - 12.57)
-            v = -(int.from_bytes(data[2:4], "big") / 65535*66.0 - 33.0)
-            torque = -(int.from_bytes(data[4:6], "big") / 65535*28.0 - 14.0)
+                raise RuntimeError(f"Motor {self.motor}: too hot")
+            # Raw-to-displayed conversion is the same for every joint; `sign`
+            # (applied on top) is this controller's internal strike-direction
+            # convention, not a hardware difference. See Command.frame().
+            q = self.sign * -(int.from_bytes(data[:2], "big") / 65535*25.14 - 12.57)
+            v = self.sign * -(int.from_bytes(data[2:4], "big") / 65535*66.0 - 33.0)
+            torque = self.sign * -(int.from_bytes(data[4:6], "big") / 65535*28.0 - 14.0)
             if self.sample is None or at > self.sample.at:
                 self.sample = Sample(q, v, torque, (cid >> 22) & 3, at)
 
@@ -380,13 +397,14 @@ class Joint7Worker:
     """Control engine; production runs this in its own spawned Python process."""
 
     def __init__(self, interface, anchor, lower, upper, settings, requests,
-                 stop_event, publish, channel_factory=Joint7Channel):
+                 stop_event, publish, channel_factory=Joint7Channel, motor=7, sign=1.0):
         self.interface = interface
         self.controller = StrikeController(anchor, settings)
         self.lower, self.upper = lower, upper
         self.requests, self.stop_event = requests, stop_event
         self.publish = publish
         self.channel_factory = channel_factory
+        self.motor, self.sign = motor, sign
         self.status = Status()
         self.last_command_at = None
         self.max_gap = 0.0
@@ -423,12 +441,13 @@ class Joint7Worker:
 
     def _prepare(self, channel):
         c = self.controller
+        m = self.motor
         deadline = time.monotonic() + 0.5
         # Start from a received state, never from a stale GUI snapshot.
         while channel.sample is None or time.monotonic()-channel.sample.at > c.settings.feedback_timeout:
             if time.monotonic() > deadline:
-                raise RuntimeError("Fresh J7 feedback unavailable before MIT setup")
-            self._send(channel, request_frame(7))
+                raise RuntimeError("Fresh J6/J7 feedback unavailable before MIT setup")
+            self._send(channel, request_frame(m))
             channel.wait(0.002)
             channel.receive()
         if abs(channel.sample.velocity) <= 0.1:
@@ -436,20 +455,20 @@ class Joint7Worker:
         # Confirm each handoff step instead of assuming that two short sleeps
         # mean the drive accepted it. Mode changes happen only at session entry.
         disabled_at = time.monotonic()
-        self._send(channel, packet(4, 7))
+        self._send(channel, packet(4, m))
         self._wait_setup(channel, lambda: channel.sample is not None
                          and channel.sample.at >= disabled_at
                          and channel.sample.state == 0, "disable confirmation")
         mode_at = time.monotonic()
         self._wait_setup(channel, lambda: channel.mode == 0
                          and channel.mode_at >= mode_at, "MIT mode readback",
-                         retry_frame=parameter(7, 0x7005, 0, True))
+                         retry_frame=parameter(m, 0x7005, 0, True))
         enabled_at = time.monotonic()
-        self._send(channel, packet(3, 7))
+        self._send(channel, packet(3, m))
         deadline = enabled_at + 0.5
         last_enable = enabled_at
         while True:
-            self._send(channel, c.hold_command().frame())
+            self._send(channel, c.hold_command().frame(m, self.sign))
             channel.wait(1.0/c.settings.hz)
             channel.receive()
             now = time.monotonic()
@@ -460,14 +479,15 @@ class Joint7Worker:
                 return
             if now > deadline:
                 state = None if sample is None else sample.state
-                raise RuntimeError(f"J7 MIT enable confirmation missing (state={state})")
+                raise RuntimeError(f"J6/J7 MIT enable confirmation missing (state={state})")
             # Some firmware transitions do not accept the first enable. Retry
             # only while arming, not during a strike, and never after stop().
             if now-last_enable >= 0.020:
-                self._send(channel, packet(3, 7))
+                self._send(channel, packet(3, m))
                 last_enable = now
 
     def _wait_setup(self, channel, confirmed, step, retry_frame=None):
+        m = self.motor
         deadline = time.monotonic() + 0.150
         last_query = 0.0
         while True:
@@ -475,15 +495,15 @@ class Joint7Worker:
             if now-last_query >= 0.010:
                 if retry_frame is not None:
                     self._send(channel, retry_frame)
-                self._send(channel, request_frame(7))
-                self._send(channel, packet(17, 7, bytes.fromhex('0570000000000000')))
+                self._send(channel, request_frame(m))
+                self._send(channel, packet(17, m, bytes.fromhex('0570000000000000')))
                 last_query = now
             channel.wait(0.002)
             channel.receive()
             if confirmed():
                 return
             if time.monotonic() > deadline:
-                raise RuntimeError(f"J7 {step} missing")
+                raise RuntimeError(f"J6/J7 {step} missing")
             if self.stop_event.is_set():
                 raise InterruptedError
 
@@ -491,6 +511,11 @@ class Joint7Worker:
         channel = None
         c = self.controller
         try:
+            # channel_factory's call signature stays (interface) only, so every
+            # existing factory/test-double keeps working unchanged; a
+            # non-default motor/sign is baked into the factory itself by the
+            # caller (see HybridSession/Joint7Session), not passed positionally
+            # here.
             channel = self.channel_factory(self.interface)
             self._prepare(channel)
             deadline = time.monotonic()
@@ -512,7 +537,7 @@ class Joint7Worker:
                     # Refresh the retained idle hold and collect its reply
                     # before considering a press. A short scheduler slip can
                     # age the previous reply without any actual arm movement.
-                    self._send(channel, c.hold_command().frame())
+                    self._send(channel, c.hold_command().frame(self.motor, self.sign))
                     channel.wait(1.0/c.settings.hz)
                     channel.receive()
                     sample = channel.sample
@@ -539,7 +564,7 @@ class Joint7Worker:
                 # Never send a release/catch trajectory based on an old tick time.
                 self._check_timing(sample, before_send)
                 gap = before_send-self.last_command_at
-                self._send(channel, command.frame())
+                self._send(channel, command.frame(self.motor, self.sign))
                 self.status = Status(c.phase, c.ready, c.completed, sample,
                                      c.peak_drop, c.overshoot, rejected=rejected,
                                      last_gap=gap, max_gap=self.max_gap,
@@ -559,7 +584,7 @@ class Joint7Worker:
             self.publish(self.status)
             if channel is not None and not self.stop_event.is_set():
                 try:
-                    channel.send(c.hold_command().frame())
+                    channel.send(c.hold_command().frame(self.motor, self.sign))
                 except Exception:
                     pass  # Existing GUI fault handler reports hold-delivery failures.
         finally:
@@ -568,7 +593,7 @@ class Joint7Worker:
 
 
 def _run_joint7_process(interface, anchor, lower, upper, settings, requests,
-                        stop_event, status_socket, channel_factory):
+                        stop_event, status_socket, channel_factory, motor=7, sign=1.0):
     # No Tk/ROS calls in this control engine; no inherited arm sockets (spawn).
     last_publish = 0.0
     last_phase = None
@@ -584,7 +609,7 @@ def _run_joint7_process(interface, anchor, lower, upper, settings, requests,
         last_publish, last_phase = now, status.phase
     try:
         Joint7Worker(interface, anchor, lower, upper, settings, requests,
-                     stop_event, publish, channel_factory).run()
+                     stop_event, publish, channel_factory, motor, sign).run()
     finally:
         status_socket.close()
 
@@ -593,11 +618,25 @@ class Joint7Session:
     """Parent-side facade; the spawned process is the sole J7 command writer."""
 
     def __init__(self, bus, anchor, lower, upper, settings=StrikeSettings(),
-                 channel_factory=Joint7Channel):
-        if bus.control_side != "right" or not bus.active:
-            raise RuntimeError("An active right arm is required for the MIT session")
-        if getattr(bus, "right_joint7_session", None) is not None:
-            raise RuntimeError("J7 already has a controller")
+                 channel_factory=Joint7Channel, motor=7, sign=1.0):
+        """`anchor`/`lower`/`upper` are in this session's internal strike
+        convention (displayed-joint units, but pre-negated by the caller when
+        sign=-1.0 so "falling = decreasing" holds regardless of motor). See
+        Command.frame()'s docstring and camera_playback/hybrid_strike.py.
+        """
+        if motor not in (6, 7):
+            raise ValueError("J6/J7 strike session only")
+        if bus.control_side not in ("left", "right") or not bus.active:
+            raise RuntimeError("An active left or right arm is required for the MIT session")
+        # Each bus instance controls exactly one side, but could in principle
+        # run a session on either of its two strike-capable motors, so key the
+        # session attribute by both. For the existing right-arm beat
+        # (side='right', motor=7, the defaults) this is byte-identical to
+        # before ("right_joint7_session"); a left-arm session gets its own
+        # parallel attribute ("left_joint6_session").
+        self.session_attr = f"{bus.control_side}_joint{motor}_session"
+        if getattr(bus, self.session_attr, None) is not None:
+            raise RuntimeError("J6/J7 already has a controller")
         self.bus = bus
         # Only immutable anchor/settings are used by the GUI. Actual controller
         # state stays in the child process and is reported through Status.
@@ -615,14 +654,15 @@ class Joint7Session:
         self.closed = False
         self.process = ctx.Process(
             target=_run_joint7_process, name="j7-mit-strike",
-            args=(bus.sockets["right"].getsockname()[0], float(anchor), self.lower,
-                  self.upper, settings, self.requests, self.stop_event, sender, channel_factory),
+            args=(bus.sockets[bus.control_side].getsockname()[0], float(anchor), self.lower,
+                  self.upper, settings, self.requests, self.stop_event, sender, channel_factory,
+                  motor, sign),
         )
-        bus.right_joint7_session = self
+        setattr(bus, self.session_attr, self)
         try:
             self.process.start()
         except Exception:
-            bus.right_joint7_session = None
+            setattr(bus, self.session_attr, None)
             self.receiver.close()
             self.requests.close()
             raise
@@ -670,5 +710,5 @@ class Joint7Session:
         self.receiver.close()
         self.requests.cancel_join_thread()
         self.requests.close()
-        if self.bus.right_joint7_session is self:
-            self.bus.right_joint7_session = None
+        if getattr(self.bus, self.session_attr, None) is self:
+            setattr(self.bus, self.session_attr, None)

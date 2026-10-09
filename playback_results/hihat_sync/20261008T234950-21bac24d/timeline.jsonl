@@ -1,0 +1,381 @@
+{"kind": "start", "at": 843538.279431947, "advance": 0.0, "period": 0.5454545454545454, "close_beats": [2, 4], "open_beats": [1, 3], "correction_policy": "confirmed_absolute_until_locked", "max_pair_step": 0.13636363636363635, "estimate_agreement": 0.02, "lock_tolerance": 0.015, "lock_matches": 2}
+{"kind": "grid", "at": 843538.440415891, "beat1": 843538.6075629127}
+{"kind": "command", "at": 843538.618351068, "index": 0, "beat": 1, "closed": false, "target": 843538.6075629127, "due": 843538.6075629127, "advance": 0.0, "lateness": 0.010788155253976583}
+{"kind": "command", "at": 843539.160540324, "index": 1, "beat": 2, "closed": true, "target": 843539.1530174582, "due": 843539.1530174582, "advance": 0.0, "lateness": 0.0075228658970445395}
+{"kind": "onset", "instrument": "ride", "event_at": 843538.425264475, "received_at": 843539.257673685, "score": 0.999399}
+{"kind": "onset", "instrument": "ride", "event_at": 843538.645264475, "received_at": 843539.257673685, "score": 0.999731}
+{"kind": "onset", "instrument": "ride", "event_at": 843538.865412687, "received_at": 843539.511141578, "score": 0.729796}
+{"kind": "onset", "instrument": "hihat", "event_at": 843538.8659465141, "received_at": 843539.511659381, "score": 0.992901}
+{"kind": "command", "at": 843539.718213284, "index": 2, "beat": 3, "closed": false, "target": 843539.6984720037, "due": 843539.6984720037, "advance": 0.0, "lateness": 0.0197412803536281}
+{"kind": "onset", "instrument": "ride", "event_at": 843539.125284384, "received_at": 843539.766157481, "score": 0.996619}
+{"kind": "onset", "instrument": "hihat", "event_at": 843539.235961487, "received_at": 843539.777111665, "score": 0.989867}
+{"kind": "onset", "instrument": "ride", "event_at": 843539.505324885, "received_at": 843540.083863306, "score": 0.999467}
+{"kind": "command", "at": 843540.244426077, "index": 3, "beat": 4, "closed": true, "target": 843540.2439265491, "due": 843540.2439265491, "advance": 0.0, "lateness": 0.0004995279014110565}
+{"kind": "onset", "instrument": "ride", "event_at": 843539.735313998, "received_at": 843540.417784202, "score": 0.996733}
+{"kind": "match", "at": 843540.423547612, "index": 1, "target": 843539.1530174582, "ride_onset": 843539.125284384, "hihat_onset": 843539.235961487, "error": 0.11067710304632783, "commanded": 843539.160540324, "advance_used": 0.0, "actual_advance": -0.0075228658970445395, "estimate": 0.10315423714928329, "advance_before": 0.0, "advance": 0.0, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843540.812010823, "index": 4, "beat": 1, "closed": false, "target": 843540.7893810945, "due": 843540.7893810945, "advance": 0.0, "lateness": 0.02262972854077816}
+{"kind": "onset", "instrument": "hihat", "event_at": 843540.235960685, "received_at": 843540.943302181, "score": 0.996884}
+{"kind": "onset", "instrument": "ride", "event_at": 843540.5953914591, "received_at": 843541.269973732, "score": 0.99953}
+{"kind": "skip", "index": 3, "target": 843540.2439265491, "at": 843541.288122851, "reason": "ambiguous/missing: ride=0, hihat=0, neighbor_ride=2"}
+{"kind": "command", "at": 843541.355866743, "index": 5, "beat": 2, "closed": true, "target": 843541.33483564, "due": 843541.33483564, "advance": 0.0, "lateness": 0.02103110298048705}
+{"kind": "onset", "instrument": "ride", "event_at": 843540.81532879, "received_at": 843541.602755863, "score": 0.999206}
+{"kind": "onset", "instrument": "ride", "event_at": 843541.31532108, "received_at": 843541.888114105, "score": 0.999479}
+{"kind": "command", "at": 843541.888588274, "index": 6, "beat": 3, "closed": false, "target": 843541.8802901855, "due": 843541.8802901855, "advance": 0.0, "lateness": 0.008298088563606143}
+{"kind": "onset", "instrument": "hihat", "event_at": 843541.426016893, "received_at": 843542.228942586, "score": 0.996488}
+{"kind": "command", "at": 843542.430202387, "index": 7, "beat": 4, "closed": true, "target": 843542.425744731, "due": 843542.425744731, "advance": 0.0, "lateness": 0.0044576560612767935}
+{"kind": "onset", "instrument": "ride", "event_at": 843541.685366598, "received_at": 843542.54150894, "score": 0.999129}
+{"kind": "onset", "instrument": "ride", "event_at": 843541.905366598, "received_at": 843542.54150894, "score": 0.990798}
+{"kind": "match", "at": 843542.543385678, "index": 5, "target": 843541.33483564, "ride_onset": 843541.31532108, "hihat_onset": 843541.426016893, "error": 0.11069581296760589, "commanded": 843541.355866743, "advance_used": 0.0, "actual_advance": -0.02103110298048705, "estimate": 0.08966470998711884, "advance_before": 0.0, "advance": 0.0, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "onset", "instrument": "hihat", "event_at": 843542.146195164, "received_at": 843542.779480415, "score": 0.993461}
+{"kind": "command", "at": 843542.987619228, "index": 8, "beat": 1, "closed": false, "target": 843542.9711992764, "due": 843542.9711992764, "advance": 0.0, "lateness": 0.016419951571151614}
+{"kind": "onset", "instrument": "ride", "event_at": 843542.4154115969, "received_at": 843543.074352053, "score": 0.999011}
+{"kind": "onset", "instrument": "hihat", "event_at": 843542.516053051, "received_at": 843543.075227251, "score": 0.954683}
+{"kind": "onset", "instrument": "ride", "event_at": 843542.7755283801, "received_at": 843543.461082455, "score": 0.984941}
+{"kind": "command", "at": 843543.538645479, "index": 9, "beat": 2, "closed": true, "target": 843543.5166538218, "due": 843543.5166538218, "advance": 0.0, "lateness": 0.021991657209582627}
+{"kind": "onset", "instrument": "ride", "event_at": 843543.005488238, "received_at": 843543.700864096, "score": 0.999361}
+{"kind": "match", "at": 843543.751670514, "index": 7, "target": 843542.425744731, "ride_onset": 843542.4154115969, "hihat_onset": 843542.516053051, "error": 0.10064145410433412, "commanded": 843542.430202387, "advance_used": 0.0, "actual_advance": -0.0044576560612767935, "estimate": 0.09618379804305732, "advance_before": 0.0, "advance": 0.09292425401508808, "estimate_confirmed": true, "desired_advance": 0.09292425401508808, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843544.073515407, "index": 10, "beat": 3, "closed": false, "target": 843544.0621083673, "due": 843544.0621083673, "advance": 0.0, "lateness": 0.011407039710320532}
+{"kind": "onset", "instrument": "ride", "event_at": 843543.4955401099, "received_at": 843544.238533181, "score": 0.991639}
+{"kind": "onset", "instrument": "hihat", "event_at": 843543.506157528, "received_at": 843544.294285303, "score": 0.996572}
+{"kind": "command", "at": 843544.522621029, "index": 11, "beat": 4, "closed": true, "target": 843544.6075629127, "due": 843544.5146386587, "advance": 0.09292425401508808, "lateness": 0.007982370327226818}
+{"kind": "skip", "index": 9, "target": 843543.5166538218, "at": 843544.574810972, "reason": "ambiguous/missing: ride=1, hihat=0, neighbor_ride=1"}
+{"kind": "onset", "instrument": "ride", "event_at": 843544.0954717569, "received_at": 843544.888252727, "score": 0.993189}
+{"kind": "onset", "instrument": "hihat", "event_at": 843544.326207463, "received_at": 843544.895516435, "score": 0.994334}
+{"kind": "command", "at": 843545.064770425, "index": 12, "beat": 1, "closed": false, "target": 843545.1530174582, "due": 843545.0600932041, "advance": 0.09292425401508808, "lateness": 0.004677220829762518}
+{"kind": "onset", "instrument": "ride", "event_at": 843544.58555612, "received_at": 843545.216591668, "score": 0.996831}
+{"kind": "onset", "instrument": "ride", "event_at": 843544.9655166661, "received_at": 843545.54111283, "score": 0.995013}
+{"kind": "command", "at": 843545.620028049, "index": 13, "beat": 2, "closed": true, "target": 843545.6984720037, "due": 843545.6055477497, "advance": 0.09292425401508808, "lateness": 0.014480299316346645}
+{"kind": "onset", "instrument": "ride", "event_at": 843545.18541777, "received_at": 843545.746624867, "score": 0.995366}
+{"kind": "skip", "index": 11, "target": 843544.6075629127, "at": 843545.754887591, "reason": "ambiguous/missing: ride=1, hihat=0, neighbor_ride=2"}
+{"kind": "command", "at": 843546.155901921, "index": 14, "beat": 3, "closed": false, "target": 843546.2439265491, "due": 843546.1510022951, "advance": 0.09292425401508808, "lateness": 0.004899625899270177}
+{"kind": "onset", "instrument": "hihat", "event_at": 843545.686282536, "received_at": 843546.430990331, "score": 0.995002}
+{"kind": "onset", "instrument": "ride", "event_at": 843546.045527124, "received_at": 843546.724298691, "score": 0.999629}
+{"kind": "command", "at": 843546.724697826, "index": 15, "beat": 4, "closed": true, "target": 843546.7893810945, "due": 843546.6964568405, "advance": 0.09292425401508808, "lateness": 0.02824098546989262}
+{"kind": "onset", "instrument": "ride", "event_at": 843546.27554011, "received_at": 843547.04755132, "score": 0.989969}
+{"kind": "skip", "index": 13, "target": 843545.6984720037, "at": 843547.058662405, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=2"}
+{"kind": "command", "at": 843547.264189404, "index": 16, "beat": 1, "closed": false, "target": 843547.33483564, "due": 843547.241911386, "advance": 0.09292425401508808, "lateness": 0.022278017946518958}
+{"kind": "onset", "instrument": "ride", "event_at": 843546.775580499, "received_at": 843547.582613808, "score": 0.989114}
+{"kind": "onset", "instrument": "hihat", "event_at": 843546.8062758229, "received_at": 843547.59087544, "score": 0.982347}
+{"kind": "command", "at": 843547.795489121, "index": 17, "beat": 2, "closed": true, "target": 843547.8802901855, "due": 843547.7873659314, "advance": 0.09292425401508808, "lateness": 0.008123189560137689}
+{"kind": "onset", "instrument": "ride", "event_at": 843547.1355884409, "received_at": 843547.876243158, "score": 0.997062}
+{"kind": "onset", "instrument": "ride", "event_at": 843547.3655884409, "received_at": 843547.876243158, "score": 0.999073}
+{"kind": "match", "at": 843547.885568981, "index": 15, "target": 843546.7893810945, "ride_onset": 843546.775580499, "hihat_onset": 843546.8062758229, "error": 0.03069532394874841, "commanded": 843546.724697826, "advance_used": 0.09292425401508808, "actual_advance": 0.06468326854519546, "estimate": 0.09537859249394387, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843548.33556082, "index": 18, "beat": 3, "closed": false, "target": 843548.425744731, "due": 843548.332820477, "advance": 0.09292425401508808, "lateness": 0.002740342984907329}
+{"kind": "onset", "instrument": "ride", "event_at": 843547.865622031, "received_at": 843548.513979624, "score": 0.984612}
+{"kind": "onset", "instrument": "hihat", "event_at": 843547.8762898371, "received_at": 843548.514630673, "score": 0.985443}
+{"kind": "onset", "instrument": "ride", "event_at": 843548.2256163621, "received_at": 843548.84261745, "score": 0.998014}
+{"kind": "command", "at": 843548.895652847, "index": 19, "beat": 4, "closed": true, "target": 843548.9711992764, "due": 843548.8782750224, "advance": 0.09292425401508808, "lateness": 0.017377824638970196}
+{"kind": "onset", "instrument": "hihat", "event_at": 843548.416332696, "received_at": 843549.09308932, "score": 0.997859}
+{"kind": "match", "at": 843549.094331662, "index": 17, "target": 843547.8802901855, "ride_onset": 843547.865622031, "hihat_onset": 843547.8762898371, "error": 0.010667806025594473, "commanded": 843547.795489121, "advance_used": 0.09292425401508808, "actual_advance": 0.08480106445495039, "estimate": 0.09546887048054487, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": true, "desired_advance": 0.09542373148724437, "locked": false, "good_matches": 1}
+{"kind": "command", "at": 843549.447383944, "index": 20, "beat": 1, "closed": false, "target": 843549.5166538218, "due": 843549.4237295678, "advance": 0.09292425401508808, "lateness": 0.023654376156628132}
+{"kind": "onset", "instrument": "ride", "event_at": 843548.955707321, "received_at": 843549.682691289, "score": 0.986016}
+{"kind": "command", "at": 843549.969816848, "index": 21, "beat": 2, "closed": true, "target": 843550.0621083673, "due": 843549.9691841133, "advance": 0.09292425401508808, "lateness": 0.0006327347364276648}
+{"kind": "onset", "instrument": "ride", "event_at": 843549.325693582, "received_at": 843550.005937712, "score": 0.998131}
+{"kind": "onset", "instrument": "ride", "event_at": 843549.5457780721, "received_at": 843550.343521868, "score": 0.994255}
+{"kind": "skip", "index": 19, "target": 843548.9711992764, "at": 843550.344413869, "reason": "ambiguous/missing: ride=1, hihat=0, neighbor_ride=1"}
+{"kind": "command", "at": 843550.516655053, "index": 22, "beat": 3, "closed": false, "target": 843550.6075629127, "due": 843550.5146386587, "advance": 0.09292425401508808, "lateness": 0.0020163942826911807}
+{"kind": "onset", "instrument": "hihat", "event_at": 843550.046386043, "received_at": 843550.563471117, "score": 0.980219}
+{"kind": "onset", "instrument": "hihat", "event_at": 843550.326347272, "received_at": 843550.925295731, "score": 0.993878}
+{"kind": "command", "at": 843551.077465187, "index": 23, "beat": 4, "closed": true, "target": 843551.1530174582, "due": 843551.0600932041, "advance": 0.09292425401508808, "lateness": 0.0173719828017056}
+{"kind": "onset", "instrument": "ride", "event_at": 843550.63571611, "received_at": 843551.203713988, "score": 0.896608}
+{"kind": "skip", "index": 21, "target": 843550.0621083673, "at": 843551.215127855, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=1"}
+{"kind": "command", "at": 843551.60842756, "index": 24, "beat": 1, "closed": false, "target": 843551.6984720037, "due": 843551.6055477497, "advance": 0.09292425401508808, "lateness": 0.0028798102866858244}
+{"kind": "onset", "instrument": "ride", "event_at": 843551.1357917669, "received_at": 843551.807071427, "score": 0.922594}
+{"kind": "onset", "instrument": "hihat", "event_at": 843551.4164085549, "received_at": 843552.177853124, "score": 0.985435}
+{"kind": "command", "at": 843552.178108454, "index": 25, "beat": 2, "closed": true, "target": 843552.2439265491, "due": 843552.1510022951, "advance": 0.09292425401508808, "lateness": 0.027106158901005983}
+{"kind": "skip", "index": 23, "target": 843551.1530174582, "at": 843552.393521167, "reason": "required advance outside signed safety bound"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843551.9565356359, "received_at": 843552.679459554, "score": 0.992673}
+{"kind": "command", "at": 843552.716692432, "index": 26, "beat": 3, "closed": false, "target": 843552.7893810945, "due": 843552.6964568405, "advance": 0.09292425401508808, "lateness": 0.020235591451637447}
+{"kind": "onset", "instrument": "ride", "event_at": 843552.225771349, "received_at": 843552.99430307, "score": 0.983428}
+{"kind": "command", "at": 843553.262928949, "index": 27, "beat": 4, "closed": true, "target": 843553.33483564, "due": 843553.241911386, "advance": 0.09292425401508808, "lateness": 0.021017562947236}
+{"kind": "onset", "instrument": "ride", "event_at": 843552.605856095, "received_at": 843553.31106277, "score": 0.940514}
+{"kind": "skip", "index": 25, "target": 843552.2439265491, "at": 843553.3166374, "reason": "ambiguous/missing: ride=1, hihat=0, neighbor_ride=1"}
+{"kind": "onset", "instrument": "ride", "event_at": 843552.82583387, "received_at": 843553.670603352, "score": 0.989823}
+{"kind": "command", "at": 843553.788422805, "index": 28, "beat": 1, "closed": false, "target": 843553.8802901855, "due": 843553.7873659314, "advance": 0.09292425401508808, "lateness": 0.001056873588822782}
+{"kind": "onset", "instrument": "ride", "event_at": 843553.315909668, "received_at": 843553.834939036, "score": 0.950795}
+{"kind": "onset", "instrument": "hihat", "event_at": 843553.3466490719, "received_at": 843553.893150354, "score": 0.90911}
+{"kind": "command", "at": 843554.339015605, "index": 29, "beat": 2, "closed": true, "target": 843554.425744731, "due": 843554.332820477, "advance": 0.09292425401508808, "lateness": 0.006195128080435097}
+{"kind": "onset", "instrument": "ride", "event_at": 843553.6859181239, "received_at": 843554.513447411, "score": 0.962526}
+{"kind": "onset", "instrument": "ride", "event_at": 843553.905918124, "received_at": 843554.513447411, "score": 0.920025}
+{"kind": "match", "at": 843554.524553669, "index": 27, "target": 843553.33483564, "ride_onset": 843553.315909668, "hihat_onset": 843553.3466490719, "error": 0.030739403911866248, "commanded": 843553.262928949, "advance_used": 0.09292425401508808, "actual_advance": 0.07190669106785208, "estimate": 0.10264609497971833, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843554.890095136, "index": 30, "beat": 3, "closed": false, "target": 843554.9711992764, "due": 843554.8782750224, "advance": 0.09292425401508808, "lateness": 0.011820113635621965}
+{"kind": "onset", "instrument": "ride", "event_at": 843554.405928814, "received_at": 843555.120374609, "score": 0.895416}
+{"kind": "onset", "instrument": "hihat", "event_at": 843554.416569629, "received_at": 843555.16559213, "score": 0.993369}
+{"kind": "onset", "instrument": "ride", "event_at": 843554.7758413119, "received_at": 843555.330267257, "score": 0.976268}
+{"kind": "command", "at": 843555.445824415, "index": 31, "beat": 4, "closed": true, "target": 843555.5166538218, "due": 843555.4237295678, "advance": 0.09292425401508808, "lateness": 0.022094847168773413}
+{"kind": "match", "at": 843555.688819376, "index": 29, "target": 843554.425744731, "ride_onset": 843554.405928814, "hihat_onset": 843554.416569629, "error": 0.010640815016813576, "commanded": 843554.339015605, "advance_used": 0.09292425401508808, "actual_advance": 0.08672912593465298, "estimate": 0.09736994095146656, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": true, "desired_advance": 0.10000801796559244, "locked": false, "good_matches": 1}
+{"kind": "command", "at": 843555.973222253, "index": 32, "beat": 1, "closed": false, "target": 843556.0621083673, "due": 843555.9691841133, "advance": 0.09292425401508808, "lateness": 0.004038139712065458}
+{"kind": "onset", "instrument": "ride", "event_at": 843555.495935501, "received_at": 843556.320273989, "score": 0.795298}
+{"kind": "onset", "instrument": "hihat", "event_at": 843555.526602246, "received_at": 843556.361089689, "score": 0.972801}
+{"kind": "command", "at": 843556.518214863, "index": 33, "beat": 2, "closed": true, "target": 843556.6075629127, "due": 843556.5146386587, "advance": 0.09292425401508808, "lateness": 0.00357620429713279}
+{"kind": "onset", "instrument": "ride", "event_at": 843555.865936295, "received_at": 843556.601853665, "score": 0.657644}
+{"kind": "match", "at": 843556.651270661, "index": 31, "target": 843555.5166538218, "ride_onset": 843555.495935501, "hihat_onset": 843555.526602246, "error": 0.030666745034977794, "commanded": 843555.445824415, "advance_used": 0.09292425401508808, "actual_advance": 0.07082940684631467, "estimate": 0.10149615188129246, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": true, "desired_advance": 0.10149615188129246, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843557.083710819, "index": 34, "beat": 3, "closed": false, "target": 843557.1530174582, "due": 843557.0600932041, "advance": 0.09292425401508808, "lateness": 0.023617614875547588}
+{"kind": "command", "at": 843557.614821189, "index": 35, "beat": 4, "closed": true, "target": 843557.6984720037, "due": 843557.6055477497, "advance": 0.09292425401508808, "lateness": 0.009273439296521246}
+{"kind": "skip", "index": 33, "target": 843556.6075629127, "at": 843557.860308057, "reason": "ambiguous/missing: ride=0, hihat=0, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843557.4167248, "received_at": 843558.150728292, "score": 0.993908}
+{"kind": "command", "at": 843558.151070849, "index": 36, "beat": 1, "closed": false, "target": 843558.2439265491, "due": 843558.1510022951, "advance": 0.09292425401508808, "lateness": 6.855395622551441e-05}
+{"kind": "onset", "instrument": "hihat", "event_at": 843557.686715533, "received_at": 843558.480646264, "score": 0.997304}
+{"kind": "command", "at": 843558.721200106, "index": 37, "beat": 2, "closed": true, "target": 843558.7893810945, "due": 843558.6964568405, "advance": 0.09292425401508808, "lateness": 0.024743265472352505}
+{"kind": "onset", "instrument": "hihat", "event_at": 843558.2367412769, "received_at": 843558.990214587, "score": 0.996308}
+{"kind": "skip", "index": 35, "target": 843557.6984720037, "at": 843558.995264571, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843559.266635339, "index": 38, "beat": 3, "closed": false, "target": 843559.33483564, "due": 843559.241911386, "advance": 0.09292425401508808, "lateness": 0.02472395298536867}
+{"kind": "onset", "instrument": "hihat", "event_at": 843558.8068463799, "received_at": 843559.610455488, "score": 0.913233}
+{"kind": "onset", "instrument": "hihat", "event_at": 843559.0568463799, "received_at": 843559.610455488, "score": 0.992425}
+{"kind": "command", "at": 843559.796654787, "index": 39, "beat": 4, "closed": true, "target": 843559.8802901855, "due": 843559.7873659314, "advance": 0.09292425401508808, "lateness": 0.009288855595514178}
+{"kind": "skip", "index": 37, "target": 843558.7893810945, "at": 843559.969030546, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843560.345081197, "index": 40, "beat": 1, "closed": false, "target": 843560.425744731, "due": 843560.332820477, "advance": 0.09292425401508808, "lateness": 0.012260720017366111}
+{"kind": "onset", "instrument": "hihat", "event_at": 843559.876832995, "received_at": 843560.486816457, "score": 0.983858}
+{"kind": "command", "at": 843560.883227751, "index": 41, "beat": 2, "closed": true, "target": 843560.9711992764, "due": 843560.8782750224, "advance": 0.09292425401508808, "lateness": 0.004952728631906211}
+{"kind": "skip", "index": 39, "target": 843559.8802901855, "at": 843561.160773421, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843561.440525723, "index": 42, "beat": 3, "closed": false, "target": 843561.5166538218, "due": 843561.4237295678, "advance": 0.09292425401508808, "lateness": 0.016796155250631273}
+{"kind": "onset", "instrument": "hihat", "event_at": 843560.966881178, "received_at": 843561.742053771, "score": 0.966246}
+{"kind": "command", "at": 843561.977934111, "index": 43, "beat": 4, "closed": true, "target": 843562.0621083673, "due": 843561.9691841133, "advance": 0.09292425401508808, "lateness": 0.008749997708946466}
+{"kind": "skip", "index": 41, "target": 843560.9711992764, "at": 843562.266036351, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843561.7770329919, "received_at": 843562.317135396, "score": 0.997329}
+{"kind": "command", "at": 843562.515282366, "index": 44, "beat": 1, "closed": false, "target": 843562.6075629127, "due": 843562.5146386587, "advance": 0.09292425401508808, "lateness": 0.0006437072297558188}
+{"kind": "onset", "instrument": "hihat", "event_at": 843562.05691464, "received_at": 843562.6002896, "score": 0.993635}
+{"kind": "onset", "instrument": "hihat", "event_at": 843562.326920578, "received_at": 843562.949896797, "score": 0.99583}
+{"kind": "command", "at": 843563.069086396, "index": 45, "beat": 2, "closed": true, "target": 843563.1530174582, "due": 843563.0600932041, "advance": 0.09292425401508808, "lateness": 0.008993191877380013}
+{"kind": "skip", "index": 43, "target": 843562.0621083673, "at": 843563.242508219, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843563.629316152, "index": 46, "beat": 3, "closed": false, "target": 843563.6984720037, "due": 843563.6055477497, "advance": 0.09292425401508808, "lateness": 0.023768402286805212}
+{"kind": "onset", "instrument": "hihat", "event_at": 843563.147022277, "received_at": 843563.808408714, "score": 0.929465}
+{"kind": "command", "at": 843564.159112529, "index": 47, "beat": 4, "closed": true, "target": 843564.2439265491, "due": 843564.1510022951, "advance": 0.09292425401508808, "lateness": 0.008110233931802213}
+{"kind": "skip", "index": 45, "target": 843563.1530174582, "at": 843564.436018107, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843564.713931741, "index": 48, "beat": 1, "closed": false, "target": 843564.7893810945, "due": 843564.6964568405, "advance": 0.09292425401508808, "lateness": 0.01747490046545863}
+{"kind": "onset", "instrument": "hihat", "event_at": 843564.236945743, "received_at": 843564.960932711, "score": 0.995852}
+{"kind": "onset", "instrument": "ride", "event_at": 843564.5964755411, "received_at": 843565.242602698, "score": 0.682682}
+{"kind": "command", "at": 843565.243143656, "index": 49, "beat": 2, "closed": true, "target": 843565.33483564, "due": 843565.241911386, "advance": 0.09292425401508808, "lateness": 0.0012322699185460806}
+{"kind": "skip", "index": 47, "target": 843564.2439265491, "at": 843565.293983747, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843565.04703928, "received_at": 843565.624102174, "score": 0.99558}
+{"kind": "command", "at": 843565.791283538, "index": 50, "beat": 3, "closed": false, "target": 843565.8802901855, "due": 843565.7873659314, "advance": 0.09292425401508808, "lateness": 0.003917606547474861}
+{"kind": "onset", "instrument": "hihat", "event_at": 843565.327191665, "received_at": 843565.904226682, "score": 0.986207}
+{"kind": "command", "at": 843566.338115333, "index": 51, "beat": 4, "closed": true, "target": 843566.425744731, "due": 843566.332820477, "advance": 0.09292425401508808, "lateness": 0.005294856033287942}
+{"kind": "skip", "index": 49, "target": 843565.33483564, "at": 843566.612052639, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843566.889042871, "index": 52, "beat": 1, "closed": false, "target": 843566.9711992764, "due": 843566.8782750224, "advance": 0.09292425401508808, "lateness": 0.010767848580144346}
+{"kind": "onset", "instrument": "hihat", "event_at": 843566.4172224369, "received_at": 843567.090715146, "score": 0.928879}
+{"kind": "command", "at": 843567.427926573, "index": 53, "beat": 2, "closed": true, "target": 843567.5166538218, "due": 843567.4237295678, "advance": 0.09292425401508808, "lateness": 0.004197005182504654}
+{"kind": "skip", "index": 51, "target": 843566.425744731, "at": 843567.746263908, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843567.97302933, "index": 54, "beat": 3, "closed": false, "target": 843568.0621083673, "due": 843567.9691841133, "advance": 0.09292425401508808, "lateness": 0.0038452167063951492}
+{"kind": "onset", "instrument": "hihat", "event_at": 843567.5071870349, "received_at": 843568.267891903, "score": 0.989936}
+{"kind": "onset", "instrument": "hihat", "event_at": 843567.777187035, "received_at": 843568.267891903, "score": 0.994359}
+{"kind": "command", "at": 843568.536834959, "index": 55, "beat": 4, "closed": true, "target": 843568.6075629127, "due": 843568.5146386587, "advance": 0.09292425401508808, "lateness": 0.022196300327777863}
+{"kind": "skip", "index": 53, "target": 843567.5166538218, "at": 843568.591519287, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843569.063521095, "index": 56, "beat": 1, "closed": false, "target": 843569.1530174582, "due": 843569.0600932041, "advance": 0.09292425401508808, "lateness": 0.0034278908278793097}
+{"kind": "onset", "instrument": "ride", "event_at": 843568.596642623, "received_at": 843569.219039389, "score": 0.603116}
+{"kind": "onset", "instrument": "hihat", "event_at": 843568.617217847, "received_at": 843569.236922145, "score": 0.93286}
+{"kind": "onset", "instrument": "ride", "event_at": 843568.966570716, "received_at": 843569.538229316, "score": 0.946292}
+{"kind": "command", "at": 843569.613699148, "index": 57, "beat": 2, "closed": true, "target": 843569.6984720037, "due": 843569.6055477497, "advance": 0.09292425401508808, "lateness": 0.008151398273184896}
+{"kind": "onset", "instrument": "hihat", "event_at": 843569.1472355489, "received_at": 843569.786836255, "score": 0.994168}
+{"kind": "match", "at": 843569.787055636, "index": 55, "target": 843568.6075629127, "ride_onset": 843568.596642623, "hihat_onset": 843568.617217847, "error": 0.020575224072672427, "commanded": 843568.536834959, "advance_used": 0.09292425401508808, "actual_advance": 0.07072795368731022, "estimate": 0.09130317775998265, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843570.171543911, "index": 58, "beat": 3, "closed": false, "target": 843570.2439265491, "due": 843570.1510022951, "advance": 0.09292425401508808, "lateness": 0.020541615900583565}
+{"kind": "onset", "instrument": "hihat", "event_at": 843569.687348944, "received_at": 843570.386875533, "score": 0.996913}
+{"kind": "command", "at": 843570.700444828, "index": 59, "beat": 4, "closed": true, "target": 843570.7893810945, "due": 843570.6964568405, "advance": 0.09292425401508808, "lateness": 0.0039879875257611275}
+{"kind": "onset", "instrument": "ride", "event_at": 843570.286643529, "received_at": 843571.012022954, "score": 0.948175}
+{"kind": "skip", "index": 57, "target": 843569.6984720037, "at": 843571.065605931, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843571.243096139, "index": 60, "beat": 1, "closed": false, "target": 843571.33483564, "due": 843571.241911386, "advance": 0.09292425401508808, "lateness": 0.001184753025881946}
+{"kind": "onset", "instrument": "hihat", "event_at": 843570.7772961679, "received_at": 843571.383519308, "score": 0.99488}
+{"kind": "command", "at": 843571.789760094, "index": 61, "beat": 2, "closed": true, "target": 843571.8802901855, "due": 843571.7873659314, "advance": 0.09292425401508808, "lateness": 0.0023941625840961933}
+{"kind": "onset", "instrument": "ride", "event_at": 843571.3366960859, "received_at": 843571.869516781, "score": 0.882268}
+{"kind": "skip", "index": 59, "target": 843570.7893810945, "at": 843571.881313376, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843572.357749872, "index": 62, "beat": 3, "closed": false, "target": 843572.425744731, "due": 843572.332820477, "advance": 0.09292425401508808, "lateness": 0.024929395061917603}
+{"kind": "onset", "instrument": "hihat", "event_at": 843571.867368334, "received_at": 843572.532938161, "score": 0.954786}
+{"kind": "onset", "instrument": "hihat", "event_at": 843572.147402238, "received_at": 843572.884499002, "score": 0.99166}
+{"kind": "command", "at": 843572.884797364, "index": 63, "beat": 4, "closed": true, "target": 843572.9711992764, "due": 843572.8782750224, "advance": 0.09292425401508808, "lateness": 0.0065223416313529015}
+{"kind": "skip", "index": 61, "target": 843571.8802901855, "at": 843573.05737154, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=1"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843572.6874552481, "received_at": 843573.380407352, "score": 0.998295}
+{"kind": "command", "at": 843573.424978737, "index": 64, "beat": 1, "closed": false, "target": 843573.5166538218, "due": 843573.4237295678, "advance": 0.09292425401508808, "lateness": 0.0012491692323237658}
+{"kind": "onset", "instrument": "hihat", "event_at": 843572.957459765, "received_at": 843573.719365156, "score": 0.958739}
+{"kind": "command", "at": 843573.97344049, "index": 65, "beat": 2, "closed": true, "target": 843574.0621083673, "due": 843573.9691841133, "advance": 0.09292425401508808, "lateness": 0.004256376647390425}
+{"kind": "onset", "instrument": "ride", "event_at": 843573.516893572, "received_at": 843574.313547949, "score": 0.976216}
+{"kind": "skip", "index": 63, "target": 843572.9711992764, "at": 843574.314089447, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843573.7775218771, "received_at": 843574.3304155, "score": 0.99394}
+{"kind": "command", "at": 843574.518695384, "index": 66, "beat": 3, "closed": false, "target": 843574.6075629127, "due": 843574.5146386587, "advance": 0.09292425401508808, "lateness": 0.004056725301779807}
+{"kind": "onset", "instrument": "hihat", "event_at": 843574.047421929, "received_at": 843574.569201332, "score": 0.991722}
+{"kind": "command", "at": 843575.076716279, "index": 67, "beat": 4, "closed": true, "target": 843575.1530174582, "due": 843575.0600932041, "advance": 0.09292425401508808, "lateness": 0.0166230748873204}
+{"kind": "skip", "index": 65, "target": 843574.0621083673, "at": 843575.216339462, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843575.609453455, "index": 68, "beat": 1, "closed": false, "target": 843575.6984720037, "due": 843575.6055477497, "advance": 0.09292425401508808, "lateness": 0.0039057052927091718}
+{"kind": "onset", "instrument": "hihat", "event_at": 843575.157651924, "received_at": 843575.858468211, "score": 0.984936}
+{"kind": "command", "at": 843576.153906667, "index": 69, "beat": 2, "closed": true, "target": 843576.2439265491, "due": 843576.1510022951, "advance": 0.09292425401508808, "lateness": 0.0029043719405308366}
+{"kind": "onset", "instrument": "hihat", "event_at": 843575.687570693, "received_at": 843576.360386632, "score": 0.995746}
+{"kind": "skip", "index": 67, "target": 843575.1530174582, "at": 843576.386947766, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843576.718135293, "index": 70, "beat": 3, "closed": false, "target": 843576.7893810945, "due": 843576.6964568405, "advance": 0.09292425401508808, "lateness": 0.021678452496416867}
+{"kind": "onset", "instrument": "hihat", "event_at": 843576.227569799, "received_at": 843576.999980692, "score": 0.992674}
+{"kind": "command", "at": 843577.305916726, "index": 71, "beat": 4, "closed": true, "target": 843577.33483564, "due": 843577.241911386, "advance": 0.09292425401508808, "lateness": 0.06400533998385072}
+{"kind": "skip", "index": 69, "target": 843576.2439265491, "at": 843577.311050634, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843577.787609058, "index": 72, "beat": 1, "closed": false, "target": 843577.8802901855, "due": 843577.7873659314, "advance": 0.09292425401508808, "lateness": 0.00024312653113156557}
+{"kind": "onset", "instrument": "hihat", "event_at": 843577.3876841221, "received_at": 843578.201895716, "score": 0.992339}
+{"kind": "command", "at": 843578.337905716, "index": 73, "beat": 2, "closed": true, "target": 843578.425744731, "due": 843578.332820477, "advance": 0.09292425401508808, "lateness": 0.005085239070467651}
+{"kind": "skip", "index": 71, "target": 843577.33483564, "at": 843578.531728633, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843578.888628037, "index": 74, "beat": 3, "closed": false, "target": 843578.9711992764, "due": 843578.8782750224, "advance": 0.09292425401508808, "lateness": 0.010353014571592212}
+{"kind": "onset", "instrument": "hihat", "event_at": 843578.417709136, "received_at": 843579.161820449, "score": 0.993193}
+{"kind": "command", "at": 843579.428794824, "index": 75, "beat": 4, "closed": true, "target": 843579.5166538218, "due": 843579.4237295678, "advance": 0.09292425401508808, "lateness": 0.005065256264060736}
+{"kind": "onset", "instrument": "hihat", "event_at": 843578.957711201, "received_at": 843579.712295081, "score": 0.993914}
+{"kind": "skip", "index": 73, "target": 843578.425744731, "at": 843579.715708748, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843580.015880282, "index": 76, "beat": 1, "closed": false, "target": 843580.0621083673, "due": 843579.9691841133, "advance": 0.09292425401508808, "lateness": 0.046696168719790876}
+{"kind": "onset", "instrument": "hihat", "event_at": 843579.507742562, "received_at": 843580.347172525, "score": 0.990585}
+{"kind": "command", "at": 843580.538517065, "index": 77, "beat": 2, "closed": true, "target": 843580.6075629127, "due": 843580.5146386587, "advance": 0.09292425401508808, "lateness": 0.023878406267613173}
+{"kind": "onset", "instrument": "ride", "event_at": 843579.867083956, "received_at": 843580.643754177, "score": 0.811021}
+{"kind": "skip", "index": 75, "target": 843579.5166538218, "at": 843580.64458489, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843581.068893841, "index": 78, "beat": 3, "closed": false, "target": 843581.1530174582, "due": 843581.0600932041, "advance": 0.09292425401508808, "lateness": 0.008800636860542}
+{"kind": "onset", "instrument": "hihat", "event_at": 843580.5980061219, "received_at": 843581.179480433, "score": 0.994934}
+{"kind": "command", "at": 843581.633883771, "index": 79, "beat": 4, "closed": true, "target": 843581.6984720037, "due": 843581.6055477497, "advance": 0.09292425401508808, "lateness": 0.028336021350696683}
+{"kind": "onset", "instrument": "ride", "event_at": 843581.177154002, "received_at": 843581.860706314, "score": 0.92739}
+{"kind": "skip", "index": 77, "target": 843580.6075629127, "at": 843581.866872121, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843581.4185693031, "received_at": 843582.136637562, "score": 0.995782}
+{"kind": "command", "at": 843582.180313155, "index": 80, "beat": 1, "closed": false, "target": 843582.2439265491, "due": 843582.1510022951, "advance": 0.09292425401508808, "lateness": 0.02931085997261107}
+{"kind": "onset", "instrument": "hihat", "event_at": 843581.7285583279, "received_at": 843582.45705583, "score": 0.949968}
+{"kind": "onset", "instrument": "ride", "event_at": 843582.04723957, "received_at": 843582.67941195, "score": 0.804237}
+{"kind": "command", "at": 843582.726727917, "index": 81, "beat": 2, "closed": true, "target": 843582.7893810945, "due": 843582.6964568405, "advance": 0.09292425401508808, "lateness": 0.030271076480858028}
+{"kind": "onset", "instrument": "ride", "event_at": 843582.267247426, "received_at": 843582.968742413, "score": 0.959619}
+{"kind": "skip", "index": 79, "target": 843581.6984720037, "at": 843583.020099902, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=2"}
+{"kind": "command", "at": 843583.242597793, "index": 82, "beat": 3, "closed": false, "target": 843583.33483564, "due": 843583.241911386, "advance": 0.09292425401508808, "lateness": 0.0006864069728180766}
+{"kind": "onset", "instrument": "ride", "event_at": 843582.7672889649, "received_at": 843583.290148199, "score": 0.665959}
+{"kind": "onset", "instrument": "hihat", "event_at": 843582.5086462799, "received_at": 843583.343389141, "score": 0.997294}
+{"kind": "onset", "instrument": "hihat", "event_at": 843582.8085939529, "received_at": 843583.670429179, "score": 0.991683}
+{"kind": "command", "at": 843583.797593273, "index": 83, "beat": 4, "closed": true, "target": 843583.8802901855, "due": 843583.7873659314, "advance": 0.09292425401508808, "lateness": 0.010227341554127634}
+{"kind": "onset", "instrument": "hihat", "event_at": 843583.328560785, "received_at": 843583.975342726, "score": 0.995605}
+{"kind": "match", "at": 843583.977598012, "index": 81, "target": 843582.7893810945, "ride_onset": 843582.7672889649, "hihat_onset": 843582.8085939529, "error": 0.041304987971670926, "commanded": 843582.726727917, "advance_used": 0.09292425401508808, "actual_advance": 0.06265317753423005, "estimate": 0.10395816550590098, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 0}
+{"kind": "command", "at": 843584.357436905, "index": 84, "beat": 1, "closed": false, "target": 843584.425744731, "due": 843584.332820477, "advance": 0.09292425401508808, "lateness": 0.024616428068839014}
+{"kind": "onset", "instrument": "ride", "event_at": 843584.2272534571, "received_at": 843584.778511859, "score": 0.783675}
+{"kind": "command", "at": 843584.89750336, "index": 85, "beat": 2, "closed": true, "target": 843584.9711992764, "due": 843584.8782750224, "advance": 0.09292425401508808, "lateness": 0.01922833768185228}
+{"kind": "skip", "index": 83, "target": 843583.8802901855, "at": 843585.145763383, "reason": "ambiguous/missing: ride=0, hihat=0, neighbor_ride=1"}
+{"kind": "command", "at": 843585.457208505, "index": 86, "beat": 3, "closed": false, "target": 843585.5166538218, "due": 843585.4237295678, "advance": 0.09292425401508808, "lateness": 0.03347893722821027}
+{"kind": "onset", "instrument": "hihat", "event_at": 843584.9586353749, "received_at": 843585.798692139, "score": 0.994689}
+{"kind": "onset", "instrument": "ride", "event_at": 843585.317314482, "received_at": 843585.966667409, "score": 0.859721}
+{"kind": "command", "at": 843585.972335952, "index": 87, "beat": 4, "closed": true, "target": 843586.0621083673, "due": 843585.9691841133, "advance": 0.09292425401508808, "lateness": 0.003151838667690754}
+{"kind": "skip", "index": 85, "target": 843584.9711992764, "at": 843586.284410214, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843586.523040443, "index": 88, "beat": 1, "closed": false, "target": 843586.6075629127, "due": 843586.5146386587, "advance": 0.09292425401508808, "lateness": 0.008401784230954945}
+{"kind": "onset", "instrument": "hihat", "event_at": 843586.0487688481, "received_at": 843586.637994143, "score": 0.9958}
+{"kind": "command", "at": 843587.062810056, "index": 89, "beat": 2, "closed": true, "target": 843587.1530174582, "due": 843587.0600932041, "advance": 0.09292425401508808, "lateness": 0.0027168518863618374}
+{"kind": "onset", "instrument": "hihat", "event_at": 843586.598726236, "received_at": 843587.273386013, "score": 0.997279}
+{"kind": "skip", "index": 87, "target": 843586.0621083673, "at": 843587.274326998, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843587.6086785, "index": 90, "beat": 3, "closed": false, "target": 843587.6984720037, "due": 843587.6055477497, "advance": 0.09292425401508808, "lateness": 0.00313075038138777}
+{"kind": "onset", "instrument": "hihat", "event_at": 843587.138736337, "received_at": 843587.848996291, "score": 0.996008}
+{"kind": "onset", "instrument": "ride", "event_at": 843587.507409585, "received_at": 843588.092989783, "score": 0.945092}
+{"kind": "command", "at": 843588.178205592, "index": 91, "beat": 4, "closed": true, "target": 843588.2439265491, "due": 843588.1510022951, "advance": 0.09292425401508808, "lateness": 0.027203296893276274}
+{"kind": "skip", "index": 89, "target": 843587.1530174582, "at": 843588.420739154, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843588.717042198, "index": 92, "beat": 1, "closed": false, "target": 843588.7893810945, "due": 843588.6964568405, "advance": 0.09292425401508808, "lateness": 0.020585357560776174}
+{"kind": "onset", "instrument": "ride", "event_at": 843588.2273559299, "received_at": 843588.925316688, "score": 0.80985}
+{"kind": "onset", "instrument": "hihat", "event_at": 843588.2586883489, "received_at": 843588.976289503, "score": 0.985862}
+{"kind": "command", "at": 843589.246475801, "index": 93, "beat": 2, "closed": true, "target": 843589.33483564, "due": 843589.241911386, "advance": 0.09292425401508808, "lateness": 0.004564414964988828}
+{"kind": "onset", "instrument": "hihat", "event_at": 843588.508733747, "received_at": 843589.317914194, "score": 0.997637}
+{"kind": "skip", "index": 91, "target": 843588.2439265491, "at": 843589.32296403, "reason": "ambiguous/missing: ride=1, hihat=2, neighbor_ride=0"}
+{"kind": "onset", "instrument": "ride", "event_at": 843588.807413564, "received_at": 843589.592050071, "score": 0.983942}
+{"kind": "command", "at": 843589.792631267, "index": 94, "beat": 3, "closed": false, "target": 843589.8802901855, "due": 843589.7873659314, "advance": 0.09292425401508808, "lateness": 0.00526533555239439}
+{"kind": "onset", "instrument": "ride", "event_at": 843589.307413478, "received_at": 843589.924546607, "score": 0.997855}
+{"kind": "onset", "instrument": "hihat", "event_at": 843589.3187821481, "received_at": 843589.932134332, "score": 0.994308}
+{"kind": "command", "at": 843590.336264185, "index": 95, "beat": 4, "closed": true, "target": 843590.425744731, "due": 843590.332820477, "advance": 0.09292425401508808, "lateness": 0.0034437080612406135}
+{"kind": "onset", "instrument": "ride", "event_at": 843589.687441574, "received_at": 843590.539376258, "score": 0.998638}
+{"kind": "onset", "instrument": "ride", "event_at": 843589.907441574, "received_at": 843590.539376258, "score": 0.890026}
+{"kind": "match", "at": 843590.595746819, "index": 93, "target": 843589.33483564, "ride_onset": 843589.307413478, "hihat_onset": 843589.3187821481, "error": 0.011368670035153627, "commanded": 843589.246475801, "advance_used": 0.09292425401508808, "actual_advance": 0.08835983905009925, "estimate": 0.09972850908525288, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": false, "good_matches": 1}
+{"kind": "command", "at": 843590.881823627, "index": 96, "beat": 1, "closed": false, "target": 843590.9711992764, "due": 843590.8782750224, "advance": 0.09292425401508808, "lateness": 0.003548604669049382}
+{"kind": "onset", "instrument": "ride", "event_at": 843590.3975024311, "received_at": 843591.07541085, "score": 0.9983}
+{"kind": "onset", "instrument": "hihat", "event_at": 843590.408822387, "received_at": 843591.092347067, "score": 0.992113}
+{"kind": "onset", "instrument": "ride", "event_at": 843590.7774860801, "received_at": 843591.406977307, "score": 0.967185}
+{"kind": "command", "at": 843591.424383837, "index": 97, "beat": 2, "closed": true, "target": 843591.5166538218, "due": 843591.4237295678, "advance": 0.09292425401508808, "lateness": 0.0006542692426592112}
+{"kind": "locked", "at": 843591.761235357, "index": 95, "advance": 0.09292425401508808, "advance_ms": 92.92425401508808, "tolerance_ms": 15.0, "consecutive_matches": 2}
+{"kind": "match", "at": 843591.761235357, "index": 95, "target": 843590.425744731, "ride_onset": 843590.3975024311, "hihat_onset": 843590.408822387, "error": 0.011319955927319825, "commanded": 843590.336264185, "advance_used": 0.09292425401508808, "actual_advance": 0.08948054595384747, "estimate": 0.10080050188116729, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": true, "desired_advance": null, "locked": true, "good_matches": 2}
+{"kind": "command", "at": 843591.969814851, "index": 98, "beat": 3, "closed": false, "target": 843592.0621083673, "due": 843591.9691841133, "advance": 0.09292425401508808, "lateness": 0.0006307376315817237}
+{"kind": "onset", "instrument": "hihat", "event_at": 843591.4989286241, "received_at": 843592.267733679, "score": 0.976213}
+{"kind": "command", "at": 843592.529357518, "index": 99, "beat": 4, "closed": true, "target": 843592.6075629127, "due": 843592.5146386587, "advance": 0.09292425401508808, "lateness": 0.014718859223648906}
+{"kind": "onset", "instrument": "ride", "event_at": 843591.867524283, "received_at": 843592.575748036, "score": 0.996515}
+{"kind": "skip", "index": 97, "target": 843591.5166538218, "at": 843592.626679816, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843593.062354058, "index": 100, "beat": 1, "closed": false, "target": 843593.1530174582, "due": 843593.0600932041, "advance": 0.09292425401508808, "lateness": 0.0022608538856729865}
+{"kind": "onset", "instrument": "ride", "event_at": 843592.587586051, "received_at": 843593.219801382, "score": 0.998202}
+{"kind": "onset", "instrument": "hihat", "event_at": 843592.608944983, "received_at": 843593.229970749, "score": 0.983467}
+{"kind": "onset", "instrument": "hihat", "event_at": 843592.868932571, "received_at": 843593.551936172, "score": 0.99716}
+{"kind": "command", "at": 843593.629157423, "index": 101, "beat": 2, "closed": true, "target": 843593.6984720037, "due": 843593.6055477497, "advance": 0.09292425401508808, "lateness": 0.02360967337153852}
+{"kind": "onset", "instrument": "ride", "event_at": 843593.1775094549, "received_at": 843593.747625346, "score": 0.999041}
+{"kind": "skip", "index": 99, "target": 843592.6075629127, "at": 843593.795412153, "reason": "ambiguous/missing: ride=1, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843594.157382509, "index": 102, "beat": 3, "closed": false, "target": 843594.2439265491, "due": 843594.1510022951, "advance": 0.09292425401508808, "lateness": 0.006380213890224695}
+{"kind": "onset", "instrument": "ride", "event_at": 843593.647553841, "received_at": 843594.411494944, "score": 0.872494}
+{"kind": "onset", "instrument": "hihat", "event_at": 843593.6888987961, "received_at": 843594.45020967, "score": 0.990687}
+{"kind": "onset", "instrument": "ride", "event_at": 843594.057568568, "received_at": 843594.726550389, "score": 0.992908}
+{"kind": "command", "at": 843594.727830565, "index": 103, "beat": 4, "closed": true, "target": 843594.7893810945, "due": 843594.6964568405, "advance": 0.09292425401508808, "lateness": 0.03137372445780784}
+{"kind": "onset", "instrument": "ride", "event_at": 843594.2775772039, "received_at": 843595.041420348, "score": 0.969038}
+{"kind": "match", "at": 843595.085430903, "index": 101, "target": 843593.6984720037, "ride_onset": 843593.647553841, "hihat_onset": 843593.6888987961, "error": 0.04134495509788394, "commanded": 843593.629157423, "advance_used": 0.09292425401508808, "actual_advance": 0.06931458064354956, "estimate": 0.1106595357414335, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": true, "good_matches": 2}
+{"kind": "command", "at": 843595.244485885, "index": 104, "beat": 1, "closed": false, "target": 843595.33483564, "due": 843595.241911386, "advance": 0.09292425401508808, "lateness": 0.002574498998001218}
+{"kind": "onset", "instrument": "ride", "event_at": 843594.7675701409, "received_at": 843595.367877314, "score": 0.998169}
+{"kind": "onset", "instrument": "hihat", "event_at": 843595.048972693, "received_at": 843595.585517673, "score": 0.993473}
+{"kind": "command", "at": 843595.813112377, "index": 105, "beat": 2, "closed": true, "target": 843595.8802901855, "due": 843595.7873659314, "advance": 0.09292425401508808, "lateness": 0.02574644552078098}
+{"kind": "onset", "instrument": "ride", "event_at": 843595.3176271, "received_at": 843595.903281899, "score": 0.982393}
+{"kind": "skip", "index": 103, "target": 843594.7893810945, "at": 843595.944966552, "reason": "required advance outside signed safety bound"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843595.5990211851, "received_at": 843596.234348944, "score": 0.99721}
+{"kind": "command", "at": 843596.349056146, "index": 106, "beat": 3, "closed": false, "target": 843596.425744731, "due": 843596.332820477, "advance": 0.09292425401508808, "lateness": 0.016235669027082622}
+{"kind": "onset", "instrument": "ride", "event_at": 843595.837660435, "received_at": 843596.519255461, "score": 0.980438}
+{"kind": "command", "at": 843596.879302864, "index": 107, "beat": 4, "closed": true, "target": 843596.9711992764, "due": 843596.8782750224, "advance": 0.09292425401508808, "lateness": 0.0010278415866196156}
+{"kind": "onset", "instrument": "hihat", "event_at": 843596.419069843, "received_at": 843597.090407398, "score": 0.996585}
+{"kind": "skip", "index": 105, "target": 843595.8802901855, "at": 843597.091213034, "reason": "ambiguous/missing: ride=1, hihat=0, neighbor_ride=1"}
+{"kind": "command", "at": 843597.442132658, "index": 108, "beat": 1, "closed": false, "target": 843597.5166538218, "due": 843597.4237295678, "advance": 0.09292425401508808, "lateness": 0.018403090187348425}
+{"kind": "onset", "instrument": "hihat", "event_at": 843596.9591978329, "received_at": 843597.719912471, "score": 0.985585}
+{"kind": "command", "at": 843597.970146271, "index": 109, "beat": 2, "closed": true, "target": 843598.0621083673, "due": 843597.9691841133, "advance": 0.09292425401508808, "lateness": 0.0009621577337384224}
+{"kind": "skip", "index": 107, "target": 843596.9711992764, "at": 843598.346984018, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843598.515492575, "index": 110, "beat": 3, "closed": false, "target": 843598.6075629127, "due": 843598.5146386587, "advance": 0.09292425401508808, "lateness": 0.0008539162809029222}
+{"kind": "onset", "instrument": "hihat", "event_at": 843598.0490681491, "received_at": 843598.59185807, "score": 0.995778}
+{"kind": "command", "at": 843599.072801314, "index": 111, "beat": 4, "closed": true, "target": 843599.1530174582, "due": 843599.0600932041, "advance": 0.09292425401508808, "lateness": 0.012708109803497791}
+{"kind": "skip", "index": 109, "target": 843598.0621083673, "at": 843599.236986468, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843598.8691568279, "received_at": 843599.534134602, "score": 0.998471}
+{"kind": "command", "at": 843599.610022091, "index": 112, "beat": 1, "closed": false, "target": 843599.6984720037, "due": 843599.6055477497, "advance": 0.09292425401508808, "lateness": 0.004474341287277639}
+{"kind": "onset", "instrument": "hihat", "event_at": 843599.1491732049, "received_at": 843599.852537151, "score": 0.993078}
+{"kind": "command", "at": 843600.151679644, "index": 113, "beat": 2, "closed": true, "target": 843600.2439265491, "due": 843600.1510022951, "advance": 0.09292425401508808, "lateness": 0.0006773489294573665}
+{"kind": "onset", "instrument": "hihat", "event_at": 843599.419180654, "received_at": 843600.191656844, "score": 0.992866}
+{"kind": "skip", "index": 111, "target": 843599.1530174582, "at": 843600.432377704, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843599.959248983, "received_at": 843600.69135561, "score": 0.997442}
+{"kind": "command", "at": 843600.716519945, "index": 114, "beat": 3, "closed": false, "target": 843600.7893810945, "due": 843600.6964568405, "advance": 0.09292425401508808, "lateness": 0.020063104457221925}
+{"kind": "onset", "instrument": "hihat", "event_at": 843600.229204978, "received_at": 843601.035823658, "score": 0.953092}
+{"kind": "command", "at": 843601.244342956, "index": 115, "beat": 4, "closed": true, "target": 843601.33483564, "due": 843601.241911386, "advance": 0.09292425401508808, "lateness": 0.002431569970212877}
+{"kind": "skip", "index": 113, "target": 843600.2439265491, "at": 843601.366443962, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843601.859687584, "index": 116, "beat": 1, "closed": false, "target": 843601.8802901855, "due": 843601.7873659314, "advance": 0.09292425401508808, "lateness": 0.07232165255118161}
+{"kind": "onset", "instrument": "hihat", "event_at": 843601.319284449, "received_at": 843601.861113499, "score": 0.993782}
+{"kind": "onset", "instrument": "hihat", "event_at": 843601.599291637, "received_at": 843602.194044189, "score": 0.997146}
+{"kind": "command", "at": 843602.342182516, "index": 117, "beat": 2, "closed": true, "target": 843602.425744731, "due": 843602.332820477, "advance": 0.09292425401508808, "lateness": 0.009362039039842784}
+{"kind": "onset", "instrument": "ride", "event_at": 843601.8780047949, "received_at": 843602.51097615, "score": 0.825062}
+{"kind": "skip", "index": 115, "target": 843601.33483564, "at": 843602.527149097, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843602.881206672, "index": 118, "beat": 3, "closed": false, "target": 843602.9711992764, "due": 843602.8782750224, "advance": 0.09292425401508808, "lateness": 0.002931649680249393}
+{"kind": "onset", "instrument": "hihat", "event_at": 843602.419435907, "received_at": 843603.192320554, "score": 0.992613}
+{"kind": "command", "at": 843603.425366901, "index": 119, "beat": 4, "closed": true, "target": 843603.5166538218, "due": 843603.4237295678, "advance": 0.09292425401508808, "lateness": 0.00163733318913728}
+{"kind": "onset", "instrument": "hihat", "event_at": 843602.959349203, "received_at": 843603.702341294, "score": 0.982049}
+{"kind": "skip", "index": 117, "target": 843602.425744731, "at": 843603.705091259, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=1"}
+{"kind": "command", "at": 843603.973180777, "index": 120, "beat": 1, "closed": false, "target": 843604.0621083673, "due": 843603.9691841133, "advance": 0.09292425401508808, "lateness": 0.003996663726866245}
+{"kind": "onset", "instrument": "hihat", "event_at": 843603.499399397, "received_at": 843604.359736202, "score": 0.99471}
+{"kind": "onset", "instrument": "hihat", "event_at": 843603.779399397, "received_at": 843604.359736202, "score": 0.993551}
+{"kind": "command", "at": 843604.518255731, "index": 121, "beat": 2, "closed": true, "target": 843604.6075629127, "due": 843604.5146386587, "advance": 0.09292425401508808, "lateness": 0.003617072245106101}
+{"kind": "skip", "index": 119, "target": 843603.5166538218, "at": 843604.640447498, "reason": "ambiguous/missing: ride=0, hihat=2, neighbor_ride=0"}
+{"kind": "command", "at": 843605.065560399, "index": 122, "beat": 3, "closed": false, "target": 843605.1530174582, "due": 843605.0600932041, "advance": 0.09292425401508808, "lateness": 0.005467194830998778}
+{"kind": "onset", "instrument": "hihat", "event_at": 843604.5994388349, "received_at": 843605.159500457, "score": 0.9909}
+{"kind": "command", "at": 843605.607983976, "index": 123, "beat": 4, "closed": true, "target": 843605.6984720037, "due": 843605.6055477497, "advance": 0.09292425401508808, "lateness": 0.0024362263502553105}
+{"kind": "onset", "instrument": "hihat", "event_at": 843605.1495122489, "received_at": 843605.816448525, "score": 0.991666}
+{"kind": "skip", "index": 121, "target": 843604.6075629127, "at": 843605.817131385, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843606.15260278, "index": 124, "beat": 1, "closed": false, "target": 843606.2439265491, "due": 843606.1510022951, "advance": 0.09292425401508808, "lateness": 0.0016004849458113313}
+{"kind": "onset", "instrument": "hihat", "event_at": 843605.689484772, "received_at": 843606.442388249, "score": 0.979837}
+{"kind": "command", "at": 843606.698286431, "index": 125, "beat": 2, "closed": true, "target": 843606.7893810945, "due": 843606.6964568405, "advance": 0.09292425401508808, "lateness": 0.0018295905319973826}
+{"kind": "skip", "index": 123, "target": 843605.6984720037, "at": 843607.008702332, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843607.243142367, "index": 126, "beat": 3, "closed": false, "target": 843607.33483564, "due": 843607.241911386, "advance": 0.09292425401508808, "lateness": 0.0012309809681028128}
+{"kind": "onset", "instrument": "hihat", "event_at": 843606.7795472919, "received_at": 843607.328206129, "score": 0.975232}
+{"kind": "command", "at": 843607.813046574, "index": 127, "beat": 4, "closed": true, "target": 843607.8802901855, "due": 843607.7873659314, "advance": 0.09292425401508808, "lateness": 0.02568064257502556}
+{"kind": "skip", "index": 125, "target": 843606.7893810945, "at": 843607.946493349, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843608.335036351, "index": 128, "beat": 1, "closed": false, "target": 843608.425744731, "due": 843608.332820477, "advance": 0.09292425401508808, "lateness": 0.0022158740321174264}
+{"kind": "onset", "instrument": "hihat", "event_at": 843608.139586911, "received_at": 843608.832841827, "score": 0.994223}
+{"kind": "command", "at": 843608.88188193, "index": 129, "beat": 2, "closed": true, "target": 843608.9711992764, "due": 843608.8782750224, "advance": 0.09292425401508808, "lateness": 0.003606907674111426}
+{"kind": "onset", "instrument": "ride", "event_at": 843608.4582984269, "received_at": 843609.115551854, "score": 0.808457}
+{"kind": "skip", "index": 127, "target": 843607.8802901855, "at": 843609.121276537, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=0"}
+{"kind": "command", "at": 843609.440103746, "index": 130, "beat": 3, "closed": false, "target": 843609.5166538218, "due": 843609.4237295678, "advance": 0.09292425401508808, "lateness": 0.01637417823076248}
+{"kind": "onset", "instrument": "hihat", "event_at": 843608.9596042229, "received_at": 843609.76157458, "score": 0.955347}
+{"kind": "onset", "instrument": "ride", "event_at": 843609.318323137, "received_at": 843609.974568201, "score": 0.806235}
+{"kind": "command", "at": 843609.975189603, "index": 131, "beat": 4, "closed": true, "target": 843610.0621083673, "due": 843609.9691841133, "advance": 0.09292425401508808, "lateness": 0.006005489733070135}
+{"kind": "onset", "instrument": "ride", "event_at": 843609.548365391, "received_at": 843610.306541504, "score": 0.995181}
+{"kind": "skip", "index": 129, "target": 843608.9711992764, "at": 843610.307069106, "reason": "ambiguous/missing: ride=0, hihat=1, neighbor_ride=2"}
+{"kind": "onset", "instrument": "hihat", "event_at": 843609.779714339, "received_at": 843610.313760424, "score": 0.998121}
+{"kind": "command", "at": 843610.515892348, "index": 132, "beat": 1, "closed": false, "target": 843610.6075629127, "due": 843610.5146386587, "advance": 0.09292425401508808, "lateness": 0.0012536892900243402}
+{"kind": "onset", "instrument": "ride", "event_at": 843610.0484026871, "received_at": 843610.65072608, "score": 0.981293}
+{"kind": "onset", "instrument": "hihat", "event_at": 843610.0496889061, "received_at": 843610.65970222, "score": 0.996621}
+{"kind": "command", "at": 843611.065973501, "index": 133, "beat": 2, "closed": true, "target": 843611.1530174582, "due": 843611.0600932041, "advance": 0.09292425401508808, "lateness": 0.005880296812392771}
+{"kind": "onset", "instrument": "ride", "event_at": 843610.408523254, "received_at": 843611.231086024, "score": 0.998315}
+{"kind": "onset", "instrument": "ride", "event_at": 843610.638523254, "received_at": 843611.231086024, "score": 0.974738}
+{"kind": "match", "at": 843611.28607397, "index": 131, "target": 843610.0621083673, "ride_onset": 843610.0484026871, "hihat_onset": 843610.0496889061, "error": 0.001286218990571797, "commanded": 843609.975189603, "advance_used": 0.09292425401508808, "actual_advance": 0.08691876428201795, "estimate": 0.08820498327258974, "advance_before": 0.09292425401508808, "advance": 0.09292425401508808, "estimate_confirmed": false, "desired_advance": null, "locked": true, "good_matches": 2}
+{"kind": "command", "at": 843611.609952161, "index": 134, "beat": 3, "closed": false, "target": 843611.6984720037, "due": 843611.6055477497, "advance": 0.09292425401508808, "lateness": 0.00440441130194813}
+{"kind": "onset", "instrument": "ride", "event_at": 843611.128455633, "received_at": 843611.777816716, "score": 0.697659}
+{"kind": "onset", "instrument": "ride", "event_at": 843611.49846884, "received_at": 843612.114638241, "score": 0.987588}
+{"kind": "command", "at": 843612.157823954, "index": 135, "beat": 4, "closed": true, "target": 843612.2439265491, "due": 843612.1510022951, "advance": 0.09292425401508808, "lateness": 0.006821658927947283}
+{"kind": "stop", "at": 843612.275236765, "advance": 0.09292425401508808, "matches": 14, "skips": 52}

@@ -1,0 +1,26 @@
+{
+  "changed_production_files": [
+    "camera_playback/dual_recording.py"
+  ],
+  "restored": "Original CameraGoalControl corrections, encoder-count hysteresis, and 200 ms target resends for right return only",
+  "command_equivalence": "Exact timestamp and CAN target-byte comparison with original CameraSearchApp.begin_stage and goal_motion.App.tick passed for CSP and MIT J7 routing",
+  "full_tests": 666,
+  "full_test_result": "PASS",
+  "ui_simulation": "PASS",
+  "physical_motion": false,
+  "physical_clearance_verified": false,
+  "left_motion_code_unchanged": true,
+  "other_snapshotted_files_unchanged": 83,
+  "cached_hardware_defaults": [
+    {
+      "arm": "left",
+      "cache_hit": true,
+      "load_seconds": 0.0353432500269264
+    },
+    {
+      "arm": "right",
+      "cache_hit": true,
+      "load_seconds": 0.031584502081386745
+    }
+  ]
+}

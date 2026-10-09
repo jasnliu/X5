@@ -1,0 +1,8 @@
+HARDWARE: automatic hi-hat calibration 90°..115° in 5° steps; one RUN button → center + close gripper → recording → wait for hi-hat calibration → experiment hybrid J7 search → first-hit depth +0.5° → 20–120 BPM (default 100) hybrid swing plus powered 11° left snare on one random beat per measure; ride v2 controls search; hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged
+LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+PASS: normal UI loads both smooth defaults, shows separate selectors, retains readiness gate; zero motor packets; no physical devices
+EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+MAJOR FAULT EMERGENCY RELAX: Operator emergency stop
+PASS: actual Emergency Relax button sends only 24 disable frames per fake arm, no centering targets; restart latched

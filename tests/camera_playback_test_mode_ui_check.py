@@ -9,6 +9,7 @@ import rclpy
 
 from camera_playback.app import App
 from camera_playback.simulation import SimulatedMotors
+from camera_playback.left_hold import LEFT_CENTER
 from camera_search.planner import INITIAL_OFFSET, solve_search_coordinate
 from cartesian_goal.ik import CartesianIK
 from centering.motors import SPEED
@@ -87,16 +88,24 @@ with tempfile.TemporaryDirectory() as directory:
 
         app.start()
         wait_for(lambda: app.phase == "WAITING FOR LOAD", 10.0, "simulated center")
+        assert app.bus.left_center_ready()
+        np.testing.assert_allclose(app.bus._left_joints, LEFT_CENTER)
+        assert abs(np.degrees(app.bus.motor8_feedback['left']['raw_rad']) - 14.16) < .022
         app.continue_motion()
         wait_for(lambda: app.continuous_strike_active, 20.0,
                  "recording and fixed 10-degree striking")
         assert app.continuous_strike_degrees == 10
         wait_for(lambda: app.continuous_strike_count >= 2, 3.0,
                  "swing pickup plus beat 1 in simulation")
+        np.testing.assert_allclose(app.bus._left_joints, LEFT_CENTER)
+        assert all(app.bus.states['left', i][1] == 2 for i in range(1, 9))
         app.center_relax()
         wait_for(lambda: app.phase == "RELAXED", 15.0,
                  "simulated Stop, Center, and Relax")
         assert app.bus.active is False
+        assert all(state[1] == 0 for state in app.bus.states.values())
+        print('PASS: shared Start centers both arms; left J5 -50 degrees and raw gripper target +14.16° '
+              'hold through right playback/strikes; both arms relax (simulation only)')
     finally:
         if app is not None:
             app._cancel_planning()

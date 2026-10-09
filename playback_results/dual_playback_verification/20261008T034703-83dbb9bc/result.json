@@ -1,0 +1,117 @@
+{
+  "success": false,
+  "physical": true,
+  "beat_skipped": true,
+  "started": true,
+  "right_endpoint_reached": false,
+  "left_recording_complete": true,
+  "snare_mode_prepared": true,
+  "faults": [
+    {
+      "at": 771445.272996848,
+      "source": "fail",
+      "phase": "SETTLING RECORDING END",
+      "message": "Encoder feedback lost",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 165, in tick\n    self.bus.poll()\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_transport.py\", line 262, in poll\n    super().poll()\n  File \"/home/jason/Proyectos3/X5/centering/motors.py\", line 206, in poll\n    if self.active and not self.fresh():raise RuntimeError('Encoder feedback lost')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Encoder feedback lost\n"
+    }
+  ],
+  "phases": [
+    {
+      "at": 771370.850073247,
+      "phase": "READY",
+      "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"
+    },
+    {
+      "at": 771414.328435221,
+      "phase": "PLAYBACK PREFLIGHTED",
+      "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"
+    },
+    {
+      "at": 771414.377527217,
+      "phase": "SETTING UP",
+      "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"
+    },
+    {
+      "at": 771417.24159039,
+      "phase": "CENTERING",
+      "status": "CENTERING"
+    },
+    {
+      "at": 771420.183604923,
+      "phase": "LEFT SNARE ARMING AT CENTER",
+      "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+    },
+    {
+      "at": 771421.879421593,
+      "phase": "LEFT MOVING TO RECORDING START",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 771424.632885824,
+      "phase": "LEFT RECORDING PLAYBACK",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 771434.824148743,
+      "phase": "LEFT RECORDING END HOLD",
+      "status": "Left recording complete \u2014 holding its endpoint before right playback"
+    },
+    {
+      "at": 771435.510048339,
+      "phase": "MOVING TO RECORDING START",
+      "status": "Left holds its endpoint; right arm moves to its recording start"
+    },
+    {
+      "at": 771437.676557612,
+      "phase": "RECORDING PLAYBACK",
+      "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"
+    },
+    {
+      "at": 771445.252667164,
+      "phase": "SETTLING RECORDING END",
+      "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"
+    },
+    {
+      "at": 771446.125335507,
+      "phase": "FAULT RECENTERING",
+      "status": "FAULT: Encoder feedback lost \u2014 returning to customized right center before relaxing"
+    },
+    {
+      "at": 771465.412460551,
+      "phase": "RELAXING",
+      "status": "Both arms centered and individually relaxed \u2014 confirming disabled feedback"
+    },
+    {
+      "at": 771465.455203644,
+      "phase": "RELAXED",
+      "status": "Left + right motors disabled"
+    }
+  ],
+  "disabled_proofs": {
+    "right": {
+      "at": 771451.508983611,
+      "q": [
+        0.0005754177157246687,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00029659014262470307,
+        0.00019180590524214836,
+        1.4003749141680029
+      ]
+    },
+    "left": {
+      "at": 771465.32734646,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        -0.8725250629434651,
+        -0.00019180590524214836,
+        0.00019180590524214836
+      ]
+    }
+  },
+  "all_16_disabled": true
+}

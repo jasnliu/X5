@@ -25,6 +25,7 @@ from camera_playback.app import App, SWING_EVENTS, CENTER_RELAX_PHASE
 from camera_playback.hybrid_strike import HybridStatus
 from camera_playback.mit_strike import Sample
 from camera_playback.simulation import SimulatedMotors
+from camera_playback.left_hold import LEFT_CENTER, LEFT_GRIPPER_TARGET
 from camera_playback import hybrid_workflow as hw
 from camera_search.planner import INITIAL_OFFSET, solve_search_coordinate
 from centering.motors import RIGHT_GRIPPER_CLOSED
@@ -39,7 +40,9 @@ with tempfile.TemporaryDirectory() as directory:
     app = None
     rclpy.init(args=[])
     try:
-        with patch('goal_motion.app.Motors', return_value=bus), patch('camera_playback.app.HiHatController'):
+        with patch('goal_motion.app.Motors', return_value=bus), \
+                patch('camera_playback.app.HiHatController'), \
+                patch('camera_playback.app.HiHatCalibrationRuntime'):
             app = App(True, str(path/'camera.sock'), str(path/'audio.sock'))
         app.root.withdraw()
         assert app.hybrid_enabled and not app.test_mode and not app.hardware_test_mode
@@ -68,6 +71,9 @@ with tempfile.TemporaryDirectory() as directory:
             assert str(app.continue_button.cget('state')) == 'disabled'
             app.continue_button.invoke()  # Disabled; must not schedule a second run.
             app._start_preflighted_recording()
+            # Model the existing post-RUN ESP32 reply gate, not just readiness.
+            app.hihat.telemetry_at = time.monotonic()
+            app._start_preflighted_recording()
             center.assert_called_once_with(app.center_goal, RIGHT_GRIPPER_CLOSED)
             list(app.setup)
             app.setup = None
@@ -77,11 +83,21 @@ with tempfile.TemporaryDirectory() as directory:
             bus._refresh_states(time.monotonic())
             app.q = bus.positions()
             app.complete_stage(time.monotonic())
+            assert app.phase == 'CENTERING'  # Right arrival alone cannot play.
+            bus._left_joints = LEFT_CENTER.copy()
+            bus._left_gripper = LEFT_GRIPPER_TARGET
+            now = time.monotonic()
+            for stamp in (now, now + .7):
+                bus._refresh_states(stamp)
+                bus.left_monitor.update(bus.states, stamp)
+            app.q = bus.positions()
+            app.complete_stage(now + .7)
             assert app.phase == 'MOVING TO RECORDING START'
             assert app.gripper_closed_latched
             app.complete_stage(time.monotonic())
             playback.assert_called_once()
-        print('PASS: one actual RUN button press centers with +7° closed gripper and '
+        print('PASS: one actual RUN button waits for both centers, left J5 -50 degrees, '
+              'left gripper raw target +14.16°, right gripper +7 degrees, and '
               'automatically enters recording; no Start control or loading pause')
         app.arm = Mock(return_value=anchor)
         bus.active = True

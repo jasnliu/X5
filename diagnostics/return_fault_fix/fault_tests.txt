@@ -1,0 +1,18 @@
+EMERGENCY calibration cleanup: log closed
+EMERGENCY hi-hat release unconfirmed: disconnected
+EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+<Mock name='mock.get()' id='124426135764096'>
+EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+EMERGENCY RELAX REQUEST: Shutdown deadline: emergency disable attempt; restart required
+Exiting after emergency disable attempt; if disable is unconfirmed, USE PHYSICAL POWER CUTOFF
+CLOSE REQUEST: center then exit; repeat Ctrl-C for emergency disable; 35 s deadline
+EMERGENCY RELAX REQUEST: Repeated close/Ctrl-C: emergency shutdown; restart required
+EMERGENCY RELAX REQUEST: MAJOR FAULT: STALL: motor 7; restart required
+DUAL ARM FAULT: injected arm-return interruption; powered hold, NOT relaxed
+HI-HAT CALIBRATION FAULT: Calibrated ESP32 status became stale; arm centering continues under arm safety checks
+HIHAT CALIBRATION: {"kind": "fault", "at": 1.501, "phase": "READY", "angle": null, "detail": "Calibrated ESP32 status became stale"}
+HI-HAT CALIBRATION FAULT: Calibrated ESP32 status became stale; arm centering continues under arm safety checks
+----------------------------------------------------------------------
+Ran 12 tests in 1.817s
+
+OK

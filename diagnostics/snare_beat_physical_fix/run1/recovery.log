@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/diagnostics/snare_beat_physical_fix/recover_powered.py", line 11, in <module>
+    from camera_playback.dual_recording import left_geometry
+  File "/home/jason/Proyectos3/X5/camera_playback/dual_recording.py", line 16, in <module>
+    from camera_search.app import App as CameraSearchApp
+  File "/home/jason/Proyectos3/X5/camera_search/app.py", line 12, in <module>
+    import rclpy
+ModuleNotFoundError: No module named 'rclpy'
+POWERED CENTER RETURN DISPATCHED
+CENTER VERIFIED BEFORE RELAX: {"t": 769774.088695939, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.0005754177157246687, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.4003749141680029], "max_error_deg": 0.032969006568082104, "span_deg": 0.0439586754241434, "settled_s": 0.6487295379629359}
+BOTH VERIFIED CENTERED THEN RELAXED

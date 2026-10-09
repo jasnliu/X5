@@ -3,6 +3,7 @@ import errno
 import math
 import struct
 import time
+from safe_zone.gripper_feedback import motor8_feedback
 from safe_zone.encoder import Observer, FRAME, EFF, request_frame, encoder_to_joint, joint_to_motor
 
 SPEED = .4  # rad/s; motor firmware performs the position move
@@ -53,7 +54,7 @@ def _uint16(value, minimum, maximum):
 
 def motion_control_packet(motor, position, velocity, kp, kd, torque):
     """Build the installed OpenArmX SDK's RobStride MIT/operation frame."""
-    if motor!=7:raise ValueError('MIT hardware-test control is right-J7-only')
+    if motor not in (6,7):raise ValueError('MIT hardware-test control is J6/J7-only')
     position_raw=_uint16(position,-RIGHT_JOINT7_MIT_POSITION_LIMIT,
                          RIGHT_JOINT7_MIT_POSITION_LIMIT)
     velocity_raw=_uint16(velocity,-RIGHT_JOINT7_MIT_VELOCITY_LIMIT,
@@ -68,7 +69,7 @@ def motion_control_packet(motor, position, velocity, kp, kd, torque):
 def allowed(frame, control_gripper=False):
     cid,_,data=FRAME.unpack(frame);i=cid&255
     if i not in range(1,9):return False
-    if (cid>>24)&31==1:return i==7
+    if (cid>>24)&31==1:return i in (6,7)
     if frame==packet(4,i):return True
     if i==8:
         if not control_gripper:return False
@@ -88,6 +89,11 @@ def allowed(frame, control_gripper=False):
                              parameter(7,0x7017,RIGHT_STRIKE_RETURN_SPEED),
                              parameter(7,0x7017,RIGHT_STRIKE_DOWN_SPEED),
                          )
+                     ) or (
+                         # Left strike joint (J6): MIT-mode select only. No
+                         # left-specific fast strike/return speed exists (or
+                         # is needed) yet, unlike the tuned right-J7 speeds above.
+                         i==6 and frame==parameter(6,0x7005,0,True)
                      ) or (data[:2]==b'\x16\x70' and struct.unpack('<f',data[4:])[0]==struct.unpack('<f',data[4:])[0] and abs(struct.unpack('<f',data[4:])[0])<=3.5)
 
 class Motors(Observer):
@@ -100,6 +106,7 @@ class Motors(Observer):
         self.isolated_motors=set()
         self.right_joint7_query_period=None;self.last_right_joint7_query=0.
         self.right_joint7_session=None
+        self.left_joint6_session=None
 
     def _send(self, side, frame):
         if side!=self.control_side:raise RuntimeError(f'{side.capitalize()} arm is query-only')
@@ -107,8 +114,12 @@ class Motors(Observer):
         if (side=='right' and cid&255==7
                 and getattr(self,'right_joint7_session',None) is not None):
             raise RuntimeError('J7 commands belong to the hardware-test worker')
-        if (cid>>24)&31==1 and (side!='right' or cid&255!=7):
-            raise RuntimeError('MIT motion control is right-J7-only')
+        if (side=='left' and cid&255==6
+                and getattr(self,'left_joint6_session',None) is not None):
+            raise RuntimeError('J6 commands belong to the hardware-test worker')
+        if (cid>>24)&31==1 and not (
+                (side=='right' and cid&255==7) or (side=='left' and cid&255==6)):
+            raise RuntimeError('MIT motion control is right-J7/left-J6-only')
         if (frame in tuple(parameter(i,0x7017,RIGHT_PLAYBACK_SPEED) for i in range(1,8))
                 and side!='right'):
             raise RuntimeError('Fast playback speed is right-arm-only')
@@ -116,7 +127,7 @@ class Motors(Observer):
                      parameter(7,0x7017,RIGHT_STRIKE_RETURN_SPEED),
                      parameter(7,0x7017,RIGHT_STRIKE_DOWN_SPEED)) and side!='right':
             raise RuntimeError('Fast strike speed is right-J7-only')
-        if not allowed(frame,self.control_gripper):raise RuntimeError(f'Invalid {side}-motor command')
+        if not self.command_allowed(frame):raise RuntimeError(f'Invalid {side}-motor command')
         for attempt in range(6):
             try:
                 if self.sockets[side].send(frame)==16:return
@@ -126,9 +137,18 @@ class Motors(Observer):
                 time.sleep(.002)
         raise RuntimeError('CAN write failed')
 
+    def command_allowed(self, frame):
+        return allowed(frame,self.control_gripper)
+
     def send_left(self, frame):self._send('left',frame)
     def send_right(self, frame):self._send('right',frame)
     def send_control(self, frame):self._send(self.control_side,frame)
+
+    def feedback_controlled(self, side, motor):
+        return side==self.control_side and (motor<=7 or self.control_gripper)
+
+    def mode_feedback(self, side, motor, mode, now):
+        if side==self.control_side:self.modes[motor]=(mode,now)
 
     def poll(self):
         now=time.monotonic()
@@ -149,18 +169,21 @@ class Motors(Observer):
                 if kind not in (2,17):continue
                 if dlc!=8:raise RuntimeError('Short feedback frame')
                 if kind==17:
-                    if side==self.control_side and data[:2]==b'\x05\x70':self.modes[i]=(data[4],now)
+                    if data[:2]==b'\x05\x70':self.mode_feedback(side,i,data[4],now)
                     continue
                 if (cid>>16)&63:
                     if isolated:continue
                     raise RuntimeError(f'{side} motor {i}: fault')
                 mode=(cid>>22)&3
-                controlled=side==self.control_side and (i<=7 or self.control_gripper)
+                controlled=self.feedback_controlled(side,i)
                 if not controlled and mode!=0:raise RuntimeError(f'{side} motor {i} is not relaxed')
                 if int.from_bytes(data[6:8],'big')*.1>=65:
                     if isolated:continue
                     raise RuntimeError(f'{side} motor {i}: too hot')
                 raw=int.from_bytes(data[:2],'big')/65535*25.14-12.57
+                if i==8:
+                    if not hasattr(self,'motor8_feedback'):self.motor8_feedback={}
+                    self.motor8_feedback[side]=motor8_feedback(int.from_bytes(data[:2],'big'))
                 q=encoder_to_joint(side,i,raw) if i<=7 else -raw
                 self.states[side,i]=(q,mode,now)
         session=getattr(self,'right_joint7_session',None)
@@ -414,6 +437,108 @@ class Motors(Observer):
         # the enable/hold commands were transmitted.
         return enabled_at
 
+    def set_left_joint6_position(self, target):
+        """Send one left-J6 target without delaying it behind other writes.
+
+        Mirrors set_right_joint7_position exactly (motor 6, side 'left'); the
+        strike controller's internal sign convention (see Command.frame() in
+        camera_playback/mit_strike.py) never applies to plain CSP commands.
+        """
+        target=float(target)
+        if not self.active or self.control_side!='left':
+            raise RuntimeError('Left arm must be active to command J6')
+        if 6 in getattr(self,'isolated_motors',set()):
+            raise RuntimeError('Left J6 is isolated after a motor fault')
+        if not math.isfinite(target) or abs(target)>3.5:
+            raise RuntimeError('Invalid left J6 target')
+        self.send_control(parameter(6,0x7016,joint_to_motor('left',6,target)))
+
+    def _require_left_joint6(self):
+        if not self.active or self.control_side!='left':
+            raise RuntimeError('Left arm must be active to control J6')
+        if 6 in getattr(self,'isolated_motors',set()):
+            raise RuntimeError('Left J6 is isolated after a motor fault')
+
+    def set_left_joint6_mit(self, position, velocity, kp, kd, torque=0.0):
+        """Send one left-J6 MIT command using displayed joint coordinates."""
+        self._require_left_joint6()
+        values=tuple(float(value) for value in (position,velocity,kp,kd,torque))
+        position,velocity,kp,kd,torque=values
+        if (not all(math.isfinite(value) for value in values)
+                or abs(position)>3.5
+                or abs(velocity)>RIGHT_JOINT7_MIT_VELOCITY_LIMIT
+                or not 0.0<=kp<=RIGHT_JOINT7_MIT_KP_LIMIT
+                or not 0.0<=kd<=RIGHT_JOINT7_MIT_KD_LIMIT
+                or abs(torque)>RIGHT_JOINT7_MIT_TORQUE_LIMIT):
+            raise RuntimeError('Invalid left J6 MIT command')
+        # Every OpenArmX arm joint uses the opposite motor/URDF direction.
+        # Reuses the right-J7 MIT wire-format limits above: same RobStride
+        # actuator model and firmware, not a side-specific hardware envelope.
+        self.send_control(motion_control_packet(
+            6,joint_to_motor('left',6,position),-velocity,kp,kd,-torque
+        ))
+
+    def request_left_joint6_mode_readback(self, clear=False):
+        """Request J6's run mode without disturbing any other motor."""
+        self._require_left_joint6()
+        if clear:self.modes.pop(6,None)
+        self.send_control(packet(17,6,bytes.fromhex('0570000000000000')))
+
+    def left_joint6_mode_readback(self):
+        result=self.modes.get(6)
+        return None if result is None else int(result[0])
+
+    def left_joint6_operating_state(self):
+        """Return J6's feedback operating state and observation time."""
+        result=self.states.get(('left',6))
+        return None if result is None else (int(result[1]),float(result[2]))
+
+    def command_left_joint6_mit_hold(self, anchor_position):
+        """Stationary recovery hold with zero desired MIT velocity."""
+        self.set_left_joint6_mit(
+            anchor_position,0.0,
+            RIGHT_JOINT7_RETURN_KP,RIGHT_JOINT7_RETURN_KD,0.0,
+        )
+
+    def reassert_left_joint6_csp_hold(self, anchor_position):
+        """Enable J6 in its configured CSP mode and hold the anchor."""
+        self._require_left_joint6()
+        enabled_at=time.monotonic()
+        self.send_control(packet(3,6))
+        self.set_left_joint6_position(anchor_position)
+        self.request_left_joint6_mode_readback()
+        return enabled_at
+
+    def hold_left_joint6_unknown_mode(self, anchor_position):
+        """Target the same stationary J6 pose in both MIT and CSP protocols."""
+        self.command_left_joint6_mit_hold(anchor_position)
+        self.set_left_joint6_position(anchor_position)
+
+    def restore_left_joint6_csp(self, anchor_position):
+        """Restore ordinary CSP when leaving the stationary MIT session."""
+        anchor_position=float(anchor_position)
+        self._require_left_joint6()
+        if not math.isfinite(anchor_position) or abs(anchor_position)>3.5:
+            raise RuntimeError('Invalid left J6 CSP restore position')
+        self.command_left_joint6_mit_hold(anchor_position)
+        self.send_control(packet(4,6))
+        time.sleep(.010)
+        for frame in (
+            parameter(6,0x7005,5,True),
+            parameter(6,0x7017,SPEED),
+            parameter(6,0x7018,CURRENT[5]),
+            parameter(6,0x7016,joint_to_motor('left',6,anchor_position)),
+        ):
+            self.send_control(frame)
+        time.sleep(.002)
+        self.modes.pop(6,None)
+        enabled_at=self.reassert_left_joint6_csp_hold(anchor_position)
+        return enabled_at
+
+    def stop_left_joint6_session(self):
+        session=getattr(self,'left_joint6_session',None)
+        if session is not None:session.stop()
+
     def set_gripper(self, target):
         target=float(target)
         if not self.active or not self.control_gripper:raise RuntimeError('Right gripper is not active')
@@ -479,6 +604,7 @@ class Motors(Observer):
 
     def relax(self):
         self.stop_right_joint7_session()
+        self.stop_left_joint6_session()
         failures=[]
         for _ in range(3):
             for i in range(1,9):
@@ -494,4 +620,5 @@ class Motors(Observer):
 
     def close(self):
         self.stop_right_joint7_session()
+        self.stop_left_joint6_session()
         super().close()

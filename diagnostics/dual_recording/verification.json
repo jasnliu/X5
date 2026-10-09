@@ -1,0 +1,58 @@
+{
+  "physical_devices_opened": false,
+  "physical_motion_performed": false,
+  "full_unittest_count": 663,
+  "full_unittest_result": "PASS",
+  "protected_files_unchanged": {
+    "recordings/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "recordings/record2.json": "305d32e9dc1c99d655341542737e4631fd5726e841e289e1d49c8ee4f6aae681",
+    "recordings/record3.json": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "recordings/record1.json": "067badcaf98f98f2631e44b8be5eac3480cfef39aa2f7f6c8e01478a1c30f90e",
+    "left_recordings/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "left_recordings/record1.json": "43cea02c6a111fe2f0e468386cb6b1b4f8136690d0ed96d92367b2d609a8fd57",
+    "left_zones/zone2.json": "45b784fc53615701a180e08a62acd511bee09b6b09039c967b2116e4cb178b4a",
+    "left_zones/zone1.json": "81e17d8b857f3b8a0df3a4f487dc4c8c56c0fdb5396268017fea3245abdbf540",
+    "right_zones/zone3.json": "af72eb2d509500513e2faaf14d51d9f886c597d4cfd3abebb505da54874fa888",
+    "right_zones/zone2.json": "1f34b4814be0ab6b2767e8e62bed32d75a885de1be467b6c98e00dfecd652b84",
+    "right_zones/zone1.json": "72e6d0cd9ead329bf8ae3baeb3c50966db46a3228d0082e6d7e71ce1dd462fee",
+    "model/openarmx.urdf": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1"
+  },
+  "changed_original_files": [
+    "camera_playback/simulation.py",
+    "camera_playback/left_hold.py",
+    "camera_playback/smooth_recording_worker.py",
+    "camera_playback/app.py",
+    "camera_playback/recording_cache.py",
+    "camera_playback/trajectory.py",
+    "camera_playback/playback_transport.py",
+    "camera_playback/smooth_recording.py",
+    "smooth_playback/hardware.py",
+    "smooth_playback/trajectory.py",
+    "tests/test_camera_playback.py",
+    "launch_right_camera_playback.py",
+    "RIGHT_CAMERA_PLAYBACK.md",
+    "README.md"
+  ],
+  "new_implementation": [
+    "camera_playback/dual_recording.py"
+  ],
+  "new_tests": [
+    "tests/test_dual_recording.py",
+    "tests/dual_recording_ui_check.py",
+    "tests/dual_recording_normal_ui_check.py"
+  ],
+  "logs": [
+    "full_tests_final.txt",
+    "ui_check_final.txt",
+    "normal_ui_check.txt",
+    "cache_benchmark.json"
+  ],
+  "normal_ui": "PASS - mocked devices, zero motor packets",
+  "simulation_ui": "PASS - complete sequence, actual Tk controls",
+  "cached_default_load_seconds": {
+    "hardware_left": 0.034541644039563835,
+    "hardware_right": 0.029334616963751614,
+    "simulation_left": 0.020581271965056658,
+    "simulation_right": 0.016999693936668336
+  }
+}

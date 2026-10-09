@@ -1,0 +1,113 @@
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-07-20-38-34-971593-jason-band37-1545097
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [1545118]
+[INFO] [rviz2-2]: process started with pid [1545119]
+[INFO] [python3-3]: process started with pid [1545120]
+[INFO] [python-4]: process started with pid [1545121]
+[INFO] [python3-5]: process started with pid [1545122]
+[INFO] [python3-6]: process started with pid [1545123]
+[INFO] [python-7]: process started with pid [1545124]
+[python3-5] ST7 ride audio model v2: /home/jason/Proyectos3/st7/models/v2 (matching config, checkpoint and normality reference)
+[python3-6] ST7 hihat audio model hihat_v1: /home/jason/Proyectos3/st7/models/hihat_v1 (matching config, checkpoint and normality reference)
+[robot_state_publisher-1] [INFO] [1791430715.224979809] [robot_state_publisher]: Robot initialized
+[python3-3] HARDWARE: automatic hi-hat calibration 90°..115° in 5° steps; one RUN button → center + close gripper → recording → wait for hi-hat calibration → experiment hybrid J7 search → first-hit depth +0.5° → 20–120 BPM (default 100) hybrid swing plus powered 11° left snare on one random beat per measure; ride v2 controls search; hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged
+[python-7] WAVEFORM: visual-only TONOR capture on alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo
+[python3-3] PHYSICAL PLAYBACK EVIDENCE: /home/jason/Proyectos3/X5/playback_results/dual_playback_verification/20261008T033835-4558c198
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770863.336228096, "phase": "READY", "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"}
+[python3-3] LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+[python3-3] LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+[python3-3] LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+[rviz2-2] [INFO] [1791430716.475432727] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791430716.475497862] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791430716.516670975] [rviz2]: Stereo is NOT SUPPORTED
+[python-4] Preprocessing: local
+[python-4] Model: /home/jason/Proyectos3/Y2/models/snare.pt; input: 640; required: drumstick + YOLO pose tip
+[python-4] Camera: /dev/video4 -> /dev/video4 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+[python-4] Warning: could not set low-light frame-rate control: [Errno 22] Invalid argument
+[python3-6] {"status": "listening", "instrument": "hihat", "label": "hihat_close", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.9, "low_threshold": 0.225, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python3-5] {"status": "listening", "sample_rate": 16000, "device": "pipewire", "window_seconds": 6.0, "lookahead_seconds": 0.4, "timestamp_clock": "portaudio_adc_monotonic", "decoder": {"high_threshold": 0.6, "low_threshold": 0.15, "min_gap_seconds": 0.08, "smooth_frames": 1, "release_frames": 2, "max_peak_frames": 3}, "normality": {"enabled": true, "version": 1, "meaning": "0-100 similarity to reference normal hits"}}
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python-4] QFontDatabase: Cannot find font directory /home/jason/Proyectos3/Y2/.venv/lib/python3.12/site-packages/cv2/qt/fonts.
+[python-4] Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+[python3-3] HIHAT CALIBRATION: {"kind": "open", "at": 770868.29725693, "phase": "INITIAL OPENING", "angle": null}
+[python3-3] HIHAT CALIBRATION: {"kind": "opened", "at": 770868.644690524, "phase": "INITIAL OPEN", "angle": null, "open_seconds": 2.0, "pos": 9}
+[python3-3] HIHAT CALIBRATION: {"kind": "configure", "at": 770870.686069126, "phase": "CONFIGURING", "angle": 90}
+[python3-3] HIHAT CALIBRATION: {"kind": "close", "at": 770870.734871775, "phase": "CLOSING", "angle": 90, "target_counts": 134}
+[python3-6] {"event": "HIT", "instrument": "hihat", "label": "hihat_close", "time_since_start": 4.84, "event_monotonic": 770870.816818342, "score": 0.996888, "normality_score": 81.3, "notification_monotonic": 770871.418029211}
+[python3-3] HIHAT CALIBRATION: {"kind": "hit", "at": 770871.421779035, "phase": "CLOSING", "angle": 90, "onset": 770870.816818342, "detected_at": 770871.418243802}
+[python3-3] HI-HAT SOUND (calibration + timing) #1: score=0.997; normality=81.3
+[python3-3] HIHAT CALIBRATION: {"kind": "closed", "at": 770871.816781195, "phase": "HOLDING CLOSED", "angle": 90, "hold_seconds": 2.0, "pos": 132}
+[python3-3] HIHAT CALIBRATION: {"kind": "open", "at": 770873.886223536, "phase": "OPENING", "angle": 90}
+[python3-3] HIHAT CALIBRATION: {"kind": "opened", "at": 770874.365125772, "phase": "HOLDING OPEN", "angle": 90, "open_seconds": 2.0, "pos": -5}
+[python3-3] HIHAT CALIBRATION: {"kind": "selected", "at": 770876.404130352, "phase": "READY", "angle": 90, "onset": 770870.816818342}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770905.190411199, "phase": "PLAYBACK PREFLIGHTED", "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770905.234927639, "phase": "SETTING UP", "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770908.142212466, "phase": "CENTERING", "status": "CENTERING"}
+[python3-3] ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770911.079367556, "phase": "LEFT SNARE ARMING AT CENTER", "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770912.415345396, "phase": "LEFT MOVING TO RECORDING START", "status": "Left powered J6 ready; moving to recording start"}
+[python3-3] START HOLD 
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770914.916146281, "phase": "LEFT RECORDING PLAYBACK", "status": "Left powered J6 ready; moving to recording start"}
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 7.591406588629155}
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 770924.863181185, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.012850995651179531, -0.12486564431219982, -0.2809956511787579, 0.07269443808651843, -0.8583314259555959, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.021979337712122585, "settle_range_deg": 0.021979337712122585, "settled_seconds": 0.6021233749343082, "tolerance_deg": 0.05}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770925.097140979, "phase": "LEFT RECORDING END HOLD", "status": "Left recording complete \u2014 holding its endpoint before right playback"}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770925.779516327, "phase": "MOVING TO RECORDING START", "status": "Left holds its endpoint; right arm moves to its recording start"}
+[python3-3] START HOLD 
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770927.726603996, "phase": "RECORDING PLAYBACK", "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"}
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 4.8}
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 770935.261098887, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6051476310368518, 0.21232913710231216, 0.2445525291828794, 1.7333499656672, 0.20514529694051795, -0.30516319523918334, 0.6005442893110562], "max_error_deg": 0.02197933771202081, "settle_range_deg": 0.0439586754241434, "settled_seconds": 0.6003051699372008, "tolerance_deg": 0.05}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770935.506568664, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"}
+[python3-3] PLAYBACK VERIFY: both animations complete; skipping alignment/beat, Center + Relax
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770937.00738207, "phase": "CENTER RELAX RECENTERING", "status": "Center + Relax: BOTH arms return together; each relaxes at its own verified center"}
+[python3-3] START HOLD 
+[python3-3] LEFT RETURN: playing selected recording backward to its start
+[python3-3] TEMPORARY POSITION GAINS 
+[python3-3] PLAYBACK {"duration_s": 7.591406588629155}
+[python3-6] {"event": "HIT", "instrument": "hihat", "label": "hihat_close", "time_since_start": 76.57, "event_monotonic": 770942.603059066, "score": 0.912296, "normality_score": 29.8, "notification_monotonic": 770943.133157517}
+[python3-3] HI-HAT SOUND (calibration + timing) #2: score=0.912; normality=29.8
+[python3-3] ENDPOINT SOFT HOLD 
+[python3-3] ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+[python3-3] ENDPOINT HOLD 
+[python3-3] ENDPOINT VERIFIED {"t": 770949.630478022, "goal_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4728015564202348, 0.07039276722362153, -0.0692419317921722], "actual_rad": [0.020523231860837043, 0.010549324788280856, -0.2809956511787579, 0.07269443808651843, -0.4724179446097523, 0.07039276722362153, -0.0692419317921722], "max_error_deg": 0.02197933771202081, "settle_range_deg": 0.021979337712122585, "settled_seconds": 0.6018880230840296, "tolerance_deg": 0.05}
+[python3-3] LEFT RETURN: recording start verified; centering, then relaxing
+[python3-3] PLAYBACK VERIFY FAULT: {"at": 770954.349979208, "source": "fail", "phase": "CENTER RELAX RECENTERING", "message": "Disable delivery failed; use physical power cutoff", "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 184, in tick\n    self.extra_control(time.monotonic())\n  File \"/home/jason/Proyectos3/X5/camera_playback/app.py\", line 1517, in extra_control\n    if getattr(self, \"dual\", None) is not None and self.dual.tick(now):\n                                                   ^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 199, in tick\n    self.tick_return(now)\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 368, in tick_return\n    a.bus.disable_centered_side(side)\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_evidence.py\", line 51, in disable\n    result = original_disable(side)\n             ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_transport.py\", line 233, in disable_centered_side\n    self.left_drive.relax()\n  File \"/home/jason/Proyectos3/X5/centering/motors.py\", line 613, in relax\n    if failures:raise RuntimeError('Disable delivery failed; use physical power cutoff')\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Disable delivery failed; use physical power cutoff\n"}
+[python3-3] FAULT: Disable delivery failed; use physical power cutoff — returning to customized right center before relaxing
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770954.497773999, "phase": "RELAXING", "status": "Both arms centered and individually relaxed \u2014 confirming disabled feedback"}
+[python3-3] PLAYBACK VERIFY PHASE: {"at": 770954.541216595, "phase": "RELAXED", "status": "Left + right motors disabled"}
+[python3-3] PHYSICAL PLAYBACK RESULT: {"success": false, "physical": true, "beat_skipped": true, "started": true, "right_endpoint_reached": true, "left_recording_complete": true, "snare_mode_prepared": true, "faults": [{"at": 770954.349979208, "source": "fail", "phase": "CENTER RELAX RECENTERING", "message": "Disable delivery failed; use physical power cutoff", "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 184, in tick\n    self.extra_control(time.monotonic())\n  File \"/home/jason/Proyectos3/X5/camera_playback/app.py\", line 1517, in extra_control\n    if getattr(self, \"dual\", None) is not None and self.dual.tick(now):\n                                                   ^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 199, in tick\n    self.tick_return(now)\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 368, in tick_return\n    a.bus.disable_centered_side(side)\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_evidence.py\", line 51, in disable\n    result = original_disable(side)\n             ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_transport.py\", line 233, in disable_centered_side\n    self.left_drive.relax()\n  File \"/home/jason/Proyectos3/X5/centering/motors.py\", line 613, in relax\n    if failures:raise RuntimeError('Disable delivery failed; use physical power cutoff')\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Disable delivery failed; use physical power cutoff\n"}], "phases": [{"at": 770863.336228096, "phase": "READY", "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"}, {"at": 770905.190411199, "phase": "PLAYBACK PREFLIGHTED", "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"}, {"at": 770905.234927639, "phase": "SETTING UP", "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"}, {"at": 770908.142212466, "phase": "CENTERING", "status": "CENTERING"}, {"at": 770911.079367556, "phase": "LEFT SNARE ARMING AT CENTER", "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"}, {"at": 770912.415345396, "phase": "LEFT MOVING TO RECORDING START", "status": "Left powered J6 ready; moving to recording start"}, {"at": 770914.916146281, "phase": "LEFT RECORDING PLAYBACK", "status": "Left powered J6 ready; moving to recording start"}, {"at": 770925.097140979, "phase": "LEFT RECORDING END HOLD", "status": "Left recording complete \u2014 holding its endpoint before right playback"}, {"at": 770925.779516327, "phase": "MOVING TO RECORDING START", "status": "Left holds its endpoint; right arm moves to its recording start"}, {"at": 770927.726603996, "phase": "RECORDING PLAYBACK", "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"}, {"at": 770935.506568664, "phase": "SETTLING RECORDING END", "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"}, {"at": 770937.00738207, "phase": "CENTER RELAX RECENTERING", "status": "Center + Relax: BOTH arms return together; each relaxes at its own verified center"}, {"at": 770954.497773999, "phase": "RELAXING", "status": "Both arms centered and individually relaxed \u2014 confirming disabled feedback"}, {"at": 770954.541216595, "phase": "RELAXED", "status": "Left + right motors disabled"}], "disabled_proofs": {"right": {"at": 770942.40203123, "q": [0.0005754177157246687, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.4003749141680029]}, "left": {"at": 770954.429827319, "q": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, -0.8725250629434651, -0.00019180590524214836, 0.00019180590524214836]}}, "all_16_disabled": true}
+[python3-3] CLOSE REQUEST: center then exit; repeat Ctrl-C for emergency disable; 35 s deadline
+[INFO] [python3-3]: process has finished cleanly [pid 1545120]
+[INFO] [python-7]: sending signal 'SIGINT' to process[python-7]
+[INFO] [python3-6]: sending signal 'SIGINT' to process[python3-6]
+[INFO] [python3-5]: sending signal 'SIGINT' to process[python3-5]
+[INFO] [python-4]: sending signal 'SIGINT' to process[python-4]
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[robot_state_publisher-1] [INFO] [1791430807.601731675] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rviz2-2] [INFO] [1791430807.602172971] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[python-4] Saved recording to /home/jason/Proyectos3/Y2/recordings/20261007_203837_625946.mp4
+[INFO] [python-7]: process has finished cleanly [pid 1545124]
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 1545118]
+[python3-5] {"status": "stopped", "captured_seconds": 88.9}
+[python3-6] {"status": "stopped", "captured_seconds": 88.9}
+[INFO] [rviz2-2]: process has finished cleanly [pid 1545119]
+[INFO] [python-4]: process has finished cleanly [pid 1545121]
+[INFO] [python3-6]: process has finished cleanly [pid 1545123]
+[INFO] [python3-5]: process has finished cleanly [pid 1545122]

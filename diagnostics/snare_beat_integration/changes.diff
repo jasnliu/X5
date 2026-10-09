@@ -1,0 +1,1564 @@
+--- before/README.md
++++ README.md
+@@ -325,11 +325,43 @@
+   --recording recordings/right_motion_YYYYMMDD_HHMMSS.json
+ ```
+ 
++### Random left snare in the main beat
++
++Normal `./start_beat.sh` hardware playback now adds **one left-J6 snare hit per
++four-beat measure**, on an independently random beat **1, 2, 3, or 4**. The
++opening ride pickup and triplet extras are not counted as quarter-note beats.
++The strike is always **+11°**, using `snare_lab.motion.build_method` and the same
++powered tuning, curved acceleration, and **unchanged 0.220 s return** as
++`./snare.sh --11`. It is not a hybrid ride strike or a new snare trajectory.
++
++A separate 500 Hz process owns left J6. It schedules the reference bottom on
++the existing ride grid (about 0.147 s descent lead); this is commanded timing,
++not a claim of acoustically measured contact synchronization. The hi-hat's
++angle/calibration and the ride's search, depth, and rhythm remain unchanged.
++No snare hits occur during setup, recordings, calibration, or ride search.
++
++Left J6 changes to MIT **only at verified center**, before left playback. The
++existing 200 Hz recording worker passes its J6 targets to that powered owner;
++all other recorded joints retain their original CSP playback. J6 remains
++powered through the recording, beat, reverse recording, and center. Normal
++Stop cancels future snare hits, finishes any current full return, then centers
++both arms and joins the left writer before disabling the independently
++verified centered arm. Faults do not authorize an off-center disable; the
++explicit severe-emergency path still stops all writers before shutdown.
++
++`--test` visualizes the same 11° reference and random-measure scheduler using
++only in-memory simulation. It remains camera/microphone/serial/CAN-free.
++`--hardwaretest`, `--recording-only`, standalone `snare.sh`, the data collector,
++and saved datasets/recordings are unchanged. New integration verification is
++**offline/fake-transport only**, not a physical full-band verification.
++
+ ### Editable beat tempo
+ 
+ Set **Beat BPM** in the control panel before pressing **RUN** (or **Start** in
+-`--test`). The default is **100 BPM**; decimal values from **20 to 180** are
+-accepted. Blank, nonnumeric, nonfinite, or out-of-range entries disable starting.
++`--test`). The default is **100 BPM**. The snare-enabled beat accepts decimal
++values from **20 to 120 BPM**, so an unchanged snare return fits even when one
++measure selects beat 4 and the next selects beat 1. The underlying ride-only
++clock still supports 20–180 BPM. Blank, nonnumeric, nonfinite, or out-of-range entries disable starting.
+ The box is locked from Start/RUN until the arm has completed **Center + Relax**;
+ change the tempo before the next run, not in the middle of a stroke.
+ 
+@@ -344,8 +376,8 @@
+ **Estimated practical upper tempo: roughly 120 BPM**, not a hardware-verified
+ limit. The shortest ride spacing is `20 / BPM` seconds (167 ms at 120 BPM), and
+ the existing short rebound alone takes 110 ms before allowing for the next
+-stroke. The 180 BPM input ceiling is not a promise that the arm/hi-hat can keep
+-up. Existing rebound, motion, encoder, and missed-deadline safeguards remain;
++stroke. The snare-enabled 120 BPM ceiling is a scheduling guard, not a promise
++that the physical arm/hi-hat can keep up. Existing rebound, motion, encoder, and missed-deadline safeguards remain;
+ an excessive tempo can still produce a controlled stop. Calibration holds,
+ recording playback speed, strike depth/boost, model settings, and motor tuning
+ are not scaled by BPM. Manual `--hardwaretest` and recording-only modes have no
+--- before/camera_playback/app.py
++++ camera_playback/app.py
+@@ -75,6 +75,7 @@
+ from centering.motors import Motors
+ from . import recording_only as recording_only_control
+ from . import hybrid_workflow as hybrid_control
++from . import snare_workflow as snare_control
+ from .visual import (
+     PlaybackVisualSample,
+     infer_direction_order,
+@@ -214,7 +215,7 @@
+                   'one RUN button → center + close gripper → recording → '
+                   'wait for hi-hat calibration → '
+                   'experiment hybrid J7 search → first-hit depth +0.5° → '
+-                  'user-selected BPM (default 100) hybrid swing with partial returns; ride v2 controls search; '
++                  '20–120 BPM (default 100) hybrid swing plus powered 11° left snare on one random beat per measure; ride v2 controls search; '
+                   'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
+         super().__init__(real_hardware, detection_socket)
+         if real_hardware and isinstance(self.bus, Motors):
+@@ -532,9 +533,12 @@
+             if auto_run:
+                 self.root.after(100, lambda: recording_only_control.auto_tick(self))
+         self.header.config(text=self.header.cget('text') + (
+-            '\nBOTH center together; LEFT recording then RIGHT; left holds endpoint with closed gripper'
++            '\nBOTH center; LEFT then RIGHT recording; powered 11° snare on one random beat per 4-beat measure'
+             if self.dual is not None else
+             '\nBOTH arms center; LEFT holds center with its closed gripper'))
++
++        if hasattr(self, 'tempo_header_template'):
++            self.tempo_header_template = self.header.cget('text')
+ 
+     @property
+     def strike_bpm(self):
+@@ -582,11 +586,13 @@
+             return True
+         try:
+             self._apply_selected_tempo()
++            snare_control.check_tempo(self)
+         except ValueError as exc:
+             self.tempo_hint.config(text=str(exc), fg='#b00020')
+             return False
++        maximum = 120. if getattr(getattr(self, 'dual', None), 'snare_template', None) is not None else MAX_BPM
+         self.tempo_hint.config(
+-            text=f'{MIN_BPM:g}–{MAX_BPM:g} BPM; estimated practical upper '
++            text=f'{MIN_BPM:g}–{maximum:g} BPM; estimated practical upper '
+                  f'~{ESTIMATED_PRACTICAL_MAX_BPM:g}. Set before Start/RUN.',
+             fg='#8a5a00' if self.strike_bpm > ESTIMATED_PRACTICAL_MAX_BPM else '#555555')
+         tempo = f'{self.strike_bpm:g} BPM'
+@@ -1042,6 +1048,7 @@
+             return
+         try:
+             self._apply_selected_tempo()
++            snare_control.check_tempo(self)
+         except ValueError as exc:
+             self.status.set('Cannot start: ' + str(exc))
+             return
+@@ -1648,6 +1655,7 @@
+                 # their triplet grid even if an individual target is late.
+                 event_at = now
+                 self.continuous_current_event_at = event_at
++                snare_control.simulation_epoch(self, event_at + interval)
+             self.continuous_last_beat_at = event_at
+             self.continuous_next_beat_at = event_at + interval
+             self._begin_continuous_stage(
+@@ -2443,6 +2451,8 @@
+                 hybrid_control.start_swing(self, self.swing_events)
+             except Exception as exc:
+                 self.fail('Could not start hybrid swing: '+str(exc))
++        elif getattr(self, 'test_mode', False):
++            snare_control.start_simulation(self)
+ 
+     def _advance_continuous_striking(self, now: float) -> None:
+         if hybrid_control.enabled(self):
+@@ -2674,6 +2684,7 @@
+             hybrid_control.request_stop(self)
+             return
+         self.continuous_stop_requested = True
++        snare_control.finish(self)
+         self._stop_hihat_sequence()
+         self.center_relax_button.config(state="disabled")
+         if self.phase == CONTINUOUS_WAIT_PHASE:
+@@ -2686,6 +2697,9 @@
+ 
+     def _finish_continuous_striking(self) -> None:
+         if not self.continuous_strike_active:
++            return
++        snare_control.finish(self)
++        if not snare_control.finished(self):
+             return
+         self.continuous_strike_active = False
+         self.continuous_stop_requested = False
+@@ -2917,6 +2931,7 @@
+             self.hihat_fault_detail = str(exc)
+ 
+     def _cancel_continuous_striking(self) -> None:
++        snare_control.finish(self)
+         self._log_continuous_j7_minimum()
+         self._stop_hihat_sequence()
+         self.continuous_strike_active = False
+--- before/camera_playback/dual_recording.py
++++ camera_playback/dual_recording.py
+@@ -26,6 +26,7 @@
+ from .smooth_recording_worker import RecordingSession
+ from .trajectory import PlaybackFollower
+ from .left_return import LeftReturn
++from . import snare_workflow as snare
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ DEFAULT_LEFT_RECORDING = ROOT / 'left_recordings/record1.json'
+@@ -34,7 +35,7 @@
+ END_HOLD = 'LEFT RECORDING END HOLD'
+ CENTERING = 'BOTH ARMS CENTERING'
+ FAULT = 'DUAL RECORDING SAFE HOLD'
+-LEFT_PHASES = {APPROACH, PLAYING, END_HOLD}
++LEFT_PHASES = {snare.ARMING, APPROACH, PLAYING, END_HOLD}
+ 
+ 
+ def left_geometry(model):
+@@ -88,6 +89,7 @@
+         if not self.selectable():
+             return False
+         self.recording = None
++        self.snare_template = None
+         loader = load_cached_smooth_recording if self.app.hardware and not self.app.test_mode else load_cached_playback_trajectory
+         self.job = RecordingPreflight(path, self.g.model, self.g.zone,
+             self.g.lower.copy(), self.g.upper.copy(), self.g.center.copy(), .4,
+@@ -111,6 +113,14 @@
+                     self.widget.config(fg='#b00020')
+                 else:
+                     self.recording = value
++                    try:
++                        snare.preflight(self)
++                    except Exception as exc:
++                        self.recording = None
++                        self.label.set('Left snare preflight rejected: ' + str(exc))
++                        self.widget.config(fg='#b00020')
++                        self.app._refresh_buttons()
++                        return
+                     self.label.set(f'Left recording: {value.source.name} • {value.duration_s:.2f} s • endpoint hold')
+                     self.widget.config(fg='#087f23')
+                 self.app._refresh_buttons()
+@@ -132,6 +142,7 @@
+         self.returning = False
+         self.left_return = None
+         self.return_prepared = False
++        self.snare_seen_completed = 0
+ 
+     def begin_left(self):
+         a = self.app
+@@ -141,6 +152,11 @@
+         self.g.check_line(q, self.recording.first_joints, measured_start=True)
+         self._refresh_after_geometry(q, 'left')
+         a.control = None  # Right holds center; only the left arm moves next.
++        if getattr(a, 'hybrid_enabled', False) and getattr(self, 'snare_template', None) is not None:
++            self.snare_arming_at = time.monotonic()
++            a.phase = snare.ARMING
++            a.status.set('Left held at verified center: preparing powered snare J6 once')
++            return
+         a.bus.set_left_hold(self.recording.first_joints)
+         a.phase = APPROACH
+         a.status.set('Left arm: center → recording start; right arm holds center')
+@@ -163,6 +179,13 @@
+ 
+     def tick(self, now):
+         a = self.app
++        snare.tick(self, now)
++        if a.phase == snare.ARMING:
++            if snare.arm(self):
++                a.bus.set_left_hold(self.recording.first_joints)
++                a.phase = APPROACH
++                a.status.set('Left powered J6 ready; moving to recording start')
++            return True
+         if self.returning:
+             self.tick_return(now)
+             # Keep the original right-arm extra_control/gripper supervision
+@@ -220,6 +243,9 @@
+             return
+         self.return_prepared = False
+         a = self.app
++        snare.finish(a)
++        if not snare.finished(a):
++            raise RuntimeError('Waiting for snare full return before centering')
+         recording = getattr(self, 'recording', None)
+         reverse_from = None if recording is None else recording.duration_s
+         if recording is not None and a.phase == PLAYING:
+@@ -344,6 +370,7 @@
+             a.relax('Both arms centered and individually relaxed')
+ 
+     def fault(self, message):
++        snare.finish(self.app)
+         try:
+             self.stop()
+         except Exception as exc:
+--- before/camera_playback/emergency.py
++++ camera_playback/emergency.py
+@@ -51,7 +51,8 @@
+                         getattr(app, 'hybrid_session', None),
+                         getattr(app, 'hardware_test_session', None),
+                         getattr(bus, 'playback_session', None),
+-                        getattr(bus, 'right_joint7_session', None)):
++                        getattr(bus, 'right_joint7_session', None),
++                        getattr(bus, 'left_joint6_session', None)):
+             if session is not None and all(session is not old for old in sessions):
+                 sessions.append(session)
+         failures = []
+@@ -83,7 +84,7 @@
+             raise RuntimeError('; '.join(failures))
+         for name in ('smooth_playback_session', 'hybrid_session', 'hardware_test_session'):
+             setattr(app, name, None)
+-        bus.playback_session = bus.right_joint7_session = None
++        bus.playback_session = bus.right_joint7_session = bus.left_joint6_session = None
+         if dual is not None:
+             dual.session = None
+         bus.left_monitor = None
+--- before/camera_playback/hybrid_strike.py
++++ camera_playback/hybrid_strike.py
+@@ -347,7 +347,7 @@
+ 
+ 
+ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
+-                requests, stop, heartbeat, sender, channel_factory, motor=7, sign=1.0):
++                requests, stop, heartbeat, sender, channel_factory, motor=7, sign=1.0, snare_clock=None):
+     """Only process allowed to command J7 (or, for the left arm, J6) while the
+     hybrid session is alive. `anchor`/`lower`/`upper` are already in this
+     session's internal strike convention (see Command.frame()'s docstring);
+@@ -407,6 +407,14 @@
+                 controller.status = replace(controller.status, request_id=request_id)
+             sample = channel.sample
+             command = controller.update(sample, now)
++            # Publish the EXISTING ride grid, not a second clock or GUI beat
++            # count. Snare can lead beat 1 by its exact reference descent time.
++            if snare_clock is not None and controller.status.swing:
++                with snare_clock.get_lock():
++                    if (snare_clock[2] and not snare_clock[0]
++                            and controller.status.bottoms == 1
++                            and controller.status.bottom_at is not None):
++                        snare_clock[0] = controller.status.bottom_at + snare_clock[1]/3.
+             before = time.monotonic()
+             if (before-sample.at > limits.feedback_timeout or
+                     before-last_send > limits.control_timeout) and controller.method:
+@@ -444,7 +452,7 @@
+     """Reuse the established joined ownership/IPC lifecycle, not its strategy."""
+ 
+     def __init__(self, bus, anchor, lower, upper, tuning=None, channel_factory=Joint7Channel,
+-                 motor=7, sign=1.0):
++                 motor=7, sign=1.0, snare_clock=None):
+         """`anchor`/`lower`/`upper` are already in this session's internal
+         strike convention — see Command.frame()'s docstring in mit_strike.py.
+         Defaults (motor=7, sign=1.0) reproduce the original right-J7-only
+@@ -476,7 +484,7 @@
+         self.process = ctx.Process(target=_run_hybrid, name='j7-hybrid-beat', args=(
+             bus.sockets[bus.control_side].getsockname()[0], anchor, lower, upper, parameters,
+             rules, limits, self.requests, self.stop_event, self.heartbeat, sender, channel_factory,
+-            motor, sign))
++            motor, sign, snare_clock))
+         setattr(bus, self.session_attr, self)
+         try:
+             self.process.start()
+--- before/camera_playback/hybrid_workflow.py
++++ camera_playback/hybrid_workflow.py
+@@ -13,6 +13,7 @@
+ from .playback_transport import PlaybackMotors
+ from .recording_only import refresh_feedback
+ from .strike import StrikePlan, _path_inside
++from . import snare_workflow as snare
+ 
+ 
+ RESTORING = 'HYBRID LEAVING MIT SESSION'
+@@ -62,7 +63,9 @@
+     app.strike_plan = StrikePlan(anchor, tuple(targets))
+     app.hybrid_anchor = anchor
+     app.hybrid_tuning = tuning
+-    app.hybrid_session = HybridSession(app.bus, float(anchor[6]), lower, upper, tuning)
++    left = snare.session(app)
++    options = {} if left is None else {'snare_clock': left.clock}
++    app.hybrid_session = HybridSession(app.bus, float(anchor[6]), lower, upper, tuning, **options)
+     if isinstance(app.bus, PlaybackMotors):
+         # Geometry/process creation can exceed the GUI's 300 ms watchdog.
+         # Query and independently verify fresh feedback before any release;
+@@ -127,6 +130,7 @@
+ 
+ 
+ def start_swing(app, events):
++    snare.start(app)
+     app.hybrid_main_count = app.hybrid_seen_bottoms = 0
+     app.hybrid_seen_closed = 0
+     app.hybrid_session.request('swing', math.radians(app.continuous_strike_degrees), events)
+@@ -135,11 +139,12 @@
+         sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+     app.status.set(f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
+                    f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
+-                   f'{app.strike_bpm:g} BPM swing + hi-hat; 4° minimum rebound before partial-return releases')
++                   f'{app.strike_bpm:g} BPM swing + hi-hat + random 11° snare; 4° minimum rebound before partial-return releases')
+     print(app.status.get(), flush=True)
+ 
+ 
+ def request_stop(app, detail='Stop requested'):
++    snare.finish(app)
+     if getattr(app, 'hybrid_stopping', False) or getattr(app, 'hybrid_restoring', False):
+         return
+     app.strike_active = False
+@@ -164,6 +169,7 @@
+ 
+ def fault(app, message):
+     """Never let inherited CSP recovery write into an active/unknown MIT mode."""
++    snare.finish(app)
+     first = app.phase != FAULT
+     if first and getattr(app, 'beat_evidence', None) is not None:
+         app.beat_evidence.faults.append(dict(t=time.monotonic(), source='hybrid', message=str(message)))
+@@ -300,7 +306,7 @@
+               f'commanded: {app.continuous_strike_degrees:g} deg', flush=True)
+     if getattr(app, 'hybrid_stopping', False):
+         if (s.request_id >= app.hybrid_stop_request and not s.swing and s.ready
+-                and s.sample is not None and now-s.sample.at <= .020):
++                and s.sample is not None and now-s.sample.at <= .020 and snare.finished(app)):
+             close(app)
+             if getattr(app, 'single_run_mode', False):
+                 begin_center_return(app)
+--- before/camera_playback/left_hold.py
++++ camera_playback/left_hold.py
+@@ -5,6 +5,7 @@
+ import numpy as np
+ 
+ from centering.motors import Motors, MOTOR_RUNNING_STATE, parameter
++from safe_zone.encoder import joint_to_motor
+ 
+ LEFT_CENTER = np.radians([0., 0., 0., 0., -50., 0., 0.])
+ # Match the raw motor-8 readout, not an estimated millimeter opening.
+@@ -67,6 +68,26 @@
+ class LeftHoldDrive(Motors):
+     """Permit the one left hold target without widening right-gripper limits."""
+ 
++    def _send(self, side, frame):
++        owner = getattr(self, 'owner', None)
++        if owner is not None:
++            owner.guard_left_disable(frame)
++        return super()._send(side, frame)
++
++    def set_positions(self, joints):
++        session = getattr(self, 'left_joint6_session', None)
++        if session is None:
++            return super().set_positions(joints)
++        if not self.active or len(joints) != 7 or not np.isfinite(joints).all():
++            raise RuntimeError('Invalid powered left path target')
++        s = session.status
++        if not s.armed or s.error or s.moving or s.scheduled:
++            raise RuntimeError('Snare must finish before left path movement')
++        session.goal.value = float(joints[5])
++        for i, q in enumerate(joints, 1):
++            if i != 6:
++                self.send_control(parameter(i, 0x7016, joint_to_motor('left', i, q)))
++
+     def command_allowed(self, frame):
+         return (frame == parameter(8, 0x7016, -LEFT_GRIPPER_TARGET)
+                 or super().command_allowed(frame))
+@@ -80,6 +101,8 @@
+     methods use it; right-arm writers cannot route through it accidentally.
+     """
+     view = LeftHoldDrive.__new__(LeftHoldDrive)
++    view.owner = owner
++    view.left_joint6_session = None
+     view.control_side, view.control_gripper = 'left', True
+     view.sockets, view.states = owner.sockets, owner.states
+     view.modes = {}
+--- before/camera_playback/playback_transport.py
++++ camera_playback/playback_transport.py
+@@ -71,7 +71,41 @@
+         result.left_playback_active = False
+         result.center_disabled = {}
+         result.dual_center_history = None
++        result.snare_center_history = deque()
++        result.left_disable_at = None
+         return result
++
++    def snare_center_evidence(self):
++        now = time.monotonic()
++        h = self.snare_center_history
++        if (not self.fresh() or len(h) < 2 or h[-1][0]-h[0][0] < .6
++                or now-h[-1][0] > .1):
++            raise RuntimeError('Left center not settled yet')
++        q = np.array([self.states['left', i][0] for i in range(1, 8)])
++        values = np.array([q for _, q in h])
++        if (any(self.states['left', i][1] != MOTOR_RUNNING_STATE for i in range(1, 9))
++                or np.max(np.abs(q-LEFT_CENTER)) > math.radians(.2)
++                or np.max(np.abs(values-LEFT_CENTER)) > math.radians(.2)
++                or np.max(np.ptp(values, axis=0)) > math.radians(.12)):
++            raise RuntimeError('Left center not settled yet')
++        return dict(at=now, max_error_deg=math.degrees(float(np.max(np.abs(values-LEFT_CENTER)))))
++
++    def guard_left_disable(self, frame):
++        if not getattr(self, 'require_center_before_relax', False) or self.emergency_relax_reason:
++            return
++        cid, _, _ = FRAME.unpack(frame)
++        if (cid >> 24) & 31 != 4:
++            return
++        state = self.states.get(('left', cid & 255))
++        if state is not None and state[1] == 0:
++            return  # Initial setup of an already disabled drive.
++        now = time.monotonic()
++        q = np.array([self.states['left', i][0] for i in range(1, 8)])
++        if (self.left_disable_at is not None and now-self.left_disable_at < .08
++                and self.fresh() and np.max(np.abs(q-LEFT_CENTER)) <= math.radians(.2)):
++            return
++        self.snare_center_evidence()
++        self.left_disable_at = now
+ 
+     def feedback_controlled(self, side, motor):
+         return (side == 'left' and getattr(self, 'left_hold_enabled', False)
+@@ -93,6 +127,8 @@
+         self.dual_center_history = None
+         self.emergency_relax_reason = None
+         self.center_history.clear()
++        self.snare_center_history.clear()
++        self.left_disable_at = None
+         # Start the inherited generator first: it validates the target and
+         # fresh, disabled feedback for ALL 16 drives before any enable.
+         right = super().center(target, gripper_target, confirm_enabled=True)
+@@ -187,6 +223,13 @@
+             raise RuntimeError('Center not settled yet')
+         # Each side is disabled only after its OWN measured center evidence.
+         if side == 'left':
++            snare = getattr(self, 'left_joint6_session', None)
++            if snare is not None:
++                if not snare.finished:
++                    raise RuntimeError('Snare still owns an active stroke')
++                snare.stop()  # Join writer BEFORE disabling centered J6.
++                if not self.fresh():
++                    raise RuntimeError('Fresh feedback required after snare worker join')
+             self.left_drive.relax()
+             self.left_monitor = None
+         elif side == 'right':
+@@ -199,6 +242,9 @@
+         self.center_disabled[side] = now
+ 
+     def poll(self):
++        snare = getattr(self, 'left_joint6_session', None)
++        if snare is not None:
++            snare.status  # Heartbeat also during the two recording workers.
+         session = self.playback_session
+         if (session is not None and session.owns_feedback
+                 and not getattr(session, 'center_return', False)):
+@@ -206,6 +252,11 @@
+             # receivers. Drain ours normally, but don't duplicate its queries.
+             self.last_query = time.monotonic()
+         super().poll()
++        if hasattr(self, 'snare_center_history') and self.active and self.fresh():
++            now = time.monotonic()
++            self.snare_center_history.append((now, np.array([self.states['left', i][0] for i in range(1, 8)])))
++            while self.snare_center_history and now-self.snare_center_history[0][0] > .65:
++                self.snare_center_history.popleft()
+         if getattr(self, 'left_playback_active', False) and self.active:
+             if any(self.states['left', i][1] != MOTOR_RUNNING_STATE for i in range(1, 9)):
+                 raise RuntimeError('Left recording motor stopped')
+--- before/camera_playback/simulation.py
++++ camera_playback/simulation.py
+@@ -39,6 +39,7 @@
+         self.center_disabled = {}
+         self.dual_center_history = None
+         self.left_monitor = None
++        self.snare_simulation = None
+         self._speeds = np.full(7, SPEED, dtype=float)
+         self._gripper = float(initial_gripper)
+         self._gripper_target = float(initial_gripper)
+@@ -89,6 +90,8 @@
+                 np.array([self._gripper]), np.array([self._gripper_target]),
+                 np.array([SPEED]), elapsed,
+             )[0])
++        if self.active and self.snare_simulation is not None:
++            self.snare_simulation.update_pose(now)
+         self._refresh_states(now)
+         if self.active and self.dual_center_history is not None:
+             for side, history in self.dual_center_history.items():
+@@ -191,6 +194,8 @@
+             raise RuntimeError('Center not settled yet')
+         self.center_disabled[side] = time.monotonic()
+         if side == 'left':
++            if self.snare_simulation is not None:
++                self.snare_simulation.stop()
+             self.left_monitor = None
+         self._refresh_states(time.monotonic())
+ 
+--- before/camera_playback/smooth_recording_worker.py
++++ camera_playback/smooth_recording_worker.py
+@@ -33,9 +33,10 @@
+     The send allowlist excludes every enable, mode write, disable, gripper,
+     other-arm command, current change, and persistent save.
+     """
+-    def __init__(self, directory, lock_handles, *, side="right"):
++    def __init__(self, directory, lock_handles, *, side="right", j6_goal=None):
+         if side not in ('left', 'right'):
+             raise ValueError('Unknown playback arm')
++        self.j6_goal = j6_goal
+         self.directory = Path(directory)
+         self.phase = 'CONNECT'
+         self.center_permission = False
+@@ -79,6 +80,13 @@
+         cid, dlc, data = FRAME.unpack(frame)
+         kind, motor = (cid >> 24) & 31, cid & 255
+         index = int.from_bytes(data[:2], 'little')
++        if (getattr(self, 'control_side', None) == side == 'left' and motor == 6 and kind == 18
++                and dlc == 8 and index == 0x7016 and getattr(self, 'j6_goal', None) is not None):
++            raw = struct.unpack('<f', data[4:])[0]
++            if not math.isfinite(raw) or abs(raw) > .75:
++                raise RuntimeError('Invalid shared J6 recording target')
++            self.j6_goal.value = -raw
++            return  # NEVER send a CSP position to the MIT-owned joint.
+         permitted = (kind == 17 and index in (0x7005, 0x701e)
+                      or kind == 18 and index in (0x7016, 0x7017, 0x701e))
+         if side != getattr(self, 'control_side', None) or motor not in range(1, 8) or dlc != 8 or not permitted:
+@@ -108,8 +116,8 @@
+ 
+ 
+ class LeftRecordingMotors(RecordingMotors):
+-    def __init__(self, directory, lock_handles):
+-        super().__init__(directory, lock_handles, side='left')
++    def __init__(self, directory, lock_handles, j6_goal=None):
++        super().__init__(directory, lock_handles, side='left', j6_goal=j6_goal)
+ 
+ 
+ PHASES = ('STARTING', 'START HOLD', 'TEMPORARY POSITION GAINS', 'PLAYBACK',
+@@ -199,8 +207,9 @@
+             if time.monotonic() > deadline:
+                 raise RuntimeError('Recording worker CSP readback timeout')
+             time.sleep(.002)
+-        if any(mode != 5 for mode, _ in self.bus.modes.values()):
+-            raise RuntimeError('Recording worker requires existing CSP mode')
++        if any(mode != (0 if self.side == 'left' and i == 6 and getattr(self.bus, 'j6_goal', None) is not None else 5)
++               for i, (mode, _) in self.bus.modes.items()):
++            raise RuntimeError('Recording worker requires existing CSP mode (except confirmed owned left J6 MIT)')
+         self.bus.active = True
+         self.g.check_line(q, self.trajectory.first, measured_start=True)
+         self.settle(self.trajectory.first, 'START HOLD')
+@@ -220,14 +229,15 @@
+ 
+ 
+ def _worker(recording, directory, cancel, heartbeat, progress, parent_pid,
+-            lock_handles, bus_factory=RecordingMotors):
++            lock_handles, bus_factory=RecordingMotors, j6_goal=None):
+     # Terminal SIGINT belongs to the GUI. Its cancellation event requests a
+     # bounded handoff, rather than KeyboardInterrupt halfway through a gain write.
+     signal.signal(signal.SIGINT, signal.SIG_IGN)
+     runner = RecordingRunner(recording, directory, cancel, heartbeat, progress, parent_pid)
+     error = cleanup_error = None
+     try:
+-        runner.bus = bus_factory(Path(directory), lock_handles)
++        options = {} if j6_goal is None else {'j6_goal': j6_goal}
++        runner.bus = bus_factory(Path(directory), lock_handles, **options)
+         runner.play_only()
+     except BaseException as exc:
+         error = f'{type(exc).__name__}: {exc}'
+@@ -286,8 +296,12 @@
+         self.heartbeat = context.Value('d', time.monotonic(), lock=False)
+         self.progress = context.Array('d', [0., 0.], lock=False)
+         handles = [DupFd(fd) for fd in bus.locks] if real_factory else []
++        snare = getattr(bus, 'left_joint6_session', None) if recording.side == 'left' else None
++        if snare is not None and (not snare.finished or snare.status.error):
++            raise RuntimeError('Snare must finish before recording takes left path ownership')
++        j6_goal = None if snare is None else snare.goal
+         self.process = context.Process(target=_worker, args=(recording, self.directory,
+-            self.cancel, self.heartbeat, self.progress, os.getpid(), handles, bus_factory),
++            self.cancel, self.heartbeat, self.progress, os.getpid(), handles, bus_factory, j6_goal),
+             name='smooth-recording', daemon=True)
+         # Bound BLAS workers in the child without changing the GUI's environment.
+         previous = {k: os.environ.get(k) for k in ('OPENBLAS_NUM_THREADS', 'OMP_NUM_THREADS')}
+--- /dev/null
++++ camera_playback/snare_beat.py
+@@ -0,0 +1,353 @@
++"""One powered left-J6 snare per four quarter notes; no hardware at import.
++
++The preflighted reference is snare.sh's actual build_method(11 degrees).
++A separate 500 Hz process owns J6 from centered setup through centered stop.
++Recording workers pass J6 targets through shared memory, never CSP on the wire.
++"""
++import copy
++from dataclasses import dataclass, replace
++import math
++import multiprocessing as mp
++import os
++import pickle
++import queue
++import random
++import signal
++import socket
++import time
++
++from .mit_center_return import MitCenterReturn
++from .mit_strike import Command, Joint7Session, Joint7Worker, Status, StrikeSettings
++from .tempo import parse_bpm
++from snare_lab.motion import build_method, stroke_timeout
++from strike_lab.engine import StableWindow, limit_command
++
++SNARE_DEGREES = 11.
++# Full unchanged return + settling must fit even across beat 4 -> beat 1.
++# Also allow the opening pickup to establish beat 1 before descent starts.
++MAX_SNARE_BPM = 120.
++MAX_RELEASE_LATENESS = .020
++
++
++def validate_tempo(bpm, method, rules):
++    bpm = parse_bpm(bpm)
++    period = 60. / bpm
++    minimum = max(method.curve.duration + rules.settle_seconds + .030,
++                  3 * (method.curve.down + .010))
++    if bpm > MAX_SNARE_BPM or period < minimum:
++        raise ValueError('Snare beat supports 20–120 BPM with its full unchanged return')
++    return period
++
++
++class MeasureGrid:
++    """Absolute quarter-note clock, NOT a count of the six ride events."""
++    def __init__(self, epoch, period, rng=None):
++        if not all(math.isfinite(x) for x in (epoch, period)) or period <= 0:
++            raise ValueError('Invalid snare beat clock')
++        self.epoch, self.period = epoch, period
++        self.rng = rng or random.Random()
++        self.measure = 0
++        self.beat = self.rng.randrange(4) + 1
++
++    @property
++    def at(self):
++        return self.epoch + (4*self.measure + self.beat-1)*self.period
++
++    def advance(self):
++        self.measure += 1
++        self.beat = self.rng.randrange(4) + 1
++
++
++@dataclass(frozen=True)
++class SnareStatus(Status):
++    at: float = 0.
++    armed: bool = False
++    scheduled: bool = False
++    moving: bool = False
++    measure: int = 0
++    beat: int = 0
++    released_at: float | None = None
++    scheduled_at: float | None = None
++
++
++class SnareController:
++    """Pure controller; the powered stroke is copied, never reimplemented."""
++    def __init__(self, template, rules, limits, lower, upper, initial, now, rng=None):
++        self.template, self.rules, self.limits = template, rules, limits
++        self.anchor, self.lower, self.upper = template.anchor, lower, upper
++        self.path = MitCenterReturn(initial, initial, 0., now)
++        self.window = StableWindow(self.anchor, rules)
++        self.method = self.grid = None
++        self.rng = rng
++        self.last_send = None
++        self.last_torque = 0.
++        self.status = SnareStatus(armed=True)
++
++    def start(self, epoch, period):
++        validate_tempo(60./period, self.template, self.rules)
++        if self.grid is not None or self.method is not None:
++            raise RuntimeError('Snare sequence already active')
++        self.grid = MeasureGrid(epoch, period, self.rng)
++
++    def finish(self):
++        # Cancel FUTURE hits immediately; finish the current full return.
++        self.grid = None
++        self.status = replace(self.status, scheduled=False)
++
++    def update(self, sample, now, displayed_goal):
++        moving = self.method is not None
++        l = self.limits
++        if (sample is None or not all(math.isfinite(v) for v in
++                (sample.position, sample.velocity, sample.torque, sample.at))
++                or sample.state != 2 or not -.001 <= now-sample.at <= (l.feedback_timeout if moving else .25)):
++            raise RuntimeError('Snare J6 feedback stale, invalid, or not running')
++        if not self.lower <= sample.position <= self.upper:
++            raise RuntimeError('Snare J6 outside joint limits')
++        if abs(sample.velocity) > l.velocity*1.25:
++            raise RuntimeError('Snare J6 excessive measured velocity')
++        if moving and self.last_send is not None and now-self.last_send > l.control_timeout:
++            raise RuntimeError('Snare control deadline missed')
++        if not math.isfinite(displayed_goal) or not self.lower <= -displayed_goal <= self.upper:
++            raise RuntimeError('Invalid left J6 path target')
++        self.window.add(sample)
++        grid = self.grid
++        if grid is not None:
++            if abs(-displayed_goal-self.anchor) > 1e-6:
++                raise RuntimeError('Left path moved while snare beat was active')
++            release_at = grid.at-self.template.curve.down
++            if now >= release_at:
++                if now-release_at > MAX_RELEASE_LATENESS:
++                    raise RuntimeError('Snare missed beat deadline; no catch-up hit')
++                if self.method is not None or not self.window.ready:
++                    raise RuntimeError('Snare not returned and settled before next beat')
++                if now-sample.at <= min(.006, self.rules.maximum_feedback_gap/2):
++                    self.method = copy.copy(self.template)
++                    self.method.bias = self.path.bias
++                    self.method.start(now, list(self.window.samples))
++                    self.window = StableWindow(self.anchor, self.rules)
++                    self.last_torque = self.path.bias
++                    self.last_send = None
++                    self.status = replace(self.status, measure=grid.measure+1, beat=grid.beat,
++                        released_at=now, scheduled_at=grid.at, peak_drop=0.)
++                    grid.advance()
++        method = self.method
++        if method is None:
++            self.path.goal = -displayed_goal
++            command = self.path.update(sample.position, now)
++            phase = 'powered path/hold'
++        else:
++            depth = math.degrees(self.anchor-sample.position)
++            if not -l.upper_excursion_deg <= depth <= min(14., l.hard_depth_deg):
++                raise RuntimeError('Snare excursion outside validated strike corridor')
++            self.status = replace(self.status, peak_drop=max(self.status.peak_drop, self.anchor-sample.position))
++            command = method.update(sample, now)
++            phase = method.phase
++            if method.done:
++                self.window.add(sample)
++                command = method.hold()
++            command, self.last_torque, _ = limit_command(command, sample, now,
++                self.anchor, l, self.last_send, self.last_torque)
++            if method.done and self.window.ready:
++                self.method = None
++                self.path = MitCenterReturn(sample.position, self.anchor, method.bias, now)
++                self.status = replace(self.status, completed=self.status.completed+1)
++            elif now-method.started > stroke_timeout(method, l):
++                raise RuntimeError('Snare return failed to settle')
++        if not self.lower <= command.position <= self.upper:
++            raise RuntimeError('Snare command outside joint limits')
++        self.last_send = now
++        self.status = replace(self.status, at=now, sample=sample, phase=phase,
++            moving=self.method is not None, scheduled=self.grid is not None,
++            ready=self.method is None and self.window.ready)
++        return command
++
++
++def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, heartbeat, sender):
++    # Only parent owns Ctrl-C / emergency; child must not die mid-handoff.
++    signal.signal(signal.SIGINT, signal.SIG_IGN)
++    from snare_lab.runner import _LeftJoint6Channel
++    channel = None
++    controller = None
++    status = SnareStatus()
++    last_publish = 0.
++    def publish(s, force=False):
++        nonlocal last_publish
++        now = time.monotonic()
++        if force or now-last_publish >= .005:
++            try:
++                sender.send(pickle.dumps(s))
++            except BlockingIOError:
++                pass
++            last_publish = now
++    try:
++        channel = _LeftJoint6Channel(interface)
++        # Parent freezes ALL left targets at independently verified center
++        # until armed status. This is the ONLY disable/mode setup in the run.
++        helper = Joint7Worker(interface, -goal.value, lower, upper, StrikeSettings(),
++            queue.Queue(), stop, lambda s: publish(replace(status, at=time.monotonic(), sample=s.sample)),
++            motor=6, sign=-1.)
++        helper._prepare(channel)
++        now = time.monotonic()
++        controller = SnareController(template, rules, limits, lower, upper, channel.sample.position, now)
++        controller.path.bias = helper.controller.bias
++        started = False
++        deadline = now
++        while not stop.is_set():
++            channel.receive()
++            now = time.monotonic()
++            if now < deadline:
++                channel.wait(deadline-now)
++                continue
++            if now-heartbeat.value > 2.:
++                raise RuntimeError('Snare parent heartbeat lost; no further strikes')
++            epoch, period, enabled = clock[:]
++            if not enabled:
++                controller.finish()
++                started = False
++            elif epoch > 0 and not started:
++                controller.start(epoch, period)
++                started = True
++            command = controller.update(channel.sample, now, goal.value)
++            if controller.method is not None and time.monotonic()-channel.sample.at > limits.feedback_timeout:
++                raise RuntimeError('Snare feedback expired before send')
++            if stop.is_set():
++                break
++            channel.send(command.frame(6, -1.))
++            publish(controller.status)
++            period_s = 1/limits.hz
++            deadline = max(deadline+period_s, time.monotonic()+period_s if deadline+period_s <= now else 0.)
++    except InterruptedError:
++        pass
++    except Exception as exc:
++        status = status if controller is None else controller.status
++        publish(replace(status, error=str(exc), ready=False, phase='fault', at=time.monotonic()), True)
++        if channel is not None and channel.sample is not None and not stop.is_set():
++            try:
++                q = channel.sample.position
++                if lower <= q <= upper:
++                    channel.send(Command(q, 0., 40., 1.8).frame(6, -1.))
++            except Exception:
++                pass  # Never disable or re-enable an off-center faulted arm.
++    finally:
++        if channel is not None:
++            channel.close()
++        sender.close()
++
++
++class SnareSession(Joint7Session):
++    def __init__(self, bus, template, rules, limits, lower, upper):
++        if os.environ.get('STRIKE_LAB_OFFLINE_ONLY') == '1':
++            raise RuntimeError('Physical snare transport forbidden in offline tests')
++        bus.snare_center_evidence()  # Strict .2 deg / .12 span / .6 s, BEFORE any mode change.
++        if getattr(bus, 'left_joint6_session', None) is not None:
++            raise RuntimeError('Left J6 already owned')
++        self.bus, self.session_attr = bus, 'left_joint6_session'
++        self.closed = False
++        self.template, self.rules = template, rules
++        ctx = mp.get_context('spawn')
++        self.goal = ctx.Value('d', bus.states['left', 6][0])
++        self.clock = ctx.Array('d', [0., 0., 0.])
++        self.heartbeat = ctx.Value('d', time.monotonic())
++        self.stop_event = ctx.Event()
++        self.requests = ctx.Queue(maxsize=1)  # Joined lifecycle inherited from Joint7Session.
++        self.receiver, sender = socket.socketpair(socket.AF_UNIX, socket.SOCK_DGRAM)
++        self.receiver.setblocking(False)
++        sender.setblocking(False)
++        self._status = SnareStatus()
++        self.process = ctx.Process(target=_run, name='left-j6-snare-beat', args=(
++            bus.sockets['left'].getsockname()[0], template, rules, limits, lower, upper,
++            self.goal, self.clock, self.stop_event, self.heartbeat, sender))
++        bus.left_joint6_session = self
++        bus.left_drive.left_joint6_session = self
++        bus.left_monitor = None
++        previous = {k: os.environ.get(k) for k in ('OPENBLAS_NUM_THREADS', 'OMP_NUM_THREADS')}
++        try:
++            os.environ.update({k: '1' for k in previous})
++            self.process.start()
++        except Exception:
++            bus.left_joint6_session = bus.left_drive.left_joint6_session = None
++            self.receiver.close()
++            self.requests.close()
++            raise
++        finally:
++            sender.close()
++            for k, v in previous.items():
++                if v is None: os.environ.pop(k, None)
++                else: os.environ[k] = v
++
++    @property
++    def status(self):
++        self.heartbeat.value = time.monotonic()
++        return super().status
++
++    def start_swing(self, bpm):
++        s = self.status
++        if s.error or not s.ready or time.monotonic()-s.at > .1:
++            raise RuntimeError('Left snare must be settled at its recording endpoint')
++        period = validate_tempo(bpm, self.template, self.rules)
++        self.clock[:] = [0., period, 1.]  # Right worker publishes actual pickup-derived epoch.
++
++    def finish(self):
++        with self.clock.get_lock():
++            self.clock[2] = 0.
++
++    @property
++    def finished(self):
++        s = self.status
++        return not s.scheduled and not s.moving and not s.error and s.armed
++
++    def stop(self):
++        super().stop()
++        if getattr(self.bus.left_drive, 'left_joint6_session', None) is self:
++            self.bus.left_drive.left_joint6_session = None
++
++
++class SnareReferenceSimulation:
++    """Ideal reference-only visualization for --test; NEVER a hardware facade."""
++    def __init__(self, bus, template, rules):
++        self.bus, self.template, self.rules = bus, template, rules
++        self.grid = self.method = None
++        self.waiting = False
++        self.status = SnareStatus(armed=True, ready=True, at=time.monotonic())
++
++    def start_swing(self, bpm):
++        self.period = validate_tempo(bpm, self.template, self.rules)
++        self.waiting = True
++
++    def set_epoch(self, epoch):
++        if self.waiting:
++            self.grid = MeasureGrid(epoch, self.period)
++            self.waiting = False
++
++    def update_pose(self, now):
++        if self.grid is not None and now >= self.grid.at-self.template.curve.down:
++            if self.method is not None:
++                raise RuntimeError('Simulated snare strokes overlap')
++            self.method = copy.copy(self.template)
++            self.method.start(self.grid.at-self.template.curve.down, [])
++            self.status = replace(self.status, measure=self.grid.measure+1, beat=self.grid.beat,
++                released_at=self.method.started, scheduled_at=self.grid.at)
++            self.grid.advance()
++        if self.method is not None:
++            elapsed = now-self.method.started
++            self.bus._left_joints[5] = -(self.template.anchor-self.method.curve.at(elapsed)[0])
++            if elapsed >= self.method.curve.duration+self.rules.settle_seconds:
++                self.method = None
++                self.status = replace(self.status, completed=self.status.completed+1,
++                                      peak_drop=self.template.target)
++        self.status = replace(self.status, at=now, scheduled=self.grid is not None or self.waiting,
++                              moving=self.method is not None, ready=self.method is None)
++
++    def finish(self):
++        self.grid = None
++        self.waiting = False
++        self.status = replace(self.status, scheduled=False)
++
++    @property
++    def finished(self):
++        return not self.status.moving and not self.status.scheduled
++
++    def stop(self):
++        self.finish()
++        self.method = None
++        self.bus.snare_simulation = None
+--- /dev/null
++++ camera_playback/snare_workflow.py
+@@ -0,0 +1,113 @@
++"""Beat lifecycle adapter; delegates every motor stroke to snare.sh's reference."""
++import math
++import time
++
++import numpy as np
++
++from snare_lab.runner import prepare_strike
++from snare_lab.motion import build_method
++from .snare_beat import SNARE_DEGREES, SnareSession, validate_tempo
++
++ARMING = 'LEFT SNARE ARMING AT CENTER'
++
++
++def preflight(dual):
++    """Called while disabled when a recording is loaded; no CAN operations."""
++    if not (getattr(dual.app, 'hybrid_enabled', False) or getattr(dual.app, 'test_mode', False)):
++        return
++    tuning = prepare_strike(dual.g, dual.recording, SNARE_DEGREES)
++    template = build_method(-float(dual.recording.last_joints[5]), 0., tuning[0], SNARE_DEGREES, tuning[2])
++    dual.snare_tuning, dual.snare_template = tuning, template
++
++
++def check_tempo(app):
++    dual = getattr(app, 'dual', None)
++    if getattr(dual, 'snare_template', None) is not None:
++        validate_tempo(app.strike_bpm, dual.snare_template, dual.snare_tuning[1])
++
++
++def session(app):
++    if getattr(app, 'bus', None) is None:
++        return None
++    return vars(app.bus).get('left_joint6_session') or vars(app.bus).get('snare_simulation')
++
++
++def arm(dual):
++    a = dual.app
++    if time.monotonic()-dual.snare_arming_at > 15.:
++        raise RuntimeError('Snare centered mode setup timeout; NOT relaxed')
++    s = session(a)
++    if s is None:
++        try:
++            a.bus.snare_center_evidence()
++        except RuntimeError:
++            return False  # Keep the center targets until strict settling proof.
++        _, rules, limits = dual.snare_tuning
++        SnareSession(a.bus, dual.snare_template, rules, limits,
++                     -float(dual.g.upper[5]), -float(dual.g.lower[5]))
++        return False
++    state = s.status
++    if state.error:
++        raise RuntimeError('Left snare setup: '+state.error)
++    return state.armed
++
++
++def start(app):
++    s = session(app)
++    if s is None:
++        if getattr(getattr(app, 'dual', None), 'snare_template', None) is not None:
++            raise RuntimeError('Left snare controller missing')
++        return
++    s.start_swing(app.strike_bpm)
++    app.bus.left_monitor = None  # J6 intentionally leaves endpoint during hit.
++    app.bus.left_playback_active = True  # Fresh running/gripper supervision remains.
++    print('SNARE: powered +11°; one random beat (1–4) in every four-beat measure; unchanged return', flush=True)
++
++
++def finish(app):
++    s = session(app)
++    if s is not None:
++        s.finish()
++
++
++def finished(app):
++    s = session(app)
++    return s is None or s.finished
++
++
++def tick(dual, now):
++    a, s = dual.app, session(dual.app)
++    if s is None:
++        return
++    state = s.status
++    if state.error:
++        raise RuntimeError('Left snare: '+state.error+'; powered hold, NOT relaxed')
++    if state.armed and now-state.at > .15:
++        raise RuntimeError('Left snare worker status stale')
++    if state.moving or state.scheduled:
++        q = dual.positions()
++        anchor = dual.recording.last_joints
++        held = [0, 1, 2, 3, 4, 6]
++        if np.max(np.abs(q[held]-anchor[held])) > math.radians(dual.snare_tuning[2].held_joint_drift_deg):
++            raise RuntimeError('Left held joints moved during snare beat')
++        dual.g.check(q, measured=True)
++    if state.completed > getattr(dual, 'snare_seen_completed', 0):
++        dual.snare_seen_completed = state.completed
++        evidence = 'simulated reference' if getattr(a, 'test_mode', False) else 'measured peak'
++        print(f'SNARE measure {state.measure}, beat {state.beat}: +11° powered; '
++              f'{evidence} {math.degrees(state.peak_drop):.2f}°; returned', flush=True)
++
++
++def start_simulation(app):
++    from .snare_beat import SnareReferenceSimulation
++    from .simulation import SimulatedMotors
++    dual = getattr(app, 'dual', None)
++    if (isinstance(app.bus, SimulatedMotors) and getattr(dual, 'snare_template', None) is not None):
++        app.bus.snare_simulation = SnareReferenceSimulation(app.bus, dual.snare_template, dual.snare_tuning[1])
++        start(app)
++
++
++def simulation_epoch(app, epoch):
++    s = vars(app.bus).get('snare_simulation') if getattr(app, 'bus', None) is not None else None
++    if s is not None:
++        s.set_epoch(epoch)
+--- /dev/null
++++ tests/snare_beat_ui_check.py
+@@ -0,0 +1,84 @@
++"""Actual Tk/ROS main beat --test, eight measures and stop mid-snare. NO devices."""
++import json
++from pathlib import Path
++import socket
++import sys
++import tempfile
++import time
++from unittest.mock import patch
++import numpy as np
++import rclpy
++
++
++def audit(event, args):
++    if event == 'socket.__new__' and args[1] == socket.PF_CAN:
++        raise AssertionError('Physical CAN forbidden')
++    if event == 'open' and isinstance(args[0], str) and args[0].startswith(('/dev/tty','/dev/video','/dev/snd')):
++        raise AssertionError('Physical devices forbidden')
++
++
++sys.addaudithook(audit)
++from camera_playback.app import App, DEFAULT_RECORDING
++from camera_playback import dual_recording as dual
++from camera_playback.left_hold import LEFT_CENTER
++from tests.test_snare_beat import Choices
++
++rclpy.init(args=[])
++app = None
++hits, phases = [], []
++try:
++    with tempfile.TemporaryDirectory() as directory:
++        with patch('goal_motion.app.Motors', side_effect=AssertionError('No motor constructor')), \
++             patch('camera_playback.app.HiHatController', side_effect=AssertionError('No serial constructor')):
++            app = App(False, str(Path(directory)/'camera.sock'), str(Path(directory)/'audio.sock'),
++                      recording_path=DEFAULT_RECORDING, test_mode=True)
++        app.root.withdraw()
++        app.dual.job.thread.join(60); app.dual.poll_load()
++        assert app.dual.ready, app.dual.label.get()
++        assert app.dual.snare_template.target == np.radians(11.)
++        for callback in app.root.tk.call('after', 'info'): app.root.after_cancel(callback)
++        with patch('time.monotonic', return_value=time.monotonic()) as clock, \
++             patch('camera_playback.snare_beat.random.Random', return_value=Choices((4, 1, 2, 3))):
++            app.start(); app._start_preflighted_recording()
++            stop = False
++            last_release = None
++            for index in range(12000):
++                clock.return_value += .01
++                app.tick()
++                if not phases or phases[-1] != app.phase:
++                    phases.append(app.phase)
++                assert app.phase not in {'FAULT', dual.FAULT, 'ZONE RECENTERING'}, app.status.get()
++                if app.phase == 'WAITING FOR LOAD': app.continue_motion()
++                sim = app.bus.snare_simulation
++                if sim is not None:
++                    s = sim.status
++                    if s.released_at is not None and s.released_at != last_release:
++                        hits.append(dict(measure=s.measure, beat=s.beat, scheduled=s.scheduled_at,
++                                         release=s.released_at))
++                        last_release = s.released_at
++                    if s.measure == 8 and s.moving and not stop:
++                        app._request_continuous_stop()
++                        assert app.continuous_strike_active, 'Must finish full snare return first'
++                        stop = True
++                if stop and app.phase == 'RELAXED': break
++            else: raise AssertionError('UI did not complete: '+app.status.get())
++            assert [(h['measure'], h['beat']) for h in hits] == list(enumerate((4, 1, 2, 3)*2, 1)), hits
++            for h in hits:
++                assert abs(h['scheduled']-h['release']-app.dual.snare_template.curve.down) < 1e-9
++            assert phases.index(dual.PLAYING) < phases.index('RECORDING PLAYBACK')
++            assert not app.bus.active
++            assert set(app.bus.center_disabled) == {'left', 'right'}
++            np.testing.assert_allclose(app.bus._left_joints, LEFT_CENTER, atol=1e-10)
++            np.testing.assert_allclose(app.bus._joints, app.center_goal, atol=1e-10)
++            assert app.bus.snare_simulation is None
++        Path('diagnostics/snare_beat_integration/simulation_ui_trace.json').write_text(json.dumps(
++            dict(hits=hits, phases=phases, result='PASS: reference simulation only; zero physical I/O'), indent=2)+'\n')
++        print('PASS: eight measures, all four choices including 4 -> 1; exact 11 degree reference; stop mid-snare completes return; both centered then relaxed; NO devices')
++finally:
++    if app is not None:
++        app._cancel_recording_preflight(); app._cancel_planning()
++        app.planner_executor.shutdown(wait=True, cancel_futures=True)
++        app.receiver.close(); app.audio_receiver.close()
++        if getattr(app, 'hihat_sound_monitor', None): app.hihat_sound_monitor.close()
++        app.root.destroy(); app.node.destroy_node()
++    if rclpy.ok(): rclpy.shutdown()
+--- /dev/null
++++ tests/test_snare_beat.py
+@@ -0,0 +1,206 @@
++"""Snare beat clock, exact shared reference, and ownership guards. NO devices."""
++from collections import deque
++from dataclasses import replace
++import math
++import random
++import struct
++import time
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++
++import numpy as np
++
++from camera_playback.snare_beat import (MeasureGrid, SnareController, SnareStatus,
++    SNARE_DEGREES, validate_tempo)
++from camera_playback import snare_workflow as workflow
++from camera_playback.left_hold import LEFT_CENTER, LEFT_GRIPPER_TARGET
++from camera_playback.mit_strike import Sample
++from camera_playback.dual_recording import left_geometry, DEFAULT_LEFT_RECORDING
++from camera_playback.recording_cache import load_cached_smooth_recording
++from camera_playback.smooth_recording_worker import LeftRecordingMotors
++from camera_playback.hybrid_strike import HybridStatus
++from camera_playback import hybrid_workflow
++from centering.motors import parameter, packet
++from safe_zone.encoder import FRAME, joint_to_motor
++from smooth_playback.trajectory import Geometry
++from snare_lab.runner import load_left_tuning
++from snare_lab.motion import build_method
++from tests.test_left_center_hold import fake_bus
++
++
++class Choices:
++    def __init__(self, choices): self.choices, self.i = choices, 0
++    def randrange(self, n):
++        assert n == 4
++        result = self.choices[self.i % len(self.choices)] - 1
++        self.i += 1
++        return result
++
++
++class SnareBeatTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.g = left_geometry(Geometry().model)
++        g = cls.g
++        cls.recording = load_cached_smooth_recording(DEFAULT_LEFT_RECORDING,
++            g.model, g.zone, g.lower, g.upper, g.center, .4, playback_speed=.8, side='left')
++        cls.parameters, cls.rules, cls.limits = load_left_tuning(cls.recording, g.lower[5], g.upper[5])
++        cls.anchor = -float(cls.recording.last_joints[5])
++        cls.template = build_method(cls.anchor, 0., cls.parameters, SNARE_DEGREES, cls.limits)
++
++    def controller(self, choices=(1, 2, 3, 4), initial=None):
++        return SnareController(self.template, self.rules, self.limits, -.75, .75,
++                               self.anchor if initial is None else initial, 0., Choices(choices))
++
++    def sample(self, now, q=None, v=0.):
++        return Sample(self.anchor if q is None else q, v, 0., 2, now)
++
++    def prime(self, c):
++        for i in range(60): c.update(self.sample(i*.002), i*.002, -self.anchor)
++
++    def test_one_uniform_random_choice_per_measure_and_absolute_clock(self):
++        g = MeasureGrid(10., .6, random.Random(221))
++        counts = [0]*4
++        for m in range(10000):
++            self.assertEqual(g.measure, m)
++            self.assertIn(g.beat, (1, 2, 3, 4))
++            self.assertAlmostEqual(g.at, 10.+(4*m+g.beat-1)*.6)
++            counts[g.beat-1] += 1
++            g.advance()
++        self.assertTrue(all(2300 < n < 2700 for n in counts))
++
++    def test_preflight_is_exact_snare_sh_11_degree_reference(self):
++        d = SimpleNamespace(app=SimpleNamespace(hybrid_enabled=True), g=self.g, recording=self.recording)
++        workflow.preflight(d)
++        self.assertAlmostEqual(d.snare_template.target, math.radians(11.))
++        self.assertAlmostEqual(d.snare_template.curve.up, .220)
++        self.assertTrue(d.snare_template.curve.curved_acceleration)
++        for t in np.linspace(0, self.template.curve.duration, 501):
++            np.testing.assert_array_equal(d.snare_template.curve.at(t), self.template.curve.at(t))
++
++    def test_all_four_beats_and_adjacent_measures_preserve_full_return(self):
++        # Worst boundary is beat 4 immediately followed by beat 1. No overlap,
++        # no omitted bar, no change of depth/dynamics even at max beat BPM.
++        for bpm in (20., 100., 120.):
++            c = self.controller((4, 1, 2, 3))
++            self.prime(c)
++            c.start(1., 60/bpm)
++            hits = []
++            previous_release = None
++            q, v = self.anchor, 0.
++            end = 1.+8*4*60/bpm
++            for i in range(60, math.ceil(end/.002)):
++                now = i*.002
++                command = c.update(self.sample(now, q, v), now, -self.anchor)
++                q, v = command.position, command.velocity  # Ideal servo, not hardware evidence.
++                if c.status.released_at != previous_release:
++                    previous_release = c.status.released_at
++                    hits.append((c.status.measure, c.status.beat, c.status.scheduled_at, now))
++                if len(hits) == 8 and c.status.completed == 8:
++                    break
++            self.assertEqual([(m, b) for m, b, _, _ in hits],
++                             list(enumerate((4, 1, 2, 3)*2, 1)))
++            self.assertEqual(c.status.completed, 8)
++            for m, b, target, release in hits:
++                self.assertAlmostEqual(target, 1.+(4*(m-1)+b-1)*60/bpm)
++                self.assertLess(abs(release+self.template.curve.down-target), .00201)
++
++    def test_stop_finishes_existing_full_curve_and_cancels_future(self):
++        c = self.controller((1,))
++        self.prime(c); c.start(1., .6)
++        q, v = self.anchor, 0.
++        stopped = False
++        for i in range(60, 2200):
++            now = i*.002
++            command = c.update(self.sample(now, q, v), now, -self.anchor)
++            q, v = command.position, command.velocity
++            if c.method is not None and not stopped:
++                c.finish(); stopped = True
++        self.assertTrue(stopped)
++        self.assertEqual(c.status.completed, 1)
++        self.assertFalse(c.status.moving or c.status.scheduled)
++        self.assertAlmostEqual(q, self.anchor, places=5)
++
++    def test_delayed_grid_does_not_catch_up(self):
++        c = self.controller((1,)); self.prime(c); c.start(.1, .6)
++        with self.assertRaisesRegex(RuntimeError, 'deadline'):
++            c.update(self.sample(.2), .2, -self.anchor)
++        self.assertIsNone(c.method)
++
++    def test_no_hit_without_settled_anchor_or_fresh_feedback(self):
++        c = self.controller((1,)); c.start(1., .6)
++        with self.assertRaisesRegex(RuntimeError, 'settled'):
++            c.update(self.sample(1-self.template.curve.down), 1-self.template.curve.down, -self.anchor)
++        c = self.controller(); self.prime(c)
++        with self.assertRaisesRegex(RuntimeError, 'stale'):
++            c.update(self.sample(0.), 1., -self.anchor)
++
++    def test_wrong_path_target_and_excessive_velocity_rejected(self):
++        c = self.controller(); self.prime(c); c.start(1., .6)
++        with self.assertRaisesRegex(RuntimeError, 'path moved'):
++            c.update(self.sample(.2), .2, -self.anchor+.01)
++        with self.assertRaisesRegex(RuntimeError, 'velocity'):
++            c.update(self.sample(.2, v=99), .2, -self.anchor)
++
++    def test_tempo_preflight_prevents_truncated_return(self):
++        for bpm in (20., 100., 120.): validate_tempo(bpm, self.template, self.rules)
++        for bpm in (121., 180., float('nan')):
++            with self.assertRaises(ValueError): validate_tempo(bpm, self.template, self.rules)
++
++    def test_reset_restarts_measure_one(self):
++        c = self.controller(); self.prime(c); c.start(1., .6)
++        c.grid.advance(); c.finish(); c.start(9., .6)
++        self.assertEqual(c.grid.measure, 0)
++        self.assertEqual(c.grid.epoch, 9.)
++
++    def test_left_path_routes_only_j6_to_shared_goal(self):
++        bus = fake_bus(); bus.active = bus.left_drive.active = True
++        session = SimpleNamespace(status=SnareStatus(armed=True), goal=SimpleNamespace(value=0.))
++        bus.left_drive.left_joint6_session = session
++        q = self.recording.last_joints
++        bus.left_drive.set_positions(q)
++        self.assertAlmostEqual(session.goal.value, q[5])
++        calls = bus.sockets['left'].sock.send.call_args_list
++        self.assertEqual([FRAME.unpack(c.args[0])[0] & 255 for c in calls], [1,2,3,4,5,7])
++        session.status = replace(session.status, moving=True)
++        with self.assertRaisesRegex(RuntimeError, 'finish'):
++            bus.left_drive.set_positions(q)
++
++    def test_recording_worker_never_sends_csp_j6(self):
++        bus = LeftRecordingMotors.__new__(LeftRecordingMotors)
++        bus.control_side = 'left'; bus.j6_goal = SimpleNamespace(value=0.)
++        bus.sockets = {'left': Mock()}
++        bus._send('left', parameter(6, 0x7016, joint_to_motor('left', 6, .123)))
++        self.assertAlmostEqual(bus.j6_goal.value, .123, places=6)
++        bus.sockets['left'].send.assert_not_called()
++
++    def test_off_center_disable_refused_and_centered_shutdown_allowed(self):
++        bus = fake_bus(); bus.require_center_before_relax = True
++        bus.active = bus.left_drive.active = True
++        now = time.monotonic()
++        bus.states.update({('left', i): (q, 2, now) for i, q in enumerate([*LEFT_CENTER, LEFT_GRIPPER_TARGET], 1)})
++        bus.states['left', 6] = (.2, 2, now)
++        with self.assertRaisesRegex(RuntimeError, 'center'):
++            bus.left_drive.send_control(packet(4, 6))
++        bus.sockets['left'].sock.send.assert_not_called()
++        bus.states['left', 6] = (0., 2, now)
++        bus.snare_center_history = deque((now-d, LEFT_CENTER.copy()) for d in (.64, .3, 0.))
++        bus.left_drive.send_control(packet(4, 6))
++        bus.sockets['left'].sock.send.assert_called_once()
++
++    def test_hybrid_stop_waits_for_snare_full_return(self):
++        from tests.test_hybrid_workflow import app_fixture
++        a = app_fixture()
++        left = Mock(finished=False)
++        a.bus.left_joint6_session = left
++        a.hybrid_stopping = True; a.hybrid_stop_request = 1
++        a.hybrid_session.status = HybridStatus(request_id=1, ready=True,
++            sample=Sample(0., 0., 0., 2, 1.), at=1.)
++        with patch.object(hybrid_workflow, 'close') as close:
++            hybrid_workflow.tick(a, 1.)
++            close.assert_not_called()
++        workflow.finish(a); left.finish.assert_called_once()
++
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ tests/test_snare_recording_bridge.py
+@@ -0,0 +1,93 @@
++"""Actual spawned 200 Hz left recording worker with a fake MIT-owned J6.
++
++Fake CAN sockets only. The fake J6 follows shared memory; any J6 CSP position
++packet on the wire fails the test. Both forward and reverse use the saved path.
++"""
++import json
++import math
++import multiprocessing as mp
++from pathlib import Path
++import struct
++import tempfile
++import time
++from types import SimpleNamespace
++import unittest
++from unittest.mock import patch
++
++from camera_playback.smooth_recording_worker import LeftRecordingMotors, RecordingSession
++from camera_playback.left_return import ReverseRecording
++from camera_playback.mit_strike import Sample
++from camera_playback.snare_beat import SnareStatus
++from safe_zone.encoder import EFF, FRAME
++from tests import test_snare_beat as fixtures
++from tests.test_dual_recording import LeftFakeSocket
++from tests.test_smooth_recording import FakeLock
++
++
++class OwnedJ6Socket(LeftFakeSocket):
++    def __init__(self, directory, config, goal):
++        super().__init__(directory, config)
++        self.goal = goal
++
++    def send(self, frame):
++        cid, _, data = FRAME.unpack(frame)
++        kind, motor = (cid >> 24) & 31, cid & 255
++        index = int.from_bytes(data[:2], 'little')
++        if self.side == 'left' and motor == 6:
++            if kind == 18 and index == 0x7016:
++                raise AssertionError('CSP position sent to MIT-owned J6')
++            if kind == 17 and index == 0x7005:
++                result = struct.pack('<H2xB3x', index, 0)
++                self.responses.append(FRAME.pack(EFF | 17 << 24 | motor << 8 | 0xfd, 8, result))
++                return 16
++        return super().send(frame)
++
++    def feedback(self, motor):
++        if self.side == 'left' and motor == 6:
++            self.targets[6] = self.goal.value
++        super().feedback(motor)
++
++
++class FakeOwnedLeftMotors(LeftRecordingMotors):
++    def __init__(self, directory, handles, j6_goal=None):
++        config = json.loads((directory/'fake_initial.json').read_text())
++        with patch('camera_playback.smooth_recording_worker.socket.socket',
++                   side_effect=lambda *a: OwnedJ6Socket(directory, config, j6_goal)):
++            super().__init__(directory, [FakeLock(), FakeLock()], j6_goal=j6_goal)
++
++
++class SnareRecordingBridgeTests(unittest.TestCase):
++    def test_spawned_forward_and_reverse_keep_j6_in_mit(self):
++        fixtures.SnareBeatTests.setUpClass()
++        original = fixtures.SnareBeatTests.recording
++        ctx = mp.get_context('spawn')
++        for recording in (original, ReverseRecording(original, original.duration_s)):
++            with self.subTest(reverse=isinstance(recording, ReverseRecording)), tempfile.TemporaryDirectory() as directory:
++                directory = Path(directory)
++                goal = ctx.Value('d', float(recording.first_joints[5]))
++                snare = SimpleNamespace(finished=True, status=SnareStatus(armed=True), goal=goal)
++                bus = SimpleNamespace(active=True, control_side='right', control_gripper=True,
++                    isolated_motors=set(), right_joint7_session=None, left_joint6_session=snare)
++                (directory/'fake_initial.json').write_text(json.dumps(dict(
++                    first=recording.first_joints.tolist(), right_center=[0.]*7)))
++                session = RecordingSession(recording, bus, directory=directory, bus_factory=FakeOwnedLeftMotors)
++                try:
++                    deadline = time.monotonic()+25.
++                    while time.monotonic() < deadline:
++                        result = session.poll()
++                        if result['done']: break
++                        time.sleep(.01)
++                    else: self.fail('Fake recording timeout')
++                    self.assertTrue(result['result']['success'], result)
++                    self.assertTrue(result['result']['gains_restored'])
++                    self.assertAlmostEqual(goal.value, float(recording.last_joints[5]), places=6)
++                    for line in (directory/'commands.jsonl').read_text().splitlines():
++                        row = json.loads(line)
++                        cid, _, data = FRAME.unpack(bytes.fromhex(row['frame']))
++                        self.assertFalse(row['side']=='left' and cid & 255 == 6
++                            and (cid >> 24) & 31 == 18 and int.from_bytes(data[:2], 'little') == 0x7016)
++                finally:
++                    session.stop()
++
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ tests/test_snare_worker_io.py
+@@ -0,0 +1,74 @@
++"""Exercise production worker loop/IPC with quantized fake J6 packets. NO CAN."""
++import pickle
++import threading
++from types import SimpleNamespace
++import unittest
++from unittest.mock import patch
++
++from camera_playback.snare_beat import _run
++from camera_playback.mit_strike import Sample
++from safe_zone.encoder import FRAME
++from tests import test_snare_beat as fixtures
++
++
++class WorkerIOTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls): fixtures.SnareBeatTests.setUpClass()
++
++    def run_worker(self, heartbeat_lost=False):
++        f = fixtures.SnareBeatTests
++        t = [0.]
++        heartbeat = SimpleNamespace(value=0.)
++        goal = SimpleNamespace(value=-f.anchor)
++        grid = [1., .6, 1.]
++        stop = threading.Event()
++        states, frames = [], []
++        class Channel:
++            def __init__(self, interface):
++                self.sample = Sample(f.anchor, 0., 0., 2, 0.)
++                self.closed = False
++            def receive(self):
++                t[0] += .001
++                if not heartbeat_lost: heartbeat.value = t[0]
++                q, v = self.sample.position, self.sample.velocity
++                self.sample = Sample(q, v, 0., 2, t[0])
++                if t[0] >= 4.: grid[2] = 0.
++                if t[0] >= 5.5: stop.set()
++            def wait(self, seconds): t[0] += min(.001, seconds)
++            def send(self, frame):
++                cid, _, data = FRAME.unpack(frame)
++                assert (cid >> 24) & 31 == 1 and cid & 255 == 6
++                frames.append(frame)
++                # sign=-1 J6: raw == internal negative strike position.
++                q = int.from_bytes(data[:2], 'big')/65535*25.14-12.57
++                v = int.from_bytes(data[2:4], 'big')/65535*66.-33.
++                self.sample = Sample(q, v, 0., 2, t[0])
++            def close(self): self.closed = True
++        channel = Channel('fake')
++        sender = SimpleNamespace(send=lambda b: states.append(pickle.loads(b)), close=lambda: None)
++        with patch('time.monotonic', side_effect=lambda: t[0]), \
++             patch('camera_playback.snare_beat.signal.signal'), \
++             patch('camera_playback.snare_beat.random.Random', return_value=fixtures.Choices((1,))), \
++             patch('snare_lab.runner._LeftJoint6Channel', return_value=channel), \
++             patch('camera_playback.snare_beat.Joint7Worker._prepare'):
++            _run('fake', f.template, f.rules, f.limits, -.75, .75,
++                 goal, grid, stop, heartbeat, sender)
++        self.assertTrue(channel.closed)
++        self.assertGreater(len(frames), 100)
++        return states
++
++    def test_worker_streams_only_j6_mit_and_finishes_on_grid_cancel(self):
++        states = self.run_worker()
++        self.assertFalse([s.error for s in states if s.error])
++        self.assertEqual(states[-1].completed, 2)
++        self.assertFalse(states[-1].moving or states[-1].scheduled)
++        hits = {(s.measure, s.beat) for s in states if s.released_at is not None}
++        self.assertEqual(hits, {(1, 1), (2, 1)})
++
++    def test_parent_heartbeat_loss_locks_out_future_strikes_without_disable(self):
++        states = self.run_worker(heartbeat_lost=True)
++        self.assertIn('heartbeat', states[-1].error)
++        self.assertLessEqual(states[-1].completed, 1)
++
++
++if __name__ == '__main__': unittest.main()

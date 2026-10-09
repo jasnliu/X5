@@ -1,0 +1,21 @@
+761023.018391 LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+761023.018465 LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+761023.018478 LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+761025.228233 Session: /home/jason/Proyectos3/X5/diagnostics/snare_data_collection/20261008T005437-development-fda6be04
+761025.951834 Motion in 10s
+761026.951911 Motion in 9s
+761027.952047 Motion in 8s
+761028.952232 Motion in 7s
+761029.952325 Motion in 6s
+761030.952437 Motion in 5s
+761031.952531 Motion in 4s
+761032.952704 Motion in 3s
+761033.952755 Motion in 2s
+761034.952852 Motion in 1s
+761036.839470 INITIAL CENTER PATH VERIFIED {"outside_buffer_mm": 0.0, "recovery_only": false}
+761037.098769 CHECKING INITIAL RIGHT CENTER 
+761037.314387 COLLECTION STOP {"error": "RuntimeError: Arm moved during stationary path validation"}
+761037.317279 LEFT CENTER BEFORE RELAX {"duration_s": 1.0}
+761037.317975 NOT RELAXED - ATTENTION REQUIRED {"error": "Pose outside existing right zone1 TCP envelope"}
+761038.868914 HIHAT OPEN RETURN AND RELEASE ACK {"error": null, "shutdown_error": null, "closures_commanded": 0, "open_command_at": 761037.317153861, "normal_open_return_wait_s": 1.5, "release_ack": true, "encoder_position_verified": false, "finished_at": 761038.829309895}
+761038.935321 COLLECTION RESULT {"success": false, "error": "RuntimeError: Arm moved during stationary path validation", "recovery_error": "Pose outside existing right zone1 TCP envelope", "relaxed_verified": false, "clips": 0, "snare_hits": 0, "center": null, "finished_at": 761038.935107306, "labels_created": false}

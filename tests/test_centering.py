@@ -257,7 +257,20 @@ class DirectCenterTests(unittest.TestCase):
             7,0.0,0.0,0.0,minimum_nonzero_kd,0.0
         )))
         with self.assertRaises(ValueError):
-            motion_control_packet(6,0.0,0.0,0.0,0.0,0.0)
+            motion_control_packet(5,0.0,0.0,0.0,0.0,0.0)
+
+    def test_left_joint6_mit_packet_is_permitted_and_self_consistent(self):
+        # No installed-SDK reference bytes exist yet for motor 6 (unlike the
+        # captured J7 bytes above) - this only checks internal self-consistency
+        # of the (now permitted) encoding, not a captured hardware reference.
+        frame = motion_control_packet(6,1.0,-3.5,10.0,1.0,2.0)
+        cid,dlc,data = FRAME.unpack(frame)
+        self.assertEqual(cid&255,6)
+        self.assertEqual((cid>>24)&31,1)
+        self.assertEqual(dlc,8)
+        self.assertTrue(allowed(frame))
+        with self.assertRaises(ValueError):
+            motion_control_packet(8,0.0,0.0,0.0,0.0,0.0)
 
     def test_hardware_test_session_exit_restores_csp_at_stationary_anchor(self):
         bus=fake('right',True);bus.active=True;bus._send=Mock()

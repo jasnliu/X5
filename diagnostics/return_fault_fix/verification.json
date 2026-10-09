@@ -1,0 +1,41 @@
+{
+  "physical_arm_commands_sent": false,
+  "physical_validation_performed": false,
+  "full_suite": {
+    "tests": 680,
+    "result": "PASS",
+    "log": "full_tests.txt"
+  },
+  "focused_fault_tests": 12,
+  "cache_tests": 18,
+  "actual_tk_emergency_button_with_mock_CAN": "PASS: 24 disable frames per side; no position/enable commands",
+  "nominal_right_path": {
+    "csp": {
+      "identical_movement_frames": 208,
+      "identical_pose_samples": 159,
+      "right_disable_s": 4.96875,
+      "physical_devices_used": false
+    },
+    "mit": {
+      "identical_movement_frames": 343,
+      "identical_pose_samples": 159,
+      "right_disable_s": 4.96875,
+      "physical_devices_used": false
+    }
+  },
+  "injected_hihat_fault_during_MIT_return": "PASS: all 343 right motion frames and 159 pose samples identical to reference; right disable completed",
+  "protected_files_checked": 289,
+  "protected_files_changed": [],
+  "source_sha256": {
+    "camera_playback/app.py": "f19df01c16d04f68d5bc81266956352e99f8693d1f3adaceac960a6100063998",
+    "camera_playback/hihat.py": "3bacd169a726d839d87ba7d5f8d5f016b6ee265837bbf6566fcd10ffd81850d5",
+    "camera_playback/hihat_calibration_runtime.py": "8cebc2f2398e559ccaecb1d18c1681029fbe428d664aa34f9077b808ea0f4e64",
+    "camera_playback/dual_recording.py": "e11b718eb2eb5b979e6bd33ea3fead46546961e834bf5571f21d7421489e2108",
+    "camera_playback/playback_transport.py": "dada7c82ea32ed79f12e7e98d91f889a50785bb83d19058aaec60f4b47e1d903",
+    "camera_playback/emergency.py": "61b5da185bb18aaa630f2aacfeff53ca9b53d1188adf6e5c92ce8efb56d6e03d",
+    "tests/test_return_fault_recovery.py": "060711bb878d99a508c8e08cfc8df53b5446449a9585e08c37df05875594bf74",
+    "tests/test_recording_preflight.py": "d3757f02651b70153fc1e9b9414da55346cec82671677714147a42d3a06f6a68",
+    "tests/dual_recording_normal_ui_check.py": "19da40d61bf31cb0c8dcf328b7746de0fd8caa994af2dcec383593193810806a",
+    "README.md": "61aa2ec449ac67fa673f7610ade13d7020232dcf9484bf3da976ba4f94882081"
+  }
+}

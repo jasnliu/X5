@@ -219,6 +219,7 @@ class CollectionSession(HybridSession):
             raise RuntimeError('Collection requires an active unowned right J7')
         self.controller = FiniteController(anchor, lower, upper, *tuning)
         self.bus, self.lower, self.upper = bus, lower, upper
+        self.session_attr = 'right_joint7_session'
         self.closed, self.request_id = False, 0
         context = mp.get_context('spawn')
         self.requests = context.Queue(maxsize=4)

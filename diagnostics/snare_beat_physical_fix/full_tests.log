@@ -1,0 +1,60 @@
+[INFO] [launch]: All log files can be found below /home/jason/.ros/log/2026-10-07-20-42-25-141003-jason-band37-1550095
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [1550098]
+[INFO] [rviz2-2]: process started with pid [1550099]
+[INFO] [python3-3]: process started with pid [1550100]
+[robot_state_publisher-1] [INFO] [1791430945.323965659] [robot_state_publisher]: Robot initialized
+[python3-3] usage: app.py [-h] [--hardware]
+[python3-3] app.py: error: unrecognized arguments: -q
+[ERROR] [python3-3]: process has died [pid 1550100, exit code 2, cmd '/usr/bin/python3 -m right_joint7_test.app -q'].
+[INFO] [rviz2-2]: sending signal 'SIGINT' to process[rviz2-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[rviz2-2] [INFO] [1791430945.567748865] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1791430945.567818478] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 1550098]
+[rviz2-2] [INFO] [1791430946.326174280] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] [INFO] [1791430946.326209397] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-2] [INFO] [1791430946.375102392] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-2] terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+[rviz2-2]   what():  failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[ERROR] [rviz2-2]: process has died [pid 1550099, exit code -6, cmd '/opt/ros/jazzy/lib/rviz2/rviz2 -d /home/jason/Proyectos3/X5/config/safe_zone.rviz --ros-args'].
+
+==================================== ERRORS ====================================
+________________________ ERROR collecting test session _________________________
+/usr/lib/python3/dist-packages/pluggy/_hooks.py:501: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+/usr/lib/python3/dist-packages/pluggy/_manager.py:119: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+/usr/lib/python3/dist-packages/_pytest/python.py:215: in pytest_collect_file
+    module: Module = ihook.pytest_pycollect_makemodule(
+/usr/lib/python3/dist-packages/_pytest/config/compat.py:66: in fixed_hook
+    return hook(**kw)
+/usr/lib/python3/dist-packages/pluggy/_hooks.py:501: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+/usr/lib/python3/dist-packages/pluggy/_manager.py:119: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+/opt/ros/jazzy/lib/python3.12/site-packages/launch_testing/pytest/hooks.py:193: in pytest_pycollect_makemodule
+    entrypoint = find_launch_test_entrypoint(path)
+/opt/ros/jazzy/lib/python3.12/site-packages/launch_testing/pytest/hooks.py:183: in find_launch_test_entrypoint
+    module = import_path(path, root=None)
+/usr/lib/python3/dist-packages/_pytest/pathlib.py:567: in import_path
+    importlib.import_module(module_name)
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+/usr/lib/python3/dist-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+launch_right_joint7_test.py:37: in <module>
+    sys.exit(service.run())
+E   SystemExit: 0
+=========================== short test summary info ============================
+ERROR  - SystemExit: 0
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 2.17s

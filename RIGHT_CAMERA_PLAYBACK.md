@@ -58,7 +58,69 @@ not video files or network URLs that could provide stale/non-live arm feedback.
 
 ## Start
 
-First create a recording with [RIGHT_RECORDING.md](RIGHT_RECORDING.md), then
+### Two recordings: left first, then right
+
+Normal `--hardware`, `--test` and offline preview have separate **Select left
+recording** and **Select right-arm recording** controls. Defaults are
+`left_recordings/record1.json` and `recordings/record3.json`, respectively.
+Override them with `--left-recording PATH` and `--recording PATH`. Both selections
+must finish preflight before Run. Files must match their respective arm schemas,
+joint order, limits and `left_zones/zone1.json` / `right_zones/zone1.json`.
+Neither recording is modified; both use the same persistent preflight cache,
+with arm-specific keys and the existing checks, smoothing and timing limits.
+
+The sequence is **center both together → left start → left recording → hold
+left endpoint → right start → right recording → existing right-only alignment
+and beat workflow**. There is no left cymbal detection, alignment or striking.
+Left playback uses the same isolated 200 Hz endpoint-exact worker on hardware;
+only the selected arm's joints 1–7 may receive recording commands. In simulation,
+both sides use the existing simulated recording follower.
+
+The left center remains **[0°, 0°, 0°, 0°, −50°, 0°, 0°]**. Its gripper stays at
+**raw motor-8 +14.16°**, the same closed target used during centering. The right
+gripper stays at +7°. Recorded gripper samples are validated but not replayed.
+During left playback the right arm holds center; during right playback and beats
+the left holds its recorded endpoint. Fresh state, faults, temperature, held-pose
+drift and gripper feedback remain supervised.
+
+RViz also displays the existing **left zone1 TCP envelope in translucent green**,
+alongside the cyan right envelope. The green hull comes from the same
+`left_zones/zone1.json` used for validation; it is an estimated TCP workspace,
+not certified collision clearance for the whole arm or drumstick.
+
+**Center + Relax** joins any active recording worker before issuing return
+commands. The right arm starts its original center return immediately. The left
+arm plays the selected recording **backward from its held endpoint to its start**,
+verifies that start pose, then moves to its center (J5 −50°) and relaxes. Its
+gripper remains at the same closed target throughout. If interrupted during left
+playback, only the played prefix is reversed; an unfinished approach first reaches
+the recording start, then centers. Startup centering before playback is unchanged.
+Each arm is disabled independently after its own fresh center arrival (0.20°
+maximum joint error, 0.12° settled range, 0.6 seconds); the right does not wait
+for the left recording to finish reversing.
+Right-arm motion now runs through the same inherited `begin_stage` and main
+control loop as `start_beatTest.sh`, not a second controller in the two-arm
+coordinator. Original phase names, encoder corrections, 200 ms updates and
+right-arm supervision are retained. Joins and geometric checks finish before
+the original MIT J7 return clock starts, with no blocking preflight inserted
+between starting that clock and dispatching J1–J6 targets.
+The coordinator keeps the two returns and their independent relax confirmations
+together. The reversed path evaluates the same cached, validated curve at
+`duration - elapsed`; it is not a newly fitted path or a rewritten JSON recording.
+Hardware reverse playback retains the existing isolated 200 Hz worker, mode,
+feedback, gripper, tracking, endpoint, and gain-restoration checks. Its write
+allowlist is left J1–J7 only. The right arm keeps its original GUI feedback/query
+cadence and can relax at verified center while that left-only worker is active.
+The application reports relaxed only after both sides confirm disabled. A stale
+state, failed handoff, unsafe return or missing confirmation stops progression
+rather than starting the next recording or claiming a successful relax.
+
+This addition has simulation, mock-CAN worker and UI verification only; no
+physical movement was performed. The independent `--hardwaretest` and
+`--recording-only` diagnostic modes retain their right-only recording workflows
+and left-center hold. Their right default is also `recordings/record3.json`.
+
+First create a recording with [RECORDING.md](RECORDING.md), then
 close the recorder and every other arm-control program. Start playback with a
 specific file:
 
@@ -68,11 +130,34 @@ cd /home/jason/Proyectos3/X5
   --recording recordings/right_motion_YYYYMMDD_HHMMSS.json
 ```
 
-The default recording is `recordings/record1.json`, so the normal command is:
+The right default is `recordings/record3.json` and the left default is
+`left_recordings/record1.json`, so the normal command is:
 
 ```bash
 ./start_beat.sh --hardware
 ```
+
+### Persistent recording preflight cache
+
+Selecting a recording first runs the **unchanged full preflight**. Successful
+results (including the exact fitted trajectory) are cached under
+`~/.cache/openarmx/recording-preflight/`, or
+`$XDG_CACHE_HOME/openarmx/recording-preflight/` when set. The original recording
+JSON is never modified. Later selections can reuse the result across restarts.
+
+Reuse requires matching recording contents/path, robot model, loaded zone
+geometry, joint limits, center pose, speed/settings, local implementation and
+Python/NumPy/SciPy versions. Hardware trajectories and simulation/preview
+trajectories have separate cache keys. Relevant changes force the original full
+preflight again. Missing, damaged or unreadable cache entries do the same;
+failure to write a cache does not prevent a successful normal preflight.
+
+Only completed successful preflights are saved, using atomic replacement and
+checksummed, non-executable JSON. Live encoder/camera/audio/ESP32 readiness,
+enable guards and all motion-time checks are **not cached or changed**. To force
+full validation again, remove the cache directory above while the program is
+closed. Code edited while a process is running disables caching in that process
+until restart. First-time or invalidated loads still take the original time.
 
 ### Pure simulation test mode
 
@@ -90,7 +175,7 @@ controller. Arm and gripper movement exists only as in-memory joint state shown
 in RViz.
 
 Test mode uses an in-memory motor substitute behind the shared recording loader,
-path preflight, centering, recorded playback, 100 BPM swing pattern, safe-zone
+path preflight, centering, recorded playback, editable-BPM swing pattern, safe-zone
 checks, and Stop/Center/Relax workflow. It retains the original Start →
 center/open → load/Continue → close sequence; only normal `--hardware` uses the
 new single RUN button without a loading pause.
@@ -98,7 +183,7 @@ Its powered simulated strike controller is unchanged; normal hardware now uses
 the experiment hybrid method in a separate worker. Once the simulated recorded endpoint settles, it assumes
 that pose is the correct cymbal anchor, safely derives the 10-degree J7 target,
 skips camera alignment and every hit-search attempt, and immediately repeats
-exactly 10 degrees in the same triplet-based 100 BPM swing ride as hardware
+exactly 10 degrees in the same triplet-based swing ride at the selected BPM (default 100) as hardware
 mode. It starts with the extra pickup before beat 1. It sends no hi-hat command.
 
 ### Playback-aligned MIT hardware test mode
@@ -276,9 +361,9 @@ Only a major fault such as a detected motor stall permits an immediate disable.
 Other modes retain their original **Emergency Relax** behavior.
 **Center + Relax** cancels the
 active playback/alignment/strike workflow, restores the ordinary motor speed if
-playback or a strike was active, moves from the current pose to the customized
-right center, and disables the right arm and gripper only after the center is
-reached. During continuous striking its label changes to **Stop 100 BPM
+playback or a strike was active, returns the right arm as before and reverses
+the left recording before its final move to center, and disables each arm and its gripper only after that
+arm reaches its own verified center (normal beat and simulation modes). During continuous striking its label changes to **Stop [BPM]
 striking: Center + Relax**; an active stroke finishes its return before the
 center command.
 
@@ -292,7 +377,7 @@ progress.
 With `--hardware`, this is powered playback; with `--hardwaretest`, it is a
 powered playback/alignment-and-MIT test. Keep the path clear and be prepared to
 use the physical emergency stop for an immediate hazard. Normal `--hardware` enables
-and commands the right arm and gripper after RUN is pressed; `--hardwaretest`
+and commands both arms and grippers after RUN is pressed; `--hardwaretest`
 does so after Start is pressed. Opening the application alone does not enable
 motion. `--test` is the
 pure-simulation exception and has no physical motor connection. Normal hardware
@@ -301,19 +386,22 @@ alone do not establish physical performance.
 
 ## Normal `--hardware` sequence
 
-1. Select and preflight a right-arm JSON recording while motors remain disabled.
-2. Press **RUN: CENTER + CLOSE → RECORDING → HYBRID SWING** once. It is enabled
-   only when the recording is ready, encoder feedback is fresh, a cymbal is
+1. Select and preflight both left- and right-arm JSON recordings while motors remain disabled.
+2. Press **RUN: CENTER BOTH → LEFT → RIGHT → HYBRID SWING** once. It is enabled
+   only when both recordings are ready, encoder feedback is fresh, a cymbal is
    visible, and ST7 and the ESP32 hi-hat are ready.
-3. Move to the customized right center, with J7 at +1.4 rad, while closing the
-   right gripper to +7 degrees around the already-secured stick.
-4. Confirm center and gripper closure, then automatically continue. There is no
+3. Center both arms concurrently: right J7 at +1.4 rad with its gripper at +7°;
+   left J5 at −50°, all other left joints at 0°, left gripper raw target +14.16°.
+4. Confirm both centers and gripper closures, then automatically continue. There is no
    Start button, gripper-opening step, loading pause, or second button press.
    If the gripper does not reach +7° (within the existing 0.75° tolerance) by
    three seconds after centering, fail safely without starting the recording.
 5. Retain the +7-degree closed-gripper command through the remainder of the
    sequence.
-6. Move from center to the recording's first pose.
+6. Move the left arm from center to its recording's first pose, play it to its
+   exact endpoint, and hold there with the centered closed-gripper target. Only
+   after that verified completion, move the right arm from center to its own
+   recording's first pose.
 7. Temporarily set right J1–J7 to a 0.8 rad/s firmware speed limit and follow
    the complete recorded path. The recording's gripper sample is retained as
    metadata but is not replayed because the drumstick gripper must remain
@@ -321,8 +409,9 @@ alone do not establish physical performance.
 8. Settle at the recorded final pose, restore J1–J7 to the ordinary 0.4 rad/s
    setting, and wait for one fresh simultaneous cymbal and directly observed
    stick-tip frame.
-9. If that one tip is anywhere inside the larger visible pink rectangle, accept
-   the recorded endpoint immediately. If it is outside, run the playback-informed
+9. If any directly observed stick tip is inside the visible pink rectangle,
+   accept the recorded endpoint immediately, regardless of stick confidence or
+   other tips outside. If all are outside, run the right-arm playback-informed
    Cartesian hill climber. At every settled hill-climber pose, the first fresh
    detected tip anywhere inside the visible pink rectangle is accepted
    immediately. Outside detections are still collected into robust measurements
@@ -347,19 +436,19 @@ alone do not establish physical performance.
 14. The first detected hit fixes the strike depth `D`. Do not test above or
     below `D`, do not run a fine-tuning phase, and do not use `normality_score`
     to select the depth.
-15. Repeat that exact first-detected depth in a triplet-based swing ride at 100
-    BPM. In `--hardware`, start immediately with
+15. Repeat the first-detected depth plus the existing 0.5° hardware boost in a
+    triplet-based swing ride at the selected BPM (default 100). In `--hardware`, start immediately with
     the extra pickup before beat 1, then play beat 1, beat 2 + its swung extra,
     beat 3, and beat 4 + its swung extra. Starting at the pickup, the intended
-    strike-target deadlines are 0.200, 0.600, 0.400, 0.200, 0.600, 0.400, and
+    strike-target deadline intervals at 100 BPM are 0.200, 0.600, 0.400, 0.200, 0.600, 0.400, and
     0.200 seconds before repeating. Use the experiment hybrid impulse/coast/catch
     and return. For short pairs, make a smooth partial rebound and release again
     only when the encoder is at least 4° above the same absolute low target. Only the four main
     quarter-note beats advance motor 2's existing alternating hi-hat sequence:
-    close to 110° on beats 1 and 3, and return to 0° on beats 2 and 4. The
+    open at 0° on beats 1 and 3, and close to the calibrated angle on beats 2 and 4. The
     ride extras send no hi-hat command. No motor-1 `K` command is sent.
 16. Continue indefinitely until the user presses
-    **Stop 100 BPM striking: Center + Relax**. If Stop is pressed during a
+    **Stop [BPM] striking: Center + Relax**. If Stop is pressed during a
     stroke, finish its hybrid return and settle at the anchor, join the worker,
     restore/confirm position mode at 0.4 rad/s, move to the
     customized center, and relax the right arm.
@@ -368,7 +457,7 @@ In `--test` mode, the original Start → center/open → load/Continue → close
 startup is unchanged. Steps 8 through 14 are replaced by one transition: after the
 recorded endpoint settles and normal playback speed is restored, the endpoint is
 accepted as the strike anchor and the safe 10-degree target is passed
-directly to the same step-15 100 BPM loop. Camera, ST7/TONOR, and ESP32 readiness
+directly to the same step-15 selected-tempo loop. Camera, ST7/TONOR, and ESP32 readiness
 are not required.
 
 In `--hardwaretest` mode, recording preflight and the original Start →
@@ -476,24 +565,39 @@ standalone ST7 listener's default console format is unchanged.
 A detected hit is latched rather than interrupting a hybrid stroke: the arm reaches
 that attempt's target and performs its full hybrid return to the exact preserved
 anchor first. In `--hardware`, it then immediately selects that first detected
-degree value and plays it in the 100 BPM swing ride. There is no fine-tuning phase, no test above
+degree value plus 0.5° and plays it in the selected-tempo swing ride (default 100 BPM). There is no fine-tuning phase, no test above
 or below the detected value, and `normality_score` does not participate in
 target selection.
 
 The ride begins with the extra pickup immediately before beat 1. Its repeating
 bar is beat 1; beat 2 plus the third triplet partial; beat 3; beat 4 plus the
-third triplet partial. At 100 BPM a quarter note is 0.600 seconds and one
+third triplet partial. Set **Beat BPM** before RUN/Start; see the
+[tempo controls and estimated upper limit](README.md#editable-beat-tempo).
+The box is locked until Center + Relax completes. At 100 BPM a quarter note is 0.600 seconds and one
 triplet partial is 0.200 seconds, producing the repeating
-0.600/0.400/0.200/0.600/0.400/0.200 spacing after beat 1.
+0.600/0.400/0.200/0.600/0.400/0.200 spacing after beat 1. Every interval
+scales by `100 / selected_BPM`; individual stroke dynamics and calibration
+hold durations do not change.
 
 The integrated ESP32 controller remains on the main quarter-note beats and is
 not advanced by the pickup or either ride extra. The firmware's encoder zero is
-the open position. Beat 1 sends `C` to close and hold at its exact 110° target;
-beat 2 sends `O` to return to encoder zero and release; beats 3 and 4 repeat
-`C`, `O`. Thus the hi-hat still closes every other main beat even though right
+the open position. Beats 1 and 3 send `O` to open at encoder zero; beats
+2 and 4 send `B` to close at the angle found during startup calibration.
+The same learned signed advance applies to CLOSE and its following OPEN. After
+two consecutive valid acoustic matches within 15 ms at the current offset, that
+offset locks for the rest of the run (the console logs `HIHAT SYNC` / `locked`).
+It does not resume adapting after later timing drift; the next run learns afresh.
+Thus the hi-hat still closes every other main beat even though right
 J7 adds the swung ride notes. The controller sends a 100 ms `H` heartbeat for
 the firmware's 400 ms watchdog and never sends `K`, so firmware motor 1 stays
 released and is rhythmically replaced by right J7.
+
+The left snare uses eight straight eighth-note positions inside the same
+four-quarter-note measure. Each bar randomly chooses one or two hits (equal
+probability), then a feasible combination of distinct positions. Selection
+reserves the complete unchanged 11° powered strike, return, settling, and 30 ms
+margin between hits, including across bar boundaries. At 100–120 BPM this
+excludes adjacent eighth-note hits; the tempo and measure length are unchanged.
 
 The opening pickup establishes the timing grid at the hybrid controller's
 bottom/catch reference event. Subsequent target-arrival deadlines stay on that
@@ -605,12 +709,20 @@ through the original camera program's centered-J2 assumption.
 ## Single-frame visible-pink acceptance
 
 The visible pink rectangle remains the complete acceptance zone for the
-recorded endpoint:
+recorded endpoint. **Any directly observed stick tip inside is sufficient**:
+stick detection confidence does not select the tip, and an outside snare stick
+cannot veto an inside ride stick. The preview and controller use the same rule.
+If all observed tips are outside, the tip nearest the rectangle's center supplies
+the existing hill-climber score. Alignment corrections remain **right-arm-only**;
+the left snare arm is not adjusted by this camera check. Missing, predicted, or
+stale tips still cannot authorize alignment success.
 
-- The first fresh simultaneous cymbal and directly observed tip after playback
-  is enough. If that tip is inside the visible pink rectangle, striking begins
+For each fresh frame:
+
+- The first fresh simultaneous cymbal and directly observed tips after playback
+  are enough. If any tip is inside the visible pink rectangle, striking begins
   without a hold or Cartesian correction.
-- If that tip is outside, hill-climber candidates use smooth distance to the
+- If all tips are outside, hill-climber candidates use smooth distance to the
   rectangle's center and the existing robust candidate measurements to choose
   each next move. At every settled endpoint or candidate pose, one fresh direct
   tip detection anywhere inside the visible pink rectangle starts striking
@@ -643,9 +755,9 @@ The processed camera preview also shows a playback-only cymbal-box diagnostic:
 It also continuously shows the directly observed stick tip's membership in the
 visible pink rectangle:
 
-- `STICK TIP IN PINK ZONE: YES` when the observed YOLO tip is inside it;
-- `STICK TIP IN PINK ZONE: NO` when the observed tip is outside it;
-- `STICK TIP IN PINK ZONE: UNKNOWN` when a valid cymbal or directly observed
+- `ANY STICK TIP IN PINK ZONE: YES` when any directly observed YOLO tip is inside;
+- `ANY STICK TIP IN PINK ZONE: NO` when all valid observed tips are outside;
+- `ANY STICK TIP IN PINK ZONE: UNKNOWN` when a valid cymbal or directly observed
   YOLO tip is unavailable.
 
 The second overlay line shows the current width, height, and signed width/height

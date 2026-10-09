@@ -1,4 +1,4 @@
-"""Tk/ROS interface for recording a manually guided, disabled right arm."""
+"""Tk/ROS interface for recording one manually guided, disabled arm."""
 from __future__ import annotations
 
 import argparse
@@ -16,15 +16,16 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
 from safe_zone.encoder import SingleArmObserver
-from safe_zone.geometry import Model, RIGHT_TCP
+from safe_zone.gripper_feedback import gripper_feedback_text
+from safe_zone.geometry import LEFT_TCP, Model, RIGHT_TCP
 from .recording import (
-    GRIPPER_NAME,
-    JOINT_NAMES,
     NOMINAL_SAMPLE_RATE_HZ,
     JOINT_LIMIT_TOLERANCE_RAD,
     MotionRecording,
     confined_json_path,
     default_filename,
+    gripper_name,
+    joint_names,
     joint_limit_violation,
 )
 
@@ -35,16 +36,21 @@ ROOT = Path(__file__).resolve().parents[1]
 class App:
     def __init__(self, args):
         self.args = args
+        self.side = args.arm
+        self.side_title = self.side.upper()
+        self.joint_names = joint_names(self.side)
+        self.gripper_name = gripper_name(self.side)
+        self.tcp_name = LEFT_TCP if self.side == "left" else RIGHT_TCP
         self.model = Model(ROOT / "model/openarmx.urdf")
         model_joints = {joint.get("name"): joint for joint in self.model.joints}
         limits = [
-            model_joints[name].find("limit") for name in JOINT_NAMES
+            model_joints[name].find("limit") for name in self.joint_names
         ]
         self.lower = tuple(float(limit.get("lower")) for limit in limits)
         self.upper = tuple(float(limit.get("upper")) for limit in limits)
-        self.recordings_dir = ROOT / "recordings"
+        self.recordings_dir = ROOT / ("left_recordings" if self.side == "left" else "recordings")
         self.recordings_dir.mkdir(parents=True, exist_ok=True)
-        self.recording = MotionRecording(self.model.digest)
+        self.recording = MotionRecording(self.model.digest, self.side)
         self.saved_path = None
         self.latest = None
         self.latest_time = 0.0
@@ -54,23 +60,23 @@ class App:
         self.inbox = queue.Queue(maxsize=128)
         self.worker = None
 
-        self.node = Node("right_arm_motion_recorder")
+        self.node = Node(f"{self.side}_arm_motion_recorder")
         self.publisher = self.node.create_publisher(JointState, "/joint_states", 10)
         self.root = tk.Tk()
         suffix = "" if args.hardware else " — OFFLINE PREVIEW"
-        self.root.title("OpenArmX RIGHT arm motion recorder" + suffix)
+        self.root.title(f"OpenArmX {self.side_title} arm motion recorder" + suffix)
         self.status = tk.StringVar()
         self.angles = tk.StringVar()
 
         tk.Label(
             self.root,
-            text="RIGHT ARM MANUAL MOTION RECORDER",
+            text=f"{self.side_title} ARM MANUAL MOTION RECORDER",
             font=("Sans", 16, "bold"),
         ).pack(padx=18, pady=(14, 6))
         tk.Label(
             self.root,
             text=(
-                "Query-only: right motors 1–8 must already be disabled.\n"
+                f"Query-only: {self.side} motors 1–8 must already be disabled.\n"
                 "Support the limp arm at all times; this program provides no holding or gravity compensation."
             ),
             fg="darkred",
@@ -82,7 +88,7 @@ class App:
             text=(
                 "The recording may begin and end at any position. No centering, zone, or path requirement is applied.\n"
                 "A J1–J7 limit violation warns, aborts, and discards the entire active recording.\n"
-                "Only can0/right-arm feedback is queried; the left arm is not queried or recorded."
+                f"Only {self.args.can}/{self.side}-arm feedback is queried; the other arm is not queried or recorded."
             ),
             wraplength=620,
             justify="center",
@@ -136,7 +142,7 @@ class App:
     def observe(self) -> None:
         observer = None
         try:
-            observer = SingleArmObserver("right", self.args.right_can)
+            observer = SingleArmObserver(self.side, self.args.can)
             period = 1.0 / NOMINAL_SAMPLE_RATE_HZ
             while not self.stop_event.is_set():
                 started = time.monotonic()
@@ -192,10 +198,12 @@ class App:
         if not self.fresh():
             messagebox.showwarning(
                 "Not ready",
-                "Recording requires fresh feedback confirming right motors 1–8 are disabled.",
+                f"Recording requires fresh feedback confirming {self.side} motors 1–8 are disabled.",
             )
             return
-        violation = joint_limit_violation(self.latest, self.lower, self.upper)
+        violation = joint_limit_violation(
+            self.latest, self.lower, self.upper, self.joint_names
+        )
         if violation is not None:
             detail = self._joint_limit_detail(violation)
             self.recording_notice = (
@@ -248,11 +256,11 @@ class App:
         if self.recording.active:
             self.stop_recording()
         if not self.recording.samples:
-            messagebox.showwarning("Nothing to save", "Record at least one right-arm sample first.")
+            messagebox.showwarning("Nothing to save", f"Record at least one {self.side}-arm sample first.")
             return
         selected = filedialog.asksaveasfilename(
             initialdir=self.recordings_dir,
-            initialfile=default_filename(),
+            initialfile=default_filename(side=self.side),
             defaultextension=".json",
             filetypes=[("OpenArmX motion JSON", "*.json")],
         )
@@ -303,26 +311,27 @@ class App:
         elif self.recording_notice:
             state_text = self.recording_notice
         elif not self.fresh():
-            state_text = "Waiting for fresh disabled right-arm feedback"
+            state_text = f"Waiting for fresh disabled {self.side}-arm feedback"
         elif self.recording.active:
             state_text = (
                 f"RECORDING AT UP TO {NOMINAL_SAMPLE_RATE_HZ:.0f} Hz — "
-                "manually guide and support the limp right arm"
+                f"manually guide and support the limp {self.side} arm"
             )
         else:
-            state_text = "READY — right motors 1–8 report disabled"
+            state_text = f"READY — {self.side} motors 1–8 report disabled"
         save_text = str(self.saved_path) if self.saved_path else "not saved"
         self.status.set(
             f"{state_text}\nSamples: {sample_count}   Duration: {duration:.2f} s   File: {save_text}"
         )
         state = self.display_state()
-        tcp = self.model.transforms(state)[RIGHT_TCP][:3, 3]
-        degrees = [math.degrees(state.get(name, 0.0)) for name in JOINT_NAMES]
+        tcp = self.model.transforms(state)[self.tcp_name][:3, 3]
+        degrees = [math.degrees(state.get(name, 0.0)) for name in self.joint_names]
         self.angles.set(
-            "Right joint degrees:\n" +
+            f"{self.side_title.title()} joint degrees:\n" +
             "  ".join(f"J{i + 1}: {value:+7.2f}" for i, value in enumerate(degrees)) +
             f"\nTCP meters: X={tcp[0]:+.4f}  Y={tcp[1]:+.4f}  Z={tcp[2]:+.4f}" +
-            f"\nGripper opening: {state.get(GRIPPER_NAME, 0.0) * 1000:.1f} mm"
+            '\n' + gripper_feedback_text(
+                getattr(self.latest, 'motor8_feedback', {}).get(self.side))
         )
         can_start = self.fresh() and not self.recording.active
         self.start_button.config(state="normal" if can_start else "disabled")
@@ -346,17 +355,17 @@ class App:
             self.latest_time = stamp
             if self.recording.active:
                 try:
-                    violation = joint_limit_violation(value, self.lower, self.upper)
+                    violation = joint_limit_violation(value, self.lower, self.upper, self.joint_names)
                     if violation is not None:
                         self.abort_for_joint_limit(violation)
                         continue
-                    tcp = self.model.transforms(value)[RIGHT_TCP][:3, 3]
+                    tcp = self.model.transforms(value)[self.tcp_name][:3, 3]
                     self.recording.add(stamp, value, tcp)
                 except Exception as exc:
                     self.error = str(exc)
                     self.stop_recording("STOPPED: " + str(exc))
         if self.recording.active and not self.fresh():
-            self.stop_recording("Recording stopped because right-arm feedback became stale")
+            self.stop_recording(f"Recording stopped because {self.side}-arm feedback became stale")
         rclpy.spin_once(self.node, timeout_sec=0)
         self.publish()
         self.update_panel()
@@ -385,10 +394,15 @@ class App:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Query-only OpenArmX right-arm motion recorder")
+    parser = argparse.ArgumentParser(description="Query-only OpenArmX single-arm motion recorder")
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--right", dest="arm", action="store_const", const="right")
+    mode.add_argument("--left", dest="arm", action="store_const", const="left")
     parser.add_argument("--hardware", action="store_true")
     parser.add_argument("--right-can", default="can0")
+    parser.add_argument("--left-can", default="can1")
     args = parser.parse_args()
+    args.can = args.right_can if args.arm == "right" else args.left_can
     rclpy.init(args=[])
     try:
         App(args).run()

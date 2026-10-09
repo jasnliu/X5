@@ -1,0 +1,512 @@
+--- before/camera_playback/app.py
++++ camera_playback/app.py
+@@ -3445,6 +3445,8 @@
+     parser.add_argument("--left-recording", type=Path, default=dual_control.DEFAULT_LEFT_RECORDING)
+     parser.add_argument("--recording-only", action="store_true")
+     parser.add_argument("--auto-run", action="store_true")
++    parser.add_argument('--verify-playback', action='store_true',
++                        help='authorized physical dual-arm playback check; skip alignment/beat and return to center')
+     parser.add_argument('--verify-swing', action='store_true',
+                         help='authorized physical acceptance run: auto RUN, 5 s swing, verified center/relax')
+     parser.add_argument("--mit-fall-kd", type=float, default=StrikeSettings.fall_kd)
+@@ -3452,6 +3454,8 @@
+     parser.add_argument("--mit-brake-accel", type=float, default=StrikeSettings.brake_accel)
+     parser.add_argument("--mit-latency-ms", type=float, default=StrikeSettings.command_latency*1000)
+     args = parser.parse_args()
++    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
++        parser.error('--verify-playback requires normal --hardware and no other verification mode')
+     if args.verify_swing and (not args.hardware or args.recording_only):
+         parser.error('--verify-swing requires normal --hardware')
+     try:
+@@ -3478,6 +3482,9 @@
+         if args.verify_swing:
+             from .beat_evidence import BeatEvidence
+             app.beat_evidence = BeatEvidence(app)
++        if args.verify_playback:
++            from .playback_evidence import PlaybackEvidence
++            app.playback_evidence = PlaybackEvidence(app)
+         app.run()
+     finally:
+         if rclpy.ok():
+--- before/camera_playback/dual_recording.py
++++ camera_playback/dual_recording.py
+@@ -26,6 +26,7 @@
+ from .smooth_recording_worker import RecordingSession
+ from .trajectory import PlaybackFollower
+ from .left_return import LeftReturn
++from .center_feedback import check_center_feedback, check_center_path
+ from . import snare_workflow as snare
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+@@ -148,18 +149,21 @@
+         a = self.app
+         if not self.ready or not a.bus.fresh() or not a.bus.left_center_ready():
+             raise RuntimeError('Fresh centered left arm and validated left recording required')
+-        q = self.positions()
+-        self.g.check_line(q, self.recording.first_joints, measured_start=True)
+-        self._refresh_after_geometry(q, 'left')
+         a.control = None  # Right holds center; only the left arm moves next.
+         if getattr(a, 'hybrid_enabled', False) and getattr(self, 'snare_template', None) is not None:
+             self.snare_arming_at = time.monotonic()
+             a.phase = snare.ARMING
+             a.status.set('Left held at verified center: preparing powered snare J6 once')
+             return
++        self._validate_center_departure()
+         a.bus.set_left_hold(self.recording.first_joints)
+         a.phase = APPROACH
+         a.status.set('Left arm: center → recording start; right arm holds center')
++
++    def _validate_center_departure(self):
++        q = self.positions()
++        check_center_path(self.g, q, self.recording.first_joints)
++        self._refresh_after_geometry(q, 'left')
+ 
+     def _refresh_after_geometry(self, q, side):
+         if not self.app.test_mode:
+@@ -179,9 +183,14 @@
+ 
+     def tick(self, now):
+         a = self.app
++        if a.phase == FAULT:
++            return True  # Already latched; do not re-enter fault cleanup every tick.
+         snare.tick(self, now)
+         if a.phase == snare.ARMING:
+             if snare.arm(self):
++                # Strict center settling/mode preparation precedes measured
++                # path checks; do not validate a still-settling boundary joint.
++                self._validate_center_departure()
+                 a.bus.set_left_hold(self.recording.first_joints)
+                 a.phase = APPROACH
+                 a.status.set('Left powered J6 ready; moving to recording start')
+@@ -282,7 +291,10 @@
+                              and np.max(np.abs(q-recording.last_joints)) <= math.radians(.20)))):
+                 self.left_return = LeftReturn(self, reverse_from)
+             elif g is not None:
+-                g.check_line(q, goal, measured_start=True)
++                if side == 'left':
++                    check_center_path(g, q, goal)
++                else:
++                    g.check_line(q, goal, measured_start=True)
+             else:
+                 if not a.ik.path_between_inside(q, goal):
+                     raise RuntimeError('Right return leaves zone1')
+@@ -347,7 +359,7 @@
+             if any(state[1] == 0 for state in states):
+                 raise RuntimeError(f'{side.capitalize()} motor stopped before verified center')
+             if side == 'left':
+-                self.g.check(self.positions(side), measured=True)
++                check_center_feedback(self.g, self.positions(side))
+                 if abs(states[7][0]-LEFT_GRIPPER_TARGET) > math.radians(1.):
+                     raise RuntimeError('Left gripper hold lost during centering')
+             _, _, reached = control.update(self.positions(side), now)
+--- before/camera_playback/playback_transport.py
++++ camera_playback/playback_transport.py
+@@ -228,8 +228,16 @@
+                 if not snare.finished:
+                     raise RuntimeError('Snare still owns an active stroke')
+                 snare.stop()  # Join writer BEFORE disabling centered J6.
+-                if not self.fresh():
+-                    raise RuntimeError('Fresh feedback required after snare worker join')
++                # Process teardown can outlast the .1 s center-proof age even
++                # when the .3 s general feedback check still passes. Do not
++                # feed that stale proof into a batch of disable commands.
++                # Query fresh replies and collect a NEW settled center window
++                # with no worker running before attempting any disable.
++                self.snare_center_history.clear()
++                self.dual_center_history['left'].clear()
++                from .recording_only import refresh_feedback
++                refresh_feedback(self, .08)
++                raise RuntimeError('Center not settled yet')
+             self.left_drive.relax()
+             self.left_monitor = None
+         elif side == 'right':
+@@ -246,11 +254,16 @@
+         if snare is not None:
+             snare.status  # Heartbeat also during the two recording workers.
+         session = self.playback_session
++        now = time.monotonic()
+         if (session is not None and session.owns_feedback
+-                and not getattr(session, 'center_return', False)):
+-            # The child's independent sockets supply fresh feedback to BOTH
+-            # receivers. Drain ours normally, but don't duplicate its queries.
+-            self.last_query = time.monotonic()
++                and not getattr(session, 'center_return', False)
++                and len(self.states) == 16
++                and all(now-s[2] < .10 for s in self.states.values())):
++            # Suppress duplicate queries only while the child's replies are
++            # actually arriving. A live process doing final log teardown is
++            # not a feedback source; resume our queries before the unchanged
++            # .3 s watchdog expires, never after accepting stale feedback.
++            self.last_query = now
+         super().poll()
+         if hasattr(self, 'snare_center_history') and self.active and self.fresh():
+             now = time.monotonic()
+--- before/camera_playback/smooth_recording_worker.py
++++ camera_playback/smooth_recording_worker.py
+@@ -315,6 +315,18 @@
+                 else:
+                     os.environ[k] = value
+ 
++        if real_factory:
++            # Spawn/pickle can block Tk for >300 ms. The firmware keeps its
++            # existing targets, but non-J6 feedback may become old while the
++            # child starts. Query/drain fresh real replies before the GUI's
++            # next active tick; never increase its freshness timeout.
++            from .recording_only import refresh_feedback
++            try:
++                refresh_feedback(bus, .08)
++            except Exception:
++                self.stop()  # No competing writer survives a failed handoff.
++                raise
++
+     def _result(self):
+         path = self.directory/'result.json'
+         if path.exists():
+@@ -326,7 +338,11 @@
+     def owns_feedback(self):
+         # START HOLD is entered only after all sixteen feedback states and CSP
+         # readbacks have arrived. Keep GUI queries alive during child startup.
+-        return self.process.is_alive() and self.progress[0] >= PHASES.index('START HOLD')
++        phase = int(self.progress[0])
++        # ENDPOINT VERIFIED is followed by log/socket teardown. The process
++        # may remain alive for >300 ms without sending another state query.
++        return (self.process.is_alive() and phase >= PHASES.index('START HOLD')
++                and phase not in (PHASES.index('ENDPOINT VERIFIED'), PHASES.index('ERROR')))
+ 
+     def poll(self):
+         self.heartbeat.value = time.monotonic()
+--- before/camera_playback/snare_beat.py
++++ camera_playback/snare_beat.py
+@@ -5,6 +5,7 @@
+ Recording workers pass J6 targets through shared memory, never CSP on the wire.
+ """
+ import copy
++import errno
+ from dataclasses import dataclass, replace
+ import math
+ import multiprocessing as mp
+@@ -68,6 +69,7 @@
+     beat: int = 0
+     released_at: float | None = None
+     scheduled_at: float | None = None
++    queue_retries: int = 0
+ 
+ 
+ class SnareController:
+@@ -192,6 +194,9 @@
+         controller.path.bias = helper.controller.bias
+         started = False
+         deadline = now
++        queue_blocked_at = None
++        commands_sent = queue_retries = 0
++        max_gap = 0.
+         while not stop.is_set():
+             channel.receive()
+             now = time.monotonic()
+@@ -207,12 +212,40 @@
+             elif epoch > 0 and not started:
+                 controller.start(epoch, period)
+                 started = True
++            previous_send, previous_torque = controller.last_send, controller.last_torque
+             command = controller.update(channel.sample, now, goal.value)
+             if controller.method is not None and time.monotonic()-channel.sample.at > limits.feedback_timeout:
+                 raise RuntimeError('Snare feedback expired before send')
+             if stop.is_set():
+                 break
+-            channel.send(command.frame(6, -1.))
++            try:
++                channel.send(command.frame(6, -1.))
++            except OSError as exc:
++                if exc.errno not in (errno.ENOBUFS, errno.EAGAIN):
++                    raise
++                # Recording targets + state queries can briefly fill can1's
++                # ten-frame TX queue. A refused write was NOT sent. Do not
++                # queue an old strike command behind a sleep: receive fresh
++                # feedback and recompute the current trajectory next turn.
++                # Preserve the successful-send clock and torque slew history.
++                controller.last_send, controller.last_torque = previous_send, previous_torque
++                queue_retries += 1
++                if queue_blocked_at is None:
++                    queue_blocked_at = now
++                if time.monotonic()-queue_blocked_at >= limits.control_timeout:
++                    raise RuntimeError('Snare CAN transmit queue blocked beyond control deadline') from exc
++                time.sleep(.00025)
++                deadline = time.monotonic()
++                continue
++            sent_at = time.monotonic()
++            gap = 0. if previous_send is None else sent_at-previous_send
++            max_gap = max(max_gap, gap)
++            controller.last_send = sent_at
++            queue_blocked_at = None
++            commands_sent += 1
++            controller.status = replace(controller.status, commands_sent=commands_sent,
++                last_gap=gap, max_gap=max_gap, feedback_age=sent_at-channel.sample.at,
++                queue_retries=queue_retries)
+             publish(controller.status)
+             period_s = 1/limits.hz
+             deadline = max(deadline+period_s, time.monotonic()+period_s if deadline+period_s <= now else 0.)
+--- before/launch_right_camera_playback.py
++++ launch_right_camera_playback.py
+@@ -60,6 +60,8 @@
+                         help="physical no-strike test: recording, verified center, then relax; never align or strike")
+     parser.add_argument("--auto-run", action="store_true",
+                         help="requires --recording-only: Run automatically, close gripper after 5 s loading pause, exit after safe relax")
++    parser.add_argument('--verify-playback', action='store_true',
++                        help='AUTHORIZED MOTION: normal dual-arm Run, skip beat, verify both recordings and centered relax')
+     parser.add_argument('--verify-swing', action='store_true',
+                         help='AUTHORIZED MOTION: auto RUN, verify 5 s physical swing, center/relax, save evidence')
+     parser.add_argument("--model", type=Path, default=None)
+@@ -103,6 +105,8 @@
+         parser.error("--recording-only requires --hardware or --hardwaretest")
+     if args.auto_run and not args.recording_only:
+         parser.error("--auto-run requires --recording-only")
++    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
++        parser.error('--verify-playback requires normal --hardware and no other verification mode')
+     if args.verify_swing and (not args.hardware or args.recording_only):
+         parser.error('--verify-swing requires normal --hardware')
+     if not args.hardwaretest and any(getattr(args, name) is not None for name in (
+@@ -175,6 +179,8 @@
+     app_command.append("--auto-run")
+ if args.verify_swing:
+     app_command.append('--verify-swing')
++if args.verify_playback:
++    app_command.append('--verify-playback')
+ camera_command = [
+     str(venv_python), str(ROOT / "camera_playback/camera.py"),
+     "--socket", str(socket_path), "--root", str(Y2),
+--- before/camera_playback/left_return.py
++++ camera_playback/left_return.py
+@@ -6,10 +6,12 @@
+ import numpy as np
+ 
+ from goal_motion.control import GoalControl
++from smooth_playback.trajectory import transition
+ from .left_hold import LEFT_GRIPPER_TARGET
+ from .smooth_recording import SmoothRecording
+ from .smooth_recording_worker import RecordingSession
+ from .trajectory import PlaybackFollower
++from .center_feedback import check_center_feedback
+ 
+ 
+ @dataclass
+@@ -86,7 +88,10 @@
+         states = [a.bus.states['left', i] for i in range(1, 9)]
+         if any(mode != 2 for _, mode, _ in states):
+             raise RuntimeError('Left motor stopped during reverse return')
+-        d.g.check(q, measured=True)
++        if self.phase == 'CENTER':
++            check_center_feedback(d.g, q)
++        else:
++            d.g.check(q, measured=True)
+         if abs(states[7][0]-LEFT_GRIPPER_TARGET) > math.radians(1.):
+             raise RuntimeError('Left gripper hold lost during reverse return')
+         if self.phase == 'APPROACH REVERSE START':
+@@ -123,10 +128,23 @@
+             if not a.bus.left_hold_ready() or np.max(np.abs(q-self.reverse.last_joints)) > math.radians(.20):
+                 return
+             # This leg was checked before either arm started its return.
+-            a.bus.set_left_hold(d.g.center)
+-            d.return_controls['left'] = GoalControl(d.g.center, d.g.lower, d.g.upper, now)
++            # A step to the boundary (J4=0) let the firmware overshoot the
++            # modeled stop. Reuse the validated rest-to-rest center profile,
++            # not a wider limit. This does not alter the snare strike/return.
++            self.center_duration, self.center_at = transition(self.reverse.last_joints, d.g.center)
++            self.center_elapsed, self.center_tick = 0., now
++            a.bus.begin_left_playback()
+             self.phase = 'CENTER'
+             print('LEFT RETURN: recording start verified; centering, then relaxing', flush=True)
++        elif self.phase == 'CENTER' and self.center_at is not None:
++            # Never catch up with a large target jump after a delayed GUI tick.
++            self.center_elapsed += min(.04, max(0., now-self.center_tick))
++            self.center_tick = now
++            a.bus.set_left_positions(self.center_at(self.center_elapsed))
++            if self.center_elapsed >= self.center_duration:
++                a.bus.set_left_hold(d.g.center)
++                self.center_at = None
++                d.return_controls['left'] = GoalControl(d.g.center, d.g.lower, d.g.upper, now)
+ 
+     def fault(self, message):
+         """Do not freeze/rebase the right wrist when the LEFT return fails."""
+--- /dev/null
++++ camera_playback/center_feedback.py
+@@ -0,0 +1,41 @@
++"""Measured boundary overshoot ONLY for the center leg of arm playback.
++
++The center target can coincide with a joint stop (left J4 = 0). Firmware may
++settle slightly beyond it. Use the EXISTING .20-degree center acceptance for
++that boundary joint, never as a widened command/recording/strike limit. Check
++the TCP at its actual measured pose, not at a clipped substitute.
++"""
++import math
++import numpy as np
++from safe_zone.geometry import MEMBERSHIP_BUFFER_M
++
++CENTER_BOUNDARY_TOLERANCE = math.radians(.20)
++
++
++def check_center_feedback(geometry, actual):
++    q = np.asarray(actual, dtype=float)
++    if q.shape != (7,) or not np.isfinite(q).all():
++        raise ValueError('Invalid center feedback')
++    checked = q.copy()
++    for i in range(7):
++        if (geometry.center[i] == geometry.lower[i]
++                and geometry.lower[i]-CENTER_BOUNDARY_TOLERANCE <= q[i] < geometry.lower[i]):
++            checked[i] = geometry.lower[i]
++        elif (geometry.center[i] == geometry.upper[i]
++                and geometry.upper[i] < q[i] <= geometry.upper[i]+CENTER_BOUNDARY_TOLERANCE):
++            checked[i] = geometry.upper[i]
++    geometry.check(checked, measured=True)
++    if not geometry.zone.contains(geometry.tcp(q), MEMBERSHIP_BUFFER_M):
++        raise ValueError('Measured center motion outside existing zone1 TCP envelope')
++
++
++def check_center_path(geometry, start, target):
++    """Validate an inward departure/recovery from a measured center boundary.
++
++    Every commanded endpoint is strictly legal. Interpolation stays on the
++    actual measured line; only tiny center-boundary overshoot is accepted.
++    """
++    geometry.check(target)
++    n = max(2, int(np.ceil(np.max(np.abs(np.asarray(target)-start))/math.radians(.25)))+1)
++    for q in np.linspace(start, target, n):
++        check_center_feedback(geometry, q)
+--- /dev/null
++++ camera_playback/playback_evidence.py
+@@ -0,0 +1,136 @@
++"""Opt-in physical acceptance of NORMAL dual-arm playback, without any beat.
++
++Uses the real Run button, readiness/perception, snare mode preparation, recording
++workers and return controllers. No fake encoders or altered motor limits. A
++failure leaves the existing safe recovery/hold in charge, never forces relax.
++The caller must send the motion warning before launching this auto-run mode.
++"""
++from dataclasses import asdict
++from datetime import datetime, timezone
++import json
++from pathlib import Path
++import time
++import traceback
++import uuid
++
++
++class PlaybackEvidence:
++    def __init__(self, app):
++        self.app = app
++        self.directory = Path(__file__).resolve().parents[1]/'playback_results'/'dual_playback_verification'/(
++            datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')+'-'+uuid.uuid4().hex[:8])
++        self.directory.mkdir(parents=True)
++        self.stream = (self.directory/'telemetry.jsonl').open('w', buffering=1)
++        self.created = time.monotonic()
++        self.started = self.endpoint = self.finished = False
++        self.snare_armed = False
++        self.faults = []
++        self.return_fault = None
++        self.phases = []
++        self.last_phase = None
++        self.last_request = None
++        self.last_log = 0.
++        self.disabled_proofs = {}
++        for name in ('fail', '_program_failure'):
++            original = getattr(app, name)
++            def failed(message, original=original, name=name):
++                row = dict(at=time.monotonic(), source=name, phase=app.phase,
++                           message=str(message), traceback=traceback.format_exc())
++                if not self.faults or self.faults[-1]['message'] != str(message):
++                    self.faults.append(row)
++                    print('PLAYBACK VERIFY FAULT: '+json.dumps(row), flush=True)
++                    self.save(False)
++                return original(message)
++            setattr(app, name, failed)
++        def no_beat(*_args, **_kwargs):
++            raise RuntimeError('Strike forbidden in --verify-playback')
++        app._begin_strike_attempt = app._begin_continuous_striking = no_beat
++        app._begin_playback_alignment = self.recording_endpoint
++        original_disable = app.bus.disable_centered_side
++        def disable(side):
++            result = original_disable(side)
++            self.disabled_proofs[side] = dict(at=time.monotonic(),
++                q=[app.bus.states[side, i][0] for i in range(1,8)])
++            return result
++        app.bus.disable_centered_side = disable
++        print('PHYSICAL PLAYBACK EVIDENCE: '+str(self.directory), flush=True)
++        app.root.after(50, self.tick)
++
++    def recording_endpoint(self, now=None):
++        self.endpoint = True
++        print('PLAYBACK VERIFY: both animations complete; skipping alignment/beat, Center + Relax', flush=True)
++        self.app.center_relax()
++
++    def save(self, success):
++        a = self.app
++        result = dict(success=success, physical=True, beat_skipped=True, started=self.started,
++            right_endpoint_reached=self.endpoint, left_recording_complete=a.dual.left_done,
++            snare_mode_prepared=self.snare_armed, faults=self.faults, phases=self.phases,
++            disabled_proofs=self.disabled_proofs,
++            all_16_disabled=a.bus.fresh() and len(a.bus.states)==16 and all(s[1]==0 for s in a.bus.states.values()))
++        (self.directory/'result.json').write_text(json.dumps(result, indent=2)+'\n')
++        return result
++
++    def tick(self):
++        if self.finished:
++            return
++        a, now = self.app, time.monotonic()
++        try:
++            s = getattr(a.bus, 'left_joint6_session', None)
++            status = None if s is None else s.status
++            self.snare_armed |= status is not None and status.armed
++            left_return = a.dual.left_return
++            failure = None if left_return is None else left_return.failure
++            if failure and failure != self.return_fault:
++                self.return_fault = failure
++                self.faults.append(dict(at=now, source='LeftReturn', phase=a.phase, message=failure))
++                print('PLAYBACK VERIFY FAULT: '+json.dumps(self.faults[-1]), flush=True)
++                self.save(False)
++            if a.phase != self.last_phase:
++                self.last_phase = a.phase
++                row = dict(at=now, phase=a.phase, status=a.status.get())
++                self.phases.append(row)
++                print('PLAYBACK VERIFY PHASE: '+json.dumps(row), flush=True)
++            if now-self.last_log >= .025:
++                self.last_log = now
++                row = dict(at=now, phase=a.phase, status=a.status.get(), active=a.bus.active,
++                    states={f'{side}{i}': list(v) for (side,i),v in a.bus.states.items()},
++                    snare=None if status is None else asdict(status))
++                self.stream.write(json.dumps(row)+'\n')
++            # Recovery requests are deliberately restricted to the existing
++            # centered-stop command or closing AFTER disabled confirmation.
++            path = self.directory/'request.json'
++            if path.exists():
++                raw = path.read_text()
++                if raw != self.last_request:
++                    self.last_request = raw
++                    action = json.loads(raw)['action']
++                    if action == 'center': a.center_relax()
++                    elif action == 'close' and not a.bus.active and all(s[1]==0 for s in a.bus.states.values()):
++                        self.finished = True
++                        self.save(False); self.stream.close(); a.root.quit(); return
++                    else: raise RuntimeError('Verification request refused')
++            if not self.started and not self.faults:
++                if (a.phase == 'READY' and a.dual.ready and a.playback_trajectory is not None
++                        and a.bus.fresh() and a._camera_ready_for_start()
++                        and a._sound_ready_for_start() and a._hihat_ready_for_start()):
++                    a._refresh_buttons()
++                    if a.continue_button.cget('state') == 'normal':
++                        self.started = True
++                        a.continue_button.invoke()
++                elif now-self.created > 300:
++                    self.faults.append(dict(message='Readiness timeout before Run'))
++                    self.save(False)
++            if self.started and a.phase == 'RELAXED' and not a.bus.active:
++                disabled = a.bus.fresh() and all(s[1]==0 for s in a.bus.states.values())
++                passed = (not self.faults and self.endpoint and a.dual.left_done
++                          and self.snare_armed and set(self.disabled_proofs)=={'left','right'} and disabled)
++                result = self.save(passed)
++                print('PHYSICAL PLAYBACK RESULT: '+json.dumps(result), flush=True)
++                self.finished = True
++                self.stream.close()
++                a.request_safe_close()
++                return
++        except Exception as exc:
++            a.fail('Playback evidence: '+str(exc))
++        a.root.after(20, self.tick)

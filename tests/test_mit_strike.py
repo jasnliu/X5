@@ -359,6 +359,7 @@ class TransportTests(unittest.TestCase):
     def channel(self):
         channel = Joint7Channel.__new__(Joint7Channel)
         channel.sample=None; channel.mode=None; channel.mode_at=0
+        channel.motor=7; channel.sign=1.0
         return channel
 
     def feedback(self, q=.5, v=-.4, torque=.16, state=2):

@@ -1,0 +1,106 @@
+{
+  "success": false,
+  "physical": true,
+  "beat_skipped": true,
+  "started": true,
+  "right_endpoint_reached": true,
+  "left_recording_complete": true,
+  "snare_mode_prepared": true,
+  "faults": [
+    {
+      "at": 770568.340622094,
+      "source": "fail",
+      "phase": "CENTER RELAX RECENTERING",
+      "message": "Encoder feedback lost",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 165, in tick\n    self.bus.poll()\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_transport.py\", line 254, in poll\n    super().poll()\n  File \"/home/jason/Proyectos3/X5/centering/motors.py\", line 206, in poll\n    if self.active and not self.fresh():raise RuntimeError('Encoder feedback lost')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Encoder feedback lost\n"
+    },
+    {
+      "at": 770580.675902362,
+      "source": "LeftReturn",
+      "phase": "FAULT RECENTERING",
+      "message": "Joint limit violation"
+    }
+  ],
+  "phases": [
+    {
+      "at": 770421.839379015,
+      "phase": "READY",
+      "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"
+    },
+    {
+      "at": 770535.165555561,
+      "phase": "PLAYBACK PREFLIGHTED",
+      "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"
+    },
+    {
+      "at": 770535.223436984,
+      "phase": "SETTING UP",
+      "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"
+    },
+    {
+      "at": 770538.080115624,
+      "phase": "CENTERING",
+      "status": "CENTERING"
+    },
+    {
+      "at": 770541.278300134,
+      "phase": "LEFT SNARE ARMING AT CENTER",
+      "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+    },
+    {
+      "at": 770542.498654344,
+      "phase": "LEFT MOVING TO RECORDING START",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 770544.831631518,
+      "phase": "LEFT RECORDING PLAYBACK",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 770554.981377612,
+      "phase": "LEFT RECORDING END HOLD",
+      "status": "Left recording complete \u2014 holding its endpoint before right playback"
+    },
+    {
+      "at": 770555.643553233,
+      "phase": "MOVING TO RECORDING START",
+      "status": "Left holds its endpoint; right arm moves to its recording start"
+    },
+    {
+      "at": 770557.57380333,
+      "phase": "RECORDING PLAYBACK",
+      "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"
+    },
+    {
+      "at": 770565.31495306,
+      "phase": "SETTLING RECORDING END",
+      "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"
+    },
+    {
+      "at": 770566.835669293,
+      "phase": "CENTER RELAX RECENTERING",
+      "status": "Center + Relax: BOTH arms return together; each relaxes at its own verified center"
+    },
+    {
+      "at": 770568.346159448,
+      "phase": "FAULT RECENTERING",
+      "status": "FAULT: Encoder feedback lost \u2014 returning to customized right center before relaxing"
+    }
+  ],
+  "disabled_proofs": {
+    "right": {
+      "at": 770572.421176516,
+      "q": [
+        0.00019180590524214836,
+        0.0005754177157246687,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00029659014262470307,
+        0.00019180590524214836,
+        1.4003749141680029
+      ]
+    }
+  },
+  "all_16_disabled": false
+}

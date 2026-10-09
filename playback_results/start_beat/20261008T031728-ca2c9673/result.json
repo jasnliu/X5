@@ -1,0 +1,72 @@
+{
+  "success": false,
+  "error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow",
+  "cleanup_error": null,
+  "endpoint": null,
+  "gains_restored": true,
+  "original_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "method": {
+    "name": "paced_precise",
+    "duration_s": 7.591406588629155,
+    "time_scale": 1.2495720866422046,
+    "peak_velocity_rad_s": 0.2663079464893924,
+    "peak_acceleration_rad_s2": 0.7937752740430105,
+    "peak_piecewise_jerk_rad_s3": 15.81865291320067,
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "firmware_speed_rad_s": 0.8,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "max_joint_deviation_deg": 1.2842536078087965,
+    "max_tcp_deviation_mm": 3.9090048918573657,
+    "exact_first": true,
+    "exact_last": true,
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "gaussian_sigma_s": 0.1,
+    "smoothing_search": [
+      {
+        "sigma": 0.14,
+        "accepted": false,
+        "reason": "Joint corridor 1.8107 deg > 1.5 deg"
+      },
+      {
+        "sigma": 0.1,
+        "accepted": true
+      }
+    ],
+    "original_recording_duration_s": 6.075205,
+    "recording_duration_ratio": 1.2495720866422046,
+    "source_sha256": "f7481678e48b4296cb4517dba3ff6b400b3655cccb58fbd38b439345b481c268"
+  },
+  "transport": {
+    "left": {
+      "retries": 46,
+      "maximum_wait_s": 0.0023849299177527428
+    },
+    "right": {
+      "retries": 0,
+      "maximum_wait_s": 9.805697482079268e-05
+    }
+  }
+}

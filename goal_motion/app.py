@@ -13,6 +13,7 @@ from sensor_msgs.msg import JointState
 from visualization_msgs.msg import Marker,MarkerArray
 from geometry_msgs.msg import Point
 from centering.motors import Motors
+from safe_zone.gripper_feedback import gripper_feedback_text
 from safe_zone.geometry import Model,Zone,LEFT_TCP,RIGHT_TCP,FRAME,MEMBERSHIP_BUFFER_M
 from .control import GoalControl,TOLERANCE,HOLD_SECONDS,CENTER,GOAL
 
@@ -67,8 +68,8 @@ class App:
         return 0.
     def encoder_text(self):
         joints='  '.join(f'{i}: {self.q[f"openarmx_{self.side}_joint{i}"]*180/math.pi:6.1f}' for i in range(1,8))
-        gripper=self.gripper_encoder()*180/math.pi
-        return f'{self.side.capitalize()} encoder degrees:\n{joints}\nGripper (motor 8): {gripper:6.1f}'
+        feedback=getattr(self.bus,'motor8_feedback',{}).get(self.side) if self.bus else None
+        return f'{self.side.capitalize()} encoder degrees:\n{joints}\n'+gripper_feedback_text(feedback)
     def tcp(self):return self.model.transforms(self.q)[self.tcp_frame][:3,3]
     def planned_tcp(self,joints):
         values={f'openarmx_{self.side}_joint{i+1}':float(joints[i]) for i in range(7)}
@@ -149,16 +150,22 @@ class App:
             mesh.points.extend(ps+ps[::-1]);edges.points.extend([ps[0],ps[1],ps[1],ps[2],ps[2],ps[0]])
         tip=self.marker(3,Marker.SPHERE,(0.,1.,0.,1.) if self.zone.contains(self.tcp(),MEMBERSHIP_BUFFER_M) else (1.,0.,0.,1.),.025)
         p=self.tcp();tip.pose.position=Point(x=float(p[0]),y=float(p[1]),z=float(p[2]))
-        label=self.marker(4,Marker.TEXT_VIEW_FACING,(1.,.6,0.,1.),.04);label.pose.position.z=1.5;label.text=self.phase+f' — {self.side.upper()} ONLY'
+        label=self.marker(4,Marker.TEXT_VIEW_FACING,(1.,.6,0.,1.),.04);label.pose.position.z=1.5;label.text=self.phase+' — '+self.control_description()
         self.markers.publish(MarkerArray(markers=[points,mesh,edges,tip,label]+self.extra_markers()))
+
+    def relaxed_feedback_sides(self):
+        return (self.side,)
+
+    def control_description(self):
+        return f'{self.side.upper()} ONLY'
 
     def tick(self):
         try:
             if self.bus:
                 self.bus.poll()
                 if self.relax_at is not None and self.bus.fresh():
-                    if all(self.bus.states[self.side,i][1]==0 and self.bus.states[self.side,i][2]>self.relax_at for i in range(1,9)):
-                        self.relax_at=None;self.phase='RELAXED';self.status.set(f'{self.side.capitalize()} motors disabled')
+                    if all(self.bus.states[side,i][1]==0 and self.bus.states[side,i][2]>self.relax_at for side in self.relaxed_feedback_sides() for i in range(1,9)):
+                        self.relax_at=None;self.phase='RELAXED';self.status.set(' + '.join(self.relaxed_feedback_sides()).capitalize()+' motors disabled')
                     elif time.monotonic()-self.relax_at>1.:
                         self.relax_at=None;self.phase='FAULT';self.status.set('Disable not confirmed — use physical power cutoff')
                 if self.bus.fresh():

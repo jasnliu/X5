@@ -1,0 +1,117 @@
+{
+  "success": false,
+  "physical": true,
+  "beat_skipped": true,
+  "started": true,
+  "right_endpoint_reached": true,
+  "left_recording_complete": true,
+  "snare_mode_prepared": true,
+  "faults": [
+    {
+      "at": 770954.349979208,
+      "source": "fail",
+      "phase": "CENTER RELAX RECENTERING",
+      "message": "Disable delivery failed; use physical power cutoff",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/jason/Proyectos3/X5/goal_motion/app.py\", line 184, in tick\n    self.extra_control(time.monotonic())\n  File \"/home/jason/Proyectos3/X5/camera_playback/app.py\", line 1517, in extra_control\n    if getattr(self, \"dual\", None) is not None and self.dual.tick(now):\n                                                   ^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 199, in tick\n    self.tick_return(now)\n  File \"/home/jason/Proyectos3/X5/camera_playback/dual_recording.py\", line 368, in tick_return\n    a.bus.disable_centered_side(side)\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_evidence.py\", line 51, in disable\n    result = original_disable(side)\n             ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jason/Proyectos3/X5/camera_playback/playback_transport.py\", line 233, in disable_centered_side\n    self.left_drive.relax()\n  File \"/home/jason/Proyectos3/X5/centering/motors.py\", line 613, in relax\n    if failures:raise RuntimeError('Disable delivery failed; use physical power cutoff')\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Disable delivery failed; use physical power cutoff\n"
+    }
+  ],
+  "phases": [
+    {
+      "at": 770863.336228096,
+      "phase": "READY",
+      "status": "Preflighting recorded path and center returns \u2014 motors remain disabled"
+    },
+    {
+      "at": 770905.190411199,
+      "phase": "PLAYBACK PREFLIGHTED",
+      "status": "Recording ready \u2014 refreshing camera, TONOR sound detection, ESP32 hi-hat, and encoders before centering"
+    },
+    {
+      "at": 770905.234927639,
+      "phase": "SETTING UP",
+      "status": "Recording preflight passed; centering BOTH arms (left J5 \u221250\u00b0, others 0\u00b0, gripper raw target +14.16\u00b0; right J7=80.2\u00b0) and closing gripper to +7\u00b0; recording follows automatically"
+    },
+    {
+      "at": 770908.142212466,
+      "phase": "CENTERING",
+      "status": "CENTERING"
+    },
+    {
+      "at": 770911.079367556,
+      "phase": "LEFT SNARE ARMING AT CENTER",
+      "status": "Centered with gripper closed at +7\u00b0 \u2014 moving to the recording's first pose"
+    },
+    {
+      "at": 770912.415345396,
+      "phase": "LEFT MOVING TO RECORDING START",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 770914.916146281,
+      "phase": "LEFT RECORDING PLAYBACK",
+      "status": "Left powered J6 ready; moving to recording start"
+    },
+    {
+      "at": 770925.097140979,
+      "phase": "LEFT RECORDING END HOLD",
+      "status": "Left recording complete \u2014 holding its endpoint before right playback"
+    },
+    {
+      "at": 770925.779516327,
+      "phase": "MOVING TO RECORDING START",
+      "status": "Left holds its endpoint; right arm moves to its recording start"
+    },
+    {
+      "at": 770927.726603996,
+      "phase": "RECORDING PLAYBACK",
+      "status": "Smooth recording: 0.00/4.80 s \u2022 START HOLD \u2022 camera observations 0"
+    },
+    {
+      "at": 770935.506568664,
+      "phase": "SETTLING RECORDING END",
+      "status": "Recorded path complete \u2014 original gains restored; settling at its final pose"
+    },
+    {
+      "at": 770937.00738207,
+      "phase": "CENTER RELAX RECENTERING",
+      "status": "Center + Relax: BOTH arms return together; each relaxes at its own verified center"
+    },
+    {
+      "at": 770954.497773999,
+      "phase": "RELAXING",
+      "status": "Both arms centered and individually relaxed \u2014 confirming disabled feedback"
+    },
+    {
+      "at": 770954.541216595,
+      "phase": "RELAXED",
+      "status": "Left + right motors disabled"
+    }
+  ],
+  "disabled_proofs": {
+    "right": {
+      "at": 770942.40203123,
+      "q": [
+        0.0005754177157246687,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00029659014262470307,
+        0.00019180590524214836,
+        1.4003749141680029
+      ]
+    },
+    "left": {
+      "at": 770954.429827319,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        -0.8725250629434651,
+        -0.00019180590524214836,
+        0.00019180590524214836
+      ]
+    }
+  },
+  "all_16_disabled": true
+}

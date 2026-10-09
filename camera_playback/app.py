@@ -36,7 +36,12 @@ from centering.motors import (
 from goal_motion.app import App as JointGoalApp
 from goal_motion.control import STALL_ERROR, STALL_MOVEMENT, TOLERANCE
 from safe_zone.geometry import MEMBERSHIP_BUFFER_M
+from safe_zone.gripper_feedback import gripper_feedback_text
 
+from .tempo import (
+    MIN_BPM, MAX_BPM, ESTIMATED_PRACTICAL_MAX_BPM, parse_bpm, swing_events,
+    CONTINUOUS_WAIT_PHASE, CONTINUOUS_OUT_PHASE, CONTINUOUS_RETURN_PHASE,
+)
 from .audio import AudioReceiver
 from .sound_monitor import HiHatSoundMonitor
 from .mit_strike import Joint7Session, StrikeSettings
@@ -56,14 +61,21 @@ from .strike import (
     build_manual_strike_target,
     build_strike_plan,
 )
-from .trajectory import PlaybackFollower, load_playback_trajectory
-from .smooth_recording import SmoothRecording, load_smooth_recording
+from .trajectory import PlaybackFollower
+from .smooth_recording import SmoothRecording
+from .recording_cache import (
+    load_cached_playback_trajectory as load_playback_trajectory,
+    load_cached_smooth_recording as load_smooth_recording,
+)
 from .recording_preflight import RecordingPreflight
+from . import dual_recording as dual_control
+from .zone_markers import left_zone_markers
 from .smooth_recording_worker import RecordingSession
 from .playback_transport import PlaybackMotors
 from centering.motors import Motors
 from . import recording_only as recording_only_control
 from . import hybrid_workflow as hybrid_control
+from . import snare_workflow as snare_control
 from .visual import (
     PlaybackVisualSample,
     infer_direction_order,
@@ -75,7 +87,7 @@ from .visual import (
 
 ROOT = Path(__file__).resolve().parents[1]
 RECORDINGS_DIR = ROOT / "recordings"
-DEFAULT_RECORDING = RECORDINGS_DIR / "record1.json"
+DEFAULT_RECORDING = RECORDINGS_DIR / "record3.json"
 # Legacy simulation/preview playback; physical playback uses an independent
 # 200 Hz paced_precise worker, leaving the rest of the GUI workflow unchanged.
 PLAYBACK_COMMAND_INTERVAL = .02
@@ -95,14 +107,7 @@ STRIKE_J7_FEEDBACK_HZ = MAX_RIGHT_JOINT7_FEEDBACK_HZ
 # next ride hit).  Starting at the final entry creates the requested pickup
 # immediately before beat 1.
 SWING_TRIPLET_SECONDS = STRIKE_PERIOD_SECONDS / 3.0
-SWING_EVENTS = (
-    ("beat 1", True, STRIKE_PERIOD_SECONDS),
-    ("beat 2", True, 2.0 * SWING_TRIPLET_SECONDS),
-    ("extra after beat 2", False, SWING_TRIPLET_SECONDS),
-    ("beat 3", True, STRIKE_PERIOD_SECONDS),
-    ("beat 4", True, 2.0 * SWING_TRIPLET_SECONDS),
-    ("extra after beat 4", False, SWING_TRIPLET_SECONDS),
-)
+SWING_EVENTS = swing_events(STRIKE_BPM)  # Default only; each App owns its tempo.
 SWING_PICKUP_INDEX = len(SWING_EVENTS) - 1
 # Continuous swing hits are scheduled as target-arrival deadlines rather than
 # as outbound-command times.  While J7 is returning, the live encoder distance
@@ -113,9 +118,6 @@ SWING_PICKUP_INDEX = len(SWING_EVENTS) - 1
 # travel through that full tolerance band instead of completing immediately.
 CONTINUOUS_STRIKE_LEAD_SECONDS = 0.04
 CONTINUOUS_MIN_REBOUND_RAD = 2.0 * STRIKE_REACHED_TOLERANCE_RAD
-CONTINUOUS_WAIT_PHASE = "100 BPM STRIKE WAITING"
-CONTINUOUS_OUT_PHASE = "100 BPM STRIKE MOVING OUT"
-CONTINUOUS_RETURN_PHASE = "100 BPM STRIKE RETURNING"
 CENTER_RELAX_PHASE = "CENTER RELAX RECENTERING"
 HIHAT_CALIBRATION_WAIT_PHASE = "WAITING FOR HI-HAT CALIBRATION"
 HARDWARE_TEST_READY_PHASE = "HARDWARE TEST READY FOR MANUAL STRIKE"
@@ -172,7 +174,7 @@ class App(CameraSearchApp):
         "HILL RETURNING TO ANCHOR",
     }
     RETURN_PHASES = CameraSearchApp.RETURN_PHASES | {
-        CENTER_RELAX_PHASE,
+        CENTER_RELAX_PHASE, dual_control.CENTERING,
     }
 
     def __init__(self, hardware: bool, detection_socket: str, audio_socket: str,
@@ -182,7 +184,10 @@ class App(CameraSearchApp):
                  hardware_test_mode: bool = False,
                  hardware_test_settings: StrikeSettings | None = None,
                  recording_only: bool = False, auto_run: bool = False,
-                 hihat_audio_socket: str | None = None):
+                 hihat_audio_socket: str | None = None,
+                 left_recording_path: str | Path | None = dual_control.DEFAULT_LEFT_RECORDING):
+        self._strike_bpm = STRIKE_BPM
+        self.dual = None
         self.recording_only = bool(recording_only)
         self.recording_only_result = None
         if auto_run and not recording_only:
@@ -210,12 +215,13 @@ class App(CameraSearchApp):
                   'one RUN button → center + close gripper → recording → '
                   'wait for hi-hat calibration → '
                   'experiment hybrid J7 search → first-hit depth +0.5° → '
-                  '100 BPM hybrid swing with partial returns; ride v2 controls search; '
+                  '20–120 BPM (default 100) hybrid swing plus 1–2 spaced random eighth-note 11° left snares per measure; ride v2 controls search; '
                   'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
         super().__init__(real_hardware, detection_socket)
         if real_hardware and isinstance(self.bus, Motors):
             self.bus = PlaybackMotors.adopt(self.bus, self.center_goal,
-                strict_center_relax=recording_only, directory=self.recording_only_directory)
+                strict_center_relax=recording_only, directory=self.recording_only_directory,
+                left_hold=True)
             self.bus.require_center_before_relax = self.single_run_mode
         if self.test_mode:
             self.bus = SimulatedMotors(self.center_goal, RIGHT_GRIPPER_OPEN)
@@ -424,6 +430,7 @@ class App(CameraSearchApp):
             command=self.choose_recording,
         )
         self.recording_button.pack(fill="x", padx=20, pady=4, before=self.start_button)
+        self._create_tempo_controls()
         self.sound_status = tk.StringVar(value=(
             "Sound: ignored in test mode — ST7/TONOR not started"
             if self.test_mode else
@@ -438,6 +445,8 @@ class App(CameraSearchApp):
             self.root, hihat_audio_socket, before=self.start_button, disabled=self.test_mode)
         if self.hybrid_enabled:
             self.hihat_calibration = HiHatCalibrationRuntime(self)
+            if self.hihat.state in ('starting', 'ready'):
+                self.hihat.start_service()
             self.hihat_sound_monitor.control_required = True
         self.hihat_sound_monitor.on_messages = self._hihat_sound_messages
         if self.test_mode:
@@ -479,8 +488,14 @@ class App(CameraSearchApp):
                     "ESP32 hi-hat, and encoders"
                 )
             self.status.set(initial_status)
+        if not self.hardware_test_mode and not self.recording_only:
+            self.dual = dual_control.DualRecording(self)
+            self.root.title('BOTH arms: Left → Right recorded beat playback' +
+                            (' — PURE SIMULATION' if self.test_mode else '' if real_hardware else ' — OFFLINE PREVIEW'))
         if recording_path is not None:
             self.load_recording(recording_path, show_dialog=False)
+        if self.dual is not None and left_recording_path is not None:
+            self.dual.load(left_recording_path)
         if self.hardware_test_mode:
             # The ESP32 is deliberately absent in manual hardware test mode.
             # Camera alignment and informational ST7 logging remain visible.
@@ -491,16 +506,19 @@ class App(CameraSearchApp):
             # Continue's location for the one complete, user-authorized run.
             self.start_button.pack_forget()
             self.continue_button.config(
-                text='RUN: CENTER + CLOSE → RECORDING → HYBRID SWING',
+                text='RUN: CENTER BOTH → LEFT → RIGHT → HYBRID SWING',
                 command=self.start,
             )
-            self.emergency_button.config(text='STOP: CENTER BEFORE RELAX')
+            self.emergency_button.config(text='EMERGENCY RELAX (NO CENTER)', command=self.emergency_relax)
+            self.root.bind('<Escape>', lambda _: self.emergency_relax())
             self.close_requested = False
             self.root.protocol('WM_DELETE_WINDOW', self.request_safe_close)
             self.root.report_callback_exception = lambda kind, value, tb: self.fail(
                 'GUI callback failed: '+str(value))
-            signal.signal(signal.SIGINT, lambda *_: self.request_safe_close())
-            signal.signal(signal.SIGTERM, lambda *_: self.request_safe_close())
+            # Queue stop handling at a callback boundary, never reenter a
+            # half-executed motor handoff/setup from Python's signal handler.
+            signal.signal(signal.SIGINT, lambda *_: self.root.after(0, self.request_safe_close))
+            signal.signal(signal.SIGTERM, lambda *_: self.root.after(0, self.request_safe_close))
         self._refresh_buttons()
         self.root.after(20, self.sound_tick)
         if not self.hardware_test_mode:
@@ -514,6 +532,74 @@ class App(CameraSearchApp):
             print('NO-STRIKE RECORDING-ONLY MODE; evidence: '+str(self.recording_only_directory), flush=True)
             if auto_run:
                 self.root.after(100, lambda: recording_only_control.auto_tick(self))
+        self.header.config(text=self.header.cget('text') + (
+            '\nBOTH center; LEFT then RIGHT recording; 1–2 spaced random eighth-note 11° snares per 4-quarter-note measure'
+            if self.dual is not None else
+            '\nBOTH arms center; LEFT holds center with its closed gripper'))
+
+        if hasattr(self, 'tempo_header_template'):
+            self.tempo_header_template = self.header.cget('text')
+
+    @property
+    def strike_bpm(self):
+        return getattr(self, '_strike_bpm', STRIKE_BPM)
+
+    @property
+    def swing_events(self):
+        return swing_events(self.strike_bpm)
+
+    def _create_tempo_controls(self):
+        # No tempo control in one-shot MIT tests or no-strike playback.
+        if self.hardware_test_mode or self.recording_only:
+            return
+        self.tempo_header_template = self.header.cget('text')
+        self.tempo_continue_template = self.continue_button.cget('text')
+        self.tempo_frame = tk.Frame(self.root)
+        self.tempo_frame.columnconfigure(2, weight=1)
+        tk.Label(self.tempo_frame, text='Beat BPM:', font=('Sans', 12, 'bold')).grid(
+            row=0, column=0, sticky='w', padx=(0, 8))
+        self.bpm_text = tk.StringVar(value=f'{self.strike_bpm:g}')
+        self.bpm_entry = tk.Entry(self.tempo_frame, textvariable=self.bpm_text,
+                                  width=8, justify='center', font=('Sans', 13))
+        self.bpm_entry.grid(row=0, column=1, sticky='w')
+        self.tempo_hint = tk.Label(self.tempo_frame, wraplength=480, justify='left')
+        self.tempo_hint.grid(row=0, column=2, sticky='w', padx=(10, 0))
+        self.tempo_frame.pack(fill='x', padx=20, pady=4, before=self.start_button)
+        self.bpm_text.trace_add('write', lambda *_: self._refresh_buttons())
+
+    def _tempo_editable(self):
+        return (self.phase in ('READY', 'RELAXED')
+                and not (self.bus and self.bus.active))
+
+    def _apply_selected_tempo(self):
+        value = getattr(self, 'bpm_text', None)
+        self._strike_bpm = parse_bpm(value.get() if value is not None else self.strike_bpm)
+
+    def _refresh_tempo_controls(self):
+        if getattr(self, 'bpm_entry', None) is None:
+            return True
+        editable = self._tempo_editable()
+        self.bpm_entry.config(state='normal' if editable else 'disabled')
+        if not editable:
+            self.tempo_hint.config(text=f'{self.strike_bpm:g} BPM locked for this run; '
+                                   'Center + Relax before changing.', fg='#555555')
+            return True
+        try:
+            self._apply_selected_tempo()
+            snare_control.check_tempo(self)
+        except ValueError as exc:
+            self.tempo_hint.config(text=str(exc), fg='#b00020')
+            return False
+        maximum = 120. if getattr(getattr(self, 'dual', None), 'snare_template', None) is not None else MAX_BPM
+        self.tempo_hint.config(
+            text=f'{MIN_BPM:g}–{maximum:g} BPM; estimated practical upper '
+                 f'~{ESTIMATED_PRACTICAL_MAX_BPM:g}. Set before Start/RUN.',
+            fg='#8a5a00' if self.strike_bpm > ESTIMATED_PRACTICAL_MAX_BPM else '#555555')
+        tempo = f'{self.strike_bpm:g} BPM'
+        self.header.config(text=self.tempo_header_template.replace('100 BPM', tempo))
+        if not getattr(self, 'single_run_mode', False):
+            self.continue_button.config(text=self.tempo_continue_template.replace('100 BPM', tempo))
+        return True
 
     def choose_recording(self) -> None:
         if getattr(self, 'recording_preflight', None) is not None:
@@ -652,6 +738,8 @@ class App(CameraSearchApp):
         self.root.after(20, lambda: self._poll_recording_preflight(source_name))
 
     def _cancel_recording_preflight(self):
+        if getattr(self, "dual", None) is not None:
+            self.dual.cancel_load()
         job = getattr(self, 'recording_preflight', None)
         if job is not None:
             job.cancel()
@@ -704,6 +792,8 @@ class App(CameraSearchApp):
         self._refresh_buttons()
 
     def _refresh_buttons(self) -> None:
+        if getattr(self, "dual", None) is not None:
+            self.dual.refresh()
         selector = getattr(self, "recording_button", None)
         if selector is not None:
             selectable = not (self.bus and self.bus.active)
@@ -711,11 +801,12 @@ class App(CameraSearchApp):
             calibration = getattr(self, 'hihat_calibration', None)
             selectable = selectable and not (calibration is not None and calibration.busy)
             selector.config(state="normal" if selectable else "disabled")
+        tempo_ready = self._refresh_tempo_controls()
         self._refresh_hardware_test_controls()
         continuous = getattr(self, "continuous_strike_active", False)
         stop_requested = getattr(self, "continuous_stop_requested", False)
         self.center_relax_button.config(
-            text=("STOP 100 BPM STRIKING: CENTER + RELAX"
+            text=(f"STOP {self.strike_bpm:g} BPM STRIKING: CENTER + RELAX"
                   if continuous else "CENTER + RELAX")
         )
         if not self.hardware or not self.bus:
@@ -727,10 +818,12 @@ class App(CameraSearchApp):
         camera_ready = self._camera_ready_for_start()
         sound_ready = self._sound_ready_for_start()
         hihat_ready = self._hihat_ready_for_start()
-        recording_ready = self.playback_trajectory is not None
+        recording_ready = (self.playback_trajectory is not None
+                           and (getattr(self, "dual", None) is None or self.dual.ready))
         ready_to_run = (not getattr(self, 'close_requested', False)
+                        and not getattr(self, 'emergency_latched', False)
                         and self.phase in ("READY", "RELAXED") and bus_fresh
-                        and camera_ready and sound_ready and hihat_ready and recording_ready)
+                        and camera_ready and sound_ready and hihat_ready and recording_ready and tempo_ready)
         self.start_button.config(
             state="normal" if ready_to_run and not getattr(self, 'single_run_mode', False) else "disabled"
         )
@@ -936,6 +1029,12 @@ class App(CameraSearchApp):
         return super().initial_gripper_goal()
 
     def start(self):
+        if getattr(self, 'emergency_latched', False):
+            self.status.set('Emergency stop latched; restart required')
+            return
+        if getattr(self, "dual", None) is not None and not self.dual.ready:
+            self.status.set("Cannot RUN: select and finish preflighting the left recording")
+            return
         if getattr(self, 'recording_preflight', None) is not None:
             self.status.set('Wait for recording validation before RUN')
             return
@@ -946,6 +1045,12 @@ class App(CameraSearchApp):
             self.status.set("Cannot start: select and preflight a right-arm recording")
             return
         if self.phase not in ("READY", "RELAXED") or not self.bus.fresh():
+            return
+        try:
+            self._apply_selected_tempo()
+            snare_control.check_tempo(self)
+        except ValueError as exc:
+            self.status.set('Cannot start: ' + str(exc))
             return
         required_support_fault = (
             self.support_fault_detail
@@ -967,6 +1072,8 @@ class App(CameraSearchApp):
             self.status.set("ERROR: configured right center is outside right_zones/zone1.json")
             return
 
+        if getattr(self, "dual", None) is not None:
+            self.dual.reset()
         self.goal = self.playback_trajectory.first_joints
         self.target_point = self.playback_trajectory.tcp_positions[0].copy()
         self.target_offset = self.target_point - self.ik.origin_tcp
@@ -1002,7 +1109,7 @@ class App(CameraSearchApp):
                     "ESP32 hi-hat, and encoders before centering"
                 )
         self.status.set(preflight_status)
-        if getattr(self, 'single_run_mode', False):
+        if getattr(self, 'single_run_mode', False) or getattr(self, 'bpm_entry', None) is not None:
             self._refresh_buttons()
         self.root.after(20, self._start_preflighted_recording)
 
@@ -1063,7 +1170,7 @@ class App(CameraSearchApp):
                 "Recording preflight passed; "
                 + ("confirming all drives at their live poses, then "
                    if self.hardware_test_mode else "")
-                + f"centering with J7={math.degrees(self.center_goal[6]):.1f}° "
+                + f"centering BOTH arms (left J5 −50°, others 0°, gripper raw target +14.16°; right J7={math.degrees(self.center_goal[6]):.1f}°) "
                 + ("and closing gripper to +7°; recording follows automatically"
                    if getattr(self, 'single_run_mode', False) else
                    "and opening gripper to −3°")
@@ -1293,7 +1400,7 @@ class App(CameraSearchApp):
                     self.hihat_fault_detail = self.hihat.detail
                     if first_fault and getattr(self, "continuous_strike_active", False):
                         self.status.set(
-                            "ESP32 hi-hat fault — stopping 100 BPM striking, then "
+                            f"ESP32 hi-hat fault — stopping {self.strike_bpm:g} BPM striking, then "
                             "centering and relaxing: " + self.hihat.detail
                         )
                         self._request_continuous_stop()
@@ -1342,6 +1449,10 @@ class App(CameraSearchApp):
             calibration.cancel()
 
     def centered(self, now=None):
+        if (isinstance(self.bus, (PlaybackMotors, SimulatedMotors))
+                and not self.bus.left_center_ready()):
+            self.status.set('Right centered — waiting for left center (J5 −50°, gripper raw target +14.16°)')
+            return
         if getattr(self, 'single_run_mode', False):
             # No WAITING FOR LOAD phase and no inherited open-gripper check.
             # The center controller keeps holding until closure is observed.
@@ -1401,6 +1512,10 @@ class App(CameraSearchApp):
         super().continue_motion()
 
     def extra_control(self, now):
+        if getattr(self, 'emergency_latched', False):
+            return
+        if getattr(self, "dual", None) is not None and self.dual.tick(now):
+            return
         if not getattr(self, 'single_run_mode', False):
             self.continue_button.config(
                 state="normal" if (
@@ -1489,6 +1604,9 @@ class App(CameraSearchApp):
             except RuntimeError:
                 self.status.set('Holding center target until all seven encoders verify settled center; NOT relaxing')
                 return
+        if getattr(self, 'dual', None) is not None and self.dual.returning:
+            self.dual.right_center_reached()
+            return
         if self.phase == "MOVING TO RECORDING START":
             self._begin_playback(now)
             return
@@ -1537,6 +1655,7 @@ class App(CameraSearchApp):
                 # their triplet grid even if an individual target is late.
                 event_at = now
                 self.continuous_current_event_at = event_at
+                snare_control.simulation_epoch(self, event_at + interval)
             self.continuous_last_beat_at = event_at
             self.continuous_next_beat_at = event_at + interval
             self._begin_continuous_stage(
@@ -1553,7 +1672,7 @@ class App(CameraSearchApp):
             if self.continuous_stop_requested:
                 self._finish_continuous_striking()
             else:
-                next_label = SWING_EVENTS[self.continuous_swing_index][0]
+                next_label = self.swing_events[self.continuous_swing_index][0]
                 self.status.set(
                     f"Swing strike {self.continuous_strike_count} returned to "
                     f"the pink-zone pose; {next_label} in "
@@ -1706,7 +1825,35 @@ class App(CameraSearchApp):
             return False
         return True
 
+    def extra_markers(self):
+        markers = super().extra_markers()
+        dual = getattr(self, 'dual', None)
+        if dual is None:
+            return markers
+        zone = dual.g.zone
+        # Static hull: build once, not on every control-loop publication.
+        if getattr(self, '_left_marker_zone', None) is not zone or zone._dirty:
+            self._left_zone_markers = left_zone_markers(self.marker, zone)
+            self._left_marker_zone = zone
+        stamp = self.node.get_clock().now().to_msg()
+        for marker in self._left_zone_markers:
+            marker.header.stamp = stamp
+        return markers + self._left_zone_markers
+
     def begin_stage(self, name, desired):
+        if getattr(self, 'emergency_latched', False):
+            raise RuntimeError('Motion blocked after emergency stop; restart required')
+        dual = getattr(self, 'dual', None)
+        if dual is not None:
+            if name in self.RETURN_PHASES | {'RECENTERING', 'ZONE RECENTERING', 'FAULT RECENTERING'}:
+                if not dual.returning:
+                    return dual.begin_return(name)
+                if 'right' in self.bus.center_disabled:
+                    return
+            if name == 'MOVING TO RECORDING START' and not dual.left_done:
+                return dual.begin_left()
+            if dual.session is not None and not dual.returning:
+                dual.stop()
         # Covers ordinary stages and inherited zone/error recovery alike.
         if not self._stop_smooth_playback():
             raise RuntimeError(self.smooth_playback_cleanup_error)
@@ -2179,7 +2326,7 @@ class App(CameraSearchApp):
             evidence.selected(message, amount, started_at, self.strike_attempt_returned_at)
         # A hit never interrupts a strike leg. Finish the commanded depth and
         # the same return to the preserved anchor used by a no-hit
-        # attempt. Only after that return is reached may the 100 BPM loop begin.
+        # attempt. Only after that return is reached may the swing loop begin.
         # This guarantees anchor -> depth -> anchor for every search attempt.
         self.strike_hit_pending = {
             "message": hit_message,
@@ -2281,18 +2428,18 @@ class App(CameraSearchApp):
             message = (
                 f"TEST DEFAULT: camera and sound bypassed; J7 "
                 f"−{self.continuous_strike_degrees:g}° swing at "
-                f"{STRIKE_BPM:.0f} BPM until Stop"
+                f"{self.strike_bpm:g} BPM until Stop"
             )
         elif hybrid_control.enabled(self):
             message = (
                 f"SWING STRIKE: J7 −{self.continuous_strike_degrees:g}° "
                 f"(first detected +{hybrid_control.SWING_DEPTH_BOOST_DEG:g}°); "
-                f"starting triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
+                f"starting triplet swing at {self.strike_bpm:g} BPM until Stop"
             )
         else:
             message = (
                 f"FIRST DETECTED STRIKE: J7 −{self.continuous_strike_degrees:g}°; starting "
-                f"triplet swing at {STRIKE_BPM:.0f} BPM until Stop"
+                f"triplet swing at {self.strike_bpm:g} BPM until Stop"
             )
         self.result_status.set(message)
         self.result_label.config(fg="#087f23")
@@ -2301,9 +2448,11 @@ class App(CameraSearchApp):
 
         if hybrid_control.enabled(self):
             try:
-                hybrid_control.start_swing(self, SWING_EVENTS)
+                hybrid_control.start_swing(self, self.swing_events)
             except Exception as exc:
                 self.fail('Could not start hybrid swing: '+str(exc))
+        elif getattr(self, 'test_mode', False):
+            snare_control.start_simulation(self)
 
     def _advance_continuous_striking(self, now: float) -> None:
         if hybrid_control.enabled(self):
@@ -2332,7 +2481,7 @@ class App(CameraSearchApp):
         if remaining > outbound_seconds or not rebound_ready:
             next_label = ("pickup (extra before beat 1)"
                           if self.continuous_first_swing_hit else
-                          SWING_EVENTS[self.continuous_swing_index][0])
+                          self.swing_events[self.continuous_swing_index][0])
             if not rebound_ready:
                 detail = (
                     f"returning at {RIGHT_STRIKE_RETURN_SPEED:.1f} rad/s; "
@@ -2347,7 +2496,7 @@ class App(CameraSearchApp):
             else:
                 detail = "waiting at the full anchor"
             self.status.set(
-                f"100 BPM swing J7 −{self.continuous_strike_degrees:g}°; "
+                f"{self.strike_bpm:g} BPM swing J7 −{self.continuous_strike_degrees:g}°; "
                 f"{detail}; {next_label} deadline in {max(0.0, remaining):.2f} s"
             )
             return
@@ -2406,14 +2555,14 @@ class App(CameraSearchApp):
                        if not main_beat else
                        "hi-hat command scheduled at the main-beat deadline"))
             self.status.set(
-                f"100 BPM swing {swing_label}, strike {self.continuous_strike_count}: J7 "
+                f"{self.strike_bpm:g} BPM swing {swing_label}, strike {self.continuous_strike_count}: J7 "
                 f"−{self.continuous_strike_degrees:g}°; {detail}"
             )
         else:
             anchor_name = ("recording endpoint" if getattr(self, "test_mode", False)
                            else "pink-zone pose")
             self.status.set(
-                f"100 BPM swing {swing_label}, strike "
+                f"{self.strike_bpm:g} BPM swing {swing_label}, strike "
                 f"{self.continuous_strike_count}: target reached; "
                 f"returning to the {anchor_name}"
             )
@@ -2488,11 +2637,11 @@ class App(CameraSearchApp):
     def _take_next_swing_event(self):
         """Return and advance the next ride event in the repeating swing bar."""
         index = self.continuous_swing_index
-        label, main_beat, interval = SWING_EVENTS[index]
+        label, main_beat, interval = self.swing_events[index]
         if self.continuous_first_swing_hit:
             label = "pickup (extra before beat 1)"
             self.continuous_first_swing_hit = False
-        self.continuous_swing_index = (index + 1) % len(SWING_EVENTS)
+        self.continuous_swing_index = (index + 1) % len(self.swing_events)
         self.continuous_current_swing_label = label
         self.continuous_current_interval_seconds = interval
         return label, main_beat, interval
@@ -2523,7 +2672,7 @@ class App(CameraSearchApp):
             amount = MOTOR2_TARGET_DEGREES
         detail = f"CLOSE {amount}°" if command in (b"C", b"B") else "OPEN 0°"
         self.status.set(
-            f"100 BPM swing {self.continuous_current_swing_label}: "
+            f"{self.strike_bpm:g} BPM swing {self.continuous_current_swing_label}: "
             f"hi-hat motor 2 {detail} on the main-beat deadline"
         )
         return True
@@ -2535,6 +2684,7 @@ class App(CameraSearchApp):
             hybrid_control.request_stop(self)
             return
         self.continuous_stop_requested = True
+        snare_control.finish(self)
         self._stop_hihat_sequence()
         self.center_relax_button.config(state="disabled")
         if self.phase == CONTINUOUS_WAIT_PHASE:
@@ -2548,23 +2698,29 @@ class App(CameraSearchApp):
     def _finish_continuous_striking(self) -> None:
         if not self.continuous_strike_active:
             return
+        snare_control.finish(self)
+        if not snare_control.finished(self):
+            return
         self.continuous_strike_active = False
         self.continuous_stop_requested = False
         self.control = None
-        if not self._restore_strike_speed("100 BPM striking stopped by user"):
+        if not self._restore_strike_speed(f"{self.strike_bpm:g} BPM striking stopped by user"):
             return
         try:
             self.begin_stage(CENTER_RELAX_PHASE, self.center_goal)
         except Exception as exc:
-            self.fail("100 BPM Stop + Center command failed: " + str(exc))
+            self.fail(f"{self.strike_bpm:g} BPM Stop + Center command failed: " + str(exc))
             return
         self.status.set(
-            "100 BPM striking stopped — returning to customized right center, "
+            f"{self.strike_bpm:g} BPM striking stopped — returning to customized right center, "
             "then relaxing"
         )
 
     def center_relax(self) -> None:
         """Cancel the active workflow, move from the live pose to center, then relax."""
+        if getattr(self, 'emergency_latched', False):
+            self.status.set('Emergency stop latched; restart required, no centering motion')
+            return
         self._cancel_hihat_calibration()
         if getattr(self, 'phase', None) == hybrid_control.FAULT:
             if getattr(self, 'single_run_mode', False):
@@ -2642,6 +2798,8 @@ class App(CameraSearchApp):
             self.fail("Center + Relax command failed: " + str(exc))
             return
         self.status.set(
+            "Center + Relax: BOTH arms return together; each relaxes at its own verified center"
+            if getattr(self, 'dual', None) is not None else
             "Center + Relax requested — returning from the current pose to "
             "customized right center, then disabling the right arm"
         )
@@ -2773,6 +2931,7 @@ class App(CameraSearchApp):
             self.hihat_fault_detail = str(exc)
 
     def _cancel_continuous_striking(self) -> None:
+        snare_control.finish(self)
         self._log_continuous_j7_minimum()
         self._stop_hihat_sequence()
         self.continuous_strike_active = False
@@ -2795,6 +2954,9 @@ class App(CameraSearchApp):
             button.config(text="CENTER + RELAX")
 
     def _program_failure(self, message: str) -> None:
+        if getattr(self, 'dual', None) is not None and self.phase in dual_control.LEFT_PHASES:
+            self.dual.fault(message)
+            return
         self._cancel_hihat_calibration()
         if hybrid_control.engaged(self):
             if self.phase == hybrid_control.FAULT:
@@ -2818,11 +2980,22 @@ class App(CameraSearchApp):
         super()._program_failure(message)
 
     def fail(self, message):
+        if getattr(self, 'emergency_latched', False):
+            self.status.set('Stopped; restart required: '+str(message))
+            return
         self._cancel_hihat_calibration()
         if (getattr(self, 'single_run_mode', False) and self.bus and self.bus.active
                 and ('STALL:' in str(message) or 'too hot' in str(message).lower())):
             self.relax('MAJOR FAULT: '+str(message))
             return
+        if (getattr(self, 'dual', None) is not None
+                and self.phase in dual_control.LEFT_PHASES | {dual_control.FAULT}):
+            self.dual.fault(message)
+            return
+        # During return use the original right-arm recovery below. Sending a
+        # recoverable return error through dual.fault() replaces J7's center
+        # goal with its current angle while J1-J6 retain their center targets.
+        # That changes the path and can leave the wrist held off-center forever.
         if hybrid_control.engaged(self):
             if str(message).startswith('STALL:'):
                 self.relax('Hybrid stall: emergency relaxation — '+str(message))
@@ -3042,7 +3215,29 @@ class App(CameraSearchApp):
             self.hardware_test_hold_delivery_error = str(exc)
         self.hardware_test_last_workflow_hold = now
 
+    def encoder_text(self):
+        feedback = getattr(self.bus, 'motor8_feedback', {}).get('left') if self.bus else None
+        return super().encoder_text() + '\nLeft ' + gripper_feedback_text(feedback)
+
+    def relaxed_feedback_sides(self):
+        return ('left', 'right')
+
+    def control_description(self):
+        return 'RIGHT PLAYBACK + LEFT CENTER HOLD'
+
     def safety(self):
+        if getattr(self, 'emergency_latched', False):
+            return  # No motion controller survives emergency shutdown.
+        if getattr(self, 'dual', None) is not None:
+            if self.phase == dual_control.FAULT:
+                return
+            if self.dual.returning and 'right' in self.bus.center_disabled:
+                return  # Left finishes independently; right is already off.
+            if self.dual.returning:
+                if not self.bus.fresh():
+                    raise RuntimeError('Fresh feedback lost during right-arm centering')
+                if any(self.bus.states['right', i][1] == 0 for i in range(1, 9)):
+                    raise RuntimeError('Right motor stopped before verified center')
         if hybrid_control.engaged(self):
             inside = self.zone.contains(self.tcp(), MEMBERSHIP_BUFFER_M)
             self.zone_status.set('Zone: INSIDE' if inside else 'Zone: OUTSIDE')
@@ -3085,7 +3280,21 @@ class App(CameraSearchApp):
                 return
         super().safety()
 
+    def emergency_relax(self, message='Operator emergency stop'):
+        from .emergency import relax
+        relax(self, message)
+
     def relax(self, message=None):
+        dual = getattr(self, 'dual', None)
+        fatal = 'STALL:' in str(message or '') or str(message or '').startswith('Hybrid stall:') or 'too hot' in str(message or '').lower()
+        if fatal and getattr(self, 'single_run_mode', False):
+            self.emergency_relax(message)
+            return
+        if dual is not None and self.bus and self.bus.active and not fatal:
+            self.center_relax()
+            return
+        if dual is not None:
+            dual.stop()
         self._cancel_hihat_calibration()
         if getattr(self, 'single_run_mode', False) and self.bus and self.bus.active:
             fatal = 'STALL:' in str(message or '') or str(message or '').startswith('Hybrid stall:')
@@ -3143,18 +3352,30 @@ class App(CameraSearchApp):
             self.playback_speed_fast = False
 
     def request_safe_close(self):
-        """Window close/Ctrl-C is a center request, never an airborne disable."""
+        """First close requests center; repeat or deadline requests emergency exit."""
         self._cancel_recording_preflight()
-        if not getattr(self, 'close_requested', False):
-            self.close_requested = True
-            print('CLOSE REQUEST: center and verify before disabling or exiting', flush=True)
-            self.root.after(50, self._safe_close_tick)
+        if getattr(self, 'close_requested', False):
+            self.force_close = True
+            self.emergency_relax('Repeated close/Ctrl-C: emergency shutdown')
+            self.root.quit()
+            return
+        self.close_requested = True
+        self.close_deadline = time.monotonic() + 35.
+        print('CLOSE REQUEST: center then exit; repeat Ctrl-C for emergency disable; 35 s deadline', flush=True)
+        self.root.after(50, self._safe_close_tick)
         self.center_relax()
 
     def _safe_close_tick(self):
+        if time.monotonic() >= getattr(self, 'close_deadline', float('inf')):
+            self.force_close = True
+            self.emergency_relax('Shutdown deadline: emergency disable attempt')
+            print('Exiting after emergency disable attempt; if disable is unconfirmed, USE PHYSICAL POWER CUTOFF', flush=True)
+            self.root.quit()
+            return
         calibration = getattr(self, 'hihat_calibration', None)
         if (not self.bus.active and self.phase != 'RELAXING'
-                and not (calibration is not None and calibration.busy)):
+                and (getattr(self, 'emergency_latched', False)
+                     or not (calibration is not None and calibration.busy))):
             self.root.quit()
             return
         if self.phase not in self.RETURN_PHASES | {'RELAXING', 'FAULT RECENTERING', 'ZONE RECENTERING'}:
@@ -3177,13 +3398,19 @@ class App(CameraSearchApp):
                         self.request_safe_close()
                         continue
                     calibration = getattr(self, 'hihat_calibration', None)
+                    if getattr(self, 'force_close', False):
+                        return result
                     if not (getattr(self, 'single_run_mode', False) and
-                            (self.bus.active or (calibration is not None and calibration.busy))):
+                            (self.bus.active or (not getattr(self, 'emergency_latched', False)
+                             and calibration is not None and calibration.busy))):
                         return result
                     self.request_safe_close()
             finally:
-                self._stop_smooth_playback()
-                hybrid_control.close(self)
+                if getattr(self, "dual", None) is not None and not getattr(self, 'emergency_latched', False):
+                    self.dual.stop()
+                if not getattr(self, 'emergency_latched', False):
+                    self._stop_smooth_playback()
+                    hybrid_control.close(self)
                 if getattr(self, 'recording_only', False) and self.bus and self.bus.active:
                     recording_only_control.finish(self, 'Window closed: controlled center return')
         self.root.mainloop = recording_safe_mainloop
@@ -3215,8 +3442,11 @@ def main():
     parser.add_argument("--hihat-audio-socket", help="hi-hat detector socket (required for normal hardware calibration)")
     parser.add_argument("--esp-port", default=DEFAULT_ESP_PORT)
     parser.add_argument("--recording", type=Path, default=DEFAULT_RECORDING)
+    parser.add_argument("--left-recording", type=Path, default=dual_control.DEFAULT_LEFT_RECORDING)
     parser.add_argument("--recording-only", action="store_true")
     parser.add_argument("--auto-run", action="store_true")
+    parser.add_argument('--verify-playback', action='store_true',
+                        help='authorized physical dual-arm playback check; skip alignment/beat and return to center')
     parser.add_argument('--verify-swing', action='store_true',
                         help='authorized physical acceptance run: auto RUN, 5 s swing, verified center/relax')
     parser.add_argument("--mit-fall-kd", type=float, default=StrikeSettings.fall_kd)
@@ -3224,6 +3454,8 @@ def main():
     parser.add_argument("--mit-brake-accel", type=float, default=StrikeSettings.brake_accel)
     parser.add_argument("--mit-latency-ms", type=float, default=StrikeSettings.command_latency*1000)
     args = parser.parse_args()
+    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
+        parser.error('--verify-playback requires normal --hardware and no other verification mode')
     if args.verify_swing and (not args.hardware or args.recording_only):
         parser.error('--verify-swing requires normal --hardware')
     try:
@@ -3245,10 +3477,14 @@ def main():
             hardware_test_settings=settings,
             recording_only=args.recording_only, auto_run=args.auto_run,
             hihat_audio_socket=args.hihat_audio_socket,
+            left_recording_path=args.left_recording,
         )
         if args.verify_swing:
             from .beat_evidence import BeatEvidence
             app.beat_evidence = BeatEvidence(app)
+        if args.verify_playback:
+            from .playback_evidence import PlaybackEvidence
+            app.playback_evidence = PlaybackEvidence(app)
         app.run()
     finally:
         if rclpy.ok():

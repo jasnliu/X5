@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Playback-only camera overlay for visual diagnostics and pink-zone alignment.
 
-The original camera process remains unchanged. This wrapper observes the same
-inference results and adds preview text only. Visual cymbal motion is diagnostic;
-ST7 microphone events, not this overlay, decide whether a strike hit the cymbal.
-Detection messages sent to the arm controller are still produced by the original
-DetectionSender implementation.
+This wrapper accepts any directly observed stick tip in the pink zone, without
+ranking sticks by confidence. The preview and controller use the same selection.
+Visual cymbal motion is diagnostic; ST7 microphone events, not this overlay,
+decide whether a strike hit the cymbal. The standalone camera search is unchanged.
 """
 from __future__ import annotations
 
@@ -21,7 +20,7 @@ if str(X5_ROOT) not in sys.path:
 from camera_search import camera as base_camera
 from camera_search.vision import (
     cymbal_grid_geometry,
-    select_observed_stick,
+    valid_box,
     valid_point,
 )
 
@@ -140,10 +139,47 @@ def draw_box_change_status(preview, status: BoxChangeStatus, cv2,
     return preview
 
 
+def select_pink_zone_stick(detections):
+    """Any observed tip inside wins; an outside stick cannot veto it.
+
+    Confidence is never used to select a stick. If none is inside, use the tip
+    nearest the pink rectangle's center for the existing right-arm hill score.
+    With no cymbal, retain the first valid tip for detection readiness only.
+    """
+    candidates = [
+        detection for detection in detections
+        if detection.get("class_id") == 1
+        and valid_box(detection.get("box")) is not None
+        and valid_point(detection.get("tip")) is not None
+        and detection.get("tip_source") == "yolo_pose"
+        and detection.get("tip_status") == "observed"
+    ]
+    if not candidates:
+        return None
+    geometry = cymbal_grid_geometry(detections)
+    if geometry is None:
+        return candidates[0]
+    left, top, right, bottom = geometry["target"]
+    for stick in candidates:
+        x, y = valid_point(stick["tip"])
+        if left <= x <= right and top <= y <= bottom:
+            return stick
+
+    # Match the controller's normalized center-distance score. This is only
+    # needed when ALL observed tips are outside, never to reject an inside tip.
+    center_x, center_y = (left + right) / 2.0, (top + bottom) / 2.0
+    outer_left, outer_top, outer_right, outer_bottom = geometry["outer"]
+    width, height = outer_right - outer_left, outer_bottom - outer_top
+    return min(candidates, key=lambda stick: (
+        ((stick["tip"][0] - center_x) / width) ** 2
+        + ((stick["tip"][1] - center_y) / height) ** 2
+    ))
+
+
 def pink_zone_membership(detections) -> bool | None:
     """Return visible-pink membership for the same directly observed tip sent to control."""
     geometry = cymbal_grid_geometry(detections)
-    stick = select_observed_stick(detections)
+    stick = select_pink_zone_stick(detections)
     if geometry is None or stick is None:
         return None
     tip = valid_point(stick.get("tip"))
@@ -158,10 +194,10 @@ def pink_zone_status(detections):
     """Return the camera-preview text and color for visible pink-zone membership."""
     membership = pink_zone_membership(detections)
     if membership is True:
-        return "STICK TIP IN PINK ZONE: YES", PINK_INSIDE_COLOR
+        return "ANY STICK TIP IN PINK ZONE: YES", PINK_INSIDE_COLOR
     if membership is False:
-        return "STICK TIP IN PINK ZONE: NO", PINK_OUTSIDE_COLOR
-    return "STICK TIP IN PINK ZONE: UNKNOWN", PINK_UNKNOWN_COLOR
+        return "ANY STICK TIP IN PINK ZONE: NO", PINK_OUTSIDE_COLOR
+    return "ANY STICK TIP IN PINK ZONE: UNKNOWN", PINK_UNKNOWN_COLOR
 
 
 def draw_pink_zone_status(preview, detections, cv2):
@@ -181,6 +217,8 @@ _BaseDetectionSender = base_camera.DetectionSender
 
 
 class PlaybackDetectionSender(_BaseDetectionSender):
+    select_stick = staticmethod(select_pink_zone_stick)
+
     def frame(self, frame_id, captured_at, detections):
         _monitor.update(detections)
         return super().frame(frame_id, captured_at, detections)

@@ -1,0 +1,78 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 35; 35; 40
+    Fixed Frame: world
+    Frame Rate: 20
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.1
+      Plane Cell Count: 30
+    - Class: rviz_default_plugins/RobotModel
+      Name: Left arm encoder simulation
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+        Depth: 1
+      Visual Enabled: true
+      Collision Enabled: false
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        openarmx_right_link0:
+          Value: false
+        openarmx_right_link1:
+          Value: false
+        openarmx_right_link2:
+          Value: false
+        openarmx_right_link3:
+          Value: false
+        openarmx_right_link4:
+          Value: false
+        openarmx_right_link4_ext:
+          Value: false
+        openarmx_right_link5:
+          Value: false
+        openarmx_right_link6:
+          Value: false
+        openarmx_right_link7:
+          Value: false
+        openarmx_right_link7_pico:
+          Value: false
+        openarmx_right_hand:
+          Value: false
+        openarmx_right_hand_tcp:
+          Value: false
+        openarmx_right_left_finger:
+          Value: false
+        openarmx_right_right_finger:
+          Value: false
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 2.4
+      Pitch: 0.30
+      Yaw: -0.70
+      Focal Point:
+        X: 0.15
+        Y: 0.15
+        Z: 0.75
+Window Geometry:
+  Width: 1200
+  Height: 850

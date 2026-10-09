@@ -1,0 +1,72 @@
+{
+  "success": false,
+  "error": "RuntimeError: ENDPOINT SOFT HOLD: did not settle within 0.20 degrees; error=0.264",
+  "cleanup_error": "CANCEL HOLD: did not settle within 0.20 degrees; error=0.154",
+  "endpoint": null,
+  "gains_restored": false,
+  "original_gains": {
+    "1": 80.0,
+    "2": 80.0,
+    "3": 60.0,
+    "4": 60.0,
+    "5": 30.0,
+    "6": 30.0,
+    "7": 30.0
+  },
+  "method": {
+    "acceleration_continuous_into_hold": true,
+    "command_hz": 200,
+    "duration_s": 7.591406588629155,
+    "exact_first": true,
+    "exact_last": true,
+    "firmware_joint_speeds_rad_s": [
+      0.4,
+      0.4,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.4
+    ],
+    "firmware_speed_rad_s": 0.8,
+    "gaussian_sigma_s": 0.1,
+    "limits_rad": [
+      0.72,
+      1.5,
+      40.0
+    ],
+    "max_joint_deviation_deg": 1.2842536078087965,
+    "max_tcp_deviation_mm": 3.9090048918573657,
+    "name": "paced_precise",
+    "original_recording_duration_s": 6.075205,
+    "peak_acceleration_rad_s2": 0.7937752740430105,
+    "peak_piecewise_jerk_rad_s3": 15.81865291320067,
+    "peak_velocity_rad_s": 0.2663079464893924,
+    "position_gain_cap": 10.0,
+    "precise_endpoint": true,
+    "recording_duration_ratio": 1.2495720866422046,
+    "smoothing_search": [
+      {
+        "accepted": false,
+        "reason": "Joint corridor 1.8107 deg > 1.5 deg",
+        "sigma": 0.14
+      },
+      {
+        "accepted": true,
+        "sigma": 0.1
+      }
+    ],
+    "source_sha256": "f7481678e48b4296cb4517dba3ff6b400b3655cccb58fbd38b439345b481c268",
+    "time_scale": 1.2495720866422046
+  },
+  "transport": {
+    "left": {
+      "retries": 11032,
+      "maximum_wait_s": 0.0036866359878331423
+    },
+    "right": {
+      "retries": 0,
+      "maximum_wait_s": 0.0001415410079061985
+    }
+  }
+}

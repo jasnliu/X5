@@ -1,0 +1,60 @@
+RUN current mit normal record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+RUN reference mit normal record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+EXACT MATCH: mit_normal_record3 159 poses 343 frames
+RUN current csp normal record3
+PASS: csp 208 right movement frames; 159 poses; no physical devices
+RUN reference csp normal record3
+PASS: csp 208 right movement frames; 159 poses; no physical devices
+EXACT MATCH: csp_normal_record3 159 poses 208 frames
+RUN current mit feedback_fault record3
+PASS: mit 354 right movement frames; 158 poses; no physical devices
+RUN reference mit feedback_fault record3
+PASS: mit 354 right movement frames; 158 poses; no physical devices
+EXACT MATCH: mit_feedback_fault_record3 158 poses 354 frames
+RUN current csp feedback_fault record3
+PASS: csp 222 right movement frames; 158 poses; no physical devices
+RUN reference csp feedback_fault record3
+PASS: csp 222 right movement frames; 158 poses; no physical devices
+EXACT MATCH: csp_feedback_fault_record3 158 poses 222 frames
+RUN current mit send_fault record3
+PASS: mit 354 right movement frames; 158 poses; no physical devices
+RUN reference mit send_fault record3
+PASS: mit 354 right movement frames; 158 poses; no physical devices
+EXACT MATCH: mit_send_fault_record3 158 poses 354 frames
+RUN current csp send_fault record3
+PASS: csp 215 right movement frames; 159 poses; no physical devices
+RUN reference csp send_fault record3
+PASS: csp 215 right movement frames; 159 poses; no physical devices
+EXACT MATCH: csp_send_fault_record3 159 poses 215 frames
+RUN current mit jitter record3
+PASS: mit 311 right movement frames; 143 poses; no physical devices
+RUN reference mit jitter record3
+PASS: mit 311 right movement frames; 143 poses; no physical devices
+EXACT MATCH: mit_jitter_record3 143 poses 311 frames
+RUN current csp jitter record3
+PASS: csp 190 right movement frames; 143 poses; no physical devices
+RUN reference csp jitter record3
+PASS: csp 190 right movement frames; 143 poses; no physical devices
+EXACT MATCH: csp_jitter_record3 143 poses 190 frames
+RUN current mit post_strike record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+RUN reference mit post_strike record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+EXACT MATCH: mit_post_strike_record3 159 poses 343 frames
+RUN current mit deadline_fault record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+RUN reference mit deadline_fault record3
+PASS: mit 343 right movement frames; 159 poses; no physical devices
+EXACT MATCH: mit_deadline_fault_record3 159 poses 343 frames
+RUN current mit normal record1
+PASS: mit 102 right movement frames; 43 poses; no physical devices
+RUN reference mit normal record1
+PASS: mit 102 right movement frames; 43 poses; no physical devices
+EXACT MATCH: mit_normal_record1 43 poses 102 frames
+RUN current mit normal record2
+PASS: mit 253 right movement frames; 116 poses; no physical devices
+RUN reference mit normal record2
+PASS: mit 253 right movement frames; 116 poses; no physical devices
+EXACT MATCH: mit_normal_record2 116 poses 253 frames

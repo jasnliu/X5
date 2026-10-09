@@ -1,0 +1,551 @@
+..ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='129274801219648'>
+............ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+....................<Mock name='mock.get()' id='129274817338768'>
+<Mock name='mock.get()' id='129274793892928'>
+<Mock name='mock.get()' id='129274817335840'>
+<Mock name='mock.get()' id='129274793900704'>
+.....Camera: orbbec -> /dev/video4 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+.Camera: orbbec -> /dev/video14 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+........Camera: 2 -> /dev/video2
+.Camera: 2 -> /dev/video2 (Orbbec Gemini 2 RGB, full FOV, 1280x720)
+...................ST7 CYMBAL HIT DETECTED on J7 −6° attempt — selecting this first detected depth
+...........MIT strike complete: goal 1°, measured peak drop 1.100°, return overshoot 0.050°; encoder position stable — MIT remains enabled
+......MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 CSP powered-hold confirmation missing after rebound
+.HARDWARE-TEST POWERED WORKFLOW FAULT: healthy drives remain powered at their last commanded poses; workflow locked — processed camera detections became stale
+.MIT strike complete: goal 2°, measured peak drop 0.000°, return overshoot 0.000°; encoder position stable — MIT remains enabled
+....MIT HARDWARE-TEST HOLD FAULT: right arm remains powered at the pink-zone pose; strikes locked — J7 run-mode 5 readback missing during hardware test
+.PINK ZONE CONFIRMED ONCE (camera frame 44); holding the fixed pink-zone reference — arming MIT hold; the strike button becomes available after fresh encoder positions stabilize
+.......FAILED: playback ended; could not restore normal right-arm speed: CAN write failed
+.STALL FAULT: immediate right-arm relaxation — STALL: motor 7
+..HARDWARE-TEST ISOLATED MOTOR FAULT: motor 7 disabled in isolation; the other drives remain powered at their captured poses; workflow locked — Motor 7: CSP enable not confirmed after 3 attempts (run-mode readback=5, feedback operating state=0, encoder=20.000 deg)
+......................PINK ZONE CONFIRMED ONCE (camera frame 21); starting the J7 hit search at 5°, then increasing by 1°
+...ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+...................FAILED: test camera loss
+......DETECTED: drumstick + observed YOLO tip at actual Y=+0.000 m (active goal Y=+0.000, camera frame 12)
+..Skipped -Z: test seed is infeasible
+.FAILED: cymbal unavailable after gripper close
+.....FAULT: Position timeout — returning to customized right center before relaxing
+STALL FAULT: immediate right-arm relaxation — STALL: motor 3
+..........FAULT: Position timeout — returning to customized right center before relaxing
+FAULT: center command retry pending; motors remain enabled until centered or the user presses EMERGENCY RELAX — Position timeout; temporary CAN congestion
+..FAILED: no drumstick + tip detection; next Y=+0.020 m is outside right zone1
+....SUCCESS: drumstick tip held inside cymbal center cell for 2 seconds (confirmed by camera frame 51)
+...........ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+..ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+.........................................................DUAL ARM FAULT: left failure; Left playback settings not restored: unverified gains; powered hold, NOT relaxed
+....START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 8.147489909054581}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 690171.216303967, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.602993798092939, "tolerance_deg": 0.05}
+.....ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+....HI-HAT SOUND (visual only) #1: score=0.980; normality=81.0
+.............................HIHAT CALIBRATION: {"kind": "fault", "at": 690171.429399495, "phase": "WAITING", "angle": null, "detail": "Calibration cancelled; restart the program"}
+.HIHAT CALIBRATION: {"kind": "open", "at": 0.3, "phase": "INITIAL OPENING", "angle": null}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 1.0, "phase": "WAITING", "angle": null, "detail": "Hi-hat detector unavailable for startup calibration"}
+.HIHAT CALIBRATION: {"kind": "open", "at": 0.1, "phase": "INITIAL OPENING", "angle": null}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 3.2, "phase": "WAITING", "angle": null, "detail": "ESP32 calibration v2 status unavailable; install the updated X5 hi-hat firmware"}
+.HIHAT CALIBRATION: {"kind": "fault", "at": 91.0, "phase": "WAITING", "angle": null, "detail": "Hi-hat calibration startup timed out waiting for firmware or detector"}
+................ARM WAIT: hi-hat calibration must finish before ride calibration
+...ARM WAIT: hi-hat calibration must finish before ride calibration
+.............................<Mock name='mock.get()' id='129274807217920'>
+.HIHAT SYNC: {"kind": "fault", "at": 10.0, "detail": "Ride status stale; cancelling future hi-hat edges"}
+.....................<Mock name='mock.get()' id='129274794779680'>
+.<Mock name='mock.get()' id='129274794777280'>
+..<Mock name='mock.get()' id='129274794779680'>
+.HYBRID search −5°: measured peak 5.000°; returned and settled
+.HYBRID swing 1 (pickup): target 5°; arrival error +0.0 ms; partial returns 0
+HYBRID swing 2 (beat 1): target 5°; arrival error +0.0 ms; partial returns 0
+..HYBRID J7: experiment hardware tuning; kick 0.3 Nm / 40 ms; 500 Hz; search 5° through 12°; hard corridor 13°; fixed camera anchor; 100 BPM swing permits partial returns after 4° rebound
+.ST7 HIT NOT SELECTED: {"reason": "onset follows this completed return", "phase": "STRIKE MOVING OUT", "onset": 10.6, "detected_at": null, "release": 10.0, "returned": 10.4}
+.<Mock name='mock.get()' id='129274796040912'>
+.ST7 HIT NOT SELECTED: {"reason": "no active released search (swing hits are informational)", "phase": "STRIKE WAITING FOR SOUND", "onset": 10.2, "detected_at": null, "release": null, "returned": null}
+.ST7 HIT NOT SELECTED: {"reason": "onset precedes this release", "phase": "STRIKE MOVING OUT", "onset": 9.0, "detected_at": null, "release": 10.0, "returned": null}
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+HYBRID search −5°: measured peak 4.000°; returned and settled
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='129274800936128'>
+.<Mock name='mock.get()' id='129274226475808'>
+.<Mock name='mock.get()' id='129274226476048'>
+................<Mock name='mock.get()' id='129274226485024'>
+...................................................................CLOSE REQUEST: center then exit; repeat Ctrl-C for emergency disable; 35 s deadline
+.......MAJOR FAULT EMERGENCY RELAX: STALL: motor 4
+..CENTER VERIFIED BEFORE RELAX: {"t": 690187.987318597, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 690187.989563566, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.CENTER VERIFIED BEFORE RELAX: {"t": 690187.990939369, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "actual_rad": [0, 0, 0, 0, 0, 0, 0], "max_error_deg": 0.0, "span_deg": 0.0, "settled_s": 0.6400000000139698}
+.............EEE.EEEEFEEEEE..E.EEFFE.....RECORDING PREFLIGHT FAILED: invalid recording
+......EMERGENCY calibration cleanup: log closed
+EMERGENCY hi-hat release unconfirmed: disconnected
+EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+.<Mock name='mock.get()' id='129274226486560'>
+.EMERGENCY RELAX REQUEST: Operator emergency stop; restart required
+.EMERGENCY RELAX REQUEST: Shutdown deadline: emergency disable attempt; restart required
+Exiting after emergency disable attempt; if disable is unconfirmed, USE PHYSICAL POWER CUTOFF
+.CLOSE REQUEST: center then exit; repeat Ctrl-C for emergency disable; 35 s deadline
+EMERGENCY RELAX REQUEST: Repeated close/Ctrl-C: emergency shutdown; restart required
+.EMERGENCY RELAX REQUEST: MAJOR FAULT: STALL: motor 7; restart required
+...DUAL ARM FAULT: injected arm-return interruption; powered hold, NOT relaxed
+.HI-HAT CALIBRATION FAULT: Calibrated ESP32 status became stale; arm centering continues under arm safety checks
+.HIHAT CALIBRATION: {"kind": "fault", "at": 1.501, "phase": "READY", "angle": null, "detail": "Calibrated ESP32 status became stale"}
+HI-HAT CALIBRATION FAULT: Calibrated ESP32 status became stale; arm centering continues under arm safety checks
+..RIDE SWING DEPTH: detected 10° + 0.5° = 10.5°
+<Mock name='mock.get()' id='129274795200576'>
+.RIDE SWING DEPTH: detected 12° + 0.5° = 12.5°
+<Mock name='mock.get()' id='129274166966032'>
+.......<Mock name='mock.get()' id='129274166289152'>
+..................................ONE RUN: center and gripper closure confirmed; starting recording without a loading pause
+............Smooth playback settings handoff failed: readback failed
+......START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "Cancelled: Recording worker stopped; returning control to the existing GUI workflow"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ERROR {"error": "RuntimeError: Recording GUI heartbeat lost"}
+CANCEL HOLD 
+.ERROR {"error": "RuntimeError: Recording worker requires existing CSP mode"}
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ERROR {"error": "RuntimeError: Injected gain restoration failure"}
+CANCEL HOLD 
+.START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 4.8}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 690259.858677932, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6015944499522448, "tolerance_deg": 0.05}
+..ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+...ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+Hi-hat sound monitor unavailable (required for normal hardware calibration): missing optional hi-hat
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+.............................usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: --fast requires --headless simulation
+...........................usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth must be a finite number from 0.5 to 30 degrees
+usage: python3 -m unittest [-h] [--hardware | --simulate]
+                           [--method {all,baseline,gravity,variable_damping,powered,cosine,torque,hybrid,impedance,optimized}]
+                           [--headless] [--no-rviz] [--no-motion-notification]
+                           [--fast] [--auto-run] [--exit-after-batch]
+                           [--degrees DEGREES] [--repetitions REPETITIONS]
+                           [--interval INTERVAL] [--campaign] [--jobs JOBS]
+                           [--stage {screen,refine,validate,all}]
+                           [--config CONFIG] [--output OUTPUT]
+                           [--list-methods] [--rescore RESCORE]
+python3 -m unittest: error: Strike depth plus tolerance must be below the 12° motion limit
+...............................
+======================================================================
+ERROR: test_all_geometry_settings_and_versions_invalidate (test_recording_cache.RecordingCacheTests.test_all_geometry_settings_and_versions_invalidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 163, in test_all_geometry_settings_and_versions_invalidate
+    before = self.key()
+             ^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_atomic_write_failure_keeps_previous_entry_and_cleans_temp (test_recording_cache.RecordingCacheTests.test_atomic_write_failure_keeps_previous_entry_and_cleans_temp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 285, in test_atomic_write_failure_keeps_previous_entry_and_cleans_temp
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_background_worker_uses_cache_without_changing_queue_contract (test_recording_cache.RecordingCacheTests.test_background_worker_uses_cache_without_changing_queue_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 300, in test_background_worker_uses_cache_without_changing_queue_contract
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_cache_survives_fresh_python_process (test_recording_cache.RecordingCacheTests.test_cache_survives_fresh_python_process)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 117, in test_cache_survives_fresh_python_process
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_changed_code_after_restart_gets_new_key (test_recording_cache.RecordingCacheTests.test_changed_code_after_restart_gets_new_key)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 213, in test_changed_code_after_restart_gets_new_key
+    before = self.key()
+             ^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_changed_contents_same_size_and_mtime_cannot_inherit_pass (test_recording_cache.RecordingCacheTests.test_changed_contents_same_size_and_mtime_cannot_inherit_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 149, in test_changed_contents_same_size_and_mtime_cannot_inherit_pass
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_changed_setting_runs_original_loader_not_cached_result (test_recording_cache.RecordingCacheTests.test_changed_setting_runs_original_loader_not_cached_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 196, in test_changed_setting_runs_original_loader_not_cached_result
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_corrupt_stale_and_incomplete_entries_fall_back (test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) (damage='truncate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 221, in test_corrupt_stale_and_incomplete_entries_fall_back
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_corrupt_stale_and_incomplete_entries_fall_back (test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) (damage='checksum')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 221, in test_corrupt_stale_and_incomplete_entries_fall_back
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_corrupt_stale_and_incomplete_entries_fall_back (test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) (damage='key')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 221, in test_corrupt_stale_and_incomplete_entries_fall_back
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_corrupt_stale_and_incomplete_entries_fall_back (test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) (damage='format')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 221, in test_corrupt_stale_and_incomplete_entries_fall_back
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_corrupt_stale_and_incomplete_entries_fall_back (test_recording_cache.RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back) (damage='structure')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 221, in test_corrupt_stale_and_incomplete_entries_fall_back
+    path = self.seed()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_inputs_changed_during_cache_read_force_original_preflight (test_recording_cache.RecordingCacheTests.test_inputs_changed_during_cache_read_force_original_preflight)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 264, in test_inputs_changed_during_cache_read_force_original_preflight
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_live_code_edit_disables_cache_until_restart (test_recording_cache.RecordingCacheTests.test_live_code_edit_disables_cache_until_restart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 204, in test_live_code_edit_disables_cache_until_restart
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_simulation_and_hardware_caches_are_separate_and_exact (test_recording_cache.RecordingCacheTests.test_simulation_and_hardware_caches_are_separate_and_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 139, in test_simulation_and_hardware_caches_are_separate_and_exact
+    self.seed('smooth')
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+ERROR: test_source_missing_or_renamed_non_json_still_runs_original_errors (test_recording_cache.RecordingCacheTests.test_source_missing_or_renamed_non_json_still_runs_original_errors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 274, in test_source_missing_or_renamed_non_json_still_runs_original_errors
+    self.seed()
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 57, in seed
+    key = self.key(kind)
+          ^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 53, in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 134, in _fingerprint
+    raise ValueError('Code changed since import')
+ValueError: Code changed since import
+
+======================================================================
+FAIL: test_cold_runs_exact_loader_then_hit_restores_exact_result (test_recording_cache.RecordingCacheTests.test_cold_runs_exact_loader_then_hit_restores_exact_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 106, in test_cold_runs_exact_loader_then_hit_restores_exact_result
+    self.assertEqual(len(list(self.cache_dir.glob('*.json'))), 1)
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_single_frame_and_stationary_roundtrip_preserve_shapes (test_recording_cache.RecordingCacheTests.test_single_frame_and_stationary_roundtrip_preserve_shapes) (count=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 322, in test_single_frame_and_stationary_roundtrip_preserve_shapes
+    warm = self.load()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 63, in load
+    return cache.load_cached_smooth_recording(*self.args, cache_dir=self.cache_dir, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 257, in load_cached_smooth_recording
+    return _load('smooth', smooth_recording.load_smooth_recording, path, model,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 244, in _load
+    result = loader(*args, playback_speed=playback_speed, progress=progress,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1193, in _execute_mock_call
+    raise effect
+AssertionError: must hit cache
+
+======================================================================
+FAIL: test_single_frame_and_stationary_roundtrip_preserve_shapes (test_recording_cache.RecordingCacheTests.test_single_frame_and_stationary_roundtrip_preserve_shapes) (count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 322, in test_single_frame_and_stationary_roundtrip_preserve_shapes
+    warm = self.load()
+           ^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/tests/test_recording_cache.py", line 63, in load
+    return cache.load_cached_smooth_recording(*self.args, cache_dir=self.cache_dir, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 257, in load_cached_smooth_recording
+    return _load('smooth', smooth_recording.load_smooth_recording, path, model,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/camera_playback/recording_cache.py", line 244, in _load
+    result = loader(*args, playback_speed=playback_speed, progress=progress,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1193, in _execute_mock_call
+    raise effect
+AssertionError: must hit cache
+
+----------------------------------------------------------------------
+Ran 680 tests in 181.275s
+
+FAILED (failures=3, errors=16)

@@ -15,12 +15,24 @@ from .config import ROOT, Plant, center_pose, joint_limits
 class SimBackend:
     name = 'simulation'
 
-    def __init__(self, plant=Plant(), realtime=False, playback=None):
+    def __init__(self, plant=Plant(), realtime=False, playback=None, anchor=None,
+                 rest_pose=None, strike_index=6):
         self.plant, self.realtime = plant, realtime
         # Runtime supplies record3. None keeps the isolated synthetic plant
         # usable in unit tests without a recording or wall-clock preparation.
         self.playback=playback
-        self.anchor = center_pose()[6]
+        # Additive, backward-compatible: omitted, these reproduce today's
+        # right-arm record3 behavior exactly (strike_lab.config.center_pose,
+        # J7 = array index 6, the default). A caller simulating a different
+        # arm/strike joint (e.g. snare_lab's left-J6 backend, strike_index=5)
+        # supplies all three instead. Any sign convention (a strike joint
+        # where "struck" is an increasing rather than decreasing value) is
+        # the caller's concern, applied to `anchor`/`playback` before they
+        # reach here and undone when reading `positions` back out -- this
+        # class only ever does `anchor - amount` arithmetic, unchanged.
+        self._rest_pose = center_pose if rest_pose is None else (lambda: list(rest_pose))
+        self._strike_index = strike_index
+        self.anchor = self._rest_pose()[strike_index] if anchor is None else float(anchor)
         self.time = 1.
         self.q, self.v = self.anchor, 0.
         self.torque = plant.gravity
@@ -33,7 +45,8 @@ class SimBackend:
     def now(self):return self.time
 
     def prepare(self, stop, publish):
-        start=list(self.positions);target=center_pose();target[6]=self.anchor
+        si=self._strike_index
+        start=list(self.positions);target=self._rest_pose();target[si]=self.anchor
         for i in range(1,41):
             if stop.is_set():raise InterruptedError('Stopped during simulated setup')
             self.positions=[a+(b-a)*i/40 for a,b in zip(start,target)]
@@ -56,7 +69,7 @@ class SimBackend:
                 if done:break
                 dt=min(.02,self.playback.duration_s-elapsed);elapsed+=dt
                 if self.realtime:time.sleep(dt)
-            self.anchor=float(self.playback.last_joints[6])
+            self.anchor=float(self.playback.last_joints[si])
             publish(dict(phase='HOLDING RECORD3 END',positions=self.positions,anchor=self.anchor,gripper_deg=7.))
         self.q,self.v=self.anchor,0.;self.pending=[];self.enabled=True
         self.command=Command(self.anchor,0,40,1.8,self.plant.gravity)
@@ -81,7 +94,7 @@ class SimBackend:
         q=round(self.q/self.plant.encoder_step)*self.plant.encoder_step if self.plant.encoder_step else self.q
         v=round(self.v/(66/65535))*(66/65535)
         self.sample=Sample(q,v,self.torque,2,self.time)
-        self.positions[6]=q
+        self.positions[self._strike_index]=q
 
     def receive(self):return self.sample
     def relax(self):self.enabled=False

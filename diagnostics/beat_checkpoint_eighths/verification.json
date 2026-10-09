@@ -1,0 +1,141 @@
+{
+  "evidence": "offline simulation only; physical devices prohibited",
+  "snare": {
+    "degrees": 11.0,
+    "down_s": 0.14746334353659105,
+    "return_s": 0.22000000000000003,
+    "settle_s": 0.04,
+    "minimum_hit_spacing_s": 0.437463343536591,
+    "tempos": [
+      {
+        "bpm": 20,
+        "bars": 2000,
+        "one_hit_bars": 991,
+        "two_hit_bars": 1009,
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "minimum_scheduled_spacing_s": 1.5
+      },
+      {
+        "bpm": 60,
+        "bars": 2000,
+        "one_hit_bars": 991,
+        "two_hit_bars": 1009,
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "minimum_scheduled_spacing_s": 0.5
+      },
+      {
+        "bpm": 68,
+        "bars": 2000,
+        "one_hit_bars": 991,
+        "two_hit_bars": 1009,
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "minimum_scheduled_spacing_s": 0.4411764705873793
+      },
+      {
+        "bpm": 100,
+        "bars": 2000,
+        "one_hit_bars": 997,
+        "two_hit_bars": 1003,
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "minimum_scheduled_spacing_s": 0.5999999999994543
+      },
+      {
+        "bpm": 120,
+        "bars": 2000,
+        "one_hit_bars": 997,
+        "two_hit_bars": 1003,
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "minimum_scheduled_spacing_s": 0.5
+      }
+    ]
+  },
+  "hihat": [
+    {
+      "scenario": "late",
+      "lock": {
+        "kind": "locked",
+        "at": 18.752000000000002,
+        "index": 11,
+        "advance": 0.1349999999999998,
+        "advance_ms": 134.99999999999977,
+        "tolerance_ms": 15.0,
+        "consecutive_matches": 2
+      },
+      "commands_after_lock": 79,
+      "constant_offset_after_lock": true
+    },
+    {
+      "scenario": "early",
+      "lock": {
+        "kind": "locked",
+        "at": 17.152,
+        "index": 9,
+        "advance": -0.08000000000000007,
+        "advance_ms": -80.00000000000007,
+        "tolerance_ms": 15.0,
+        "consecutive_matches": 2
+      },
+      "commands_after_lock": 81,
+      "constant_offset_after_lock": true
+    },
+    {
+      "scenario": "delayed_delivery",
+      "lock": {
+        "kind": "locked",
+        "at": 21.252000000000002,
+        "index": 13,
+        "advance": 0.09999999999999964,
+        "advance_ms": 99.99999999999964,
+        "tolerance_ms": 15.0,
+        "consecutive_matches": 2
+      },
+      "commands_after_lock": 75,
+      "constant_offset_after_lock": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+test_app_run_blocked_without_left_pass_and_return_hook_is_dual (tests.test_dual_recording.DualRecordingTests.test_app_run_blocked_without_left_pass_and_return_hook_is_dual) ... ok
+test_center_dispatches_both_then_relaxes_each_only_at_own_center (tests.test_dual_recording.DualRecordingTests.test_center_dispatches_both_then_relaxes_each_only_at_own_center) ... ok
+test_defaults_and_left_schema_are_correct (tests.test_dual_recording.DualRecordingTests.test_defaults_and_left_schema_are_correct) ... ok
+test_failed_left_worker_never_starts_right (tests.test_dual_recording.DualRecordingTests.test_failed_left_worker_never_starts_right) ... ok
+test_left_cache_is_exact_and_cannot_accept_right_recording (tests.test_dual_recording.DualRecordingTests.test_left_cache_is_exact_and_cannot_accept_right_recording) ... ok
+test_left_plays_first_gripper_fixed_right_waits_then_endpoint_holds (tests.test_dual_recording.DualRecordingTests.test_left_plays_first_gripper_fixed_right_waits_then_endpoint_holds) ... ok
+test_per_side_disable_does_not_release_other_arm (tests.test_dual_recording.DualRecordingTests.test_per_side_disable_does_not_release_other_arm) ... ok
+test_spawned_left_worker_exact_endpoint_restored_gains_no_other_commands (tests.test_dual_recording.DualRecordingTests.test_spawned_left_worker_exact_endpoint_restored_gains_no_other_commands) ... START HOLD 
+TEMPORARY POSITION GAINS 
+PLAYBACK {"duration_s": 8.147489909054581}
+ENDPOINT SOFT HOLD 
+ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+ENDPOINT HOLD 
+ENDPOINT VERIFIED {"t": 681631.273285678, "goal_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "actual_rad": [-0.013234607461662051, -0.12524925612268234, -0.2813792629892422, 0.07269443808651843, -0.8587150377660784, 0.018221560997940145, -1.1602339208056751], "max_error_deg": 0.0, "settle_range_deg": 0.0, "settled_seconds": 0.6010859910165891, "tolerance_deg": 0.05}
+ok
+test_stop_joins_left_worker_before_center_targets (tests.test_dual_recording.DualRecordingTests.test_stop_joins_left_worker_before_center_targets) ... ok
+test_worker_only_writes_selected_left_joints_never_gripper_or_other_arm (tests.test_dual_recording.DualRecordingTests.test_worker_only_writes_selected_left_joints_never_gripper_or_other_arm) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 29.785s
+
+OK

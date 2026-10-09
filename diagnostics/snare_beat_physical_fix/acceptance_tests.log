@@ -1,0 +1,42 @@
+.FF.....................                                                 [100%]
+=================================== FAILURES ===================================
+___ PlaybackEvidenceTests.test_failure_is_preserved_and_does_not_force_relax ___
+
+self = <test_playback_evidence.PlaybackEvidenceTests testMethod=test_failure_is_preserved_and_does_not_force_relax>
+
+    def test_failure_is_preserved_and_does_not_force_relax(self):
+        with tempfile.TemporaryDirectory() as p:
+            a,e=self.fixture(p);a.bus.active=True;a.phase='LEFT RECORDING PLAYBACK'
+            a.fail('queue fault');e.tick()
+            self.assertEqual(e.faults[0]['message'],'queue fault')
+>           a.bus.disable_centered_side.assert_not_called()
+E           AttributeError: 'function' object has no attribute 'assert_not_called'
+
+tests/test_playback_evidence.py:69: AttributeError
+----------------------------- Captured stdout call -----------------------------
+PHYSICAL PLAYBACK EVIDENCE: /tmp/tmpiwnmquo8/playback_results/dual_playback_verification/20261008T033010-a04bc1dd
+PLAYBACK VERIFY FAULT: {"at": 770357.95971824, "source": "fail", "phase": "LEFT RECORDING PLAYBACK", "message": "queue fault", "traceback": "NoneType: None\n"}
+PLAYBACK VERIFY PHASE: {"at": 770357.959878697, "phase": "LEFT RECORDING PLAYBACK", "status": "Both disabled"}
+_ PlaybackEvidenceTests.test_left_return_fault_is_recorded_even_without_app_fail_callback _
+
+self = <test_playback_evidence.PlaybackEvidenceTests testMethod=test_left_return_fault_is_recorded_even_without_app_fail_callback>
+
+    def test_left_return_fault_is_recorded_even_without_app_fail_callback(self):
+        with tempfile.TemporaryDirectory() as p:
+            a,e=self.fixture(p);a.phase='CENTER RELAX RECENTERING';a.bus.active=True
+            a.dual.left_return=SimpleNamespace(failure='Joint limit violation')
+            e.tick();self.assertEqual(e.faults[0]['source'],'LeftReturn')
+            self.assertFalse(self.result(e)['success'])
+            a.request_safe_close.assert_not_called()
+>           a.bus.disable_centered_side.assert_not_called()
+E           AttributeError: 'function' object has no attribute 'assert_not_called'
+
+tests/test_playback_evidence.py:54: AttributeError
+----------------------------- Captured stdout call -----------------------------
+PHYSICAL PLAYBACK EVIDENCE: /tmp/tmpr93pclfo/playback_results/dual_playback_verification/20261008T033010-105f1fe2
+PLAYBACK VERIFY FAULT: {"at": 770357.993067886, "source": "LeftReturn", "phase": "CENTER RELAX RECENTERING", "message": "Joint limit violation"}
+PLAYBACK VERIFY PHASE: {"at": 770357.993067886, "phase": "CENTER RELAX RECENTERING", "status": "Both disabled"}
+=========================== short test summary info ============================
+FAILED tests/test_playback_evidence.py::PlaybackEvidenceTests::test_failure_is_preserved_and_does_not_force_relax
+FAILED tests/test_playback_evidence.py::PlaybackEvidenceTests::test_left_return_fault_is_recorded_even_without_app_fail_callback
+2 failed, 22 passed in 25.62s

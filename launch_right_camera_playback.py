@@ -31,7 +31,7 @@ def parse_args():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
         "--hardware", action="store_true",
-        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, 100 BPM swing (camera/TONOR/ESP32)",
+        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, editable BPM swing (default 100; camera/TONOR/ESP32)",
     )
     mode.add_argument(
         "--test", action="store_true",
@@ -45,9 +45,11 @@ def parse_args():
               "damped J7 freefall, predictive catch and smooth MIT return per press (no ESP32)"),
     )
     parser.add_argument(
-        "--recording", type=Path, default=ROOT / "recordings/record1.json",
-        help="right-arm recording (default: recordings/record1.json)",
+        "--recording", type=Path, default=ROOT / "recordings/record3.json",
+        help="right-arm recording (default: recordings/record3.json)",
     )
+    parser.add_argument("--left-recording", type=Path, default=ROOT / "left_recordings/record1.json",
+                        help="left recording, played before right (normal beat/test/preview)")
     camera_choice = parser.add_mutually_exclusive_group()
     add_camera_argument(camera_choice)
     camera_choice.add_argument('--select-camera', action='store_true',
@@ -58,6 +60,8 @@ def parse_args():
                         help="physical no-strike test: recording, verified center, then relax; never align or strike")
     parser.add_argument("--auto-run", action="store_true",
                         help="requires --recording-only: Run automatically, close gripper after 5 s loading pause, exit after safe relax")
+    parser.add_argument('--verify-playback', action='store_true',
+                        help='AUTHORIZED MOTION: normal dual-arm Run, skip beat, verify both recordings and centered relax')
     parser.add_argument('--verify-swing', action='store_true',
                         help='AUTHORIZED MOTION: auto RUN, verify 5 s physical swing, center/relax, save evidence')
     parser.add_argument("--model", type=Path, default=None)
@@ -101,6 +105,8 @@ def parse_args():
         parser.error("--recording-only requires --hardware or --hardwaretest")
     if args.auto_run and not args.recording_only:
         parser.error("--auto-run requires --recording-only")
+    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
+        parser.error('--verify-playback requires normal --hardware and no other verification mode')
     if args.verify_swing and (not args.hardware or args.recording_only):
         parser.error('--verify-swing requires normal --hardware')
     if not args.hardwaretest and any(getattr(args, name) is not None for name in (
@@ -166,12 +172,15 @@ if args.hardwaretest:
     for flag in ("mit-fall-kd", "mit-inertia", "mit-brake-accel", "mit-latency-ms"):
         optional(app_command, "--" + flag, getattr(args, flag.replace("-", "_")))
 optional(app_command, "--recording", args.recording)
+optional(app_command, "--left-recording", args.left_recording)
 if args.recording_only:
     app_command.append("--recording-only")
 if args.auto_run:
     app_command.append("--auto-run")
 if args.verify_swing:
     app_command.append('--verify-swing')
+if args.verify_playback:
+    app_command.append('--verify-playback')
 camera_command = [
     str(venv_python), str(ROOT / "camera_playback/camera.py"),
     "--socket", str(socket_path), "--root", str(Y2),
