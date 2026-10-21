@@ -1,4 +1,4 @@
-# ESP32 hi-hat firmware used by right camera playback
+# ESP32 hi-hat and bass-drum firmware used by camera playback
 
 This is the proven `motor_beat` firmware copied from
 `/home/jason/Proyectos3/esp-main`. The integrated host is now
@@ -21,6 +21,9 @@ The protocol is:
 - `B`: motor 2 closes to and holds the acknowledged calibrated angle;
 - `C` or `J`: legacy fixed **100-degree** closure (unchanged for collectors/keyboard);
 - `O`: motor 2 returns to encoder zero, then releases;
+- `K`: motor 1 bass strike, clockwise **PWM 180/255 at 20 kHz for 50 ms**,
+  then both enable pins go LOW and the motor coasts/releases. This is the exact
+  `esp-main/run_keys.sh` F-key strike, unchanged in this firmware;
 - `Q`: read protocol bounds, configured angle, encoder position, active target,
   released state, zero-return arrival latch (`opened`) and fault state, with no motion;
 - `H`: 100 ms watchdog heartbeat;
@@ -28,8 +31,19 @@ The protocol is:
 
 The beat program sends `O` on beats 1/3 and `B` on beats 2/4, shifted together
 by its automatically tuned hi-hat advance. This changes timing, not the learned
-rotation. The host never sends `K`; firmware motor 1 is
-replaced rhythmically by right-arm joint 7 and remains released.
+rotation. During normal hardware swing, the host also sends `K` on **every
+quarter note (1, 2, 3, 4)** at the user's BPM. Bass starts at beat 1 after the
+ride pickup, never during calibration or on pickup/triplet extras. It has no
+calibration or timing offset and does not inherit the hi-hat advance. Right-arm
+joint 7 continues to play the ride cymbal. Both motors share the existing
+serial owner; no second port or host-side pulse timer is needed.
+
+Normal stop cancels future kicks and returns motor 2 to zero; any current bass
+pulse ends automatically after 50 ms. Emergency Relax/exit sends `S`, releasing
+both motors. Late commands trigger controlled stop rather than catch-up hits.
+Collectors, simulation, manual hardware-test and recording-only modes do not
+add bass strikes. Existing X5 calibration-v2 firmware already supports this
+unchanged `K` pulse, so the bass addition itself requires no reflash.
 
 All calibrated angle commands are bounded to **90..115°** in firmware and host.
 Travel retains encoder quantization and closed-loop tolerance; 115° is the

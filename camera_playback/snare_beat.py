@@ -20,7 +20,8 @@ import time
 
 from .mit_center_return import MitCenterReturn
 from .mit_strike import Command, Joint7Session, Joint7Worker, Status, StrikeSettings
-from .tempo import parse_bpm
+from .tempo import parse_bpm, SYNC_PERIOD
+from .hihat_sync import MAX_ADVANCE, CALIBRATION_MAX_STEP
 from snare_lab.motion import build_method, stroke_timeout
 from strike_lab.engine import StableWindow, limit_command
 
@@ -29,6 +30,12 @@ SNARE_DEGREES = 11.
 # Also allow the opening pickup to establish beat 1 before descent starts.
 MAX_SNARE_BPM = 120.
 MAX_RELEASE_LATENESS = .020
+# Left J6's path/hold load estimator must not wind up against static friction.
+# Keep the right-J7 default and the powered strike's own controller unchanged.
+PATH_BIAS_GAIN = 40.
+# Precision path/hold only: damp static-friction breakaway while retaining the
+# same 3 Nm net-torque cap, .35 rad/s speed and .6 rad/s^2 acceleration bounds.
+PATH_KP, PATH_KD = 160., 4.
 
 
 def minimum_hit_spacing(method, rules):
@@ -52,7 +59,7 @@ class MeasureGrid:
     Choose 1 or 2 with equal probability, then uniformly choose a feasible
     combination. Never shorten the stroke, shift notes late, or omit a bar.
     """
-    def __init__(self, epoch, period, rng=None, *, minimum_spacing=0.):
+    def __init__(self, epoch, period, rng=None, *, minimum_spacing=0., earliest_at=None):
         if not all(math.isfinite(x) for x in (epoch, period)) or period <= 0:
             raise ValueError('Invalid snare beat clock')
         if not math.isfinite(minimum_spacing) or minimum_spacing < 0:
@@ -60,6 +67,7 @@ class MeasureGrid:
         self.epoch, self.period = epoch, period
         self.rng = rng or random.Random()
         self.minimum_spacing = minimum_spacing
+        self.earliest_at = earliest_at
         self.last_at = None
         self.measure = 0
         self._choose_measure()
@@ -70,7 +78,8 @@ class MeasureGrid:
     def _choose_measure(self):
         count = self.rng.randrange(2) + 1
         choices = [notes for notes in combinations(range(1, 9), count)
-                   if (self.last_at is None or
+                   if (self.earliest_at is None or self._time(notes[0]) >= self.earliest_at-1e-9)
+                   and (self.last_at is None or
                        self._time(notes[0])-self.last_at >= self.minimum_spacing-1e-9)
                    and all((b-a)*self.period/2 >= self.minimum_spacing-1e-9
                            for a, b in zip(notes, notes[1:]))]
@@ -96,6 +105,20 @@ class MeasureGrid:
             self._choose_measure()
 
 
+class CalibrationGrid:
+    """Read-only ride quarter-note anchor; no random notes during calibration."""
+    def __init__(self, epoch):
+        self.epoch, self.index = epoch, 0
+
+    @property
+    def at(self): return self.epoch+self.index*SYNC_PERIOD
+    @property
+    def beat(self): return self.index % 4+1
+    @property
+    def measure(self): return self.index//4
+    def advance(self): self.index += 1
+
+
 @dataclass(frozen=True)
 class SnareStatus(Status):
     at: float = 0.
@@ -107,6 +130,9 @@ class SnareStatus(Status):
     released_at: float | None = None
     scheduled_at: float | None = None
     queue_retries: int = 0
+    strike_index: int = 0
+    advance: float = 0.
+    calibrating: bool = False
 
 
 class SnareController:
@@ -114,7 +140,8 @@ class SnareController:
     def __init__(self, template, rules, limits, lower, upper, initial, now, rng=None):
         self.template, self.rules, self.limits = template, rules, limits
         self.anchor, self.lower, self.upper = template.anchor, lower, upper
-        self.path = MitCenterReturn(initial, initial, 0., now)
+        self.path = MitCenterReturn(initial, initial, 0., now, bias_gain=PATH_BIAS_GAIN,
+                                    kp=PATH_KP, kd=PATH_KD)
         self.window = StableWindow(self.anchor, rules)
         self.method = self.grid = None
         self.rng = rng
@@ -122,12 +149,30 @@ class SnareController:
         self.last_torque = 0.
         self.status = SnareStatus(armed=True)
 
-    def start(self, epoch, period):
+    def start(self, epoch, period, *, advance=0., calibration=False):
         validate_tempo(60./period, self.template, self.rules)
+        if not math.isfinite(epoch) or not math.isfinite(advance) or abs(advance) > MAX_ADVANCE:
+            raise ValueError('Invalid snare offset/epoch')
+        if calibration and abs(period-SYNC_PERIOD) > 1e-9:
+            raise ValueError('Snare calibration must run at 80 BPM')
         if self.grid is not None or self.method is not None:
             raise RuntimeError('Snare sequence already active')
-        self.grid = MeasureGrid(epoch, period, self.rng,
-                                minimum_spacing=minimum_hit_spacing(self.template, self.rules))
+        self.advance = self.scheduled_advance = advance
+        self.period, self.calibrating = period, calibration
+        self.status = replace(self.status, strike_index=0, calibrating=calibration)
+        self.grid = (CalibrationGrid(epoch) if calibration else
+                     MeasureGrid(epoch, period, self.rng,
+                         minimum_spacing=minimum_hit_spacing(self.template, self.rules),
+                         # Pickup establishes epoch only one triplet before beat 1.
+                         # Restrict the first bar's choices if a positive advance
+                         # makes its first note impossible; never issue a late hit.
+                         earliest_at=epoch-period/3+self.template.curve.down+advance+.010))
+
+    def set_advance(self, advance):
+        if not math.isfinite(advance) or abs(advance) > MAX_ADVANCE:
+            raise ValueError('Invalid snare calibration offset')
+        if self.grid is not None and self.calibrating:
+            self.advance = advance  # The already scheduled release is immutable.
 
     def finish(self):
         # Cancel FUTURE hits immediately; finish the current full return.
@@ -154,7 +199,7 @@ class SnareController:
         if grid is not None:
             if abs(-displayed_goal-self.anchor) > 1e-6:
                 raise RuntimeError('Left path moved while snare beat was active')
-            release_at = grid.at-self.template.curve.down
+            release_at = grid.at-self.template.curve.down-self.scheduled_advance
             if now >= release_at:
                 if now-release_at > MAX_RELEASE_LATENESS:
                     raise RuntimeError('Snare missed beat deadline; no catch-up hit')
@@ -168,12 +213,21 @@ class SnareController:
                     self.last_torque = self.path.bias
                     self.last_send = None
                     self.status = replace(self.status, measure=grid.measure+1, beat=grid.beat,
-                        released_at=now, scheduled_at=grid.at, peak_drop=0.)
+                        released_at=now, scheduled_at=grid.at, peak_drop=0.,
+                        strike_index=self.status.strike_index+1, advance=self.scheduled_advance)
                     grid.advance()
+                    if self.calibrating:
+                        step = min(CALIBRATION_MAX_STEP,
+                                   self.period-minimum_hit_spacing(self.template, self.rules))
+                        self.scheduled_advance += max(-step, min(step, self.advance-self.scheduled_advance))
         method = self.method
         if method is None:
             self.path.goal = -displayed_goal
-            command = self.path.update(sample.position, now)
+            # At 500 Hz, differencing quantized positions by the command-loop
+            # interval aliases repeated/delayed CAN replies into false speeds.
+            # Use the drive's same-sample velocity for idle/path load estimation
+            # and torque limiting. The powered strike reference is untouched.
+            command = self.path.update(sample.position, now, measured_velocity=sample.velocity)
             phase = 'powered path/hold'
         else:
             depth = math.degrees(self.anchor-sample.position)
@@ -189,7 +243,8 @@ class SnareController:
                 self.anchor, l, self.last_send, self.last_torque)
             if method.done and self.window.ready:
                 self.method = None
-                self.path = MitCenterReturn(sample.position, self.anchor, method.bias, now)
+                self.path = MitCenterReturn(sample.position, self.anchor, method.bias, now,
+                                            bias_gain=PATH_BIAS_GAIN, kp=PATH_KP, kd=PATH_KD)
                 self.status = replace(self.status, completed=self.status.completed+1)
             elif now-method.started > stroke_timeout(method, l):
                 raise RuntimeError('Snare return failed to settle')
@@ -243,13 +298,15 @@ def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, he
                 continue
             if now-heartbeat.value > 2.:
                 raise RuntimeError('Snare parent heartbeat lost; no further strikes')
-            epoch, period, enabled = clock[:]
+            epoch, period, enabled, calibration, advance = clock[:]
             if not enabled:
                 controller.finish()
                 started = False
             elif epoch > 0 and not started:
-                controller.start(epoch, period)
+                controller.start(epoch, period, calibration=bool(calibration), advance=advance)
                 started = True
+            if enabled and started and calibration:
+                controller.set_advance(advance)
             previous_send, previous_torque = controller.last_send, controller.last_torque
             command = controller.update(channel.sample, now, goal.value)
             if controller.method is not None and time.monotonic()-channel.sample.at > limits.feedback_timeout:
@@ -317,7 +374,7 @@ class SnareSession(Joint7Session):
         self.template, self.rules = template, rules
         ctx = mp.get_context('spawn')
         self.goal = ctx.Value('d', bus.states['left', 6][0])
-        self.clock = ctx.Array('d', [0., 0., 0.])
+        self.clock = ctx.Array('d', [0., 0., 0., 0., 0.])
         self.heartbeat = ctx.Value('d', time.monotonic())
         self.stop_event = ctx.Event()
         self.requests = ctx.Queue(maxsize=1)  # Joined lifecycle inherited from Joint7Session.
@@ -351,12 +408,25 @@ class SnareSession(Joint7Session):
         self.heartbeat.value = time.monotonic()
         return super().status
 
-    def start_swing(self, bpm):
+    def start_swing(self, bpm, advance=0.):
         s = self.status
         if s.error or not s.ready or time.monotonic()-s.at > .1:
             raise RuntimeError('Left snare must be settled at its recording endpoint')
         period = validate_tempo(bpm, self.template, self.rules)
-        self.clock[:] = [0., period, 1.]  # Right worker publishes actual pickup-derived epoch.
+        if not math.isfinite(advance) or abs(advance) > MAX_ADVANCE:
+            raise ValueError('Invalid calibrated snare offset')
+        self.clock[:] = [0., period, 1., 0., advance]  # Right worker publishes pickup-derived epoch.
+
+    def start_calibration(self, epoch):
+        self.start_swing(60./SYNC_PERIOD)
+        self.clock[:] = [epoch, SYNC_PERIOD, 1., 1., 0.]
+
+    def set_calibration_advance(self, advance):
+        if not math.isfinite(advance) or abs(advance) > MAX_ADVANCE:
+            raise ValueError('Invalid snare calibration offset')
+        with self.clock.get_lock():
+            if self.clock[2] and self.clock[3]:
+                self.clock[4] = advance
 
     def finish(self):
         with self.clock.get_lock():
@@ -364,8 +434,19 @@ class SnareSession(Joint7Session):
 
     @property
     def finished(self):
+        """No pending stroke owns J6; the path controller may take new targets.
+
+        ``ready`` means settled at the *recording endpoint* for another strike,
+        not an idle path/center hold. Requiring it here deadlocks playback at
+        its start and shutdown at center. The worker keeps ``moving`` true
+        through the entire strike, return and measured settling window.
+        """
         s = self.status
-        return not s.scheduled and not s.moving and not s.error and s.armed
+        now = time.monotonic()
+        return (not self.clock[2] and not s.scheduled and not s.moving
+                and not s.error and s.armed and s.sample is not None
+                and s.sample.state == 2 and -.001 <= now-s.sample.at <= .020
+                and -.001 <= now-s.at <= .1)
 
     def stop(self):
         super().stop()

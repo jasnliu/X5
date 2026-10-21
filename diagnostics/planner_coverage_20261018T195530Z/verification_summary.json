@@ -1,0 +1,65 @@
+{
+  "schema": "x5-coverage-verification-v1",
+  "all_features_verified_without_errors": false,
+  "real_trajectory_available": false,
+  "blocking_condition": "Current calibrated camera view does not establish required whole-arm clearance at start or goal; unknown space remains blocked",
+  "software_changes": "Diagnostic reports and messages only; no collision guard, padding, sensor profile, calibration, encoder convention or motor-control changes",
+  "automated_tests": {
+    "planner_passed": 167,
+    "calibration_passed": 110,
+    "final_failures": 0
+  },
+  "checks": {
+    "real_moveit_and_fault_tests": "passed offline; synthetic obstacles, artificial depth and mocked motor transport",
+    "live_current_pose": {
+      "application_exception": null,
+      "planning_status": "blocked_start",
+      "encoder_batches": 88,
+      "depth_frames": 5,
+      "visualization": false
+    },
+    "live_regular_gui": {
+      "application_exception": null,
+      "planning_status": "blocked_start",
+      "encoder_batches": 89,
+      "depth_frames": 5,
+      "visualization": true
+    },
+    "live_camera_3d": {
+      "passed": true,
+      "application_exception": null,
+      "frames": 36
+    },
+    "live_camera_2d": {
+      "passed": true,
+      "application_exception": null,
+      "frames": 36
+    },
+    "live_snapshot_playback": {
+      "passed": true,
+      "application_exception": null,
+      "frames": 1
+    },
+    "live_hardware_check": true,
+    "gui_controls_and_complete_simulated_cycle": true,
+    "saved_actual_scene_replay": "reproduced safety refusal, no exception",
+    "build_demo_simulation_png_export": "passed"
+  },
+  "physical_motion_tested": false,
+  "motor_commands": 0,
+  "mode_changes": 0,
+  "gripper_commands": 0,
+  "relax_commands": 0,
+  "minute_soak_performed": false,
+  "sdk_warnings_retained": true,
+  "evidence": {
+    "planner_tests_final.log": "planner_tests_final.log",
+    "calibration_tests.log": "calibration_tests.log",
+    "live_wire_audit.json": "live_wire_audit.json",
+    "gui_checks.json": "gui_checks.json",
+    "preservation_audit.json": "preservation_audit.json",
+    "sdk_warning_inventory.json": "sdk_warning_inventory.json",
+    "exact_mesh_camera_coverage.json": "exact_mesh_camera_coverage.json",
+    "resting_arm_depth_fov.png": "resting_arm_depth_fov.png"
+  }
+}

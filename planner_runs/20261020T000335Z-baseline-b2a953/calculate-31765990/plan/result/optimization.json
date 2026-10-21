@@ -1,0 +1,337 @@
+{
+  "method": "independent OMPL RRTConnect seeds; normalized broad-route style selection",
+  "objective": "broad_route_style_v1",
+  "weights": {
+    "workspace_economy": 0.4,
+    "broad_bending": 0.3,
+    "obstacle_proximity": 0.2,
+    "joint_economy": 0.1
+  },
+  "bending_spacing_m": 0.05,
+  "comfort_clearance_m": 0.1,
+  "soft_clearance_method": "distal FCL padding probes in 5 mm bands; NOT a hard-clearance certificate",
+  "normalization": {
+    "workspace_economy": 1.2639810438719021,
+    "broad_bending": 438.98196355622866,
+    "obstacle_proximity": 0.20302238805970152,
+    "joint_economy": 1.3697823074293194
+  },
+  "normalization_floors": {
+    "workspace_economy": 1.0,
+    "broad_bending": 5.0,
+    "obstacle_proximity": 0.05,
+    "joint_economy": 1.0
+  },
+  "duration_budget_s": 14.820531207378593,
+  "max_duration_ratio": 2.0,
+  "duration_role": "at most 2x fastest valid duration (and <=120s); tie-break only within budget",
+  "fastest_valid_reference": {
+    "candidate": 4,
+    "seed": 23776,
+    "duration_s": 7.410265603689297,
+    "stop_at_corners": false,
+    "score": {
+      "total": 100.0,
+      "weighted_components": {
+        "workspace_economy": 40.0,
+        "broad_bending": 30.0,
+        "obstacle_proximity": 20.0,
+        "joint_economy": 10.0
+      }
+    }
+  },
+  "requested_candidates": 6,
+  "searched_candidates": 6,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "planned",
+      "planning_wall_s": 2.374701054999605,
+      "backend_folder": "candidates/01",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_higher_style_score",
+          "duration_outward_s": 8.386181693572816,
+          "duration_cycle_s": 18.77236338714563,
+          "style_metrics": {
+            "components": {
+              "workspace_economy": 1.5021993642610345,
+              "broad_bending": 908.05255832076,
+              "obstacle_proximity": 0.3352611940298508,
+              "joint_economy": 1.4946324860340068
+            },
+            "wrist": {
+              "travel_m": 0.5659522583447161,
+              "direct_distance_m": 0.3706787099478578,
+              "broad_turning_deg": 373.0381553210881
+            },
+            "tip": {
+              "travel_m": 1.3040568653574982,
+              "direct_distance_m": 0.8741687904517406,
+              "broad_turning_deg": 535.0144029996719
+            },
+            "joint_travel_rad": 4.669433040845361,
+            "joint_direct_rad": 3.1241345845731328,
+            "minimum_distal_padding_estimate_m": 0.0,
+            "clearance_is_soft_estimate_not_safety_certificate": true,
+            "joint_arc_samples": 801,
+            "clearance_samples": 201
+          },
+          "style_score": {
+            "total": 153.5333997745194,
+            "weighted_components": {
+              "workspace_economy": 47.53866749961401,
+              "broad_bending": 62.05625517945331,
+              "obstacle_proximity": 33.02701709244624,
+              "joint_economy": 10.91146000300584
+            }
+          }
+        },
+        {
+          "stop_at_corners": true,
+          "status": "excluded_duration_budget",
+          "duration_outward_s": 57.10645114143739,
+          "duration_cycle_s": 116.21290228287478
+        }
+      ],
+      "waypoint_count": 7,
+      "moveit_seed_duration_s": 4.531260201995513
+    },
+    {
+      "index": 2,
+      "seed": 7938,
+      "status": "blocked_after_smoothing",
+      "planning_wall_s": 4.630133275000844,
+      "backend_folder": "candidates/02",
+      "variants": [],
+      "details": {
+        "contacts": [
+          [
+            "gemini_native_depth",
+            "right_drumstick"
+          ]
+        ],
+        "reason": "collision"
+      }
+    },
+    {
+      "index": 3,
+      "seed": 15857,
+      "status": "blocked_after_smoothing",
+      "planning_wall_s": 4.5814437990193255,
+      "backend_folder": "candidates/03",
+      "variants": [],
+      "details": {
+        "contacts": [
+          [
+            "gemini_native_depth",
+            "right_drumstick"
+          ]
+        ],
+        "reason": "collision"
+      }
+    },
+    {
+      "index": 4,
+      "seed": 23776,
+      "status": "planned",
+      "planning_wall_s": 3.5286866090027615,
+      "backend_folder": "candidates/04",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "selected",
+          "duration_outward_s": 7.410265603689297,
+          "duration_cycle_s": 16.820531207378593,
+          "passed": true,
+          "checked_samples": 3707,
+          "failures": [],
+          "style_metrics": {
+            "components": {
+              "workspace_economy": 1.2639810438719021,
+              "broad_bending": 438.98196355622866,
+              "obstacle_proximity": 0.20302238805970152,
+              "joint_economy": 1.3697823074293194
+            },
+            "wrist": {
+              "travel_m": 0.471010939338821,
+              "direct_distance_m": 0.3706787099478578,
+              "broad_turning_deg": 203.41767274480586
+            },
+            "tip": {
+              "travel_m": 1.1024527036775915,
+              "direct_distance_m": 0.8741687904517406,
+              "broad_turning_deg": 235.5642908114228
+            },
+            "joint_travel_rad": 4.279384279976324,
+            "joint_direct_rad": 3.1241345845731328,
+            "minimum_distal_padding_estimate_m": 0.0325,
+            "clearance_is_soft_estimate_not_safety_certificate": true,
+            "joint_arc_samples": 801,
+            "clearance_samples": 201
+          },
+          "style_score": {
+            "total": 100.0,
+            "weighted_components": {
+              "workspace_economy": 40.0,
+              "broad_bending": 30.0,
+              "obstacle_proximity": 20.0,
+              "joint_economy": 10.0
+            }
+          }
+        },
+        {
+          "stop_at_corners": true,
+          "status": "excluded_duration_budget",
+          "duration_outward_s": 34.62010016040911,
+          "duration_cycle_s": 71.24020032081822
+        }
+      ],
+      "waypoint_count": 8,
+      "moveit_seed_duration_s": 4.355547238608421
+    },
+    {
+      "index": 5,
+      "seed": 31695,
+      "status": "planned",
+      "planning_wall_s": 2.826363141008187,
+      "backend_folder": "candidates/05",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 5.106200284958951,
+          "duration_cycle_s": 12.212400569917902,
+          "passed": false,
+          "checked_samples": 576,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.30893683574411374,
+                -0.30879034611926814,
+                0.044775769227598766
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_higher_style_score",
+          "duration_outward_s": 13.138188915766712,
+          "duration_cycle_s": 28.276377831533424,
+          "style_metrics": {
+            "components": {
+              "workspace_economy": 1.3624884559512005,
+              "broad_bending": 421.11923383249945,
+              "obstacle_proximity": 0.22413246268656714,
+              "joint_economy": 1.3615662151428918
+            },
+            "wrist": {
+              "travel_m": 0.5360577146022729,
+              "direct_distance_m": 0.3706787099477988,
+              "broad_turning_deg": 209.51739798349962
+            },
+            "tip": {
+              "travel_m": 1.1600326341116598,
+              "direct_distance_m": 0.8741687904516328,
+              "broad_turning_deg": 211.60183584899983
+            },
+            "joint_travel_rad": 4.253716101911982,
+            "joint_direct_rad": 3.124134584571466,
+            "minimum_distal_padding_estimate_m": 0.0375,
+            "clearance_is_soft_estimate_not_safety_certificate": true,
+            "joint_arc_samples": 801,
+            "clearance_samples": 201
+          },
+          "style_score": {
+            "total": 103.91623203513281,
+            "weighted_components": {
+              "workspace_economy": 43.117369918066004,
+              "broad_bending": 28.779262165190904,
+              "obstacle_proximity": 22.07958095938246,
+              "joint_economy": 9.940018992493437
+            }
+          }
+        }
+      ],
+      "waypoint_count": 5,
+      "moveit_seed_duration_s": 4.126039779288277
+    },
+    {
+      "index": 6,
+      "seed": 39614,
+      "status": "planned",
+      "planning_wall_s": 4.080202994984575,
+      "backend_folder": "candidates/06",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 5.462376205093968,
+          "duration_cycle_s": 12.924752410187937,
+          "passed": false,
+          "checked_samples": 624,
+          "failures": [
+            {
+              "buffer_m": 0.005,
+              "constraint_sha256": "e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43",
+              "enabled": true,
+              "max_signed_plane_distance_m": 0.005026441692757566,
+              "point_only": true,
+              "point_xyz_m": [
+                0.31084566412684633,
+                -0.3355967623803834,
+                0.20345875062594368
+              ],
+              "reason": "outside_right_zone3",
+              "stick_center_world": [
+                0.43432841293572844,
+                -0.36588761419142435,
+                0.13906919776472643
+              ],
+              "tcp": "openarmx_right_hand_tcp",
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "excluded_duration_budget",
+          "duration_outward_s": 27.003825876932876,
+          "duration_cycle_s": 56.00765175386575
+        }
+      ],
+      "waypoint_count": 7,
+      "moveit_seed_duration_s": 4.663238247840976
+    }
+  ],
+  "selected_candidate": 4,
+  "selected_seed": 23776,
+  "selected_stop_at_corners": false,
+  "selected_duration_s": 7.410265603689297,
+  "selected_score": {
+    "total": 100.0,
+    "weighted_components": {
+      "workspace_economy": 40.0,
+      "broad_bending": 30.0,
+      "obstacle_proximity": 20.0,
+      "joint_economy": 10.0
+    }
+  },
+  "wall_time_s": 18.80197967699496,
+  "globally_time_optimal": false,
+  "globally_style_optimal": false,
+  "collision_check_order": "fastest valid reference, then ascending style score; every winner densely validated",
+  "score_error": null
+}

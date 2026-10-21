@@ -65,6 +65,12 @@ class TempoTests(unittest.TestCase):
                 target = a.strike_plan.anchor_joints.copy()
                 target[6] -= math.radians(10.5)
                 a._begin_continuous_striking(10.5, target)
+                self.assertEqual(a.hybrid_session.request.call_args.args[0], 'calibrate')
+                a.hihat_sync.start_calibration.assert_called_once()
+                a.hihat_sync.start.assert_not_called()
+                a.hybrid_session.request.reset_mock()
+                from camera_playback.hybrid_workflow import start_swing
+                start_swing(a, a.swing_events)
                 a.hybrid_session.request.assert_called_once_with('swing', math.radians(10.5), swing_events(bpm))
                 self.assertAlmostEqual(a.hihat_sync.start.call_args.args[0], 60/bpm)
                 self.assertEqual(a.continuous_strike_degrees, 10.5)

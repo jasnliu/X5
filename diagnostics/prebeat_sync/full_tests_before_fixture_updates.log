@@ -1,0 +1,69 @@
+..F..................................................................... [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 26%]
+........................................................................ [ 34%]
+........................................................................ [ 43%]
+........................................................................ [ 52%]
+........................................................................ [ 61%]
+........................................................................ [ 69%]
+...............................FF....................................... [ 78%]
+........................................................................ [ 87%]
+........................................................................ [ 96%]
+.................................                                        [100%]
+=================================== FAILURES ===================================
+_ AudioTimingTests.test_delayed_hit_after_old_timeout_still_selects_original_attempt _
+
+self = <test_audio_timing.AudioTimingTests testMethod=test_delayed_hit_after_old_timeout_still_selects_original_attempt>
+
+    def test_delayed_hit_after_old_timeout_still_selects_original_attempt(self):
+        a = self.waiting()
+        a._advance_hybrid_audio_wait(12.)
+        self.assertEqual(a.strike_index, 0)
+        self.assertEqual(a.phase, STRIKE_SOUND_WAIT_PHASE)
+        a._process_sound_hit(dict(event_at=10.1, detected_at=12.))
+>       self.assertTrue(a.continuous_strike_active)
+E       AssertionError: False is not true
+
+tests/test_audio_timing.py:75: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 CYMBAL HIT DETECTED on J7 −5° attempt — selecting this first detected depth
+RIDE SWING DEPTH: detected 5° + 0.5° = 5.5°
+<Mock name='mock.get()' id='126187003982336'>
+______ RideBoostTests.test_10_becomes_10_point_5_after_successful_search _______
+
+self = <test_ride_depth_boost.RideBoostTests testMethod=test_10_becomes_10_point_5_after_successful_search>
+
+    def test_10_becomes_10_point_5_after_successful_search(self):
+        a=self.fixture()
+        original=a.strike_plan.targets[a.strike_index].copy()
+        a._finish_hit_strike_attempt()
+        self.assertEqual(a.continuous_strike_degrees,10.5)
+        self.assertAlmostEqual(a.continuous_strike_target[6],-math.radians(10.5))
+        np.testing.assert_array_equal(a.continuous_strike_target[:6],a.strike_plan.anchor_joints[:6])
+>       a.hybrid_session.request.assert_called_once_with('swing',math.radians(10.5),SWING_EVENTS)
+E       AttributeError: 'NoneType' object has no attribute 'request'
+
+tests/test_ride_depth_boost.py:33: AttributeError
+----------------------------- Captured stdout call -----------------------------
+RIDE SWING DEPTH: detected 10° + 0.5° = 10.5°
+<Mock name='mock.get()' id='126186381011008'>
+_______ RideBoostTests.test_12_point_5_uses_existing_13_degree_corridor ________
+
+self = <test_ride_depth_boost.RideBoostTests testMethod=test_12_point_5_uses_existing_13_degree_corridor>
+
+    def test_12_point_5_uses_existing_13_degree_corridor(self):
+        a=self.fixture(12)
+        a._finish_hit_strike_attempt()
+        self.assertEqual(a.continuous_strike_degrees,12.5)
+>       a.hybrid_session.request.assert_called_once_with('swing',math.radians(12.5),SWING_EVENTS)
+E       AttributeError: 'NoneType' object has no attribute 'request'
+
+tests/test_ride_depth_boost.py:50: AttributeError
+----------------------------- Captured stdout call -----------------------------
+RIDE SWING DEPTH: detected 12° + 0.5° = 12.5°
+<Mock name='mock.get()' id='126186381003760'>
+=========================== short test summary info ============================
+FAILED tests/test_audio_timing.py::AudioTimingTests::test_delayed_hit_after_old_timeout_still_selects_original_attempt
+FAILED tests/test_ride_depth_boost.py::RideBoostTests::test_10_becomes_10_point_5_after_successful_search
+FAILED tests/test_ride_depth_boost.py::RideBoostTests::test_12_point_5_uses_existing_13_degree_corridor
+3 failed, 822 passed in 247.83s (0:04:07)

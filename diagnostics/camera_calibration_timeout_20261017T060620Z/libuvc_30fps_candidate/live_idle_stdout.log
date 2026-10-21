@@ -1,0 +1,39 @@
+{
+  "success": false,
+  "reason": "application_error",
+  "failure": "RGB frame delivery stalled: no new complete frames for 3.0s. Last usable frame was 3.0s ago",
+  "wall_duration_s": 6.246434081000189,
+  "live_display_duration_s": 4.824177206999593,
+  "first_sequence": 1,
+  "final_displayed_sequence": 7,
+  "displayed_frames": 4,
+  "maximum_display_gap_s": 0.10083136800312786,
+  "pauses": [
+    {
+      "monotonic": 29467.82238339,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    }
+  ],
+  "quality_text": "Camera preview stopped \u2014 see error below",
+  "status_text": "CAPTURE STOPPED: RGB frame delivery stalled: no new complete frames for 3.0s. Last usable frame was 3.0s ago. No motor state was changed. Support the arm; close and restart after fixing the cause.",
+  "can_attempts": [],
+  "observer_absent": true,
+  "session": "/home/jason/Proyectos3/X5/diagnostics/camera_calibration_timeout_20261017T060620Z/libuvc_30fps_candidate/live_idle_sessions/20261017T061056Z-d4841340",
+  "camera_released": true,
+  "jpeg_report": {
+    "policy": "reject_decoder_warnings",
+    "received": 7,
+    "accepted": 7,
+    "rejected": 0,
+    "consecutive_rejected": 0,
+    "last_rejection": null,
+    "rejection_examples": [],
+    "last_received_monotonic": 29466.752774527,
+    "last_accepted_monotonic": 29466.752774527,
+    "last_rejected_monotonic": null,
+    "maximum_received_gap_s": 0.03357385599883855,
+    "maximum_accepted_gap_s": 0.03357385599883855,
+    "error": null,
+    "stop_reason": "RGB frame delivery stalled: no new complete frames for 3.0s. Last usable frame was 3.0s ago"
+  }
+}

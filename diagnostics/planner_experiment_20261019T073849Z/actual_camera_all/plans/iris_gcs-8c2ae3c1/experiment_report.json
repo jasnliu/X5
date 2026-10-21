@@ -1,0 +1,40 @@
+{
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    }
+  ],
+  "reason": "sampled_regions_missed_collision_final_FCL_rejected",
+  "region_count": 12,
+  "solver": "Clarabel",
+  "solver_status": "SolutionResult.kSolutionFound",
+  "success": true,
+  "refinements": 5,
+  "region_certification": "sampled, not continuous",
+  "algorithm": "Drake IRIS + GcsTrajectoryOptimization",
+  "gcs_geometric_collision_check": {
+    "samples_checked": 144,
+    "details": {
+      "contacts": [
+        [
+          "gemini_native_depth",
+          "right_drumstick"
+        ]
+      ],
+      "reason": "collision"
+    }
+  }
+}

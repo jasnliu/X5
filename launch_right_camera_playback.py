@@ -12,9 +12,11 @@ from launch.events import Shutdown
 from launch_ros.actions import Node
 
 from camera_playback.hihat import DEFAULT_ESP_PORT
-from camera_playback.audio_bridge import ST7_MODEL_VERSION, HIHAT_MODEL_VERSION, detector_command
+from camera_playback.audio_bridge import (ST7_MODEL_VERSION, HIHAT_MODEL_VERSION,
+                                        SNARE_MODEL_VERSION, detector_command)
 from camera_search.device import add_camera_argument
 from camera_playback.camera_selection import choose_camera, list_cameras, print_cameras
+from camera_playback.resource_preflight import check_memory
 
 
 ROOT = Path(__file__).resolve().parent
@@ -31,7 +33,7 @@ def parse_args():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
         "--hardware", action="store_true",
-        help="automatic hi-hat-v1 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride-v2 search, editable BPM swing (default 100; camera/TONOR/ESP32)",
+        help="automatic hihat_v2 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride_v4 search, editable BPM swing (default 100; camera/TONOR/ESP32)",
     )
     mode.add_argument(
         "--test", action="store_true",
@@ -64,6 +66,8 @@ def parse_args():
                         help='AUTHORIZED MOTION: normal dual-arm Run, skip beat, verify both recordings and centered relax')
     parser.add_argument('--verify-swing', action='store_true',
                         help='AUTHORIZED MOTION: auto RUN, verify 5 s physical swing, center/relax, save evidence')
+    parser.add_argument('--verify-calibration', action='store_true',
+                        help='AUTHORIZED MOTION: auto RUN through hi-hat timing calibration, then center/relax; no swing')
     parser.add_argument("--model", type=Path, default=None)
     parser.add_argument("--imgsz", type=int, default=None)
     parser.add_argument("--conf", type=float, default=None)
@@ -105,10 +109,9 @@ def parse_args():
         parser.error("--recording-only requires --hardware or --hardwaretest")
     if args.auto_run and not args.recording_only:
         parser.error("--auto-run requires --recording-only")
-    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
-        parser.error('--verify-playback requires normal --hardware and no other verification mode')
-    if args.verify_swing and (not args.hardware or args.recording_only):
-        parser.error('--verify-swing requires normal --hardware')
+    verification = sum((args.verify_playback, args.verify_swing, args.verify_calibration))
+    if verification and (not args.hardware or args.recording_only or verification > 1):
+        parser.error('verification requires normal --hardware and exactly one verification mode')
     if not args.hardwaretest and any(getattr(args, name) is not None for name in (
             "mit_fall_kd", "mit_inertia", "mit_brake_accel", "mit_latency_ms")):
         parser.error("--mit-* tuning flags require --hardwaretest")
@@ -135,6 +138,11 @@ detector_source = Y2 / "realtime_detector.py"
 if perception_enabled and (not venv_python.is_file() or not detector_source.is_file()):
     raise SystemExit(f"Y2 detector environment not found under {Y2}")
 if perception_enabled:
+    shared_audio_available = True
+    try:
+        check_memory()
+    except RuntimeError as exc:
+        raise SystemExit(str(exc)) from None
     try:
         # Share the bridge's exact preflight; this does not start the listener.
         detector_command(ST7, args.audio_device)
@@ -146,21 +154,33 @@ if perception_enabled:
         detector_command(ST7, args.audio_device, 'hihat')
     except RuntimeError as exc:
         print(f"Hi-hat sound monitor unavailable (required for normal hardware calibration): {exc}", flush=True)
+        shared_audio_available = False
     hihat_purpose = ('startup calibration and hi-hat-only timing'
                      if args.hardware and not args.recording_only else 'visual only')
     print(f"ST7 hi-hat audio model {HIHAT_MODEL_VERSION}: {hihat_purpose}; "
-          "ride v2 remains the only strike-search input", flush=True)
+          f"{ST7_MODEL_VERSION} remains the only strike-search input", flush=True)
+    try:
+        detector_command(ST7, args.audio_device, 'snare')
+    except RuntimeError as exc:
+        print(f"Optional snare waveform detector unavailable: {exc}", flush=True)
+        shared_audio_available = False
+    snare_purpose = 'waveform markers only; no calibration or offset'
+    print(f"ST7 snare audio model {SNARE_MODEL_VERSION}: {snare_purpose}; "
+          "ride remains the absolute beat anchor", flush=True)
 socket_path = Path(f"/tmp/x5-right-camera-playback-{os.getpid()}.sock")
 audio_socket_path = Path(f"/tmp/x5-right-camera-audio-{os.getpid()}.sock")
 hihat_audio_socket_path = Path(f"/tmp/x5-right-hihat-audio-{os.getpid()}.sock")
 waveform_ride_socket = Path(f'/tmp/x5-wave-ride-{os.getpid()}.sock')
 waveform_hihat_socket = Path(f'/tmp/x5-wave-hihat-{os.getpid()}.sock')
+waveform_snare_socket = Path(f'/tmp/x5-wave-snare-{os.getpid()}.sock')
+snare_audio_socket_path = Path(f"/tmp/x5-snare-control-{os.getpid()}.sock")
 
 app_command = [
     "/usr/bin/python3", "-m", "camera_playback.app",
     "--detection-socket", str(socket_path),
     "--audio-socket", str(audio_socket_path),
     "--hihat-audio-socket", str(hihat_audio_socket_path),
+    "--snare-audio-socket", str(snare_audio_socket_path),
     "--esp-port", args.esp_port,
 ]
 if args.hardware:
@@ -181,6 +201,8 @@ if args.verify_swing:
     app_command.append('--verify-swing')
 if args.verify_playback:
     app_command.append('--verify-playback')
+if args.verify_calibration:
+    app_command.append('--verify-calibration')
 camera_command = [
     str(venv_python), str(ROOT / "camera_playback/camera.py"),
     "--socket", str(socket_path), "--root", str(Y2),
@@ -214,10 +236,26 @@ hihat_audio_command = [
     "--source", args.audio_source, "--device", args.audio_device,
     '--visual-socket', str(waveform_hihat_socket),
 ]
+# Snare audio is visual-only; the app drains messages without tuning or gating motion.
+snare_audio_command = [
+    "/usr/bin/python3", "-m", "camera_playback.audio_bridge",
+    "--socket", str(snare_audio_socket_path),
+    "--visual-socket", str(waveform_snare_socket),
+    "--root", str(ST7), "--instrument", "snare",
+    "--source", args.audio_source, "--device", args.audio_device,
+]
 waveform_command = [
     str(ST7 / '.venv/bin/python'), '-m', 'camera_playback.audio_waveform',
     '--ride-socket', str(waveform_ride_socket), '--hihat-socket', str(waveform_hihat_socket),
+    '--snare-socket', str(waveform_snare_socket),
     '--source', args.audio_source, '--device', args.audio_device,
+]
+shared_audio_command = [
+    '/usr/bin/python3', '-m', 'camera_playback.shared_audio_bridge',
+    '--root', str(ST7), '--source', args.audio_source, '--device', args.audio_device,
+    '--channel', 'ride', str(audio_socket_path), str(waveform_ride_socket),
+    '--channel', 'hihat', str(hihat_audio_socket_path), str(waveform_hihat_socket),
+    '--channel', 'snare', str(snare_audio_socket_path), str(waveform_snare_socket),
 ]
 
 camera_env = os.environ.copy()
@@ -235,8 +273,11 @@ app = ExecuteProcess(cmd=app_command, cwd=str(ROOT), output="screen",
 camera = ExecuteProcess(cmd=camera_command, cwd=str(Y2), env=camera_env, output="screen")
 audio = ExecuteProcess(cmd=audio_command, cwd=str(ROOT), env=audio_env, output="screen")
 hihat_audio = ExecuteProcess(cmd=hihat_audio_command, cwd=str(ROOT), env=audio_env, output="screen")
+snare_audio = ExecuteProcess(cmd=snare_audio_command, cwd=str(ROOT), env=audio_env, output="screen")
+shared_audio = ExecuteProcess(cmd=shared_audio_command, cwd=str(ROOT), env=audio_env, output='screen')
 # This optional process has no support-fault/Shutdown handler: closing or losing
-# the graph must never stop calibration, either detector, or the physical beat.
+# the graph must never stop calibration, any detector, or the physical beat.
+# Snare detections are not required for timing or for the random snare strokes.
 waveform = ExecuteProcess(cmd=waveform_command, cwd=str(ROOT), env=waveform_env, output='screen')
 rsp = Node(
     package="robot_state_publisher", executable="robot_state_publisher",
@@ -248,7 +289,9 @@ rviz = Node(
 )
 processes = [rsp, rviz, app]
 if perception_enabled:
-    processes.extend([camera, audio, hihat_audio, waveform])
+    audio_processes = ([shared_audio] if shared_audio_available
+                       else [audio, hihat_audio, snare_audio])
+    processes.extend([camera, *audio_processes, waveform])
 description = LaunchDescription(processes)
 watched_processes = [
     (rsp, "Robot-state publisher exited"),
@@ -269,7 +312,7 @@ for process, label in watched_processes:
     )))
 if perception_enabled:
     description.add_action(RegisterEventHandler(OnProcessExit(
-        target_action=audio,
+        target_action=shared_audio if shared_audio_available else audio,
         on_exit=[ExecuteProcess(
             cmd=[
                 "/usr/bin/python3", "-m", "camera_playback.audio_notify",
@@ -282,13 +325,23 @@ if perception_enabled:
     # Notify the hi-hat receiver, not the ride receiver. Normal hardware
     # calibration/synchronization owns the resulting supervised stop policy.
     description.add_action(RegisterEventHandler(OnProcessExit(
-        target_action=hihat_audio,
+        target_action=shared_audio if shared_audio_available else hihat_audio,
         on_exit=[ExecuteProcess(
             cmd=[
                 "/usr/bin/python3", "-m", "camera_playback.audio_notify",
                 "--socket", str(hihat_audio_socket_path), "--instrument", "hihat",
                 "--detail", "Hi-hat sound detector exited",
             ],
+            cwd=str(ROOT), output="screen",
+        )],
+    )))
+if perception_enabled:
+    description.add_action(RegisterEventHandler(OnProcessExit(
+        target_action=shared_audio if shared_audio_available else snare_audio,
+        on_exit=[ExecuteProcess(
+            cmd=["/usr/bin/python3", "-m", "camera_playback.audio_notify",
+                 "--socket", str(snare_audio_socket_path), "--instrument", "snare",
+                 "--detail", "Snare sound detector exited"],
             cwd=str(ROOT), output="screen",
         )],
     )))

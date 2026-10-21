@@ -1,0 +1,89 @@
+{
+  "method": "chomp",
+  "description": "Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.06999999999999999,
+        "transit_low_decile_clearance_m": 0.06999999999999999,
+        "all_path_min_clearance_m": 0.055,
+        "transit_proximity": 0.0245061728395062,
+        "workspace_length_m": 2.024251356034068,
+        "joint_length_rad": 3.714640704411228,
+        "bending_deg": 1017.6613710845281
+      },
+      "duration_s": 29.631922680717732
+    },
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.11,
+        "transit_low_decile_clearance_m": 0.134,
+        "all_path_min_clearance_m": 0.055,
+        "transit_proximity": 0.0,
+        "workspace_length_m": 3.605457687591883,
+        "joint_length_rad": 3.4960441679656538,
+        "bending_deg": 685.5462932932573
+      },
+      "duration_s": 20.662649751813287
+    },
+    {
+      "index": 3,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.2430844155844156,
+        "workspace_length_m": 3.1831146937449493,
+        "joint_length_rad": 3.1707511628991427,
+        "bending_deg": 700.1994683600193
+      },
+      "duration_s": 82.81037588790447
+    }
+  ],
+  "selected": 2,
+  "elapsed_s": 23.142122594988905,
+  "budget_s": 60.0
+}

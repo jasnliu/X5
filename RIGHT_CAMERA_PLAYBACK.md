@@ -322,10 +322,10 @@ drop/return overshoot. The goal is near the entered depth, not a guaranteed hard
 mechanical stop. `--hardware` and pure `--test` retain their separate controllers.
 
 The launcher uses the `/home/jason/Proyectos3/st7` sibling checkout with
-**model V2**, explicitly passing `models/v2/config.yaml`,
-`models/v2/best.pt`, and `models/v2/normality/reference.npz` to its listener.
-Startup logs identify V2; missing V2 assets fail startup instead of silently
-falling back to V1 or the older `/home/jason/st7` checkout. All audio-enabled
+**model ride_v3**, explicitly passing `models/ride_v3/config.yaml`,
+`models/ride_v3/best.pt`, and `models/ride_v3/normality/reference.npz` to its listener.
+Startup logs identify ride_v3; missing ride_v3 assets fail startup instead of silently
+falling back to older models or the older `/home/jason/st7` checkout. All audio-enabled
 modes use this selection; pure `--test` remains microphone/model-free. The Y2
 camera model, robot motion, and ST7's standalone default launcher are unchanged.
 The bridge routes the detector through the
@@ -436,8 +436,15 @@ alone do not establish physical performance.
 14. The first detected hit fixes the strike depth `D`. Do not test above or
     below `D`, do not run a fine-tuning phase, and do not use `normality_score`
     to select the depth.
-15. Repeat the first-detected depth plus the existing 0.5° hardware boost in a
-    triplet-based swing ride at the selected BPM (default 100). In `--hardware`, start immediately with
+15. In `--hardware`, first run the separate **80 BPM ride/hi-hat timing
+    calibration**, using the first-detected depth plus the existing 0.5° boost.
+    Pair each quarter-note ride hit with a hi-hat closure; reopen halfway between
+    pairs. Keep the snare and bass idle. Two consecutive paired detections with
+    acoustic differences within 15 ms freeze the offset. Finalized windows missing
+    either instrument do not count or reset the streak; a bad pair still resets it.
+    Finish the final open and full ride return.
+    Then repeat that same boosted depth in a
+    triplet-based swing ride at the selected BPM (default 100). Start with
     the extra pickup before beat 1, then play beat 1, beat 2 + its swung extra,
     beat 3, and beat 4 + its swung extra. Starting at the pickup, the intended
     strike-target deadline intervals at 100 BPM are 0.200, 0.600, 0.400, 0.200, 0.600, 0.400, and
@@ -446,7 +453,11 @@ alone do not establish physical performance.
     only when the encoder is at least 4° above the same absolute low target. Only the four main
     quarter-note beats advance motor 2's existing alternating hi-hat sequence:
     open at 0° on beats 1 and 3, and close to the calibrated angle on beats 2 and 4. The
-    ride extras send no hi-hat command. No motor-1 `K` command is sent.
+    ride extras send no hi-hat command. Starting on beat 1, motor 1 also receives
+    `K` on **all four quarter notes** when **Use bass drum (motor 1) in swing beat**
+    is checked (default); unchecked sends no bass strikes. This is the exact keyboard strike,
+    clockwise PWM 180/255 for 50 ms, then released until the next beat. Bass has
+    no calibration/offset and is not shifted by the hi-hat's learned advance.
 16. Continue indefinitely until the user presses
     **Stop [BPM] striking: Center + Relax**. If Stop is pressed during a
     stroke, finish its hybrid return and settle at the anchor, join the worker,
@@ -569,7 +580,18 @@ degree value plus 0.5° and plays it in the selected-tempo swing ride (default 1
 or below the detected value, and `normality_score` does not participate in
 target selection.
 
-The ride begins with the extra pickup immediately before beat 1. Its repeating
+After hi-hat angle calibration and ride search, a separate **80 BPM timing
+calibration** pairs a ride hit with every hi-hat closure (750 ms apart), opening
+the hi-hat halfway between pairs. The snare remains idle. Each valid pair can
+update the signed offset immediately, with a 200 ms maximum next-pair shift and
+±250 ms total bound. Two consecutive paired acoustic onset differences within 15 ms
+lock the offset; the final open and full ride return finish before swing starts.
+Hi-hat-only, ride-only and empty finalized windows leave the good-pair count and
+offset unchanged, even across many intervening beats. A bad or ambiguous pair
+with both instruments still resets the streak. A 45-second nonconvergence timeout
+or detector/deadline failure uses controlled Stop, not off-center relaxation.
+
+The real ride swing begins with the extra pickup immediately before beat 1. Its repeating
 bar is beat 1; beat 2 plus the third triplet partial; beat 3; beat 4 plus the
 third triplet partial. Set **Beat BPM** before RUN/Start; see the
 [tempo controls and estimated upper limit](README.md#editable-beat-tempo).
@@ -583,14 +605,22 @@ The integrated ESP32 controller remains on the main quarter-note beats and is
 not advanced by the pickup or either ride extra. The firmware's encoder zero is
 the open position. Beats 1 and 3 send `O` to open at encoder zero; beats
 2 and 4 send `B` to close at the angle found during startup calibration.
-The same learned signed advance applies to CLOSE and its following OPEN. After
-two consecutive valid acoustic matches within 15 ms at the current offset, that
-offset locks for the rest of the run (the console logs `HIHAT SYNC` / `locked`).
-It does not resume adapting after later timing drift; the next run learns afresh.
+The same signed advance learned during the **separate pre-beat calibration**
+applies to CLOSE and its following OPEN. It is already locked when swing starts
+(the console logs `HIHAT SYNC` / `locked` before the handoff), and stays constant
+throughout swing at the selected BPM. The next run calibrates afresh.
 Thus the hi-hat still closes every other main beat even though right
 J7 adds the swung ride notes. The controller sends a 100 ms `H` heartbeat for
-the firmware's 400 ms watchdog and never sends `K`, so firmware motor 1 stays
-released and is rhythmically replaced by right J7.
+the firmware's 400 ms watchdog. The **Use bass drum (motor 1) in swing beat**
+checkbox below BPM defaults to checked. Set it before RUN; it stays locked until
+Center + Relax. Unchecked leaves motor 1 idle without changing the other instruments.
+When checked, motor 1 receives `K` on every quarter note of
+normal hardware swing, with no commands during setup, calibration, pickup or
+ride extras. The existing `esp-main/run_keys.sh` pulse is unchanged: clockwise
+PWM 180/255 at 20 kHz for 50 ms, then coast/release. Bass uses the same read-only
+ride epoch at `60 / BPM` intervals, without any learned advance. Stop/fault
+cancels future kicks; firmware finishes an in-flight pulse within its 50 ms.
+Emergency Relax/exit sends `S` to release both ESP32 outputs immediately.
 
 The left snare uses eight straight eighth-note positions inside the same
 four-quarter-note measure. Each bar randomly chooses one or two hits (equal
@@ -788,3 +818,18 @@ Key new files:
 
 The existing `start_right_camera_cartesian.sh`,
 `launch_right_camera_cartesian.py`, and `camera_search/` files remain unchanged.
+
+
+### Visual-only snare detections
+
+The separate rolling TONOR audio graph now also runs the existing
+`st7/models/snare_v2` detector continuously. Its onset markers are purple, dotted,
+and labeled **snare**, alongside red ride and blue hi-hat markers. Labels have
+separate rows when sounds overlap; markers use original audio onset timestamps.
+The graph receives read-only event copies; the separate snare control socket
+supplies the pre-beat ride/snare timing calibration described in `README.md`.
+All three instrument heads now share one encoder and microphone process without
+changing their weights, decoders or onset timestamps. Closing the graph leaves
+the detectors running; launcher exit cleans them up. `--test` remains audio-free.
+The launcher checks for at least 2 GiB of Linux `MemAvailable` before starting
+controllers. Camera resolution, processing cadence and inference remain unchanged.

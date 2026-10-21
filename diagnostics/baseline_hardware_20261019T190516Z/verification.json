@@ -1,0 +1,66 @@
+{
+  "software_tests_passed": true,
+  "regression_tests": 401,
+  "hardware_execution_tested": false,
+  "physical_motor_commands": 0,
+  "physical_CAN_access": false,
+  "mock_gui_passed": true,
+  "mock_cycles": [
+    {
+      "case": "normal_cycle",
+      "passed": true
+    },
+    {
+      "case": "moving_can_fault",
+      "passed": true
+    },
+    {
+      "case": "lost_ui_heartbeat",
+      "passed": true
+    },
+    {
+      "case": "controller_sigterm",
+      "passed": true
+    }
+  ],
+  "native_FCL_checks": {
+    "source": "diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+    "can_access": false,
+    "motor_commands": 0,
+    "results": {
+      "full_curve": {
+        "rejected": true,
+        "error": "Hardware clearance/zone check failed; no motion: [{'distance_m': 0.01245372007287912, 'reason': 'insufficient_self_clearance', 'stick_center_world': [0.1834212967468378, -0.15435849573202998, -0.02661672924191777], 'valid': False}]"
+      },
+      "return_prefix": {
+        "rejected": true,
+        "error": "Hardware clearance/zone check failed; no motion: [{'distance_m': 0.010243068934774465, 'reason': 'insufficient_self_clearance', 'stick_center_world': [0.27342902004381814, -0.18775736787609268, 0.11677007195940674], 'valid': False}]"
+      }
+    },
+    "invalid_rejected": "Hardware clearance/zone check failed; no motion: [{'accepted_static_encoder_overshoot': [{'handling': 'Static left measurement retained exactly for FK/collision checking; no commands or clipping', 'joint': 'openarmx_left_joint4', 'lower_rad': 0.0, 'measured_rad': -0.00019180590524214836, 'measurement_tolerance_rad': 0.0011508354314488441, 'overshoot_rad': 0.00019180590524214836, 'upper_rad': 1.8}], 'angles_clamped': False, 'moving_right_limits_unchanged': True, 'reason': 'joint_limits', 'static_left_encoder_tolerance_rad': 0.0011508354314488441, 'stick_center_world': [-0.15893166613321877, -0.35431615807583305, 0.2568956429115591], 'valid': False, 'violations': [{'joint': 'openarmx_right_joint3', 'lower_rad': -1.6139329852572395, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.47393298525723937, 'upper_rad': 1.5260670147427606}, {'joint': 'openarmx_right_joint4', 'lower_rad': -0.027614306757365363, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.22761430675736527, 'upper_rad': 1.7723856932426347}, {'joint': 'openarmx_right_joint5', 'lower_rad': -1.4877306018557213, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.48773060185572126, 'upper_rad': 1.5122693981442787}, {'joint': 'openarmx_right_joint6', 'lower_rad': -0.7730048019279488, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 1.2730048019279487, 'upper_rad': 0.7269951980720512}, {'joint': 'openarmx_right_joint7', 'lower_rad': -1.4, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.6000000000000001, 'upper_rad': 1.4}]}]"
+  },
+  "CLI_preview_passed": true,
+  "source_sha256": {
+    "drum_planner/baseline/simulation.py": "4838b1054d2f16c80f931ccdfb8b44851c028aace1854e0a5ba7f5216c4f2dae",
+    "drum_planner/baseline/__init__.py": "c71fb0844940c9ec896c1633d246ad6bab79597d726da88dfe4cf73aa51d979a",
+    "drum_planner/baseline/paths.py": "3001cd3fa135ea5684f007912cbd90a56562d5b7bbc92b9c7ed0377d8f5d41d4",
+    "drum_planner/baseline/service.py": "0a9405ee99a93d0c2cb8ddcf192bd4a3e5ebcb58f0fde584968f3f4a7b9a1831",
+    "drum_planner/baseline/transport.py": "d2f9e04bf0d57b7b20c5a9cadc44718b78f61e76b3ba7ccd85bf4f826aee2507",
+    "drum_planner/baseline/app.py": "41ecc6504ca204c18bb7094c6b36fb166a8f2d06a84e2471c11fb1537a803c83",
+    "drum_planner/baseline/motion.py": "9ced1632e27c9d06f032add3147d745078f1bc9571ea6f0b931c15e8113b5e19",
+    "drum_planner/baseline/tasks.py": "47f05efa09f9d30fb4d9ac12cd4cc9110b296f3095b0fc74f99a422a96e89080",
+    "tests/test_baseline_hardware.py": "b35e318713a776b87d3387fb3b5913d188384166e67b571bd6f78d28ee0af028",
+    "drum_planner/cli.py": "8188ad3fd92b0c953bf94e000be9a3eecefe65353548e46054aa0c8502ecb048",
+    "drum_planner/experiment/runtime.py": "07979481ffd328250b747b03eb98ea890998e139faf5266d8381c01eee3fbe57",
+    "BASELINE_HARDWARE.md": "80c248a2c13a770baec9c90d3f3ed0b2802754e3d2b73b0faa5b248e3c9fdab7",
+    "DRUM_PLANNER.md": "4b4f55d44b39e4fb5360a5935310ba8dfd9dd6fb6711e0cb015421494aba14b6",
+    "plan_drums.sh": "1a6d7cd596d9a16b5258f9bb15d5c03879e159f64036371dcd69bdc615b7b5e9"
+  },
+  "changed_existing_files": [
+    "drum_planner/cli.py",
+    "drum_planner/experiment/runtime.py",
+    "plan_drums.sh"
+  ],
+  "protected_original_files_unchanged": 69,
+  "pending_user_decision": "Retain older extra 50mm world/40mm self-clearance (currently retained; saved baseline rejected), or approve matching baseline-preview margins for this new mode. No automatic relaxation of checks."
+}

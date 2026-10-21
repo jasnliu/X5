@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "utc": "2026-10-19T17:14:49.947439+00:00",
+  "planner_tests": 337,
+  "ui_checks": {
+    "startup_immediate_queue": true,
+    "all_nine_cached_without_any_selection": true,
+    "complete_playback_while_background_planning": true,
+    "cached_selection_does_not_regenerate": true,
+    "cancel_and_resume_only_missing_methods": true,
+    "background_result_keeps_other_selected_cached_plan": true,
+    "budget_change_requeues_all": true,
+    "uncertainty_change_requeues_all": true,
+    "recapture_requeues_all_and_camera_stops": true
+  },
+  "workers": {
+    "clearance": {
+      "status": "planned",
+      "elapsed_s": 46.86467850598274,
+      "peak_bytes": 340422656,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/clearance-f65d48d5/plan.json"
+    },
+    "baseline": {
+      "status": "planned",
+      "elapsed_s": 25.302846328006126,
+      "peak_bytes": 346116096,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/baseline-74c3bb57/plan.json"
+    },
+    "robust": {
+      "status": "no_feasible_route",
+      "elapsed_s": 24.645339890004834,
+      "peak_bytes": 370626560,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/robust-45e34fe1/plan.json"
+    },
+    "chance": {
+      "status": "no_feasible_route",
+      "elapsed_s": 48.203593460988486,
+      "peak_bytes": 939651072,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/chance-b135a4f1/plan.json"
+    },
+    "cvar": {
+      "status": "planned",
+      "elapsed_s": 48.16863542498322,
+      "peak_bytes": 939757568,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/cvar-1e37889d/plan.json"
+    },
+    "families": {
+      "status": "planned",
+      "elapsed_s": 55.05171962600434,
+      "peak_bytes": 351862784,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/families-7e8c05d6/plan.json"
+    },
+    "iris_gcs": {
+      "status": "planned",
+      "elapsed_s": 14.078269453981193,
+      "peak_bytes": 922247168,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/iris_gcs-b993059e/plan.json"
+    },
+    "chomp": {
+      "status": "planned",
+      "elapsed_s": 45.602266380010406,
+      "peak_bytes": 997048320,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/chomp-ed50a82d/plan.json"
+    },
+    "stomp": {
+      "status": "planned",
+      "elapsed_s": 35.3648296459869,
+      "peak_bytes": 527147008,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/stomp-dc2fd676/plan.json"
+    }
+  },
+  "production_changes": [
+    "drum_planner/experiment/app.py"
+  ],
+  "source_sha256": {
+    "drum_planner/experiment/app.py": "66b94e09906a9aa0a691c026e3123d7e53dad9acbd2452d64f98f1709903b700",
+    "tests/test_planner_experiment.py": "aa9dc82ba0a2f1014665620d0a25b43200499b9f5129810d7e68117ca0f00514",
+    "DRUM_PLANNER_EXPERIMENTS.md": "1931197f0d4227fccb452e65b75ac5ef3b153cbbda0f7e64d26b415f93e07bc9",
+    "DRUM_PLANNER.md": "dcdc796daa8b43c726b7ac9d3f07332fa014005bd144048923a16f4e1fc15a57"
+  },
+  "source_algorithms_and_rendering_unchanged": true,
+  "no_can_queries": true,
+  "motor_commands": 0
+}

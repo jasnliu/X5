@@ -1,0 +1,35 @@
+Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.
+No current usable trajectory. Click Calculate trajectory first.
+No active trajectory to hold. Calculate and Start remain available.
+No active controller/trajectory to recover. Click Calculate for a new cycle. No automatic relaxation. You can retry using the same buttons.
+No calculation/start check is running. Use Emergency Hold to stop actual arm motion.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Preview / next Start speed: 0.65×.
+Right arm moved since Calculate (4.58° on one joint). Plan discarded. Click Calculate again and leave the right arm still.
+Preview / next Start speed: 0.65×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/diagnostics/baseline_simplify_20261020T001211Z/mock/controller-dc4c627f
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+Arm is running or held. Use Emergency Hold / Reverse to rest + relax, then Calculate. No plan or motor state changed.
+A real-arm cycle/hold already exists. Use Hold or Reverse to rest; Start will not create a second controller.
+Preview / next Start speed: 0.50×. The requested/current arm run keeps 1.00×.
+HOLD requested. No relaxation. Reverse to rest remains available.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/diagnostics/baseline_simplify_20261020T001211Z/mock/controller-fec2cfe3
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/diagnostics/baseline_simplify_20261020T001211Z/mock/controller-e4cfdcc2
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+SIMULATED CAN failure Correct the cause and retry the button; no automatic release.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+THREE-WINDOW MOCK WORKFLOW PASSED

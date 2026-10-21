@@ -1,0 +1,91 @@
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+This plugin does not support propagateSizeHints()
+{
+  "passed": true,
+  "error": null,
+  "duration_s": 65.03860900498694,
+  "MOCK_ENCODERS": true,
+  "SYNTHETIC_DEPTH": true,
+  "physical_hardware_test": false,
+  "can_attempts": [],
+  "actions": [
+    "both",
+    "focus",
+    "height",
+    "hide",
+    "idle",
+    "play_blocked",
+    "points",
+    "reset",
+    "save",
+    "show",
+    "surface"
+  ],
+  "visualization": {
+    "type": "measured_pose_alignment",
+    "rendered_updates": 1,
+    "first_displayed_sequence": 1,
+    "last_displayed_sequence": 1,
+    "max_age_at_display_s": null,
+    "last_frame_compute_s": 0.0,
+    "maximum_draw_s": 0.40595617599319667,
+    "worker_submissions": 0,
+    "maximum_pending_jobs": 0,
+    "modes_rendered": [
+      "depth points",
+      "mesh + points",
+      "surface mesh"
+    ],
+    "freeze_count": 0,
+    "resume_count": 0,
+    "mode_switches": 3,
+    "display_point_limit": 18000,
+    "planning_points_downsampled": false,
+    "robot_overlay": true,
+    "robot_overlay_source": "FK of saved measured encoder angles, not a live pose",
+    "animation_draws": 0,
+    "animation_time_s": 0.0,
+    "animation_completed_cycles": 0,
+    "animation_play_clicks": 0,
+    "animation_seeks": 0,
+    "animation_phases_seen": [],
+    "live_collision_revalidation": false,
+    "motion_authorized": false,
+    "hardware_execution_available": false,
+    "camera_updates": false,
+    "mesh_builds": 0,
+    "mesh": {
+      "vertices": 16261,
+      "triangles": 32000,
+      "candidate_triangles": 32000,
+      "rejected_triangles": 0,
+      "grid_step_pixels": 8,
+      "native_resolution": [
+        1280,
+        800
+      ],
+      "valid_pixels": 1024000,
+      "depth_jump_m": 0.03,
+      "relative_depth_jump": 0.02,
+      "max_edge_m": 0.12,
+      "hole_filling": false,
+      "hidden_surface_reconstruction": false,
+      "preview_only": true
+    },
+    "scene_immutable": true,
+    "collision_mesh": false,
+    "loaded_saved_mesh": true,
+    "mesh_loads": 1,
+    "historical_snapshot": true,
+    "animation_available": false,
+    "can_access": false,
+    "camera_access": false,
+    "physical_alignment_verified": false,
+    "state_file": "/tmp/pytest-of-jason/pytest-46/test_alignment_gui_is_static_m0/run/measured_start.json",
+    "state_warning": "MEASURED ENCODER SNAPSHOT \u2014 geometry/alignment NOT physically verified; NOT motion-ready"
+  }
+}

@@ -1,0 +1,36 @@
+........................................................................ [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 43%]
+........................................................................ [ 51%]
+........................................................................ [ 60%]
+........................................................................ [ 69%]
+........................................................................ [ 77%]
+........................................................................ [ 86%]
+........................F............................................... [ 94%]
+..........................................                               [100%]
+=================================== FAILURES ===================================
+_ ModelSelectionTests.test_all_audio_modes_preflight_v2_and_pass_sibling_root __
+
+self = <test_st7_model_selection.ModelSelectionTests testMethod=test_all_audio_modes_preflight_v2_and_pass_sibling_root>
+
+    def test_all_audio_modes_preflight_v2_and_pass_sibling_root(self):
+        for mode in ([], ['--hardware'], ['--hardwaretest']):
+            with self.subTest(mode=mode):
+                command, _, service, description, code = self.launch(mode)
+                self.assertEqual(code, 0)
+>               self.assertEqual(command.call_args_list, [
+                    call(ROOT.parent / 'st7', 'pipewire'),
+                    call(ROOT.parent / 'st7', 'pipewire', 'hihat')])
+E               AssertionError: [call[49 chars]re'),
+E                call(PosixPath('/home/jason/Proyectos3/[92 chars]re')] != [call[49 chars]re'), call(PosixPath('/home/jason/Proyectos3/s[22 chars]at')]
+
+tests/test_st7_model_selection.py:108: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 snare audio model snare_v1: waveform markers only; no robot control or calibration input
+=========================== short test summary info ============================
+FAILED tests/test_st7_model_selection.py::ModelSelectionTests::test_all_audio_modes_preflight_v2_and_pass_sibling_root
+1 failed, 833 passed in 250.27s (0:04:10)

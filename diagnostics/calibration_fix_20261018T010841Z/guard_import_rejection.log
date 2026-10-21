@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/camera_calibration/cli.py", line 4, in <module>
+    from .core import ROOT, Board
+  File "/home/jason/Proyectos3/X5/camera_calibration/core.py", line 8, in <module>
+    from scipy.optimize import least_squares
+  File "/usr/lib/python3/dist-packages/scipy/optimize/__init__.py", line 410, in <module>
+    from ._minimize import *
+  File "/usr/lib/python3/dist-packages/scipy/optimize/_minimize.py", line 27, in <module>
+    from ._trustregion_constr import _minimize_trustregion_constr
+  File "/usr/lib/python3/dist-packages/scipy/optimize/_trustregion_constr/__init__.py", line 4, in <module>
+    from .minimize_trustregion_constr import _minimize_trustregion_constr
+  File "/usr/lib/python3/dist-packages/scipy/optimize/_trustregion_constr/minimize_trustregion_constr.py", line 5, in <module>
+    from .._constraints import (
+  File "/usr/lib/python3/dist-packages/scipy/optimize/_constraints.py", line 8, in <module>
+    from numpy.testing import suppress_warnings
+  File "/usr/lib/python3/dist-packages/numpy/testing/__init__.py", line 11, in <module>
+    from ._private.utils import *
+  File "/usr/lib/python3/dist-packages/numpy/testing/_private/utils.py", line 1253, in <module>
+    _SUPPORTS_SVE = check_support_sve()
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/numpy/testing/_private/utils.py", line 1247, in check_support_sve
+    output = subprocess.run(cmd, capture_output=True, text=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/diagnostics/calibration_fix_20261018T010841Z/offline_guard/sitecustomize.py", line 23, in no_popen
+    denied('Popen', args)
+  File "/home/jason/Proyectos3/X5/diagnostics/calibration_fix_20261018T010841Z/offline_guard/sitecustomize.py", line 13, in denied
+    raise RuntimeError('Offline verification forbids ' + kind)
+RuntimeError: Offline verification forbids Popen

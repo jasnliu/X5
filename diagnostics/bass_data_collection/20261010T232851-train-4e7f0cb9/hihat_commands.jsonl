@@ -1,0 +1,565 @@
+{"t": 6053.330676889, "kind": "command", "command": "S"}
+{"t": 6053.335879588, "kind": "firmware", "line": "STOP -- all motors released."}
+{"t": 6053.341133886, "kind": "command", "command": "O"}
+{"t": 6053.341279236, "kind": "command", "command": "Q"}
+{"t": 6053.361587076, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=-2 target=0 released=1 opened=1 fault=0"}
+{"t": 6053.361755339, "kind": "command", "command": "S"}
+{"t": 6053.381939451, "kind": "firmware", "line": "STOP -- all motors released."}
+{"t": 6053.382159294, "kind": "command", "command": "A90\n"}
+{"t": 6053.387525677, "kind": "firmware", "line": "ANGLE degrees=90 counts=134"}
+{"t": 6053.392923652, "kind": "target_confirmed", "degrees": 90, "counts": 134}
+{"t": 6095.431996556, "kind": "block", "block": 5, "events": [[6097.429751471, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6097.43136645, "kind": "command", "command": "K"}
+{"t": 6097.431417518, "kind": "beat", "block": 5, "command": "K", "due": 6097.429751471}
+{"t": 6104.032599425, "kind": "block", "block": 6, "events": [[6106.032249733, "K"], [6106.532249733, "K"], [6107.032249733, "K"], [6107.532249733, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6106.032873195, "kind": "command", "command": "K"}
+{"t": 6106.032927139, "kind": "beat", "block": 6, "command": "K", "due": 6106.032249733}
+{"t": 6106.533948641, "kind": "command", "command": "K"}
+{"t": 6106.534024517, "kind": "beat", "block": 6, "command": "K", "due": 6106.532249733}
+{"t": 6107.032672126, "kind": "command", "command": "K"}
+{"t": 6107.032738363, "kind": "beat", "block": 6, "command": "K", "due": 6107.032249733}
+{"t": 6107.533584117, "kind": "command", "command": "K"}
+{"t": 6107.533631108, "kind": "beat", "block": 6, "command": "K", "due": 6107.532249733}
+{"t": 6112.640732914, "kind": "block", "block": 7, "events": [[6114.638628229, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6114.640377916, "kind": "command", "command": "K"}
+{"t": 6114.640418304, "kind": "beat", "block": 7, "command": "K", "due": 6114.638628229}
+{"t": 6121.242343275, "kind": "block", "block": 8, "events": [[6123.241386236, "K"], [6123.841386236, "K"], [6124.441386236, "K"], [6125.041386236, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6123.241673754, "kind": "command", "command": "K"}
+{"t": 6123.241735854, "kind": "beat", "block": 8, "command": "K", "due": 6123.241386236}
+{"t": 6123.8420722, "kind": "command", "command": "K"}
+{"t": 6123.842097138, "kind": "beat", "block": 8, "command": "K", "due": 6123.841386236}
+{"t": 6124.442668035, "kind": "command", "command": "K"}
+{"t": 6124.442708433, "kind": "beat", "block": 8, "command": "K", "due": 6124.441386236}
+{"t": 6125.042640913, "kind": "command", "command": "K"}
+{"t": 6125.042690489, "kind": "beat", "block": 8, "command": "K", "due": 6125.041386236}
+{"t": 6129.846946829, "kind": "block", "block": 9, "events": [[6131.845884698, "K"], [6132.595884698, "B"], [6132.595884698, "K"], [6133.345884698, "K"], [6133.345884698, "O"], [6134.095884698, "B"], [6134.095884698, "K"], [6134.845884698, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6131.846080808, "kind": "command", "command": "K"}
+{"t": 6131.846125424, "kind": "beat", "block": 9, "command": "K", "due": 6131.845884698}
+{"t": 6132.597837673, "kind": "command", "command": "B"}
+{"t": 6132.597920692, "kind": "beat", "block": 9, "command": "B", "due": 6132.595884698}
+{"t": 6132.600104038, "kind": "command", "command": "K"}
+{"t": 6132.600145709, "kind": "beat", "block": 9, "command": "K", "due": 6132.595884698}
+{"t": 6133.347272244, "kind": "command", "command": "K"}
+{"t": 6133.347341016, "kind": "beat", "block": 9, "command": "K", "due": 6133.345884698}
+{"t": 6133.34954425, "kind": "command", "command": "O"}
+{"t": 6133.349581692, "kind": "beat", "block": 9, "command": "O", "due": 6133.345884698}
+{"t": 6134.096457525, "kind": "command", "command": "B"}
+{"t": 6134.096505317, "kind": "beat", "block": 9, "command": "B", "due": 6134.095884698}
+{"t": 6134.098624059, "kind": "command", "command": "K"}
+{"t": 6134.098644047, "kind": "beat", "block": 9, "command": "K", "due": 6134.095884698}
+{"t": 6134.847899394, "kind": "command", "command": "O"}
+{"t": 6134.847942497, "kind": "beat", "block": 9, "command": "O", "due": 6134.845884698}
+{"t": 6138.449399867, "kind": "block", "block": 10, "events": [[6140.449183181, "K"], [6140.974183181001, "B"], [6141.049183181, "K"], [6141.574183181001, "O"], [6141.649183181, "K"], [6142.174183181, "B"], [6142.249183181, "K"], [6142.774183181001, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6140.449346668, "kind": "command", "command": "K"}
+{"t": 6140.449381726, "kind": "beat", "block": 10, "command": "K", "due": 6140.449183181}
+{"t": 6140.974316126, "kind": "command", "command": "B"}
+{"t": 6140.974355131, "kind": "beat", "block": 10, "command": "B", "due": 6140.974183181001}
+{"t": 6141.049949597, "kind": "command", "command": "K"}
+{"t": 6141.049993862, "kind": "beat", "block": 10, "command": "K", "due": 6141.049183181}
+{"t": 6141.574507433, "kind": "command", "command": "O"}
+{"t": 6141.574550616, "kind": "beat", "block": 10, "command": "O", "due": 6141.574183181001}
+{"t": 6141.650401856, "kind": "command", "command": "K"}
+{"t": 6141.650440911, "kind": "beat", "block": 10, "command": "K", "due": 6141.649183181}
+{"t": 6142.175465955, "kind": "command", "command": "B"}
+{"t": 6142.175512174, "kind": "beat", "block": 10, "command": "B", "due": 6142.174183181}
+{"t": 6142.250025773, "kind": "command", "command": "K"}
+{"t": 6142.250068105, "kind": "beat", "block": 10, "command": "K", "due": 6142.249183181}
+{"t": 6142.775356154, "kind": "command", "command": "O"}
+{"t": 6142.775397834, "kind": "beat", "block": 10, "command": "O", "due": 6142.774183181001}
+{"t": 6147.052646102, "kind": "block", "block": 11, "events": [[6149.052152604, "K"], [6149.552152604, "K"], [6149.627152604, "B"], [6150.052152604, "K"], [6150.127152604, "O"], [6150.552152604, "K"], [6150.627152604, "B"], [6151.127152604, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6149.053472113, "kind": "command", "command": "K"}
+{"t": 6149.053510447, "kind": "beat", "block": 11, "command": "K", "due": 6149.052152604}
+{"t": 6149.553225277, "kind": "command", "command": "K"}
+{"t": 6149.553267749, "kind": "beat", "block": 11, "command": "K", "due": 6149.552152604}
+{"t": 6149.628969771, "kind": "command", "command": "B"}
+{"t": 6149.629027592, "kind": "beat", "block": 11, "command": "B", "due": 6149.627152604}
+{"t": 6150.052985013, "kind": "command", "command": "K"}
+{"t": 6150.053034799, "kind": "beat", "block": 11, "command": "K", "due": 6150.052152604}
+{"t": 6150.128703378, "kind": "command", "command": "O"}
+{"t": 6150.128727113, "kind": "beat", "block": 11, "command": "O", "due": 6150.127152604}
+{"t": 6150.553165048, "kind": "command", "command": "K"}
+{"t": 6150.553259549, "kind": "beat", "block": 11, "command": "K", "due": 6150.552152604}
+{"t": 6150.627528849, "kind": "command", "command": "B"}
+{"t": 6150.627560069, "kind": "beat", "block": 11, "command": "B", "due": 6150.627152604}
+{"t": 6151.128171672, "kind": "command", "command": "O"}
+{"t": 6151.128224995, "kind": "beat", "block": 11, "command": "O", "due": 6151.127152604}
+{"t": 6155.65717085, "kind": "block", "block": 12, "events": [[6157.656528455, "K"], [6158.406528455, "B"], [6158.406528455, "K"], [6159.156528455, "K"], [6159.156528455, "O"], [6159.906528455, "B"], [6159.906528455, "K"], [6160.656528455, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6157.658229487, "kind": "command", "command": "K"}
+{"t": 6157.658260376, "kind": "beat", "block": 12, "command": "K", "due": 6157.656528455}
+{"t": 6158.40698354, "kind": "command", "command": "B"}
+{"t": 6158.407032474, "kind": "beat", "block": 12, "command": "B", "due": 6158.406528455}
+{"t": 6158.409161125, "kind": "command", "command": "K"}
+{"t": 6158.409181534, "kind": "beat", "block": 12, "command": "K", "due": 6158.406528455}
+{"t": 6159.157327838, "kind": "command", "command": "K"}
+{"t": 6159.157368226, "kind": "beat", "block": 12, "command": "K", "due": 6159.156528455}
+{"t": 6159.159490835, "kind": "command", "command": "O"}
+{"t": 6159.159523448, "kind": "beat", "block": 12, "command": "O", "due": 6159.156528455}
+{"t": 6159.907948879, "kind": "command", "command": "B"}
+{"t": 6159.908007753, "kind": "beat", "block": 12, "command": "B", "due": 6159.906528455}
+{"t": 6159.910142836, "kind": "command", "command": "K"}
+{"t": 6159.910161842, "kind": "beat", "block": 12, "command": "K", "due": 6159.906528455}
+{"t": 6160.656696429, "kind": "command", "command": "O"}
+{"t": 6160.656751876, "kind": "beat", "block": 12, "command": "O", "due": 6160.656528455}
+{"t": 6164.260818069, "kind": "block", "block": 13, "events": [[6166.259834879, "K"], [6166.784834879, "B"], [6166.859834879, "K"], [6167.384834879001, "O"], [6167.459834879, "K"], [6167.984834879, "B"], [6168.059834879, "K"], [6168.5848348790005, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6166.260980733, "kind": "command", "command": "K"}
+{"t": 6166.261046209, "kind": "beat", "block": 13, "command": "K", "due": 6166.259834879}
+{"t": 6166.785011446, "kind": "command", "command": "B"}
+{"t": 6166.785061402, "kind": "beat", "block": 13, "command": "B", "due": 6166.784834879}
+{"t": 6166.860341625, "kind": "command", "command": "K"}
+{"t": 6166.860390078, "kind": "beat", "block": 13, "command": "K", "due": 6166.859834879}
+{"t": 6167.385134453, "kind": "command", "command": "O"}
+{"t": 6167.385175261, "kind": "beat", "block": 13, "command": "O", "due": 6167.384834879001}
+{"t": 6167.461344502, "kind": "command", "command": "K"}
+{"t": 6167.46138504, "kind": "beat", "block": 13, "command": "K", "due": 6167.459834879}
+{"t": 6167.985605878, "kind": "command", "command": "B"}
+{"t": 6167.985641276, "kind": "beat", "block": 13, "command": "B", "due": 6167.984834879}
+{"t": 6168.061139237, "kind": "command", "command": "K"}
+{"t": 6168.061181529, "kind": "beat", "block": 13, "command": "K", "due": 6168.059834879}
+{"t": 6168.585094846, "kind": "command", "command": "O"}
+{"t": 6168.585165792, "kind": "beat", "block": 13, "command": "O", "due": 6168.5848348790005}
+{"t": 6172.864966791, "kind": "block", "block": 14, "events": [[6174.863764911, "K"], [6175.363764911, "K"], [6175.438764910999, "B"], [6175.863764911, "K"], [6175.938764910999, "O"], [6176.363764911, "K"], [6176.438764910999, "B"], [6176.938764910999, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6174.865298541, "kind": "command", "command": "K"}
+{"t": 6174.865340612, "kind": "beat", "block": 14, "command": "K", "due": 6174.863764911}
+{"t": 6175.365043458, "kind": "command", "command": "K"}
+{"t": 6175.365088565, "kind": "beat", "block": 14, "command": "K", "due": 6175.363764911}
+{"t": 6175.439127702, "kind": "command", "command": "B"}
+{"t": 6175.439185273, "kind": "beat", "block": 14, "command": "B", "due": 6175.438764910999}
+{"t": 6175.863929425, "kind": "command", "command": "K"}
+{"t": 6175.863963291, "kind": "beat", "block": 14, "command": "K", "due": 6175.863764911}
+{"t": 6175.939576172, "kind": "command", "command": "O"}
+{"t": 6175.939665283, "kind": "beat", "block": 14, "command": "O", "due": 6175.938764910999}
+{"t": 6176.365871516, "kind": "command", "command": "K"}
+{"t": 6176.365922915, "kind": "beat", "block": 14, "command": "K", "due": 6176.363764911}
+{"t": 6176.439155471, "kind": "command", "command": "B"}
+{"t": 6176.43919671, "kind": "beat", "block": 14, "command": "B", "due": 6176.438764910999}
+{"t": 6176.94045684, "kind": "command", "command": "O"}
+{"t": 6176.940523418, "kind": "beat", "block": 14, "command": "O", "due": 6176.938764910999}
+{"t": 6181.470853422, "kind": "block", "block": 15, "events": [[6183.469167301, "K"], [6184.219167301, "B"], [6184.219167301, "K"], [6184.969167301, "K"], [6184.969167301, "O"], [6185.719167301, "B"], [6185.719167301, "K"], [6186.469167301, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6183.469936491, "kind": "command", "command": "K"}
+{"t": 6183.469998921, "kind": "beat", "block": 15, "command": "K", "due": 6183.469167301}
+{"t": 6184.220132465, "kind": "command", "command": "B"}
+{"t": 6184.220235803, "kind": "beat", "block": 15, "command": "B", "due": 6184.219167301}
+{"t": 6184.222373512, "kind": "command", "command": "K"}
+{"t": 6184.222395564, "kind": "beat", "block": 15, "command": "K", "due": 6184.219167301}
+{"t": 6184.970711615, "kind": "command", "command": "K"}
+{"t": 6184.97075088, "kind": "beat", "block": 15, "command": "K", "due": 6184.969167301}
+{"t": 6184.972852519, "kind": "command", "command": "O"}
+{"t": 6184.972870253, "kind": "beat", "block": 15, "command": "O", "due": 6184.969167301}
+{"t": 6185.719234493, "kind": "command", "command": "B"}
+{"t": 6185.719284839, "kind": "beat", "block": 15, "command": "B", "due": 6185.719167301}
+{"t": 6185.721432277, "kind": "command", "command": "K"}
+{"t": 6185.721462695, "kind": "beat", "block": 15, "command": "K", "due": 6185.719167301}
+{"t": 6186.469717768, "kind": "command", "command": "O"}
+{"t": 6186.469748908, "kind": "beat", "block": 15, "command": "O", "due": 6186.469167301}
+{"t": 6190.07565729, "kind": "block", "block": 16, "events": [[6192.074327825, "K"], [6192.599327825001, "B"], [6192.674327825001, "K"], [6193.199327825001, "O"], [6193.274327825, "K"], [6193.799327825001, "B"], [6193.874327825, "K"], [6194.399327825001, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6192.075774337, "kind": "command", "command": "K"}
+{"t": 6192.075831617, "kind": "beat", "block": 16, "command": "K", "due": 6192.074327825}
+{"t": 6192.600908961, "kind": "command", "command": "B"}
+{"t": 6192.600959578, "kind": "beat", "block": 16, "command": "B", "due": 6192.599327825001}
+{"t": 6192.676497285, "kind": "command", "command": "K"}
+{"t": 6192.676540278, "kind": "beat", "block": 16, "command": "K", "due": 6192.674327825001}
+{"t": 6193.200782197, "kind": "command", "command": "O"}
+{"t": 6193.200828606, "kind": "beat", "block": 16, "command": "O", "due": 6193.199327825001}
+{"t": 6193.275075021, "kind": "command", "command": "K"}
+{"t": 6193.275097023, "kind": "beat", "block": 16, "command": "K", "due": 6193.274327825}
+{"t": 6193.800017667, "kind": "command", "command": "B"}
+{"t": 6193.800053636, "kind": "beat", "block": 16, "command": "B", "due": 6193.799327825001}
+{"t": 6193.875514946, "kind": "command", "command": "K"}
+{"t": 6193.875554592, "kind": "beat", "block": 16, "command": "K", "due": 6193.874327825}
+{"t": 6194.400049707, "kind": "command", "command": "O"}
+{"t": 6194.400091317, "kind": "beat", "block": 16, "command": "O", "due": 6194.399327825001}
+{"t": 6198.682394582, "kind": "block", "block": 17, "events": [[6200.681343301, "K"], [6201.431343301, "K"], [6202.181343301, "K"], [6202.931343301, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6200.68273139, "kind": "command", "command": "K"}
+{"t": 6200.682780444, "kind": "beat", "block": 17, "command": "K", "due": 6200.681343301}
+{"t": 6201.431493548, "kind": "command", "command": "K"}
+{"t": 6201.431529467, "kind": "beat", "block": 17, "command": "K", "due": 6201.431343301}
+{"t": 6202.181605069, "kind": "command", "command": "K"}
+{"t": 6202.181653853, "kind": "beat", "block": 17, "command": "K", "due": 6202.181343301}
+{"t": 6202.931833685, "kind": "command", "command": "K"}
+{"t": 6202.931883942, "kind": "beat", "block": 17, "command": "K", "due": 6202.931343301}
+{"t": 6207.290148738, "kind": "block", "block": 18, "events": [[6209.288771532, "K"], [6209.888771532001, "K"], [6210.488771532, "K"], [6211.0887715320005, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6209.290333825, "kind": "command", "command": "K"}
+{"t": 6209.290368592, "kind": "beat", "block": 18, "command": "K", "due": 6209.288771532}
+{"t": 6209.890221588, "kind": "command", "command": "K"}
+{"t": 6209.890282746, "kind": "beat", "block": 18, "command": "K", "due": 6209.888771532001}
+{"t": 6210.489529427, "kind": "command", "command": "K"}
+{"t": 6210.48957273, "kind": "beat", "block": 18, "command": "K", "due": 6210.488771532}
+{"t": 6211.089694323, "kind": "command", "command": "K"}
+{"t": 6211.089729251, "kind": "beat", "block": 18, "command": "K", "due": 6211.0887715320005}
+{"t": 6215.892792472, "kind": "block", "block": 19, "events": [[6217.892589051, "K"], [6218.392589051, "K"], [6218.892589051, "K"], [6219.392589051, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6217.894661905, "kind": "command", "command": "K"}
+{"t": 6217.894710909, "kind": "beat", "block": 19, "command": "K", "due": 6217.892589051}
+{"t": 6218.39432197, "kind": "command", "command": "K"}
+{"t": 6218.394372627, "kind": "beat", "block": 19, "command": "K", "due": 6218.392589051}
+{"t": 6218.89356395, "kind": "command", "command": "K"}
+{"t": 6218.893589038, "kind": "beat", "block": 19, "command": "K", "due": 6218.892589051}
+{"t": 6219.39371599, "kind": "command", "command": "K"}
+{"t": 6219.39376782, "kind": "beat", "block": 19, "command": "K", "due": 6219.392589051}
+{"t": 6224.499946784, "kind": "block", "block": 20, "events": [[6226.497808895, "K"], [6227.247808895, "K"], [6227.997808895, "K"], [6228.747808895, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6226.499716331, "kind": "command", "command": "K"}
+{"t": 6226.49976288, "kind": "beat", "block": 20, "command": "K", "due": 6226.497808895}
+{"t": 6227.248479981, "kind": "command", "command": "K"}
+{"t": 6227.248527934, "kind": "beat", "block": 20, "command": "K", "due": 6227.247808895}
+{"t": 6227.999635047, "kind": "command", "command": "K"}
+{"t": 6227.999698229, "kind": "beat", "block": 20, "command": "K", "due": 6227.997808895}
+{"t": 6228.749848624, "kind": "command", "command": "K"}
+{"t": 6228.749891717, "kind": "beat", "block": 20, "command": "K", "due": 6228.747808895}
+{"t": 6233.102763768, "kind": "block", "block": 21, "events": [[6235.102417041, "K"], [6235.702417041, "K"], [6236.302417041, "K"], [6236.902417041, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6235.102906081, "kind": "command", "command": "K"}
+{"t": 6235.102936049, "kind": "beat", "block": 21, "command": "K", "due": 6235.102417041}
+{"t": 6235.703073692, "kind": "command", "command": "K"}
+{"t": 6235.703121624, "kind": "beat", "block": 21, "command": "K", "due": 6235.702417041}
+{"t": 6236.304403597, "kind": "command", "command": "K"}
+{"t": 6236.304444416, "kind": "beat", "block": 21, "command": "K", "due": 6236.302417041}
+{"t": 6236.902844099, "kind": "command", "command": "K"}
+{"t": 6236.902889055, "kind": "beat", "block": 21, "command": "K", "due": 6236.902417041}
+{"t": 6241.708303063, "kind": "block", "block": 22, "events": [[6243.707315385, "K"], [6244.207315385, "K"], [6244.707315385, "K"], [6245.207315385, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6243.709236216, "kind": "command", "command": "K"}
+{"t": 6243.709261425, "kind": "beat", "block": 22, "command": "K", "due": 6243.707315385}
+{"t": 6244.209018916, "kind": "command", "command": "K"}
+{"t": 6244.209060175, "kind": "beat", "block": 22, "command": "K", "due": 6244.207315385}
+{"t": 6244.708305314, "kind": "command", "command": "K"}
+{"t": 6244.708341173, "kind": "beat", "block": 22, "command": "K", "due": 6244.707315385}
+{"t": 6245.208081814, "kind": "command", "command": "K"}
+{"t": 6245.20811629, "kind": "beat", "block": 22, "command": "K", "due": 6245.207315385}
+{"t": 6250.312165989, "kind": "block", "block": 23, "events": [[6252.311571466, "K"], [6253.061571466, "K"], [6253.811571466, "K"], [6254.561571466, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6252.312878448, "kind": "command", "command": "K"}
+{"t": 6252.312933083, "kind": "beat", "block": 23, "command": "K", "due": 6252.311571466}
+{"t": 6253.062763814, "kind": "command", "command": "K"}
+{"t": 6253.062807087, "kind": "beat", "block": 23, "command": "K", "due": 6253.061571466}
+{"t": 6253.811983881, "kind": "command", "command": "K"}
+{"t": 6253.812046471, "kind": "beat", "block": 23, "command": "K", "due": 6253.811571466}
+{"t": 6254.562919134, "kind": "command", "command": "K"}
+{"t": 6254.562980492, "kind": "beat", "block": 23, "command": "K", "due": 6254.561571466}
+{"t": 6258.919949014, "kind": "block", "block": 24, "events": [[6260.918802671, "K"], [6261.518802671, "K"], [6262.118802671, "K"], [6262.718802671, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6260.920308454, "kind": "command", "command": "K"}
+{"t": 6260.920374852, "kind": "beat", "block": 24, "command": "K", "due": 6260.918802671}
+{"t": 6261.520342959, "kind": "command", "command": "K"}
+{"t": 6261.520404918, "kind": "beat", "block": 24, "command": "K", "due": 6261.518802671}
+{"t": 6262.119936848, "kind": "command", "command": "K"}
+{"t": 6262.119994138, "kind": "beat", "block": 24, "command": "K", "due": 6262.118802671}
+{"t": 6262.720680024, "kind": "command", "command": "K"}
+{"t": 6262.720712567, "kind": "beat", "block": 24, "command": "K", "due": 6262.718802671}
+{"t": 6267.525552068, "kind": "block", "block": 25, "events": [[6269.523233071, "K"], [6270.273233071, "K"], [6271.023233071, "K"], [6271.773233071, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6269.525252704, "kind": "command", "command": "K"}
+{"t": 6269.525284756, "kind": "beat", "block": 25, "command": "K", "due": 6269.523233071}
+{"t": 6270.273725555, "kind": "command", "command": "K"}
+{"t": 6270.273768518, "kind": "beat", "block": 25, "command": "K", "due": 6270.273233071}
+{"t": 6271.023314351, "kind": "command", "command": "K"}
+{"t": 6271.023353005, "kind": "beat", "block": 25, "command": "K", "due": 6271.023233071}
+{"t": 6271.773517016, "kind": "command", "command": "K"}
+{"t": 6271.773540211, "kind": "beat", "block": 25, "command": "K", "due": 6271.773233071}
+{"t": 6276.129713344, "kind": "block", "block": 26, "events": [[6278.127724962, "K"], [6278.727724962, "K"], [6279.327724962, "K"], [6279.927724962, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6278.128415408, "kind": "command", "command": "K"}
+{"t": 6278.128456306, "kind": "beat", "block": 26, "command": "K", "due": 6278.127724962}
+{"t": 6278.729746565, "kind": "command", "command": "K"}
+{"t": 6278.729790109, "kind": "beat", "block": 26, "command": "K", "due": 6278.727724962}
+{"t": 6279.329516692, "kind": "command", "command": "K"}
+{"t": 6279.329542902, "kind": "beat", "block": 26, "command": "K", "due": 6279.327724962}
+{"t": 6279.928561665, "kind": "command", "command": "K"}
+{"t": 6279.928617112, "kind": "beat", "block": 26, "command": "K", "due": 6279.927724962}
+{"t": 6284.732573114, "kind": "block", "block": 27, "events": [[6286.731872387, "K"], [6287.231872387, "K"], [6287.731872387, "K"], [6288.231872387, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6286.733879543, "kind": "command", "command": "K"}
+{"t": 6286.73392482, "kind": "beat", "block": 27, "command": "K", "due": 6286.731872387}
+{"t": 6287.232125459, "kind": "command", "command": "K"}
+{"t": 6287.232164675, "kind": "beat", "block": 27, "command": "K", "due": 6287.231872387}
+{"t": 6287.732576263, "kind": "command", "command": "K"}
+{"t": 6287.732619606, "kind": "beat", "block": 27, "command": "K", "due": 6287.731872387}
+{"t": 6288.233227321, "kind": "command", "command": "K"}
+{"t": 6288.233260625, "kind": "beat", "block": 27, "command": "K", "due": 6288.231872387}
+{"t": 6293.336402549, "kind": "block", "block": 28, "events": [[6295.335642529, "K"], [6296.085642529, "K"], [6296.835642529, "K"], [6297.585642529, "K"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6295.336479665, "kind": "command", "command": "K"}
+{"t": 6295.336550441, "kind": "beat", "block": 28, "command": "K", "due": 6295.335642529}
+{"t": 6296.087105434, "kind": "command", "command": "K"}
+{"t": 6296.087169297, "kind": "beat", "block": 28, "command": "K", "due": 6296.085642529}
+{"t": 6296.83761524, "kind": "command", "command": "K"}
+{"t": 6296.837642672, "kind": "beat", "block": 28, "command": "K", "due": 6296.835642529}
+{"t": 6297.586431179, "kind": "command", "command": "K"}
+{"t": 6297.586537454, "kind": "beat", "block": 28, "command": "K", "due": 6297.585642529}
+{"t": 6301.941833389, "kind": "block", "block": 29, "events": [[6303.941195603, "K"], [6304.691195603, "B"], [6304.691195603, "K"], [6305.441195603, "K"], [6305.441195603, "O"], [6306.191195603, "B"], [6306.191195603, "K"], [6306.941195603, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6303.941545012, "kind": "command", "command": "K"}
+{"t": 6303.941588977, "kind": "beat", "block": 29, "command": "K", "due": 6303.941195603}
+{"t": 6304.691838422, "kind": "command", "command": "B"}
+{"t": 6304.691907074, "kind": "beat", "block": 29, "command": "B", "due": 6304.691195603}
+{"t": 6304.694093727, "kind": "command", "command": "K"}
+{"t": 6304.694122893, "kind": "beat", "block": 29, "command": "K", "due": 6304.691195603}
+{"t": 6305.442447338, "kind": "command", "command": "K"}
+{"t": 6305.442488527, "kind": "beat", "block": 29, "command": "K", "due": 6305.441195603}
+{"t": 6305.444631806, "kind": "command", "command": "O"}
+{"t": 6305.444655802, "kind": "beat", "block": 29, "command": "O", "due": 6305.441195603}
+{"t": 6306.191820208, "kind": "command", "command": "B"}
+{"t": 6306.191867088, "kind": "beat", "block": 29, "command": "B", "due": 6306.191195603}
+{"t": 6306.194047739, "kind": "command", "command": "K"}
+{"t": 6306.194077035, "kind": "beat", "block": 29, "command": "K", "due": 6306.191195603}
+{"t": 6306.942273104, "kind": "command", "command": "O"}
+{"t": 6306.942314654, "kind": "beat", "block": 29, "command": "O", "due": 6306.941195603}
+{"t": 6310.549056512, "kind": "block", "block": 30, "events": [[6312.547205565, "K"], [6313.072205565, "B"], [6313.147205565, "K"], [6313.672205565001, "O"], [6313.747205565, "K"], [6314.272205565, "B"], [6314.347205565, "K"], [6314.8722055650005, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6312.549283526, "kind": "command", "command": "K"}
+{"t": 6312.549318333, "kind": "beat", "block": 30, "command": "K", "due": 6312.547205565}
+{"t": 6313.07269586, "kind": "command", "command": "B"}
+{"t": 6313.072743922, "kind": "beat", "block": 30, "command": "B", "due": 6313.072205565}
+{"t": 6313.148513895, "kind": "command", "command": "K"}
+{"t": 6313.148563871, "kind": "beat", "block": 30, "command": "K", "due": 6313.147205565}
+{"t": 6313.67388836, "kind": "command", "command": "O"}
+{"t": 6313.673951391, "kind": "beat", "block": 30, "command": "O", "due": 6313.672205565001}
+{"t": 6313.747407798, "kind": "command", "command": "K"}
+{"t": 6313.747443867, "kind": "beat", "block": 30, "command": "K", "due": 6313.747205565}
+{"t": 6314.27434693, "kind": "command", "command": "B"}
+{"t": 6314.274380384, "kind": "beat", "block": 30, "command": "B", "due": 6314.272205565}
+{"t": 6314.348067224, "kind": "command", "command": "K"}
+{"t": 6314.348110817, "kind": "beat", "block": 30, "command": "K", "due": 6314.347205565}
+{"t": 6314.873276341, "kind": "command", "command": "O"}
+{"t": 6314.873314324, "kind": "beat", "block": 30, "command": "O", "due": 6314.8722055650005}
+{"t": 6319.151947042, "kind": "block", "block": 31, "events": [[6321.151617149, "K"], [6321.651617149, "K"], [6321.726617149, "B"], [6322.151617149, "K"], [6322.226617149, "O"], [6322.651617149, "K"], [6322.726617149, "B"], [6323.226617149, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6321.152579896, "kind": "command", "command": "K"}
+{"t": 6321.152646223, "kind": "beat", "block": 31, "command": "K", "due": 6321.151617149}
+{"t": 6321.653565868, "kind": "command", "command": "K"}
+{"t": 6321.653599032, "kind": "beat", "block": 31, "command": "K", "due": 6321.651617149}
+{"t": 6321.727323674, "kind": "command", "command": "B"}
+{"t": 6321.727367448, "kind": "beat", "block": 31, "command": "B", "due": 6321.726617149}
+{"t": 6322.153149935, "kind": "command", "command": "K"}
+{"t": 6322.153198088, "kind": "beat", "block": 31, "command": "K", "due": 6322.151617149}
+{"t": 6322.228744592, "kind": "command", "command": "O"}
+{"t": 6322.228786753, "kind": "beat", "block": 31, "command": "O", "due": 6322.226617149}
+{"t": 6322.652461399, "kind": "command", "command": "K"}
+{"t": 6322.65250332, "kind": "beat", "block": 31, "command": "K", "due": 6322.651617149}
+{"t": 6322.728031138, "kind": "command", "command": "B"}
+{"t": 6322.72806363, "kind": "beat", "block": 31, "command": "B", "due": 6322.726617149}
+{"t": 6323.228298609, "kind": "command", "command": "O"}
+{"t": 6323.228338505, "kind": "beat", "block": 31, "command": "O", "due": 6323.226617149}
+{"t": 6327.759783031, "kind": "block", "block": 32, "events": [[6329.758363092, "K"], [6330.508363092, "B"], [6330.508363092, "K"], [6331.258363092, "K"], [6331.258363092, "O"], [6332.008363092, "B"], [6332.008363092, "K"], [6332.758363092, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6329.759926384, "kind": "command", "command": "K"}
+{"t": 6329.759995005, "kind": "beat", "block": 32, "command": "K", "due": 6329.758363092}
+{"t": 6330.510623639, "kind": "command", "command": "B"}
+{"t": 6330.510671481, "kind": "beat", "block": 32, "command": "B", "due": 6330.508363092}
+{"t": 6330.512856871, "kind": "command", "command": "K"}
+{"t": 6330.51289248, "kind": "beat", "block": 32, "command": "K", "due": 6330.508363092}
+{"t": 6331.259129373, "kind": "command", "command": "K"}
+{"t": 6331.259166474, "kind": "beat", "block": 32, "command": "K", "due": 6331.258363092}
+{"t": 6331.261288041, "kind": "command", "command": "O"}
+{"t": 6331.261307649, "kind": "beat", "block": 32, "command": "O", "due": 6331.258363092}
+{"t": 6332.009953822, "kind": "command", "command": "B"}
+{"t": 6332.010038004, "kind": "beat", "block": 32, "command": "B", "due": 6332.008363092}
+{"t": 6332.012186383, "kind": "command", "command": "K"}
+{"t": 6332.012206702, "kind": "beat", "block": 32, "command": "K", "due": 6332.008363092}
+{"t": 6332.759253271, "kind": "command", "command": "O"}
+{"t": 6332.759286214, "kind": "beat", "block": 32, "command": "O", "due": 6332.758363092}
+{"t": 6336.366329681, "kind": "block", "block": 33, "events": [[6338.364507669, "K"], [6339.114507669, "B"], [6339.114507669, "K"], [6339.864507669, "K"], [6339.864507669, "O"], [6340.614507669, "B"], [6340.614507669, "K"], [6341.364507669, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6338.365868081, "kind": "command", "command": "K"}
+{"t": 6338.36591468, "kind": "beat", "block": 33, "command": "K", "due": 6338.364507669}
+{"t": 6339.115929864, "kind": "command", "command": "B"}
+{"t": 6339.115980512, "kind": "beat", "block": 33, "command": "B", "due": 6339.114507669}
+{"t": 6339.11811814, "kind": "command", "command": "K"}
+{"t": 6339.118143439, "kind": "beat", "block": 33, "command": "K", "due": 6339.114507669}
+{"t": 6339.865319277, "kind": "command", "command": "K"}
+{"t": 6339.865373491, "kind": "beat", "block": 33, "command": "K", "due": 6339.864507669}
+{"t": 6339.867559963, "kind": "command", "command": "O"}
+{"t": 6339.867595952, "kind": "beat", "block": 33, "command": "O", "due": 6339.864507669}
+{"t": 6340.615742004, "kind": "command", "command": "B"}
+{"t": 6340.615801168, "kind": "beat", "block": 33, "command": "B", "due": 6340.614507669}
+{"t": 6340.618058376, "kind": "command", "command": "K"}
+{"t": 6340.618120085, "kind": "beat", "block": 33, "command": "K", "due": 6340.614507669}
+{"t": 6341.364819516, "kind": "command", "command": "O"}
+{"t": 6341.364863681, "kind": "beat", "block": 33, "command": "O", "due": 6341.364507669}
+{"t": 6344.970330023, "kind": "block", "block": 34, "events": [[6346.968427396, "K"], [6347.493427396001, "B"], [6347.5684273960005, "K"], [6348.093427396001, "O"], [6348.168427396, "K"], [6348.6934273960005, "B"], [6348.768427396, "K"], [6349.293427396001, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6346.968667825, "kind": "command", "command": "K"}
+{"t": 6346.968752989, "kind": "beat", "block": 34, "command": "K", "due": 6346.968427396}
+{"t": 6347.494482195, "kind": "command", "command": "B"}
+{"t": 6347.494506091, "kind": "beat", "block": 34, "command": "B", "due": 6347.493427396001}
+{"t": 6347.570526055, "kind": "command", "command": "K"}
+{"t": 6347.570565731, "kind": "beat", "block": 34, "command": "K", "due": 6347.5684273960005}
+{"t": 6348.093785093, "kind": "command", "command": "O"}
+{"t": 6348.093827425, "kind": "beat", "block": 34, "command": "O", "due": 6348.093427396001}
+{"t": 6348.170284118, "kind": "command", "command": "K"}
+{"t": 6348.170326079, "kind": "beat", "block": 34, "command": "K", "due": 6348.168427396}
+{"t": 6348.695452266, "kind": "command", "command": "B"}
+{"t": 6348.695493815, "kind": "beat", "block": 34, "command": "B", "due": 6348.6934273960005}
+{"t": 6348.769080643, "kind": "command", "command": "K"}
+{"t": 6348.76911577, "kind": "beat", "block": 34, "command": "K", "due": 6348.768427396}
+{"t": 6349.295182365, "kind": "command", "command": "O"}
+{"t": 6349.295225939, "kind": "beat", "block": 34, "command": "O", "due": 6349.293427396001}
+{"t": 6353.573487928, "kind": "block", "block": 35, "events": [[6355.573172893, "K"], [6356.073172893, "K"], [6356.148172893, "B"], [6356.573172893, "K"], [6356.648172893, "O"], [6357.073172893, "K"], [6357.148172893, "B"], [6357.648172893, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6355.573511551, "kind": "command", "command": "K"}
+{"t": 6355.573587406, "kind": "beat", "block": 35, "command": "K", "due": 6355.573172893}
+{"t": 6356.07517251, "kind": "command", "command": "K"}
+{"t": 6356.07519876, "kind": "beat", "block": 35, "command": "K", "due": 6356.073172893}
+{"t": 6356.14963491, "kind": "command", "command": "B"}
+{"t": 6356.149698983, "kind": "beat", "block": 35, "command": "B", "due": 6356.148172893}
+{"t": 6356.574458073, "kind": "command", "command": "K"}
+{"t": 6356.574507478, "kind": "beat", "block": 35, "command": "K", "due": 6356.573172893}
+{"t": 6356.648385525, "kind": "command", "command": "O"}
+{"t": 6356.648435912, "kind": "beat", "block": 35, "command": "O", "due": 6356.648172893}
+{"t": 6357.074607708, "kind": "command", "command": "K"}
+{"t": 6357.074656662, "kind": "beat", "block": 35, "command": "K", "due": 6357.073172893}
+{"t": 6357.148961288, "kind": "command", "command": "B"}
+{"t": 6357.149041683, "kind": "beat", "block": 35, "command": "B", "due": 6357.148172893}
+{"t": 6357.648674965, "kind": "command", "command": "O"}
+{"t": 6357.648715082, "kind": "beat", "block": 35, "command": "O", "due": 6357.648172893}
+{"t": 6362.181139129, "kind": "block", "block": 36, "events": [[6364.178858105, "K"], [6364.928858105, "B"], [6364.928858105, "K"], [6365.678858105, "K"], [6365.678858105, "O"], [6366.428858105, "B"], [6366.428858105, "K"], [6367.178858105, "O"]], "pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}}
+{"t": 6364.179084677, "kind": "command", "command": "K"}
+{"t": 6364.179120095, "kind": "beat", "block": 36, "command": "K", "due": 6364.178858105}
+{"t": 6364.930668887, "kind": "command", "command": "B"}
+{"t": 6364.930727139, "kind": "beat", "block": 36, "command": "B", "due": 6364.928858105}
+{"t": 6364.932864346, "kind": "command", "command": "K"}
+{"t": 6364.932875848, "kind": "beat", "block": 36, "command": "K", "due": 6364.928858105}
+{"t": 6365.679281265, "kind": "command", "command": "K"}
+{"t": 6365.679329678, "kind": "beat", "block": 36, "command": "K", "due": 6365.678858105}
+{"t": 6365.68146927, "kind": "command", "command": "O"}
+{"t": 6365.681492465, "kind": "beat", "block": 36, "command": "O", "due": 6365.678858105}
+{"t": 6366.429163967, "kind": "command", "command": "B"}
+{"t": 6366.429204615, "kind": "beat", "block": 36, "command": "B", "due": 6366.428858105}
+{"t": 6366.431325191, "kind": "command", "command": "K"}
+{"t": 6366.431339989, "kind": "beat", "block": 36, "command": "K", "due": 6366.428858105}
+{"t": 6367.180898236, "kind": "command", "command": "O"}
+{"t": 6367.180935407, "kind": "beat", "block": 36, "command": "O", "due": 6367.178858105}
+{"t": 6370.182782488, "kind": "command", "command": "O"}
+{"t": 6370.182895104, "kind": "command", "command": "Q"}
+{"t": 6370.203262348, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=-11 target=0 released=0 opened=0 fault=0"}
+{"t": 6370.20338787, "kind": "command", "command": "Q"}
+{"t": 6370.223626016, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=-3 target=0 released=0 opened=0 fault=0"}
+{"t": 6370.223681091, "kind": "command", "command": "Q"}
+{"t": 6370.244070278, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=7 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.244187112, "kind": "command", "command": "Q"}
+{"t": 6370.264620884, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=17 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.264741887, "kind": "command", "command": "Q"}
+{"t": 6370.28515584, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=25 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.285270821, "kind": "command", "command": "Q"}
+{"t": 6370.305470053, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=31 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.305617186, "kind": "command", "command": "Q"}
+{"t": 6370.326025539, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=35 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.326155188, "kind": "command", "command": "Q"}
+{"t": 6370.346515999, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.346627123, "kind": "command", "command": "Q"}
+{"t": 6370.367031408, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.367166798, "kind": "command", "command": "Q"}
+{"t": 6370.387535465, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.387666597, "kind": "command", "command": "Q"}
+{"t": 6370.408097454, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.40816316, "kind": "command", "command": "Q"}
+{"t": 6370.428535614, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.428631328, "kind": "command", "command": "Q"}
+{"t": 6370.448977422, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.449087754, "kind": "command", "command": "Q"}
+{"t": 6370.469502238, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.46963329, "kind": "command", "command": "Q"}
+{"t": 6370.490034349, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.490170811, "kind": "command", "command": "Q"}
+{"t": 6370.510568374, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.510772276, "kind": "command", "command": "Q"}
+{"t": 6370.531162384, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.531252377, "kind": "command", "command": "Q"}
+{"t": 6370.552013728, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.552100785, "kind": "command", "command": "Q"}
+{"t": 6370.572594773, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.572738149, "kind": "command", "command": "Q"}
+{"t": 6370.59315581, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.593292232, "kind": "command", "command": "Q"}
+{"t": 6370.613860723, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.614142685, "kind": "command", "command": "Q"}
+{"t": 6370.634576637, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.634696437, "kind": "command", "command": "Q"}
+{"t": 6370.655171388, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.655298172, "kind": "command", "command": "Q"}
+{"t": 6370.675566606, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.675632443, "kind": "command", "command": "Q"}
+{"t": 6370.696047398, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.696204681, "kind": "command", "command": "Q"}
+{"t": 6370.716552117, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.716713306, "kind": "command", "command": "Q"}
+{"t": 6370.73708007, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.737150074, "kind": "command", "command": "Q"}
+{"t": 6370.757492791, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.757604285, "kind": "command", "command": "Q"}
+{"t": 6370.77787292, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.777957783, "kind": "command", "command": "Q"}
+{"t": 6370.79830082, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.798417545, "kind": "command", "command": "Q"}
+{"t": 6370.819080427, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.819253019, "kind": "command", "command": "Q"}
+{"t": 6370.83957145, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.839647526, "kind": "command", "command": "Q"}
+{"t": 6370.859927181, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.860017906, "kind": "command", "command": "Q"}
+{"t": 6370.880304775, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.880363328, "kind": "command", "command": "Q"}
+{"t": 6370.900571787, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.900627975, "kind": "command", "command": "Q"}
+{"t": 6370.921213479, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.921290667, "kind": "command", "command": "Q"}
+{"t": 6370.9417878, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.941909945, "kind": "command", "command": "Q"}
+{"t": 6370.962248404, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.962349138, "kind": "command", "command": "Q"}
+{"t": 6370.982642049, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6370.982738023, "kind": "command", "command": "Q"}
+{"t": 6371.002940972, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.00310677, "kind": "command", "command": "Q"}
+{"t": 6371.023599335, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.023664751, "kind": "command", "command": "Q"}
+{"t": 6371.044063956, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.044204476, "kind": "command", "command": "Q"}
+{"t": 6371.064563755, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.064669989, "kind": "command", "command": "Q"}
+{"t": 6371.084933895, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.085029068, "kind": "command", "command": "Q"}
+{"t": 6371.10529123, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.105487497, "kind": "command", "command": "Q"}
+{"t": 6371.125764057, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.125853138, "kind": "command", "command": "Q"}
+{"t": 6371.146194974, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.146253336, "kind": "command", "command": "Q"}
+{"t": 6371.166564171, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.16666212, "kind": "command", "command": "Q"}
+{"t": 6371.186969929, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.187197887, "kind": "command", "command": "Q"}
+{"t": 6371.20753836, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.207830331, "kind": "command", "command": "Q"}
+{"t": 6371.228211572, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.228322616, "kind": "command", "command": "Q"}
+{"t": 6371.248657568, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.24871101, "kind": "command", "command": "Q"}
+{"t": 6371.269087703, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.26919572, "kind": "command", "command": "Q"}
+{"t": 6371.28953484, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.289630334, "kind": "command", "command": "Q"}
+{"t": 6371.309839715, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.310039468, "kind": "command", "command": "Q"}
+{"t": 6371.330562863, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.330679066, "kind": "command", "command": "Q"}
+{"t": 6371.350922151, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.351014849, "kind": "command", "command": "Q"}
+{"t": 6371.371271441, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.371350813, "kind": "command", "command": "Q"}
+{"t": 6371.391655277, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.391731033, "kind": "command", "command": "Q"}
+{"t": 6371.412102865, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.412230761, "kind": "command", "command": "Q"}
+{"t": 6371.432533732, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.432633894, "kind": "command", "command": "Q"}
+{"t": 6371.453147971, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.453274574, "kind": "command", "command": "Q"}
+{"t": 6371.47356492, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.473620477, "kind": "command", "command": "Q"}
+{"t": 6371.493860707, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.493920642, "kind": "command", "command": "Q"}
+{"t": 6371.514165962, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.514252278, "kind": "command", "command": "Q"}
+{"t": 6371.534523437, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.534623029, "kind": "command", "command": "Q"}
+{"t": 6371.55483264, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.554913536, "kind": "command", "command": "Q"}
+{"t": 6371.575266362, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.575495432, "kind": "command", "command": "Q"}
+{"t": 6371.596411801, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.596610313, "kind": "command", "command": "Q"}
+{"t": 6371.616915247, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.617098148, "kind": "command", "command": "Q"}
+{"t": 6371.637497545, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.637614439, "kind": "command", "command": "Q"}
+{"t": 6371.657890508, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.657945834, "kind": "command", "command": "Q"}
+{"t": 6371.678214048, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.678291978, "kind": "command", "command": "Q"}
+{"t": 6371.698425172, "kind": "command", "command": "S"}
+{"t": 6371.698472102, "kind": "firmware", "line": "HIHAT v=2 min=90 max=115 angle=90 counts=134 pos=37 target=0 released=1 opened=1 fault=0"}
+{"t": 6371.703577194, "kind": "firmware", "line": "STOP -- all motors released."}

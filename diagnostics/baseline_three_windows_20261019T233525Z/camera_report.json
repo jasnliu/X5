@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "camera_scene": "/home/jason/Proyectos3/X5/diagnostics/baseline_three_windows_20261019T233525Z/actual_camera/scene-68499379/scene.json",
+  "startup_plan": null,
+  "shared_scene": true,
+  "physical_motor_commands": 0,
+  "live_encoder_feedback_available": false,
+  "external_can_owners_before": [
+    {
+      "bus": "can1",
+      "pid": 296484,
+      "resume": null
+    },
+    {
+      "bus": "can0",
+      "pid": 296484,
+      "resume": null
+    }
+  ],
+  "buttons": {
+    "calculate": true,
+    "start": true,
+    "hold": true,
+    "reverse": true,
+    "cancel": true
+  },
+  "report": {
+    "type": "baseline_three_windows",
+    "plan": null,
+    "plan_valid": false,
+    "simulated": false,
+    "owner": null,
+    "owner_status": {},
+    "last_error": "No current usable trajectory. Click Calculate trajectory first.",
+    "button_states": {
+      "calculate": true,
+      "start": true,
+      "hold": true,
+      "reverse": true,
+      "cancel": true
+    },
+    "preview_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 2,
+      "maximum_frame_s": 0.051512472971808165,
+      "median_frame_s": 0.03513720698538236,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 19516,
+      "render_errors": []
+    },
+    "live_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 2,
+      "maximum_frame_s": 0.042376100027468055,
+      "median_frame_s": 0.02969969401601702,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 19516,
+      "render_errors": []
+    }
+  }
+}

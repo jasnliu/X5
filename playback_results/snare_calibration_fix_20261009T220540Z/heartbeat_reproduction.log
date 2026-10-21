@@ -1,0 +1,37 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_ready_heartbeat_received_inside_tick_is_not_a_detector_failure ______
+
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-10/test_ready_heartbeat_received_0')
+
+    def test_ready_heartbeat_received_inside_tick_is_not_a_detector_failure(tmp_path):
+        """Real datagram delivery can timestamp a heartbeat AFTER tick's first clock read."""
+        from camera_playback.audio import AudioSender, AudioReceiver
+        a=app_fixture();a.root=Mock();a.continuous_strike_active=True
+        a._request_continuous_stop=Mock()
+        a.bus.left_joint6_session=Mock(status=SnareStatus(at=10.))
+        r=SnareSyncRuntime(a,tmp_path/'snare.sock')
+        a.audio_receiver=AudioReceiver(tmp_path/'ride.sock')
+        a.audio_receiver.state='ready';a.audio_receiver.received_at=9.9
+        sender=AudioSender(r.receiver.path,'snare')
+        r.engine=engine();r.last_observed=10.
+        clock=[10.]
+        poll=r.receiver.poll
+        def receive_later():
+            clock[0]+=.0001
+            return poll()
+        try:
+            sender.status('ready')
+            with patch('camera_playback.snare_sync_runtime.time.monotonic',side_effect=lambda:clock[0]), \
+                 patch.object(r.receiver,'poll',side_effect=receive_later):
+                r.tick()
+>           assert r.active
+E           assert False
+E            +  where False = <camera_playback.snare_sync_runtime.SnareSyncRuntime object at 0x7a24a5138c20>.active
+
+tests/test_snare_sync.py:340: AssertionError
+----------------------------- Captured stdout call -----------------------------
+SNARE SYNC: {"kind": "fault", "at": 10.0, "detail": "Ride/snare detector unavailable during timing calibration"}
+=========================== short test summary info ============================
+FAILED tests/test_snare_sync.py::test_ready_heartbeat_received_inside_tick_is_not_a_detector_failure
+1 failed, 21 deselected in 0.41s

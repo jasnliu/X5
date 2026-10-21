@@ -56,6 +56,7 @@ class AudioTimingTests(unittest.TestCase):
 
     def waiting(self):
         a = app_fixture()
+        a.hihat_sync = Mock()
         a.phase = STRIKE_SOUND_WAIT_PHASE
         a.strike_attempt_returned_at = 10.4
         a.strike_sound_deadline = 13.4
@@ -73,6 +74,8 @@ class AudioTimingTests(unittest.TestCase):
         self.assertEqual(a.phase, STRIKE_SOUND_WAIT_PHASE)
         a._process_sound_hit(dict(event_at=10.1, detected_at=12.))
         self.assertTrue(a.continuous_strike_active)
+        self.assertTrue(a.sync_calibrating)
+        a.hihat_sync.start_calibration.assert_called_once()
         self.assertEqual(a.continuous_strike_degrees, 5.5)
         self.assertEqual(a._current_strike_degrees(), 5)  # Same original search attempt.
 

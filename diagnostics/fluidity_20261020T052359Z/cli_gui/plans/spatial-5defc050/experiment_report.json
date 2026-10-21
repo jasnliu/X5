@@ -1,0 +1,159 @@
+{
+  "method": "spatial",
+  "pool_key": "4cb5d6272be31094487206867bb9091cd2e64452e5d89f341e91466de3295910",
+  "pool_file": "/home/jason/Proyectos3/X5/diagnostics/fluidity_20261020T052359Z/cli_gui/shared_pools/4cb5d6272be31094487206867bb9091cd2e64452e5d89f341e91466de3295910/pool.json",
+  "pool_reused": true,
+  "candidates": [
+    {
+      "index": 2,
+      "file": "candidate_02.json",
+      "sha256": "b24d4ebbd8d62fe318fc4ca0da575ee454f4c4a3a96502631b555043cea76b50",
+      "metrics": {
+        "values": {
+          "reversals": 11.43329288594986,
+          "coordination": 15.041711183054517,
+          "spatial": 197.0036588181033
+        },
+        "reversals": {
+          "count": 7,
+          "per_joint_count": [
+            1,
+            1,
+            3,
+            0,
+            0,
+            0,
+            2
+          ],
+          "excess_travel_rad": 2.3212667269519955,
+          "per_joint_excess_rad": [
+            0.2167389530434629,
+            1.0945444213348154,
+            0.5974342141509122,
+            0.0,
+            0.028152296022042944,
+            0.0,
+            0.384396842400762
+          ],
+          "score": 11.43329288594986
+        },
+        "coordination": {
+          "length": 2.8569680798151884,
+          "total_turn_rad": 4.027243491341662,
+          "bending_energy": 121.31849853178629,
+          "curvature_variation": 356.13003847042313
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.6533812729598112,
+            "total_turn_rad": 5.516095354449466,
+            "bending_energy": 77.15127808266541,
+            "curvature_variation": 71.85105884766622,
+            "excess_length_ratio": 0.7066047998231526,
+            "score": 95.82064759440512
+          },
+          "tip": {
+            "length": 1.42141176667351,
+            "total_turn_rad": 6.135798661565415,
+            "bending_energy": 68.82636701937453,
+            "curvature_variation": 127.13650680240923,
+            "excess_length_ratio": 0.5725175037213521,
+            "score": 101.18301122369819
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.6124129048568379,
+            "broad_bending": 667.6043504513921,
+            "obstacle_proximity": 0.1923787313432836,
+            "joint_economy": 1.6274428844230064
+          },
+          "wrist": {
+            "travel_m": 0.6533812729598112,
+            "direct_distance_m": 0.38285446813903135,
+            "broad_turning_deg": 316.04898320167433
+          },
+          "tip": {
+            "travel_m": 1.42141176667351,
+            "direct_distance_m": 0.9039083910415933,
+            "broad_turning_deg": 351.5553672497177
+          },
+          "joint_travel_rad": 6.0938539050980935,
+          "joint_direct_rad": 3.7444348821240556,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "duration_s": 32.873449248774904,
+      "search": 1,
+      "stop_at_corners": true,
+      "score": 99.99999999999999,
+      "normalized_fluidity": {
+        "reversals": 100.0,
+        "coordination": 100.0,
+        "spatial": 99.99999999999999
+      },
+      "baseline_score": {
+        "total": 100.0,
+        "weighted_components": {
+          "workspace_economy": 40.0,
+          "broad_bending": 29.999999999999996,
+          "obstacle_proximity": 20.0,
+          "joint_economy": 10.0
+        }
+      }
+    }
+  ],
+  "selected": 2,
+  "searches": [
+    {
+      "search": 1,
+      "status": "planned",
+      "allocation_s": 0.8332585624981826
+    }
+  ],
+  "pool_elapsed_s": 5.320227755000815,
+  "budget_s": 5.0,
+  "joint_limit_check": {
+    "accepted_static_encoder_overshoot": [
+      {
+        "handling": "Static left measurement retained exactly for FK/collision checking; no commands or clipping",
+        "joint": "openarmx_left_joint4",
+        "lower_rad": 0.0,
+        "measured_rad": -0.00019180590524214836,
+        "measurement_tolerance_rad": 0.0011508354314488441,
+        "overshoot_rad": 0.00019180590524214836,
+        "upper_rad": 1.8
+      }
+    ],
+    "angles_clamped": false,
+    "moving_right_limits_unchanged": true,
+    "reason": "joint_limits",
+    "static_left_encoder_tolerance_rad": 0.0011508354314488441,
+    "valid": true,
+    "violations": []
+  },
+  "duration_ratio_filter": null,
+  "normalization": {
+    "baseline_reference_index": 2,
+    "fastest_reference_index": 2,
+    "baseline_normalizers": {
+      "workspace_economy": 1.6124129048568379,
+      "broad_bending": 667.6043504513921,
+      "obstacle_proximity": 0.1923787313432836,
+      "joint_economy": 1.6274428844230064
+    },
+    "fluidity_normalizers": {
+      "reversals": 11.43329288594986,
+      "coordination": 15.041711183054517,
+      "spatial": 197.0036588181033
+    },
+    "duration_ratio_filter": null,
+    "lower_is_better": true,
+    "fluidity_reference": "per-component pool median, floored at 1",
+    "baseline_uses_fastest_reference": true,
+    "fluidity_scoring_uses_elapsed_time": false
+  }
+}

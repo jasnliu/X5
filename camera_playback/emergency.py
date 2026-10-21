@@ -68,12 +68,13 @@ def relax(app, reason):
                 calibration.close()
             except Exception as exc:
                 print('EMERGENCY calibration cleanup: '+str(exc), flush=True)
-        sync = getattr(app, 'hihat_sync', None)
-        if sync is not None:
-            try:
-                sync.stop()
-            except Exception as exc:
-                print('EMERGENCY hi-hat sync cleanup: '+str(exc), flush=True)
+        for name in ('hihat_sync', 'snare_sync'):
+            sync = getattr(app, name, None)
+            if sync is not None:
+                try:
+                    sync.stop()
+                except Exception as exc:
+                    print('EMERGENCY '+name+' cleanup: '+str(exc), flush=True)
         hihat = getattr(app, 'hihat', None)
         if hihat is not None:
             try:

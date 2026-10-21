@@ -1,0 +1,166 @@
+{
+  "baseline": {
+    "collision_ranges": [],
+    "key_pose_checks": {
+      "0": {
+        "checks": 802,
+        "valid": [
+          true
+        ]
+      },
+      "800": {
+        "checks": 803,
+        "valid": [
+          true
+        ]
+      }
+    },
+    "positive_x_overshoot_tip_m": 0.13341297124560714,
+    "positive_x_overshoot_wrist_m": 0.08608895329860167,
+    "joint5_min_deg": -22.08389619558774,
+    "joint5_max_deg": 11.731980363937698,
+    "tip_horizontal_travel_m": 0.7730148076360965,
+    "constant_speed_joint_only_duration_lower_bound_s": 2.889003013313791,
+    "joint_bending_scale_sweep": {
+      "0.025": 3.136120179378448,
+      "0.05": 3.0988475422707835,
+      "0.1": 2.9733715606578537,
+      "0.2": 2.5941284387760977,
+      "0.4": 2.2753027218879613
+    }
+  },
+  "record3_raw": {
+    "collision_ranges": [
+      {
+        "first": 0,
+        "last": 0,
+        "start_joint_arc_fraction": 0.0,
+        "end_joint_arc_fraction": 0.0
+      },
+      {
+        "first": 21,
+        "last": 361,
+        "start_joint_arc_fraction": 0.02625,
+        "end_joint_arc_fraction": 0.45125
+      }
+    ],
+    "key_pose_checks": {
+      "0": {
+        "checks": 1605,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          false
+        ]
+      },
+      "361": {
+        "checks": 1606,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          false
+        ]
+      },
+      "800": {
+        "checks": 1607,
+        "valid": [
+          true
+        ]
+      }
+    },
+    "positive_x_overshoot_tip_m": 0.013243439193753037,
+    "positive_x_overshoot_wrist_m": 0.0011014418172169138,
+    "joint5_min_deg": -3.763452723054275,
+    "joint5_max_deg": 19.138414931325784,
+    "tip_horizontal_travel_m": 0.3459295387500691,
+    "constant_speed_joint_only_duration_lower_bound_s": 3.381255464924061,
+    "joint_bending_scale_sweep": {
+      "0.025": 19.079159191306115,
+      "0.05": 11.81432350401683,
+      "0.1": 8.35846964312885,
+      "0.2": 5.531852406992679,
+      "0.4": 3.0234248058259516
+    }
+  },
+  "record3_playback_fit": {
+    "collision_ranges": [
+      {
+        "first": 0,
+        "last": 0,
+        "start_joint_arc_fraction": 0.0,
+        "end_joint_arc_fraction": 0.0
+      },
+      {
+        "first": 22,
+        "last": 368,
+        "start_joint_arc_fraction": 0.0275,
+        "end_joint_arc_fraction": 0.46
+      }
+    ],
+    "key_pose_checks": {
+      "0": {
+        "checks": 2409,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          false
+        ]
+      },
+      "368": {
+        "checks": 2410,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          false
+        ]
+      },
+      "800": {
+        "checks": 2411,
+        "valid": [
+          true
+        ]
+      }
+    },
+    "positive_x_overshoot_tip_m": 0.01291535423118817,
+    "positive_x_overshoot_wrist_m": 0.0008149320902058055,
+    "joint5_min_deg": -3.763452723054275,
+    "joint5_max_deg": 19.065095376728706,
+    "tip_horizontal_travel_m": 0.3249624633884004,
+    "constant_speed_joint_only_duration_lower_bound_s": 3.3025040691469782,
+    "joint_bending_scale_sweep": {
+      "0.025": 11.483915041611496,
+      "0.05": 8.925490325014609,
+      "0.1": 7.226741269052549,
+      "0.2": 5.115817242483801,
+      "0.4": 2.971963679563306
+    }
+  }
+}

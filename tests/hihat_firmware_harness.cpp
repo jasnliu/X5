@@ -18,10 +18,15 @@ unsigned long clockMs = 100;
 unsigned long millis() { return clockMs; }
 unsigned long micros() { return clockMs*1000; }
 void noInterrupts() {} void interrupts() {}
-void pinMode(int,int) {} void digitalWrite(int,int) {}
+int digitalLevels[40] = {}, pwmLevels[40] = {};
+int pwmFrequencies[40] = {}, pwmBits[40] = {};
+void pinMode(int,int) {}
+void digitalWrite(int pin,int level) { digitalLevels[pin] = level; }
 int digitalRead(int) { return 0; }
-bool ledcAttach(int,int,int) { return true; }
-void ledcWrite(int,int) {}
+bool ledcAttach(int pin,int frequency,int bits) {
+  pwmFrequencies[pin] = frequency; pwmBits[pin] = bits; return true;
+}
+void ledcWrite(int pin,int duty) { pwmLevels[pin] = duty; }
 int digitalPinToInterrupt(int p) { return p; }
 void attachInterrupt(int,void(*)(),int) {}
 struct SerialMock {
@@ -43,8 +48,32 @@ void send(const std::string& s) {
   clockMs += 10; loop();
 }
 void pos(long p) { enc2Raw = -p; }
+void assertKickReleased() {
+  assert(!kick1Active && pwmLevels[M1_RPWM]==0 && digitalLevels[M1_LPWM]==LOW);
+  assert(digitalLevels[M1_R_EN]==LOW && digitalLevels[M1_L_EN]==LOW);
+}
+void testBassPulse() {
+  assert(KICK_DUTY==180 && KICK_MS==50);
+  assert(M1_RPWM==16 && M1_LPWM==17 && M1_R_EN==18 && M1_L_EN==19);
+  assert(pwmFrequencies[M1_RPWM]==20000 && pwmBits[M1_RPWM]==8);
+  assertKickReleased();
+  send("J"); pos(KEY_TARGET_COUNTS); send("H");
+  send("K");
+  assert(kick1Active && pwmLevels[M1_RPWM]==180 && digitalLevels[M1_LPWM]==LOW);
+  assert(digitalLevels[M1_R_EN]==HIGH && digitalLevels[M1_L_EN]==HIGH);
+  clockMs+=49; loop();
+  assert(kick1Active && pwmLevels[M1_RPWM]==180);
+  assert(!released2 && setpoint2==KEY_TARGET_COUNTS);
+  clockMs+=1; loop(); assertKickReleased();
+  assert(!released2 && setpoint2==KEY_TARGET_COUNTS); // Bass release never opens hi-hat.
+  clockMs+=100; loop(); assertKickReleased(); // No autonomous repeat or reverse.
+  send("K"); assert(kick1Active); // Next host beat starts a fresh identical pulse.
+  send("S"); assertKickReleased(); assert(released2); // Emergency stop cuts pulse short.
+  send("O"); pos(0); send("H"); assert(released2 && openReached2);
+  std::cout << "Bass clockwise PWM 180/255 for 50 ms, release and independent hi-hat passed\n";
+}
 int main() {
-  setup(); send("Q");
+  setup(); testBassPulse(); send("Q");
   assert(Serial.output.find("HIHAT v=2 min=90 max=115") != std::string::npos);
   send("A115\n"); assert(calibratedDegrees==115 && calibratedCounts==172);
   assert(released2 && setpoint2==0);  // Setting an angle never moves the motor.

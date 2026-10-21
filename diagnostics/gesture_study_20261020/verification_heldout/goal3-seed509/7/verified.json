@@ -1,0 +1,59 @@
+{
+  "case": "goal3",
+  "seed": 509,
+  "index": 7,
+  "samples": 11145,
+  "passed": true,
+  "cycle": {
+    "status": "software_cycle_verified",
+    "events": [
+      "START",
+      "OUTWARD",
+      "HOLD_2_SECONDS",
+      "RETURN_TO_SAVED_START",
+      "RELAX_INTENT_ONLY"
+    ],
+    "supported_rest_is_synthetic": true,
+    "right_gripper": "custom CLOSED +7 degrees for all movement",
+    "left_arm": "static, no commands",
+    "motor_commands": 0,
+    "recoverable_fault": "RETURN_TO_SAVED_START_INTENT",
+    "stall": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+    "missing_feedback": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+    "unsafe_return": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+    "unsupported_rest": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+    "physical_recovery_implemented": false
+  },
+  "peaks": [
+    [
+      0.0813663565140953,
+      0.050768954727311626,
+      0.0760010268695047,
+      0.17178983055018737,
+      0.09711903452337925,
+      0.11973977906366862,
+      0.015216459454088168
+    ],
+    [
+      0.15332227073196203,
+      0.17077932998608222,
+      0.06586819491427556,
+      0.5269120823833078,
+      0.15164059065590824,
+      0.12128539484837714,
+      0.011218514658729712
+    ],
+    [
+      1.7406686325851255,
+      1.9388587279689784,
+      0.6608726405307613,
+      5.982035940089878,
+      1.721576508887529,
+      1.3769537940927268,
+      0.12736386225829893
+    ]
+  ],
+  "candidate_sha256": "4b8a5b5367adea4c25f93aebb3a0a18a781bd60320e498cc08e88a7f91001763",
+  "unchanged_production_backend": true,
+  "original_acquisition_self_filter": true
+}

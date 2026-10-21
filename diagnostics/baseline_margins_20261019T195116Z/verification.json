@@ -1,0 +1,63 @@
+{
+  "request": "Use Baseline collision margins for the new Baseline-only hardware mode",
+  "complete": true,
+  "physical_motor_commands": 0,
+  "physical_can_access": false,
+  "physical_camera_access": false,
+  "physical_execution_tested": false,
+  "baseline_margin_policy": "baseline_request",
+  "normal_scene_padding_m": 0.02,
+  "native_voxel_edge_allowances_m": 0.014,
+  "extra_self_clearance_m": 0.0,
+  "full_robot_stick_self_collision_zone3_and_tracking_checks_retained": true,
+  "legacy_executor_unchanged": true,
+  "regression_tests_passed": 415,
+  "regression_duration": "101.17s (0:01:41)",
+  "native_saved_scene_checks": {
+    "source": "diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+    "can_access": false,
+    "motor_commands": 0,
+    "results": {
+      "full_curve": {
+        "samples": 3405,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      },
+      "return_prefix": {
+        "samples": 5916,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "invalid_rejected": "Baseline collision/zone check failed; no motion: [{'accepted_static_encoder_overshoot': [{'handling': 'Static left measurement retained exactly for FK/collision checking; no commands or clipping', 'joint': 'openarmx_left_joint4', 'lower_rad': 0.0, 'measured_rad': -0.00019180590524214836, 'measurement_tolerance_rad': 0.0011508354314488441, 'overshoot_rad': 0.00019180590524214836, 'upper_rad': 1.8}], 'angles_clamped': False, 'moving_right_limits_unchanged': True, 'reason': 'joint_limits', 'static_left_encoder_tolerance_rad': 0.0011508354314488441, 'stick_center_world': [-0.15893166613321877, -0.35431615807583305, 0.2568956429115591], 'valid': False, 'violations': [{'joint': 'openarmx_right_joint3', 'lower_rad': -1.6139329852572395, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.47393298525723937, 'upper_rad': 1.5260670147427606}, {'joint': 'openarmx_right_joint4', 'lower_rad': -0.027614306757365363, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.22761430675736527, 'upper_rad': 1.7723856932426347}, {'joint': 'openarmx_right_joint5', 'lower_rad': -1.4877306018557213, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.48773060185572126, 'upper_rad': 1.5122693981442787}, {'joint': 'openarmx_right_joint6', 'lower_rad': -0.7730048019279488, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 1.2730048019279487, 'upper_rad': 0.7269951980720512}, {'joint': 'openarmx_right_joint7', 'lower_rad': -1.4, 'measured_rad': 2.0, 'measurement_tolerance_rad': 0.0, 'overshoot_rad': 0.6000000000000001, 'upper_rad': 1.4}]}]"
+  },
+  "mock_gui_checks": [
+    "preview",
+    "speed",
+    "start",
+    "hold",
+    "blocked_close",
+    "checked_prefix_reverse",
+    "hold_during_reverse",
+    "GUI_disconnect",
+    "reconnect",
+    "CAN_fault_blocks_reverse",
+    "clear_fault_then_recover",
+    "supported_start_release"
+  ],
+  "mock_gui_passed": true,
+  "independent_memory_capped_services": true,
+  "memory_snapshot": "ControlGroup=/user.slice/user-1000.slice/user@1000.service/app.slice/x5-baseline-margins-regression-1792439522.service\nMemoryCurrent=224227328\nMemoryPeak=429101056\nMemorySwapPeak=0\nMemoryMax=3221225472\nMemorySwapMax=134217728\n",
+  "changed_files": [
+    "BASELINE_HARDWARE.md",
+    "DRUM_PLANNER.md",
+    "drum_planner/baseline/app.py",
+    "drum_planner/baseline/tasks.py",
+    "tests/test_baseline_hardware.py"
+  ],
+  "unchanged_files_count": 78
+}

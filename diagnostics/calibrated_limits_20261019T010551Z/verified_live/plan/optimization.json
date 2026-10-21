@@ -1,0 +1,176 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 6,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "planned",
+      "planning_wall_s": 4.682058500999119,
+      "backend_folder": "candidates/01",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "selected",
+          "duration_outward_s": 7.643675770043926,
+          "duration_cycle_s": 17.287351540087855,
+          "passed": true,
+          "checked_samples": 3823,
+          "failures": []
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 25.660514790020507,
+          "duration_cycle_s": 53.321029580041014
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 5.203054436719467
+    },
+    {
+      "index": 2,
+      "seed": 7938,
+      "status": "planned",
+      "planning_wall_s": 4.285748791007791,
+      "backend_folder": "candidates/02",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 12.37686482726246,
+          "duration_cycle_s": 26.75372965452492
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 41.817983090265685,
+          "duration_cycle_s": 85.63596618053137
+        }
+      ],
+      "waypoint_count": 12,
+      "moveit_seed_duration_s": 8.252455136407635
+    },
+    {
+      "index": 3,
+      "seed": 15857,
+      "status": "planned",
+      "planning_wall_s": 4.185641846008366,
+      "backend_folder": "candidates/03",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 6.986886397845594,
+          "duration_cycle_s": 15.973772795691188,
+          "passed": false,
+          "checked_samples": 2418,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5465582850733672,
+                -0.5140969798225407,
+                0.5902539112217878
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 30.62370297999974,
+          "duration_cycle_s": 63.24740595999948
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 5.789249559892294
+    },
+    {
+      "index": 4,
+      "seed": 23776,
+      "status": "planned",
+      "planning_wall_s": 3.5312782029795926,
+      "backend_folder": "candidates/04",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 15.511190510232591,
+          "duration_cycle_s": 33.02238102046518
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 50.53668217856323,
+          "duration_cycle_s": 103.07336435712647
+        }
+      ],
+      "waypoint_count": 9,
+      "moveit_seed_duration_s": 5.689273191625007
+    },
+    {
+      "index": 5,
+      "seed": 31695,
+      "status": "planned",
+      "planning_wall_s": 3.454264650994446,
+      "backend_folder": "candidates/05",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 9.731472666417364,
+          "duration_cycle_s": 21.462945332834728
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 24.065361396936446,
+          "duration_cycle_s": 50.13072279387289
+        }
+      ],
+      "waypoint_count": 9,
+      "moveit_seed_duration_s": 5.901833710316102
+    },
+    {
+      "index": 6,
+      "seed": 39614,
+      "status": "planned",
+      "planning_wall_s": 3.4469054869841784,
+      "backend_folder": "candidates/06",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 8.130303631655716,
+          "duration_cycle_s": 18.26060726331143
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 28.693608418629598,
+          "duration_cycle_s": 59.387216837259196
+        }
+      ],
+      "waypoint_count": 9,
+      "moveit_seed_duration_s": 5.950130819403042
+    }
+  ],
+  "selected_candidate": 1,
+  "selected_seed": 19,
+  "selected_stop_at_corners": false,
+  "selected_duration_s": 7.643675770043926,
+  "wall_time_s": 18.246619159996044,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

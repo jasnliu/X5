@@ -1,0 +1,551 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 6,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "planned",
+      "planning_wall_s": 4.279818651993992,
+      "backend_folder": "candidates/01",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 5.215610587908044,
+          "duration_cycle_s": 12.431221175816088,
+          "passed": false,
+          "checked_samples": 2609,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.3507640313263294,
+                -0.24137502595349453,
+                0.08818158423507169
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.35101492561695913,
+                -0.24143184976312365,
+                0.08850649075343817
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.3512651588985902,
+                -0.24148859034760015,
+                0.0888310442996805
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.35151473073775075,
+                -0.24154525250863934,
+                0.08915524202115288
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.3517636407262218,
+                -0.24160184108616414,
+                0.08947908110482553
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 32.21785529506378,
+          "duration_cycle_s": 66.43571059012756
+        }
+      ],
+      "waypoint_count": 6,
+      "moveit_seed_duration_s": 4.664482393958408
+    },
+    {
+      "index": 2,
+      "seed": 7938,
+      "status": "planned",
+      "planning_wall_s": 3.731737352005439,
+      "backend_folder": "candidates/02",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 9.168160212113824,
+          "duration_cycle_s": 20.336320424227647,
+          "passed": false,
+          "checked_samples": 4586,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5103515322756733,
+                -0.3208387629642212,
+                0.12688774178596546
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5105209195948489,
+                -0.3212055548522561,
+                0.12710328363209444
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5106892247299682,
+                -0.3215720983291974,
+                0.12731833068617576
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.510856458658728,
+                -0.32193838867667046,
+                0.12753288990621656
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5110226323776483,
+                -0.3223044211931547,
+                0.12774696828447535
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 26.762458658561776,
+          "duration_cycle_s": 55.52491731712355
+        }
+      ],
+      "waypoint_count": 11,
+      "moveit_seed_duration_s": 6.1134500284161035
+    },
+    {
+      "index": 3,
+      "seed": 15857,
+      "status": "planned",
+      "planning_wall_s": 3.5824770339822862,
+      "backend_folder": "candidates/03",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 11.818771002248404,
+          "duration_cycle_s": 25.637542004496808,
+          "passed": false,
+          "checked_samples": 5911,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5612044630446479,
+                -0.4867636881101153,
+                0.5811693844507106
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.561154912380434,
+                -0.48664194375656644,
+                0.5810989306546512
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5611052749098591,
+                -0.48652025951666145,
+                0.5810286046549243
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5610555504509789,
+                -0.48639863498860025,
+                0.5809584060382624
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5610057388200761,
+                -0.4862770697714362,
+                0.5808883343896051
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 68.43565176031261,
+          "duration_cycle_s": 138.87130352062522
+        }
+      ],
+      "waypoint_count": 14,
+      "moveit_seed_duration_s": 6.4888994492181835
+    },
+    {
+      "index": 4,
+      "seed": 23776,
+      "status": "planned",
+      "planning_wall_s": 3.93435576299089,
+      "backend_folder": "candidates/04",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 7.928035730220849,
+          "duration_cycle_s": 17.856071460441697,
+          "passed": false,
+          "checked_samples": 3966,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5778287832225122,
+                -0.5778411483406019,
+                0.39013201349922505
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5776372219423629,
+                -0.5784005105402541,
+                0.3904696803083242
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5774447393692101,
+                -0.5789597966259172,
+                0.3908069721146161
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.577251340870755,
+                -0.579519000148221,
+                0.3911438928746628
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5770570318341273,
+                -0.5800781146576753,
+                0.39148044655101577
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "selected",
+          "duration_outward_s": 17.37191719052646,
+          "duration_cycle_s": 36.74383438105292,
+          "passed": true,
+          "checked_samples": 8687,
+          "failures": []
+        }
+      ],
+      "waypoint_count": 8,
+      "moveit_seed_duration_s": 6.043544880948261
+    },
+    {
+      "index": 5,
+      "seed": 31695,
+      "status": "planned",
+      "planning_wall_s": 4.201661122002406,
+      "backend_folder": "candidates/05",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 12.15987839542419,
+          "duration_cycle_s": 26.31975679084838,
+          "passed": false,
+          "checked_samples": 6081,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5983033635396985,
+                -0.5163583176906738,
+                0.37392470365416686
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5982897018069246,
+                -0.5166966626837127,
+                0.37423507344376905
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5982753801722407,
+                -0.5170351871240386,
+                0.3745448447229516
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5982603993400564,
+                -0.517373890402016,
+                0.3748540175085196
+              ],
+              "valid": false
+            },
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5982447600192113,
+                -0.5177127719021096,
+                0.37516259182797906
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 18.08401190839414,
+          "duration_cycle_s": 38.16802381678828
+        }
+      ],
+      "waypoint_count": 7,
+      "moveit_seed_duration_s": 6.106339630003329
+    },
+    {
+      "index": 6,
+      "seed": 39614,
+      "status": "planned",
+      "planning_wall_s": 3.74032627500128,
+      "backend_folder": "candidates/06",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 112.19856343693871,
+          "duration_cycle_s": 226.39712687387743
+        },
+        {
+          "stop_at_corners": true,
+          "status": "rejected_timing",
+          "details": "Trajectory would be impractically slow; rejected instead of creeping"
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 7.604095140832671
+    }
+  ],
+  "selected_candidate": 4,
+  "selected_seed": 23776,
+  "selected_stop_at_corners": true,
+  "selected_duration_s": 17.37191719052646,
+  "wall_time_s": 24.030536117992597,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

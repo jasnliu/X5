@@ -1,0 +1,151 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 6,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "planned",
+      "planning_wall_s": 14.295743752998533,
+      "backend_folder": "candidates/01",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 9.20101954409324,
+          "duration_cycle_s": 20.40203908818648
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 44.33804656164515,
+          "duration_cycle_s": 90.6760931232903
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 7.174111940324377
+    },
+    {
+      "index": 2,
+      "seed": 7938,
+      "status": "planned",
+      "planning_wall_s": 5.344859136006562,
+      "backend_folder": "candidates/02",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 10.753865907470368,
+          "duration_cycle_s": 23.507731814940737
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 60.0561555731294,
+          "duration_cycle_s": 122.1123111462588
+        }
+      ],
+      "waypoint_count": 12,
+      "moveit_seed_duration_s": 9.265860093248982
+    },
+    {
+      "index": 3,
+      "seed": 15857,
+      "status": "planned",
+      "planning_wall_s": 3.983603054017294,
+      "backend_folder": "candidates/03",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "selected",
+          "duration_outward_s": 7.421973398401673,
+          "duration_cycle_s": 16.843946796803344,
+          "passed": true,
+          "checked_samples": 3712,
+          "failures": []
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 25.63161526963808,
+          "duration_cycle_s": 53.26323053927616
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 5.608844789486726
+    },
+    {
+      "index": 4,
+      "seed": 23776,
+      "status": "planned",
+      "planning_wall_s": 3.9861590710061137,
+      "backend_folder": "candidates/04",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 9.30595065510407,
+          "duration_cycle_s": 20.61190131020814
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 61.02293907286519,
+          "duration_cycle_s": 124.04587814573038
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 5.142694293265305
+    },
+    {
+      "index": 5,
+      "seed": 31695,
+      "status": "planned",
+      "planning_wall_s": 3.848293048009509,
+      "backend_folder": "candidates/05",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 17.49288770661941,
+          "duration_cycle_s": 36.98577541323882
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 59.71976929985331,
+          "duration_cycle_s": 121.43953859970662
+        }
+      ],
+      "waypoint_count": 12,
+      "moveit_seed_duration_s": 5.77681936879701
+    },
+    {
+      "index": 6,
+      "seed": 39614,
+      "status": "blocked_after_smoothing",
+      "planning_wall_s": 3.2387377860140987,
+      "backend_folder": "candidates/06",
+      "variants": [],
+      "details": {
+        "contacts": [
+          [
+            "gemini_native_depth",
+            "right_drumstick"
+          ]
+        ],
+        "reason": "collision"
+      }
+    }
+  ],
+  "selected_candidate": 3,
+  "selected_seed": 15857,
+  "selected_stop_at_corners": false,
+  "selected_duration_s": 7.421973398401673,
+  "wall_time_s": 26.796304256975418,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

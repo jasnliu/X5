@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "trial": "normal",
+  "phases": [
+    "PREFLIGHT",
+    "ARMING",
+    "SETTLING_START",
+    "OUTWARD",
+    "SETTLING_GOAL",
+    "GOAL_HOLD",
+    "RETURN",
+    "SETTLING_REST",
+    "VERIFIED_START_POSITION",
+    "RELAXED"
+  ],
+  "goal_hold_s": 2.002731157001108,
+  "peak_tracking_error_deg": [
+    0.3453055956176413,
+    0.15379129563978852,
+    0.17287738258063826,
+    0.6879881371090281,
+    0.4266633543079746,
+    0.26909162931503133,
+    0.12768082721498822
+  ],
+  "pre_release_error_deg": [
+    0.02197933771202081,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.02197933771202081,
+    0.02197933771202081
+  ],
+  "right_disabled_confirmed": true,
+  "left_disabled_throughout": true,
+  "left_actuator_commands": 0,
+  "disable_commands": 8,
+  "all_disables_after_verified_rest": true,
+  "motor_fault_frames": 0,
+  "maximum_temperature_c": 31.0,
+  "packets": {
+    "state_query": 20480,
+    "right_kind_18": 14614,
+    "right_kind_17": 8,
+    "right_kind_3": 8,
+    "right_kind_4": 8
+  },
+  "owner": "/home/jason/Proyectos3/X5/diagnostics/baseline_playback_fix_20261019T215933Z/physical_03/session/controller-5892c88f"
+}

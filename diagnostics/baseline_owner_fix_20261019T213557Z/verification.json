@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "cause": "Legacy background motor owner retained both exclusive CAN locks after motors had already been disabled.",
+  "fixes": [
+    "release sockets/locks on completed or rejected sessions",
+    "recognize fresh externally disabled drives without sending any motor command",
+    "identify genuine owners and print resume command on contention"
+  ],
+  "real_starts": 2,
+  "real_captures": [
+    {
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/baseline_owner_fix_20261019T213557Z/live/actual_startup/capture",
+      "state_queries": 1120,
+      "batches": 70,
+      "all_16_disabled": true
+    },
+    {
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/baseline_owner_fix_20261019T213557Z/live/actual_startup/prepare-ad80f2e7/capture",
+      "state_queries": 1120,
+      "batches": 70,
+      "all_16_disabled": true
+    },
+    {
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/baseline_owner_fix_20261019T213557Z/repeat/actual_startup/capture",
+      "state_queries": 1152,
+      "batches": 72,
+      "all_16_disabled": true
+    },
+    {
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/baseline_owner_fix_20261019T213557Z/repeat/actual_startup/prepare-f842bb29/capture",
+      "state_queries": 1120,
+      "batches": 70,
+      "all_16_disabled": true
+    }
+  ],
+  "total_state_queries": 4512,
+  "physical_motor_commands": 0,
+  "full_preview_cycle_tested": true,
+  "readiness_native_checked_samples": [
+    12146,
+    2590
+  ],
+  "regression": "487 passed in 103.09s (0:01:43)",
+  "mock_gui_cases": [
+    "relax_while_moving",
+    "one_click_reverse",
+    "manual_relax_after_can_fault",
+    "one_click_controller_exit",
+    "close_window_and_reconnect",
+    "normal_cycle"
+  ],
+  "lock_lifecycle_reproduced_with_real_file_locks": true,
+  "current_can_lock_owners": [],
+  "all_test_controllers_exited": true,
+  "unchanged_protected_files": 189,
+  "changed_files": [
+    "BASELINE_HARDWARE.md",
+    "drum_planner/baseline/app.py",
+    "drum_planner/baseline/motion.py",
+    "drum_planner/baseline/service.py",
+    "drum_planner/cli.py",
+    "drum_planner/read_only.py",
+    "tests/test_baseline_hardware.py",
+    "tests/test_readonly_hardware.py"
+  ],
+  "added_files": [
+    "drum_planner/bus_ownership.py"
+  ],
+  "limitation": "Physical movement, tracking and actuator stop performance were not tested. Controller actions used simulated motors only."
+}

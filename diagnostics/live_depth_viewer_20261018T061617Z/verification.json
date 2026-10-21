@@ -1,0 +1,176 @@
+{
+  "status": "LIVE_3D_SOFTWARE_VERIFIED",
+  "offline_tests_passed": 46,
+  "calibration_regressions_passed": 110,
+  "final_production_cli": {
+    "passed": true,
+    "error": null,
+    "duration_after_first_frame_s": 65.39851825601363,
+    "frames": 656,
+    "maximum_received_gap_s": 0.10874668799806386,
+    "native_depth_resolution": [
+      1280,
+      800
+    ],
+    "camera_only": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "display_mode": "3d",
+    "visualization": {
+      "type": "live_3d",
+      "rendered_updates": 206,
+      "first_displayed_sequence": 5,
+      "last_displayed_sequence": 646,
+      "max_age_at_display_s": 0.3177490990055958,
+      "last_frame_compute_s": 0.194083402006072,
+      "maximum_draw_s": 0.12344053600099869,
+      "worker_submissions": 207,
+      "maximum_pending_jobs": 1,
+      "modes_rendered": [
+        "raw"
+      ],
+      "freeze_count": 0,
+      "resume_count": 0,
+      "mode_switches": 0,
+      "display_point_limit": 18000,
+      "planning_points_downsampled": false,
+      "robot_overlay": false
+    },
+    "warning": "SDK warnings may record upstream dropped USB frames; inspect depth_sdk_logs."
+  },
+  "live_controls": {
+    "passed": true,
+    "error": null,
+    "duration_after_first_frame_s": 65.50972824599012,
+    "frames": 657,
+    "maximum_received_gap_s": 0.11273603301378898,
+    "native_depth_resolution": [
+      1280,
+      800
+    ],
+    "camera_only": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "display_mode": "3d",
+    "visualization": {
+      "type": "live_3d",
+      "rendered_updates": 172,
+      "first_displayed_sequence": 5,
+      "last_displayed_sequence": 649,
+      "max_age_at_display_s": 0.3527008060045773,
+      "last_frame_compute_s": 0.20359478700265754,
+      "maximum_draw_s": 0.13798422199033666,
+      "worker_submissions": 173,
+      "maximum_pending_jobs": 1,
+      "modes_rendered": [
+        "raw",
+        "voxels"
+      ],
+      "freeze_count": 1,
+      "resume_count": 1,
+      "mode_switches": 4,
+      "display_point_limit": 18000,
+      "planning_points_downsampled": false,
+      "robot_overlay": false
+    },
+    "warning": "SDK warnings may record upstream dropped USB frames; inspect depth_sdk_logs."
+  },
+  "interactions": {
+    "completed_all_steps": true,
+    "events": [
+      {
+        "name": "voxel_layer",
+        "elapsed": 5.228033937004511
+      },
+      {
+        "name": "freeze",
+        "elapsed": 10.132001969002886,
+        "sequence": 105,
+        "acquired": 109
+      },
+      {
+        "name": "freeze_kept_view_acquisition_continued",
+        "elapsed": 14.577945528013515,
+        "acquired": 153,
+        "sequence": 105
+      },
+      {
+        "name": "rotate_pan_scroll_and_height",
+        "elapsed": 14.57794846300385
+      },
+      {
+        "name": "save_live_while_frozen",
+        "elapsed": 17.003865591002977
+      },
+      {
+        "name": "saved_newer_live_frames",
+        "elapsed": 20.00245415000245,
+        "saved": 178,
+        "frozen": 105
+      },
+      {
+        "name": "resume",
+        "elapsed": 20.118684063010733
+      },
+      {
+        "name": "resume_caught_up",
+        "elapsed": 25.111499148013536,
+        "displayed": 256,
+        "latest": 259
+      },
+      {
+        "name": "live_voxels_again",
+        "elapsed": 35.156755347008584
+      },
+      {
+        "name": "raw_again",
+        "elapsed": 45.17286487600359
+      }
+    ],
+    "can_attempts": []
+  },
+  "can_before": {
+    "can0": {
+      "tx_packets": 2298816,
+      "rx_packets": 2298856
+    },
+    "can1": {
+      "tx_packets": 1408,
+      "rx_packets": 1456
+    }
+  },
+  "can_after": {
+    "can0": {
+      "tx_packets": 2298816,
+      "rx_packets": 2298856
+    },
+    "can1": {
+      "tx_packets": 1408,
+      "rx_packets": 1456
+    }
+  },
+  "protected_files_unchanged": 131,
+  "voxel_parity": {
+    "original_structured_sort": {
+      "seconds": 0.5356050889968174,
+      "max_python_heartbeat_gap_s": 0.516212764006923,
+      "voxel_count": 161056
+    },
+    "new_integer_sort": {
+      "seconds": 0.07510703599837143,
+      "max_python_heartbeat_gap_s": 0.002524333991459571,
+      "voxel_count": 161056
+    },
+    "identical_voxel_array": true,
+    "identical_prior_saved_scene": true
+  },
+  "source_sha256": {
+    "drum_planner/depth.py": "22f3e6fca5de760b83713f793d29fdc533fbe19bd287c1f88a01be607ee33e1f",
+    "drum_planner/cli.py": "f28760466a3800f7916a4646c0d0553c0d1afadd4832c157c9f1d8a65d1456e2",
+    "drum_planner/live_view.py": "77d37245e9fc9fffef22369536e5f297adf11a545f9cf56a7e06d100431412e6",
+    "tests/test_live_depth_view.py": "392812859aa4c884ee3e7f2495732ae7b08c2b210c86023c7edade3dc3165504",
+    "DRUM_PLANNER.md": "2e59d9c3593f1bde4f9442770c64f048033ac594c19c9808b77fc7b40c4865a8"
+  },
+  "scope": "Camera-only live 3D visualization. No robot control or hardware execution.",
+  "caveat": "SDK logs retain firmware property warnings and occasional upstream rejected USB frames; application success is not a perfect-transport or physical-depth-accuracy claim."
+}

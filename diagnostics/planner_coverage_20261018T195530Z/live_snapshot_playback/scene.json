@@ -1,0 +1,178 @@
+{
+  "schema": "x5-depth-surface-preview-v1",
+  "preview_only": true,
+  "synthetic": false,
+  "camera": {
+    "protocol": 1,
+    "serial": "AY6R463004K",
+    "name": "Orbbec Gemini 2",
+    "firmware": "1.4.92",
+    "depth_work_mode": "Unbinned Dense Default",
+    "depth": {
+      "width": 1280,
+      "height": 800,
+      "fps": 10,
+      "format_enum": 8,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 800,
+      "K": [
+        [
+          613.611877441,
+          0,
+          634.910949707
+        ],
+        [
+          0,
+          613.611877441,
+          400.3934021
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "color": {
+      "width": 1280,
+      "height": 720,
+      "fps": 15,
+      "format_enum": 0,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 720,
+      "K": [
+        [
+          690.735229492,
+          0,
+          647.398071289
+        ],
+        [
+          0,
+          690.641601562,
+          361.572753906
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        43.8931617737,
+        -99.6809844971,
+        6.35045580566e-05,
+        0.000259708933299,
+        106.131744385,
+        43.7220077515,
+        -99.2912826538,
+        106.184356689
+      ]
+    },
+    "T_color_depth_m": [
+      [
+        0.999998771667,
+        0.000881533622742,
+        -0.00127070999146,
+        -0.0139434547424
+      ],
+      [
+        -0.000879107117653,
+        0.999997776031,
+        0.00190857362747,
+        9.11664962769e-06
+      ],
+      [
+        0.00127239990234,
+        -0.00190747070312,
+        0.999997436523,
+        -0.00182580566406
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "depth_stream_enabled": true,
+    "color_stream_enabled": false,
+    "alignment": "native_depth"
+  },
+  "frame": {
+    "n": 2048000,
+    "sequence": 1,
+    "received_monotonic": 165658.272583093,
+    "device_timestamp_us": 14272173078,
+    "value_scale_m": 0.001
+  },
+  "frames_used": 1,
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "T_base_depth": [
+    [
+      -0.045052558100081574,
+      -0.7443385240172491,
+      0.6662810850966814,
+      0.034195196764152364
+    ],
+    [
+      -0.9988181949234571,
+      0.04573537173282772,
+      -0.016444600525398697,
+      0.023050366975580924
+    ],
+    [
+      -0.018232269875979226,
+      -0.6662344970423257,
+      -0.7455194304414164,
+      0.9585032619308057
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "mesh": {
+    "vertices": 12564,
+    "triangles": 20791,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 11209,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 853284,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "captured_utc": "2026-10-18T20:00:50Z",
+  "camera_released_before_meshing": true,
+  "collision_scene": false,
+  "unknown_space_policy": "holes and unseen surfaces remain unknown; not a planning scene",
+  "files_sha256": {
+    "raw_depth.npz": "451da250c2fa0d24934ae1a44a3bf0274d841e3fda4baecec4c6dd66eb4eeb32",
+    "surface_mesh.npz": "491d9d52084586fc7b0d5458cd632daa26375280476c397ed372ed3dc5b0029b"
+  },
+  "physical_depth_alignment_verified": false,
+  "motion_authorized": false,
+  "can_access": false,
+  "motor_commands": 0
+}

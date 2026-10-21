@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "regression_tests": 527,
+  "regression_seconds": 108.15,
+  "saved_failure_comparison": {
+    "original_scene": {
+      "reason": "valid",
+      "stick_center_world": [
+        0.5092312424463392,
+        -0.3237298591673854,
+        0.42272202983602486
+      ],
+      "valid": true
+    },
+    "new_scene": {
+      "contacts": [
+        [
+          "gemini_native_depth",
+          "right_drumstick"
+        ]
+      ],
+      "reason": "collision",
+      "stick_center_world": [
+        0.5092312424463392,
+        -0.3237298591673854,
+        0.42272202983602486
+      ],
+      "valid": false
+    }
+  },
+  "failed_time_s": 8.764,
+  "replacement_proof": {
+    "samples": 8468,
+    "all_valid": true,
+    "collision_margin_policy": "baseline_request",
+    "obstacle_padding_m": 0.02,
+    "minimum_self_clearance_m": 0.0
+  },
+  "historical_replacement_packet_integrity": true,
+  "historical_packet_clock_used_only_for_offline_integrity": true,
+  "live_gui_report": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_pose_20261019T230537Z/live_retry/live_ui_report.json",
+  "live_query_audit": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_pose_20261019T230537Z/live_retry/live_tx_audit.json",
+  "mock_gui_report": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_pose_20261019T230537Z/mock/report.json",
+  "physical_motor_commands": 0,
+  "can_owners_after": [],
+  "protected_files": 17,
+  "protected_files_changed": [],
+  "initial_live_test_harness_iteration": "First test compared None before the first render; test timing fixed and full live test rerun successfully."
+}

@@ -1,0 +1,3520 @@
+{
+  "version": 1,
+  "target": "bass_hit",
+  "grouping": "physical-session",
+  "training_performed": false,
+  "records": [
+    {
+      "id": "r1",
+      "wav": "recordings/r1.wav",
+      "csv": "timestamps/t1.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232155-train-63812811",
+      "collection_session": "20261010T232155-train-63812811",
+      "block": 1,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086125
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086125
+        }
+      ],
+      "raw_offset_seconds": 52.6214375,
+      "duration": 8.0005,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms and enlarged attacks; raw 22 ms isolated bass attack correlation as an annotation aid. Command times locate windows only. No learned model, no training.",
+      "label_status": "assistant_visual_signal_review",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232155-train-63812811",
+      "notes": "Verified expected bass impacts and natural decay; motor sounds are not labeled as drum hits.",
+      "wav_sha256": "762c12e77e7d673ce6ba3dbff82d5ee243c7bddf27331bc6897b0724a486d602",
+      "csv_sha256": "654126031bb19436e99f624ceab4e8f3695ee486e80085368dff0a7df2c267d5",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "centered_before_new_reverse_requirement"
+    },
+    {
+      "id": "r2",
+      "wav": "recordings/r2.wav",
+      "csv": "timestamps/t2.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232155-train-63812811",
+      "collection_session": "20261010T232155-train-63812811",
+      "block": 2,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085625,
+        2.686688,
+        3.286375,
+        3.886125
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085625
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.686688
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.286375
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.886125
+        }
+      ],
+      "raw_offset_seconds": 61.2245625,
+      "duration": 8.0005625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms and enlarged attacks; raw 22 ms isolated bass attack correlation as an annotation aid. Command times locate windows only. No learned model, no training.",
+      "label_status": "assistant_visual_signal_review",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232155-train-63812811",
+      "notes": "Verified expected bass impacts and natural decay; motor sounds are not labeled as drum hits.",
+      "wav_sha256": "67cc14e22b28d66b92f6598ba1f813ef07396d4046eec356d074d455a46fe263",
+      "csv_sha256": "d82f0eb235c593d0c51202a51a053859d715d8c9e9efeaab58f7b5f1c8784656",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "centered_before_new_reverse_requirement"
+    },
+    {
+      "id": "r3",
+      "wav": "recordings/r3.wav",
+      "csv": "timestamps/t3.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232632-train-65a1ae8b",
+      "collection_session": "20261010T232632-train-65a1ae8b",
+      "block": 3,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085938
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085938
+        }
+      ],
+      "raw_offset_seconds": 52.876625,
+      "duration": 8.000375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms and enlarged attacks; raw 22 ms isolated bass attack correlation as an annotation aid. Command times locate windows only. No learned model, no training.",
+      "label_status": "assistant_visual_signal_review",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232632-train-65a1ae8b",
+      "notes": "Verified expected bass impacts and natural decay; motor sounds are not labeled as drum hits.",
+      "wav_sha256": "1339ddbd9d923598760e287b6ab912061081b34490776aee0bc597cb05777abf",
+      "csv_sha256": "b9d025511b3c58b6f51fdbb0cef374527149191ca9781798fef34cbc2408ac79",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center"
+    },
+    {
+      "id": "r4",
+      "wav": "recordings/r4.wav",
+      "csv": "timestamps/t4.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232632-train-65a1ae8b",
+      "collection_session": "20261010T232632-train-65a1ae8b",
+      "block": 4,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085938,
+        2.835062,
+        3.587375,
+        4.33775
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085938
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.835062
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587375
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.33775
+        }
+      ],
+      "raw_offset_seconds": 61.4783125,
+      "duration": 8.0005625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms and enlarged attacks; raw 22 ms isolated bass attack correlation as an annotation aid. Command times locate windows only. No learned model, no training.",
+      "label_status": "assistant_visual_signal_review",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232632-train-65a1ae8b",
+      "notes": "Verified expected bass impacts and natural decay; motor sounds are not labeled as drum hits.",
+      "wav_sha256": "ce1d9ac100afabe3fae83254e2dbf3b61878210be5e75b39972997de8f704097",
+      "csv_sha256": "0b06334a0f35cccd84ead1981255bfcbced1b55cc409a3f71280777c5d0237be",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center"
+    },
+    {
+      "id": "r5",
+      "wav": "recordings/r5.wav",
+      "csv": "timestamps/t5.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 5,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.093812
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.093812
+        }
+      ],
+      "raw_offset_seconds": 52.92925,
+      "duration": 8.0003125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "4f038c7f331d21a7e60c782d981e703023c09c0b3b604181f598d879c3e09c3e",
+      "csv_sha256": "8e8b82d8435b5fd7afea68b8f2ed925a03751f416b4679c955c7a65da535a714"
+    },
+    {
+      "id": "r6",
+      "wav": "recordings/r6.wav",
+      "csv": "timestamps/t6.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 6,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.091187,
+        2.606562,
+        3.10675,
+        3.6075
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.091187
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.606562
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.10675
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.6075
+        }
+      ],
+      "raw_offset_seconds": 61.53175,
+      "duration": 8.001,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "773e9abc0d6766837390a69108a15453d58661e8ab11c709eef3beaec649f10b",
+      "csv_sha256": "f45754aa0f2613a29b7a3432d15f6affa8b9c1088abbb3ae11386a6e4cdba126"
+    },
+    {
+      "id": "r7",
+      "wav": "recordings/r7.wav",
+      "csv": "timestamps/t7.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 7,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.091938
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.091938
+        }
+      ],
+      "raw_offset_seconds": 70.138125,
+      "duration": 8.0000625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "e8c6247bf9efb95231ff836bdcbe117e16604233d473714b85549a20e2b0020a",
+      "csv_sha256": "2c88c68693e32f54d39eb1ec820a03dafb4f2ebec2e750747491ad80d38d1258"
+    },
+    {
+      "id": "r8",
+      "wav": "recordings/r8.wav",
+      "csv": "timestamps/t8.csv",
+      "kind": "bass_only",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 8,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.089562,
+        2.692687,
+        3.2925,
+        3.892187
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.089562
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.692687
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.2925
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.892187
+        }
+      ],
+      "raw_offset_seconds": 78.740875,
+      "duration": 8.0008125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "79967f1fdb9ac7eb450ffbfbedf0e8c824e50f71c7601e23c7cc19b3e876d267",
+      "csv_sha256": "ae6e95dd0f4a8e4ec2d9790c4b01850ffdb253b5598cd92ecff67b385efdd39a"
+    },
+    {
+      "id": "r9",
+      "wav": "recordings/r9.wav",
+      "csv": "timestamps/t9.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 9,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.088938,
+        2.844187,
+        3.591187,
+        4.345687
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.088938
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.844187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.591187
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.345687
+        }
+      ],
+      "raw_offset_seconds": 87.345375,
+      "duration": 8.0011875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "7971c29ccd094b8af8275c94b3760fe267b577d8765c613dc7e32923a04f0724",
+      "csv_sha256": "7b2008463e854d63990fe3fe8910ec4da48ada698b5de86c4a98c3b87ef8f3f7"
+    },
+    {
+      "id": "r10",
+      "wav": "recordings/r10.wav",
+      "csv": "timestamps/t10.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 10,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.089062,
+        2.691312,
+        3.291375,
+        3.89075
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.089062
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.691312
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.291375
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.89075
+        }
+      ],
+      "raw_offset_seconds": 95.9486875,
+      "duration": 8.0008125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b1618252c57c84eb56d148ed8e21a9689c347d5d236fa5c9643ebd3e0eb4f78d",
+      "csv_sha256": "72e04815fbc9c10dab20d568e003b22138b26fc04c0372248729a3927ab1af3f"
+    },
+    {
+      "id": "r11",
+      "wav": "recordings/r11.wav",
+      "csv": "timestamps/t11.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 11,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.08875,
+        2.603375,
+        3.1045,
+        3.605312
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.08875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.603375
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.1045
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.605312
+        }
+      ],
+      "raw_offset_seconds": 104.551625,
+      "duration": 8.0009375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b7499c1ddd622f7ea3b0d66e8590f564d21eb6046ca02d4a42cc38b7fded2fe0",
+      "csv_sha256": "71caff36d8530f87509e8d6e67cf4db0a205454f25784deb22c141800e156fc5"
+    },
+    {
+      "id": "r12",
+      "wav": "recordings/r12.wav",
+      "csv": "timestamps/t12.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 12,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.089437,
+        2.843437,
+        3.590937,
+        4.3485
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.089437
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.843437
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.590937
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.3485
+        }
+      ],
+      "raw_offset_seconds": 113.156,
+      "duration": 8.000625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "5760e0f7dc1a9f5d26c1956067c3b2ac682bd198ed85ca24f281da18edcb17cb",
+      "csv_sha256": "2a565161ac0565115176b49a810bb3f12ec68ba467d503ddbab9c1c9d6cfb3b7"
+    },
+    {
+      "id": "r13",
+      "wav": "recordings/r13.wav",
+      "csv": "timestamps/t13.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 13,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.092125,
+        2.691188,
+        3.290563,
+        3.890063
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.092125
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.691188
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.290563
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.890063
+        }
+      ],
+      "raw_offset_seconds": 121.7593125,
+      "duration": 8.000375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "3a1bcd4c194cd159ca2e5ae543b6546d0c95c29c74024084766986b9368af3be",
+      "csv_sha256": "50feb710a16a60142ef6cfdfdb67c41d036e8905dbbf77ca6e8a87d66c3cf524"
+    },
+    {
+      "id": "r14",
+      "wav": "recordings/r14.wav",
+      "csv": "timestamps/t14.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 14,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.08775,
+        2.602875,
+        3.1035,
+        3.605
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.08775
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.602875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.1035
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.605
+        }
+      ],
+      "raw_offset_seconds": 130.36325,
+      "duration": 8.0006875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b6b859c33c6a4d39e645f1c3eef04759df2201d62e1c047392c280e68478cf8a",
+      "csv_sha256": "90d4aa1eb0d088039bcceb73dc76d1a2244995f20caa7af663eaf97c7e40f760"
+    },
+    {
+      "id": "r15",
+      "wav": "recordings/r15.wav",
+      "csv": "timestamps/t15.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 15,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086375,
+        2.842688,
+        3.591375,
+        4.34625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086375
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.842688
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.591375
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.34625
+        }
+      ],
+      "raw_offset_seconds": 138.968625,
+      "duration": 8.0011875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "7b012db7b971af064e73701b6f724c802dfff4b16860c766ed0e87706785a06b",
+      "csv_sha256": "2984763b9d0a384895ef18e07274b65842bff529df0b7d0959fe9bba83d5e97d"
+    },
+    {
+      "id": "r16",
+      "wav": "recordings/r16.wav",
+      "csv": "timestamps/t16.csv",
+      "kind": "bass_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 16,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.091688,
+        2.691313,
+        3.28875,
+        3.888937
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.091688
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.691313
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.28875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.888937
+        }
+      ],
+      "raw_offset_seconds": 147.5738125,
+      "duration": 8.0013125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b2760f7cf5e353c4649698f49591b2d8a21c471ececb6374e9cef220878e858c",
+      "csv_sha256": "8a71fd527f23cb2ed9f7eb2a5c3708f421e5cc25972099174e770286289f226e"
+    },
+    {
+      "id": "r17",
+      "wav": "recordings/r17.wav",
+      "csv": "timestamps/t17.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 17,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086,
+        2.836125,
+        3.587875,
+        4.340375
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.836125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587875
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.340375
+        }
+      ],
+      "raw_offset_seconds": 156.1808125,
+      "duration": 8.001125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "4df4afaeb11c81c3d78216a442cb848d5d29af6f04421f8e76cc6207254c383f",
+      "csv_sha256": "627ba6c4f67250dc22dbf3805b9e14e21dacd2b79afcdf8fafb73fe18c98df11"
+    },
+    {
+      "id": "r18",
+      "wav": "recordings/r18.wav",
+      "csv": "timestamps/t18.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 18,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.090125,
+        2.689875,
+        3.287625,
+        3.887375
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.090125
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.689875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887375
+        }
+      ],
+      "raw_offset_seconds": 164.78825,
+      "duration": 8.0001875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "3fe1822612d5edbaa9cc3f81d781451de6d91511c044324322299a156e3e1647",
+      "csv_sha256": "6f75b193d6da4709149e1457853406ff3a29e939af0160f8fc86c5374d222576"
+    },
+    {
+      "id": "r19",
+      "wav": "recordings/r19.wav",
+      "csv": "timestamps/t19.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 19,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.0865,
+        2.601875,
+        3.102688,
+        3.6025
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.0865
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.601875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.102688
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.6025
+        }
+      ],
+      "raw_offset_seconds": 173.3920625,
+      "duration": 8.0009375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "487f8ae2ee6cba8c76c7d0edf4d0c5f8b6369f25aca02545992566d67f73c40f",
+      "csv_sha256": "ace3b67dabe5fa61c66399fbeeabf8f2a8af8d0386f6747838d64de9c0d6f928"
+    },
+    {
+      "id": "r20",
+      "wav": "recordings/r20.wav",
+      "csv": "timestamps/t20.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 20,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086125,
+        2.83575,
+        3.591313,
+        4.341813
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086125
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.83575
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.591313
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.341813
+        }
+      ],
+      "raw_offset_seconds": 181.9973125,
+      "duration": 8.0006875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "17c8edbca917c3e258aac6d0d77603850cb3055fa63802f86f757fe18e2f211d",
+      "csv_sha256": "ec1399d07a13fc15996b22cda1b501b9af4464ceb62aec17aac4181fa0160311"
+    },
+    {
+      "id": "r21",
+      "wav": "recordings/r21.wav",
+      "csv": "timestamps/t21.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 21,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.08675,
+        2.687437,
+        3.286563,
+        3.884938
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.08675
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.687437
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.286563
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.884938
+        }
+      ],
+      "raw_offset_seconds": 190.601875,
+      "duration": 8.0005,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "7e34b97b941a8ce9958cf034ee81dcc3f1e5d94018c4dcbc62a6f75a121ee8c8",
+      "csv_sha256": "a8c21f35594f37f7a827d7489e1d70062e6dc6d5c9ca085b1cbe3dd68e9577eb"
+    },
+    {
+      "id": "r22",
+      "wav": "recordings/r22.wav",
+      "csv": "timestamps/t22.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 22,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085187,
+        2.59975,
+        3.10025,
+        3.600187
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085187
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.59975
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.10025
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.600187
+        }
+      ],
+      "raw_offset_seconds": 199.2068125,
+      "duration": 8.0005625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "ded91ac37b7de93f25b8fd94319c302f1c129db83a1200c51c1366807b2ab160",
+      "csv_sha256": "b51be5e82c1ff5f3b76b3a2905a1d9d41c5abeefdbfa0bb117e415c9170ffe3f"
+    },
+    {
+      "id": "r23",
+      "wav": "recordings/r23.wav",
+      "csv": "timestamps/t23.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 23,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084125,
+        2.83525,
+        3.587438,
+        4.338813
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084125
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.83525
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587438
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.338813
+        }
+      ],
+      "raw_offset_seconds": 207.8110625,
+      "duration": 8.0004375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "9402ab954ebaefd9b416752b7d777c68fcbf29150e7ecda28f5ee7c0e95719a5",
+      "csv_sha256": "6f65e4ca1ff05e3e8838e1717895a6caa526c11ae79a204e0c53c9fc42f6dfcb"
+    },
+    {
+      "id": "r24",
+      "wav": "recordings/r24.wav",
+      "csv": "timestamps/t24.csv",
+      "kind": "bass_ride",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 24,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086938,
+        2.68725,
+        3.285188,
+        3.885687
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086938
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.68725
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.285188
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.885687
+        }
+      ],
+      "raw_offset_seconds": 216.41825,
+      "duration": 8.0005625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "747db7c6d3c46d5d304639a49d2be0d0089c031856181727931b2624951fc394",
+      "csv_sha256": "4cb9a2e46e167a7a9ea76b6061dd3d4c93b87f4029f151ac3a95f23d8b6b6ab5"
+    },
+    {
+      "id": "r25",
+      "wav": "recordings/r25.wav",
+      "csv": "timestamps/t25.csv",
+      "kind": "bass_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 25,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.083438,
+        2.832188,
+        3.584125,
+        4.334563
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.083438
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.832188
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.584125
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.334563
+        }
+      ],
+      "raw_offset_seconds": 225.0226875,
+      "duration": 8.00025,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "0fa2cbc730e7666f85ee41ce04820d17e1f38fd0a3eaacb088e2611a51abda1c",
+      "csv_sha256": "be97c4d0c50a38607151d12c8be13e58e360bd8edfe8a41735c8f59873551be3"
+    },
+    {
+      "id": "r26",
+      "wav": "recordings/r26.wav",
+      "csv": "timestamps/t26.csv",
+      "kind": "bass_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 26,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.083063,
+        2.686125,
+        3.284813,
+        3.883625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.083063
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.686125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.284813
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.883625
+        }
+      ],
+      "raw_offset_seconds": 233.6271875,
+      "duration": 8.0004375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "f03dfc4c773b42f1424eed2047c6a8a55c553dab355188d0041689f4864a4455",
+      "csv_sha256": "83823acca5611cf719be93dd6bc1bbf43c4fe0e8fd27920eeaa8ad6e2ff360a0"
+    },
+    {
+      "id": "r27",
+      "wav": "recordings/r27.wav",
+      "csv": "timestamps/t27.csv",
+      "kind": "bass_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 27,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.082687,
+        2.597812,
+        3.098625,
+        3.59875
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.082687
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.597812
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.098625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.59875
+        }
+      ],
+      "raw_offset_seconds": 242.231375,
+      "duration": 8.0010625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "ea4a1f31183e754917e61c0d1bbea8c59aa9b22cfb0768589dac0cf324b72692",
+      "csv_sha256": "1d0dd728ad92f79bfe7f0d6a114ef95a42aea5a9fc0871084d833f565c6ebda5"
+    },
+    {
+      "id": "r28",
+      "wav": "recordings/r28.wav",
+      "csv": "timestamps/t28.csv",
+      "kind": "bass_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 28,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.081187,
+        2.833438,
+        3.587312,
+        4.336687
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.081187
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.833438
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587312
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.336687
+        }
+      ],
+      "raw_offset_seconds": 250.835125,
+      "duration": 8.0008125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "93952e5ff0849d11e6700d0847bd7700b35cfd0f2d1a6387cc4a9d910885b454",
+      "csv_sha256": "53f821b7efa45859c31bed9f7222d4e0ad93aa1707c44857a49c5c459d8df94e"
+    },
+    {
+      "id": "r29",
+      "wav": "recordings/r29.wav",
+      "csv": "timestamps/t29.csv",
+      "kind": "bass_ride_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 29,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.083937,
+        2.836125,
+        3.587063,
+        4.339875
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.083937
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.836125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587063
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.339875
+        }
+      ],
+      "raw_offset_seconds": 259.4406875,
+      "duration": 8.0013125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "9174e095161234b5b439fe1dd5a65430953bde655e91cbb97210d6f1b25304ff",
+      "csv_sha256": "0fe1bc79c4e72d9bf0f4cb110fffa1b2e94d3e4186fbc41397005a20d0ed2cea"
+    },
+    {
+      "id": "r30",
+      "wav": "recordings/r30.wav",
+      "csv": "timestamps/t30.csv",
+      "kind": "bass_ride_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 30,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.0865,
+        2.685187,
+        3.281813,
+        3.882
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.0865
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.685187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.281813
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.882
+        }
+      ],
+      "raw_offset_seconds": 268.0466875,
+      "duration": 8.0010625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "ca932667200e1382c67cd4c41ca42e9f2def60606b610ef1f701b680279b3f12",
+      "csv_sha256": "ac2c0ce94c8d4f0f5d58eb6d10066a6519575da7b39d747345960d0dfcacb002"
+    },
+    {
+      "id": "r31",
+      "wav": "recordings/r31.wav",
+      "csv": "timestamps/t31.csv",
+      "kind": "bass_ride_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 31,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.08,
+        2.596125,
+        3.09825,
+        3.597437
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.08
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.596125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.09825
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.597437
+        }
+      ],
+      "raw_offset_seconds": 276.6510625,
+      "duration": 8.0008125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "de6711155d685bcdc2311e445f6e3125e166ad27c2d243d4db58509fff132c5f",
+      "csv_sha256": "43deed085a10cd7474ad42de54c5cc55c83b79dd92fa53ec0c799bcd1d7da5aa"
+    },
+    {
+      "id": "r32",
+      "wav": "recordings/r32.wav",
+      "csv": "timestamps/t32.csv",
+      "kind": "bass_ride_hihat",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 32,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.0805,
+        2.83675,
+        3.58625,
+        4.341937
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.0805
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.83675
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.58625
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.341937
+        }
+      ],
+      "raw_offset_seconds": 285.2578125,
+      "duration": 8.0015,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "eebd2449670a7243e61860809b1ac0fab1401fbccb5e02678f0049e4f3bf3431",
+      "csv_sha256": "1b873b6df500bc48342f90b750073554bface8bee8f1f59338f042dc2170beba"
+    },
+    {
+      "id": "r33",
+      "wav": "recordings/r33.wav",
+      "csv": "timestamps/t33.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 33,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085625,
+        2.836563,
+        3.586313,
+        4.340375
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085625
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.836563
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.586313
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.340375
+        }
+      ],
+      "raw_offset_seconds": 293.864,
+      "duration": 8.00025,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "2b509cdbe20c73aaee89f0a6015e3ac8b11ce8514118f065a512104695479ac2",
+      "csv_sha256": "239df1e4cdbe6f911ed34d59c2a3f69e3f8eb3b91a8c74abb65c9ad37d792665"
+    },
+    {
+      "id": "r34",
+      "wav": "recordings/r34.wav",
+      "csv": "timestamps/t34.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 34,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.083375,
+        2.68425,
+        3.2825,
+        3.880313
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.083375
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.68425
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.2825
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.880313
+        }
+      ],
+      "raw_offset_seconds": 302.467875,
+      "duration": 8.001125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "8e9ec1f208aea7fcfc5dca056b0c69e0efc011db05bc5b92bd1b01903d90ad6a",
+      "csv_sha256": "6c83cc42dd20323dc64fa7e13af3e471e0e0616f5627ce382466e7e487007b29"
+    },
+    {
+      "id": "r35",
+      "wav": "recordings/r35.wav",
+      "csv": "timestamps/t35.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 35,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.078438,
+        2.596187,
+        3.097062,
+        3.5975
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.078438
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.596187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.097062
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.5975
+        }
+      ],
+      "raw_offset_seconds": 311.072625,
+      "duration": 8.0010625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "821aee110ea316f200ad6f7f5c7f7ea8afe48eb04da67f6257694524f40e2b22",
+      "csv_sha256": "4e2e880a1282863dd5184f6171668cdc43449c438f0786938feb31d716ba8610"
+    },
+    {
+      "id": "r36",
+      "wav": "recordings/r36.wav",
+      "csv": "timestamps/t36.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "train",
+      "group": "20261010T232851-train-4e7f0cb9",
+      "collection_session": "20261010T232851-train-4e7f0cb9",
+      "block": 36,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.077625,
+        2.834625,
+        3.584063,
+        4.338125
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.077625
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.834625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.584063
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.338125
+        }
+      ],
+      "raw_offset_seconds": 319.6783125,
+      "duration": 8.0000625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232851-train-4e7f0cb9",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b204640160f1c64a91079c728d0ad7a3ef16e7b4a59032c3526824330964d65a",
+      "csv_sha256": "163c0e0757ac9a73a7d73ff244e89d0538f79798f731611cffe596f62161ca91"
+    },
+    {
+      "id": "r37",
+      "wav": "recordings/r37.wav",
+      "csv": "timestamps/t37.csv",
+      "kind": "bass_only",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 37,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.091687
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.091687
+        }
+      ],
+      "raw_offset_seconds": 52.77975,
+      "duration": 8.0004375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "d56cf45dce756d1f57f6662974a2d795cf2ac440bdff679eea6a4ba7a6c5ba20",
+      "csv_sha256": "c5f602d24d667666b6b6fd30a478d109dd56b3f0e09b17cd5dd4978a22ab8256"
+    },
+    {
+      "id": "r38",
+      "wav": "recordings/r38.wav",
+      "csv": "timestamps/t38.csv",
+      "kind": "bass_only",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 38,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085375,
+        2.834313,
+        3.587438,
+        4.338438
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085375
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.834313
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.587438
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.338438
+        }
+      ],
+      "raw_offset_seconds": 61.383625,
+      "duration": 8.000875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "d1e2abcdbccb2eb4e38ab439a7fe49539d794c758850b078d6f6e602717b16f6",
+      "csv_sha256": "ba4b6b3f2c0464bd4f78b8c8d4e1d801e2d7a6e5ad3e134b38495402fe88031c"
+    },
+    {
+      "id": "r39",
+      "wav": "recordings/r39.wav",
+      "csv": "timestamps/t39.csv",
+      "kind": "bass_hihat",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 39,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086437,
+        2.601687,
+        3.102437,
+        3.603187
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086437
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.601687
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.102437
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.603187
+        }
+      ],
+      "raw_offset_seconds": 69.9865,
+      "duration": 8.00025,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "2f2407378624f6ab7d16d45efe1ea1863d73b6d72a6c7256d2878df297beaa2b",
+      "csv_sha256": "8166fc4e0b83cc7bbc7364fcc130fb351656d1a74a6ae9ae13b3f39ab7315d93"
+    },
+    {
+      "id": "r40",
+      "wav": "recordings/r40.wav",
+      "csv": "timestamps/t40.csv",
+      "kind": "bass_hihat",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 40,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085563,
+        2.840625,
+        3.590938,
+        4.346063
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085563
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.840625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.590938
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.346063
+        }
+      ],
+      "raw_offset_seconds": 78.5898125,
+      "duration": 8.0011875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "1ccf75c163e54395b014d57ee843d4387301d5ab1a9d25231a72f9959e89d2ae",
+      "csv_sha256": "7285757ea1a879e9ead6cff47c6ff721c9c12ed5ecfc5c1db1afc40982b362b3"
+    },
+    {
+      "id": "r41",
+      "wav": "recordings/r41.wav",
+      "csv": "timestamps/t41.csv",
+      "kind": "bass_ride",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 41,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.090187,
+        2.604375,
+        3.103625,
+        3.6035
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.090187
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.604375
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.103625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.6035
+        }
+      ],
+      "raw_offset_seconds": 87.193,
+      "duration": 8.00075,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "990cc1e0612f425ff84848233c82da1afdbece14a22de764f806a6f841a0e697",
+      "csv_sha256": "216aeec842e45ce47193d09db6a1effdede1d3b356d5ab42bda5bb3b01ca5a5e"
+    },
+    {
+      "id": "r42",
+      "wav": "recordings/r42.wav",
+      "csv": "timestamps/t42.csv",
+      "kind": "bass_ride",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 42,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086188,
+        2.8375,
+        3.590625,
+        4.340625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086188
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.8375
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.590625
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.340625
+        }
+      ],
+      "raw_offset_seconds": 95.7951875,
+      "duration": 8.00075,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "24d4776671778b8001e7427b9fe4fc651edf88e7af2727ee84f29c272676ce1b",
+      "csv_sha256": "21c4f09dc645dc32c0d7ebcecf301cd75738b27beca879367af4fc10911687ad"
+    },
+    {
+      "id": "r43",
+      "wav": "recordings/r43.wav",
+      "csv": "timestamps/t43.csv",
+      "kind": "bass_snare",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 43,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.089187,
+        2.690812,
+        3.287937,
+        3.887
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.089187
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.690812
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287937
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887
+        }
+      ],
+      "raw_offset_seconds": 104.3983125,
+      "duration": 8.0008125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "9a1cbab0eb82cc0e854651ad35dfb0ce7e9f766c953ffdf911e12d6a5b6fd126",
+      "csv_sha256": "99eddc486fe475b3d179a2c0f6c5e4e98f0e709e3f018e8295593f0cd2bf5c42"
+    },
+    {
+      "id": "r44",
+      "wav": "recordings/r44.wav",
+      "csv": "timestamps/t44.csv",
+      "kind": "bass_snare",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 44,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085875,
+        2.602312,
+        3.103625,
+        3.603625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.602312
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.103625
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.603625
+        }
+      ],
+      "raw_offset_seconds": 113.00425,
+      "duration": 8.001125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "11aa486cac328fd65f122e76f4e274808acb97496a861196096600deee9d243f",
+      "csv_sha256": "b6d5dbec0c2f32def7cd71bb029e3a7e61c3bff13b00a75305b8dd8329334a73"
+    },
+    {
+      "id": "r45",
+      "wav": "recordings/r45.wav",
+      "csv": "timestamps/t45.csv",
+      "kind": "bass_ride_hihat",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 45,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085938,
+        2.688812,
+        3.289,
+        3.887312
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085938
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.688812
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.289
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887312
+        }
+      ],
+      "raw_offset_seconds": 121.609125,
+      "duration": 8.0000625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "538503f78af0470d45d478e7613ba67b8c6e7ef26ded3ef880d80924577d780c",
+      "csv_sha256": "7b3c75f4b9f513758c267c6bfd64b2c9583c9ddbecb6ed368e90fd0261e13aa4"
+    },
+    {
+      "id": "r46",
+      "wav": "recordings/r46.wav",
+      "csv": "timestamps/t46.csv",
+      "kind": "bass_ride_hihat",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 46,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084625,
+        2.602,
+        3.103125,
+        3.604437
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084625
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.602
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.103125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.604437
+        }
+      ],
+      "raw_offset_seconds": 130.2116875,
+      "duration": 8.0003125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "0ff3f2fea4abe51ad444fa02334d3195a521351a5ef619be577ebd71f5b54812",
+      "csv_sha256": "925aa0245adb5544e934aa6b65e564fb898225e014193c0489934fc8f323b175"
+    },
+    {
+      "id": "r47",
+      "wav": "recordings/r47.wav",
+      "csv": "timestamps/t47.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 47,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084937,
+        2.689875,
+        3.287687,
+        3.887563
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084937
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.689875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287687
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887563
+        }
+      ],
+      "raw_offset_seconds": 138.815625,
+      "duration": 8.000875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "7dbc2bd1f67d9cf520a3e92ac34a6b7817695a58d9af5d8f9d11fe6425efd8a9",
+      "csv_sha256": "89350e71a93bb606390e5592ab529109120b150b3c01d7393ed7216f461591b2"
+    },
+    {
+      "id": "r48",
+      "wav": "recordings/r48.wav",
+      "csv": "timestamps/t48.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "validation",
+      "group": "20261010T233449-validation-5fd0ac49",
+      "collection_session": "20261010T233449-validation-5fd0ac49",
+      "block": 48,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085875,
+        2.603062,
+        3.10525,
+        3.605
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.603062
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.10525
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.605
+        }
+      ],
+      "raw_offset_seconds": 147.423,
+      "duration": 8.0001875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233449-validation-5fd0ac49",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "a7d2398f8632e85026c0fe3919f3d5ee8eaf8ae3889532ec118c25ab0722e1bc",
+      "csv_sha256": "108eb5c5ee21d67b29f6520e500f39fdecc29e595df749be9fa2c0fb397419c5"
+    },
+    {
+      "id": "r49",
+      "wav": "recordings/r49.wav",
+      "csv": "timestamps/t49.csv",
+      "kind": "bass_only",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 49,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.086375
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.086375
+        }
+      ],
+      "raw_offset_seconds": 52.8134375,
+      "duration": 8.001,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "fc76fafd82355060e68a633c36569f64001905a1c34df7fb9eaca9f37f3f5e4d",
+      "csv_sha256": "431633a942729fdc2e3a07c449470892c26df209cc985283aee880b00dbb3285"
+    },
+    {
+      "id": "r50",
+      "wav": "recordings/r50.wav",
+      "csv": "timestamps/t50.csv",
+      "kind": "bass_only",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 50,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085875,
+        2.603187,
+        3.1035,
+        3.603937
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.603187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.1035
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.603937
+        }
+      ],
+      "raw_offset_seconds": 61.416125,
+      "duration": 8.0011875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "c67c6bc9c4171a41f600fc5d3d0bb11ff1ea9d1ea5090146306c97c4d66245c9",
+      "csv_sha256": "76469d4582a31ed68ace84b3a58c08e38c6b9b1b66faa32084be2e6cf1076de4"
+    },
+    {
+      "id": "r51",
+      "wav": "recordings/r51.wav",
+      "csv": "timestamps/t51.csv",
+      "kind": "bass_hihat",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 51,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.08625,
+        2.689188,
+        3.287875,
+        3.887625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.08625
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.689188
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887625
+        }
+      ],
+      "raw_offset_seconds": 70.019875,
+      "duration": 8.0004375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "4f8065ceac71fee4431063558ec83c89b9d0e1ef0b9d960c2ec9d125b149ac04",
+      "csv_sha256": "30057e2ab5d06f00fafac8d9a4e52888f1045dcac59ac80e01e372ce379206a4"
+    },
+    {
+      "id": "r52",
+      "wav": "recordings/r52.wav",
+      "csv": "timestamps/t52.csv",
+      "kind": "bass_hihat",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 52,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085063,
+        2.601438,
+        3.103875,
+        3.604813
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085063
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.601438
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.103875
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.604813
+        }
+      ],
+      "raw_offset_seconds": 78.6221875,
+      "duration": 8.0010625,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "317e02db944cdefc75462139b046a93696aa2591c801486afe73498c3e2ca2af",
+      "csv_sha256": "8464cf226381657351090201532bd858edf5c400d7e1c262166e4dc89cbe046c"
+    },
+    {
+      "id": "r53",
+      "wav": "recordings/r53.wav",
+      "csv": "timestamps/t53.csv",
+      "kind": "bass_ride",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 53,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084438,
+        2.6895,
+        3.287937,
+        3.887687
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084438
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.6895
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287937
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887687
+        }
+      ],
+      "raw_offset_seconds": 87.2265625,
+      "duration": 8.000875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "dd7667d9f8cb6dfe88aba80b3a63ac90fbbade446467e88d98d04af0639f8979",
+      "csv_sha256": "5d81068ed07b1a2dbbd7b2db649be5b7b87a84a4f56841da6e0e18739fb6115d"
+    },
+    {
+      "id": "r54",
+      "wav": "recordings/r54.wav",
+      "csv": "timestamps/t54.csv",
+      "kind": "bass_ride",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 54,
+      "bpm": 120,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084,
+        2.601187,
+        3.102937,
+        3.602437
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.601187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.102937
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.602437
+        }
+      ],
+      "raw_offset_seconds": 95.82975,
+      "duration": 8.0023125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "eb48861c958267e21ab0c448ad848c9570687a9b1950ba692f310bd44f216985",
+      "csv_sha256": "90506311a4c970b9497750da9a2ecc71e42d8446085460fbc0c07b6083316546"
+    },
+    {
+      "id": "r55",
+      "wav": "recordings/r55.wav",
+      "csv": "timestamps/t55.csv",
+      "kind": "bass_snare",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 55,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.085,
+        2.835563,
+        3.589188,
+        4.341063
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.085
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.835563
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.589188
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.341063
+        }
+      ],
+      "raw_offset_seconds": 104.434625,
+      "duration": 8.0003125,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "d3a56772b3a1059d0ba44c852796a4601ccdc6268f65af44c6c5c17225e16710",
+      "csv_sha256": "7fa424c78a2f3e9a58054a41650b59c061ed04a801d3ed0799d09a230384585c"
+    },
+    {
+      "id": "r56",
+      "wav": "recordings/r56.wav",
+      "csv": "timestamps/t56.csv",
+      "kind": "bass_snare",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 56,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.088,
+        2.69025,
+        3.288687,
+        3.887625
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.088
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.69025
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.288687
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887625
+        }
+      ],
+      "raw_offset_seconds": 113.0384375,
+      "duration": 8.0,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "983f3c731c7bd496982910244b4f7a746c1a7aeab2123db80ba434e3c027954e",
+      "csv_sha256": "993a31aef0484cf7d27eef16e926b476a7b1c8635b4c0576c27c6bd92f06db42"
+    },
+    {
+      "id": "r57",
+      "wav": "recordings/r57.wav",
+      "csv": "timestamps/t57.csv",
+      "kind": "bass_ride_hihat",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 57,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084812,
+        2.840187,
+        3.591375,
+        4.346812
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084812
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.840187
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.591375
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.346812
+        }
+      ],
+      "raw_offset_seconds": 121.6414375,
+      "duration": 8.000375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "494191cf9da727039c9eccce410ad17a7798ed0c4146bcae31c672fb094bf0da",
+      "csv_sha256": "d484fadf8c6021e668c5083ac7a0059b007fc235e797ed068e92c181cb38e544"
+    },
+    {
+      "id": "r58",
+      "wav": "recordings/r58.wav",
+      "csv": "timestamps/t58.csv",
+      "kind": "bass_ride_hihat",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 58,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.091875,
+        2.690562,
+        3.289125,
+        3.888937
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.091875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.690562
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.289125
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.888937
+        }
+      ],
+      "raw_offset_seconds": 130.2444375,
+      "duration": 8.0009375,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "20818a37adc1f27aa558a4abff2c3eb174eeaf52f0599dd6196aed8db59a579f",
+      "csv_sha256": "2f3111a1bf0709ea2e4607579c67aedf371eb4fb53f8bde326a578ce69546c4a"
+    },
+    {
+      "id": "r59",
+      "wav": "recordings/r59.wav",
+      "csv": "timestamps/t59.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 59,
+      "bpm": 80,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.084875,
+        2.842438,
+        3.593063,
+        4.346188
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.084875
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.842438
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.593063
+        },
+        {
+          "label": "bass_hit",
+          "time": 4.346188
+        }
+      ],
+      "raw_offset_seconds": 138.8515,
+      "duration": 8.0001875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "3aa2f168f4d93e799f8f4fc8a244883a2eb9003d7fa43fd78521257c6ff890bc",
+      "csv_sha256": "f647c8778837ac22e1155c5733a7fe0479c03df0c98f0e955d4400cd1e4cb993"
+    },
+    {
+      "id": "r60",
+      "wav": "recordings/r60.wav",
+      "csv": "timestamps/t60.csv",
+      "kind": "bass_ride_hihat_snare",
+      "split": "test",
+      "group": "20261010T233755-test-9e4798d8",
+      "collection_session": "20261010T233755-test-9e4798d8",
+      "block": 60,
+      "bpm": 100,
+      "bass_pulse": {
+        "command": "K",
+        "direction": "clockwise",
+        "duty": 180,
+        "pwm_bits": 8,
+        "pwm_hz": 20000,
+        "duration_ms": 50,
+        "return_mode": "coast"
+      },
+      "hits": [
+        2.090937,
+        2.689,
+        3.287937,
+        3.887812
+      ],
+      "annotations": [
+        {
+          "label": "bass_hit",
+          "time": 2.090937
+        },
+        {
+          "label": "bass_hit",
+          "time": 2.689
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.287937
+        },
+        {
+          "label": "bass_hit",
+          "time": 3.887812
+        }
+      ],
+      "raw_offset_seconds": 147.4585625,
+      "duration": 8.000875,
+      "annotation_method": "Assistant visual review of full WAV waveforms, spectrograms, and enlarged ambiguous attacks; 22 ms isolated raw bass attack correlation used as an annotation aid, crosschecked with 40-300 Hz filtered waveform alignment. Command times locate broad search windows only. No learned model or training.",
+      "label_status": "assistant_visual_signal_review",
+      "annotation_scope": "bass_only",
+      "exhaustively_labeled_instruments": [
+        "bass"
+      ],
+      "accompaniment_labels_complete": false,
+      "left_return_policy": "reverse_then_center",
+      "auditory_review_performed": false,
+      "human_verified": false,
+      "source_capture": "/home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T233755-test-9e4798d8",
+      "notes": "Expected bass impacts visible with natural decay; no extra bass impacts identified in full-clip review. Bass attack alignment retained after enlarged-attack review and filtered crosscheck. Accompaniment is context only; other instruments are not exhaustively labeled.",
+      "wav_sha256": "b99dd33b40104f1d386fb7ebee6455519b82e75022a347b89ab9a54f0c17f1ec",
+      "csv_sha256": "cf9eda583a8a4e9393daede83ba1d9efdc779f12a8419c10cb4651bee7f2f895"
+    }
+  ],
+  "annotation_scope": "bass_only",
+  "annotation_limitations": "Assistant visual signal review, no auditory or independent human verification. Other instruments are not exhaustively labeled; their missing labels are not negative ground truth."
+}

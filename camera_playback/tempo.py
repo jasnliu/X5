@@ -2,6 +2,8 @@
 import math
 
 DEFAULT_BPM = 100.0
+SYNC_BPM = 80.0
+SYNC_PERIOD = 60.0 / SYNC_BPM
 MIN_BPM = 20.0
 MAX_BPM = 180.0
 # Engineering estimate, not a physical safety/success guarantee. The shortest

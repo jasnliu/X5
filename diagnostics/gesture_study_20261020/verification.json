@@ -1,0 +1,58 @@
+{
+  "refine": {
+    "passed": true,
+    "unique_trajectories": 40,
+    "samples": 540423,
+    "current_candidate_hashes_match_verified_proofs": true,
+    "evidence": "verification_refine/verification.json"
+  },
+  "heldout": {
+    "passed": true,
+    "unique_trajectories": 42,
+    "samples": 537342,
+    "current_candidate_hashes_match_verified_proofs": true,
+    "evidence": "verification_heldout/verification.json"
+  },
+  "passed": true,
+  "created_utc": "2026-10-20T07:46:38.499659+00:00",
+  "unit_tests_passed": 518,
+  "final_trial_count": 33,
+  "public_methods": [
+    "progress",
+    "sweep",
+    "single_arc",
+    "clearance"
+  ],
+  "independently_verified_curves": 82,
+  "dense_samples": 1077765,
+  "peak_worker_mib": 373.7265625,
+  "peak_all_logged_jobs_mib": 1199.27734375,
+  "memory_scope": "peak_worker is final 33 study planning jobs; all_logged includes initial compilation/setup and prototype failures, not just planning",
+  "oom_jobs": [],
+  "active_experiment_services": [],
+  "cli": {
+    "passed": true,
+    "evidence": "cli_final_job/job.json"
+  },
+  "native_ui": {
+    "passed": true,
+    "methods_with_full_cycle": [
+      "clearance",
+      "progress",
+      "single_arc",
+      "sweep"
+    ],
+    "full_mesh_triangles": 20184,
+    "render_errors": [],
+    "evidence": "ui_test/ui_full.json"
+  },
+  "live_camera_opened": false,
+  "physical_arm_access": false,
+  "motor_commands": 0,
+  "recapture_test": "Explicit offline filesystem fixture; real camera not exercised",
+  "preservation_audit": "preservation_audit.json",
+  "numerical_tie_correction": "precision_fix.json",
+  "regression_evidence": "regression_precision_final.log",
+  "images_visually_reviewed": true,
+  "limits": "One frozen scene and nearby tasks; no physical safety/speed claim; recording has a different start; no universal humanlike winner"
+}

@@ -1,0 +1,168 @@
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json
+The physical pose is NOT measured. All modes use one frozen scene and record3 FINAL pose only.
+-- Found moveit_core: 2.12.4 (/opt/ros/jazzy/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found tcb_span: 1.3.2 (/opt/ros/jazzy/share/tcb_span/cmake)
+-- Found rclcpp_lifecycle: 28.1.22 (/opt/ros/jazzy/share/rclcpp_lifecycle/cmake)
+-- Found parameter_traits: 0.7.6 (/opt/ros/jazzy/share/parameter_traits/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: serialization filesystem system 
+-- Found chomp_motion_planner: 2.12.4 (/opt/ros/jazzy/share/chomp_motion_planner/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jason/Proyectos3/X5/drum_planner/build/experiment
+[ 50%] Building CXX object CMakeFiles/experiment_oracle.dir/experiment_oracle.cpp.o
+[100%] Linking CXX executable experiment_oracle
+[100%] Built target experiment_oracle
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 121,456 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_000/camera
+[baseline +   0.0s] Existing 40/30/20/10 workspace, bending, proximity, joint-economy score with a 2x fastest-valid duration cap.
+[baseline +   0.0s] building/loading model + frozen FCL world; no motor access
+Candidate 1/6, seed 19: blocked_after_smoothing
+Candidate 2/6, seed 7938: blocked_after_smoothing
+Candidate 3/6, seed 15857: planned
+Candidate 4/6, seed 23776: planned
+Candidate 5/6, seed 31695: planned
+Candidate 6/6, seed 39614: planned
+Checking candidate 6, smooth: 8.186s outward (fastest valid reference)
+Checking candidate 3, smooth: 8.541s outward (fastest valid reference)
+Route score candidate 3, smooth: 100.00 (lower is better), 8.541s
+Route score candidate 5, smooth: 85.76 (lower is better), 8.879s
+Checking candidate 5, smooth: 8.879s outward (best route score)
+Selected candidate 5/6 (seed 31695): route score 85.76, 8.879s outward, 19.758s full cycle
+[baseline +  22.0s] READY: 8.879s outward → 2s hold → exact reverse; SIMULATION ONLY
+[clearance +   0.0s] Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.
+[clearance +   0.0s] building/loading model + frozen FCL world; no motor access
+[clearance +   0.6s] search 1: 5.0s allocation, added clearance 0.0 mm
+[clearance +   5.3s] candidate 1: rejected by final bounds/collision checks
+[clearance +   5.3s] search 2: 5.0s allocation, added clearance 15.0 mm
+[clearance +  12.5s] search 3: 5.0s allocation, added clearance 30.0 mm
+[clearance +  20.2s] search 4: 5.0s allocation, added clearance 50.0 mm
+[clearance +  26.9s] search 5: 5.0s allocation, added clearance 75.0 mm
+[clearance +  33.5s] NO FEASIBLE ROUTE: no_valid_route_within_budget
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.6s] robust envelope: +24.3 mm world, 22.1 mm self bound
+[robust +   1.1s] NO FEASIBLE ROUTE: endpoint_blocked_by_error_envelope
+[chance +   0.0s] From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.
+[chance +   0.0s] building/loading model + frozen FCL world; no motor access
+[chance +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chance +   5.3s] candidate 1: rejected by final bounds/collision checks
+[chance +   5.3s] search 2: 3.0s allocation, added clearance 25.0 mm
+[chance +  12.5s] search 3: 3.0s allocation, added clearance 0.0 mm
+[chance +  41.1s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[chance +  41.1s] candidate 2: evaluating 64 common uncertainty scenarios
+[chance +  53.4s] scenarios 16/64
+[chance +  61.0s] budget reached; partial scenario estimates discarded
+[chance +  61.0s] NO FEASIBLE ROUTE: no_candidate_passed_complete_scenario_evaluation
+[cvar +   0.0s] From-scratch candidate search + CVaR of worst scenario clearance/collision losses. Optimizes the bad tail rather than mean proximity; nominal full-body validity remains mandatory.
+[cvar +   0.0s] building/loading model + frozen FCL world; no motor access
+[cvar +   0.7s] search 1: 3.0s allocation, added clearance 0.0 mm
+[cvar +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +  32.8s] candidate 1: valid, 50.09s outward, transit clearance 32.5 mm
+[cvar +  32.8s] candidate 1: evaluating 64 common uncertainty scenarios
+[cvar +  45.0s] scenarios 16/64
+[cvar +  57.3s] scenarios 32/64
+[cvar +  61.1s] budget reached; partial scenario estimates discarded
+[cvar +  61.1s] NO FEASIBLE ROUTE: no_candidate_passed_complete_scenario_evaluation
+[families +   0.0s] Joint-space waypoint and independent-route search, geometric route-family clustering, then clearance-first ranking. This is a diversity heuristic, not a proof of distinct mathematical homotopy classes.
+[families +   0.0s] building/loading model + frozen FCL world; no motor access
+-- Found moveit_core: 2.12.4 (/opt/ros/jazzy/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found tcb_span: 1.3.2 (/opt/ros/jazzy/share/tcb_span/cmake)
+-- Found rclcpp_lifecycle: 28.1.22 (/opt/ros/jazzy/share/rclcpp_lifecycle/cmake)
+-- Found parameter_traits: 0.7.6 (/opt/ros/jazzy/share/parameter_traits/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: serialization filesystem system 
+-- Found chomp_motion_planner: 2.12.4 (/opt/ros/jazzy/share/chomp_motion_planner/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jason/Proyectos3/X5/drum_planner/build/experiment
+[ 50%] Building CXX object CMakeFiles/experiment_oracle.dir/experiment_oracle.cpp.o
+/home/jason/Proyectos3/X5/drum_planner/cpp/experiment_oracle.cpp: In member function ‘Json::Value ExperimentOracle::features(const Json::Value&)’:
+/home/jason/Proyectos3/X5/drum_planner/cpp/experiment_oracle.cpp:77:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   77 |         if(found[i])continue;collision_detection::CollisionResult res;
+      |         ^~
+/home/jason/Proyectos3/X5/drum_planner/cpp/experiment_oracle.cpp:77:30: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   77 |         if(found[i])continue;collision_detection::CollisionResult res;
+      |                              ^~~~~~~~~~~~~~~~~~~
+[100%] Linking CXX executable experiment_oracle
+[100%] Built target experiment_oracle
+[families +  15.1s] search 1: 3.0s allocation, added clearance 0.0 mm
+[families +  18.3s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  22.3s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[families +  22.3s] search 2: 3.0s allocation, added clearance 25.0 mm
+[families +  29.5s] search 3: 3.0s allocation, added clearance 0.0 mm
+[families +  33.3s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[families +  33.3s] search 4: 3.0s allocation, added clearance 25.0 mm
+[families +  40.0s] search 5: 3.0s allocation, added clearance 0.0 mm
+[families +  43.3s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  47.6s] candidate 3: valid, 59.92s outward, transit clearance 30.0 mm
+[families +  47.7s] search 6: 3.0s allocation, added clearance 25.0 mm
+[families +  60.4s] search 7: 2.0s allocation, added clearance 0.0 mm
+[families +  63.0s] search 8: 2.0s allocation, added clearance 0.0 mm
+[families +  65.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  67.6s] candidate 4: valid, 20.60s outward, transit clearance 35.0 mm
+[families +  67.6s] READY: 20.604s outward → 2s hold → exact reverse; SIMULATION ONLY
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision points, iteratively refined convex regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+[iris_gcs +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   3.8s] search 2: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   6.7s] IRIS region 1/12: 7 full-body collision witnesses, 18 faces
+[iris_gcs +   6.8s] IRIS region 2/12: 38 full-body collision witnesses, 24 faces
+[iris_gcs +   6.8s] IRIS region 3/12: 15 full-body collision witnesses, 20 faces
+[iris_gcs +   6.9s] IRIS region 4/12: 15 full-body collision witnesses, 22 faces
+[iris_gcs +   6.9s] IRIS region 5/12: 23 full-body collision witnesses, 21 faces
+[iris_gcs +   7.0s] IRIS region 6/12: 80 full-body collision witnesses, 34 faces
+[iris_gcs +   7.0s] IRIS region 7/12: 18 full-body collision witnesses, 20 faces
+[iris_gcs +   7.1s] IRIS region 8/12: 16 full-body collision witnesses, 22 faces
+[iris_gcs +   7.2s] IRIS region 9/12: 114 full-body collision witnesses, 30 faces
+[iris_gcs +   7.3s] IRIS region 10/12: 68 full-body collision witnesses, 37 faces
+[iris_gcs +   7.4s] IRIS region 11/12: 108 full-body collision witnesses, 43 faces
+[iris_gcs +   7.5s] IRIS region 12/12: 148 full-body collision witnesses, 38 faces
+[iris_gcs +   7.5s] GCS: connecting 12 configuration-space regions and solving convex relaxation + rounding
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 8 unique paths, discarded 1 duplicate paths.
+INFO:drake:Finished 8 rounding solutions with Clarabel.
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 45, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 168, in run
+    if not candidates:return None,dict(reason='no_valid_route_within_budget',attempts=attempts,**special)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'reason'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 104, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 101, in main
+    plan(context,a.folder,a.method,params,a.budget)
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 45, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 168, in run
+    if not candidates:return None,dict(reason='no_valid_route_within_budget',attempts=attempts,**special)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'reason'
+Planner stopped (no motor commands): Contained worker stopped; see /home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/iris_gcs-de824106/worker.log

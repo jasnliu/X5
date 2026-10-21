@@ -1,0 +1,1159 @@
+{
+  "development": {
+    "cases": 4,
+    "methods": {
+      "baseline_control": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "rrt": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 155.4795491381155,
+            "minimum": 70.76266475957169,
+            "maximum": 227.83923522632102
+          },
+          "wrist_detour": {
+            "median": 1.6019788416498173,
+            "minimum": 1.5759687349498313,
+            "maximum": 2.8267662542966847
+          },
+          "wrist_turn_deg": {
+            "median": 264.01191988777657,
+            "minimum": 207.3415036535077,
+            "maximum": 311.8372283352564
+          },
+          "tip_overshoot_cm": {
+            "median": 3.0263545842842134,
+            "minimum": 0.0,
+            "maximum": 17.19991400536436
+          },
+          "tip_shape_rms_cm": {
+            "median": 26.741840381036447,
+            "minimum": 19.068105036456622,
+            "maximum": 43.95440354444817
+          },
+          "joint_shape_rms_deg": {
+            "median": 10.8704349650442,
+            "minimum": 9.564730518293274,
+            "maximum": 15.183526356517895
+          },
+          "clearance_estimate_mm": {
+            "median": 35.0,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.1787189054726368,
+            "minimum": 0.09524564676616917,
+            "maximum": 0.2221797263681592
+          },
+          "duration_s": {
+            "median": 7.540578756509904,
+            "minimum": 5.704248475093428,
+            "maximum": 25.776822379131577
+          }
+        }
+      },
+      "economy": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "rrt": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 86.0809831759476,
+            "minimum": 70.76266475957169,
+            "maximum": 209.96515791725963
+          },
+          "wrist_detour": {
+            "median": 1.5785359988878036,
+            "minimum": 1.534533449567553,
+            "maximum": 1.7911866641998537
+          },
+          "wrist_turn_deg": {
+            "median": 243.23967651982332,
+            "minimum": 207.3415036535077,
+            "maximum": 263.08571725829796
+          },
+          "tip_overshoot_cm": {
+            "median": 6.408130600350248,
+            "minimum": 0.11553340283487756,
+            "maximum": 17.30995041488771
+          },
+          "tip_shape_rms_cm": {
+            "median": 23.28683031964725,
+            "minimum": 18.614376028643296,
+            "maximum": 29.264059607607813
+          },
+          "joint_shape_rms_deg": {
+            "median": 10.192289269758913,
+            "minimum": 8.473048244131325,
+            "maximum": 14.18386268931166
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 32.5
+          },
+          "proximity": {
+            "median": 0.2013805970149254,
+            "minimum": 0.1883861940298507,
+            "maximum": 0.20822450248756222
+          },
+          "duration_s": {
+            "median": 19.8992546005583,
+            "minimum": 5.978709481012035,
+            "maximum": 25.776822379131577
+          }
+        }
+      },
+      "partial": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "partial": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 79.68891483185473,
+            "minimum": 65.18064527496485,
+            "maximum": 193.9096734901983
+          },
+          "wrist_detour": {
+            "median": 1.663153932213844,
+            "minimum": 1.5511466853823939,
+            "maximum": 1.7510553600750869
+          },
+          "wrist_turn_deg": {
+            "median": 254.50621011146774,
+            "minimum": 206.2089452321815,
+            "maximum": 372.6242766853966
+          },
+          "tip_overshoot_cm": {
+            "median": 6.799268005463049,
+            "minimum": 0.0,
+            "maximum": 17.064270447798968
+          },
+          "tip_shape_rms_cm": {
+            "median": 23.5807411952767,
+            "minimum": 18.348121877164107,
+            "maximum": 27.719738792583737
+          },
+          "joint_shape_rms_deg": {
+            "median": 10.098678631813804,
+            "minimum": 8.35861401914377,
+            "maximum": 13.470632086315637
+          },
+          "clearance_estimate_mm": {
+            "median": 35.0,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.1889070273631841,
+            "minimum": 0.14662624378109454,
+            "maximum": 0.23087375621890555
+          },
+          "duration_s": {
+            "median": 12.15435509516649,
+            "minimum": 6.073595701109183,
+            "maximum": 22.565429308808188
+          }
+        }
+      },
+      "corridor": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "corridor": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 52.44763836768883,
+            "minimum": 13.86605081989815,
+            "maximum": 67.09575560338719
+          },
+          "wrist_detour": {
+            "median": 1.134060030436539,
+            "minimum": 1.0538274010743347,
+            "maximum": 1.2593956142578007
+          },
+          "wrist_turn_deg": {
+            "median": 150.3063032694242,
+            "minimum": 73.14049487242056,
+            "maximum": 222.7101947302063
+          },
+          "tip_overshoot_cm": {
+            "median": 4.846202348971418,
+            "minimum": 3.185254259979342,
+            "maximum": 5.147215022619378
+          },
+          "tip_shape_rms_cm": {
+            "median": 10.66800780217897,
+            "minimum": 9.206752891876262,
+            "maximum": 14.25272962268162
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.325867718983228,
+            "minimum": 4.009064746002786,
+            "maximum": 4.906114358784351
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.17485230099502488,
+            "minimum": 0.14286380597014928,
+            "maximum": 0.18245335820895525
+          },
+          "duration_s": {
+            "median": 6.691013131754358,
+            "minimum": 5.443430367618251,
+            "maximum": 19.93380212614399
+          }
+        }
+      },
+      "phase": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "rrt": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 86.0809831759476,
+            "minimum": 70.76266475957169,
+            "maximum": 209.96515791725963
+          },
+          "wrist_detour": {
+            "median": 1.5785359988878036,
+            "minimum": 1.534533449567553,
+            "maximum": 1.7911866641998537
+          },
+          "wrist_turn_deg": {
+            "median": 243.23967651982332,
+            "minimum": 207.3415036535077,
+            "maximum": 263.08571725829796
+          },
+          "tip_overshoot_cm": {
+            "median": 6.408130600350248,
+            "minimum": 0.11553340283487756,
+            "maximum": 17.30995041488771
+          },
+          "tip_shape_rms_cm": {
+            "median": 23.28683031964725,
+            "minimum": 18.614376028643296,
+            "maximum": 29.264059607607813
+          },
+          "joint_shape_rms_deg": {
+            "median": 10.192289269758913,
+            "minimum": 8.473048244131325,
+            "maximum": 14.18386268931166
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 32.5
+          },
+          "proximity": {
+            "median": 0.2013805970149254,
+            "minimum": 0.1883861940298507,
+            "maximum": 0.20822450248756222
+          },
+          "duration_s": {
+            "median": 19.8992546005583,
+            "minimum": 5.978709481012035,
+            "maximum": 25.776822379131577
+          }
+        }
+      },
+      "arch": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "rrt": 3,
+          "arch": 1
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 104.40128389701603,
+            "minimum": 70.76266475957169,
+            "maximum": 158.5637559256189
+          },
+          "wrist_detour": {
+            "median": 1.5525645758234856,
+            "minimum": 1.4781840922375704,
+            "maximum": 1.5886377604079214
+          },
+          "wrist_turn_deg": {
+            "median": 194.294995566478,
+            "minimum": 158.16893245180867,
+            "maximum": 253.79262071710258
+          },
+          "tip_overshoot_cm": {
+            "median": 5.642401218154408,
+            "minimum": 0.0,
+            "maximum": 17.199438584787806
+          },
+          "tip_shape_rms_cm": {
+            "median": 25.458332306824595,
+            "minimum": 18.455075403466623,
+            "maximum": 26.22293479159049
+          },
+          "joint_shape_rms_deg": {
+            "median": 10.079018686026185,
+            "minimum": 9.564730518293274,
+            "maximum": 10.898445262418342
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.18822294776119403,
+            "minimum": 0.1287779850746269,
+            "maximum": 0.25715485074626865
+          },
+          "duration_s": {
+            "median": 21.994282458959972,
+            "minimum": 7.946489636028057,
+            "maximum": 28.315191293497197
+          }
+        }
+      },
+      "elastic": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "rrt": 1,
+          "elastic": 3
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 75.43811103110077,
+            "minimum": 60.05453524169119,
+            "maximum": 114.258499511141
+          },
+          "wrist_detour": {
+            "median": 1.5012102341793256,
+            "minimum": 1.263638014327358,
+            "maximum": 1.5886377604079214
+          },
+          "wrist_turn_deg": {
+            "median": 182.9144636252388,
+            "minimum": 156.60379710903732,
+            "maximum": 207.3415036535077
+          },
+          "tip_overshoot_cm": {
+            "median": 0.12121705928704873,
+            "minimum": 0.0,
+            "maximum": 9.09427045337785
+          },
+          "tip_shape_rms_cm": {
+            "median": 25.307370597762215,
+            "minimum": 20.898967711132862,
+            "maximum": 27.02314094171376
+          },
+          "joint_shape_rms_deg": {
+            "median": 9.82227621398302,
+            "minimum": 9.303365470225529,
+            "maximum": 10.215088900614305
+          },
+          "clearance_estimate_mm": {
+            "median": 37.5,
+            "minimum": 32.5,
+            "maximum": 42.49999999999999
+          },
+          "proximity": {
+            "median": 0.15233364427860702,
+            "minimum": 0.12236629353233831,
+            "maximum": 0.1883861940298507
+          },
+          "duration_s": {
+            "median": 7.714779661088919,
+            "minimum": 7.409856678872704,
+            "maximum": 25.776822379131577
+          }
+        }
+      },
+      "comfort": {
+        "valid": 4,
+        "total": 4,
+        "sources": {
+          "corridor": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 52.44763836768883,
+            "minimum": 13.86605081989815,
+            "maximum": 67.09575560338719
+          },
+          "wrist_detour": {
+            "median": 1.134060030436539,
+            "minimum": 1.0538274010743347,
+            "maximum": 1.2593956142578007
+          },
+          "wrist_turn_deg": {
+            "median": 150.3063032694242,
+            "minimum": 73.14049487242056,
+            "maximum": 222.7101947302063
+          },
+          "tip_overshoot_cm": {
+            "median": 4.846202348971418,
+            "minimum": 3.185254259979342,
+            "maximum": 5.147215022619378
+          },
+          "tip_shape_rms_cm": {
+            "median": 10.66800780217897,
+            "minimum": 9.206752891876262,
+            "maximum": 14.25272962268162
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.325867718983228,
+            "minimum": 4.009064746002786,
+            "maximum": 4.906114358784351
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.17485230099502488,
+            "minimum": 0.14286380597014928,
+            "maximum": 0.18245335820895525
+          },
+          "duration_s": {
+            "median": 6.691013131754358,
+            "minimum": 5.443430367618251,
+            "maximum": 19.93380212614399
+          }
+        }
+      }
+    },
+    "identical_selections": {
+      "baseline_control": {
+        "baseline_control": 4,
+        "economy": 1,
+        "partial": 0,
+        "corridor": 0,
+        "phase": 1,
+        "arch": 1,
+        "elastic": 1,
+        "comfort": 0
+      },
+      "economy": {
+        "baseline_control": 1,
+        "economy": 4,
+        "partial": 0,
+        "corridor": 0,
+        "phase": 4,
+        "arch": 1,
+        "elastic": 1,
+        "comfort": 0
+      },
+      "partial": {
+        "baseline_control": 0,
+        "economy": 0,
+        "partial": 4,
+        "corridor": 0,
+        "phase": 0,
+        "arch": 0,
+        "elastic": 0,
+        "comfort": 0
+      },
+      "corridor": {
+        "baseline_control": 0,
+        "economy": 0,
+        "partial": 0,
+        "corridor": 4,
+        "phase": 0,
+        "arch": 0,
+        "elastic": 0,
+        "comfort": 4
+      },
+      "phase": {
+        "baseline_control": 1,
+        "economy": 4,
+        "partial": 0,
+        "corridor": 0,
+        "phase": 4,
+        "arch": 1,
+        "elastic": 1,
+        "comfort": 0
+      },
+      "arch": {
+        "baseline_control": 1,
+        "economy": 1,
+        "partial": 0,
+        "corridor": 0,
+        "phase": 1,
+        "arch": 4,
+        "elastic": 1,
+        "comfort": 0
+      },
+      "elastic": {
+        "baseline_control": 1,
+        "economy": 1,
+        "partial": 0,
+        "corridor": 0,
+        "phase": 1,
+        "arch": 1,
+        "elastic": 4,
+        "comfort": 0
+      },
+      "comfort": {
+        "baseline_control": 0,
+        "economy": 0,
+        "partial": 0,
+        "corridor": 4,
+        "phase": 0,
+        "arch": 0,
+        "elastic": 0,
+        "comfort": 4
+      }
+    }
+  },
+  "refine": {
+    "cases": 15,
+    "methods": {
+      "compact": {
+        "valid": 15,
+        "total": 15,
+        "sources": {
+          "corridor": 15
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 32.10008570881042,
+            "minimum": 20.060506296695845,
+            "maximum": 44.20716811857357
+          },
+          "wrist_detour": {
+            "median": 1.1833114271865175,
+            "minimum": 1.1009903451798961,
+            "maximum": 1.4201631556761944
+          },
+          "wrist_turn_deg": {
+            "median": 167.92597333132184,
+            "minimum": 134.48459550172254,
+            "maximum": 233.62068259484502
+          },
+          "tip_overshoot_cm": {
+            "median": 6.284204120568382,
+            "minimum": 3.0273038836694077,
+            "maximum": 12.482469706091482
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.37149787069236,
+            "minimum": 10.402900164502476,
+            "maximum": 16.423437883322027
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.386258340608253,
+            "minimum": 3.6649924319117706,
+            "maximum": 6.239124938422272
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.1927021144278607,
+            "minimum": 0.16967972636815923,
+            "maximum": 0.2334825870646766
+          },
+          "duration_s": {
+            "median": 28.370632059072022,
+            "minimum": 5.620876637425732,
+            "maximum": 57.05702174926738
+          }
+        }
+      },
+      "progress": {
+        "valid": 15,
+        "total": 15,
+        "sources": {
+          "progress": 10,
+          "corridor": 5
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 30.34436923610773,
+            "minimum": 16.33432443670344,
+            "maximum": 48.81347559939949
+          },
+          "wrist_detour": {
+            "median": 1.1537432510029624,
+            "minimum": 1.0968560381643078,
+            "maximum": 1.2230775467361428
+          },
+          "wrist_turn_deg": {
+            "median": 159.56136596542768,
+            "minimum": 117.0988025333545,
+            "maximum": 188.6119552109038
+          },
+          "tip_overshoot_cm": {
+            "median": 6.240430366833194,
+            "minimum": 3.046271185888827,
+            "maximum": 8.307248184946081
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.225051277585413,
+            "minimum": 10.498698339470247,
+            "maximum": 13.511493639505199
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.066084723038471,
+            "minimum": 3.6410850668750423,
+            "maximum": 5.098570499034425
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.1946610696517413,
+            "minimum": 0.11252798507462686,
+            "maximum": 0.23423196517412934
+          },
+          "duration_s": {
+            "median": 23.01939759231468,
+            "minimum": 6.172582952936623,
+            "maximum": 117.55489012614937
+          }
+        }
+      },
+      "sweep": {
+        "valid": 15,
+        "total": 15,
+        "sources": {
+          "sweep": 6,
+          "corridor": 9
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 40.40445516599054,
+            "minimum": 17.938131526463213,
+            "maximum": 75.85499291792406
+          },
+          "wrist_detour": {
+            "median": 1.1643787183861676,
+            "minimum": 1.039060213585272,
+            "maximum": 1.2596344833731319
+          },
+          "wrist_turn_deg": {
+            "median": 155.7943180448229,
+            "minimum": 105.70577992988052,
+            "maximum": 223.2579228069034
+          },
+          "tip_overshoot_cm": {
+            "median": 5.44532309149891,
+            "minimum": 1.6973635880256355,
+            "maximum": 10.73381637311348
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.244696169167547,
+            "minimum": 7.784349403402249,
+            "maximum": 15.011844719389527
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.543033967857128,
+            "minimum": 3.7289720521459144,
+            "maximum": 6.3937114270763065
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.18512748756218905,
+            "minimum": 0.11106654228855722,
+            "maximum": 0.22639614427860694
+          },
+          "duration_s": {
+            "median": 28.370632059072022,
+            "minimum": 5.620876637425732,
+            "maximum": 60.01615066297079
+          }
+        }
+      },
+      "single_arc": {
+        "valid": 15,
+        "total": 15,
+        "sources": {
+          "corridor": 10,
+          "single_arc": 5
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 38.209861272154974,
+            "minimum": 20.060506296695845,
+            "maximum": 93.59513849606469
+          },
+          "wrist_detour": {
+            "median": 1.1252787903568735,
+            "minimum": 1.0658111649616573,
+            "maximum": 1.2596344833731319
+          },
+          "wrist_turn_deg": {
+            "median": 137.40082543697542,
+            "minimum": 72.45636479926033,
+            "maximum": 223.2579228069034
+          },
+          "tip_overshoot_cm": {
+            "median": 4.801387919168343,
+            "minimum": 1.165651009208557,
+            "maximum": 7.077553393602876
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.244696169167547,
+            "minimum": 10.248319334979536,
+            "maximum": 16.91447743395326
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.679448608199178,
+            "minimum": 3.6649924319117706,
+            "maximum": 6.921913459396798
+          },
+          "clearance_estimate_mm": {
+            "median": 37.5,
+            "minimum": 32.5,
+            "maximum": 42.49999999999999
+          },
+          "proximity": {
+            "median": 0.17130597014925375,
+            "minimum": 0.04607276119402987,
+            "maximum": 0.22615360696517411
+          },
+          "duration_s": {
+            "median": 18.244321871547548,
+            "minimum": 6.07243179814065,
+            "maximum": 57.05702174926738
+          }
+        }
+      },
+      "clearance": {
+        "valid": 15,
+        "total": 15,
+        "sources": {
+          "progress": 4,
+          "single_arc": 7,
+          "sweep": 3,
+          "corridor": 1
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 48.81347559939949,
+            "minimum": 16.33432443670344,
+            "maximum": 110.3234578828021
+          },
+          "wrist_detour": {
+            "median": 1.094628329690997,
+            "minimum": 1.039060213585272,
+            "maximum": 1.1916079085026354
+          },
+          "wrist_turn_deg": {
+            "median": 105.70577992988052,
+            "minimum": 72.45636479926033,
+            "maximum": 173.69148237627715
+          },
+          "tip_overshoot_cm": {
+            "median": 3.1179667389689025,
+            "minimum": 1.213056190439743,
+            "maximum": 7.251788745773391
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.508165205799699,
+            "minimum": 7.784349403402249,
+            "maximum": 17.928132523515504
+          },
+          "joint_shape_rms_deg": {
+            "median": 5.181955470613701,
+            "minimum": 3.6410850668750423,
+            "maximum": 7.873054745302997
+          },
+          "clearance_estimate_mm": {
+            "median": 37.5,
+            "minimum": 32.5,
+            "maximum": 47.5
+          },
+          "proximity": {
+            "median": 0.11106654228855722,
+            "minimum": 0.04607276119402987,
+            "maximum": 0.22420087064676616
+          },
+          "duration_s": {
+            "median": 7.7926996311903265,
+            "minimum": 5.61481305030186,
+            "maximum": 96.2603586728766
+          }
+        }
+      }
+    },
+    "identical_selections": {
+      "compact": {
+        "compact": 15,
+        "progress": 5,
+        "sweep": 6,
+        "single_arc": 7,
+        "clearance": 0
+      },
+      "progress": {
+        "compact": 5,
+        "progress": 15,
+        "sweep": 3,
+        "single_arc": 2,
+        "clearance": 3
+      },
+      "sweep": {
+        "compact": 6,
+        "progress": 3,
+        "sweep": 15,
+        "single_arc": 6,
+        "clearance": 3
+      },
+      "single_arc": {
+        "compact": 7,
+        "progress": 2,
+        "sweep": 6,
+        "single_arc": 15,
+        "clearance": 5
+      },
+      "clearance": {
+        "compact": 0,
+        "progress": 3,
+        "sweep": 3,
+        "single_arc": 5,
+        "clearance": 15
+      }
+    }
+  },
+  "heldout": {
+    "cases": 18,
+    "methods": {
+      "compact": {
+        "valid": 18,
+        "total": 18,
+        "sources": {
+          "corridor": 18
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 26.73782170728552,
+            "minimum": 15.933823008110215,
+            "maximum": 54.92613725743528
+          },
+          "wrist_detour": {
+            "median": 1.1758157830708433,
+            "minimum": 1.1217375245555752,
+            "maximum": 1.2683224367633084
+          },
+          "wrist_turn_deg": {
+            "median": 170.3603413010042,
+            "minimum": 137.19661542455611,
+            "maximum": 238.237640764919
+          },
+          "tip_overshoot_cm": {
+            "median": 6.077670530622226,
+            "minimum": 1.8872919620807282,
+            "maximum": 8.777930786486854
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.69178095910377,
+            "minimum": 9.466428316146441,
+            "maximum": 14.288550882725175
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.451330434477265,
+            "minimum": 3.6266548893284636,
+            "maximum": 4.99092300020264
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 32.5
+          },
+          "proximity": {
+            "median": 0.21763059701492538,
+            "minimum": 0.15928171641791045,
+            "maximum": 0.24362562189054726
+          },
+          "duration_s": {
+            "median": 24.01836310653792,
+            "minimum": 7.49001419562338,
+            "maximum": 67.9266289936626
+          }
+        }
+      },
+      "progress": {
+        "valid": 18,
+        "total": 18,
+        "sources": {
+          "progress": 9,
+          "corridor": 9
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 25.7337384206388,
+            "minimum": 19.444708864907344,
+            "maximum": 34.53863456110303
+          },
+          "wrist_detour": {
+            "median": 1.1674862328707056,
+            "minimum": 1.05662680247012,
+            "maximum": 1.2259220128118489
+          },
+          "wrist_turn_deg": {
+            "median": 158.76648368675285,
+            "minimum": 95.44234088471285,
+            "maximum": 204.41804016697864
+          },
+          "tip_overshoot_cm": {
+            "median": 6.182366536703126,
+            "minimum": 1.0762722093553556,
+            "maximum": 8.724967001579953
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.624064696930919,
+            "minimum": 9.577587844531713,
+            "maximum": 13.828313046308274
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.398423719229374,
+            "minimum": 3.6266548893284636,
+            "maximum": 4.897650608714155
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.21938899253731342,
+            "minimum": 0.1697792288557214,
+            "maximum": 0.23845460199004972
+          },
+          "duration_s": {
+            "median": 24.42819401312979,
+            "minimum": 8.137954552997211,
+            "maximum": 89.98896877184198
+          }
+        }
+      },
+      "sweep": {
+        "valid": 18,
+        "total": 18,
+        "sources": {
+          "corridor": 14,
+          "sweep": 4
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 27.76867120547775,
+            "minimum": 19.444708864907344,
+            "maximum": 77.15378357084204
+          },
+          "wrist_detour": {
+            "median": 1.1546533742330454,
+            "minimum": 1.056412122839367,
+            "maximum": 1.2094024411161521
+          },
+          "wrist_turn_deg": {
+            "median": 149.58341531767854,
+            "minimum": 107.47913899430864,
+            "maximum": 181.97885767886066
+          },
+          "tip_overshoot_cm": {
+            "median": 5.999999266837181,
+            "minimum": 0.699968026044262,
+            "maximum": 8.724967001579953
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.383224892320515,
+            "minimum": 9.466428316146441,
+            "maximum": 13.900893813571125
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.693729470918814,
+            "minimum": 3.6266548893284636,
+            "maximum": 6.031432506994748
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 37.5
+          },
+          "proximity": {
+            "median": 0.21959110696517412,
+            "minimum": 0.15205845771144283,
+            "maximum": 0.24362562189054726
+          },
+          "duration_s": {
+            "median": 24.9537894031085,
+            "minimum": 7.708995926309687,
+            "maximum": 67.61310307726278
+          }
+        }
+      },
+      "single_arc": {
+        "valid": 18,
+        "total": 18,
+        "sources": {
+          "corridor": 15,
+          "single_arc": 3
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 29.7069802658395,
+            "minimum": 19.444708864907344,
+            "maximum": 89.61938059191472
+          },
+          "wrist_detour": {
+            "median": 1.158356099910156,
+            "minimum": 1.0348303464411035,
+            "maximum": 1.2094024411161521
+          },
+          "wrist_turn_deg": {
+            "median": 148.17677446384013,
+            "minimum": 64.73476639668277,
+            "maximum": 183.8687892191886
+          },
+          "tip_overshoot_cm": {
+            "median": 5.587461019029499,
+            "minimum": 0.6928099378833985,
+            "maximum": 8.724967001579953
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.705883939704545,
+            "minimum": 9.466428316146441,
+            "maximum": 15.871510544143753
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.693729470918814,
+            "minimum": 3.6266548893284636,
+            "maximum": 7.0926083963155895
+          },
+          "clearance_estimate_mm": {
+            "median": 32.5,
+            "minimum": 32.5,
+            "maximum": 42.49999999999999
+          },
+          "proximity": {
+            "median": 0.21102456467661693,
+            "minimum": 0.05298818407960198,
+            "maximum": 0.23845460199004972
+          },
+          "duration_s": {
+            "median": 22.28562641490528,
+            "minimum": 7.117877324338283,
+            "maximum": 53.67367102349344
+          }
+        }
+      },
+      "clearance": {
+        "valid": 18,
+        "total": 18,
+        "sources": {
+          "progress": 4,
+          "single_arc": 8,
+          "sweep": 1,
+          "corridor": 5
+        },
+        "metrics": {
+          "excess_deg": {
+            "median": 35.324298519016594,
+            "minimum": 19.444708864907344,
+            "maximum": 96.2506498058285
+          },
+          "wrist_detour": {
+            "median": 1.0884451210650552,
+            "minimum": 1.0348303464411035,
+            "maximum": 1.1918996013550616
+          },
+          "wrist_turn_deg": {
+            "median": 103.12527623465269,
+            "minimum": 64.73476639668277,
+            "maximum": 168.59815117797294
+          },
+          "tip_overshoot_cm": {
+            "median": 4.33396338328389,
+            "minimum": 0.7835606908300763,
+            "maximum": 7.232887645645003
+          },
+          "tip_shape_rms_cm": {
+            "median": 12.853015957521224,
+            "minimum": 9.577587844531713,
+            "maximum": 18.546471961748736
+          },
+          "joint_shape_rms_deg": {
+            "median": 4.949269192008643,
+            "minimum": 3.6266548893284636,
+            "maximum": 8.25440583767581
+          },
+          "clearance_estimate_mm": {
+            "median": 35.0,
+            "minimum": 32.5,
+            "maximum": 47.5
+          },
+          "proximity": {
+            "median": 0.1609188432835821,
+            "minimum": 0.044129353233830854,
+            "maximum": 0.2349471393034826
+          },
+          "duration_s": {
+            "median": 8.472712891645468,
+            "minimum": 7.108677356390186,
+            "maximum": 89.98896877184198
+          }
+        }
+      }
+    },
+    "identical_selections": {
+      "compact": {
+        "compact": 18,
+        "progress": 9,
+        "sweep": 10,
+        "single_arc": 11,
+        "clearance": 5
+      },
+      "progress": {
+        "compact": 9,
+        "progress": 18,
+        "sweep": 7,
+        "single_arc": 7,
+        "clearance": 9
+      },
+      "sweep": {
+        "compact": 10,
+        "progress": 7,
+        "sweep": 18,
+        "single_arc": 11,
+        "clearance": 6
+      },
+      "single_arc": {
+        "compact": 11,
+        "progress": 7,
+        "sweep": 11,
+        "single_arc": 18,
+        "clearance": 7
+      },
+      "clearance": {
+        "compact": 5,
+        "progress": 9,
+        "sweep": 6,
+        "single_arc": 7,
+        "clearance": 18
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "method": "clearance",
+  "description": "Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.005,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.01,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.02,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.04,
+        "taper": true
+      },
+      "status": "no_path"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.2819666666666667,
+        "workspace_length_m": 1.7352558373802704,
+        "joint_length_rad": 2.816036044464543,
+        "bending_deg": 587.5946925622214
+      },
+      "duration_s": 7.547557230904076
+    },
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.32685714285714285,
+        "workspace_length_m": 1.4629218040377254,
+        "joint_length_rad": 2.4176919669858656,
+        "bending_deg": 348.5947053770991
+      },
+      "duration_s": 20.513191173848355
+    }
+  ],
+  "selected": 1,
+  "elapsed_s": 43.082541972980835,
+  "budget_s": 60.0
+}

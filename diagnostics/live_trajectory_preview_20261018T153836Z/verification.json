@@ -1,0 +1,204 @@
+{
+  "status": "LIVE_TRAJECTORY_PREVIEW_SOFTWARE_VERIFIED",
+  "planner_viewer_tests_passed": 62,
+  "calibration_regressions_passed": 110,
+  "live_runs": {
+    "live_playback_cli": {
+      "passed": true,
+      "error": null,
+      "duration_after_first_frame_s": 65.44026599801145,
+      "frames": 657,
+      "maximum_received_gap_s": 0.11241992001305334,
+      "native_depth_resolution": [
+        1280,
+        800
+      ],
+      "camera_only": true,
+      "can_access": false,
+      "motor_commands": 0,
+      "display_mode": "3d",
+      "visualization": {
+        "type": "live_depth_trajectory_preview",
+        "rendered_updates": 183,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 646,
+        "max_age_at_display_s": 0.4959479640237987,
+        "last_frame_compute_s": 0.21909361897269264,
+        "maximum_draw_s": 0.15806312501081266,
+        "worker_submissions": 184,
+        "maximum_pending_jobs": 1,
+        "modes_rendered": [
+          "raw"
+        ],
+        "freeze_count": 0,
+        "resume_count": 0,
+        "mode_switches": 0,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/planner_runs/camera_preview/plan.json",
+        "plan_warning": "OCCUPIED-ONLY PLAN \u2014 UNKNOWN SPACE WAS NOT CHECKED",
+        "animation_draws": 395,
+        "animation_time_s": 11.727656292856494,
+        "animation_completed_cycles": 2,
+        "animation_play_clicks": 0,
+        "animation_seeks": 0,
+        "animation_phases_seen": [
+          "HOLD (2 seconds)",
+          "outward",
+          "return"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false
+      },
+      "warning": "SDK warnings may record upstream dropped USB frames; inspect depth_sdk_logs."
+    },
+    "live_controls": {
+      "passed": true,
+      "error": null,
+      "duration_after_first_frame_s": 65.39753246400505,
+      "frames": 656,
+      "maximum_received_gap_s": 0.10950865800259635,
+      "native_depth_resolution": [
+        1280,
+        800
+      ],
+      "camera_only": true,
+      "can_access": false,
+      "motor_commands": 0,
+      "display_mode": "3d",
+      "visualization": {
+        "type": "live_depth_trajectory_preview",
+        "rendered_updates": 168,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 645,
+        "max_age_at_display_s": 0.6568488449847791,
+        "last_frame_compute_s": 0.20830811600899324,
+        "maximum_draw_s": 0.14762747500208206,
+        "worker_submissions": 170,
+        "maximum_pending_jobs": 1,
+        "modes_rendered": [
+          "raw",
+          "voxels"
+        ],
+        "freeze_count": 1,
+        "resume_count": 1,
+        "mode_switches": 3,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/planner_runs/software_demo/plan.json",
+        "plan_warning": "SYNTHETIC PLAN \u2014 not planned against this live kit",
+        "animation_draws": 382,
+        "animation_time_s": 10.28299671008164,
+        "animation_completed_cycles": 3,
+        "animation_play_clicks": 3,
+        "animation_seeks": 2,
+        "animation_phases_seen": [
+          "HOLD (2 seconds)",
+          "outward",
+          "return"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false
+      },
+      "warning": "SDK warnings may record upstream dropped USB frames; inspect depth_sdk_logs."
+    }
+  },
+  "interactions": {
+    "completed_all_steps": true,
+    "events": [
+      {
+        "name": "clicked_play",
+        "elapsed": 4.218588677991647
+      },
+      {
+        "name": "freeze_depth_only",
+        "elapsed": 8.181499133992475,
+        "depth_sequence": 84,
+        "animation_time": 3.9045184130081907
+      },
+      {
+        "name": "animation_continued_while_depth_frozen",
+        "elapsed": 12.099303019000217,
+        "depth_sequence": 84,
+        "acquired": 128,
+        "animation_time": 7.882561929000076
+      },
+      {
+        "name": "depth_continued_while_animation_paused",
+        "elapsed": 17.001452603988582,
+        "depth_sequence": 175,
+        "animation_time": 7.9848349440144375
+      },
+      {
+        "name": "exact_goal_scrub",
+        "elapsed": 17.100839771999745
+      },
+      {
+        "name": "voxel_height_and_rotate",
+        "elapsed": 21.398889533011243
+      },
+      {
+        "name": "save_live_scene",
+        "elapsed": 25.005370228987886
+      },
+      {
+        "name": "loop_and_2x_animation",
+        "elapsed": 28.499341288988944
+      },
+      {
+        "name": "completed_animation_cycle",
+        "elapsed": 40.24886333401082,
+        "cycles": 1
+      },
+      {
+        "name": "continuous_live_updates",
+        "elapsed": 55.072036063007545,
+        "depth_updates": 144,
+        "animation_draws": 311
+      }
+    ],
+    "can_attempts": []
+  },
+  "protected_files_unchanged": 157,
+  "can_before": {
+    "can0": {
+      "tx_packets": 2298816,
+      "rx_packets": 2298856
+    },
+    "can1": {
+      "tx_packets": 1408,
+      "rx_packets": 1456
+    }
+  },
+  "can_after": {
+    "can0": {
+      "tx_packets": 2298816,
+      "rx_packets": 2298856
+    },
+    "can1": {
+      "tx_packets": 1408,
+      "rx_packets": 1456
+    }
+  },
+  "motor_commands": 0,
+  "physical_motion_tested": false,
+  "live_collision_revalidation": false,
+  "source_sha256": {
+    "drum_planner/preview.py": "49dd0a12bb5b1c4932daf7f1abec3ce5ada2f5ed92d7a91bf1420a6a39282b6c",
+    "drum_planner/trajectory_view.py": "6f83406eb89504caa91f6b3c6a2fc7f27d68c2b0fd4453d8654ff110d684c5b9",
+    "drum_planner/live_playback.py": "c5cf268033b4ccd4e45c3a69a4c7441c063bde6874f8bf943914ba2f5f833a34",
+    "drum_planner/live_view.py": "470a5aa0a4b8129d2893a50950087881d6669dcd9b87c74e8304643d2ec3ffd1",
+    "drum_planner/depth.py": "74db8fe9543eff6ae590977ee0c15a4bb01119b27a4bf3d1385c0de05ca01dc9",
+    "drum_planner/cli.py": "b20fb4ffa4aba863ca3c7200ed5f564c573b33485ddb92ede1f43cb761216992",
+    "tests/test_live_trajectory_preview.py": "60df3f19de40a35e149ff5010a237034a18ca1de6f029551fd68c7c10f7e39cf",
+    "DRUM_PLANNER.md": "020c0e3747e239a6642747ffbd58fae89cce68e19855dc0e1473b8156de20803"
+  },
+  "offline_png_render_verified": true,
+  "caveat": "Simulation overlay only. Unknown space, model registration and live collision safety are not certified. SDK warnings remain logged."
+}

@@ -1,0 +1,85 @@
+{
+  "method": "clearance",
+  "description": "Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.005,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.01,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.02,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 5.0,
+        "margin": 0.04,
+        "taper": true
+      },
+      "status": "no_path"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.2484493670886076,
+        "workspace_length_m": 3.052358055298296,
+        "joint_length_rad": 3.3296360354357573,
+        "bending_deg": 698.2878401769163
+      },
+      "duration_s": 34.386514155469456
+    },
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.04,
+        "transit_low_decile_clearance_m": 0.045000000000000005,
+        "all_path_min_clearance_m": 0.04,
+        "transit_proximity": 0.11006172839506176,
+        "workspace_length_m": 3.3745313306364535,
+        "joint_length_rad": 3.5500943223905836,
+        "bending_deg": 868.3118671772801
+      },
+      "duration_s": 8.85172646898488
+    }
+  ],
+  "selected": 2,
+  "elapsed_s": 43.85473785101203,
+  "budget_s": 60.0
+}

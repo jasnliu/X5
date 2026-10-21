@@ -1,0 +1,19 @@
+BASELINE ONLY: independent candidates → weighted route score → dense final zone/collision check
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 182, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 175, in main
+    elif a.action=='plan':make_plan(folder,a.capture,a.calibration)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 35, in make_plan
+    result=planning.plan(folder,capture/'measured_start.json',capture/'camera/scene.json',cal_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/planning.py", line 177, in plan
+    folder=Path(folder).resolve();folder.mkdir(parents=True,exist_ok=False)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/jason/Proyectos3/X5/planner_runs/20261019T195421Z-baseline-907f55/plan'

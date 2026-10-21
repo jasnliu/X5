@@ -4,3 +4,19 @@ install/
 log/
 recordings/*.json
 !recordings/.gitkeep
+
+# Local Python environments and test caches.
+.venv*/
+.pytest_cache/
+*.py[cod]
+
+# Oversized raw capture artifacts remain local; reports and source stay tracked.
+/diagnostics/snare_csp_restore_20261007/run1/physical_video.avi
+/diagnostics/bass_data_collection/physical_pilot3/physical_video.avi
+/diagnostics/bass_data_collection/physical_pilot/physical_video.avi
+/diagnostics/bass_data_collection/physical_pilot2/physical_video.avi
+/diagnostics/bass_data_collection/physical_main/physical_video.avi
+/diagnostics/bass_data_collection/physical_reverse_check/physical_video.avi
+/diagnostics/snare_data_collection/physical2/physical_video.avi
+/diagnostics/snare_data_collection/physical1/physical_video.avi
+/calibration_sessions/20261017T211949Z-762f9908/can_query_audit.jsonl

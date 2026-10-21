@@ -347,6 +347,15 @@ class WorkerTests(unittest.TestCase):
             self.assertIs(bus.right_joint7_session, session)
             session.request('search', math.radians(7))
             wait_for(lambda s: s.completed == 1 and s.ready)
+            epoch = time.monotonic()+1.
+            session.request('calibrate', math.radians(7), epoch)
+            calibration = wait_for(lambda s: s.bottoms >= 3)
+            self.assertTrue(calibration.calibrating)
+            self.assertEqual(calibration.label, 'sync pair')
+            self.assertEqual(calibration.partial_returns, 0)
+            self.assertAlmostEqual(calibration.scheduled_at, epoch+1.5)  # Three 80 BPM pairs.
+            request = session.request('finish')
+            wait_for(lambda s: s.request_id >= request and s.ready and not s.swing)
             session.request('swing', math.radians(7), EVENTS)
             wait_for(lambda s: s.bottoms >= 4)
             request = session.request('finish')

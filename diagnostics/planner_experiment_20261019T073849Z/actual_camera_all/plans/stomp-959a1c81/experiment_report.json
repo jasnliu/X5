@@ -1,0 +1,63 @@
+{
+  "method": "stomp",
+  "description": "Installed MoveIt STOMP, initialized by a new camera/model-planned path. Native stochastic rollouts and smoothing followed by independent dense FCL validation.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    }
+  ],
+  "candidates": [
+    {
+      "index": 3,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.24438311688311687,
+        "workspace_length_m": 3.1961946602085853,
+        "joint_length_rad": 3.1779629565761423,
+        "bending_deg": 711.6154519564427
+      },
+      "duration_s": 44.29775157898553
+    }
+  ],
+  "selected": 3,
+  "elapsed_s": 14.050075360020855,
+  "budget_s": 60.0
+}

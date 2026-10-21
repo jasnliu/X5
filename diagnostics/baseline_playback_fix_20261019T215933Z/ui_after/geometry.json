@@ -1,0 +1,447 @@
+{
+  "pid": 276737,
+  "windows": [
+    {
+      "title": "X5 BASELINE \u2014 supervised RIGHT ARM",
+      "visible": true,
+      "rect": [
+        50,
+        82,
+        1440,
+        900
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "type": "QLabel",
+      "text": "BASELINE ONLY \u2022 START REAL ARM authorizes motion after automatic checks",
+      "rect": [
+        11,
+        11,
+        1418,
+        26
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Frozen planning scene",
+      "rect": [
+        11,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "3D layer:",
+      "rect": [
+        189,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QComboBox",
+      "text": "",
+      "rect": [
+        367,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Color:",
+      "rect": [
+        545,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QComboBox",
+      "text": "",
+      "rect": [
+        723,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Reset / fit view [R]",
+      "rect": [
+        901,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Save view [S]",
+      "rect": [
+        1079,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Close window [Q]",
+      "rect": [
+        1257,
+        43,
+        172,
+        24
+      ]
+    },
+    {
+      "type": "QSplitter",
+      "text": "",
+      "rect": [
+        11,
+        221,
+        1418,
+        565
+      ]
+    },
+    {
+      "type": "QWidget",
+      "text": "",
+      "rect": [
+        452,
+        221,
+        977,
+        565
+      ]
+    },
+    {
+      "type": "VtkViewport",
+      "text": "",
+      "rect": [
+        461,
+        230,
+        959,
+        525
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "SIMULATED ARM \u2014 outward \u2014 t=0.00s\nINITIAL SNAPSHOT 5 \u2014 CAMERA OFF / surface mesh",
+      "rect": [
+        461,
+        230,
+        959,
+        31
+      ]
+    },
+    {
+      "type": "QVTKRenderWindowInteractor",
+      "text": "",
+      "rect": [
+        461,
+        267,
+        959,
+        488
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Left-drag: rotate   \u2022   Middle-drag: pan   \u2022   Wheel or right-drag: zoom",
+      "rect": [
+        461,
+        761,
+        959,
+        16
+      ]
+    },
+    {
+      "type": "QWidget",
+      "text": "",
+      "rect": [
+        11,
+        221,
+        437,
+        565
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "INITIAL DEPTH SNAPSHOT \u2014 CAMERA OFF",
+      "rect": [
+        20,
+        230,
+        419,
+        16
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "",
+      "rect": [
+        20,
+        252,
+        419,
+        366
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Preview animates the model ONLY. P = preview, Space = emergency hold.\nReal motion: start \u2192 record3 endpoint \u2192 hold 2 seconds \u2192 reverse \u2192 settled original start \u2192 relax.\nStart only from a physically supported resting pose; encoders cannot verify physical support.\nLeft arm stays relaxed; right gripper stays custom-closed until final release.\nSpeed is locked once preparing/armed. 1\u00d7 respects existing validated motion limits.",
+      "rect": [
+        20,
+        624,
+        419,
+        153
+      ]
+    },
+    {
+      "type": "QSplitterHandle",
+      "text": "",
+      "rect": [
+        448,
+        221,
+        4,
+        565
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "FIVE-FRAME PLANNING SNAPSHOT \u2014 camera released \u2014 mesh remains frozen",
+      "rect": [
+        11,
+        792,
+        1418,
+        16
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Frozen initial scene: 17,680 triangles (17,680 retained in the GPU scene). No further camera acquisition or mesh rebuilding. Missing/hidden space remains UNKNOWN. Not a collision check.",
+      "rect": [
+        11,
+        814,
+        1418,
+        16
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "SOFTWARE HOLD IS NOT A HARDWARE E-STOP. Power/CAN/drive failure may prevent holding torque. No fault auto-relaxes or auto-returns. Relax now immediately releases torque: support the arm first. Reverse assumes the traveled corridor is clear and unchanged. Frozen observed scene only; unseen/moved obstacles are not covered. zone3: original right gripper point only.",
+      "rect": [
+        11,
+        836,
+        1418,
+        31
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Session: /home/jason/Proyectos3/X5/diagnostics/baseline_playback_fix_20261019T215933Z/ui_after",
+      "rect": [
+        11,
+        873,
+        1418,
+        16
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Play animation [P]",
+      "rect": [
+        11,
+        169,
+        113,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Go to start",
+      "rect": [
+        130,
+        169,
+        80,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Go to goal",
+      "rect": [
+        216,
+        169,
+        80,
+        24
+      ]
+    },
+    {
+      "type": "QSlider",
+      "text": "",
+      "rect": [
+        302,
+        173,
+        850,
+        15
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "0.00 / 13.56 s \u2022 outward",
+      "rect": [
+        1158,
+        169,
+        185,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Fit arm + kit",
+      "rect": [
+        1349,
+        169,
+        80,
+        24
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "BASELINE \u2022 original zone3 right-gripper point \u2022 full arm/stick collisions \u2022 PREVIEW MODEL, NOT LIVE FEEDBACK",
+      "rect": [
+        11,
+        199,
+        1418,
+        16
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Check readiness (no motion)",
+      "rect": [
+        435,
+        80,
+        328,
+        24
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "Movement speed:",
+      "rect": [
+        11,
+        73,
+        327,
+        38
+      ]
+    },
+    {
+      "type": "QDoubleSpinBox",
+      "text": "1.00 \u00d7",
+      "rect": [
+        344,
+        79,
+        85,
+        25
+      ]
+    },
+    {
+      "type": "QLineEdit",
+      "text": "1.00 \u00d7",
+      "rect": [
+        347,
+        82,
+        65,
+        19
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "START REAL ARM",
+      "rect": [
+        769,
+        80,
+        327,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "EMERGENCY HOLD [Space]",
+      "rect": [
+        1102,
+        73,
+        327,
+        38
+      ]
+    },
+    {
+      "type": "QLabel",
+      "text": "PREVIEW ONLY \u2014 no motors enabled.",
+      "rect": [
+        11,
+        117,
+        1418,
+        16
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Reverse to rest + relax",
+      "rect": [
+        11,
+        139,
+        279,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Recheck hold",
+      "rect": [
+        296,
+        139,
+        279,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Relax now (torque OFF)",
+      "rect": [
+        581,
+        139,
+        278,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Exit controller",
+      "rect": [
+        865,
+        139,
+        279,
+        24
+      ]
+    },
+    {
+      "type": "QPushButton",
+      "text": "Reconnect controller",
+      "rect": [
+        1150,
+        139,
+        279,
+        24
+      ]
+    }
+  ]
+}

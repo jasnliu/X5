@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "regression": "446 passed",
+  "direct_ui_checks": [
+    "no_modal_review_or_typed_phrase",
+    "preview",
+    "speed",
+    "cancel_pending_start",
+    "optional_readiness_without_motion",
+    "expired_readiness_automatically_refreshed",
+    "one_click_start_after_checks",
+    "no_duplicate_start",
+    "outward_goal_2s_hold_reverse_settle_release"
+  ],
+  "mock_control_checks": [
+    "preview",
+    "speed",
+    "start",
+    "hold",
+    "blocked_close",
+    "checked_prefix_reverse",
+    "hold_during_reverse",
+    "GUI_disconnect",
+    "reconnect",
+    "CAN_fault_blocks_reverse",
+    "clear_fault_then_recover",
+    "supported_start_release"
+  ],
+  "physical_motor_commands": 0,
+  "can_access": false,
+  "camera_access": false,
+  "modified_files": [
+    "BASELINE_HARDWARE.md",
+    "DRUM_PLANNER.md",
+    "drum_planner/baseline/app.py",
+    "drum_planner/baseline/motion.py",
+    "drum_planner/baseline/service.py",
+    "drum_planner/baseline/tasks.py",
+    "tests/test_baseline_hardware.py"
+  ],
+  "limitation": "Hardware motion and physical support not tested; all motors simulated and CAN denied in test services."
+}

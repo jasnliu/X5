@@ -1,0 +1,246 @@
+{
+  "conclusion": "Dominant systematic encoder-to-URDF kinematic calibration mismatch; small middle-joint zero/axis-alignment biases are the strongest tested explanation.",
+  "certainty": "Strong, repeatable statistical diagnosis from saved data. Exact physical encoder zeros versus mechanically equivalent axis/alignment errors are not independently identifiable from these observations alone.",
+  "source_session": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908",
+  "training_samples": 25,
+  "reserved_validation_samples": 5,
+  "original_training_metrics": {
+    "translation_mm": {
+      "rms": 5.5273516474041084,
+      "maximum": 8.93303251028032
+    },
+    "rotation_deg": {
+      "rms": 1.0607755099712952,
+      "maximum": 1.9760290052159761
+    },
+    "reprojection_px": {
+      "rms": 5.291519030949068,
+      "maximum": 8.398599022474086
+    }
+  },
+  "diagnostic_joint_offset_model_metrics": {
+    "translation_mm": {
+      "rms": 2.5153993628102067,
+      "maximum": 5.572916438620466
+    },
+    "rotation_deg": {
+      "rms": 0.5272808218121494,
+      "maximum": 1.3426381194527905
+    },
+    "reprojection_px": {
+      "rms": 2.2057426096912636,
+      "maximum": 4.535646232442723
+    }
+  },
+  "internal_five_fold_crossvalidation": {
+    "original": {
+      "translation_mm": {
+        "rms": 6.2383281624156055,
+        "maximum": 9.543798499572619
+      },
+      "rotation_deg": {
+        "rms": 1.1384708929056182,
+        "maximum": 2.2457930005777933
+      },
+      "reprojection_px": {
+        "rms": 5.96414174995659,
+        "maximum": 9.2121404087472
+      }
+    },
+    "joint_offset_hypothesis": {
+      "translation_mm": {
+        "rms": 3.2510319147440163,
+        "maximum": 6.392276104134101
+      },
+      "rotation_deg": {
+        "rms": 0.6096207858550553,
+        "maximum": 1.4626880961517987
+      },
+      "reprojection_px": {
+        "rms": 2.7745314912641756,
+        "maximum": 5.320649310863957
+      }
+    }
+  },
+  "diagnostic_only_joint_offset_estimates_degrees": {
+    "2": -1.1641145849267729,
+    "3": 2.5171748169954493,
+    "4": 1.582183279494663,
+    "5": -0.7029847293143439,
+    "6": 1.318078051667978
+  },
+  "estimate_warning": "Not a calibrated motor-setting prescription; no offset, URDF, capture policy or threshold has been changed. J1/J7 constants are absorbed by free extrinsics and were not estimated.",
+  "evidence": [
+    "All 25 training images redetected identical corner coordinates and poses to the saved observations.",
+    "Independent batched URDF FK reproduces saved hand transforms to below 1e-12.",
+    "Joint-offset hypothesis improves both positional and angular consistency and passes the original aggregate thresholds in internal five-fold prediction.",
+    "Estimating from early 15 poses predicts late 10 better, and estimating from late 15 predicts early 10 better.",
+    "Rotation-only diagnostic independently estimates similar middle-joint biases; scale/link lengths alone cannot explain the angular inconsistency.",
+    "Printed scale, anisotropic print scale, simple fixed board bow, simple gravity-induced mount flex, and intrinsic adjustment models did not match the predictive improvement.",
+    "A 41-point uniform timing-offset sweep across saved encoder history did not materially reduce errors.",
+    "The factory distortion handling is specified Brown-Conrady K6. Ignoring distortion does not resolve the failure."
+  ],
+  "predictive_pixel_comparison": {
+    "baseline": {
+      "fitted_rms_px": 4.946954560052783,
+      "internal_cv_rms_px": 5.615849233640793
+    },
+    "joint_offsets": {
+      "fitted_rms_px": 1.9712723480274048,
+      "internal_cv_rms_px": 2.731927268444384
+    },
+    "camera_K": {
+      "fitted_rms_px": 4.870681651474615,
+      "internal_cv_rms_px": 5.753312359521374
+    },
+    "board_scale": {
+      "fitted_rms_px": 4.92552158281333,
+      "internal_cv_rms_px": 5.574620561208576
+    },
+    "board_anisotropic": {
+      "fitted_rms_px": 4.923924838930617,
+      "internal_cv_rms_px": 5.570927439608551
+    },
+    "board_bow": {
+      "fitted_rms_px": 4.915839371786039,
+      "internal_cv_rms_px": 5.5876862987193086
+    },
+    "mount_gravity_flex": {
+      "fitted_rms_px": 4.737487534906147,
+      "internal_cv_rms_px": 5.528225349527094
+    }
+  },
+  "timing_best": {
+    "lag_seconds": -0.016644593727702772,
+    "metrics": {
+      "translation_mm": {
+        "rms": 5.524223099013495,
+        "maximum": 8.900264248021914
+      },
+      "rotation_deg": {
+        "rms": 1.0598756221027805,
+        "maximum": 1.9777197371447566
+      },
+      "reprojection_px": {
+        "rms": 5.299331179593196,
+        "maximum": 8.420269462734847
+      }
+    },
+    "cost": 23.677705514531972
+  },
+  "rotation_only_check": {
+    "joint_offsets_deg": [
+      -0.8001733749314114,
+      2.1990514337587763,
+      1.384145849158418,
+      -1.001299416142243,
+      1.2613258340964248
+    ],
+    "angular_rms_deg": 0.4942051492578043
+  },
+  "early_late_prediction_checks": {
+    "early_to_late": {
+      "baseline": {
+        "metrics": {
+          "translation_mm": {
+            "rms": 6.623379306329386,
+            "maximum": 10.782080925412703
+          },
+          "rotation_deg": {
+            "rms": 1.1664299133699851,
+            "maximum": 1.895120903126394
+          },
+          "reprojection_px": {
+            "rms": 6.663542371162939,
+            "maximum": 9.714603014488816
+          }
+        },
+        "offsets": {}
+      },
+      "joint_offsets": {
+        "metrics": {
+          "translation_mm": {
+            "rms": 3.42560036301022,
+            "maximum": 6.3014713528468045
+          },
+          "rotation_deg": {
+            "rms": 0.5823032763815786,
+            "maximum": 1.1833912900010324
+          },
+          "reprojection_px": {
+            "rms": 3.2444125762552862,
+            "maximum": 5.160670375865471
+          }
+        },
+        "offsets": {
+          "2": -1.1675469527864701,
+          "3": 2.19905911317957,
+          "4": 1.9194169601599735,
+          "5": -0.764935728474181,
+          "6": 1.3928265430087525
+        }
+      }
+    },
+    "late_to_early": {
+      "baseline": {
+        "metrics": {
+          "translation_mm": {
+            "rms": 6.886236512708258,
+            "maximum": 9.355131443380301
+          },
+          "rotation_deg": {
+            "rms": 1.3701855034399466,
+            "maximum": 2.256362018237913
+          },
+          "reprojection_px": {
+            "rms": 6.8839944714693875,
+            "maximum": 9.512138096050995
+          }
+        },
+        "offsets": {}
+      },
+      "joint_offsets": {
+        "metrics": {
+          "translation_mm": {
+            "rms": 3.0817957810866115,
+            "maximum": 4.782437037382539
+          },
+          "rotation_deg": {
+            "rms": 0.810306907766146,
+            "maximum": 1.5606203651686423
+          },
+          "reprojection_px": {
+            "rms": 2.976875168747873,
+            "maximum": 3.9860191989773255
+          }
+        },
+        "offsets": {
+          "2": -1.289436126758769,
+          "3": 2.388311534759398,
+          "4": 1.4424535515590569,
+          "5": -0.623976546473903,
+          "6": 1.118022168577772
+        }
+      }
+    }
+  },
+  "limitations": [
+    "No independent dimensional measurement or mechanical zero reference is available in this offline dataset.",
+    "Other pose-dependent mechanical errors can be partly absorbed into fitted zero offsets; exact mechanical cause is not proven.",
+    "Residual calibration, physical accuracy, and collision safety have not been validated.",
+    "Reserved first-five validation images/measurements were not evaluated or optimized against.",
+    "The SDK 3D-to-2D helper returned essentially undistorted pinhole pixels in a separate arithmetic check; it is not used by this RGB calibration solver, and this check does not establish physical distortion accuracy."
+  ],
+  "verification": {
+    "source_files_hash_verified_unchanged": 13,
+    "session_files_hash_verified_unchanged": 35,
+    "existing_user_capture_process_continues_appending_runtime_logs": [
+      "calibration_sessions/20261017T211949Z-762f9908/can_query_audit.jsonl",
+      "calibration_sessions/20261017T211949Z-762f9908/orbbec_sdk_logs/OrbbecSDK.log.txt"
+    ],
+    "no_calibration_applied": true,
+    "no_calibration_export_created": true,
+    "no_hardware_access_by_diagnostics": true,
+    "validation_poses_not_used": true
+  }
+}

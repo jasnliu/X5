@@ -1,0 +1,24 @@
+{
+  "changes": [
+    {
+      "stage": "refine",
+      "case": "main",
+      "seed": 19,
+      "method": "sweep",
+      "old": 24,
+      "new": 8,
+      "score_difference": 2.037725543857505e-09
+    },
+    {
+      "stage": "heldout",
+      "case": "goal4",
+      "seed": 19,
+      "method": "sweep",
+      "old": 24,
+      "new": 5,
+      "score_difference": 2.3823445438608815e-09
+    }
+  ],
+  "all_33_generator_seed_choices_unchanged": true,
+  "reason": "Round soft scores to 8 decimals (as production does) before candidate-index tie-break; no elapsed-time preference, objective weights or recording-similarity changes"
+}

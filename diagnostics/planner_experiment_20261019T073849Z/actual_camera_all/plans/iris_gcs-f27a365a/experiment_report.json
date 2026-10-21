@@ -1,0 +1,28 @@
+{
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    }
+  ],
+  "reason": "no_valid_route_within_budget",
+  "region_count": 12,
+  "solver": "",
+  "solver_status": "SolutionResult.kInfeasibleConstraints",
+  "success": false,
+  "refinements": 0,
+  "region_certification": "sampled, not continuous",
+  "algorithm": "Drake IRIS + GcsTrajectoryOptimization"
+}

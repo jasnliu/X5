@@ -1,0 +1,18 @@
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.6s] robust envelope: +0.0 mm world, 0.0 mm self bound
+[robust +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[robust +   3.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +   5.2s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +   9.2s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[robust +   9.2s] search 2: 3.0s allocation, added clearance 0.0 mm
+[robust +  13.7s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[robust +  13.7s] search 3: 3.0s allocation, added clearance 0.0 mm
+[robust +  17.5s] candidate 3: valid, 8.50s outward, transit clearance 35.0 mm
+[robust +  17.5s] search 4: 3.0s allocation, added clearance 0.0 mm
+[robust +  20.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +  22.9s] candidate 4: valid, 26.27s outward, transit clearance 30.0 mm
+[robust +  22.9s] search 5: 3.0s allocation, added clearance 0.0 mm
+[robust +  25.1s] candidate rejected by continuous polynomial joint bounds
+[robust +  29.4s] candidate 5: valid, 59.92s outward, transit clearance 30.0 mm
+[robust +  29.5s] READY: 6.762s outward → 2s hold → exact reverse; SIMULATION ONLY

@@ -1,0 +1,31 @@
+{
+  "state": "/home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json",
+  "state_sha256": "ec640c9d38ca47202b16a4bd0d9f01042e2381e3fb721fb5d71950e31aedce8d",
+  "scene": "/home/jason/Proyectos3/X5/planner_runs/20261020T055146Z-experiment-c5da14/capture_000/camera/scene.json",
+  "scene_sha256": "4b70eae3356ab006db2e245b27aa0474f44ca734e41f47aa3d5fac560b6e48bf",
+  "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+  "saved_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "pool_root": "/home/jason/Proyectos3/X5/planner_runs/20261020T055146Z-experiment-c5da14/shared_pools",
+  "right_zone": {
+    "schema": "x5-right-zone-constraint-v1",
+    "enabled": true,
+    "zone_file": "/home/jason/Proyectos3/X5/right_zones/zone3.json",
+    "zone_sha256": "af72eb2d509500513e2faaf14d51d9f886c597d4cfd3abebb505da54874fa888",
+    "reference_urdf": "/home/jason/Proyectos3/X5/model/openarmx.urdf",
+    "reference_urdf_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "frame": "world",
+    "tcp": "openarmx_right_hand_tcp",
+    "buffer_m": 0.005,
+    "numerical_tolerance_m": 1e-09,
+    "point_only": true,
+    "left_arm_constrained": false,
+    "stick_constrained": false,
+    "kinematics": "original URDF, saved joint coordinates; identical to safe_zone.geometry.Model",
+    "membership": "recomputed convex hull; signed plane distance <= buffer_m + 1e-9",
+    "point_count": 793,
+    "plane_count": 360,
+    "constraint_sha256": "e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43"
+  }
+}

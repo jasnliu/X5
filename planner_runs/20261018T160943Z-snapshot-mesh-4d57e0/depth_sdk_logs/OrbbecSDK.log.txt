@@ -1,0 +1,15 @@
+[10/18 09:09:44.821167][warning][130811][PropertyServer.cpp:120] [AY6R463004K] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[10/18 09:09:44.821294][warning][130811][PropertyServer.cpp:120] [AY6R463004K] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[10/18 09:09:44.858252][warning][130811][SensorBase.cpp:161] [AY6R463004K] Failed to update default stream profile for sensor due to no matching stream profile found
+[10/18 09:09:45.005067][warning][130851][VideoSensor.cpp:241] [AY6R463004K] This frame will be dropped because the data size does not match the expectation! size=48956, expected=2048000 @Depth
+[10/18 09:09:45.197479][warning][130852][ObException.cpp:32] A unrecoverable_exception has occurred!
+ - where: Frame.cpp(92)
+ - msg: Update data size(2110328) > data buffer size! (2048000)
+ - type: MEMORY
+ - status: 104
+[10/18 09:09:45.197538][warning][130852][ObLibuvcDevicePort.cpp:507] Execute failure! A libobsensor_exception has occurred!
+ - where: ObLibuvcDevicePort.cpp(507):onFrameCallback
+ - msg: Update data size(2110328) > data buffer size! (2048000)
+ - type: N11libobsensor23unrecoverable_exceptionE
+ - status: 104
+[10/18 09:09:45.847204][warning][130860][VideoSensor.cpp:241] [AY6R463004K] This frame will be dropped because the data size does not match the expectation! size=16372, expected=2048000 @Depth [**67 logs in 842ms, last: 09:09:45.094743**]

@@ -1,0 +1,236 @@
+{
+  "schema": "x5-moveit-request-v1",
+  "execute": false,
+  "urdf": "/home/jason/Proyectos3/X5/diagnostics/multiseed_20261018T213334Z/saved_scene_plan/model/robot.urdf",
+  "srdf": "/home/jason/Proyectos3/X5/diagnostics/multiseed_20261018T213334Z/saved_scene_plan/model/robot.srdf",
+  "start": [
+    0.04162188143740053,
+    0.019756008239872003,
+    -0.210411078049896,
+    0.07307804989700095,
+    0.29375962516207965,
+    -0.05888441290913171,
+    0.3496621652552072
+  ],
+  "left": [
+    -0.014769054703593909,
+    0.005562371252002762,
+    -0.00019180590524214836,
+    -0.00019180590524214836,
+    -0.8732922865644301,
+    0.03356603341725872,
+    -0.07844861524376334
+  ],
+  "left_opening_m": 0.0,
+  "goal": [
+    -0.6055312428473343,
+    0.21194552529182964,
+    0.24416891737239688,
+    1.7329663538567175,
+    0.20476168513003543,
+    -0.30516319523918334,
+    0.6001606775005737
+  ],
+  "scene": {
+    "schema": "x5-native-depth-scene-v1",
+    "synthetic": false,
+    "camera": {
+      "protocol": 1,
+      "serial": "AY6R463004K",
+      "name": "Orbbec Gemini 2",
+      "firmware": "1.4.92",
+      "depth_work_mode": "Unbinned Dense Default",
+      "depth": {
+        "width": 1280,
+        "height": 800,
+        "fps": 10,
+        "format_enum": 8,
+        "intrinsic_width": 1280,
+        "intrinsic_height": 800,
+        "K": [
+          [
+            613.611877441,
+            0,
+            634.910949707
+          ],
+          [
+            0,
+            613.611877441,
+            400.3934021
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "distortion_model": 4,
+        "D_opencv_order": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": {
+        "width": 1280,
+        "height": 720,
+        "fps": 15,
+        "format_enum": 0,
+        "intrinsic_width": 1280,
+        "intrinsic_height": 720,
+        "K": [
+          [
+            690.735229492,
+            0,
+            647.398071289
+          ],
+          [
+            0,
+            690.641601562,
+            361.572753906
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "distortion_model": 4,
+        "D_opencv_order": [
+          43.8931617737,
+          -99.6809844971,
+          6.35045580566e-05,
+          0.000259708933299,
+          106.131744385,
+          43.7220077515,
+          -99.2912826538,
+          106.184356689
+        ]
+      },
+      "T_color_depth_m": [
+        [
+          0.999998771667,
+          0.000881533622742,
+          -0.00127070999146,
+          -0.0139434547424
+        ],
+        [
+          -0.000879107117653,
+          0.999997776031,
+          0.00190857362747,
+          9.11664962769e-06
+        ],
+        [
+          0.00127239990234,
+          -0.00190747070312,
+          0.999997436523,
+          -0.00182580566406
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "depth_stream_enabled": true,
+      "color_stream_enabled": false,
+      "alignment": "native_depth"
+    },
+    "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+    "T_base_depth": [
+      [
+        -0.045052558100081574,
+        -0.7443385240172491,
+        0.6662810850966814,
+        0.034195196764152364
+      ],
+      [
+        -0.9988181949234571,
+        0.04573537173282772,
+        -0.016444600525398697,
+        0.023050366975580924
+      ],
+      [
+        -0.018232269875979226,
+        -0.6662344970423257,
+        -0.7455194304414164,
+        0.9585032619308057
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "voxel_size_m": 0.01,
+    "obstacle_padding_m": 0.02,
+    "point_count": 147428,
+    "points_file": "/home/jason/Proyectos3/X5/diagnostics/observed_obstacle_policy_20261018T201044Z/live_current_pose/camera/points_base.f32",
+    "free_depth_file": "/home/jason/Proyectos3/X5/diagnostics/observed_obstacle_policy_20261018T201044Z/live_current_pose/camera/free_depth_m.bin",
+    "frames": [
+      {
+        "n": 2048000,
+        "sequence": 1,
+        "received_monotonic": 166481.727278353,
+        "device_timestamp_us": 15095610829,
+        "value_scale_m": 0.001
+      },
+      {
+        "n": 2048000,
+        "sequence": 2,
+        "received_monotonic": 166481.818760117,
+        "device_timestamp_us": 15095710740,
+        "value_scale_m": 0.001
+      },
+      {
+        "n": 2048000,
+        "sequence": 3,
+        "received_monotonic": 166481.91672107,
+        "device_timestamp_us": 15095810651,
+        "value_scale_m": 0.001
+      },
+      {
+        "n": 2048000,
+        "sequence": 4,
+        "received_monotonic": 166482.01718582,
+        "device_timestamp_us": 15095910562,
+        "value_scale_m": 0.001
+      },
+      {
+        "n": 2048000,
+        "sequence": 5,
+        "received_monotonic": 166482.11761477,
+        "device_timestamp_us": 15096010473,
+        "value_scale_m": 0.001
+      }
+    ],
+    "captured_utc": "2026-10-18T20:14:33Z",
+    "observed_valid_fraction": 0.8607119140625,
+    "fully_observed_fraction": 0.8036083984375,
+    "unknown_space_policy": "unobserved; default planning checks detected obstacles only, not proof of free space",
+    "default_collision_policy": "observed_obstacles",
+    "files_sha256": {
+      "raw_depth.npz": "51e0d9652dbcae7e82dec25034c66b08f7bcaab5bca12c7e3dac70343939b84f",
+      "depth_m.bin": "b33bb212c280762274123939af0562136f105f590e18b34d61c26b6208140026",
+      "free_depth_m.bin": "95361956e356885dc870a214decde80531e09df85fc0ef0f0fceadc1b797caf8",
+      "points_base.f32": "a5625a9d3dac9a8fc4cb603a93f59390dd694ab89fa7b267e9e7c127ee1fa387"
+    },
+    "physical_depth_alignment_verified": false,
+    "motion_authorized": false,
+    "measured_state_sha256": "b59b9d64a5dfc9818fe737307c30ac9696087d6364f743f73e46c9d2063edbe9",
+    "acquisition": "stationary encoder-bracketed five-frame planning capture",
+    "source_scene_sha256": "10851df62acce7629fea517d85b25db246bfed0b0e19affb09b67fa0940103cc"
+  },
+  "collision_policy": "observed_obstacles",
+  "occupied_only_preview": false,
+  "planning_seconds": 8.0,
+  "seed": 31695,
+  "candidate_count": 6
+}

@@ -1,0 +1,11 @@
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[robust +   0.7s] robust envelope: +24.3 mm world, 22.1 mm self bound
+[robust +   1.1s] search 1: 3.0s allocation, added clearance 24.3 mm
+[robust +   5.0s] hard constraint rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   5.4s] hard constraint rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   5.8s] hard constraint rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   5.8s] candidate 1: rejected by final bounds/zone/collision checks
+[robust +   5.8s] search 2: 3.0s allocation, added clearance 24.3 mm
+[robust +   9.2s] search 3: 3.0s allocation, added clearance 24.3 mm

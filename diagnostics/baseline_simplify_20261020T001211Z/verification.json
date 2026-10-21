@@ -1,0 +1,44 @@
+{
+  "completed_utc": "2026-10-20T00:22:26.447861+00:00",
+  "passed": true,
+  "regression_suite": "578 passed in 127.07s (0:02:07)",
+  "actual_camera_encoders_calculate_and_preview": "passed, query-only",
+  "actual_start": "UI dispatch dry-run only; no motor owner launched",
+  "native_simulated_full_cycles_and_fault_recovery": "passed",
+  "continuous_left_sway": "simulated complete cycles at 0.25, 0.6, 1.0 speed; capture/preview/recovery regressions",
+  "physical_enable_or_motion_commands": 0,
+  "wire_audit": {
+    "exact_state_query_allowlist": true,
+    "retained_query_sent_records": 8544,
+    "query_audit_files": [
+      "diagnostics/baseline_simplify_20261020T001211Z/actual_readonly/live-encoders/can_query_audit.jsonl",
+      "diagnostics/baseline_simplify_20261020T001211Z/actual_readonly/calculate-8eaa3b49/capture/can_query_audit.jsonl.1",
+      "diagnostics/baseline_simplify_20261020T001211Z/actual_readonly/calculate-8eaa3b49/capture/can_query_audit.jsonl"
+    ],
+    "protected_files_unchanged": 15
+  },
+  "controls_always_enabled": true,
+  "protected_files_unchanged": 15,
+  "remaining_can_owners": [],
+  "tests_sequential_with_memory_limit": "2500M, swap 0; simulated/offline tests denied AF_CAN",
+  "modified_files": [
+    "DRUM_PLANNER.md",
+    "BASELINE_HARDWARE.md",
+    "tests/test_baseline_workspace.py",
+    "tests/test_baseline_hardware.py",
+    "drum_planner/read_only.py",
+    "drum_planner/current_plan.py",
+    "drum_planner/baseline/windows.py",
+    "drum_planner/baseline/workspace.py",
+    "drum_planner/baseline/service.py",
+    "drum_planner/baseline/transport.py",
+    "drum_planner/baseline/motion.py",
+    "drum_planner/baseline/tasks.py",
+    "drum_planner/baseline/feedback.py",
+    "drum_planner/baseline/work.py"
+  ],
+  "new_review": "BASELINE_ERROR_REVIEW.md",
+  "actual_readonly_report": "diagnostics/baseline_simplify_20261020T001211Z/actual_readonly_report.json",
+  "native_report": "diagnostics/baseline_simplify_20261020T001211Z/mock_report.json",
+  "suite_log": "diagnostics/baseline_simplify_20261020T001211Z/full-tests.log"
+}

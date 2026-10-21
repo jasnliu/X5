@@ -137,6 +137,8 @@ class FirmwareTests(unittest.TestCase):
                            check=True,capture_output=True,text=True)
             result = subprocess.run([str(binary)],check=True,capture_output=True,text=True)
             self.assertIn('stall latch passed', result.stdout)
+            self.assertIn('Bass clockwise PWM 180/255 for 50 ms, release and independent hi-hat passed',
+                          result.stdout)
 
 
 if __name__ == '__main__': unittest.main()

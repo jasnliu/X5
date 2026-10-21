@@ -10,7 +10,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--socket", required=True)
     parser.add_argument("--detail", required=True)
-    parser.add_argument("--instrument", choices=("ride", "hihat"), default="ride")
+    parser.add_argument("--instrument", choices=("ride", "hihat", "snare"), default="ride")
     args = parser.parse_args()
     sender = AudioSender(args.socket, instrument=args.instrument)
     try:

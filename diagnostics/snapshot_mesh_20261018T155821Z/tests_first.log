@@ -1,0 +1,25 @@
+.......................................................................F [ 91%]
+.......                                                                  [100%]
+=================================== FAILURES ===================================
+____________________ test_saved_mesh_is_not_a_planner_scene ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-38/test_saved_mesh_is_not_a_plann0')
+
+    def test_saved_mesh_is_not_a_planner_scene(tmp_path):
+        h,raw=frame();cal=common.calibration()
+        packet,mesh=snapshot.prepare_scene(h,raw,meta(),np.eye(4))
+        snapshot.save_scene(tmp_path,h,raw,meta(),cal,common.DEFAULT_CALIBRATION,mesh)
+        saved=json.loads((tmp_path/'scene.json').read_text())
+        assert saved['schema']=='x5-depth-surface-preview-v1' and saved['frames_used']==1
+        assert not saved['collision_scene'] and not saved['motion_authorized']
+        assert 'free_depth_file' not in saved
+        data=np.load(tmp_path/'surface_mesh.npz');assert np.array_equal(data['faces'],mesh.faces)
+        assert np.array_equal(np.load(tmp_path/'raw_depth.npz')['depth'],raw)
+        with pytest.raises(ValueError):packet.raw_points[0,0]=3
+>       from drum_planner.scene import load_scene
+E       ModuleNotFoundError: No module named 'drum_planner.scene'
+
+tests/test_snapshot_mesh.py:111: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_snapshot_mesh.py::test_saved_mesh_is_not_a_planner_scene - ...
+1 failed, 78 passed in 11.44s

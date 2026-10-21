@@ -1,0 +1,111 @@
+-- Found moveit_core: 2.12.4 (/opt/ros/jazzy/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found tcb_span: 1.3.2 (/opt/ros/jazzy/share/tcb_span/cmake)
+-- Found rclcpp_lifecycle: 28.1.22 (/opt/ros/jazzy/share/rclcpp_lifecycle/cmake)
+-- Found parameter_traits: 0.7.6 (/opt/ros/jazzy/share/parameter_traits/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: serialization filesystem system 
+-- Found chomp_motion_planner: 2.12.4 (/opt/ros/jazzy/share/chomp_motion_planner/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jason/Proyectos3/X5/drum_planner/build/experiment
+[ 50%] Building CXX object CMakeFiles/experiment_oracle.dir/experiment_oracle.cpp.o
+[100%] Linking CXX executable experiment_oracle
+[100%] Built target experiment_oracle
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+[chance +   0.0s] From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.
+[chance +   0.0s] building/loading model + frozen FCL world; no motor access
+[chance +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chance +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   5.3s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   9.3s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[chance +   9.3s] search 2: 3.0s allocation, added clearance 0.0 mm
+[chance +  13.8s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[chance +  13.8s] risk candidate pool: native CHOMP broad-route proposal from a newly planned seed
+[chance +  17.4s] candidate 3: valid, 20.66s outward, transit clearance 110.0 mm
+[chance +  17.4s] evaluating 64 common uncertainty scenarios across 3 candidates
+[chance +  21.0s] scenarios 8/64 × 3 candidates (shared scene work)
+[chance +  24.4s] scenarios 16/64 × 3 candidates (shared scene work)
+[chance +  27.9s] scenarios 24/64 × 3 candidates (shared scene work)
+[chance +  31.4s] scenarios 32/64 × 3 candidates (shared scene work)
+[chance +  34.9s] scenarios 40/64 × 3 candidates (shared scene work)
+[chance +  38.3s] scenarios 48/64 × 3 candidates (shared scene work)
+[chance +  41.8s] scenarios 56/64 × 3 candidates (shared scene work)
+[chance +  45.3s] scenarios 64/64 × 3 candidates (shared scene work)
+[chance +  45.3s] candidate 2 rejected: scenario upper bound 0.833 > 0.150
+[chance +  45.3s] candidate 1 rejected: scenario upper bound 0.998 > 0.150
+[chance +  45.3s] READY: 20.663s outward → 2s hold → exact reverse; SIMULATION ONLY
+[cvar +   0.0s] From-scratch candidate search + CVaR of worst scenario clearance/collision losses. Optimizes the bad tail rather than mean proximity; nominal full-body validity remains mandatory.
+[cvar +   0.0s] building/loading model + frozen FCL world; no motor access
+[cvar +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[cvar +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +   5.3s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +   9.3s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[cvar +   9.4s] search 2: 3.0s allocation, added clearance 0.0 mm
+[cvar +  13.9s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[cvar +  13.9s] risk candidate pool: native CHOMP broad-route proposal from a newly planned seed
+[cvar +  17.5s] candidate 3: valid, 20.66s outward, transit clearance 110.0 mm
+[cvar +  17.5s] evaluating 64 common uncertainty scenarios across 3 candidates
+[cvar +  21.0s] scenarios 8/64 × 3 candidates (shared scene work)
+[cvar +  24.5s] scenarios 16/64 × 3 candidates (shared scene work)
+[cvar +  28.0s] scenarios 24/64 × 3 candidates (shared scene work)
+[cvar +  31.5s] scenarios 32/64 × 3 candidates (shared scene work)
+[cvar +  34.9s] scenarios 40/64 × 3 candidates (shared scene work)
+[cvar +  38.4s] scenarios 48/64 × 3 candidates (shared scene work)
+[cvar +  41.9s] scenarios 56/64 × 3 candidates (shared scene work)
+[cvar +  45.3s] scenarios 64/64 × 3 candidates (shared scene work)
+[cvar +  45.4s] READY: 20.663s outward → 2s hold → exact reverse; SIMULATION ONLY
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision neighborhoods, iteratively refined convex regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+[iris_gcs +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   3.8s] search 2: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   6.6s] IRIS seeding: adding a fresh native-CHOMP broad-route proposal
+[iris_gcs +   8.4s] IRIS region 1/35: 92 full-body collision witnesses, 42 faces
+[iris_gcs +   8.5s] IRIS region 2/35: 101 full-body collision witnesses, 40 faces
+INFO:drake:Clarabel returns NumericalError
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 46, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 144, in run
+    q,special=generate(oracle,seeds,req,params,deadline,log,folder)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/regions.py", line 55, in generate
+    region=Iris(obstacles,center,domain,options);last=center
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Solver Clarabel failed to solve the `minimum uniform scaling to touch' problem; it terminated with SolutionResult SolverSpecificError). The solver likely ran into numerical issues.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 105, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 102, in main
+    plan(context,a.folder,a.method,params,a.budget)
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 46, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 144, in run
+    q,special=generate(oracle,seeds,req,params,deadline,log,folder)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/regions.py", line 55, in generate
+    region=Iris(obstacles,center,domain,options);last=center
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Solver Clarabel failed to solve the `minimum uniform scaling to touch' problem; it terminated with SolutionResult SolverSpecificError). The solver likely ran into numerical issues.
+Traceback (most recent call last):
+  File "<stdin>", line 8, in <module>
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/app.py", line 50, in headless
+    target,job=start_plan(folder,method,params,seconds);wait(job)
+                                                        ^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/app.py", line 21, in wait
+    if job.process.returncode:raise RuntimeError('Contained worker stopped; see '+str(job.log_path))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Contained worker stopped; see /home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/iris_gcs-17e17606/worker.log

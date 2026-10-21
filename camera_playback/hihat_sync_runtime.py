@@ -1,4 +1,8 @@
-"""Nonvisual Tk background adapter. Never commands or retimes the ride arm."""
+"""Shared ESP32 beat adapter: calibrated hi-hat and uncalibrated quarter-note bass.
+
+Never commands or retimes the ride arm. Both use its grid, not each other's
+serial command times; the hi-hat's learned advance never moves the bass.
+"""
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -6,16 +10,20 @@ import time
 import uuid
 
 from .hihat_sync import HiHatSynchronizer, TimingFault
+from .bass_drum import BassDrumScheduler
+from .tempo import SYNC_PERIOD
 
 
 class HiHatSyncRuntime:
     def __init__(self, app):
         self.app = app
         self.engine = None
+        self.bass_drum = None
         self.after_id = None
         self.stream = None
         self.directory = None
         self.last_observed = None
+        self.calibrated_advance = None
 
     @property
     def active(self):
@@ -36,7 +44,32 @@ class HiHatSyncRuntime:
         self.app.hihat.send_state(closed)
         return time.monotonic()
 
+    def send_kick(self):
+        self.app.hihat.send_kick()
+        return time.monotonic()
+
     def start(self, period):
+        if self.calibrated_advance is None:
+            raise TimingFault('Ride/hi-hat timing must be calibrated before swing')
+        self._start(period, fixed_advance=self.calibrated_advance)
+
+    def start_calibration(self, epoch):
+        self.calibrated_advance = None
+        self._start(SYNC_PERIOD, calibration=True)
+        self.engine.set_epoch(epoch, time.monotonic())
+
+    def finish_calibration(self):
+        if self.engine is None or not self.engine.complete:
+            raise TimingFault('Ride/hi-hat timing calibration is not complete')
+        self.calibrated_advance = self.engine.advance
+        self.stop()
+        return self.calibrated_advance
+
+    @property
+    def calibration_complete(self):
+        return self.engine is not None and self.engine.complete
+
+    def _start(self, period, **options):
         self.stop()
         self.directory = Path(__file__).resolve().parents[1]/'playback_results'/'hihat_sync'/(
             datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')+'-'+uuid.uuid4().hex[:8])
@@ -45,7 +78,11 @@ class HiHatSyncRuntime:
             self.stream = (self.directory/'timeline.jsonl').open('w', buffering=1)
         except OSError as exc:
             print('HIHAT SYNC: timeline file unavailable: '+str(exc), flush=True)
-        self.engine = HiHatSynchronizer(self.send, self.log, period)
+        self.engine = HiHatSynchronizer(self.send, self.log, period, **options)
+        bass_enabled = not self.engine.calibration and getattr(self.app, 'bass_drum_enabled', True)
+        if bass_enabled:
+            self.bass_drum = BassDrumScheduler(self.send_kick, period, self.log)
+        self.log(dict(kind='bass_option', at=time.monotonic(), enabled=bool(bass_enabled)))
         self.engine.start(time.monotonic())
         self.last_observed = time.monotonic()
         self.after_id = self.app.root.after(5, self.tick)
@@ -54,6 +91,8 @@ class HiHatSyncRuntime:
         if not self.active or not status.swing:
             return
         self.last_observed = now
+        if self.engine.calibration:
+            return  # Shared future deadline was supplied before either command.
         if self.engine.epoch is None:
             if status.count == 1 and status.bottoms == 1 and status.bottom_at is not None:
                 # Unchanged worker establishes its grid at the pickup bottom.
@@ -76,23 +115,30 @@ class HiHatSyncRuntime:
                 self.stop()
                 return
             if now-self.last_observed > .15:
-                raise TimingFault('Ride status stale; cancelling future hi-hat edges')
+                raise TimingFault('Ride status stale; cancelling future hi-hat/bass commands')
             monitor = getattr(a, 'hihat_sound_monitor', None)
             receiver = getattr(monitor, 'receiver', None)
             available = dict(ride=a.audio_receiver.ready(now),
                              hihat=receiver is not None and receiver.ready(now))
+            if self.engine.calibration and not all(available.values()):
+                raise TimingFault('Ride/hi-hat detector unavailable during timing calibration')
             self.engine.tick(now, available)
+            if self.bass_drum is not None:
+                self.bass_drum.tick(time.monotonic(), self.engine.epoch)
         except Exception as exc:
             self.log(dict(kind='fault', at=now, detail=str(exc)))
             self.stop()
             # Existing stop finishes the hybrid return then verifies center;
             # no disable/relax is performed here.
-            a._request_continuous_stop()
+            a._request_continuous_stop('Automatic ESP32 beat timing fault: '+str(exc))
             return
         if self.active:
             self.after_id = a.root.after(5, self.tick)
 
     def stop(self):
+        # No new K commands after stop. A pulse already sent coasts after its
+        # firmware-owned 50 ms; emergency release_all still cuts both outputs.
+        self.bass_drum = None
         if self.after_id is not None:
             self.app.root.after_cancel(self.after_id)
             self.after_id = None

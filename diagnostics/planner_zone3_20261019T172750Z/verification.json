@@ -1,0 +1,247 @@
+{
+  "passed": true,
+  "regression_tests_passed": 349,
+  "actual_camera_ui_checks": {
+    "all_methods_attempted_and_cached": true,
+    "planned_methods": [
+      "clearance",
+      "baseline",
+      "chance",
+      "cvar",
+      "families",
+      "iris_gcs",
+      "chomp",
+      "stomp"
+    ],
+    "independent_legacy_zone_check": true,
+    "full_playback": true,
+    "old_unconstrained_cache_rejected": true,
+    "frozen_mesh_uploads": 1,
+    "render_errors": [],
+    "can_access": false,
+    "motor_commands": 0
+  },
+  "method_zone_audit": {
+    "clearance": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 3005,
+      "max_signed_plane_distance_m": -0.008631207119314118,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 6.0075872349717665
+    },
+    "baseline": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 3405,
+      "max_signed_plane_distance_m": -0.008631207119313923,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 6.807909722783153
+    },
+    "robust": {
+      "status": "no_feasible_route",
+      "details": {
+        "attempts": [
+          {
+            "parameters": {
+              "seconds": 3.0,
+              "margin": 0.024312644346108178,
+              "taper": false
+            },
+            "status": "planned"
+          },
+          {
+            "parameters": {
+              "seconds": 3.0,
+              "margin": 0.024312644346108178,
+              "taper": false
+            },
+            "status": "planned"
+          },
+          {
+            "parameters": {
+              "seconds": 3.0,
+              "margin": 0.024312644346108178,
+              "taper": false
+            },
+            "status": "planned"
+          },
+          {
+            "parameters": {
+              "seconds": 3.0,
+              "margin": 0.024312644346108178,
+              "taper": false
+            },
+            "status": "planned"
+          },
+          {
+            "parameters": {
+              "seconds": 3.0,
+              "margin": 0.024312644346108178,
+              "taper": false
+            },
+            "status": "no_path"
+          }
+        ],
+        "reason": "no_valid_route_within_budget",
+        "envelope": {
+          "world_m": 0.024312644346108178,
+          "self_m": 0.02211229963679481,
+          "joint_rad": 0.0008726646259971648,
+          "lever_arm_bound_m": 1.5,
+          "camera_range_bound_m": 5.0,
+          "additional_to_original_padding": true
+        }
+      }
+    },
+    "chance": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 7845,
+      "max_signed_plane_distance_m": -0.008631207119313896,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 15.687283814979633
+    },
+    "cvar": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 7845,
+      "max_signed_plane_distance_m": -0.008631207119313896,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 15.687283814979633
+    },
+    "families": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 21825,
+      "max_signed_plane_distance_m": -0.008631207119313896,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 43.646353783003036
+    },
+    "iris_gcs": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 6687,
+      "max_signed_plane_distance_m": -0.006558430430993607,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 13.370274228739904
+    },
+    "chomp": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 7845,
+      "max_signed_plane_distance_m": -0.008631207119313896,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 15.687283814979633
+    },
+    "stomp": {
+      "status": "planned",
+      "passed": true,
+      "dense_samples": 3839,
+      "max_signed_plane_distance_m": -0.008631207119313923,
+      "allowed_m": 0.0050000010000000004,
+      "original_model_and_tcp": true,
+      "outward_s": 7.675443637534999
+    }
+  },
+  "changed_original_sources": [
+    "drum_planner/cli.py",
+    "drum_planner/planning.py",
+    "drum_planner/execution.py",
+    "drum_planner/cpp/experiment_oracle.cpp",
+    "drum_planner/cpp/moveit_plan.cpp",
+    "drum_planner/experiment/worker.py",
+    "drum_planner/experiment/app.py",
+    "drum_planner/experiment/algorithms.py"
+  ],
+  "source_sha256": {
+    "DRUM_PLANNER.md": "10f92905b40845801048511cb5286f770d8c96d38c691bf499f3de0ed49884a2",
+    "DRUM_PLANNER_EXPERIMENTS.md": "9c3a99d3ec457ff21558fda21f97edc86ff8a585d6ce984e54241af47ed6991b",
+    "drum_planner/cli.py": "96212c9215cbbd5f47a481a0a0440d00957d2bc5bada9caa99d19c441f07fef5",
+    "drum_planner/cpp/experiment_oracle.cpp": "5381e558a035f8227d7caa02619efcd3459aaf3af847d67881c4d112a8fd9929",
+    "drum_planner/cpp/moveit_plan.cpp": "6154973893522fcbdc10cd8b1c919718c46faebd32a2ae205ba8a68260e40869",
+    "drum_planner/execution.py": "8991303968d51701cc9db9887f5fd635fff99d959422dc9c0e49e9e4846917f8",
+    "drum_planner/experiment/algorithms.py": "97dfa83ace34a74fe70b2a629e822b81c09f7284b7e9d7ee85ffdfc1f3780460",
+    "drum_planner/experiment/app.py": "b8a82ed7522cf0ae8fe9a2fc77f837458b51538e91fc5991eafd35d321acb108",
+    "drum_planner/experiment/worker.py": "8b922cb476ead246e39c7be05f6222d3f6c72502611dd759f3aa452204662f36",
+    "drum_planner/planning.py": "2bf50138513224bfdfb51ec5ef4cbb44409bea7b19d51af14b26d57c0823709b",
+    "drum_planner/right_zone.py": "e1a4ee4bebc3c65f29a2d36b640c225c8a9639487d85ef158908c5d088175b93",
+    "tests/test_planner_zone.py": "ed68f3b3e95f4fd5c61a9982e1279de59884183a59feaff81baefdcb2c43c9ff"
+  },
+  "protected_original_files_unchanged": [
+    "drum_planner/read_only.py",
+    "drum_planner/__init__.py",
+    "drum_planner/alignment_view.py",
+    "drum_planner/live_playback.py",
+    "drum_planner/planned_view.py",
+    "drum_planner/motor_transport.py",
+    "drum_planner/depth.py",
+    "drum_planner/model.py",
+    "drum_planner/surface_mesh.py",
+    "drum_planner/style.py",
+    "drum_planner/triangle_artist.py",
+    "drum_planner/offline_view.py",
+    "drum_planner/workflow.py",
+    "drum_planner/preview.py",
+    "drum_planner/snapshot_preview.py",
+    "drum_planner/current_plan.py",
+    "drum_planner/visual_mesh.py",
+    "drum_planner/trajectory_view.py",
+    "drum_planner/common.py",
+    "drum_planner/diagnostics.py",
+    "drum_planner/live_view.py",
+    "drum_planner/vtk_view.py",
+    "drum_planner/hardware_check.py",
+    "drum_planner/cpp/depth_capture.cpp",
+    "drum_planner/generated/model_manifest.json",
+    "drum_planner/config/example_start.json",
+    "drum_planner/experiment/__init__.py",
+    "drum_planner/experiment/runtime.py",
+    "drum_planner/experiment/config.py",
+    "drum_planner/experiment/risk.py",
+    "drum_planner/experiment/capture.py",
+    "drum_planner/experiment/regions.py",
+    "safe_zone/geometry.py",
+    "safe_zone/__init__.py",
+    "safe_zone/app.py",
+    "safe_zone/gripper_feedback.py",
+    "safe_zone/encoder.py",
+    "right_zones/zone3.json",
+    "right_zones/zone2.json",
+    "right_zones/zone1.json",
+    "left_zones/zone2.json",
+    "left_zones/zone1.json",
+    "recordings/record2.json",
+    "recordings/record3.json",
+    "recordings/record1.json",
+    "camera_calibration/orbbec_capture.cpp",
+    "camera_calibration/automatic.py",
+    "camera_calibration/cli.py",
+    "camera_calibration/__init__.py",
+    "camera_calibration/observer.py",
+    "camera_calibration/io.py",
+    "camera_calibration/jpeg.py",
+    "camera_calibration/core.py",
+    "camera_calibration/app.py",
+    "camera_calibration/kinematics.py",
+    "calibration_sessions/20261017T211949Z-762f9908-reprocessed/previous_training_report.json",
+    "calibration_sessions/20261017T211949Z-762f9908-reprocessed/training_report.json",
+    "calibration_sessions/20261017T211949Z-762f9908-reprocessed/target.json",
+    "calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "calibration_sessions/20261017T211949Z-762f9908-reprocessed/session.json",
+    "plan_drums.sh",
+    "start_beat.sh",
+    "model/openarmx.urdf"
+  ],
+  "membership": "Exact legacy original-URDF right gripper TCP, rebuilt zone3 convex hull, existing 5 mm tolerance + 1e-9; no left arm or stick zone restriction",
+  "collisions": "Unchanged full robot and stick checks",
+  "hardware_motion": false,
+  "can_access": false
+}

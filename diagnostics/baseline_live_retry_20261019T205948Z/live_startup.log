@@ -1,0 +1,18 @@
+BASELINE HARDWARE MODE: startup only reads disabled encoders and the camera. It NEVER enables/moves the arm.
+READ ONLY: measuring relaxed stationary arms + five native depth frames; NO actuator commands
+BASELINE ONLY: independent candidates → weighted route score → dense final zone/collision check
+Candidate 1/6, seed 19: planned
+Candidate 2/6, seed 7938: blocked_after_smoothing
+Candidate 3/6, seed 15857: planned
+Candidate 4/6, seed 23776: blocked_after_smoothing
+Candidate 5/6, seed 31695: planned
+Candidate 6/6, seed 39614: planned
+Checking candidate 3, smooth: 6.239s outward (fastest valid reference)
+Route score candidate 1, smooth: 132.01 (lower is better), 7.548s
+Route score candidate 3, smooth: 100.00 (lower is better), 6.239s
+Route score candidate 5, smooth: 197.85 (lower is better), 10.798s
+Route score candidate 6, smooth: 184.88 (lower is better), 11.815s
+Selected candidate 3/6 (seed 15857): route score 100.00, 6.239s outward, 14.479s full cycle
+BASELINE READY — preview/prepare only; no motors enabled
+QA: fresh startup reached the real-mode preview; physical controller launch is forbidden.
+QA: full live-startup preview cycle and read-only GUI controls PASSED. No physical controller started.

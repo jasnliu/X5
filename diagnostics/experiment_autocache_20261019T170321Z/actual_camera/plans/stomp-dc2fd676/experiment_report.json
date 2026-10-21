@@ -1,0 +1,115 @@
+{
+  "method": "stomp",
+  "description": "Installed MoveIt STOMP, initialized by a new camera/model-planned path. Native stochastic rollouts and smoothing followed by independent dense FCL validation.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "stomp",
+      "status": "planned",
+      "code": 1
+    }
+  ],
+  "candidates": [
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.2249050632911393,
+        "workspace_length_m": 3.233728432404429,
+        "joint_length_rad": 3.422217259092026,
+        "bending_deg": 741.6796544253698
+      },
+      "duration_s": 36.13144862926656
+    },
+    {
+      "index": 5,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.2266772151898734,
+        "workspace_length_m": 3.21908784980985,
+        "joint_length_rad": 3.309155327651724,
+        "bending_deg": 676.2967112272468
+      },
+      "duration_s": 8.934705935645862
+    }
+  ],
+  "selected": 5,
+  "elapsed_s": 34.14426014901255,
+  "budget_s": 60.0
+}

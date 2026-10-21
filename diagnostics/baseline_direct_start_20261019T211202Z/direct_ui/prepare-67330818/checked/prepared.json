@@ -1,0 +1,215 @@
+{
+  "schema": "TEST_ONLY_NON_EXECUTABLE",
+  "scene_stamp": 256543.881461795,
+  "fresh_scene": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_retry_20261019T205948Z/actual_startup/capture/camera/scene.json",
+  "request": {
+    "scene": {
+      "schema": "x5-native-depth-scene-v1",
+      "synthetic": false,
+      "camera": {
+        "protocol": 1,
+        "serial": "AY6R463004K",
+        "name": "Orbbec Gemini 2",
+        "firmware": "1.4.92",
+        "depth_work_mode": "Unbinned Dense Default",
+        "depth": {
+          "width": 1280,
+          "height": 800,
+          "fps": 10,
+          "format_enum": 8,
+          "intrinsic_width": 1280,
+          "intrinsic_height": 800,
+          "K": [
+            [
+              613.611877441,
+              0,
+              634.910949707
+            ],
+            [
+              0,
+              613.611877441,
+              400.3934021
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "distortion_model": 4,
+          "D_opencv_order": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "color": {
+          "width": 1280,
+          "height": 720,
+          "fps": 15,
+          "format_enum": 0,
+          "intrinsic_width": 1280,
+          "intrinsic_height": 720,
+          "K": [
+            [
+              690.735229492,
+              0,
+              647.398071289
+            ],
+            [
+              0,
+              690.641601562,
+              361.572753906
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "distortion_model": 4,
+          "D_opencv_order": [
+            43.8931617737,
+            -99.6809844971,
+            6.35045580566e-05,
+            0.000259708933299,
+            106.131744385,
+            43.7220077515,
+            -99.2912826538,
+            106.184356689
+          ]
+        },
+        "T_color_depth_m": [
+          [
+            0.999998771667,
+            0.000881533622742,
+            -0.00127070999146,
+            -0.0139434547424
+          ],
+          [
+            -0.000879107117653,
+            0.999997776031,
+            0.00190857362747,
+            9.11664962769e-06
+          ],
+          [
+            0.00127239990234,
+            -0.00190747070312,
+            0.999997436523,
+            -0.00182580566406
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "depth_stream_enabled": true,
+        "color_stream_enabled": false,
+        "alignment": "native_depth"
+      },
+      "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+      "T_base_depth": [
+        [
+          -0.045052558100081574,
+          -0.7443385240172491,
+          0.6662810850966814,
+          0.034195196764152364
+        ],
+        [
+          -0.9988181949234571,
+          0.04573537173282772,
+          -0.016444600525398697,
+          0.023050366975580924
+        ],
+        [
+          -0.018232269875979226,
+          -0.6662344970423257,
+          -0.7455194304414164,
+          0.9585032619308057
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "voxel_size_m": 0.01,
+      "obstacle_padding_m": 0.02,
+      "point_count": 111270,
+      "points_file": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_retry_20261019T205948Z/actual_startup/capture/camera/points_base.f32",
+      "free_depth_file": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_retry_20261019T205948Z/actual_startup/capture/camera/free_depth_m.bin",
+      "frames": [
+        {
+          "n": 2048000,
+          "sequence": 1,
+          "received_monotonic": 255613.579093417,
+          "device_timestamp_us": 104225786570,
+          "value_scale_m": 0.001
+        },
+        {
+          "n": 2048000,
+          "sequence": 2,
+          "received_monotonic": 255613.666497257,
+          "device_timestamp_us": 104225886481,
+          "value_scale_m": 0.001
+        },
+        {
+          "n": 2048000,
+          "sequence": 3,
+          "received_monotonic": 255613.766062664,
+          "device_timestamp_us": 104225986392,
+          "value_scale_m": 0.001
+        },
+        {
+          "n": 2048000,
+          "sequence": 4,
+          "received_monotonic": 255613.865875439,
+          "device_timestamp_us": 104226086303,
+          "value_scale_m": 0.001
+        },
+        {
+          "n": 2048000,
+          "sequence": 5,
+          "received_monotonic": 255613.966235693,
+          "device_timestamp_us": 104226186214,
+          "value_scale_m": 0.001
+        }
+      ],
+      "captured_utc": "2026-10-19T21:00:05Z",
+      "depth_fusion": {
+        "method": "nearest_temporally_confirmed_v1",
+        "frame_count": 5,
+        "minimum_support": 3,
+        "maximum_cluster_span_m": 0.02,
+        "spatial_filter": false,
+        "uncertain_pixels": "unknown_not_free",
+        "unconfirmed_foreground": "unknown_not_replaced_with_background",
+        "raw_frames_preserved": true,
+        "confirmed_pixel_count": 778928
+      },
+      "observed_valid_fraction": 0.760671875,
+      "fully_observed_fraction": 0.6393447265625,
+      "unknown_space_policy": "unobserved; default planning checks detected obstacles only, not proof of free space",
+      "default_collision_policy": "observed_obstacles",
+      "files_sha256": {
+        "raw_depth.npz": "5a657dd3471ee615b09444e1d41415e607fe6c00d8290a2a50843f34ffd8c657",
+        "depth_m.bin": "8849999024188953cfb7f207a864f785116ba6be74dd29a6818e71bfadd7b645",
+        "free_depth_m.bin": "464ed9e685793adb3d0c814bfc25b2f4125a9edf86f6c86e7e706a70756dd421",
+        "points_base.f32": "0f224c1d312287626118a2681de57f1f78b063b41e685b2732a0c4a89c16e3ff"
+      },
+      "physical_depth_alignment_verified": false,
+      "motion_authorized": false,
+      "measured_state_sha256": "53a663c545fc0ff2b8407fa5d1958e4de616ef7de8189775c215dc8907df08fd",
+      "acquisition": "stationary encoder-bracketed five-frame planning capture",
+      "source_scene_sha256": "557ca90af521f0fe93978de87a3e9e1731e9f6a6784b31f7e0d10af901ba8bd2"
+    }
+  }
+}

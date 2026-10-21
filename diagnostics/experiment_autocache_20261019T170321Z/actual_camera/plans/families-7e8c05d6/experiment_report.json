@@ -1,0 +1,247 @@
+{
+  "method": "families",
+  "description": "Joint-space waypoint and independent-route search, geometric route-family clustering, then clearance-first ranking. This is a diversity heuristic, not a proof of distinct mathematical homotopy classes.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.01,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.01,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.01,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "goal": [
+          -0.3683352232863172,
+          0.821412019831542,
+          0.28230579275302553,
+          0.6177021124802167,
+          0.32188867407490207,
+          -0.7151198614660736,
+          0.6338806269457585
+        ]
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "start": [
+          -0.3683352232863172,
+          0.821412019831542,
+          0.28230579275302553,
+          0.6177021124802167,
+          0.32188867407490207,
+          -0.7151198614660736,
+          0.6338806269457585
+        ]
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "goal": [
+          -0.21852019846923484,
+          1.3057849628379463,
+          0.4280554935221449,
+          0.431046104282195,
+          0.3302529091791683,
+          0.07961138851007213,
+          -0.07897042830427015
+        ]
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "start": [
+          -0.21852019846923484,
+          1.3057849628379463,
+          0.4280554935221449,
+          0.431046104282195,
+          0.3302529091791683,
+          0.07961138851007213,
+          -0.07897042830427015
+        ]
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "goal": [
+          0.942871430785359,
+          1.4501618547332664,
+          -0.2858041641494406,
+          0.32555329476831185,
+          0.16082490751289935,
+          0.17548155627684386,
+          -0.0928748026681272
+        ]
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 2.0,
+        "margin": 0.0,
+        "taper": false,
+        "start": [
+          0.942871430785359,
+          1.4501618547332664,
+          -0.2858041641494406,
+          0.32555329476831185,
+          0.16082490751289935,
+          0.17548155627684386,
+          -0.0928748026681272
+        ]
+      },
+      "status": "planned"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.3336986301369863,
+        "workspace_length_m": 1.6550192431737005,
+        "joint_length_rad": 2.6031334220078475,
+        "bending_deg": 479.4742088788088
+      },
+      "family": 1,
+      "duration_s": 23.17094013245893
+    },
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.04,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.14768987341772155,
+        "workspace_length_m": 3.3901497462891808,
+        "joint_length_rad": 3.3401473953131027,
+        "bending_deg": 742.2378568452118
+      },
+      "family": 2,
+      "duration_s": 8.500749423677497
+    },
+    {
+      "index": 3,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.24142405063291136,
+        "workspace_length_m": 3.2263674677656047,
+        "joint_length_rad": 3.298910880255032,
+        "bending_deg": 712.6924000669954
+      },
+      "family": 2,
+      "duration_s": 25.173431700865777
+    },
+    {
+      "index": 4,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.04,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.15074074074074076,
+        "workspace_length_m": 2.99206186069921,
+        "joint_length_rad": 3.880993582198542,
+        "bending_deg": 597.8546118303025
+      },
+      "family": 3,
+      "duration_s": 7.0500829171433645
+    },
+    {
+      "index": 5,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.17496913580246912,
+        "workspace_length_m": 3.533169835496831,
+        "joint_length_rad": 3.8597337446599753,
+        "bending_deg": 670.1854199752336
+      },
+      "family": 4,
+      "duration_s": 48.76259087887063
+    },
+    {
+      "index": 6,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.045000000000000005,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.08195402298850572,
+        "workspace_length_m": 4.36060099523363,
+        "joint_length_rad": 5.827726961805458,
+        "bending_deg": 840.2685253308537
+      },
+      "family": 5,
+      "duration_s": 10.932668987782037
+    }
+  ],
+  "selected": 6,
+  "elapsed_s": 53.83689172400045,
+  "budget_s": 60.0,
+  "route_families": 5,
+  "family_distance": "RMS normalized joint-arc path; threshold 0.045; heuristic, not homotopy proof"
+}

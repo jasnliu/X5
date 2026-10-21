@@ -1,0 +1,988 @@
+{
+  "schema": "x5-moveit-result-v1",
+  "status": "no_feasible_route",
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "synthetic": false,
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "recording_sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+  "model": {
+    "schema": "x5-planner-model-v1",
+    "original_model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "calibrated_urdf_sha256": "3506326e6c598a1251ccd5de62a6f7dd96b7ff6c3be46d646957719fd5e5b3ed",
+    "srdf_sha256": "c3a4175b5be0a64fee53e98f009b398189ab699728fc6181e4b120c2492619a4",
+    "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+    "joint_coordinates": "encoder_to_joint; corrections embedded in joint origins",
+    "joint_limits_coordinate_rule": "q_model = q_saved + offset; saved limits = original model limits - offset",
+    "joint_limit_mapping": {
+      "openarmx_right_joint1": {
+        "offset_rad": 0.0,
+        "original_model_lower_rad": -1.25,
+        "original_model_upper_rad": 3.0,
+        "saved_coordinate_lower_rad": -1.25,
+        "saved_coordinate_upper_rad": 3.0
+      },
+      "openarmx_right_joint2": {
+        "offset_rad": -0.020317632753407828,
+        "original_model_lower_rad": -0.1292036732051034,
+        "original_model_upper_rad": 3.2707963267948967,
+        "saved_coordinate_lower_rad": -0.10888604045169557,
+        "saved_coordinate_upper_rad": 3.2911139595483045
+      },
+      "openarmx_right_joint3": {
+        "offset_rad": 0.04393298525723954,
+        "original_model_lower_rad": -1.57,
+        "original_model_upper_rad": 1.57,
+        "saved_coordinate_lower_rad": -1.6139329852572395,
+        "saved_coordinate_upper_rad": 1.5260670147427606
+      },
+      "openarmx_right_joint4": {
+        "offset_rad": 0.027614306757365363,
+        "original_model_lower_rad": 0.0,
+        "original_model_upper_rad": 1.8,
+        "saved_coordinate_lower_rad": -0.027614306757365363,
+        "saved_coordinate_upper_rad": 1.7723856932426347
+      },
+      "openarmx_right_joint5": {
+        "offset_rad": -0.012269398144278784,
+        "original_model_lower_rad": -1.5,
+        "original_model_upper_rad": 1.5,
+        "saved_coordinate_lower_rad": -1.4877306018557213,
+        "saved_coordinate_upper_rad": 1.5122693981442787
+      },
+      "openarmx_right_joint6": {
+        "offset_rad": 0.02300480192794884,
+        "original_model_lower_rad": -0.75,
+        "original_model_upper_rad": 0.75,
+        "saved_coordinate_lower_rad": -0.7730048019279488,
+        "saved_coordinate_upper_rad": 0.7269951980720512
+      },
+      "openarmx_right_joint7": {
+        "offset_rad": 0.0,
+        "original_model_lower_rad": -1.4,
+        "original_model_upper_rad": 1.4,
+        "saved_coordinate_lower_rad": -1.4,
+        "saved_coordinate_upper_rad": 1.4
+      }
+    },
+    "joint_limit_intervals_widened": false,
+    "physical_joint_stops_independently_verified": false,
+    "gripper_motor_joint_closed_rad": 0.12217304763960307,
+    "gripper_joints_fixed": true,
+    "gripper_assemblies": [
+      {
+        "link": "openarmx_right_left_finger",
+        "mesh": "/home/jason/Proyectos3/X5/gripper_models/gripperLeft.stl",
+        "sha256": "2bfd32ef8ca7ca063f6e010f84cf7076b5a1f45181367b172a244adee823ca41",
+        "scale": 0.001,
+        "xyz_m": [
+          -0.02335,
+          0.014750000000000001,
+          0.015
+        ],
+        "rpy_rad": [
+          0.0,
+          0.0,
+          1.5707963267948966
+        ],
+        "bore_radius_m": 0.0074
+      },
+      {
+        "link": "openarmx_right_right_finger",
+        "mesh": "/home/jason/Proyectos3/X5/gripper_models/gripperRight.stl",
+        "sha256": "358e103a5c4bb14da21c1b1da13aba478dc1fe2290ffe09bd08ac5361bec3e0d",
+        "scale": 0.001,
+        "xyz_m": [
+          -0.02335,
+          -0.014750000000000001,
+          0.015
+        ],
+        "rpy_rad": [
+          0.0,
+          0.0,
+          1.5707963267948966
+        ],
+        "bore_radius_m": 0.0074
+      }
+    ],
+    "stick_radius_m": 0.0074,
+    "stick_length_from_mount_m": 0.4094,
+    "stick_exposed_length_m": 0.2794,
+    "mounting_face_hand_z_m": 0.015,
+    "tool_geometry_physically_verified": false,
+    "left_stick_geometry_verified": false,
+    "hardware_execution_available": false,
+    "warning": "STL bore assembly is checked mathematically. Mount plane/yaw and left stick require physical verification. Mesh mounting is provisional, not a certified physical model."
+  },
+  "start_state": {
+    "schema": "x5-planner-start-state-v1",
+    "coordinate_convention": "encoder_to_joint",
+    "right_rad": [
+      0.004027924010070905,
+      0.013234607461662051,
+      0.4532373540856032,
+      -0.019756008239872003,
+      -0.24406413313501255,
+      0.17818768596932877,
+      0.5579633783474467
+    ],
+    "left_rad": [
+      -0.009014877546348998,
+      0.005945983062485283,
+      -0.00019180590524214836,
+      -0.00019180590524214836,
+      -0.8732922865644301,
+      0.033182421606774426,
+      -0.07844861524376334
+    ],
+    "left_gripper_opening_m": 0.0,
+    "left_gripper_opening_source": "legacy encoder-derived display estimate; not a measured jaw width",
+    "right_gripper_closed_motor_joint_rad": 0.12217304763960307,
+    "right_gripper_closed_field_meaning": "future configured target ONLY; no gripper command was sent",
+    "motor8_feedback": {
+      "left": {
+        "encoder_count": 33431,
+        "raw_rad": 0.2545264362554356
+      },
+      "right": {
+        "encoder_count": 32444,
+        "raw_rad": -0.124098420691233
+      }
+    },
+    "motor_telemetry": {
+      "left": [
+        {
+          "motor": 1,
+          "received_monotonic": 201539.904638876,
+          "request_monotonic": 201539.903716348,
+          "encoder_count": 32791,
+          "raw_rad": 0.009014877546348998,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 29.0
+        },
+        {
+          "motor": 2,
+          "received_monotonic": 201539.905246167,
+          "request_monotonic": 201539.903825789,
+          "encoder_count": 32752,
+          "raw_rad": -0.005945983062485283,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 30.0
+        },
+        {
+          "motor": 3,
+          "received_monotonic": 201539.90586015,
+          "request_monotonic": 201539.903876627,
+          "encoder_count": 32768,
+          "raw_rad": 0.00019180590524214836,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 31.0
+        },
+        {
+          "motor": 4,
+          "received_monotonic": 201539.906529179,
+          "request_monotonic": 201539.903946632,
+          "encoder_count": 32768,
+          "raw_rad": 0.00019180590524214836,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 30.0
+        },
+        {
+          "motor": 5,
+          "received_monotonic": 201539.907077416,
+          "request_monotonic": 201539.903975147,
+          "encoder_count": 35044,
+          "raw_rad": 0.8732922865644301,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 33.0
+        },
+        {
+          "motor": 6,
+          "received_monotonic": 201539.907757196,
+          "request_monotonic": 201539.904020895,
+          "encoder_count": 32681,
+          "raw_rad": -0.033182421606774426,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 33.0
+        },
+        {
+          "motor": 7,
+          "received_monotonic": 201539.908265466,
+          "request_monotonic": 201539.904045934,
+          "encoder_count": 32972,
+          "raw_rad": 0.07844861524376334,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 31.0
+        },
+        {
+          "motor": 8,
+          "received_monotonic": 201539.90882826,
+          "request_monotonic": 201539.90406988,
+          "encoder_count": 33431,
+          "raw_rad": 0.2545264362554356,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 30.0
+        }
+      ],
+      "right": [
+        {
+          "motor": 1,
+          "received_monotonic": 201539.904966678,
+          "request_monotonic": 201539.90409572,
+          "encoder_count": 32757,
+          "raw_rad": -0.004027924010070905,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 29.0
+        },
+        {
+          "motor": 2,
+          "received_monotonic": 201539.905582826,
+          "request_monotonic": 201539.904119285,
+          "encoder_count": 32733,
+          "raw_rad": -0.013234607461662051,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 31.0
+        },
+        {
+          "motor": 3,
+          "received_monotonic": 201539.90607801,
+          "request_monotonic": 201539.904144013,
+          "encoder_count": 31586,
+          "raw_rad": -0.4532373540856032,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 31.0
+        },
+        {
+          "motor": 4,
+          "received_monotonic": 201539.906706361,
+          "request_monotonic": 201539.90416833,
+          "encoder_count": 32819,
+          "raw_rad": 0.019756008239872003,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 29.0
+        },
+        {
+          "motor": 5,
+          "received_monotonic": 201539.907281038,
+          "request_monotonic": 201539.904192175,
+          "encoder_count": 33017,
+          "raw_rad": 0.09571114671549452,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 33.0
+        },
+        {
+          "motor": 6,
+          "received_monotonic": 201539.908030703,
+          "request_monotonic": 201539.904214208,
+          "encoder_count": 32303,
+          "raw_rad": -0.17818768596932877,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 33.0
+        },
+        {
+          "motor": 7,
+          "received_monotonic": 201539.908639576,
+          "request_monotonic": 201539.904239877,
+          "encoder_count": 31313,
+          "raw_rad": -0.5579633783474467,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 31.0
+        },
+        {
+          "motor": 8,
+          "received_monotonic": 201539.90917062,
+          "request_monotonic": 201539.904263854,
+          "encoder_count": 32444,
+          "raw_rad": -0.124098420691233,
+          "mode": 0,
+          "fault_bits": 0,
+          "temperature_c": 30.0
+        }
+      ]
+    },
+    "preview_only": true,
+    "measured": true,
+    "source": "Read-only disabled-motor CAN encoder snapshot of both arms",
+    "captured_utc": "2026-10-19T05:58:51Z",
+    "measurement_start_monotonic": 201539.903689036,
+    "measurement_end_monotonic": 201539.909215356,
+    "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "encoder_source_sha256": "03e56325d0a593b75921e6bff6b80b443551af6eeb29473c6da949ac353f7887",
+    "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+    "synchronization": {
+      "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+      "batch_count": 60,
+      "duration_s": 2.9672321950201876,
+      "maximum_batch_duration_s": 0.006495759007520974,
+      "maximum_batch_start_gap_s": 0.05070274099125527,
+      "joint_spread_deg": {
+        "openarmx_right_joint1": 0.0,
+        "openarmx_right_joint2": 0.0,
+        "openarmx_right_joint3": 0.02197933771202081,
+        "openarmx_right_joint4": 0.0,
+        "openarmx_right_joint5": 0.021979337712122585,
+        "openarmx_right_joint6": 0.02197933771202081,
+        "openarmx_right_joint7": 0.021979337712122585,
+        "openarmx_left_joint1": 0.0,
+        "openarmx_left_joint2": 0.02197933771202081,
+        "openarmx_left_joint3": 0.02197933771202081,
+        "openarmx_left_joint4": 0.02197933771202081,
+        "openarmx_left_joint5": 0.021979337712122585,
+        "openarmx_left_joint6": 0.021979337712122585,
+        "openarmx_left_joint7": 0.02197933771202081
+      },
+      "camera_received_monotonic": 201539.927815761,
+      "selected_batch_index": 52,
+      "nearest_midpoint_skew_s": 0.0213635649997741,
+      "bracketing_indices": [
+        52,
+        53
+      ],
+      "all_five_frames": [
+        {
+          "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+          "batch_count": 60,
+          "duration_s": 2.9672321950201876,
+          "maximum_batch_duration_s": 0.006495759007520974,
+          "maximum_batch_start_gap_s": 0.05070274099125527,
+          "joint_spread_deg": {
+            "openarmx_right_joint1": 0.0,
+            "openarmx_right_joint2": 0.0,
+            "openarmx_right_joint3": 0.02197933771202081,
+            "openarmx_right_joint4": 0.0,
+            "openarmx_right_joint5": 0.021979337712122585,
+            "openarmx_right_joint6": 0.02197933771202081,
+            "openarmx_right_joint7": 0.021979337712122585,
+            "openarmx_left_joint1": 0.0,
+            "openarmx_left_joint2": 0.02197933771202081,
+            "openarmx_left_joint3": 0.02197933771202081,
+            "openarmx_left_joint4": 0.02197933771202081,
+            "openarmx_left_joint5": 0.021979337712122585,
+            "openarmx_left_joint6": 0.021979337712122585,
+            "openarmx_left_joint7": 0.02197933771202081
+          },
+          "camera_received_monotonic": 201539.540454968,
+          "selected_batch_index": 45,
+          "nearest_midpoint_skew_s": 0.015422531520016491,
+          "bracketing_indices": [
+            44,
+            45
+          ]
+        },
+        {
+          "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+          "batch_count": 60,
+          "duration_s": 2.9672321950201876,
+          "maximum_batch_duration_s": 0.006495759007520974,
+          "maximum_batch_start_gap_s": 0.05070274099125527,
+          "joint_spread_deg": {
+            "openarmx_right_joint1": 0.0,
+            "openarmx_right_joint2": 0.0,
+            "openarmx_right_joint3": 0.02197933771202081,
+            "openarmx_right_joint4": 0.0,
+            "openarmx_right_joint5": 0.021979337712122585,
+            "openarmx_right_joint6": 0.02197933771202081,
+            "openarmx_right_joint7": 0.021979337712122585,
+            "openarmx_left_joint1": 0.0,
+            "openarmx_left_joint2": 0.02197933771202081,
+            "openarmx_left_joint3": 0.02197933771202081,
+            "openarmx_left_joint4": 0.02197933771202081,
+            "openarmx_left_joint5": 0.021979337712122585,
+            "openarmx_left_joint6": 0.021979337712122585,
+            "openarmx_left_joint7": 0.02197933771202081
+          },
+          "camera_received_monotonic": 201539.628244661,
+          "selected_batch_index": 46,
+          "nearest_midpoint_skew_s": 0.022173090517753735,
+          "bracketing_indices": [
+            46,
+            47
+          ]
+        },
+        {
+          "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+          "batch_count": 60,
+          "duration_s": 2.9672321950201876,
+          "maximum_batch_duration_s": 0.006495759007520974,
+          "maximum_batch_start_gap_s": 0.05070274099125527,
+          "joint_spread_deg": {
+            "openarmx_right_joint1": 0.0,
+            "openarmx_right_joint2": 0.0,
+            "openarmx_right_joint3": 0.02197933771202081,
+            "openarmx_right_joint4": 0.0,
+            "openarmx_right_joint5": 0.021979337712122585,
+            "openarmx_right_joint6": 0.02197933771202081,
+            "openarmx_right_joint7": 0.021979337712122585,
+            "openarmx_left_joint1": 0.0,
+            "openarmx_left_joint2": 0.02197933771202081,
+            "openarmx_left_joint3": 0.02197933771202081,
+            "openarmx_left_joint4": 0.02197933771202081,
+            "openarmx_left_joint5": 0.021979337712122585,
+            "openarmx_left_joint6": 0.021979337712122585,
+            "openarmx_left_joint7": 0.02197933771202081
+          },
+          "camera_received_monotonic": 201539.727954163,
+          "selected_batch_index": 48,
+          "nearest_midpoint_skew_s": 0.02189645150792785,
+          "bracketing_indices": [
+            48,
+            49
+          ]
+        },
+        {
+          "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+          "batch_count": 60,
+          "duration_s": 2.9672321950201876,
+          "maximum_batch_duration_s": 0.006495759007520974,
+          "maximum_batch_start_gap_s": 0.05070274099125527,
+          "joint_spread_deg": {
+            "openarmx_right_joint1": 0.0,
+            "openarmx_right_joint2": 0.0,
+            "openarmx_right_joint3": 0.02197933771202081,
+            "openarmx_right_joint4": 0.0,
+            "openarmx_right_joint5": 0.021979337712122585,
+            "openarmx_right_joint6": 0.02197933771202081,
+            "openarmx_right_joint7": 0.021979337712122585,
+            "openarmx_left_joint1": 0.0,
+            "openarmx_left_joint2": 0.02197933771202081,
+            "openarmx_left_joint3": 0.02197933771202081,
+            "openarmx_left_joint4": 0.02197933771202081,
+            "openarmx_left_joint5": 0.021979337712122585,
+            "openarmx_left_joint6": 0.021979337712122585,
+            "openarmx_left_joint7": 0.02197933771202081
+          },
+          "camera_received_monotonic": 201539.829419189,
+          "selected_batch_index": 50,
+          "nearest_midpoint_skew_s": 0.023258567467564717,
+          "bracketing_indices": [
+            50,
+            51
+          ]
+        }
+      ],
+      "planning_frame_count": 5
+    },
+    "motor_commands": 0,
+    "gripper_commands": 0,
+    "motion_authorized": false,
+    "hardware_execution_available": false,
+    "supported_rest_verified": false,
+    "gripper_closed_physically_verified": false
+  },
+  "collision_policy": "observed_obstacles",
+  "strict_unknown_space": false,
+  "scene_is_frozen_snapshot": true,
+  "actual_current_robot_state_verified": false,
+  "provenance": {
+    "scene": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_000/camera/scene.json",
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json",
+    "state_sha256": "ec640c9d38ca47202b16a4bd0d9f01042e2381e3fb721fb5d71950e31aedce8d"
+  },
+  "physical_execution_blockers": [
+    "SOFTWARE EXPERIMENT ONLY; saved state is not current joint feedback",
+    "Experimental method outputs are never eligible for hardware execution"
+  ],
+  "environment_assumption": "Only observed obstacles are checked; unseen space is not certified free",
+  "experiment_only": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "experiment": {
+    "method": "chance",
+    "description": "From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.",
+    "uncertainty": {
+      "depth_mm": 3.0,
+      "camera_translation_mm": 2.0,
+      "camera_rotation_deg": 0.05,
+      "joint_deg": 0.05,
+      "tool_mm": 2.0,
+      "tool_angle_deg": 0.25,
+      "scene_motion_mm": 2.0,
+      "scenarios": 64,
+      "chance_limit": 0.15,
+      "cvar_alpha": 0.9,
+      "seed": 19
+    },
+    "budget_s": 60.0,
+    "goal_source": "ONLY final joint pose of record3; no intermediate positions",
+    "state_source": "saved measurement; no live CAN",
+    "scene_sha256": "e8be6c8d94689ca82eae8bfa1f7025b6eeab512c43d045296b28529feb95de52",
+    "report": {
+      "reason": "no_candidate_passed_complete_scenario_evaluation",
+      "attempts": [
+        {
+          "parameters": {
+            "seconds": 3.0,
+            "margin": 0.0,
+            "taper": true
+          },
+          "status": "planned"
+        },
+        {
+          "parameters": {
+            "seconds": 3.0,
+            "margin": 0.01,
+            "taper": true
+          },
+          "status": "no_path"
+        },
+        {
+          "parameters": {
+            "seconds": 3.0,
+            "margin": 0.0,
+            "taper": true
+          },
+          "status": "planned"
+        },
+        {
+          "parameters": {
+            "seconds": 3.0,
+            "margin": 0.01,
+            "taper": true
+          },
+          "status": "no_path"
+        }
+      ],
+      "candidates": [
+        {
+          "index": 2,
+          "metrics": {
+            "transit_min_clearance_m": 0.035,
+            "transit_low_decile_clearance_m": 0.035,
+            "all_path_min_clearance_m": 0.035,
+            "transit_proximity": 0.18787974683544303,
+            "workspace_length_m": 3.3365454480397823,
+            "joint_length_rad": 3.306170354264306,
+            "bending_deg": 741.4702641318792
+          },
+          "risk": {
+            "scenarios": 64,
+            "failed_scenarios": 60,
+            "failure_fraction": 0.9375,
+            "wilson_one_sided_95_upper": 0.9754287986033819,
+            "accepted": false,
+            "confidence_candidates": 2,
+            "confidence_adjustment": "Bonferroni; Wilson interval remains approximate",
+            "cvar": 10.466274752475249,
+            "alpha": 0.9,
+            "mean_loss": 9.801361386138613,
+            "losses": [
+              10.445544554455445,
+              10.445544554455445,
+              10.445544554455445,
+              10.445544554455445,
+              10.405940594059405,
+              10.415841584158416,
+              10.405940594059405,
+              10.445544554455445,
+              10.386138613861386,
+              0.38613861386138615,
+              10.386138613861386,
+              10.445544554455445,
+              10.445544554455445,
+              10.386138613861386,
+              10.445544554455445,
+              10.386138613861386,
+              0.38613861386138615,
+              10.445544554455445,
+              10.386138613861386,
+              10.396039603960396,
+              0.38613861386138615,
+              10.425742574257425,
+              10.445544554455445,
+              10.405940594059405,
+              10.435643564356436,
+              10.455445544554456,
+              10.445544554455445,
+              10.386138613861386,
+              10.396039603960396,
+              10.455445544554456,
+              10.435643564356436,
+              0.38613861386138615,
+              10.495049504950495,
+              10.425742574257425,
+              10.386138613861386,
+              10.445544554455445,
+              10.445544554455445,
+              10.445544554455445,
+              10.425742574257425,
+              10.445544554455445,
+              10.455445544554456,
+              10.455445544554456,
+              10.396039603960396,
+              10.405940594059405,
+              10.465346534653465,
+              10.445544554455445,
+              10.455445544554456,
+              10.425742574257425,
+              10.455445544554456,
+              10.455445544554456,
+              10.445544554455445,
+              10.445544554455445,
+              10.386138613861386,
+              10.445544554455445,
+              10.455445544554456,
+              10.475247524752476,
+              10.425742574257425,
+              10.386138613861386,
+              10.415841584158416,
+              10.405940594059405,
+              10.435643564356436,
+              10.386138613861386,
+              10.396039603960396,
+              10.455445544554456
+            ],
+            "whole_path_samples": 101,
+            "temporal_model": "constant bias plus bounded smooth tracking modes",
+            "distribution": "experimental bounded uniform scene and joint perturbations; not fitted from hardware",
+            "real_world_probability_claim": false,
+            "continuous_collision_probability": false
+          },
+          "duration_s": 8.50198661828172
+        },
+        {
+          "index": 1,
+          "metrics": {
+            "transit_min_clearance_m": 0.030000000000000002,
+            "transit_low_decile_clearance_m": 0.035,
+            "all_path_min_clearance_m": 0.030000000000000002,
+            "transit_proximity": 0.2300316455696202,
+            "workspace_length_m": 2.261815202552609,
+            "joint_length_rad": 3.3597289347595822,
+            "bending_deg": 677.6180074142453
+          },
+          "risk": {
+            "scenarios": 64,
+            "failed_scenarios": 63,
+            "failure_fraction": 0.984375,
+            "wilson_one_sided_95_upper": 0.9972364580766626,
+            "accepted": false,
+            "confidence_candidates": 2,
+            "confidence_adjustment": "Bonferroni; Wilson interval remains approximate",
+            "cvar": 10.524133663366335,
+            "alpha": 0.9,
+            "mean_loss": 10.338954207920793,
+            "losses": [
+              10.504950495049505,
+              10.495049504950495,
+              10.495049504950495,
+              10.504950495049505,
+              10.485148514851485,
+              10.504950495049505,
+              10.495049504950495,
+              10.504950495049505,
+              10.465346534653465,
+              0.42574257425742573,
+              10.485148514851485,
+              10.495049504950495,
+              10.495049504950495,
+              10.465346534653465,
+              10.504950495049505,
+              10.485148514851485,
+              10.485148514851485,
+              10.495049504950495,
+              10.465346534653465,
+              10.485148514851485,
+              10.475247524752476,
+              10.504950495049505,
+              10.504950495049505,
+              10.485148514851485,
+              10.504950495049505,
+              10.504950495049505,
+              10.504950495049505,
+              10.485148514851485,
+              10.465346534653465,
+              10.504950495049505,
+              10.504950495049505,
+              10.445544554455445,
+              10.524752475247524,
+              10.465346534653465,
+              10.475247524752476,
+              10.495049504950495,
+              10.514851485148515,
+              10.504950495049505,
+              10.495049504950495,
+              10.504950495049505,
+              10.534653465346535,
+              10.514851485148515,
+              10.475247524752476,
+              10.485148514851485,
+              10.534653465346535,
+              10.504950495049505,
+              10.504950495049505,
+              10.495049504950495,
+              10.514851485148515,
+              10.514851485148515,
+              10.495049504950495,
+              10.504950495049505,
+              10.485148514851485,
+              10.495049504950495,
+              10.524752475247524,
+              10.514851485148515,
+              10.495049504950495,
+              10.485148514851485,
+              10.504950495049505,
+              10.485148514851485,
+              10.504950495049505,
+              10.485148514851485,
+              10.504950495049505,
+              10.514851485148515
+            ],
+            "whole_path_samples": 101,
+            "temporal_model": "constant bias plus bounded smooth tracking modes",
+            "distribution": "experimental bounded uniform scene and joint perturbations; not fitted from hardware",
+            "real_world_probability_claim": false,
+            "continuous_collision_probability": false
+          },
+          "duration_s": 50.09405715407828
+        }
+      ]
+    },
+    "elapsed_s": 54.20243903499795
+  },
+  "details": {
+    "reason": "no_candidate_passed_complete_scenario_evaluation",
+    "attempts": [
+      {
+        "parameters": {
+          "seconds": 3.0,
+          "margin": 0.0,
+          "taper": true
+        },
+        "status": "planned"
+      },
+      {
+        "parameters": {
+          "seconds": 3.0,
+          "margin": 0.01,
+          "taper": true
+        },
+        "status": "no_path"
+      },
+      {
+        "parameters": {
+          "seconds": 3.0,
+          "margin": 0.0,
+          "taper": true
+        },
+        "status": "planned"
+      },
+      {
+        "parameters": {
+          "seconds": 3.0,
+          "margin": 0.01,
+          "taper": true
+        },
+        "status": "no_path"
+      }
+    ],
+    "candidates": [
+      {
+        "index": 2,
+        "metrics": {
+          "transit_min_clearance_m": 0.035,
+          "transit_low_decile_clearance_m": 0.035,
+          "all_path_min_clearance_m": 0.035,
+          "transit_proximity": 0.18787974683544303,
+          "workspace_length_m": 3.3365454480397823,
+          "joint_length_rad": 3.306170354264306,
+          "bending_deg": 741.4702641318792
+        },
+        "risk": {
+          "scenarios": 64,
+          "failed_scenarios": 60,
+          "failure_fraction": 0.9375,
+          "wilson_one_sided_95_upper": 0.9754287986033819,
+          "accepted": false,
+          "confidence_candidates": 2,
+          "confidence_adjustment": "Bonferroni; Wilson interval remains approximate",
+          "cvar": 10.466274752475249,
+          "alpha": 0.9,
+          "mean_loss": 9.801361386138613,
+          "losses": [
+            10.445544554455445,
+            10.445544554455445,
+            10.445544554455445,
+            10.445544554455445,
+            10.405940594059405,
+            10.415841584158416,
+            10.405940594059405,
+            10.445544554455445,
+            10.386138613861386,
+            0.38613861386138615,
+            10.386138613861386,
+            10.445544554455445,
+            10.445544554455445,
+            10.386138613861386,
+            10.445544554455445,
+            10.386138613861386,
+            0.38613861386138615,
+            10.445544554455445,
+            10.386138613861386,
+            10.396039603960396,
+            0.38613861386138615,
+            10.425742574257425,
+            10.445544554455445,
+            10.405940594059405,
+            10.435643564356436,
+            10.455445544554456,
+            10.445544554455445,
+            10.386138613861386,
+            10.396039603960396,
+            10.455445544554456,
+            10.435643564356436,
+            0.38613861386138615,
+            10.495049504950495,
+            10.425742574257425,
+            10.386138613861386,
+            10.445544554455445,
+            10.445544554455445,
+            10.445544554455445,
+            10.425742574257425,
+            10.445544554455445,
+            10.455445544554456,
+            10.455445544554456,
+            10.396039603960396,
+            10.405940594059405,
+            10.465346534653465,
+            10.445544554455445,
+            10.455445544554456,
+            10.425742574257425,
+            10.455445544554456,
+            10.455445544554456,
+            10.445544554455445,
+            10.445544554455445,
+            10.386138613861386,
+            10.445544554455445,
+            10.455445544554456,
+            10.475247524752476,
+            10.425742574257425,
+            10.386138613861386,
+            10.415841584158416,
+            10.405940594059405,
+            10.435643564356436,
+            10.386138613861386,
+            10.396039603960396,
+            10.455445544554456
+          ],
+          "whole_path_samples": 101,
+          "temporal_model": "constant bias plus bounded smooth tracking modes",
+          "distribution": "experimental bounded uniform scene and joint perturbations; not fitted from hardware",
+          "real_world_probability_claim": false,
+          "continuous_collision_probability": false
+        },
+        "duration_s": 8.50198661828172
+      },
+      {
+        "index": 1,
+        "metrics": {
+          "transit_min_clearance_m": 0.030000000000000002,
+          "transit_low_decile_clearance_m": 0.035,
+          "all_path_min_clearance_m": 0.030000000000000002,
+          "transit_proximity": 0.2300316455696202,
+          "workspace_length_m": 2.261815202552609,
+          "joint_length_rad": 3.3597289347595822,
+          "bending_deg": 677.6180074142453
+        },
+        "risk": {
+          "scenarios": 64,
+          "failed_scenarios": 63,
+          "failure_fraction": 0.984375,
+          "wilson_one_sided_95_upper": 0.9972364580766626,
+          "accepted": false,
+          "confidence_candidates": 2,
+          "confidence_adjustment": "Bonferroni; Wilson interval remains approximate",
+          "cvar": 10.524133663366335,
+          "alpha": 0.9,
+          "mean_loss": 10.338954207920793,
+          "losses": [
+            10.504950495049505,
+            10.495049504950495,
+            10.495049504950495,
+            10.504950495049505,
+            10.485148514851485,
+            10.504950495049505,
+            10.495049504950495,
+            10.504950495049505,
+            10.465346534653465,
+            0.42574257425742573,
+            10.485148514851485,
+            10.495049504950495,
+            10.495049504950495,
+            10.465346534653465,
+            10.504950495049505,
+            10.485148514851485,
+            10.485148514851485,
+            10.495049504950495,
+            10.465346534653465,
+            10.485148514851485,
+            10.475247524752476,
+            10.504950495049505,
+            10.504950495049505,
+            10.485148514851485,
+            10.504950495049505,
+            10.504950495049505,
+            10.504950495049505,
+            10.485148514851485,
+            10.465346534653465,
+            10.504950495049505,
+            10.504950495049505,
+            10.445544554455445,
+            10.524752475247524,
+            10.465346534653465,
+            10.475247524752476,
+            10.495049504950495,
+            10.514851485148515,
+            10.504950495049505,
+            10.495049504950495,
+            10.504950495049505,
+            10.534653465346535,
+            10.514851485148515,
+            10.475247524752476,
+            10.485148514851485,
+            10.534653465346535,
+            10.504950495049505,
+            10.504950495049505,
+            10.495049504950495,
+            10.514851485148515,
+            10.514851485148515,
+            10.495049504950495,
+            10.504950495049505,
+            10.485148514851485,
+            10.495049504950495,
+            10.524752475247524,
+            10.514851485148515,
+            10.495049504950495,
+            10.485148514851485,
+            10.504950495049505,
+            10.485148514851485,
+            10.504950495049505,
+            10.485148514851485,
+            10.504950495049505,
+            10.514851485148515
+          ],
+          "whole_path_samples": 101,
+          "temporal_model": "constant bias plus bounded smooth tracking modes",
+          "distribution": "experimental bounded uniform scene and joint perturbations; not fitted from hardware",
+          "real_world_probability_claim": false,
+          "continuous_collision_probability": false
+        },
+        "duration_s": 50.09405715407828
+      }
+    ]
+  }
+}

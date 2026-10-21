@@ -1937,9 +1937,9 @@ class CameraPlaybackTests(unittest.TestCase):
         st7 = ROOT.parent / "st7"
         command = detector_command(st7, "pipewire")
         self.assertEqual(Path(command[0]), st7 / ".venv/bin/python")
-        self.assertEqual(command[2:5], ["--config", str(st7 / "models/v2/config.yaml"), "listen"])
-        self.assertEqual(command[5:9], ["--checkpoint", str(st7 / "models/v2/best.pt"),
-                                       "--normality-artifact", str(st7 / "models/v2/normality/reference.npz")])
+        self.assertEqual(command[2:5], ["--config", str(st7 / "models/ride_v4/config.yaml"), "listen"])
+        self.assertEqual(command[5:9], ["--checkpoint", str(st7 / "models/ride_v4/best.pt"),
+                                       "--normality-artifact", str(st7 / "models/ride_v4/normality/reference.npz")])
         self.assertEqual(command[-2:], ["--device", "pipewire"])
 
     def test_sound_process_failure_during_strike_uses_safe_program_failure(self):

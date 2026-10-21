@@ -1,0 +1,293 @@
+[experiment cache] Automatically queued: baseline, reversals, coordination, spatial, combined. One memory-limited worker at a time.
+[experiment cache] Starting baseline; 4 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.7s] SHARED POOL search 1/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +   5.2s] candidate 1: VALID; 7.52s; reversals=6; coordination=10.612; spatial=110.036
+[baseline +   7.1s] candidate 2: VALID; 17.03s; reversals=6; coordination=14.611; spatial=88.341
+[baseline +   7.1s] SHARED POOL search 2/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  12.3s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  15.4s] candidate 4: VALID; 43.45s; reversals=10; coordination=23.554; spatial=543.503
+[baseline +  15.4s] SHARED POOL search 3/6; allocation 8.0s; all five methods will reuse these candidates
+[worker] FCL/solver operation running: 5s
+[baseline +  21.0s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  26.3s] candidate 6: VALID; 81.98s; reversals=5; coordination=15.949; spatial=248.457
+[baseline +  26.5s] SHARED POOL search 4/6; allocation 8.0s; all five methods will reuse these candidates
+[worker] FCL/solver operation running: 5s
+[baseline +  32.2s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  36.6s] candidate 8: VALID; 69.10s; reversals=11; coordination=30.022; spatial=681.183
+[baseline +  36.7s] SHARED POOL search 5/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  39.5s] candidate 9: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005001387214461583, 'point_only': True, 'point_xyz_m': [0.21337569226711828, -0.5182090758623284, 0.2907453253459741], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[baseline +  40.3s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  43.4s] candidate 11: VALID; 38.46s; reversals=7; coordination=15.906; spatial=273.933
+[baseline +  43.4s] SHARED POOL search 6/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  47.4s] candidate 12: VALID; 7.94s; reversals=5; coordination=12.464; spatial=149.408
+[baseline +  50.5s] candidate 13: VALID; 41.95s; reversals=5; coordination=15.856; spatial=234.079
+[baseline +  50.6s] SHARED POOL COMPLETE: 8 validated candidates, 6 searches, 50.0s; no 2x duration cutoff
+[baseline +  50.8s] baseline: candidate 2, score=96.1865, duration=17.03s
+[baseline +  50.8s] baseline: candidate 1, score=100.0000, duration=7.52s
+[baseline +  50.8s] baseline: candidate 12, score=116.2140, duration=7.94s
+[baseline +  50.8s] baseline: candidate 6, score=117.0926, duration=81.98s
+[baseline +  50.8s] baseline: candidate 13, score=121.4302, duration=41.95s
+[baseline +  50.8s] baseline: candidate 11, score=126.5989, duration=38.46s
+[baseline +  50.8s] baseline: candidate 4, score=164.7515, duration=43.45s
+[baseline +  50.8s] baseline: candidate 8, score=181.9654, duration=69.10s
+[baseline +  50.8s] SELECTED candidate 2: lowest baseline score; 8 equally checked candidates
+[baseline +  50.8s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting reversals; 3 other methods queued.
+[reversals +   0.0s] Minimize meaningful per-joint direction changes and excess angular travel. Small reversals below the editable threshold do not count; no speed preference.
+[reversals +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[reversals +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[reversals +   0.1s] REUSING SHARED POOL: 8 validated candidates; no repeat search or FCL world loading
+[reversals +   0.1s] reversals: candidate 13, score=88.2837, duration=41.95s
+[reversals +   0.1s] reversals: candidate 12, score=90.3554, duration=7.94s
+[reversals +   0.1s] reversals: candidate 6, score=92.9094, duration=81.98s
+[reversals +   0.1s] reversals: candidate 2, score=98.5261, duration=17.03s
+[reversals +   0.1s] reversals: candidate 1, score=101.4739, duration=7.52s
+[reversals +   0.1s] reversals: candidate 11, score=102.1248, duration=38.46s
+[reversals +   0.1s] reversals: candidate 4, score=236.7511, duration=43.45s
+[reversals +   0.1s] reversals: candidate 8, score=284.6717, duration=69.10s
+[reversals +   0.1s] SELECTED candidate 13: lowest reversals score; 8 equally checked candidates
+[reversals +   0.1s] READY: 41.948s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached reversals: planned.
+[experiment cache] Starting coordination; 2 other methods queued.
+[coordination +   0.0s] Minimize changes in the direction of seven-joint progress: favor one coordinated gesture rather than shoulder-then-elbow-then-wrist steps. Scored over joint arc, not elapsed time.
+[coordination +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[coordination +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[coordination +   0.0s] REUSING SHARED POOL: 8 validated candidates; no repeat search or FCL world loading
+[coordination +   0.0s] coordination: candidate 1, score=66.8204, duration=7.52s
+[coordination +   0.0s] coordination: candidate 12, score=78.4849, duration=7.94s
+[coordination +   0.0s] coordination: candidate 2, score=92.0025, duration=17.03s
+[coordination +   0.0s] coordination: candidate 13, score=99.8426, duration=41.95s
+[coordination +   0.0s] coordination: candidate 11, score=100.1574, duration=38.46s
+[coordination +   0.0s] coordination: candidate 6, score=100.4265, duration=81.98s
+[coordination +   0.0s] coordination: candidate 4, score=148.3132, duration=43.45s
+[coordination +   0.0s] coordination: candidate 8, score=189.0421, duration=69.10s
+[coordination +   0.1s] SELECTED candidate 1: lowest coordination score; 8 equally checked candidates
+[coordination +   0.1s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached coordination: planned.
+[experiment cache] Starting spatial; 1 other methods queued.
+[spatial +   0.0s] Minimize wrist/stick curve bending energy, curvature variation and excess travel at a fixed physical spatial scale. Broad coherent arcs beat repeated turns; timing cannot improve this score.
+[spatial +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[spatial +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[spatial +   0.0s] REUSING SHARED POOL: 8 validated candidates; no repeat search or FCL world loading
+[spatial +   0.0s] spatial: candidate 2, score=36.6154, duration=17.03s
+[spatial +   0.0s] spatial: candidate 1, score=45.6074, duration=7.52s
+[spatial +   0.0s] spatial: candidate 12, score=61.9260, duration=7.94s
+[spatial +   0.0s] spatial: candidate 13, score=97.0201, duration=41.95s
+[spatial +   0.0s] spatial: candidate 6, score=102.9799, duration=81.98s
+[spatial +   0.0s] spatial: candidate 11, score=113.5387, duration=38.46s
+[spatial +   0.0s] spatial: candidate 4, score=225.2693, duration=43.45s
+[spatial +   0.0s] spatial: candidate 8, score=282.3345, duration=69.10s
+[spatial +   0.1s] SELECTED candidate 2: lowest spatial score; 8 equally checked candidates
+[spatial +   0.1s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached spatial: planned.
+[experiment cache] Starting combined; 0 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.0s] REUSING SHARED POOL: 8 validated candidates; no repeat search or FCL world loading
+[combined +   0.0s] combined: candidate 1, score=71.3006, duration=7.52s
+[combined +   0.0s] combined: candidate 2, score=75.7146, duration=17.03s
+[combined +   0.0s] combined: candidate 12, score=76.9221, duration=7.94s
+[combined +   0.0s] combined: candidate 13, score=95.0488, duration=41.95s
+[combined +   0.0s] combined: candidate 6, score=98.7719, duration=81.98s
+[combined +   0.0s] combined: candidate 11, score=105.2736, duration=38.46s
+[combined +   0.0s] combined: candidate 4, score=203.4445, duration=43.45s
+[combined +   0.0s] combined: candidate 8, score=252.0161, duration=69.10s
+[combined +   0.1s] SELECTED candidate 1: lowest combined score; 8 equally checked candidates
+[combined +   0.1s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.
+AUTO-CACHE: all five ready on one identical candidate pool
+PLAYBACK PASSED: baseline
+[experiment] Loading cached result for reversals (same scene, state and settings).
+PLAYBACK PASSED: reversals
+[experiment] Loading cached result for coordination (same scene, state and settings).
+PLAYBACK PASSED: coordination
+[experiment] Loading cached result for spatial (same scene, state and settings).
+PLAYBACK PASSED: spatial
+[experiment] Loading cached result for combined (same scene, state and settings).
+PLAYBACK PASSED: combined
+[experiment cache] Automatically queued: combined, baseline, reversals, coordination, spatial. One memory-limited worker at a time.
+[experiment cache] Starting combined; 4 other methods queued.
+[experiment cache] Automatically queued: combined, baseline, reversals, coordination, spatial. One memory-limited worker at a time.
+[experiment cache] Starting combined; 4 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.7s] SHARED POOL search 1/2; allocation 8.0s; all five methods will reuse these candidates
+[combined +   5.5s] candidate 1: VALID; 7.52s; reversals=9; coordination=10.662; spatial=136.718
+[combined +   7.5s] candidate 2: VALID; 17.03s; reversals=6; coordination=18.819; spatial=168.723
+[combined +   7.5s] SHARED POOL search 2/2; allocation 8.0s; all five methods will reuse these candidates
+[worker] FCL/solver operation running: 5s
+[combined +  12.8s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[combined +  15.9s] candidate 4: VALID; 43.45s; reversals=12; coordination=28.917; spatial=1023.920
+[combined +  16.0s] SHARED POOL COMPLETE: 3 validated candidates, 2 searches, 15.2s; no 2x duration cutoff
+[combined +  16.1s] combined: candidate 1, score=79.2300, duration=7.52s
+[combined +  16.1s] combined: candidate 2, score=91.6680, duration=17.03s
+[combined +  16.1s] combined: candidate 4, score=318.5753, duration=43.45s
+[combined +  16.1s] SELECTED candidate 1: lowest combined score; 3 equally checked candidates
+[combined +  16.1s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.
+[experiment cache] Starting baseline; 3 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.0s] REUSING SHARED POOL: 3 validated candidates; no repeat search or FCL world loading
+[baseline +   0.0s] baseline: candidate 2, score=96.1865, duration=17.03s
+[baseline +   0.0s] baseline: candidate 1, score=100.0000, duration=7.52s
+[baseline +   0.0s] baseline: candidate 4, score=164.7515, duration=43.45s
+[baseline +   0.0s] SELECTED candidate 2: lowest baseline score; 3 equally checked candidates
+[baseline +   0.1s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting reversals; 2 other methods queued.
+[reversals +   0.0s] Minimize meaningful per-joint direction changes and excess angular travel. Small reversals below the editable threshold do not count; no speed preference.
+[reversals +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[reversals +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[reversals +   0.0s] REUSING SHARED POOL: 3 validated candidates; no repeat search or FCL world loading
+[reversals +   0.0s] reversals: candidate 2, score=75.0041, duration=17.03s
+[reversals +   0.0s] reversals: candidate 1, score=100.0000, duration=7.52s
+[reversals +   0.0s] reversals: candidate 4, score=195.2011, duration=43.45s
+[reversals +   0.0s] SELECTED candidate 2: lowest reversals score; 3 equally checked candidates
+[reversals +   0.1s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached reversals: planned.
+[experiment cache] Starting coordination; 1 other methods queued.
+[coordination +   0.0s] Minimize changes in the direction of seven-joint progress: favor one coordinated gesture rather than shoulder-then-elbow-then-wrist steps. Scored over joint arc, not elapsed time.
+[coordination +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[coordination +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[coordination +   0.0s] REUSING SHARED POOL: 3 validated candidates; no repeat search or FCL world loading
+[coordination +   0.0s] coordination: candidate 1, score=56.6593, duration=7.52s
+[coordination +   0.0s] coordination: candidate 2, score=100.0000, duration=17.03s
+[coordination +   0.0s] coordination: candidate 4, score=153.6616, duration=43.45s
+[coordination +   0.0s] SELECTED candidate 1: lowest coordination score; 3 equally checked candidates
+[coordination +   0.0s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached coordination: planned.
+[experiment cache] Starting spatial; 0 other methods queued.
+[spatial +   0.0s] Minimize wrist/stick curve bending energy, curvature variation and excess travel at a fixed physical spatial scale. Broad coherent arcs beat repeated turns; timing cannot improve this score.
+[spatial +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[spatial +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[spatial +   0.0s] REUSING SHARED POOL: 3 validated candidates; no repeat search or FCL world loading
+[spatial +   0.0s] spatial: candidate 1, score=81.0308, duration=7.52s
+[spatial +   0.0s] spatial: candidate 2, score=100.0000, duration=17.03s
+[spatial +   0.0s] spatial: candidate 4, score=606.8633, duration=43.45s
+[spatial +   0.0s] SELECTED candidate 1: lowest spatial score; 3 equally checked candidates
+[spatial +   0.0s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached spatial: planned.
+[experiment cache] Automatically queued: combined, baseline, reversals, coordination, spatial. One memory-limited worker at a time.
+[experiment cache] Starting combined; 4 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.7s] SHARED POOL search 1/2; allocation 2.5s; all five methods will reuse these candidates
+[combined +   5.3s] candidate 1: VALID; 7.52s; reversals=9; coordination=10.662; spatial=136.718
+[combined +   7.1s] candidate 2: VALID; 17.03s; reversals=6; coordination=18.819; spatial=168.723
+[combined +   7.1s] SHARED POOL COMPLETE: 2 validated candidates, 1 searches, 6.4s; no 2x duration cutoff
+[combined +   7.3s] combined: candidate 1, score=92.0463, duration=7.52s
+[combined +   7.3s] combined: candidate 2, score=107.9537, duration=17.03s
+[combined +   7.3s] SELECTED candidate 1: lowest combined score; 2 equally checked candidates
+[combined +   7.3s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.
+[experiment cache] Starting baseline; 3 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[baseline +   0.0s] baseline: candidate 2, score=96.1865, duration=17.03s
+[baseline +   0.0s] baseline: candidate 1, score=100.0000, duration=7.52s
+[baseline +   0.0s] SELECTED candidate 2: lowest baseline score; 2 equally checked candidates
+[baseline +   0.0s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting reversals; 2 other methods queued.
+[reversals +   0.0s] Minimize meaningful per-joint direction changes and excess angular travel. Small reversals below the editable threshold do not count; no speed preference.
+[reversals +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[reversals +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[reversals +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[reversals +   0.0s] reversals: candidate 2, score=85.7170, duration=17.03s
+[reversals +   0.0s] reversals: candidate 1, score=114.2830, duration=7.52s
+[reversals +   0.0s] SELECTED candidate 2: lowest reversals score; 2 equally checked candidates
+[reversals +   0.0s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached reversals: planned.
+[experiment cache] Starting coordination; 1 other methods queued.
+[coordination +   0.0s] Minimize changes in the direction of seven-joint progress: favor one coordinated gesture rather than shoulder-then-elbow-then-wrist steps. Scored over joint arc, not elapsed time.
+[coordination +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[coordination +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[coordination +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[coordination +   0.0s] coordination: candidate 1, score=72.3344, duration=7.52s
+[coordination +   0.0s] coordination: candidate 2, score=127.6656, duration=17.03s
+[coordination +   0.0s] SELECTED candidate 1: lowest coordination score; 2 equally checked candidates
+[coordination +   0.0s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached coordination: planned.
+[experiment cache] Starting spatial; 0 other methods queued.
+[spatial +   0.0s] Minimize wrist/stick curve bending energy, curvature variation and excess travel at a fixed physical spatial scale. Broad coherent arcs beat repeated turns; timing cannot improve this score.
+[spatial +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[spatial +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[spatial +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[spatial +   0.0s] spatial: candidate 1, score=89.5215, duration=7.52s
+[spatial +   0.0s] spatial: candidate 2, score=110.4785, duration=17.03s
+[spatial +   0.0s] SELECTED candidate 1: lowest spatial score; 2 equally checked candidates
+[spatial +   0.0s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached spatial: planned.
+[experiment cache] Starting combined; 0 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[combined +   0.0s] combined: candidate 1, score=92.0463, duration=7.52s
+[combined +   0.0s] combined: candidate 2, score=107.9537, duration=17.03s
+[combined +   0.0s] SELECTED candidate 1: lowest combined score; 2 equally checked candidates
+[combined +   0.0s] READY: 7.521s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 123,483 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/fluidity_20261020T052359Z/actual_camera_all/capture_c541f9ef/camera
+[experiment cache] Automatically queued: combined, baseline, reversals, coordination, spatial. One memory-limited worker at a time.
+[experiment cache] Starting combined; 4 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.7s] SHARED POOL search 1/2; allocation 2.5s; all five methods will reuse these candidates
+[combined +   4.4s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[combined +   6.5s] candidate 2: VALID; 22.21s; reversals=7; coordination=19.885; spatial=240.832
+[combined +   6.5s] SHARED POOL COMPLETE: 1 validated candidates, 1 searches, 5.9s; no 2x duration cutoff
+[combined +   6.7s] combined: candidate 2, score=100.0000, duration=22.21s
+[combined +   6.7s] SELECTED candidate 2: lowest combined score; 1 equally checked candidates
+[combined +   6.7s] READY: 22.205s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.
+[experiment cache] Starting baseline; 3 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[baseline +   0.0s] baseline: candidate 2, score=100.0000, duration=22.21s
+[baseline +   0.0s] SELECTED candidate 2: lowest baseline score; 1 equally checked candidates
+[baseline +   0.1s] READY: 22.205s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting reversals; 2 other methods queued.
+[reversals +   0.0s] Minimize meaningful per-joint direction changes and excess angular travel. Small reversals below the editable threshold do not count; no speed preference.
+[reversals +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[reversals +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[reversals +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[reversals +   0.0s] reversals: candidate 2, score=100.0000, duration=22.21s
+[reversals +   0.0s] SELECTED candidate 2: lowest reversals score; 1 equally checked candidates
+[reversals +   0.1s] READY: 22.205s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached reversals: planned.
+[experiment cache] Starting coordination; 1 other methods queued.
+[coordination +   0.0s] Minimize changes in the direction of seven-joint progress: favor one coordinated gesture rather than shoulder-then-elbow-then-wrist steps. Scored over joint arc, not elapsed time.
+[coordination +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[coordination +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[coordination +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[coordination +   0.0s] coordination: candidate 2, score=100.0000, duration=22.21s
+[coordination +   0.0s] SELECTED candidate 2: lowest coordination score; 1 equally checked candidates
+[coordination +   0.0s] READY: 22.205s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached coordination: planned.
+[experiment cache] Starting spatial; 0 other methods queued.
+[spatial +   0.0s] Minimize wrist/stick curve bending energy, curvature variation and excess travel at a fixed physical spatial scale. Broad coherent arcs beat repeated turns; timing cannot improve this score.
+[spatial +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[spatial +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[spatial +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[spatial +   0.0s] spatial: candidate 2, score=100.0000, duration=22.21s
+[spatial +   0.0s] SELECTED candidate 2: lowest spatial score; 1 equally checked candidates
+[spatial +   0.0s] READY: 22.205s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached spatial: planned.
+ALL FLUIDITY UI FEATURES PASSED

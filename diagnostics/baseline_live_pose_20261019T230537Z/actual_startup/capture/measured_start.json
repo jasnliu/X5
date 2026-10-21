@@ -1,0 +1,370 @@
+{
+  "schema": "x5-planner-start-state-v1",
+  "coordinate_convention": "encoder_to_joint",
+  "right_rad": [
+    -0.02090684367132134,
+    0.007864042114899661,
+    0.8702233920805682,
+    0.03663492790112066,
+    -0.5375271681544674,
+    0.2035060654612053,
+    0.5525928130006861
+  ],
+  "left_rad": [
+    0.020523231860837043,
+    0.009014877546348998,
+    -0.035100480659188804,
+    0.07231082627603591,
+    -1.0298059052414725,
+    0.18585992217898806,
+    -0.016687113756008287
+  ],
+  "left_gripper_opening_m": 0.0,
+  "left_gripper_opening_source": "legacy encoder-derived display estimate; not a measured jaw width",
+  "right_gripper_closed_motor_joint_rad": 0.12217304763960307,
+  "right_gripper_closed_field_meaning": "future configured target ONLY; no gripper command was sent",
+  "motor8_feedback": {
+    "left": {
+      "encoder_count": 33428,
+      "raw_rad": 0.25337560082398625
+    },
+    "right": {
+      "encoder_count": 32445,
+      "raw_rad": -0.12371480888075048
+    }
+  },
+  "motor_telemetry": {
+    "left": [
+      {
+        "motor": 1,
+        "received_monotonic": 263441.902326883,
+        "request_monotonic": 263441.901205113,
+        "encoder_count": 32714,
+        "raw_rad": -0.020523231860837043,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 28.0
+      },
+      {
+        "motor": 2,
+        "received_monotonic": 263441.902781869,
+        "request_monotonic": 263441.901344101,
+        "encoder_count": 32744,
+        "raw_rad": -0.009014877546348998,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 29.0
+      },
+      {
+        "motor": 3,
+        "received_monotonic": 263441.903334062,
+        "request_monotonic": 263441.90140594,
+        "encoder_count": 32859,
+        "raw_rad": 0.035100480659188804,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      },
+      {
+        "motor": 4,
+        "received_monotonic": 263441.903873009,
+        "request_monotonic": 263441.901457509,
+        "encoder_count": 32579,
+        "raw_rad": -0.07231082627603591,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      },
+      {
+        "motor": 5,
+        "received_monotonic": 263441.904570752,
+        "request_monotonic": 263441.90150469,
+        "encoder_count": 35452,
+        "raw_rad": 1.0298059052414725,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 32.0
+      },
+      {
+        "motor": 6,
+        "received_monotonic": 263441.905196617,
+        "request_monotonic": 263441.901699365,
+        "encoder_count": 32283,
+        "raw_rad": -0.18585992217898806,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 32.0
+      },
+      {
+        "motor": 7,
+        "received_monotonic": 263441.905772656,
+        "request_monotonic": 263441.901771163,
+        "encoder_count": 32811,
+        "raw_rad": 0.016687113756008287,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 31.0
+      },
+      {
+        "motor": 8,
+        "received_monotonic": 263441.90634103,
+        "request_monotonic": 263441.901819466,
+        "encoder_count": 33428,
+        "raw_rad": 0.25337560082398625,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      }
+    ],
+    "right": [
+      {
+        "motor": 1,
+        "received_monotonic": 263441.902919384,
+        "request_monotonic": 263441.901868871,
+        "encoder_count": 32822,
+        "raw_rad": 0.02090684367132134,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 29.0
+      },
+      {
+        "motor": 2,
+        "received_monotonic": 263441.903401712,
+        "request_monotonic": 263441.901938355,
+        "encoder_count": 32747,
+        "raw_rad": -0.007864042114899661,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      },
+      {
+        "motor": 3,
+        "received_monotonic": 263441.903910983,
+        "request_monotonic": 263441.901984314,
+        "encoder_count": 30499,
+        "raw_rad": -0.8702233920805682,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      },
+      {
+        "motor": 4,
+        "received_monotonic": 263441.904616841,
+        "request_monotonic": 263441.90205503,
+        "encoder_count": 32672,
+        "raw_rad": -0.03663492790112066,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 29.0
+      },
+      {
+        "motor": 5,
+        "received_monotonic": 263441.905150729,
+        "request_monotonic": 263441.902097892,
+        "encoder_count": 33782,
+        "raw_rad": 0.38917418173494944,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 33.0
+      },
+      {
+        "motor": 6,
+        "received_monotonic": 263441.905878951,
+        "request_monotonic": 263441.902144652,
+        "encoder_count": 32237,
+        "raw_rad": -0.2035060654612053,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 33.0
+      },
+      {
+        "motor": 7,
+        "received_monotonic": 263441.906451643,
+        "request_monotonic": 263441.902193466,
+        "encoder_count": 31327,
+        "raw_rad": -0.5525928130006861,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 31.0
+      },
+      {
+        "motor": 8,
+        "received_monotonic": 263441.906954201,
+        "request_monotonic": 263441.902237381,
+        "encoder_count": 32445,
+        "raw_rad": -0.12371480888075048,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 30.0
+      }
+    ]
+  },
+  "preview_only": true,
+  "measured": true,
+  "source": "Read-only disabled-motor CAN encoder snapshot of both arms",
+  "captured_utc": "2026-10-19T23:10:33Z",
+  "measurement_start_monotonic": 263441.901160377,
+  "measurement_end_monotonic": 263441.907024205,
+  "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+  "encoder_source_sha256": "03e56325d0a593b75921e6bff6b80b443551af6eeb29473c6da949ac353f7887",
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "synchronization": {
+    "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+    "batch_count": 62,
+    "duration_s": 3.0670316020259634,
+    "maximum_batch_duration_s": 0.006467710016295314,
+    "maximum_batch_start_gap_s": 0.05077799700666219,
+    "joint_spread_deg": {
+      "openarmx_right_joint1": 0.02197933771202081,
+      "openarmx_right_joint2": 0.021979337712122585,
+      "openarmx_right_joint3": 0.02197933771202081,
+      "openarmx_right_joint4": 0.021979337712122585,
+      "openarmx_right_joint5": 0.0,
+      "openarmx_right_joint6": 0.02197933771202081,
+      "openarmx_right_joint7": 0.02197933771202081,
+      "openarmx_left_joint1": 0.02197933771202081,
+      "openarmx_left_joint2": 0.02197933771202081,
+      "openarmx_left_joint3": 0.0,
+      "openarmx_left_joint4": 0.0,
+      "openarmx_left_joint5": 0.02197933771202081,
+      "openarmx_left_joint6": 0.02197933771202081,
+      "openarmx_left_joint7": 0.02197933771202081
+    },
+    "camera_received_monotonic": 263441.907476476,
+    "selected_batch_index": 54,
+    "nearest_midpoint_skew_s": 0.0033841849653981626,
+    "bracketing_indices": [
+      54,
+      55
+    ],
+    "all_five_frames": [
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 62,
+        "duration_s": 3.0670316020259634,
+        "maximum_batch_duration_s": 0.006467710016295314,
+        "maximum_batch_start_gap_s": 0.05077799700666219,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.02197933771202081,
+          "openarmx_right_joint2": 0.021979337712122585,
+          "openarmx_right_joint3": 0.02197933771202081,
+          "openarmx_right_joint4": 0.021979337712122585,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.02197933771202081,
+          "openarmx_right_joint7": 0.02197933771202081,
+          "openarmx_left_joint1": 0.02197933771202081,
+          "openarmx_left_joint2": 0.02197933771202081,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.02197933771202081,
+          "openarmx_left_joint6": 0.02197933771202081,
+          "openarmx_left_joint7": 0.02197933771202081
+        },
+        "camera_received_monotonic": 263441.518731648,
+        "selected_batch_index": 46,
+        "nearest_midpoint_skew_s": 0.015806042472831905,
+        "bracketing_indices": [
+          46,
+          47
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 62,
+        "duration_s": 3.0670316020259634,
+        "maximum_batch_duration_s": 0.006467710016295314,
+        "maximum_batch_start_gap_s": 0.05077799700666219,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.02197933771202081,
+          "openarmx_right_joint2": 0.021979337712122585,
+          "openarmx_right_joint3": 0.02197933771202081,
+          "openarmx_right_joint4": 0.021979337712122585,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.02197933771202081,
+          "openarmx_right_joint7": 0.02197933771202081,
+          "openarmx_left_joint1": 0.02197933771202081,
+          "openarmx_left_joint2": 0.02197933771202081,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.02197933771202081,
+          "openarmx_left_joint6": 0.02197933771202081,
+          "openarmx_left_joint7": 0.02197933771202081
+        },
+        "camera_received_monotonic": 263441.610395391,
+        "selected_batch_index": 48,
+        "nearest_midpoint_skew_s": 0.007078165537677705,
+        "bracketing_indices": [
+          48,
+          49
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 62,
+        "duration_s": 3.0670316020259634,
+        "maximum_batch_duration_s": 0.006467710016295314,
+        "maximum_batch_start_gap_s": 0.05077799700666219,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.02197933771202081,
+          "openarmx_right_joint2": 0.021979337712122585,
+          "openarmx_right_joint3": 0.02197933771202081,
+          "openarmx_right_joint4": 0.021979337712122585,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.02197933771202081,
+          "openarmx_right_joint7": 0.02197933771202081,
+          "openarmx_left_joint1": 0.02197933771202081,
+          "openarmx_left_joint2": 0.02197933771202081,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.02197933771202081,
+          "openarmx_left_joint6": 0.02197933771202081,
+          "openarmx_left_joint7": 0.02197933771202081
+        },
+        "camera_received_monotonic": 263441.707602345,
+        "selected_batch_index": 50,
+        "nearest_midpoint_skew_s": 0.004219487018417567,
+        "bracketing_indices": [
+          50,
+          51
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 62,
+        "duration_s": 3.0670316020259634,
+        "maximum_batch_duration_s": 0.006467710016295314,
+        "maximum_batch_start_gap_s": 0.05077799700666219,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.02197933771202081,
+          "openarmx_right_joint2": 0.021979337712122585,
+          "openarmx_right_joint3": 0.02197933771202081,
+          "openarmx_right_joint4": 0.021979337712122585,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.02197933771202081,
+          "openarmx_right_joint7": 0.02197933771202081,
+          "openarmx_left_joint1": 0.02197933771202081,
+          "openarmx_left_joint2": 0.02197933771202081,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.02197933771202081,
+          "openarmx_left_joint6": 0.02197933771202081,
+          "openarmx_left_joint7": 0.02197933771202081
+        },
+        "camera_received_monotonic": 263441.809135147,
+        "selected_batch_index": 52,
+        "nearest_midpoint_skew_s": 0.005386583507061005,
+        "bracketing_indices": [
+          52,
+          53
+        ]
+      }
+    ],
+    "planning_frame_count": 5
+  },
+  "motor_commands": 0,
+  "gripper_commands": 0,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "supported_rest_verified": false,
+  "gripper_closed_physically_verified": false
+}

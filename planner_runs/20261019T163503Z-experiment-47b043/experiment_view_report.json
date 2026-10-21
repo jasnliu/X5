@@ -1,0 +1,150 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 1,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": 2.4905756679945625,
+  "last_frame_compute_s": 0.09042798800510354,
+  "maximum_draw_s": 0.0045872689806856215,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 0,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 1191,
+    "maximum_frame_s": 0.00457302201539278,
+    "median_frame_s": 0.0018633784929988906,
+    "surface_geometry_uploads": 1,
+    "surface_color_uploads": 1,
+    "surface_triangles": 19626,
+    "render_errors": []
+  },
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/planner_runs/20261019T163503Z-experiment-47b043/plans/cvar-8cbd70ca/plan.json",
+  "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+  "animation_draws": 1191,
+  "animation_time_s": 0.0,
+  "animation_completed_cycles": 0,
+  "animation_play_clicks": 2,
+  "animation_seeks": 1,
+  "animation_phases_seen": [
+    "BLOCKED",
+    "HOLD (2 seconds)",
+    "outward",
+    "return"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 11780,
+    "triangles": 19626,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 12374,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 813901,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "experiment": true,
+  "saved_state_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "context": {
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json",
+    "state_sha256": "ec640c9d38ca47202b16a4bd0d9f01042e2381e3fb721fb5d71950e31aedce8d",
+    "scene": "/home/jason/Proyectos3/X5/planner_runs/20261019T163503Z-experiment-47b043/capture_000/camera/scene.json",
+    "scene_sha256": "94aca3ea68a1eae4964ab9aabfd88749a14c1b8359b9b838c4dc2a96b08dc866",
+    "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "saved_not_live": true,
+    "can_access": false,
+    "motor_commands": 0
+  },
+  "events": [
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "robust"
+    },
+    {
+      "event": "installed",
+      "method": "robust",
+      "status": "no_feasible_route"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "chance"
+    },
+    {
+      "event": "installed",
+      "method": "chance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "cvar"
+    },
+    {
+      "event": "installed",
+      "method": "cvar",
+      "status": "planned"
+    }
+  ],
+  "generations": 4,
+  "scene_generations": 0,
+  "displayed_method": "cvar"
+}

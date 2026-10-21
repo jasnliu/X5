@@ -1,0 +1,41 @@
+[goal2/509 +0.0s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[goal2/509 +4.6s] candidate 1: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005003059326918774, 'point_only': True, 'point_xyz_m': [-0.05907529705983875, -0.2805491330759074, 0.10373704509104809], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[goal2/509 +10.4s] candidate 2: VALID; 103.33s; reversals=11; coordination=15.765; spatial=266.884
+[goal2/509 +10.6s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[goal2/509 +13.9s] candidate 3: VALID; 5.23s; reversals=10; coordination=15.230; spatial=105.844
+[goal2/509 +14.0s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[goal2/509 +15.3s] candidate 4: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005069525051543122, 'point_only': True, 'point_xyz_m': [0.3127258090555974, -0.3430417911031156, 0.21367889374416363], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[goal2/509 +17.4s] candidate 5: VALID; 25.99s; reversals=3; coordination=10.770; spatial=42.697
+[goal2/509 +17.4s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[goal2/509 +20.5s] candidate 6: VALID; 6.19s; reversals=10; coordination=14.251; spatial=93.743
+[goal2/509 +20.5s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[goal2/509 +22.9s] candidate 7: VALID; 6.10s; reversals=5; coordination=10.662; spatial=66.610
+[goal2/509 +22.9s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[goal2/509 +24.8s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +26.4s] candidate 9: VALID; 17.19s; reversals=3; coordination=13.573; spatial=68.759
+[goal2/509 +26.6s] arch search 1/10: 0/60 coarse-feasible; best blocked samples 2
+[goal2/509 +26.8s] arch search 2/10: 0/60 coarse-feasible; best blocked samples 2
+[goal2/509 +27.0s] arch search 3/10: 0/60 coarse-feasible; best blocked samples 2
+[goal2/509 +27.2s] arch search 4/10: 2/60 coarse-feasible; best blocked samples 0
+[goal2/509 +27.4s] arch search 5/10: 3/60 coarse-feasible; best blocked samples 0
+[goal2/509 +27.6s] arch search 6/10: 5/60 coarse-feasible; best blocked samples 0
+[goal2/509 +27.8s] arch search 7/10: 16/60 coarse-feasible; best blocked samples 0
+[goal2/509 +28.0s] arch search 8/10: 23/60 coarse-feasible; best blocked samples 0
+[goal2/509 +28.2s] arch search 9/10: 31/60 coarse-feasible; best blocked samples 0
+[goal2/509 +28.4s] arch search 10/10: 29/60 coarse-feasible; best blocked samples 0
+[goal2/509 +28.7s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +29.1s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +30.3s] candidate 12: VALID; 7.97s; reversals=6; coordination=6.203; spatial=27.450
+[goal2/509 +31.5s] candidate 13: VALID; 7.73s; reversals=5; coordination=6.044; spatial=29.424
+[goal2/509 +34.3s] partial shortcut (economy): 24 accepted changes; objective 1.3785
+[goal2/509 +34.6s] candidate 14: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +36.3s] candidate 15: VALID; 19.70s; reversals=2; coordination=10.778; spatial=49.037
+[goal2/509 +38.4s] partial shortcut (economy): 10 accepted changes; objective 1.3197
+[goal2/509 +38.5s] candidate 16: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +39.3s] candidate 17: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[goal2/509 +39.3s] candidate 18: timing rejected: Trajectory would be impractically slow; rejected instead of creeping
+[goal2/509 +40.7s] elastic deformation: 17 accepted updates; objective 1.0868
+[goal2/509 +41.9s] candidate 19: VALID; 10.00s; reversals=4; coordination=8.208; spatial=31.845
+[goal2/509 +42.5s] elastic deformation: 0 accepted updates; objective 1.6035
+[goal2/509 +43.6s] candidate 20: VALID; 6.10s; reversals=5; coordination=10.662; spatial=66.610
+[goal2/509 +43.7s] DONE: compact=9, progress=15, sweep=19, single_arc=9, clearance=19

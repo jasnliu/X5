@@ -1,0 +1,54 @@
+......................................F................................. [ 90%]
+........                                                                 [100%]
+=================================== FAILURES ===================================
+____________________ test_unknown_pixels_are_not_free_space ____________________
+
+req = {'execute': False, 'goal': [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, ...], 'left': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ...], 'left_opening_m': 0.0, ...}
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-57/test_unknown_pixels_are_not_fr0')
+
+    def test_unknown_pixels_are_not_free_space(req,tmp_path):
+        np.array([[3.,3.,3.]],dtype='<f4').tofile(tmp_path/'cloud.bin')
+        np.zeros((800,1280),dtype='<f4').tofile(tmp_path/'free.bin')
+        req['scene']=dict(synthetic=False,obstacle_padding_m=.02,points_file=str(tmp_path/'cloud.bin'),
+                          free_depth_file=str(tmp_path/'free.bin'),camera=camera_meta(),
+                          T_base_depth=common.calibration()['T_base_depth'])
+        result=planning.backend(req,tmp_path)
+        assert result['status']=='blocked_start' and result['details']['reason']=='unknown_or_occluded_space'
+        report=result['visibility_coverage']
+        assert set(report)=={'start','goal'}
+        for pose in report.values():
+            assert pose['diagnostic_only'] and not pose['collision_checked']
+            assert pose['moving_links_checked']==11
+            assert pose['links_with_unobserved_clearance']==11
+            names={row['link'] for row in pose['links']}
+            assert 'right_drumstick' in names and 'openarmx_right_link1' in names
+            assert not any(name.startswith('openarmx_left_') for name in names)
+            for row in pose['links']:
+                assert sum(row['failure_counts'].values())==row['blocked_probe_count']
+                assert 0<row['blocked_probe_count']<=row['probe_count']
+        # Exact surface extrema, independent Python FK/STL implementation. This is
+        # the nominal shape, not an inflated AABB or visibility sphere.
+        root=ET.parse(req['urdf']).getroot()
+        collision=root.find("link[@name='openarmx_right_link1']/collision")
+        mesh=collision.find('geometry/mesh')
+        vertices=model.stl_vertices(mesh.get('filename').removeprefix('file://')).reshape(-1,3)
+        vertices=vertices*np.fromstring(mesh.get('scale','1 1 1'),sep=' ')
+        origin=collision.find('origin');local=np.eye(4)
+        if origin is not None:
+            local[:3,3]=np.fromstring(origin.get('xyz','0 0 0'),sep=' ')
+            local[:3,:3]=Rotation.from_euler('xyz',np.fromstring(origin.get('rpy','0 0 0'),sep=' ')).as_matrix()
+        T=np.linalg.inv(req['scene']['T_base_depth'])@Model(req['urdf']).transforms(
+            dict(zip(common.JOINTS,req['start'])))['openarmx_right_link1']@local
+        z=(vertices@T[:3,:3].T+T[:3,3])[:,2]
+        row=next(row for row in report['start']['links'] if row['link']=='openarmx_right_link1')
+        assert row['nominal_geometry_camera_z_min_m']==pytest.approx(z.min(),abs=1e-8)
+>       assert row['nominal_geometry_camera_z_max_m']==pytest.approx(z.max(),abs=1e-8)
+E       assert 0.22348592119490107 == 0.22348589266943267 ± 1.0e-08
+E         comparison failed
+E         Obtained: 0.22348592119490107
+E         Expected: 0.22348589266943267 ± 1.0e-08
+
+tests/test_drum_planner.py:343: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_drum_planner.py::test_unknown_pixels_are_not_free_space - a...
+1 failed, 79 passed in 33.69s

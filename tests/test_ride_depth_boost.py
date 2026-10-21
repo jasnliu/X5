@@ -2,7 +2,7 @@
 from dataclasses import replace
 import math
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import ANY, Mock, patch
 
 import numpy as np
 
@@ -15,6 +15,7 @@ from test_hybrid_workflow import app_fixture
 class RideBoostTests(unittest.TestCase):
     def fixture(self, detected=10, corridor=13., hard_depth=13.):
         a=app_fixture()
+        a.hihat_sync=Mock()
         p,r,l=load_tuning()
         a.hybrid_session.controller=HybridController(0.,-math.radians(corridor),.01,
             p,r,replace(l,hard_depth_deg=hard_depth))
@@ -30,7 +31,8 @@ class RideBoostTests(unittest.TestCase):
         self.assertEqual(a.continuous_strike_degrees,10.5)
         self.assertAlmostEqual(a.continuous_strike_target[6],-math.radians(10.5))
         np.testing.assert_array_equal(a.continuous_strike_target[:6],a.strike_plan.anchor_joints[:6])
-        a.hybrid_session.request.assert_called_once_with('swing',math.radians(10.5),SWING_EVENTS)
+        a.hybrid_session.request.assert_called_once_with('calibrate',math.radians(10.5),ANY)
+        self.assertTrue(a.sync_calibrating)
         np.testing.assert_array_equal(a.strike_plan.targets[a.strike_index],original)
         self.assertEqual(a._current_strike_degrees(),10)
         a._program_failure.assert_not_called()
@@ -47,7 +49,7 @@ class RideBoostTests(unittest.TestCase):
         a=self.fixture(12)
         a._finish_hit_strike_attempt()
         self.assertEqual(a.continuous_strike_degrees,12.5)
-        a.hybrid_session.request.assert_called_once_with('swing',math.radians(12.5),SWING_EVENTS)
+        a.hybrid_session.request.assert_called_once_with('calibrate',math.radians(12.5),ANY)
         self.assertEqual(a.hybrid_session.controller.limits.hard_depth_deg,13.)
 
     def test_geometric_corridor_blocks_boost_before_hihat_or_swing_start(self):

@@ -16,12 +16,12 @@ class WorkerIOTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls): fixtures.SnareBeatTests.setUpClass()
 
-    def run_worker(self, heartbeat_lost=False, pressure=None, patterns=(1,)):
+    def run_worker(self, heartbeat_lost=False, pressure=None, patterns=(1,), calibration=False):
         f = fixtures.SnareBeatTests
         t = [0.]
         heartbeat = SimpleNamespace(value=0.)
         goal = SimpleNamespace(value=-f.anchor)
-        grid = [1., .6, 1.]
+        grid = [1., .75 if calibration else .6, 1., float(calibration), 0.]
         stop = threading.Event()
         states, frames = [], []
         class Channel:
@@ -34,6 +34,7 @@ class WorkerIOTests(unittest.TestCase):
                 if not heartbeat_lost: heartbeat.value = t[0]
                 q, v = self.sample.position, self.sample.velocity
                 self.sample = Sample(q, v, 0., 2, t[0])
+                if calibration and t[0] >= 2.: grid[4] = .1
                 if t[0] >= 4.: grid[2] = 0.
                 if t[0] >= 5.5: stop.set()
             def wait(self, seconds): t[0] += min(.001, seconds)
@@ -104,6 +105,22 @@ class WorkerIOTests(unittest.TestCase):
         states = self.run_worker(heartbeat_lost=True)
         self.assertIn('heartbeat', states[-1].error)
         self.assertLessEqual(states[-1].completed, 1)
+
+    def test_calibration_ipc_uses_80bpm_and_latched_offset_with_full_return(self):
+        states = self.run_worker(calibration=True,pressure='temporary')
+        self.assertFalse([s.error for s in states if s.error])
+        releases = {s.strike_index:s for s in states if s.strike_index}
+        self.assertGreaterEqual(len(releases),4)
+        f = fixtures.SnareBeatTests
+        for index,s in releases.items():
+            self.assertTrue(s.calibrating)
+            self.assertAlmostEqual(s.scheduled_at,1.+(index-1)*.75)
+            self.assertAlmostEqual(s.released_at+f.template.curve.down+s.advance,
+                                   s.scheduled_at,delta=.004)
+        self.assertTrue(any(s.advance==.1 for s in releases.values()))
+        self.assertEqual(states[-1].completed,len(releases))
+        self.assertTrue(states[-1].ready)
+        self.assertFalse(states[-1].moving or states[-1].scheduled)
 
 
 if __name__ == '__main__': unittest.main()

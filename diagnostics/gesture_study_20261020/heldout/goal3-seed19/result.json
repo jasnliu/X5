@@ -1,0 +1,2288 @@
+{
+  "attempts": [
+    {
+      "search": 1,
+      "source": "corridor",
+      "corridor_rad": 0.079412480965742,
+      "status": "planned"
+    },
+    {
+      "index": 1,
+      "source": "corridor",
+      "origin": 1,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 2,
+      "source": "corridor",
+      "origin": 1,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "search": 2,
+      "source": "corridor",
+      "corridor_rad": 0.12217304763960307,
+      "status": "planned"
+    },
+    {
+      "index": 3,
+      "source": "corridor",
+      "origin": 2,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "search": 3,
+      "source": "corridor",
+      "corridor_rad": 0.20158552860534507,
+      "status": "planned"
+    },
+    {
+      "index": 4,
+      "source": "corridor",
+      "origin": 3,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 5,
+      "source": "corridor",
+      "origin": 3,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "search": 4,
+      "source": "corridor",
+      "corridor_rad": 0.12217304763960307,
+      "status": "planned"
+    },
+    {
+      "index": 6,
+      "source": "corridor",
+      "origin": 4,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "search": 5,
+      "source": "corridor",
+      "corridor_rad": 0.25045474766118625,
+      "status": "planned"
+    },
+    {
+      "index": 7,
+      "source": "corridor",
+      "origin": 5,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 8,
+      "source": "corridor",
+      "origin": 5,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "search": 6,
+      "source": "corridor",
+      "corridor_rad": 0.20158552860534507,
+      "status": "planned"
+    },
+    {
+      "index": 9,
+      "source": "corridor",
+      "origin": 6,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 10,
+      "source": "corridor",
+      "origin": 6,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "index": 11,
+      "source": "single_arc",
+      "origin": null,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "index": 12,
+      "source": "single_arc",
+      "origin": null,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "index": 13,
+      "source": "single_arc",
+      "origin": null,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "index": 14,
+      "source": "progress",
+      "origin": 1,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 15,
+      "source": "progress",
+      "origin": 1,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "index": 16,
+      "source": "progress",
+      "origin": 2,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 17,
+      "source": "progress",
+      "origin": 2,
+      "accepted": true,
+      "stop_at_corners": true
+    },
+    {
+      "index": 18,
+      "source": "sweep",
+      "origin": 1,
+      "accepted": true,
+      "stop_at_corners": false
+    },
+    {
+      "index": 19,
+      "source": "sweep",
+      "origin": 2,
+      "accepted": false,
+      "stop_at_corners": false
+    },
+    {
+      "index": 20,
+      "source": "sweep",
+      "origin": 2,
+      "accepted": true,
+      "stop_at_corners": true
+    }
+  ],
+  "elapsed_s": 48.17638501699548,
+  "case": {
+    "id": "goal3",
+    "split": "heldout",
+    "start": [
+      0.016303501945525767,
+      0.004795147631037722,
+      0.1735843442435332,
+      0.03701853971160496,
+      -0.043818768062914876,
+      -0.12333119707026796,
+      0.501572442206454
+    ],
+    "goal": [
+      -0.6291360372531105,
+      0.1837569756710589,
+      0.2552880700714367,
+      1.7627302557671762,
+      0.19175510342985544,
+      -0.35751607031390026,
+      0.5825599262365376
+    ],
+    "start_delta_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "goal_delta_deg": [
+      -1.352455095724992,
+      -1.6150849238652614,
+      0.6370805214164816,
+      1.7053459613106554,
+      -0.7452222373124044,
+      -2.9995987871569243,
+      -1.008448763688813
+    ],
+    "start_max_deg": 0.0,
+    "goal_max_deg": 2.9995987871569243,
+    "start_tip_delta_m": 0.0,
+    "goal_tip_delta_m": 0.030034931494931402
+  },
+  "seed": 19,
+  "rows": [
+    {
+      "index": 2,
+      "file": "candidate_002.json",
+      "sha256": "6700e56ddd20a617d618fd69dfccca07c04ba7fdc65a58b0f12aec3746acbda0",
+      "metrics": {
+        "values": {
+          "reversals": 11.425443453379465,
+          "coordination": 27.22054702000524,
+          "spatial": 278.0843387232765
+        },
+        "reversals": {
+          "count": 9,
+          "per_joint_count": [
+            2,
+            2,
+            2,
+            0,
+            2,
+            1,
+            0
+          ],
+          "excess_travel_rad": 1.2699592224723975,
+          "per_joint_excess_rad": [
+            0.4086779082019989,
+            0.34323401126107156,
+            0.30338620420209367,
+            0.0,
+            0.11324373672130039,
+            0.07544680595382486,
+            0.02597055613210808
+          ],
+          "score": 11.425443453379465
+        },
+        "coordination": {
+          "length": 2.596780671470807,
+          "total_turn_rad": 6.489596398836644,
+          "bending_energy": 429.77231365733064,
+          "curvature_variation": 594.0477368911618
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4803459688854324,
+            "total_turn_rad": 4.725847447879734,
+            "bending_energy": 37.85270069339194,
+            "curvature_variation": 41.57076606523739,
+            "excess_length_ratio": 0.2952563321649282,
+            "score": 48.54064854186621
+          },
+          "tip": {
+            "length": 1.1989851854641462,
+            "total_turn_rad": 6.584761554345211,
+            "bending_energy": 192.35893571432175,
+            "curvature_variation": 147.263173222738,
+            "excess_length_ratio": 0.3689611614040651,
+            "score": 229.5436901814103
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.347036276737936,
+            "broad_bending": 648.0501595501644,
+            "obstacle_proximity": 0.149589552238806,
+            "joint_economy": 1.4606526016742363
+          },
+          "wrist": {
+            "travel_m": 0.4803459688854324,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 270.77111338618005
+          },
+          "tip": {
+            "travel_m": 1.1989851854641462,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 377.2790461639844
+          },
+          "joint_travel_rad": 4.6486189812842715,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 83.9988186604646,
+        "joint_total_deg": 266.34624876581637,
+        "joint_excess_ratio": 0.46065260482110465,
+        "workspace_detour": 0.3321087462325666,
+        "workspace_overshoot": 0.09073990003558972,
+        "broad_turning_rad": 5.376467379840943,
+        "progress_disagreement": 0.2651592618530999,
+        "reversal_count": 9,
+        "wrist": {
+          "length_m": 0.4803459688037446,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.2952563319446564,
+          "broad_turning_deg": 270.7711129235749,
+          "endpoint_box_overshoot_m": 0.03416248132440297,
+          "positive_x_goal_overshoot_m": 0.03416248132440297
+        },
+        "tip": {
+          "length_m": 1.198985184690268,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.3689611605204768,
+          "broad_turning_deg": 377.2790461552068,
+          "endpoint_box_overshoot_m": 0.07826505915297266,
+          "positive_x_goal_overshoot_m": 0.07826505915297266
+        }
+      },
+      "duration_s": 24.977212714733092,
+      "source": "corridor",
+      "origin": 1,
+      "stop_at_corners": true
+    },
+    {
+      "index": 3,
+      "file": "candidate_003.json",
+      "sha256": "36ea4dfbaba226804793981b82060eb9b97376e2136ef16b55262b2b22973918",
+      "metrics": {
+        "values": {
+          "reversals": 11.059735232535106,
+          "coordination": 15.494422002521905,
+          "spatial": 132.00744982751277
+        },
+        "reversals": {
+          "count": 9,
+          "per_joint_count": [
+            2,
+            0,
+            1,
+            0,
+            3,
+            2,
+            1
+          ],
+          "excess_travel_rad": 1.0784748458120583,
+          "per_joint_excess_rad": [
+            0.16107922840110378,
+            0.02039932285995938,
+            0.09877384346050477,
+            0.0,
+            0.20434950854033207,
+            0.4713311071688006,
+            0.12254183538135766
+          ],
+          "score": 11.059735232535106
+        },
+        "coordination": {
+          "length": 2.3177605235795276,
+          "total_turn_rad": 5.919721057070412,
+          "bending_energy": 91.67489819482967,
+          "curvature_variation": 160.243830877307
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.46486296805901406,
+            "total_turn_rad": 4.635446462283301,
+            "bending_energy": 39.24926176561144,
+            "curvature_variation": 60.59459823943397,
+            "excess_length_ratio": 0.25350630997182755,
+            "score": 54.65141763544176
+          },
+          "tip": {
+            "length": 1.1522372342734788,
+            "total_turn_rad": 4.570282399567455,
+            "bending_energy": 51.69015896420847,
+            "curvature_variation": 101.40114925093725,
+            "excess_length_ratio": 0.31558591512822165,
+            "score": 77.35603219207101
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2971191715345733,
+            "broad_bending": 527.4494111258191,
+            "obstacle_proximity": 0.11881529850746272,
+            "joint_economy": 1.4246574129095826
+          },
+          "wrist": {
+            "travel_m": 0.46486296805901406,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 265.59151844768155
+          },
+          "tip": {
+            "travel_m": 1.1522372342734788,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 261.8578926781376
+          },
+          "joint_travel_rad": 4.534062023980061,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0375,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 77.42898076667592,
+        "joint_total_deg": 259.77641087202767,
+        "joint_excess_ratio": 0.42462337265702677,
+        "workspace_detour": 0.2845257241383521,
+        "workspace_overshoot": 0.10357803753794051,
+        "broad_turning_rad": 4.612431409787231,
+        "progress_disagreement": 0.28599155828035366,
+        "reversal_count": 9,
+        "wrist": {
+          "length_m": 0.46485548051186265,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.2534861197475133,
+          "broad_turning_deg": 265.5771454220177,
+          "endpoint_box_overshoot_m": 0.03830167081501784,
+          "positive_x_goal_overshoot_m": 0.03830167081501784
+        },
+        "tip": {
+          "length_m": 1.1522192037931753,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.3155653285291908,
+          "broad_turning_deg": 261.8505958573518,
+          "endpoint_box_overshoot_m": 0.09097774651920243,
+          "positive_x_goal_overshoot_m": 0.09097774651920243
+        }
+      },
+      "duration_s": 6.285290165197713,
+      "source": "corridor",
+      "origin": 2,
+      "stop_at_corners": false
+    },
+    {
+      "index": 5,
+      "file": "candidate_005.json",
+      "sha256": "5aadc4848d6a10ed5c3321c6c4607a761bc1ddf8f6576cc0142f3052323b6854",
+      "metrics": {
+        "values": {
+          "reversals": 7.243853761154371,
+          "coordination": 10.085150177022875,
+          "spatial": 166.5324297250366
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            0,
+            0,
+            1,
+            0,
+            2,
+            2,
+            1
+          ],
+          "excess_travel_rad": 0.6512803063637673,
+          "per_joint_excess_rad": [
+            0.0,
+            0.0,
+            0.16984274004615785,
+            0.0,
+            0.19768583101352533,
+            0.17555538743118054,
+            0.10819634787290355
+          ],
+          "score": 7.243853761154371
+        },
+        "coordination": {
+          "length": 2.1812578009887758,
+          "total_turn_rad": 2.6794736443810514,
+          "bending_energy": 54.84404490612184,
+          "curvature_variation": 157.21461336635844
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.6064013929407397,
+            "total_turn_rad": 3.9319174808203554,
+            "bending_energy": 42.34379938405886,
+            "curvature_variation": 61.37180463412062,
+            "excess_length_ratio": 0.6351656824822087,
+            "score": 58.32191622507123
+          },
+          "tip": {
+            "length": 1.250158381043085,
+            "total_turn_rad": 4.508324960066051,
+            "bending_energy": 73.97315386183975,
+            "curvature_variation": 135.23988253796594,
+            "excess_length_ratio": 0.4273890036341441,
+            "score": 108.21051349996537
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.4891960760754186,
+            "broad_bending": 483.59026992998736,
+            "obstacle_proximity": 0.23596393034825872,
+            "joint_economy": 1.229137985763988
+          },
+          "wrist": {
+            "travel_m": 0.6064013929407397,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 225.28227704471718
+          },
+          "tip": {
+            "travel_m": 1.250158381043085,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 258.30799288527015
+          },
+          "joint_travel_rad": 3.9118091219573348,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 41.782723388740855,
+        "joint_total_deg": 224.1301534940926,
+        "joint_excess_ratio": 0.22913798875367075,
+        "workspace_detour": 0.5312773377261835,
+        "workspace_overshoot": 0.3292289044466893,
+        "broad_turning_rad": 4.133660064868884,
+        "progress_disagreement": 0.27330543913026084,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.606401390330473,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.635165675443606,
+          "broad_turning_deg": 225.2822748455667,
+          "endpoint_box_overshoot_m": 0.15853357597597506,
+          "positive_x_goal_overshoot_m": 0.15853357597597506
+        },
+        "tip": {
+          "length_m": 1.2501583778678447,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.427389000008761,
+          "broad_turning_deg": 258.3079914546938,
+          "endpoint_box_overshoot_m": 0.2022925729640096,
+          "positive_x_goal_overshoot_m": 0.2022925729640096
+        }
+      },
+      "duration_s": 13.472414716384094,
+      "source": "corridor",
+      "origin": 3,
+      "stop_at_corners": true
+    },
+    {
+      "index": 6,
+      "file": "candidate_006.json",
+      "sha256": "2d3350250164ae025d44daf435447cfabd4758494cd1cf5957a07dcbb6755f9b",
+      "metrics": {
+        "values": {
+          "reversals": 9.381077415562132,
+          "coordination": 14.8318253115018,
+          "spatial": 92.45386433662594
+        },
+        "reversals": {
+          "count": 8,
+          "per_joint_count": [
+            2,
+            2,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "excess_travel_rad": 0.723130443794795,
+          "per_joint_excess_rad": [
+            0.262578111812072,
+            0.10400796564803685,
+            0.0846017542977196,
+            0.0,
+            0.0,
+            0.2719426120369665,
+            0.0
+          ],
+          "score": 9.381077415562132
+        },
+        "coordination": {
+          "length": 2.3021685559777927,
+          "total_turn_rad": 5.26581978585007,
+          "bending_energy": 91.50846171679945,
+          "curvature_variation": 158.29975365294473
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4703617351081308,
+            "total_turn_rad": 4.1580870263586265,
+            "bending_energy": 31.256700621691017,
+            "curvature_variation": 45.19272498636591,
+            "excess_length_ratio": 0.26833377455114826,
+            "score": 42.82321564283364
+          },
+          "tip": {
+            "length": 1.1171942674666653,
+            "total_turn_rad": 4.414153484994844,
+            "bending_energy": 33.64475092009659,
+            "curvature_variation": 62.841290981498005,
+            "excess_length_ratio": 0.2755750283212015,
+            "score": 49.630648693792295
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.273420981491631,
+            "broad_bending": 491.15320227162056,
+            "obstacle_proximity": 0.15928171641791045,
+            "joint_economy": 1.248163544180012
+          },
+          "wrist": {
+            "travel_m": 0.4703617351081308,
+            "direct_distance_m": 0.37085012206237866,
+            "broad_turning_deg": 238.240837458452
+          },
+          "tip": {
+            "travel_m": 1.1171942674666653,
+            "direct_distance_m": 0.8758357937886391,
+            "broad_turning_deg": 252.91236481316855
+          },
+          "joint_travel_rad": 3.972359160947354,
+          "joint_direct_rad": 3.1825630378886105,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 45.24869730980851,
+        "joint_total_deg": 227.5961274151598,
+        "joint_excess_ratio": 0.24814551695993778,
+        "workspace_detour": 0.2719440527669682,
+        "workspace_overshoot": 0.11977970264460062,
+        "broad_turning_rad": 4.247639941521734,
+        "progress_disagreement": 0.2642641566178589,
+        "reversal_count": 8,
+        "wrist": {
+          "length_m": 0.47035753048812645,
+          "straight_m": 0.37085012206237866,
+          "detour_ratio": 1.2683224367633084,
+          "broad_turning_deg": 238.237640764919,
+          "endpoint_box_overshoot_m": 0.05167274629728552,
+          "positive_x_goal_overshoot_m": 0.05167274629728552
+        },
+        "tip": {
+          "length_m": 1.1171860700372593,
+          "straight_m": 0.8758357937886391,
+          "detour_ratio": 1.275565668770628,
+          "broad_turning_deg": 252.90678583769665,
+          "endpoint_box_overshoot_m": 0.08777930786486854,
+          "positive_x_goal_overshoot_m": 0.08777930786486854
+        }
+      },
+      "duration_s": 7.49001419562338,
+      "source": "corridor",
+      "origin": 4,
+      "stop_at_corners": false
+    },
+    {
+      "index": 8,
+      "file": "candidate_008.json",
+      "sha256": "3e711e49aee32e6e21a8a4b0474b9ab84c23d8b0143ee0d87596165b6ac63cae",
+      "metrics": {
+        "values": {
+          "reversals": 8.442414916846035,
+          "coordination": 14.840226428368823,
+          "spatial": 72.93571562727207
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.278845459963605,
+          "per_joint_excess_rad": [
+            0.0,
+            0.1098742986774078,
+            0.28890035425913385,
+            0.0,
+            0.40709614743389133,
+            0.18106531498899403,
+            0.29190934460417806
+          ],
+          "score": 8.442414916846035
+        },
+        "coordination": {
+          "length": 2.2394724346142287,
+          "total_turn_rad": 3.1372914533206697,
+          "bending_energy": 136.9586870302053,
+          "curvature_variation": 240.85262058218322
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4174143051412822,
+            "total_turn_rad": 2.6188036310749476,
+            "bending_energy": 9.988267423318796,
+            "curvature_variation": 25.261298466020076,
+            "excess_length_ratio": 0.1255606518880188,
+            "score": 16.429152691711835
+          },
+          "tip": {
+            "length": 1.0797085650225666,
+            "total_turn_rad": 3.370744832305063,
+            "bending_energy": 39.36195170944616,
+            "curvature_variation": 67.64734447362316,
+            "excess_length_ratio": 0.23277510770829202,
+            "score": 56.50656293556024
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2008821557447988,
+            "broad_bending": 343.1758481407421,
+            "obstacle_proximity": 0.22402985074626866,
+            "joint_economy": 1.423114181631311
+          },
+          "wrist": {
+            "travel_m": 0.4174143051412822,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 150.04639543412958
+          },
+          "tip": {
+            "travel_m": 1.0797085650225666,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 193.12945270661254
+          },
+          "joint_travel_rad": 4.52915059315492,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 77.15378357084204,
+        "joint_total_deg": 259.5012136761938,
+        "joint_excess_ratio": 0.4231141811335988,
+        "workspace_detour": 0.1791678796132049,
+        "workspace_overshoot": 0.05120807449360702,
+        "broad_turning_rad": 2.881983051510931,
+        "progress_disagreement": 0.47856401251061825,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.4174143050771437,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.125560651715069,
+          "broad_turning_deg": 150.04639539467476,
+          "endpoint_box_overshoot_m": 0.011392396474151745,
+          "positive_x_goal_overshoot_m": 0.011392396474151745
+        },
+        "tip": {
+          "length_m": 1.07970856485007,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.232775107511341,
+          "broad_turning_deg": 193.12945278077677,
+          "endpoint_box_overshoot_m": 0.06279433525269817,
+          "positive_x_goal_overshoot_m": 0.06279433525269817
+        }
+      },
+      "duration_s": 29.300607575793656,
+      "source": "corridor",
+      "origin": 5,
+      "stop_at_corners": true
+    },
+    {
+      "index": 10,
+      "file": "candidate_010.json",
+      "sha256": "1ce35b8f4db9c43234a7e8d4f0a357c1bdfa55bd4ad921880fffae8d2c163862",
+      "metrics": {
+        "values": {
+          "reversals": 7.335638864651717,
+          "coordination": 19.539666850708546,
+          "spatial": 206.9643523914246
+        },
+        "reversals": {
+          "count": 5,
+          "per_joint_count": [
+            2,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "excess_travel_rad": 1.22293764977144,
+          "per_joint_excess_rad": [
+            0.48715073215546156,
+            0.0,
+            0.33223349365968163,
+            0.0,
+            0.0,
+            0.40355342395629673,
+            0.0
+          ],
+          "score": 7.335638864651717
+        },
+        "coordination": {
+          "length": 2.425558214147303,
+          "total_turn_rad": 4.020031298202529,
+          "bending_energy": 240.85908768260876,
+          "curvature_variation": 348.2146606815319
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.6065415934587337,
+            "total_turn_rad": 4.152266699974368,
+            "bending_energy": 58.43162846465987,
+            "curvature_variation": 67.93608679166951,
+            "excess_length_ratio": 0.6355437341792509,
+            "score": 76.0511938967565
+          },
+          "tip": {
+            "length": 1.258855715707797,
+            "total_turn_rad": 4.458322358751015,
+            "bending_energy": 94.93665830137041,
+            "curvature_variation": 142.156723455979,
+            "excess_length_ratio": 0.4373193293029429,
+            "score": 130.9131584946681
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.4962848985850346,
+            "broad_bending": 493.3504121864886,
+            "obstacle_proximity": 0.1953016169154229,
+            "joint_economy": 1.4005874078186007
+          },
+          "wrist": {
+            "travel_m": 0.6065415934587337,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 237.9073573212454
+          },
+          "tip": {
+            "travel_m": 1.258855715707797,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 255.44305486524323
+          },
+          "joint_travel_rad": 4.457457715455711,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 73.04608222512252,
+        "joint_total_deg": 255.39351233047427,
+        "joint_excess_ratio": 0.4005873961750925,
+        "workspace_detour": 0.5364315154433733,
+        "workspace_overshoot": 0.3331512103280315,
+        "broad_turning_rad": 4.259386181306153,
+        "progress_disagreement": 0.32800983705978065,
+        "reversal_count": 5,
+        "wrist": {
+          "length_m": 0.6065415869113161,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.6355437165240927,
+          "broad_turning_deg": 237.907356881598,
+          "endpoint_box_overshoot_m": 0.1593166576898315,
+          "positive_x_goal_overshoot_m": 0.1593166576898315
+        },
+        "tip": {
+          "length_m": 1.258855702622557,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.437319314362654,
+          "broad_turning_deg": 255.44305580613815,
+          "endpoint_box_overshoot_m": 0.20731376263433443,
+          "positive_x_goal_overshoot_m": 0.20731376263433443
+        }
+      },
+      "duration_s": 19.56380354167958,
+      "source": "corridor",
+      "origin": 6,
+      "stop_at_corners": true
+    },
+    {
+      "index": 11,
+      "file": "candidate_011.json",
+      "sha256": "06fbb2e204ca185bae9827de2f2817fa2778293b59bb408ea7d9cc3f78fbd2bd",
+      "metrics": {
+        "values": {
+          "reversals": 7.922587816034563,
+          "coordination": 6.525913841818637,
+          "spatial": 36.37441568716863
+        },
+        "reversals": {
+          "count": 5,
+          "per_joint_count": [
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "excess_travel_rad": 1.5302634020542032,
+          "per_joint_excess_rad": [
+            0.22516540902189508,
+            0.0,
+            0.19756292715561802,
+            0.0007861987190038722,
+            0.0,
+            0.8341855516014856,
+            0.2725633155562007
+          ],
+          "score": 7.922587816034563
+        },
+        "coordination": {
+          "length": 2.5452637045424176,
+          "total_turn_rad": 2.668459613942987,
+          "bending_energy": 14.879953120155726,
+          "curvature_variation": 53.55176806272974
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4050198279202766,
+            "total_turn_rad": 1.382937616799822,
+            "bending_energy": 3.343301594029731,
+            "curvature_variation": 11.922507399136352,
+            "excess_length_ratio": 0.09213885563222357,
+            "score": 6.416067299446043
+          },
+          "tip": {
+            "length": 1.1122019223281399,
+            "total_turn_rad": 3.1531683427102144,
+            "bending_energy": 18.100036040413638,
+            "curvature_variation": 46.35374964640366,
+            "excess_length_ratio": 0.2698749357080308,
+            "score": 29.958348387722584
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2170040031395757,
+            "broad_bending": 259.89972690406574,
+            "obstacle_proximity": 0.05298818407960198,
+            "joint_economy": 1.4914793859622508
+          },
+          "wrist": {
+            "travel_m": 0.4050198279202766,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 79.23648877251013
+          },
+          "tip": {
+            "travel_m": 1.1122019223281399,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 180.66323813155563
+          },
+          "joint_travel_rad": 4.746727165536273,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.042499999999999996,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 89.61938059191472,
+        "joint_total_deg": 271.96681069726645,
+        "joint_excess_ratio": 0.4914759727632952,
+        "workspace_detour": 0.18100454007941147,
+        "workspace_overshoot": 0.08295729115578362,
+        "broad_turning_rad": 2.0024787777435256,
+        "progress_disagreement": 0.6115653699699767,
+        "reversal_count": 5,
+        "wrist": {
+          "length_m": 0.4050190332270096,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.0921367127361594,
+          "broad_turning_deg": 79.23486348067038,
+          "endpoint_box_overshoot_m": 0.009347396987545588,
+          "positive_x_goal_overshoot_m": 0.0
+        },
+        "tip": {
+          "length_m": 1.1121996729318866,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2698723674226635,
+          "broad_turning_deg": 180.6597750479539,
+          "endpoint_box_overshoot_m": 0.12323820611452535,
+          "positive_x_goal_overshoot_m": 0.04055578298286355
+        }
+      },
+      "duration_s": 8.152125383863574,
+      "source": "single_arc",
+      "origin": null,
+      "stop_at_corners": false
+    },
+    {
+      "index": 12,
+      "file": "candidate_012.json",
+      "sha256": "50653c8d77b9ebb13b68751e9f5367ccf8fef38ca19df6b401712b7550985b4f",
+      "metrics": {
+        "values": {
+          "reversals": 6.945824631894487,
+          "coordination": 5.598366385858671,
+          "spatial": 22.37102528167187
+        },
+        "reversals": {
+          "count": 4,
+          "per_joint_count": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.542430170387263,
+          "per_joint_excess_rad": [
+            0.12384121107162671,
+            0.0,
+            0.0,
+            0.0,
+            0.6457198960710615,
+            0.6455263099680075,
+            0.1273427532765672
+          ],
+          "score": 6.945824631894487
+        },
+        "coordination": {
+          "length": 2.5553990268573936,
+          "total_turn_rad": 2.2969952609471354,
+          "bending_energy": 10.899051304399656,
+          "curvature_variation": 39.34563702162584
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.40236267373588414,
+            "total_turn_rad": 1.7725471664458854,
+            "bending_energy": 5.0016731480667795,
+            "curvature_variation": 12.450499713097113,
+            "excess_length_ratio": 0.08497382041633794,
+            "score": 8.199271896757395
+          },
+          "tip": {
+            "length": 1.1042102849238105,
+            "total_turn_rad": 2.315887323944692,
+            "bending_energy": 6.9804261925891185,
+            "curvature_variation": 27.722307363079917,
+            "excess_length_ratio": 0.2607503515553786,
+            "score": 14.171753384914476
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2084623235927647,
+            "broad_bending": 234.25004111509963,
+            "obstacle_proximity": 0.044129353233830854,
+            "joint_economy": 1.5158368346632958
+          },
+          "wrist": {
+            "travel_m": 0.40236267373588414,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 101.5594716252223
+          },
+          "tip": {
+            "travel_m": 1.1042102849238105,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 132.69056948987733
+          },
+          "joint_travel_rad": 4.824246281469486,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0475,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 94.06107444355108,
+        "joint_total_deg": 276.40850454890284,
+        "joint_excess_ratio": 0.5158343848838836,
+        "workspace_detour": 0.17286051218901177,
+        "workspace_overshoot": 0.08890348428980335,
+        "broad_turning_rad": 1.9626882660139047,
+        "progress_disagreement": 0.6155686024999782,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.40236212050023423,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.0849723286124608,
+          "broad_turning_deg": 101.55796024889659,
+          "endpoint_box_overshoot_m": 0.009406887548881873,
+          "positive_x_goal_overshoot_m": 0.00025287616057118045
+        },
+        "tip": {
+          "length_m": 1.1042088347238228,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2607486957655627,
+          "broad_turning_deg": 132.6887999447536,
+          "endpoint_box_overshoot_m": 0.1335134849736362,
+          "positive_x_goal_overshoot_m": 0.050225487530845325
+        }
+      },
+      "duration_s": 8.268496166784628,
+      "source": "single_arc",
+      "origin": null,
+      "stop_at_corners": false
+    },
+    {
+      "index": 13,
+      "file": "candidate_013.json",
+      "sha256": "654c9e76ad6925464bc8fc4ada6632a0ab1c79970e19b23e3a0d8ffca75ea1c7",
+      "metrics": {
+        "values": {
+          "reversals": 8.402995657908363,
+          "coordination": 6.0081973243218005,
+          "spatial": 41.50099196922348
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.2582055842488478,
+          "per_joint_excess_rad": [
+            0.13553588959417273,
+            0.0,
+            0.27264232921790627,
+            0.0,
+            0.17359078992763877,
+            0.543806588728879,
+            0.13262998678025095
+          ],
+          "score": 8.402995657908363
+        },
+        "coordination": {
+          "length": 2.398043508786257,
+          "total_turn_rad": 2.4322732913340994,
+          "bending_energy": 12.787232689699026,
+          "curvature_variation": 46.715049326634414
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4308129701339119,
+            "total_turn_rad": 2.1742678035308565,
+            "bending_energy": 11.224759228197401,
+            "curvature_variation": 18.650943890519578,
+            "excess_length_ratio": 0.1616902476344535,
+            "score": 16.04918544846175
+          },
+          "tip": {
+            "length": 1.0991265175710303,
+            "total_turn_rad": 2.7407936951477105,
+            "bending_energy": 15.21236701648985,
+            "curvature_variation": 39.937974512618055,
+            "excess_length_ratio": 0.25494587611736397,
+            "score": 25.45180652076173
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.227205239308867,
+            "broad_bending": 281.6122799215271,
+            "obstacle_proximity": 0.057916666666666665,
+            "joint_economy": 1.4285829066118654
+          },
+          "wrist": {
+            "travel_m": 0.4308129701339119,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 124.57636867349774
+          },
+          "tip": {
+            "travel_m": 1.0991265175710303,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 157.03591124802935
+          },
+          "joint_travel_rad": 4.546555155142411,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0375,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 78.15063169982061,
+        "joint_total_deg": 260.49806180517237,
+        "joint_excess_ratio": 0.4285809328635389,
+        "workspace_detour": 0.20831528719576808,
+        "workspace_overshoot": 0.10067522768883352,
+        "broad_turning_rad": 2.37250689223535,
+        "progress_disagreement": 0.5270107420847622,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.430811874259164,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.1616872926003772,
+          "broad_turning_deg": 124.57370972195199,
+          "endpoint_box_overshoot_m": 0.023767663231469473,
+          "positive_x_goal_overshoot_m": 0.00010155671573638947
+        },
+        "tip": {
+          "length_m": 1.0991242453672792,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.254943281791159,
+          "broad_turning_deg": 157.03348706147426,
+          "endpoint_box_overshoot_m": 0.12021790587299763,
+          "positive_x_goal_overshoot_m": 0.04663916398691392
+        }
+      },
+      "duration_s": 7.436252625844523,
+      "source": "single_arc",
+      "origin": null,
+      "stop_at_corners": false
+    },
+    {
+      "index": 15,
+      "file": "candidate_015.json",
+      "sha256": "c3640b201fc55f9acd7eea392f991e9ba64bc61b1d05443742d4f9c76d6361bb",
+      "metrics": {
+        "values": {
+          "reversals": 4.566931804961426,
+          "coordination": 15.236512934562164,
+          "spatial": 100.87786885114163
+        },
+        "reversals": {
+          "count": 4,
+          "per_joint_count": [
+            2,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "excess_travel_rad": 0.29684479892553617,
+          "per_joint_excess_rad": [
+            0.08134751152810193,
+            0.0,
+            0.0838550509801323,
+            0.0,
+            0.0,
+            0.13164223641730194,
+            0.0
+          ],
+          "score": 4.566931804961426
+        },
+        "coordination": {
+          "length": 2.1665106855045115,
+          "total_turn_rad": 3.401133047497797,
+          "bending_energy": 140.07621707112773,
+          "curvature_variation": 236.2675262618869
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4546333281061953,
+            "total_turn_rad": 3.567767851530691,
+            "bending_energy": 21.45592876053619,
+            "curvature_variation": 28.62217988137229,
+            "excess_length_ratio": 0.22592201285489666,
+            "score": 28.83739574373416
+          },
+          "tip": {
+            "length": 1.1128056109489992,
+            "total_turn_rad": 4.157916226975774,
+            "bending_energy": 50.201858985971185,
+            "curvature_variation": 86.27219965705216,
+            "excess_length_ratio": 0.2705642071732308,
+            "score": 72.04047310740746
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2572845486789859,
+            "broad_bending": 442.64909154983695,
+            "obstacle_proximity": 0.19497512437810943,
+            "joint_economy": 1.1071820609383751
+          },
+          "wrist": {
+            "travel_m": 0.4546333281061953,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 204.41804017516588
+          },
+          "tip": {
+            "travel_m": 1.1128056109489992,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 238.2310513746711
+          },
+          "joint_travel_rad": 3.5236767033558167,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0375,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 19.544373350656937,
+        "joint_total_deg": 201.8918034560087,
+        "joint_excess_ratio": 0.10718206085693184,
+        "workspace_detour": 0.24824310996231358,
+        "workspace_overshoot": 0.09477551386317176,
+        "broad_turning_rad": 3.7743197828040023,
+        "progress_disagreement": 0.2488211178874305,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.45463332809023105,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.2259220128118489,
+          "broad_turning_deg": 204.41804016697864,
+          "endpoint_box_overshoot_m": 0.03474215914993489,
+          "positive_x_goal_overshoot_m": 0.03474215914993489
+        },
+        "tip": {
+          "length_m": 1.1128056108960527,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2705642071127783,
+          "broad_turning_deg": 238.23105136819066,
+          "endpoint_box_overshoot_m": 0.08396510558113912,
+          "positive_x_goal_overshoot_m": 0.08396510558113912
+        }
+      },
+      "duration_s": 20.563663612720152,
+      "source": "progress",
+      "origin": 1,
+      "stop_at_corners": true
+    },
+    {
+      "index": 17,
+      "file": "candidate_017.json",
+      "sha256": "bad790a484441c863d74e072e33f81f97725f572192ef5a582546bd281cb4127",
+      "metrics": {
+        "values": {
+          "reversals": 8.32338274884654,
+          "coordination": 15.521218778766169,
+          "spatial": 66.08633414371212
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.216520362542258,
+          "per_joint_excess_rad": [
+            0.0,
+            0.1098302049088192,
+            0.28871883814512966,
+            0.0,
+            0.4060675183000173,
+            0.14701709554865605,
+            0.2648867056396358
+          ],
+          "score": 8.32338274884654
+        },
+        "coordination": {
+          "length": 2.225995534642177,
+          "total_turn_rad": 3.4261418386711457,
+          "bending_energy": 146.29088618681837,
+          "curvature_variation": 263.3762861245579
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4172822389988893,
+            "total_turn_rad": 2.591478431919138,
+            "bending_energy": 9.833409054648142,
+            "curvature_variation": 25.052935499297508,
+            "excess_length_ratio": 0.1252045345928201,
+            "score": 16.22184746406534
+          },
+          "tip": {
+            "length": 1.0749821210585255,
+            "total_turn_rad": 3.1930048469818577,
+            "bending_energy": 33.849784869509634,
+            "curvature_variation": 63.14929279191696,
+            "excess_length_ratio": 0.2273786121579151,
+            "score": 49.86448667964679
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.1969850152985482,
+            "broad_bending": 331.42647854502286,
+            "obstacle_proximity": 0.2270149253731343,
+            "joint_economy": 1.40349254994567
+          },
+          "wrist": {
+            "travel_m": 0.4172822389988893,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 148.48077684814723
+          },
+          "tip": {
+            "travel_m": 1.0749821210585255,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 182.94570169687566
+          },
+          "joint_travel_rad": 4.4667035134091355,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 73.575829060905,
+        "joint_total_deg": 255.92325916625674,
+        "joint_excess_ratio": 0.40349254726757794,
+        "workspace_detour": 0.17629157229199188,
+        "workspace_overshoot": 0.053043990698992384,
+        "broad_turning_rad": 2.802012674775731,
+        "progress_disagreement": 0.4724803135656451,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.41728223860709757,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.125204533536351,
+          "broad_turning_deg": 148.48077660525271,
+          "endpoint_box_overshoot_m": 0.011670561808898028,
+          "positive_x_goal_overshoot_m": 0.011670561808898028
+        },
+        "tip": {
+          "length_m": 1.0749821200861005,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2273786110476328,
+          "broad_turning_deg": 182.9457017525658,
+          "endpoint_box_overshoot_m": 0.06535331514045895,
+          "positive_x_goal_overshoot_m": 0.06535331514045895
+        }
+      },
+      "duration_s": 65.26499795670304,
+      "source": "progress",
+      "origin": 2,
+      "stop_at_corners": true
+    },
+    {
+      "index": 18,
+      "file": "candidate_018.json",
+      "sha256": "7d000b77d70efea53d5e57983c1d8de126b8bab73bc72090f39ee9f8c14abaa8",
+      "metrics": {
+        "values": {
+          "reversals": 9.381077415562132,
+          "coordination": 14.8318253115018,
+          "spatial": 92.45386433662594
+        },
+        "reversals": {
+          "count": 8,
+          "per_joint_count": [
+            2,
+            2,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "excess_travel_rad": 0.723130443794795,
+          "per_joint_excess_rad": [
+            0.262578111812072,
+            0.10400796564803685,
+            0.0846017542977196,
+            0.0,
+            0.0,
+            0.2719426120369665,
+            0.0
+          ],
+          "score": 9.381077415562132
+        },
+        "coordination": {
+          "length": 2.3021685559777927,
+          "total_turn_rad": 5.26581978585007,
+          "bending_energy": 91.50846171679945,
+          "curvature_variation": 158.29975365294473
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4703617351081308,
+            "total_turn_rad": 4.1580870263586265,
+            "bending_energy": 31.256700621691017,
+            "curvature_variation": 45.19272498636591,
+            "excess_length_ratio": 0.26833377455114826,
+            "score": 42.82321564283364
+          },
+          "tip": {
+            "length": 1.1171942674666653,
+            "total_turn_rad": 4.414153484994844,
+            "bending_energy": 33.64475092009659,
+            "curvature_variation": 62.841290981498005,
+            "excess_length_ratio": 0.2755750283212015,
+            "score": 49.630648693792295
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.273420981491631,
+            "broad_bending": 491.15320227162056,
+            "obstacle_proximity": 0.15928171641791045,
+            "joint_economy": 1.248163544180012
+          },
+          "wrist": {
+            "travel_m": 0.4703617351081308,
+            "direct_distance_m": 0.37085012206237866,
+            "broad_turning_deg": 238.240837458452
+          },
+          "tip": {
+            "travel_m": 1.1171942674666653,
+            "direct_distance_m": 0.8758357937886391,
+            "broad_turning_deg": 252.91236481316855
+          },
+          "joint_travel_rad": 3.972359160947354,
+          "joint_direct_rad": 3.1825630378886105,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 45.24869730980851,
+        "joint_total_deg": 227.5961274151598,
+        "joint_excess_ratio": 0.24814551695993778,
+        "workspace_detour": 0.2719440527669682,
+        "workspace_overshoot": 0.11977970264460062,
+        "broad_turning_rad": 4.247639941521734,
+        "progress_disagreement": 0.2642641566178589,
+        "reversal_count": 8,
+        "wrist": {
+          "length_m": 0.47035753048812645,
+          "straight_m": 0.37085012206237866,
+          "detour_ratio": 1.2683224367633084,
+          "broad_turning_deg": 238.237640764919,
+          "endpoint_box_overshoot_m": 0.05167274629728552,
+          "positive_x_goal_overshoot_m": 0.05167274629728552
+        },
+        "tip": {
+          "length_m": 1.1171860700372593,
+          "straight_m": 0.8758357937886391,
+          "detour_ratio": 1.275565668770628,
+          "broad_turning_deg": 252.90678583769665,
+          "endpoint_box_overshoot_m": 0.08777930786486854,
+          "positive_x_goal_overshoot_m": 0.08777930786486854
+        }
+      },
+      "duration_s": 7.49001419562338,
+      "source": "sweep",
+      "origin": 1,
+      "stop_at_corners": false
+    },
+    {
+      "index": 20,
+      "file": "candidate_020.json",
+      "sha256": "53f2ecd85798963de8ea87dbcef7d506dd4a3f69b0504959abcad1746ccdf5eb",
+      "metrics": {
+        "values": {
+          "reversals": 8.442414916846035,
+          "coordination": 14.840226428368823,
+          "spatial": 72.93571562727207
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.278845459963605,
+          "per_joint_excess_rad": [
+            0.0,
+            0.1098742986774078,
+            0.28890035425913385,
+            0.0,
+            0.40709614743389133,
+            0.18106531498899403,
+            0.29190934460417806
+          ],
+          "score": 8.442414916846035
+        },
+        "coordination": {
+          "length": 2.2394724346142287,
+          "total_turn_rad": 3.1372914533206697,
+          "bending_energy": 136.9586870302053,
+          "curvature_variation": 240.85262058218322
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4174143051412822,
+            "total_turn_rad": 2.6188036310749476,
+            "bending_energy": 9.988267423318796,
+            "curvature_variation": 25.261298466020076,
+            "excess_length_ratio": 0.1255606518880188,
+            "score": 16.429152691711835
+          },
+          "tip": {
+            "length": 1.0797085650225666,
+            "total_turn_rad": 3.370744832305063,
+            "bending_energy": 39.36195170944616,
+            "curvature_variation": 67.64734447362316,
+            "excess_length_ratio": 0.23277510770829202,
+            "score": 56.50656293556024
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2008821557447988,
+            "broad_bending": 343.1758481407421,
+            "obstacle_proximity": 0.22402985074626866,
+            "joint_economy": 1.423114181631311
+          },
+          "wrist": {
+            "travel_m": 0.4174143051412822,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 150.04639543412958
+          },
+          "tip": {
+            "travel_m": 1.0797085650225666,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 193.12945270661254
+          },
+          "joint_travel_rad": 4.52915059315492,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 77.15378357084204,
+        "joint_total_deg": 259.5012136761938,
+        "joint_excess_ratio": 0.4231141811335988,
+        "workspace_detour": 0.1791678796132049,
+        "workspace_overshoot": 0.05120807449360702,
+        "broad_turning_rad": 2.881983051510931,
+        "progress_disagreement": 0.47856401251061825,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.4174143050771437,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.125560651715069,
+          "broad_turning_deg": 150.04639539467476,
+          "endpoint_box_overshoot_m": 0.011392396474151745,
+          "positive_x_goal_overshoot_m": 0.011392396474151745
+        },
+        "tip": {
+          "length_m": 1.07970856485007,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.232775107511341,
+          "broad_turning_deg": 193.12945278077677,
+          "endpoint_box_overshoot_m": 0.06279433525269817,
+          "positive_x_goal_overshoot_m": 0.06279433525269817
+        }
+      },
+      "duration_s": 29.300607575793656,
+      "source": "sweep",
+      "origin": 2,
+      "stop_at_corners": true
+    }
+  ],
+  "selected": {
+    "compact": {
+      "index": 6,
+      "file": "candidate_006.json",
+      "sha256": "2d3350250164ae025d44daf435447cfabd4758494cd1cf5957a07dcbb6755f9b",
+      "metrics": {
+        "values": {
+          "reversals": 9.381077415562132,
+          "coordination": 14.8318253115018,
+          "spatial": 92.45386433662594
+        },
+        "reversals": {
+          "count": 8,
+          "per_joint_count": [
+            2,
+            2,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "excess_travel_rad": 0.723130443794795,
+          "per_joint_excess_rad": [
+            0.262578111812072,
+            0.10400796564803685,
+            0.0846017542977196,
+            0.0,
+            0.0,
+            0.2719426120369665,
+            0.0
+          ],
+          "score": 9.381077415562132
+        },
+        "coordination": {
+          "length": 2.3021685559777927,
+          "total_turn_rad": 5.26581978585007,
+          "bending_energy": 91.50846171679945,
+          "curvature_variation": 158.29975365294473
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4703617351081308,
+            "total_turn_rad": 4.1580870263586265,
+            "bending_energy": 31.256700621691017,
+            "curvature_variation": 45.19272498636591,
+            "excess_length_ratio": 0.26833377455114826,
+            "score": 42.82321564283364
+          },
+          "tip": {
+            "length": 1.1171942674666653,
+            "total_turn_rad": 4.414153484994844,
+            "bending_energy": 33.64475092009659,
+            "curvature_variation": 62.841290981498005,
+            "excess_length_ratio": 0.2755750283212015,
+            "score": 49.630648693792295
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.273420981491631,
+            "broad_bending": 491.15320227162056,
+            "obstacle_proximity": 0.15928171641791045,
+            "joint_economy": 1.248163544180012
+          },
+          "wrist": {
+            "travel_m": 0.4703617351081308,
+            "direct_distance_m": 0.37085012206237866,
+            "broad_turning_deg": 238.240837458452
+          },
+          "tip": {
+            "travel_m": 1.1171942674666653,
+            "direct_distance_m": 0.8758357937886391,
+            "broad_turning_deg": 252.91236481316855
+          },
+          "joint_travel_rad": 3.972359160947354,
+          "joint_direct_rad": 3.1825630378886105,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 45.24869730980851,
+        "joint_total_deg": 227.5961274151598,
+        "joint_excess_ratio": 0.24814551695993778,
+        "workspace_detour": 0.2719440527669682,
+        "workspace_overshoot": 0.11977970264460062,
+        "broad_turning_rad": 4.247639941521734,
+        "progress_disagreement": 0.2642641566178589,
+        "reversal_count": 8,
+        "wrist": {
+          "length_m": 0.47035753048812645,
+          "straight_m": 0.37085012206237866,
+          "detour_ratio": 1.2683224367633084,
+          "broad_turning_deg": 238.237640764919,
+          "endpoint_box_overshoot_m": 0.05167274629728552,
+          "positive_x_goal_overshoot_m": 0.05167274629728552
+        },
+        "tip": {
+          "length_m": 1.1171860700372593,
+          "straight_m": 0.8758357937886391,
+          "detour_ratio": 1.275565668770628,
+          "broad_turning_deg": 252.90678583769665,
+          "endpoint_box_overshoot_m": 0.08777930786486854,
+          "positive_x_goal_overshoot_m": 0.08777930786486854
+        }
+      },
+      "duration_s": 7.49001419562338,
+      "source": "corridor",
+      "origin": 4,
+      "stop_at_corners": false,
+      "score": 2.3329256511239915
+    },
+    "progress": {
+      "index": 15,
+      "file": "candidate_015.json",
+      "sha256": "c3640b201fc55f9acd7eea392f991e9ba64bc61b1d05443742d4f9c76d6361bb",
+      "metrics": {
+        "values": {
+          "reversals": 4.566931804961426,
+          "coordination": 15.236512934562164,
+          "spatial": 100.87786885114163
+        },
+        "reversals": {
+          "count": 4,
+          "per_joint_count": [
+            2,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "excess_travel_rad": 0.29684479892553617,
+          "per_joint_excess_rad": [
+            0.08134751152810193,
+            0.0,
+            0.0838550509801323,
+            0.0,
+            0.0,
+            0.13164223641730194,
+            0.0
+          ],
+          "score": 4.566931804961426
+        },
+        "coordination": {
+          "length": 2.1665106855045115,
+          "total_turn_rad": 3.401133047497797,
+          "bending_energy": 140.07621707112773,
+          "curvature_variation": 236.2675262618869
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4546333281061953,
+            "total_turn_rad": 3.567767851530691,
+            "bending_energy": 21.45592876053619,
+            "curvature_variation": 28.62217988137229,
+            "excess_length_ratio": 0.22592201285489666,
+            "score": 28.83739574373416
+          },
+          "tip": {
+            "length": 1.1128056109489992,
+            "total_turn_rad": 4.157916226975774,
+            "bending_energy": 50.201858985971185,
+            "curvature_variation": 86.27219965705216,
+            "excess_length_ratio": 0.2705642071732308,
+            "score": 72.04047310740746
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2572845486789859,
+            "broad_bending": 442.64909154983695,
+            "obstacle_proximity": 0.19497512437810943,
+            "joint_economy": 1.1071820609383751
+          },
+          "wrist": {
+            "travel_m": 0.4546333281061953,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 204.41804017516588
+          },
+          "tip": {
+            "travel_m": 1.1128056109489992,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 238.2310513746711
+          },
+          "joint_travel_rad": 3.5236767033558167,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0375,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 19.544373350656937,
+        "joint_total_deg": 201.8918034560087,
+        "joint_excess_ratio": 0.10718206085693184,
+        "workspace_detour": 0.24824310996231358,
+        "workspace_overshoot": 0.09477551386317176,
+        "broad_turning_rad": 3.7743197828040023,
+        "progress_disagreement": 0.2488211178874305,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.45463332809023105,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.2259220128118489,
+          "broad_turning_deg": 204.41804016697864,
+          "endpoint_box_overshoot_m": 0.03474215914993489,
+          "positive_x_goal_overshoot_m": 0.03474215914993489
+        },
+        "tip": {
+          "length_m": 1.1128056108960527,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2705642071127783,
+          "broad_turning_deg": 238.23105136819066,
+          "endpoint_box_overshoot_m": 0.08396510558113912,
+          "positive_x_goal_overshoot_m": 0.08396510558113912
+        }
+      },
+      "duration_s": 20.563663612720152,
+      "source": "progress",
+      "origin": 1,
+      "stop_at_corners": true,
+      "score": 1.6166080283028135
+    },
+    "sweep": {
+      "index": 8,
+      "file": "candidate_008.json",
+      "sha256": "3e711e49aee32e6e21a8a4b0474b9ab84c23d8b0143ee0d87596165b6ac63cae",
+      "metrics": {
+        "values": {
+          "reversals": 8.442414916846035,
+          "coordination": 14.840226428368823,
+          "spatial": 72.93571562727207
+        },
+        "reversals": {
+          "count": 6,
+          "per_joint_count": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.278845459963605,
+          "per_joint_excess_rad": [
+            0.0,
+            0.1098742986774078,
+            0.28890035425913385,
+            0.0,
+            0.40709614743389133,
+            0.18106531498899403,
+            0.29190934460417806
+          ],
+          "score": 8.442414916846035
+        },
+        "coordination": {
+          "length": 2.2394724346142287,
+          "total_turn_rad": 3.1372914533206697,
+          "bending_energy": 136.9586870302053,
+          "curvature_variation": 240.85262058218322
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4174143051412822,
+            "total_turn_rad": 2.6188036310749476,
+            "bending_energy": 9.988267423318796,
+            "curvature_variation": 25.261298466020076,
+            "excess_length_ratio": 0.1255606518880188,
+            "score": 16.429152691711835
+          },
+          "tip": {
+            "length": 1.0797085650225666,
+            "total_turn_rad": 3.370744832305063,
+            "bending_energy": 39.36195170944616,
+            "curvature_variation": 67.64734447362316,
+            "excess_length_ratio": 0.23277510770829202,
+            "score": 56.50656293556024
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2008821557447988,
+            "broad_bending": 343.1758481407421,
+            "obstacle_proximity": 0.22402985074626866,
+            "joint_economy": 1.423114181631311
+          },
+          "wrist": {
+            "travel_m": 0.4174143051412822,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 150.04639543412958
+          },
+          "tip": {
+            "travel_m": 1.0797085650225666,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 193.12945270661254
+          },
+          "joint_travel_rad": 4.52915059315492,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0325,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 77.15378357084204,
+        "joint_total_deg": 259.5012136761938,
+        "joint_excess_ratio": 0.4231141811335988,
+        "workspace_detour": 0.1791678796132049,
+        "workspace_overshoot": 0.05120807449360702,
+        "broad_turning_rad": 2.881983051510931,
+        "progress_disagreement": 0.47856401251061825,
+        "reversal_count": 6,
+        "wrist": {
+          "length_m": 0.4174143050771437,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.125560651715069,
+          "broad_turning_deg": 150.04639539467476,
+          "endpoint_box_overshoot_m": 0.011392396474151745,
+          "positive_x_goal_overshoot_m": 0.011392396474151745
+        },
+        "tip": {
+          "length_m": 1.07970856485007,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.232775107511341,
+          "broad_turning_deg": 193.12945278077677,
+          "endpoint_box_overshoot_m": 0.06279433525269817,
+          "positive_x_goal_overshoot_m": 0.06279433525269817
+        }
+      },
+      "duration_s": 29.300607575793656,
+      "source": "corridor",
+      "origin": 5,
+      "stop_at_corners": true,
+      "score": 2.2237582510705027
+    },
+    "single_arc": {
+      "index": 11,
+      "file": "candidate_011.json",
+      "sha256": "06fbb2e204ca185bae9827de2f2817fa2778293b59bb408ea7d9cc3f78fbd2bd",
+      "metrics": {
+        "values": {
+          "reversals": 7.922587816034563,
+          "coordination": 6.525913841818637,
+          "spatial": 36.37441568716863
+        },
+        "reversals": {
+          "count": 5,
+          "per_joint_count": [
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "excess_travel_rad": 1.5302634020542032,
+          "per_joint_excess_rad": [
+            0.22516540902189508,
+            0.0,
+            0.19756292715561802,
+            0.0007861987190038722,
+            0.0,
+            0.8341855516014856,
+            0.2725633155562007
+          ],
+          "score": 7.922587816034563
+        },
+        "coordination": {
+          "length": 2.5452637045424176,
+          "total_turn_rad": 2.668459613942987,
+          "bending_energy": 14.879953120155726,
+          "curvature_variation": 53.55176806272974
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.4050198279202766,
+            "total_turn_rad": 1.382937616799822,
+            "bending_energy": 3.343301594029731,
+            "curvature_variation": 11.922507399136352,
+            "excess_length_ratio": 0.09213885563222357,
+            "score": 6.416067299446043
+          },
+          "tip": {
+            "length": 1.1122019223281399,
+            "total_turn_rad": 3.1531683427102144,
+            "bending_energy": 18.100036040413638,
+            "curvature_variation": 46.35374964640366,
+            "excess_length_ratio": 0.2698749357080308,
+            "score": 29.958348387722584
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2170040031395757,
+            "broad_bending": 259.89972690406574,
+            "obstacle_proximity": 0.05298818407960198,
+            "joint_economy": 1.4914793859622508
+          },
+          "wrist": {
+            "travel_m": 0.4050198279202766,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 79.23648877251013
+          },
+          "tip": {
+            "travel_m": 1.1122019223281399,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 180.66323813155563
+          },
+          "joint_travel_rad": 4.746727165536273,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.042499999999999996,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 89.61938059191472,
+        "joint_total_deg": 271.96681069726645,
+        "joint_excess_ratio": 0.4914759727632952,
+        "workspace_detour": 0.18100454007941147,
+        "workspace_overshoot": 0.08295729115578362,
+        "broad_turning_rad": 2.0024787777435256,
+        "progress_disagreement": 0.6115653699699767,
+        "reversal_count": 5,
+        "wrist": {
+          "length_m": 0.4050190332270096,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.0921367127361594,
+          "broad_turning_deg": 79.23486348067038,
+          "endpoint_box_overshoot_m": 0.009347396987545588,
+          "positive_x_goal_overshoot_m": 0.0
+        },
+        "tip": {
+          "length_m": 1.1121996729318866,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2698723674226635,
+          "broad_turning_deg": 180.6597750479539,
+          "endpoint_box_overshoot_m": 0.12323820611452535,
+          "positive_x_goal_overshoot_m": 0.04055578298286355
+        }
+      },
+      "duration_s": 8.152125383863574,
+      "source": "single_arc",
+      "origin": null,
+      "stop_at_corners": false,
+      "score": 2.1188965363180614
+    },
+    "clearance": {
+      "index": 12,
+      "file": "candidate_012.json",
+      "sha256": "50653c8d77b9ebb13b68751e9f5367ccf8fef38ca19df6b401712b7550985b4f",
+      "metrics": {
+        "values": {
+          "reversals": 6.945824631894487,
+          "coordination": 5.598366385858671,
+          "spatial": 22.37102528167187
+        },
+        "reversals": {
+          "count": 4,
+          "per_joint_count": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "excess_travel_rad": 1.542430170387263,
+          "per_joint_excess_rad": [
+            0.12384121107162671,
+            0.0,
+            0.0,
+            0.0,
+            0.6457198960710615,
+            0.6455263099680075,
+            0.1273427532765672
+          ],
+          "score": 6.945824631894487
+        },
+        "coordination": {
+          "length": 2.5553990268573936,
+          "total_turn_rad": 2.2969952609471354,
+          "bending_energy": 10.899051304399656,
+          "curvature_variation": 39.34563702162584
+        },
+        "spatial": {
+          "wrist": {
+            "length": 0.40236267373588414,
+            "total_turn_rad": 1.7725471664458854,
+            "bending_energy": 5.0016731480667795,
+            "curvature_variation": 12.450499713097113,
+            "excess_length_ratio": 0.08497382041633794,
+            "score": 8.199271896757395
+          },
+          "tip": {
+            "length": 1.1042102849238105,
+            "total_turn_rad": 2.315887323944692,
+            "bending_energy": 6.9804261925891185,
+            "curvature_variation": 27.722307363079917,
+            "excess_length_ratio": 0.2607503515553786,
+            "score": 14.171753384914476
+          }
+        },
+        "baseline": {
+          "components": {
+            "workspace_economy": 1.2084623235927647,
+            "broad_bending": 234.25004111509963,
+            "obstacle_proximity": 0.044129353233830854,
+            "joint_economy": 1.5158368346632958
+          },
+          "wrist": {
+            "travel_m": 0.40236267373588414,
+            "direct_distance_m": 0.3708501220623786,
+            "broad_turning_deg": 101.5594716252223
+          },
+          "tip": {
+            "travel_m": 1.1042102849238105,
+            "direct_distance_m": 0.8758357937886389,
+            "broad_turning_deg": 132.69056948987733
+          },
+          "joint_travel_rad": 4.824246281469486,
+          "joint_direct_rad": 3.1825630378886185,
+          "minimum_distal_padding_estimate_m": 0.0475,
+          "clearance_is_soft_estimate_not_safety_certificate": true,
+          "joint_arc_samples": 801,
+          "clearance_samples": 201
+        }
+      },
+      "gesture": {
+        "joint_excess_deg": 94.06107444355108,
+        "joint_total_deg": 276.40850454890284,
+        "joint_excess_ratio": 0.5158343848838836,
+        "workspace_detour": 0.17286051218901177,
+        "workspace_overshoot": 0.08890348428980335,
+        "broad_turning_rad": 1.9626882660139047,
+        "progress_disagreement": 0.6155686024999782,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.40236212050023423,
+          "straight_m": 0.3708501220623786,
+          "detour_ratio": 1.0849723286124608,
+          "broad_turning_deg": 101.55796024889659,
+          "endpoint_box_overshoot_m": 0.009406887548881873,
+          "positive_x_goal_overshoot_m": 0.00025287616057118045
+        },
+        "tip": {
+          "length_m": 1.1042088347238228,
+          "straight_m": 0.8758357937886389,
+          "detour_ratio": 1.2607486957655627,
+          "broad_turning_deg": 132.6887999447536,
+          "endpoint_box_overshoot_m": 0.1335134849736362,
+          "positive_x_goal_overshoot_m": 0.050225487530845325
+        }
+      },
+      "duration_s": 8.268496166784628,
+      "source": "single_arc",
+      "origin": null,
+      "stop_at_corners": false,
+      "score": 2.270500673714809
+    }
+  },
+  "parameters": {
+    "backtrack_weight": 4.0,
+    "overshoot_weight": 2.0,
+    "clearance_weight": 3.0,
+    "corridor_deg": 7.0,
+    "candidates": 6,
+    "seed": 19
+  },
+  "no_can": true,
+  "reference_not_read_during_generation": true,
+  "fixed_acquisition_self_filter": true,
+  "source_hashes": {
+    "search.py": "2426d4940c57d5a0ddd98454be43b05f06f0897a2260b35f5ca7f36cf8caf95b",
+    "gesture.py": "31efd2cd413b5358dd5f2452c94ebbfc8a74fd14902dba0ba2a9fdb6f0057807",
+    "experiment_oracle.cpp": "c1a8c3bf4b1f574f26c61c2b1f78cc62c73cb2905464330de02a09e21ba65046"
+  },
+  "selection_precision_digits": 8,
+  "selection_source_sha256": "41457d8d5d1cd35341f5eb240a2e8a08b21987a8542206484e5d1c324ebee153",
+  "generation_seeds_unchanged_by_precision_fix": true
+}

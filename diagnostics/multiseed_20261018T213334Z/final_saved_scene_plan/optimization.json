@@ -1,0 +1,251 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 6,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "planned",
+      "planning_wall_s": 4.380028641986428,
+      "backend_folder": "candidates/01",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 5.215610587908044,
+          "duration_cycle_s": 12.431221175816088,
+          "passed": false,
+          "checked_samples": 711,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.3507640313263294,
+                -0.24137502595349453,
+                0.08818158423507169
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 32.21785529506378,
+          "duration_cycle_s": 66.43571059012756
+        }
+      ],
+      "waypoint_count": 6,
+      "moveit_seed_duration_s": 4.664482393958408
+    },
+    {
+      "index": 2,
+      "seed": 7938,
+      "status": "planned",
+      "planning_wall_s": 3.7876814710034523,
+      "backend_folder": "candidates/02",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 9.168160212113824,
+          "duration_cycle_s": 20.336320424227647,
+          "passed": false,
+          "checked_samples": 719,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5103515322756733,
+                -0.3208387629642212,
+                0.12688774178596546
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 26.762458658561776,
+          "duration_cycle_s": 55.52491731712355
+        }
+      ],
+      "waypoint_count": 11,
+      "moveit_seed_duration_s": 6.1134500284161035
+    },
+    {
+      "index": 3,
+      "seed": 15857,
+      "status": "planned",
+      "planning_wall_s": 3.631272700004047,
+      "backend_folder": "candidates/03",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 11.818771002248404,
+          "duration_cycle_s": 25.637542004496808,
+          "passed": false,
+          "checked_samples": 4096,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5612044630446479,
+                -0.4867636881101153,
+                0.5811693844507106
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 68.43565176031261,
+          "duration_cycle_s": 138.87130352062522
+        }
+      ],
+      "waypoint_count": 14,
+      "moveit_seed_duration_s": 6.4888994492181835
+    },
+    {
+      "index": 4,
+      "seed": 23776,
+      "status": "planned",
+      "planning_wall_s": 3.988597720017424,
+      "backend_folder": "candidates/04",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 7.928035730220849,
+          "duration_cycle_s": 17.856071460441697,
+          "passed": false,
+          "checked_samples": 1402,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5778287832225122,
+                -0.5778411483406019,
+                0.39013201349922505
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "selected",
+          "duration_outward_s": 17.37191719052646,
+          "duration_cycle_s": 36.74383438105292,
+          "passed": true,
+          "checked_samples": 8687,
+          "failures": []
+        }
+      ],
+      "waypoint_count": 8,
+      "moveit_seed_duration_s": 6.043544880948261
+    },
+    {
+      "index": 5,
+      "seed": 31695,
+      "status": "planned",
+      "planning_wall_s": 4.252596703008749,
+      "backend_folder": "candidates/05",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "rejected_collision_check",
+          "duration_outward_s": 12.15987839542419,
+          "duration_cycle_s": 26.31975679084838,
+          "passed": false,
+          "checked_samples": 1745,
+          "failures": [
+            {
+              "contacts": [
+                [
+                  "gemini_native_depth",
+                  "right_drumstick"
+                ]
+              ],
+              "reason": "collision",
+              "stick_center_world": [
+                0.5983033635396985,
+                -0.5163583176906738,
+                0.37392470365416686
+              ],
+              "valid": false
+            }
+          ]
+        },
+        {
+          "stop_at_corners": true,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 18.08401190839414,
+          "duration_cycle_s": 38.16802381678828
+        }
+      ],
+      "waypoint_count": 7,
+      "moveit_seed_duration_s": 6.106339630003329
+    },
+    {
+      "index": 6,
+      "seed": 39614,
+      "status": "planned",
+      "planning_wall_s": 3.7388805329974275,
+      "backend_folder": "candidates/06",
+      "variants": [
+        {
+          "stop_at_corners": false,
+          "status": "not_checked_slower_or_equal",
+          "duration_outward_s": 112.19856343693871,
+          "duration_cycle_s": 226.39712687387743
+        },
+        {
+          "stop_at_corners": true,
+          "status": "rejected_timing",
+          "details": "Trajectory would be impractically slow; rejected instead of creeping"
+        }
+      ],
+      "waypoint_count": 10,
+      "moveit_seed_duration_s": 7.604095140832671
+    }
+  ],
+  "selected_candidate": 4,
+  "selected_seed": 23776,
+  "selected_stop_at_corners": true,
+  "selected_duration_s": 17.37191719052646,
+  "wall_time_s": 22.65148852299899,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

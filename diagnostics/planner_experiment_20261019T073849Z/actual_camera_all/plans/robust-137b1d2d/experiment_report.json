@@ -1,0 +1,124 @@
+{
+  "method": "robust",
+  "description": "Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.2300316455696202,
+        "workspace_length_m": 2.261815202552609,
+        "joint_length_rad": 3.3597289347595822,
+        "bending_deg": 677.6180074142453
+      },
+      "duration_s": 50.09405715407828
+    },
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.03900000000000001,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.16056962025316457,
+        "workspace_length_m": 3.1212042513780527,
+        "joint_length_rad": 3.268167974346758,
+        "bending_deg": 639.6306769505803
+      },
+      "duration_s": 6.761969324675652
+    },
+    {
+      "index": 3,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.18787974683544303,
+        "workspace_length_m": 3.3365454480397823,
+        "joint_length_rad": 3.306170354264306,
+        "bending_deg": 741.4702641318792
+      },
+      "duration_s": 8.50198661828172
+    },
+    {
+      "index": 4,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.0425,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.1626315789473685,
+        "workspace_length_m": 3.013943445814041,
+        "joint_length_rad": 2.964140670224298,
+        "bending_deg": 650.0396218186347
+      },
+      "duration_s": 26.272280922958192
+    },
+    {
+      "index": 5,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.23103896103896102,
+        "workspace_length_m": 3.1715692403287004,
+        "joint_length_rad": 3.1540497423855856,
+        "bending_deg": 679.5285425489549
+      },
+      "duration_s": 59.91901550656195
+    }
+  ],
+  "selected": 2,
+  "elapsed_s": 28.80241544501041,
+  "budget_s": 60.0,
+  "envelope": {
+    "world_m": 0.0,
+    "self_m": 0.0,
+    "joint_rad": 0.0,
+    "lever_arm_bound_m": 1.5,
+    "camera_range_bound_m": 5.0,
+    "additional_to_original_padding": true
+  }
+}

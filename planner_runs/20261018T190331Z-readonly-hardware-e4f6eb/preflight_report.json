@@ -1,0 +1,456 @@
+{
+  "schema": "x5-readonly-preflight-report-v1",
+  "acquisition_passed": true,
+  "passed": false,
+  "error": "KeyboardInterrupt",
+  "cleanup_errors": [],
+  "execution_ready": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "can_access": true,
+  "can_operation": "state queries only on can0 and can1",
+  "mode_changes": 0,
+  "motor_commands": 0,
+  "gripper_commands": 0,
+  "relax_commands": 0,
+  "encoder_sockets_closed": true,
+  "telemetry": {
+    "sample_batches": 60,
+    "error": null,
+    "thread_stopped": true,
+    "duration_s": 2.972524742974201,
+    "observer": {
+      "batches": 60,
+      "requests_sent": {
+        "left": 480,
+        "right": 480
+      },
+      "feedback_frames_received": {
+        "left": 480,
+        "right": 480
+      },
+      "exact_query_allowlist": true,
+      "mode_changes": 0,
+      "enable_commands": 0,
+      "disable_commands": 0,
+      "motion_commands": 0,
+      "gripper_commands": 0,
+      "closed": true
+    }
+  },
+  "camera_requested": true,
+  "camera_frames": 1,
+  "camera_released": true,
+  "camera_exit_code": 0,
+  "joint_limits": {
+    "within_urdf_limits": false,
+    "violations": [
+      {
+        "joint": "openarmx_left_joint4",
+        "measured_rad": -0.0005754177157246687,
+        "lower_rad": 0.0,
+        "upper_rad": 1.8
+      }
+    ],
+    "angles_clamped": false
+  },
+  "coverage": {
+    "landmarks": {
+      "right_joint0": {
+        "base_xyz_m": [
+          0.0,
+          -0.031,
+          0.735
+        ],
+        "camera_xyz_m": [
+          0.059602042856144996,
+          0.17188637196177417,
+          0.14473124842450366
+        ],
+        "pixel_uv": [
+          887.6035908221318,
+          1129.1338818105967
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint1": {
+        "base_xyz_m": [
+          0.0,
+          -0.08899999999960873,
+          0.734999786954104
+        ],
+        "camera_xyz_m": [
+          0.11753350204562497,
+          0.16923386233981347,
+          0.14568519408482541
+        ],
+        "pixel_uv": [
+          1129.9506365158024,
+          1113.1899813904215
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint2": {
+        "base_xyz_m": [
+          -0.020482245657931632,
+          -0.16999999686581013,
+          0.7341464871922949
+        ],
+        "camera_xyz_m": [
+          0.19937610785839646,
+          0.18134351961199857,
+          0.13400642536608484
+        ],
+        "pixel_uv": [
+          1547.848874330071,
+          1230.7605820832912
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint3": {
+        "base_xyz_m": [
+          0.0036198090080945614,
+          -0.16994367211917247,
+          0.6360644409840372
+        ],
+        "camera_xyz_m": [
+          0.20002224879491504,
+          0.2287516505737715,
+          0.2231863134897751
+        ],
+        "pixel_uv": [
+          1184.8372677410202,
+          1029.3062040614434
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint4": {
+        "base_xyz_m": [
+          0.014665837270787229,
+          -0.20043439142810235,
+          0.4945741536861318
+        ],
+        "camera_xyz_m": [
+          0.2325589712897433,
+          0.313400872212765,
+          0.3365312392847449
+        ],
+        "pixel_uv": [
+          1058.9457207200567,
+          971.8306867896624
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint5": {
+        "base_xyz_m": [
+          0.02723274269411457,
+          -0.1677886008372162,
+          0.3696456331442749
+        ],
+        "camera_xyz_m": [
+          0.20166332092490855,
+          0.38877159779613335,
+          0.43750412316165777
+        ],
+        "pixel_uv": [
+          917.749447478133,
+          945.6565376688429
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint6": {
+        "base_xyz_m": [
+          0.08244872985283563,
+          -0.169840328890254,
+          0.2451117395647183
+        ],
+        "camera_xyz_m": [
+          0.20349553832224482,
+          0.43054715082075357,
+          0.5671696682607569
+        ],
+        "pixel_uv": [
+          855.069548285956,
+          866.1955426695744
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_joint7": {
+        "base_xyz_m": [
+          0.045557449738593554,
+          -0.1655187954426246,
+          0.23995346464052636
+        ],
+        "camera_xyz_m": [
+          0.20093520568602796,
+          0.4616410194485036,
+          0.5463642344079744
+        ],
+        "pixel_uv": [
+          860.577677212686,
+          918.8541555834624
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint0": {
+        "base_xyz_m": [
+          0.0,
+          0.031,
+          0.735
+        ],
+        "camera_xyz_m": [
+          -0.0023246852291093443,
+          0.1747219650092095,
+          0.14371168319192895
+        ],
+        "pixel_uv": [
+          624.9851424503408,
+          1146.4111968835969
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint1": {
+        "base_xyz_m": [
+          0.0,
+          0.08899999999960873,
+          0.734999786954104
+        ],
+        "camera_xyz_m": [
+          -0.060256136649968775,
+          0.17737475850822101,
+          0.14275805519131732
+        ],
+        "pixel_uv": [
+          375.91413802041444,
+          1162.797025720485
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint2": {
+        "base_xyz_m": [
+          -0.020497764259627092,
+          0.16999999888698253,
+          0.7346967348097396
+        ],
+        "camera_xyz_m": [
+          -0.14023140728374633,
+          0.1965385029553362,
+          0.12799470121615694
+        ],
+        "pixel_uv": [
+          -37.36420138895181,
+          1342.6070925261477
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint3": {
+        "base_xyz_m": [
+          0.0009621151435099187,
+          0.16944860081394408,
+          0.6360044375613328
+        ],
+        "camera_xyz_m": [
+          -0.13884809872126708,
+          0.24629208261821783,
+          0.21587910570555177
+        ],
+        "pixel_uv": [
+          240.25097436099807,
+          1100.4507176067132
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint4": {
+        "base_xyz_m": [
+          0.003059803507733453,
+          0.13765724473027802,
+          0.49438484327477883
+        ],
+        "camera_xyz_m": [
+          -0.10460677338775677,
+          0.3376285620398069,
+          0.3233797112078741
+        ],
+        "pixel_uv": [
+          436.4199609812245,
+          1041.0424244432004
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint5": {
+        "base_xyz_m": [
+          0.004844726775312178,
+          0.1678549703362571,
+          0.3682273170737834
+        ],
+        "camera_xyz_m": [
+          -0.132549088462949,
+          0.4217315751120329,
+          0.41812526936430905
+        ],
+        "pixel_uv": [
+          440.39102712853946,
+          1019.2976457351107
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint6": {
+        "base_xyz_m": [
+          0.030737405283997488,
+          0.19581448964491838,
+          0.23742387692149056
+        ],
+        "camera_xyz_m": [
+          -0.15925725285106973,
+          0.4908831601783465,
+          0.5324337943733375
+        ],
+        "pixel_uv": [
+          451.37237091889415,
+          966.1195838419492
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_joint7": {
+        "base_xyz_m": [
+          0.006656481131232333,
+          0.16706860158694734,
+          0.23724218567962896
+        ],
+        "camera_xyz_m": [
+          -0.12945711695128354,
+          0.5076138648162042,
+          0.5169972990957123
+        ],
+        "pixel_uv": [
+          481.2613567216602,
+          1002.8683031290067
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_hand": {
+        "base_xyz_m": [
+          0.09211503149538942,
+          -0.17119889421181286,
+          0.1515219201615819
+        ],
+        "camera_xyz_m": [
+          0.20612336131304793,
+          0.48564278189175536,
+          0.6434055121285713
+        ],
+        "pixel_uv": [
+          831.4895309213845,
+          863.5479345758139
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "left_hand": {
+        "base_xyz_m": [
+          0.010572067341514387,
+          0.1746524572120957,
+          0.137506718976521
+        ],
+        "camera_xyz_m": [
+          -0.1353900131674511,
+          0.5714934021081916,
+          0.5938361949798007
+        ],
+        "pixel_uv": [
+          495.01223543400556,
+          990.9184364062703
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_stick_mount": {
+        "base_xyz_m": [
+          0.09909169209830591,
+          -0.17205005786353939,
+          0.13827043996993185
+        ],
+        "camera_xyz_m": [
+          0.20690080721120285,
+          0.48923944959054444,
+          0.6579471621366528
+        ],
+        "pixel_uv": [
+          827.8698984843429,
+          856.6658118882871
+        ],
+        "inside_depth_image": false,
+        "valid_depth_at_projected_pixel": false,
+        "observed_surface_depth_m": null
+      },
+      "right_stick_tip": {
+        "base_xyz_m": [
+          0.28950801548723926,
+          -0.19528115113132832,
+          -0.22340662606083608
+        ],
+        "camera_xyz_m": [
+          0.22811989725817572,
+          0.587404499982825,
+          1.0548372630238898
+        ],
+        "pixel_uv": [
+          767.6111143152984,
+          742.0938621486795
+        ],
+        "inside_depth_image": true,
+        "valid_depth_at_projected_pixel": true,
+        "observed_surface_depth_m": 1.2710000000000001
+      }
+    },
+    "alignment_verified": false,
+    "clearance_verified": false,
+    "note": "Projected FK landmarks only, not detected arm features. In-image does NOT mean visible/unoccluded or clear. No alignment error is inferred from interior joint centers."
+  },
+  "visualization": null,
+  "physical_alignment_verified": false,
+  "tool_mount_verified": false,
+  "supported_rest_verified": false,
+  "execution_blockers": [
+    "Read-only stage: no motor execution, torque ownership or recovery controller is implemented",
+    "Visual/physical verification of depth alignment and provisional custom gripper/stick mounting is still required",
+    "Left gripper opening is an encoder-derived model estimate; left stick geometry remains unverified",
+    "Resting table contact, support and camera-blind regions are not verified safe",
+    "A collision-checked route from the measured start against a real planning scene is still required",
+    "Feedback tracking, stall handling and a checked return/support policy are required before motion"
+  ]
+}

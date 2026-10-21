@@ -1,0 +1,45 @@
+[main/127 +0.6s] Independent endpoint-only RRT control searches
+[main/127 +3.8s] RRT 1/6: planned
+[main/127 +3.9s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +6.5s] candidate 2: VALID; 34.03s; reversals=14; coordination=23.905; spatial=662.906
+[main/127 +8.7s] RRT 2/6: planned
+[main/127 +10.0s] candidate 3: VALID; 8.45s; reversals=8; coordination=13.791; spatial=148.190
+[main/127 +12.4s] candidate 4: VALID; 29.95s; reversals=8; coordination=17.083; spatial=264.632
+[main/127 +16.7s] RRT 3/6: planned
+[main/127 +16.7s] candidate 5: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005006497337614352, 'point_only': True, 'point_xyz_m': [0.2984785639379461, -0.3169866094552869, 0.17612121752398122], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[main/127 +17.7s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +20.1s] RRT 4/6: planned
+[main/127 +20.2s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +20.4s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +23.7s] RRT 5/6: planned
+[main/127 +23.8s] candidate 9: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +25.5s] candidate 10: VALID; 17.31s; reversals=6; coordination=18.514; spatial=139.400
+[main/127 +28.8s] RRT 6/6: planned
+[main/127 +28.9s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +31.0s] candidate 12: VALID; 23.81s; reversals=7; coordination=17.043; spatial=275.503
+[main/127 +35.0s] endpoint corridor ±2.3deg: no_path
+[main/127 +36.5s] endpoint corridor ±6.9deg: planned
+[main/127 +37.6s] candidate 13: VALID; 6.01s; reversals=8; coordination=8.480; spatial=104.260
+[main/127 +40.5s] endpoint corridor ±14.3deg: planned
+[main/127 +41.7s] candidate 14: VALID; 6.61s; reversals=7; coordination=9.663; spatial=26.532
+[main/127 +41.9s] phase search 1/5: 0/40 coarse-feasible; best blocked samples 10
+[main/127 +42.0s] phase search 2/5: 0/40 coarse-feasible; best blocked samples 9
+[main/127 +42.1s] phase search 3/5: 0/40 coarse-feasible; best blocked samples 8
+[main/127 +42.3s] phase search 4/5: 0/40 coarse-feasible; best blocked samples 8
+[main/127 +42.4s] phase search 5/5: 0/40 coarse-feasible; best blocked samples 8
+[main/127 +42.5s] arch search 1/5: 0/40 coarse-feasible; best blocked samples 4
+[main/127 +42.7s] arch search 2/5: 0/40 coarse-feasible; best blocked samples 2
+[main/127 +42.8s] arch search 3/5: 0/40 coarse-feasible; best blocked samples 2
+[main/127 +43.0s] arch search 4/5: 1/40 coarse-feasible; best blocked samples 0
+[main/127 +43.1s] arch search 5/5: 0/40 coarse-feasible; best blocked samples 0
+[main/127 +44.3s] candidate 15: VALID; 7.95s; reversals=6; coordination=7.017; spatial=48.341
+[main/127 +46.9s] partial shortcut (economy): 7 accepted changes; objective 5.2070
+[main/127 +47.2s] candidate 16: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +47.5s] candidate 17: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[main/127 +50.9s] partial shortcut (economy): 18 accepted changes; objective 6.5222
+[main/127 +52.3s] candidate 18: VALID; 10.41s; reversals=6; coordination=22.861; spatial=298.922
+[main/127 +53.3s] elastic deformation: 0 accepted updates; objective 4.8340
+[main/127 +54.8s] candidate 19: VALID; 12.01s; reversals=4; coordination=7.082; spatial=89.967
+[main/127 +57.3s] elastic deformation: 18 accepted updates; objective 3.3439
+[main/127 +58.6s] candidate 20: VALID; 7.48s; reversals=5; coordination=5.088; spatial=43.079
+[main/127 +58.6s] DONE: baseline_control=3, economy=10, partial=18, corridor=14, phase=10, arch=15, elastic=20, comfort=14

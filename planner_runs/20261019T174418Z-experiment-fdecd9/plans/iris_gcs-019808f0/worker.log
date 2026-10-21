@@ -1,0 +1,149 @@
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision witnesses and inward-shrunk cells, iteratively refined regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+[iris_gcs +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[iris_gcs +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   5.3s] search 2: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   8.3s] IRIS seeding: adding a fresh native-CHOMP broad-route proposal
+[iris_gcs +  10.0s] IRIS region 1/28: 106 full-body collision witnesses, 37 faces
+[iris_gcs +  10.1s] IRIS region 2/28: 157 full-body collision witnesses, 47 faces
+[iris_gcs +  10.2s] IRIS region 3/28: 145 full-body collision witnesses, 44 faces
+[iris_gcs +  10.3s] IRIS region 4/28: 188 full-body collision witnesses, 35 faces
+[iris_gcs +  10.5s] IRIS region 5/28: 224 full-body collision witnesses, 41 faces
+[iris_gcs +  10.6s] IRIS region 6/28: 124 full-body collision witnesses, 32 faces
+[iris_gcs +  10.6s] IRIS region 7/28: 111 full-body collision witnesses, 33 faces
+[iris_gcs +  10.7s] IRIS region 8/28: 134 full-body collision witnesses, 30 faces
+[iris_gcs +  10.8s] IRIS region 9/28: 114 full-body collision witnesses, 26 faces
+[iris_gcs +  10.9s] IRIS region 10/28: 75 full-body collision witnesses, 30 faces
+[iris_gcs +  11.0s] IRIS region 11/28: 52 full-body collision witnesses, 31 faces
+[iris_gcs +  11.0s] IRIS region 12/28: 47 full-body collision witnesses, 27 faces
+[iris_gcs +  11.1s] IRIS region 13/28: 50 full-body collision witnesses, 29 faces
+[iris_gcs +  11.1s] IRIS region 14/28: 34 full-body collision witnesses, 27 faces
+[iris_gcs +  11.2s] IRIS region 15/28: 42 full-body collision witnesses, 34 faces
+[iris_gcs +  11.2s] IRIS region 16/28: 41 full-body collision witnesses, 35 faces
+[iris_gcs +  11.3s] IRIS region 17/28: 153 full-body collision witnesses, 56 faces
+[iris_gcs +  11.4s] IRIS region 18/28: 133 full-body collision witnesses, 52 faces
+[iris_gcs +  11.6s] IRIS region 19/28: 144 full-body collision witnesses, 64 faces
+[iris_gcs +  11.6s] IRIS region 20/28: 108 full-body collision witnesses, 48 faces
+[iris_gcs +  11.8s] IRIS region 21/28: 128 full-body collision witnesses, 57 faces
+[iris_gcs +  11.8s] IRIS region 22/28: 84 full-body collision witnesses, 49 faces
+[iris_gcs +  11.9s] IRIS region 23/28: 86 full-body collision witnesses, 41 faces
+[iris_gcs +  12.0s] IRIS region 24/28: 80 full-body collision witnesses, 35 faces
+[iris_gcs +  12.1s] IRIS region 25/28: 61 full-body collision witnesses, 34 faces
+[iris_gcs +  12.2s] IRIS region 26/28: 51 full-body collision witnesses, 45 faces
+[iris_gcs +  12.2s] IRIS region 27/28: 52 full-body collision witnesses, 45 faces
+[iris_gcs +  12.3s] IRIS region 28/28: 47 full-body collision witnesses, 38 faces
+[iris_gcs +  12.3s] GCS: 28 regions, convex relaxation + rounding, refinement 0; endpoint cells 3/4
+[iris_gcs +  12.3s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  14.8s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  14.9s] GCS: 28 regions, convex relaxation + rounding, refinement 1; endpoint cells 3/3
+[iris_gcs +  14.9s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  17.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  17.4s] GCS: 28 regions, convex relaxation + rounding, refinement 2; endpoint cells 3/3
+[iris_gcs +  17.5s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  19.8s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  19.8s] GCS: 28 regions, convex relaxation + rounding, refinement 3; endpoint cells 3/3
+[iris_gcs +  19.8s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  22.0s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  22.1s] GCS: 28 regions, convex relaxation + rounding, refinement 4; endpoint cells 3/3
+[iris_gcs +  22.1s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  24.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  24.5s] GCS: 28 regions, convex relaxation + rounding, refinement 5; endpoint cells 3/3
+[iris_gcs +  24.5s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  26.7s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  26.7s] GCS: 28 regions, convex relaxation + rounding, refinement 6; endpoint cells 3/3
+[iris_gcs +  26.7s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  29.0s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  29.1s] GCS: 28 regions, convex relaxation + rounding, refinement 7; endpoint cells 3/3
+[iris_gcs +  29.1s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  31.7s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  31.8s] GCS: 28 regions, convex relaxation + rounding, refinement 8; endpoint cells 3/3
+[iris_gcs +  31.8s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  34.1s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  34.1s] GCS: 28 regions, convex relaxation + rounding, refinement 9; endpoint cells 3/3
+[iris_gcs +  34.1s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  36.3s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  36.4s] GCS: 28 regions, convex relaxation + rounding, refinement 10; endpoint cells 3/3
+[iris_gcs +  36.4s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  38.7s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  38.7s] GCS: 28 regions, convex relaxation + rounding, refinement 11; endpoint cells 3/3
+[iris_gcs +  38.7s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  41.0s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  41.0s] GCS: 28 regions, convex relaxation + rounding, refinement 12; endpoint cells 3/3
+[iris_gcs +  41.0s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  43.0s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  43.0s] GCS: 28 regions, convex relaxation + rounding, refinement 13; endpoint cells 3/3
+[iris_gcs +  43.0s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  45.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  45.4s] GCS: 28 regions, convex relaxation + rounding, refinement 14; endpoint cells 3/3
+[iris_gcs +  45.4s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  47.5s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  47.5s] GCS: 28 regions, convex relaxation + rounding, refinement 15; endpoint cells 3/3
+[iris_gcs +  47.5s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  49.8s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  49.9s] GCS: 28 regions, convex relaxation + rounding, refinement 16; endpoint cells 3/3
+[iris_gcs +  49.9s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  52.1s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  52.2s] GCS: 28 regions, convex relaxation + rounding, refinement 17; endpoint cells 3/3
+[iris_gcs +  52.2s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  54.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  54.4s] GCS: 28 regions, convex relaxation + rounding, refinement 18; endpoint cells 3/3
+[iris_gcs +  54.5s] GCS sparse graph: 28 regions / 94 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  58.4s] candidate 1: valid, 6.96s outward, transit clearance 35.0 mm
+[iris_gcs +  58.4s] READY: 6.956s outward → 2s hold → exact reverse; SIMULATION ONLY

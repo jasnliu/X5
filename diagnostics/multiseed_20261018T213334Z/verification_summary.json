@@ -1,0 +1,52 @@
+{
+  "implemented": true,
+  "default_candidate_count": 6,
+  "configurable_count_range": [
+    1,
+    32
+  ],
+  "comparison": "final quintic duration after unchanged velocity/acceleration/jerk scaling, then full collision validation",
+  "no_claim_of_global_time_optimality": true,
+  "real_saved_scene": {
+    "passed": true,
+    "tests": "all candidate reports, final-duration selection, actual FCL check evidence, exact polynomial/limits, endpoints, hold and reverse",
+    "candidate_count": 6,
+    "selected_seed": 23776,
+    "planning_wall_s": 22.65148852299899,
+    "previous_outward_s": 32.21785529506378,
+    "selected_outward_s": 17.37191719052646,
+    "outward_time_reduction_percent": 46.07984600021443,
+    "cycle_duration_s": 36.74383438105292,
+    "full_selected_interpolated_checks": 8687,
+    "calibration_recording_and_state_unchanged": true,
+    "physical_motion_tested": false,
+    "live_camera_used": false
+  },
+  "tests": {
+    "full_planner_suite": 233,
+    "final_optimizer_suite": 38,
+    "calibration_suite": 110,
+    "note": "Optimizer suite overlaps the full suite and adds three final failure-handling cases"
+  },
+  "native_full_cycle_passed": true,
+  "native_device_access_attempts": [],
+  "cli_planned_view_passed": true,
+  "hardware_moved": false,
+  "live_camera_accessed": false,
+  "unchanged": [
+    "recordings",
+    "calibration",
+    "robot/tool geometry",
+    "collision policy and buffers",
+    "speed limits",
+    "execution and fault handling",
+    "frozen VTK rendering"
+  ],
+  "source_sha256": {
+    "drum_planner/planning.py": "ef074a917bc20ad291127934ef931553eddf414e636860d13ef8ab176a4a4139",
+    "drum_planner/current_plan.py": "26bbda30d73d9acd5d0b5a8755326f351ad7223214d7fe6d68e2babf9d54c360",
+    "drum_planner/cli.py": "fd3522aafb2d9e9ec7c2d19291b2dec8b4f92634f54cb0486c6110312b2c6086",
+    "drum_planner/cpp/moveit_plan.cpp": "7142db08da62af9377f7b622c5012c3d1d2132b0872b96fa9f196081e3ca8a28",
+    "tests/test_planner_optimization.py": "c50b0a846c9b38903f9dfaa867c2f7759a18f4f3e5edc60a70a47f8169766521"
+  }
+}

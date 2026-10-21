@@ -76,13 +76,16 @@ class MicrophoneCapture:
 
 class WaveformApp:
     def __init__(self, root, ride_socket, hihat_socket, *, device=DEFAULT_AUDIO_DEVICE,
-                 history=HISTORY_SECONDS):
+                 history=HISTORY_SECONDS, snare_socket=None):
         self.root = root
         self.timeline = WaveformTimeline(history)
         self.window = WaveformWindow(root, self.timeline)
         self.receivers = {}
         self.errors = []
-        for instrument, path in (('ride', ride_socket), ('hihat', hihat_socket)):
+        for instrument, path in (('ride', ride_socket), ('hihat', hihat_socket),
+                                 ('snare', snare_socket)):
+            if path is None:
+                continue
             try:
                 self.receivers[instrument] = AudioReceiver(path, instrument=instrument)
             except Exception as exc:
@@ -110,7 +113,7 @@ class WaveformApp:
             return
         for started, samples in self.capture.poll():
             self.timeline.add_audio(started, samples)
-        # Poll both streams before rendering; delayed events are inserted at
+        # Poll all streams before rendering; delayed events are inserted at
         # event_at, never notification time or the graph's right edge.
         for receiver in self.receivers.values():
             for message in receiver.poll():
@@ -166,13 +169,14 @@ def main():
     p = argparse.ArgumentParser(description='Visual-only rolling TONOR waveform with ST7 onset markers')
     p.add_argument('--ride-socket', required=True)
     p.add_argument('--hihat-socket', required=True)
+    p.add_argument('--snare-socket', help='read-only snare_v2 event copies for graph markers')
     p.add_argument('--source', default=DEFAULT_TONOR_SOURCE)
     p.add_argument('--device', default=DEFAULT_AUDIO_DEVICE)
     p.add_argument('--history-seconds', type=float, default=HISTORY_SECONDS)
     args = p.parse_args()
     root = tk.Tk()
     app = WaveformApp(root, args.ride_socket, args.hihat_socket,
-                      device=args.device, history=args.history_seconds)
+                      device=args.device, history=args.history_seconds, snare_socket=args.snare_socket)
     signal.signal(signal.SIGINT, app.request_close)
     signal.signal(signal.SIGTERM, app.request_close)
     try:

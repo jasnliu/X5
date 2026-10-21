@@ -1,0 +1,39 @@
+{
+  "schema": "x5-baseline-prefix-return-v1",
+  "held": [
+    -0.25452643632888794,
+    0.35810163617134094,
+    0.15440376102924347,
+    0.8571805953979492,
+    -0.0959899744335008,
+    -0.1156589612364769,
+    0.3124518096446991
+  ],
+  "tau": 2.9756148559466125,
+  "last_commanded_tau": 2.9961158870137297,
+  "connector_l1_rad": 0.008758871246683175,
+  "bridge_s": 0.6152974372720171,
+  "return_s": 12.266783239259297,
+  "recovery_rate": 0.5,
+  "original_curve_duration_s": 8.997345672010697,
+  "left_snapshot": {
+    "left": [
+      0.020139620050354523,
+      0.010165712977798336,
+      -0.035100480659188804,
+      0.07269443808651843,
+      -1.0298059052414725,
+      0.20082078278782411,
+      -0.016303501945525767
+    ],
+    "left_opening_m": 0.0
+  },
+  "proof": {
+    "samples": 6444,
+    "all_valid": true,
+    "collision_margin_policy": "baseline_request",
+    "obstacle_padding_m": 0.02,
+    "minimum_self_clearance_m": 0.0
+  },
+  "plan_sha256": "efc4da9f70d1396e4fce47911e7403cc4a49fd3be159b7dd1e9b1435fb1a94fe"
+}

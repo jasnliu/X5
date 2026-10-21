@@ -1,0 +1,50 @@
+5623.582729 LEFT: J6 maximum positive strike depth 41.927816 deg (joint upper limit 42.971835 deg)
+5623.582777 LEFT: powered reference down 0.147 s (previous 0.160 s), return unchanged at 0.220 s; dynamic limits unchanged
+5623.582787 LEFT: curved acceleration reaches 143.1 deg/s at 70% of downward travel; smooth braking into the existing return
+5625.802455 Session: /home/jason/Proyectos3/X5/diagnostics/bass_data_collection/20261010T232155-train-63812811
+5626.443782 Motion in 10s
+5627.443849 Motion in 9s
+5628.443989 Motion in 8s
+5629.444099 Motion in 7s
+5630.444213 Motion in 6s
+5631.444289 Motion in 5s
+5632.444378 Motion in 4s
+5633.444520 Motion in 3s
+5634.444604 Motion in 2s
+5635.444701 Motion in 1s
+5637.409588 INITIAL CENTER PATH VERIFIED {"outside_buffer_mm": 0.0, "recovery_only": false}
+5637.661685 CHECKING INITIAL RIGHT CENTER 
+5637.863600 INITIAL RIGHT CENTER {"duration_s": 5.995705334663049}
+5643.864038 INITIAL RIGHT CENTER SETTLED 
+5644.465228 INITIAL LEFT CENTER 
+5645.104372 LEFT MIT CENTER VERIFIED 
+5645.832228 RIGHT MIT CENTER VERIFIED 
+5648.377391 CHECKING RECORD3 START 
+5648.487032 RECORD3 START {"duration_s": 1.8038252703571256}
+5650.297478 RECORD3 START SETTLED 
+5650.899891 START HOLD 
+5651.501686 TEMPORARY POSITION GAINS 
+5651.554252 PLAYBACK RECORD3 {"duration_s": 4.8, "j7_mode": "powered MIT"}
+5656.357842 ENDPOINT SOFT HOLD 
+5658.236654 ENDPOINT GAIN RESTORATION {"ramp_s": 0.5}
+5658.790748 ENDPOINT HOLD 
+5660.229570 RECORD3 ENDPOINT VERIFIED {"t": 5660.228982145, "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6051476310368518, 0.21194552529182964, 0.24416891737239688, 1.7333499656672, 0.20476168513003543, -0.3047795834287008, 0.5997770656900894], "max_error_deg": 0.021979337712122585, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.627593170000182, "tolerance_deg": 0.05}
+5660.296363 LEFT RECORDING START {"duration_s": 2.676719909753774}
+5662.983638 LEFT RECORDING START SETTLED 
+5663.586931 LEFT RECORDING 
+5675.260796 LEFT ENDPOINT VERIFIED 
+5678.111687 SNARE ANCHOR VERIFIED 
+5678.712573 CAPTURING {"kind": "bass_only", "split": "train", "bass_hits": 1, "bpm": 80, "offset_s": 0.0, "ride_hits": 0, "ride_depth_deg": null, "snare_hits": 0, "hihat_closures": 0, "duration_s": 8.0, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "block": 1}
+5686.713103 CAPTURED {"block": 1, "kind": "bass_only"}
+5686.713173 SNARE ANCHOR VERIFIED 
+5687.315663 CAPTURING {"kind": "bass_only", "split": "train", "bass_hits": 4, "bpm": 100, "offset_s": -0.075, "ride_hits": 0, "ride_depth_deg": null, "snare_hits": 0, "hihat_closures": 0, "duration_s": 8.0, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "block": 2}
+5695.316736 CAPTURED {"block": 2, "kind": "bass_only"}
+5695.316794 FINITE BATCH COMPLETE {"clips": 2}
+5695.499964 LEFT CENTER BEFORE RELAX {"duration_s": 7.769423576823717}
+5703.272849 LEFT CENTER BEFORE RELAX SETTLED 
+5704.383428 CENTER BEFORE RELAX {"j7_mode": 0, "duration_s": 11.604685405290518}
+5715.993233 CENTER SETTLED 
+5716.613410 CENTER VERIFIED BEFORE RELAX: {"t": 5716.613181874, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6479366879993904}
+5716.645902 RELAXED VERIFIED {"center": {"t": 5716.613181874, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6479366879993904}}
+5716.646248 HIHAT OPEN RETURN AND RELEASE ACK {"error": null, "shutdown_error": null, "closures_commanded": 0, "open_command_at": 5695.317820049, "normal_open_return_wait_s": 1.5, "release_ack": true, "encoder_position_verified": true, "open_proof": "firmware latched encoder-zero return; mechanism may coast afterward", "final_telemetry": {"v": 2, "min": 90, "max": 115, "angle": 90, "counts": 134, "pos": -2, "target": 0, "released": 1, "opened": 1, "fault": 0}, "kicks_commanded": 5, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "finished_at": 5696.84196672}
+5716.877837 COLLECTION RESULT {"success": true, "error": null, "recovery_error": null, "relaxed_verified": true, "clips": 2, "bass_hits": 5, "training_performed": false, "hardware_emergency": false, "center": {"t": 5716.593794553, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.022477675917915732, "settle_range_deg": 0.0439586754241434, "settled_seconds": 0.6000081530000898, "tolerance_deg": 0.2}, "finished_at": 5716.877650093, "labels_created": false}

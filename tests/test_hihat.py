@@ -114,7 +114,7 @@ class HiHatControllerTests(unittest.TestCase):
                 self.controller._handle_line('STOP -- all motors released.')
                 self.assertEqual(self.controller.state, 'error')
 
-    def test_arm_beats_replace_motor1_and_alternate_motor2_close_open(self):
+    def test_legacy_collection_edges_alternate_motor2_without_implicit_bass(self):
         handshake = self.make_ready()
         self.controller.start_sequence()
         commands = [self.controller.send_beat() for _ in range(4)]
@@ -126,6 +126,42 @@ class HiHatControllerTests(unittest.TestCase):
         wire = handshake + self.drain()
         self.assertEqual(wire, b"HSCOCOOS")
         self.assertNotIn(b"K", wire)
+
+    def test_bass_reuses_keyboard_command_without_changing_hihat_state(self):
+        self.make_ready()
+        self.drain()
+        with self.assertRaises(RuntimeError):
+            self.controller.send_kick()
+        self.assertEqual(self.drain(), b'')
+        self.controller.start_sequence()
+        for closed in (False, True, False, True):
+            self.controller.send_state(closed)
+            before = (self.controller.motor2_closed, self.controller.next_beat_closes,
+                      self.controller.beat_count, self.controller.target_degrees)
+            self.assertEqual(self.controller.send_kick(), b'K')
+            self.assertEqual(before, (self.controller.motor2_closed,
+                self.controller.next_beat_closes, self.controller.beat_count,
+                self.controller.target_degrees))
+        self.assertEqual(self.drain(), b'OKCKOKCK')
+        self.controller.stop_sequence()
+        with self.assertRaises(RuntimeError):
+            self.controller.send_kick()
+        self.assertEqual(self.drain(), b'O')
+
+    def test_bass_rejects_faulted_connection_and_emergency_release(self):
+        self.make_ready()
+        self.controller.start_sequence()
+        self.controller.send_kick()
+        self.drain()
+        self.controller.release_all()
+        with self.assertRaises(RuntimeError):
+            self.controller.send_kick()
+        self.assertEqual(self.drain(), b'S')
+        self.controller.start_sequence()
+        self.controller._handle_line('FAULT: test')
+        with self.assertRaises(RuntimeError):
+            self.controller.send_kick()
+        self.assertEqual(self.drain(), b'')
 
     def test_explicit_sync_edges_open13_close24_without_target_changes(self):
         self.make_ready()

@@ -1,0 +1,482 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 2,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": 22339.22084263299,
+  "last_frame_compute_s": 0.07551321800565347,
+  "maximum_draw_s": 0.023092000978067517,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "depth points",
+    "mesh + points",
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 3,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 3339,
+    "maximum_frame_s": 0.023063476022798568,
+    "median_frame_s": 0.0017438209906686097,
+    "surface_geometry_uploads": 2,
+    "surface_color_uploads": 4,
+    "surface_triangles": 20184,
+    "render_errors": []
+  },
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-1e059c8d/plan.json",
+  "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+  "animation_draws": 3336,
+  "animation_time_s": 0.0,
+  "animation_completed_cycles": 0,
+  "animation_play_clicks": 14,
+  "animation_seeks": 18,
+  "animation_phases_seen": [
+    "BLOCKED",
+    "HOLD (2 seconds)",
+    "outward",
+    "return"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 12074,
+    "triangles": 20184,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 11816,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 827092,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "experiment": true,
+  "saved_state_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "context": {
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/measured_start.json",
+    "state_sha256": "821b647e3ff1b0159e4d3a10f2db8534e39083f853f115a91d668af6497adafc",
+    "scene": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/capture_4993f917/camera/scene.json",
+    "scene_sha256": "3f1ab1bd4ced6dfd2e9b5898c6d92644f88b1d9625cb11100de7df0d41e3bacd",
+    "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "saved_not_live": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "pool_root": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/capture_4993f917/shared_pools",
+    "right_zone": {
+      "schema": "x5-right-zone-constraint-v1",
+      "enabled": true,
+      "zone_file": "/home/jason/Proyectos3/X5/right_zones/zone3.json",
+      "zone_sha256": "af72eb2d509500513e2faaf14d51d9f886c597d4cfd3abebb505da54874fa888",
+      "reference_urdf": "/home/jason/Proyectos3/X5/model/openarmx.urdf",
+      "reference_urdf_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+      "frame": "world",
+      "tcp": "openarmx_right_hand_tcp",
+      "buffer_m": 0.005,
+      "numerical_tolerance_m": 1e-09,
+      "point_only": true,
+      "left_arm_constrained": false,
+      "stick_constrained": false,
+      "kinematics": "original URDF, saved joint coordinates; identical to safe_zone.geometry.Model",
+      "membership": "recomputed convex hull; signed plane distance <= buffer_m + 1e-9",
+      "point_count": 793,
+      "plane_count": 360,
+      "constraint_sha256": "e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43"
+    }
+  },
+  "events": [
+    {
+      "event": "cache_all",
+      "methods": [
+        "progress",
+        "sweep",
+        "single_arc",
+        "clearance"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "installed",
+      "method": "progress",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/progress-90def465/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/sweep-8e369f85/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/single_arc-9890ac09/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-0eca795b/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": "sweep",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "settings_changed"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "cancel",
+      "kind": "plan"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-279a74d0/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/progress-27271b2e/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/sweep-49cac810/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/single_arc-50aa702a/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "budget_changed"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-96b526a7/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/progress-03f5357c/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/sweep-98913fcc/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/single_arc-ad142f09/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-e7fdd3d8/plan.json"
+    },
+    {
+      "event": "recapture"
+    },
+    {
+      "event": "worker_stopped",
+      "kind": "capture",
+      "method": null,
+      "log": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/capture_6c62a71f/job/worker.log"
+    },
+    {
+      "event": "recapture"
+    },
+    {
+      "event": "scene_installed",
+      "generation": 1
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "scene_cache_restarted"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-1e059c8d/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/progress-f1e58411/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/sweep-edb3f280/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/single_arc-a981372f/plan.json"
+    }
+  ],
+  "generations": 18,
+  "scene_generations": 1,
+  "displayed_method": "clearance",
+  "automatic_precompute": true,
+  "queued_methods": [],
+  "calculating_method": null,
+  "method_states": {
+    "progress": "ready",
+    "sweep": "ready",
+    "single_arc": "ready",
+    "clearance": "ready"
+  },
+  "cached_results": {
+    "clearance": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/clearance-1e059c8d/plan.json",
+    "progress": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/progress-f1e58411/plan.json",
+    "sweep": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/sweep-edb3f280/plan.json",
+    "single_arc": "/home/jason/Proyectos3/X5/diagnostics/gesture_study_20261020/ui_session_v2/plans/single_arc-a981372f/plan.json"
+  },
+  "passed": true,
+  "feature_checks": [
+    {
+      "method": "progress",
+      "played_entire_cycle": true,
+      "duration_s": 104.28276878538827,
+      "selected": 8
+    },
+    {
+      "method": "sweep",
+      "played_entire_cycle": true,
+      "duration_s": 230.5769575659782,
+      "selected": 24
+    },
+    {
+      "method": "single_arc",
+      "played_entire_cycle": true,
+      "duration_s": 17.550464146472564,
+      "selected": 14
+    },
+    {
+      "method": "clearance",
+      "played_entire_cycle": true,
+      "duration_s": 17.585399262380655,
+      "selected": 15
+    },
+    {
+      "play_pause_seek_speed_loop_layers_color_navigation_save": true,
+      "mesh_uploads": 1
+    },
+    {
+      "settings_accept_cancel_presets": true,
+      "cancel_resume": true,
+      "budget_invalidation": true,
+      "generate_reranks_shared_pool": true
+    },
+    {
+      "offline_capture_fixture_and_requeue": true,
+      "capture_failure_recovery": true,
+      "actual_camera_opened": false
+    }
+  ]
+}

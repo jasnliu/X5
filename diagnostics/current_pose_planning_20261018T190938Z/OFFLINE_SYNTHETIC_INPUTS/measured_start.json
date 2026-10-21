@@ -1,0 +1,196 @@
+{
+  "schema": "x5-planner-start-state-v1",
+  "coordinate_convention": "encoder_to_joint",
+  "right_rad": [
+    0.03011352712291071,
+    0.025510185397115137,
+    0.03586770428015562,
+    0.03893659876401934,
+    -0.0656846412604434,
+    -0.19545021744106172,
+    1.338613412680246
+  ],
+  "left_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.3386
+  ],
+  "left_gripper_opening_m": 0.0,
+  "left_gripper_opening_source": "legacy encoder-derived display estimate; not a measured jaw width",
+  "right_gripper_closed_motor_joint_rad": 0.12217304763960307,
+  "right_gripper_closed_field_meaning": "future configured target ONLY; no gripper command was sent",
+  "motor8_feedback": {},
+  "motor_telemetry": {},
+  "preview_only": true,
+  "measured": true,
+  "source": "Read-only disabled-motor CAN encoder snapshot of both arms",
+  "captured_utc": "2026-10-18T19:22:13Z",
+  "measurement_start_monotonic": 100.79999999999995,
+  "measurement_end_monotonic": 100.80999999999996,
+  "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+  "encoder_source_sha256": "03e56325d0a593b75921e6bff6b80b443551af6eeb29473c6da949ac353f7887",
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "synchronization": {
+    "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+    "batch_count": 23,
+    "duration_s": 1.1099999999999426,
+    "maximum_batch_duration_s": 0.010000000000005116,
+    "maximum_batch_start_gap_s": 0.04999999999999716,
+    "joint_spread_deg": {
+      "openarmx_right_joint1": 0.0,
+      "openarmx_right_joint2": 0.0,
+      "openarmx_right_joint3": 0.0,
+      "openarmx_right_joint4": 0.0,
+      "openarmx_right_joint5": 0.0,
+      "openarmx_right_joint6": 0.0,
+      "openarmx_right_joint7": 0.0,
+      "openarmx_left_joint1": 0.0,
+      "openarmx_left_joint2": 0.0,
+      "openarmx_left_joint3": 0.0,
+      "openarmx_left_joint4": 0.0,
+      "openarmx_left_joint5": 0.0,
+      "openarmx_left_joint6": 0.0,
+      "openarmx_left_joint7": 0.0
+    },
+    "camera_received_monotonic": 100.80000000000041,
+    "selected_batch_index": 16,
+    "nearest_midpoint_skew_s": 0.004999999999540705,
+    "bracketing_indices": [
+      15,
+      17
+    ],
+    "all_five_frames": [
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 23,
+        "duration_s": 1.1099999999999426,
+        "maximum_batch_duration_s": 0.010000000000005116,
+        "maximum_batch_start_gap_s": 0.04999999999999716,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.0,
+          "openarmx_right_joint2": 0.0,
+          "openarmx_right_joint3": 0.0,
+          "openarmx_right_joint4": 0.0,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.0,
+          "openarmx_right_joint7": 0.0,
+          "openarmx_left_joint1": 0.0,
+          "openarmx_left_joint2": 0.0,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.0,
+          "openarmx_left_joint6": 0.0,
+          "openarmx_left_joint7": 0.0
+        },
+        "camera_received_monotonic": 100.4000000000004,
+        "selected_batch_index": 8,
+        "nearest_midpoint_skew_s": 0.004999999999569127,
+        "bracketing_indices": [
+          7,
+          9
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 23,
+        "duration_s": 1.1099999999999426,
+        "maximum_batch_duration_s": 0.010000000000005116,
+        "maximum_batch_start_gap_s": 0.04999999999999716,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.0,
+          "openarmx_right_joint2": 0.0,
+          "openarmx_right_joint3": 0.0,
+          "openarmx_right_joint4": 0.0,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.0,
+          "openarmx_right_joint7": 0.0,
+          "openarmx_left_joint1": 0.0,
+          "openarmx_left_joint2": 0.0,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.0,
+          "openarmx_left_joint6": 0.0,
+          "openarmx_left_joint7": 0.0
+        },
+        "camera_received_monotonic": 100.5000000000004,
+        "selected_batch_index": 10,
+        "nearest_midpoint_skew_s": 0.004999999999569127,
+        "bracketing_indices": [
+          9,
+          11
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 23,
+        "duration_s": 1.1099999999999426,
+        "maximum_batch_duration_s": 0.010000000000005116,
+        "maximum_batch_start_gap_s": 0.04999999999999716,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.0,
+          "openarmx_right_joint2": 0.0,
+          "openarmx_right_joint3": 0.0,
+          "openarmx_right_joint4": 0.0,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.0,
+          "openarmx_right_joint7": 0.0,
+          "openarmx_left_joint1": 0.0,
+          "openarmx_left_joint2": 0.0,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.0,
+          "openarmx_left_joint6": 0.0,
+          "openarmx_left_joint7": 0.0
+        },
+        "camera_received_monotonic": 100.6000000000004,
+        "selected_batch_index": 12,
+        "nearest_midpoint_skew_s": 0.004999999999554916,
+        "bracketing_indices": [
+          11,
+          13
+        ]
+      },
+      {
+        "method": "stationary disabled-motor batches; host receive timestamps, NOT hardware synchronization",
+        "batch_count": 23,
+        "duration_s": 1.1099999999999426,
+        "maximum_batch_duration_s": 0.010000000000005116,
+        "maximum_batch_start_gap_s": 0.04999999999999716,
+        "joint_spread_deg": {
+          "openarmx_right_joint1": 0.0,
+          "openarmx_right_joint2": 0.0,
+          "openarmx_right_joint3": 0.0,
+          "openarmx_right_joint4": 0.0,
+          "openarmx_right_joint5": 0.0,
+          "openarmx_right_joint6": 0.0,
+          "openarmx_right_joint7": 0.0,
+          "openarmx_left_joint1": 0.0,
+          "openarmx_left_joint2": 0.0,
+          "openarmx_left_joint3": 0.0,
+          "openarmx_left_joint4": 0.0,
+          "openarmx_left_joint5": 0.0,
+          "openarmx_left_joint6": 0.0,
+          "openarmx_left_joint7": 0.0
+        },
+        "camera_received_monotonic": 100.7000000000004,
+        "selected_batch_index": 14,
+        "nearest_midpoint_skew_s": 0.004999999999554916,
+        "bracketing_indices": [
+          13,
+          15
+        ]
+      }
+    ],
+    "planning_frame_count": 5
+  },
+  "motor_commands": 0,
+  "gripper_commands": 0,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "supported_rest_verified": false,
+  "gripper_closed_physically_verified": false
+}

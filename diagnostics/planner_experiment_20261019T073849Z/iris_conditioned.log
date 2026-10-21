@@ -1,0 +1,36 @@
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision neighborhoods, iteratively refined convex regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 46, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 141, in run
+    from .regions import generate
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/regions.py", line 57
+    except RuntimeError as exc:
+SyntaxError: expected 'except' or 'finally' block
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 107, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 104, in main
+    plan(context,a.folder,a.method,params,a.budget)
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 46, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 141, in run
+    from .regions import generate
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/regions.py", line 57
+    except RuntimeError as exc:
+SyntaxError: expected 'except' or 'finally' block
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/app.py", line 50, in headless
+    target,job=start_plan(folder,method,params,seconds);wait(job)
+                                                        ^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/app.py", line 21, in wait
+    if job.process.returncode:raise RuntimeError('Contained worker stopped; see '+str(job.log_path))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Contained worker stopped; see /home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/iris_gcs-68e68114/worker.log

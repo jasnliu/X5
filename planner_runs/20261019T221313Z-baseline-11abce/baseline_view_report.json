@@ -1,0 +1,136 @@
+{
+  "error": null,
+  "simulated": false,
+  "hardware_status": {
+    "phase": "RELAXED",
+    "error": "",
+    "feedback_error": "",
+    "tau": 0.0,
+    "duration": 16.992611395654055,
+    "rate": 1.0,
+    "started": true,
+    "disabled": true,
+    "tracking_error_deg": [
+      0.02197933771202081,
+      0.02197933771202081,
+      0.0,
+      0.02197933771202081,
+      0.02197933771202081,
+      0.021979337712122585,
+      0.02197933771202081
+    ],
+    "peak_tracking_error_deg": [
+      0.3291653280315053,
+      0.1931277794356615,
+      0.21326615714213704,
+      0.4066535145877514,
+      0.3691493985527309,
+      0.2344698582569093,
+      0.13247513007922967
+    ],
+    "hold_confirmed": false,
+    "right_rad": [
+      -0.002493476768139047,
+      0.04622522316319433,
+      0.5721570153353159,
+      -0.008631265735866478,
+      -0.5256352020294969,
+      0.11527534905012615,
+      0.5917212176699476
+    ],
+    "can_retry_hold": false,
+    "can_relax": false,
+    "can_return": false,
+    "safe_to_close": true,
+    "simulated": false,
+    "session": "/home/jason/Proyectos3/X5/planner_runs/20261019T221313Z-baseline-11abce/controller-3cc54830",
+    "recovery_check_running": false,
+    "connection_error": "",
+    "bus_released": true
+  },
+  "controller": {
+    "schema": "x5-baseline-control-v1",
+    "folder": "/home/jason/Proyectos3/X5/planner_runs/20261019T221313Z-baseline-11abce/controller-3cc54830",
+    "socket": "/run/user/1000/x5-baseline-owner-9c64e451ec2a/control.sock",
+    "token": "8951f0f80b6aa5c6d9d49b456d5e0788336693d43388ccfb2e8904e8d2fe524f",
+    "unit": "x5-baseline-owner-9c64e451ec2a",
+    "simulated": false,
+    "rate": 1.0,
+    "prepared": "/home/jason/Proyectos3/X5/planner_runs/20261019T221313Z-baseline-11abce/prepare-e2541a09/checked/prepared.json",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/20261019T221313Z-baseline-11abce/plan/result/plan.json"
+  },
+  "rendering": {
+    "type": "snapshot_mesh_trajectory_preview",
+    "rendered_updates": 2,
+    "first_displayed_sequence": 5,
+    "last_displayed_sequence": 5,
+    "max_age_at_display_s": 30.106928207009332,
+    "last_frame_compute_s": 0.07013239301159047,
+    "maximum_draw_s": 0.06816995400004089,
+    "worker_submissions": 0,
+    "maximum_pending_jobs": 0,
+    "modes_rendered": [
+      "surface mesh"
+    ],
+    "freeze_count": 0,
+    "resume_count": 0,
+    "mode_switches": 0,
+    "display_point_limit": 18000,
+    "planning_points_downsampled": false,
+    "robot_overlay": true,
+    "renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 324,
+      "maximum_frame_s": 0.06815591800841503,
+      "median_frame_s": 0.0017265835049329326,
+      "surface_geometry_uploads": 2,
+      "surface_color_uploads": 2,
+      "surface_triangles": 17718,
+      "render_errors": []
+    },
+    "robot_overlay_source": "saved plan simulation, not encoders",
+    "plan_file": "/home/jason/Proyectos3/X5/planner_runs/20261019T221313Z-baseline-11abce/plan/result/plan.json",
+    "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+    "animation_draws": 324,
+    "animation_time_s": 0.0,
+    "animation_completed_cycles": 0,
+    "animation_play_clicks": 2,
+    "animation_seeks": 1,
+    "animation_phases_seen": [
+      "HOLD (2 seconds)",
+      "outward"
+    ],
+    "live_collision_revalidation": false,
+    "motion_authorized": false,
+    "hardware_execution_available": false,
+    "camera_updates": false,
+    "mesh_builds": 1,
+    "mesh": {
+      "vertices": 10812,
+      "triangles": 17718,
+      "candidate_triangles": 32000,
+      "rejected_triangles": 14282,
+      "grid_step_pixels": 8,
+      "native_resolution": [
+        1280,
+        800
+      ],
+      "valid_pixels": 758600,
+      "depth_jump_m": 0.03,
+      "relative_depth_jump": 0.02,
+      "max_edge_m": 0.12,
+      "hole_filling": false,
+      "hidden_surface_reconstruction": false,
+      "preview_only": true
+    },
+    "scene_immutable": true,
+    "collision_mesh": false
+  },
+  "last_error": "Baseline collision/zone check failed; no motion: [{'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision', 'stick_center_world': [0.4499382503525303, -0.3877408288455755, 0.30250186588962424], 'valid': False}]"
+}

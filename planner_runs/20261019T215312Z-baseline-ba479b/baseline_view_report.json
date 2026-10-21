@@ -1,0 +1,120 @@
+{
+  "error": null,
+  "simulated": false,
+  "hardware_status": {
+    "phase": "FAULT_HOLD",
+    "error": "Tracking deviation / possible contact; no relaxation",
+    "feedback_error": "",
+    "tau": 0.24570056700031273,
+    "duration": 5.777667766590744,
+    "rate": 1.0,
+    "started": true,
+    "disabled": false,
+    "hold_confirmed": true,
+    "right_rad": [
+      -0.004411535820553425,
+      0.04814328221561048,
+      0.5736914625772478,
+      -0.010549324788280856,
+      -0.5283204847028763,
+      0.12333119707026796,
+      0.5951737239642938
+    ],
+    "can_retry_hold": true,
+    "can_relax": true,
+    "can_return": true,
+    "safe_to_close": false,
+    "simulated": false,
+    "session": "/home/jason/Proyectos3/X5/planner_runs/20261019T215312Z-baseline-ba479b/controller-c80996aa",
+    "recovery_check_running": false,
+    "connection_error": "",
+    "bus_released": false
+  },
+  "controller": {
+    "schema": "x5-baseline-control-v1",
+    "folder": "/home/jason/Proyectos3/X5/planner_runs/20261019T215312Z-baseline-ba479b/controller-c80996aa",
+    "socket": "/run/user/1000/x5-baseline-owner-198a104807da/control.sock",
+    "token": "0010a68a14f596265f2b82e92e8b2fba21c8cf9ff7f1d29e930c823ee03bcfb0",
+    "unit": "x5-baseline-owner-198a104807da",
+    "simulated": false,
+    "rate": 1.0,
+    "prepared": "/home/jason/Proyectos3/X5/planner_runs/20261019T215312Z-baseline-ba479b/prepare-34ac7df6/checked/prepared.json",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/20261019T215312Z-baseline-ba479b/plan/result/plan.json"
+  },
+  "rendering": {
+    "type": "snapshot_mesh_trajectory_preview",
+    "rendered_updates": 2,
+    "first_displayed_sequence": 5,
+    "last_displayed_sequence": 5,
+    "max_age_at_display_s": 26.18876216901117,
+    "last_frame_compute_s": 0.06995693701901473,
+    "maximum_draw_s": 0.06575678201625124,
+    "worker_submissions": 0,
+    "maximum_pending_jobs": 0,
+    "modes_rendered": [
+      "surface mesh"
+    ],
+    "freeze_count": 0,
+    "resume_count": 0,
+    "mode_switches": 0,
+    "display_point_limit": 18000,
+    "planning_points_downsampled": false,
+    "robot_overlay": true,
+    "renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 168,
+      "maximum_frame_s": 0.06574734399328008,
+      "median_frame_s": 0.0017562445136718452,
+      "surface_geometry_uploads": 2,
+      "surface_color_uploads": 2,
+      "surface_triangles": 17744,
+      "render_errors": []
+    },
+    "robot_overlay_source": "saved plan simulation, not encoders",
+    "plan_file": "/home/jason/Proyectos3/X5/planner_runs/20261019T215312Z-baseline-ba479b/plan/result/plan.json",
+    "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+    "animation_draws": 168,
+    "animation_time_s": 9.198653011000715,
+    "animation_completed_cycles": 0,
+    "animation_play_clicks": 1,
+    "animation_seeks": 0,
+    "animation_phases_seen": [
+      "HOLD (2 seconds)",
+      "hold_complete",
+      "outward",
+      "return"
+    ],
+    "live_collision_revalidation": false,
+    "motion_authorized": false,
+    "hardware_execution_available": false,
+    "camera_updates": false,
+    "mesh_builds": 1,
+    "mesh": {
+      "vertices": 10813,
+      "triangles": 17744,
+      "candidate_triangles": 32000,
+      "rejected_triangles": 14256,
+      "grid_step_pixels": 8,
+      "native_resolution": [
+        1280,
+        800
+      ],
+      "valid_pixels": 762187,
+      "depth_jump_m": 0.03,
+      "relative_depth_jump": 0.02,
+      "max_edge_m": 0.12,
+      "hole_filling": false,
+      "hidden_surface_reconstruction": false,
+      "preview_only": true
+    },
+    "scene_immutable": true,
+    "collision_mesh": false
+  },
+  "last_error": ""
+}

@@ -1,0 +1,207 @@
+{
+  "schema": "x5-native-depth-scene-v1",
+  "synthetic": false,
+  "camera": {
+    "protocol": 1,
+    "serial": "AY6R463004K",
+    "name": "Orbbec Gemini 2",
+    "firmware": "1.4.92",
+    "depth_work_mode": "Unbinned Dense Default",
+    "depth": {
+      "width": 1280,
+      "height": 800,
+      "fps": 10,
+      "format_enum": 8,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 800,
+      "K": [
+        [
+          613.611877441,
+          0,
+          634.910949707
+        ],
+        [
+          0,
+          613.611877441,
+          400.3934021
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "color": {
+      "width": 1280,
+      "height": 720,
+      "fps": 15,
+      "format_enum": 0,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 720,
+      "K": [
+        [
+          690.735229492,
+          0,
+          647.398071289
+        ],
+        [
+          0,
+          690.641601562,
+          361.572753906
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        43.8931617737,
+        -99.6809844971,
+        6.35045580566e-05,
+        0.000259708933299,
+        106.131744385,
+        43.7220077515,
+        -99.2912826538,
+        106.184356689
+      ]
+    },
+    "T_color_depth_m": [
+      [
+        0.999998771667,
+        0.000881533622742,
+        -0.00127070999146,
+        -0.0139434547424
+      ],
+      [
+        -0.000879107117653,
+        0.999997776031,
+        0.00190857362747,
+        9.11664962769e-06
+      ],
+      [
+        0.00127239990234,
+        -0.00190747070312,
+        0.999997436523,
+        -0.00182580566406
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "depth_stream_enabled": true,
+    "color_stream_enabled": false,
+    "alignment": "native_depth"
+  },
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "T_base_depth": [
+    [
+      -0.045052558100081574,
+      -0.7443385240172491,
+      0.6662810850966814,
+      0.034195196764152364
+    ],
+    [
+      -0.9988181949234571,
+      0.04573537173282772,
+      -0.016444600525398697,
+      0.023050366975580924
+    ],
+    [
+      -0.018232269875979226,
+      -0.6662344970423257,
+      -0.7455194304414164,
+      0.9585032619308057
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "voxel_size_m": 0.01,
+  "obstacle_padding_m": 0.02,
+  "point_count": 106366,
+  "points_file": "points_base.f32",
+  "free_depth_file": "free_depth_m.bin",
+  "frames": [
+    {
+      "n": 2048000,
+      "sequence": 1,
+      "received_monotonic": 258853.301790952,
+      "device_timestamp_us": 107465453896,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 2,
+      "received_monotonic": 258853.391750329,
+      "device_timestamp_us": 107465553807,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 3,
+      "received_monotonic": 258853.491295894,
+      "device_timestamp_us": 107465653718,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 4,
+      "received_monotonic": 258853.591034169,
+      "device_timestamp_us": 107465753629,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 5,
+      "received_monotonic": 258853.690889358,
+      "device_timestamp_us": 107465853540,
+      "value_scale_m": 0.001
+    }
+  ],
+  "captured_utc": "2026-10-19T21:54:05Z",
+  "depth_fusion": {
+    "method": "nearest_temporally_confirmed_v1",
+    "frame_count": 5,
+    "minimum_support": 3,
+    "maximum_cluster_span_m": 0.02,
+    "spatial_filter": false,
+    "uncertain_pixels": "unknown_not_free",
+    "unconfirmed_foreground": "unknown_not_replaced_with_background",
+    "raw_frames_preserved": true,
+    "confirmed_pixel_count": 762187
+  },
+  "observed_valid_fraction": 0.7443232421875,
+  "fully_observed_fraction": 0.6133056640625,
+  "unknown_space_policy": "unobserved; default planning checks detected obstacles only, not proof of free space",
+  "default_collision_policy": "observed_obstacles",
+  "files_sha256": {
+    "raw_depth.npz": "07b217b2fcdb44f8df4fcdc5479c359b1319cd81833b540ee5acc37e95f8761b",
+    "depth_m.bin": "9d0b005fdd247882359cf7f518033b155cfdd2ab408fb4c475b7e38c77cdfd00",
+    "free_depth_m.bin": "d6de4ea95a7f2053074e80d3b0f0ac0582db54ab11b8658132905edea428bea7",
+    "points_base.f32": "f0e82a48f5c5c128ee6d27fb398efde15ca62dd92625c05861232df45032bdf4"
+  },
+  "physical_depth_alignment_verified": false,
+  "motion_authorized": false,
+  "measured_state_sha256": "ef9cde810998477a052f05461fec41f4ceeefda9263edb1891f783c1fbbe2478",
+  "acquisition": "stationary encoder-bracketed five-frame planning capture"
+}

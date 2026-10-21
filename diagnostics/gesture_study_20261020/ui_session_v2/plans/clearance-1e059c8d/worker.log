@@ -1,0 +1,12 @@
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 1.2s search
+[clearance +   1.9s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 1.2s search
+[clearance +   3.2s] No validated compact route yet; trying unrestricted fallback
+[clearance +   6.2s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +   9.0s] candidate 2: VALID; 36.30s; reversals=5; coordination=12.428; spatial=149.431
+[clearance +   9.0s] SHARED POOL COMPLETE: 1 validated candidates; 8.4s; no recording interiors
+[clearance +   9.2s] clearance: candidate 2, score=6.7121, duration=36.30s
+[clearance +   9.2s] SELECTED candidate 2: lowest clearance score; 1 eligible, equally checked candidates
+[clearance +   9.2s] READY: 36.301s outward → 2s hold → exact reverse; SIMULATION ONLY

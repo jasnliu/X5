@@ -1,0 +1,63 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 1,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": null,
+  "last_frame_compute_s": 0.08187069199630059,
+  "maximum_draw_s": 0.20140218501910567,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "depth points",
+    "mesh + points",
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 3,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_coverage_20261018T195530Z/live_current_pose/plan/plan.json",
+  "plan_warning": "NO TRAJECTORY \u2014 {'link': 'openarmx_right_link1', 'reason': 'unknown_or_occluded_space', 'visibility': {'nearest_camera_z_m': 0.08832617724173132, 'reason': 'body_or_clearance_buffer_too_near_or_behind_camera'}}\nSTART: 11/11 moving links have unverified camera clearance: inside near-depth cutoff, outside depth FOV, missing depth.\nGOAL: 11/11 moving links have unverified camera clearance: inside near-depth cutoff, outside depth FOV, missing depth.\nSafety refusal, not a camera connection failure. The camera does not establish clearance for the whole arm and stick. Improve measured scene coverage; recalibrate if the camera is moved. Unseen space has NOT been marked clear.",
+  "animation_draws": 6,
+  "animation_time_s": 0.0,
+  "animation_completed_cycles": 0,
+  "animation_play_clicks": 0,
+  "animation_seeks": 0,
+  "animation_phases_seen": [
+    "BLOCKED"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 12905,
+    "triangles": 21606,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 10394,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 887805,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "same_planning_scene": true,
+  "can_access": false,
+  "camera_access": false,
+  "planning_frames_used": 5,
+  "historical_snapshot": true
+}

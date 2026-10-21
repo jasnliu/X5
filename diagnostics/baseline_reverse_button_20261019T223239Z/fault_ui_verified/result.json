@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "can_access": false,
+  "physical_motor_commands": 0,
+  "checks": [
+    "button enabled without controller",
+    "button enabled during unconfirmed fault hold",
+    "actual mouse click reaches owner despite fault",
+    "rejection stays visible",
+    "no queued motion after communication restored",
+    "retry establishes measured hold",
+    "retry reverses traveled path",
+    "relax only after verified rest"
+  ],
+  "events": [
+    {
+      "monotonic": 261581.075501353,
+      "phase": "PREFLIGHT",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261581.075753115,
+      "phase": "ARMING",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261581.093163354,
+      "phase": "SETTLING_START",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261581.707305046,
+      "phase": "OUTWARD",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261582.288040002,
+      "phase": "FAULT_HOLD",
+      "tau": 0.5697439429932274,
+      "error": "SIMULATED CAN failure",
+      "hold_confirmed": false,
+      "feedback_error": "SIMULATED CAN failure"
+    },
+    {
+      "monotonic": 261584.404221716,
+      "phase": "CHECKING_RETURN",
+      "tau": 0.5697439429932274
+    },
+    {
+      "monotonic": 261584.955275037,
+      "phase": "RECOVERY",
+      "tau": 0.5697439429932274,
+      "connector_l1_rad": 0.0
+    },
+    {
+      "monotonic": 261588.940595008,
+      "phase": "SETTLING_REST",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261589.554118117,
+      "phase": "VERIFIED_START_POSITION",
+      "tau": 0.0
+    },
+    {
+      "monotonic": 261589.554235852,
+      "phase": "RELAXED",
+      "tau": 0.0
+    }
+  ],
+  "final_status": {
+    "phase": "RELAXED",
+    "error": "",
+    "feedback_error": "",
+    "tau": 0.0,
+    "duration": 5.777667766590744,
+    "rate": 1.0,
+    "started": true,
+    "disabled": true,
+    "tracking_error_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "peak_tracking_error_deg": [
+      2.4848083448933725e-17,
+      3.975693351829396e-16,
+      6.3611093629270335e-15,
+      1.987846675914698e-16,
+      0.0,
+      0.0,
+      6.3611093629270335e-15
+    ],
+    "hold_confirmed": false,
+    "right_rad": [
+      -0.002109864957656526,
+      0.04737605859464366,
+      0.5794456397344926,
+      -0.016687113756008284,
+      -0.53138937918674,
+      0.12256397344930114,
+      0.5951737239642937
+    ],
+    "can_retry_hold": false,
+    "can_relax": false,
+    "can_return": false,
+    "safe_to_close": true,
+    "simulated": true,
+    "session": "/home/jason/Proyectos3/X5/diagnostics/baseline_reverse_button_20261019T223239Z/fault_ui_verified/controller-b25d9755",
+    "recovery_check_running": false,
+    "connection_error": "",
+    "bus_released": true
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "completed": true,
+  "fixes": [
+    "Calibrated coordinate-consistent joint limits",
+    "Initial stick surface and nominal ray-shadow self-filtering"
+  ],
+  "tests": {
+    "planner": 246,
+    "calibration": 110
+  },
+  "actual_live_plan": {
+    "passed": true,
+    "live_camera_and_encoder_capture": true,
+    "candidate_count": 6,
+    "selected_seed": 19,
+    "outward_s": 7.643675770043926,
+    "cycle_s": 17.287351540087855,
+    "raw_right_j4_rad": -0.019756008239872003,
+    "calibrated_model_right_j4_rad": 0.00785829851749336,
+    "full_continuous_polynomial_within_mapped_limits": true,
+    "all_16_motors_remained_disabled": true,
+    "query_packets": 6992,
+    "motor_commands": 0,
+    "mode_changes": 0,
+    "gripper_commands": 0,
+    "relax_commands": 0,
+    "physical_arm_motion_tested": false,
+    "self_filter": {
+      "ambiguous_near_stick_points_excluded": true,
+      "body_padding_m": 0.005,
+      "collision_geometry_changed": false,
+      "drumstick_padding_m": 0.029,
+      "initial_pose_only": true,
+      "nominal_stick_depth_shadow_filter": true,
+      "removed_voxels_per_link": {
+        "right_drumstick": 36
+      },
+      "shadow_points_are_unobserved_not_proven_free": true,
+      "shadow_voxels": 87,
+      "swept_path_masking": false
+    },
+    "physical_alignment_and_clearance_independently_verified": false
+  },
+  "actual_native_playback": {
+    "completed_cycles": 1,
+    "duration_s": 17.287351540087855,
+    "phases": [
+      "HOLD (2 seconds)",
+      "hold_complete",
+      "outward",
+      "return"
+    ],
+    "render_errors": [],
+    "mesh_builds": 1,
+    "camera_access": false,
+    "can_access": false
+  },
+  "physical_arm_motion_tested": false,
+  "source_sha256": {
+    "drum_planner/planning.py": "2b981a11492cb4e45d625c8afbdb2d2ddb70129c5d7e682ec52605cb4d971422",
+    "drum_planner/model.py": "f8e465c6e404fc267a60e259dac9d5434172b19af2b68421d600cf087cbbf4da",
+    "drum_planner/cpp/moveit_plan.cpp": "2254eadc1f1dd5b91404c74b80241e52a6c065c64c521a71acfc93f155c355cc",
+    "tests/test_drum_planner.py": "088a02d2dfb9ed470063575a95641449430824af193fccc66811f49cd598bb88",
+    "tests/test_planner_execution.py": "5cdf6f36876152d31bafe0f92ebddbd07289938e47c9fdc754e3a05c44a20ad7",
+    "DRUM_PLANNER.md": "2fa8a94bfc22ce0f45b0dd11cec5d3dfb0c8757730b6a27361ede42916339658"
+  }
+}

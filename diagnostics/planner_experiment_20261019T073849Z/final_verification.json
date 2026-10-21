@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "completed_utc": "2026-10-19T08:44:37.244207+00:00",
+  "tests": {
+    "planner": 328,
+    "calibration": 110,
+    "total": 438
+  },
+  "methods": {
+    "baseline": {
+      "status": "planned",
+      "elapsed_s": 21.725778363004792,
+      "peak_bytes": 339107840,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/baseline-e69eb22d/plan.json"
+    },
+    "clearance": {
+      "status": "planned",
+      "elapsed_s": 47.49524583900347,
+      "peak_bytes": 344137728,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/clearance-6e0188e4/plan.json"
+    },
+    "robust": {
+      "status": "no_feasible_route",
+      "elapsed_s": 1.5768043090065476,
+      "peak_bytes": 212316160,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/robust-9cb3df1f/plan.json"
+    },
+    "chance": {
+      "status": "planned",
+      "elapsed_s": 45.93140395099181,
+      "peak_bytes": 946593792,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/chance-6197a5ea/plan.json"
+    },
+    "cvar": {
+      "status": "planned",
+      "elapsed_s": 45.98112577199936,
+      "peak_bytes": 944779264,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/cvar-0f8649b8/plan.json"
+    },
+    "families": {
+      "status": "planned",
+      "elapsed_s": 51.73331299299025,
+      "peak_bytes": 367976448,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/families-9a42b52b/plan.json"
+    },
+    "iris_gcs": {
+      "status": "planned",
+      "elapsed_s": 29.884740541980136,
+      "peak_bytes": 921612288,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/iris_gcs-cc399474/plan.json"
+    },
+    "chomp": {
+      "status": "planned",
+      "elapsed_s": 44.37407285600784,
+      "peak_bytes": 994480128,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/chomp-c971bc82/plan.json"
+    },
+    "stomp": {
+      "status": "planned",
+      "elapsed_s": 31.14635773000191,
+      "peak_bytes": 472481792,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/stomp-2c9fefb8/plan.json"
+    }
+  },
+  "independent_verification": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/independent_verification.json",
+  "full_ui": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/ui_full.json",
+  "resilience": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/ui_resilience.json",
+  "actual_cli": {
+    "duration_s": 120,
+    "completed_cycles": 1,
+    "render_errors": [],
+    "mesh_uploads": 1,
+    "median_render_s": 0.0017954445065697655
+  },
+  "preservation": {
+    "passed": true,
+    "protected_files": 43,
+    "changed": [
+      "drum_planner/cli.py",
+      "drum_planner/cpp/CMakeLists.txt"
+    ],
+    "missing": []
+  },
+  "source_sha256": {
+    "drum_planner/experiment/__init__.py": "aed8b64ee6b976372691c43adce3c00a4214fa319084a796a116010bbe6954d3",
+    "drum_planner/experiment/worker.py": "5dff1cb23d65248e5932a865090b175e55b28f1747a98cbd74198900c36b218c",
+    "drum_planner/experiment/app.py": "0645aa0c8bf51d1ec24955841ceb6a5d417aa8f014f245f8cb03b5e9732f43b3",
+    "drum_planner/experiment/runtime.py": "b03416127ef58374dbe873fd6baf2b582d82a06432b86b56c5aa387469cec9d9",
+    "drum_planner/experiment/algorithms.py": "87bf105c3a4c08ef70924f94ff09470c9424b3d992af038bf6a94cf343d20a94",
+    "drum_planner/experiment/config.py": "09eacd304b54b95392a56ac731177071a43bbbabd62e6d8a6a26debe258dd886",
+    "drum_planner/experiment/risk.py": "9c29e36e1c7fe9e4a76d9a3f0f20d5cc74b651634d00ed42834ba4bb16b6af07",
+    "drum_planner/experiment/capture.py": "3c8957f0a7ba6dcc5e0372d6f6b108da09ef37c2a3c7f348e71309329e3a688c",
+    "drum_planner/experiment/regions.py": "c4dc4f980fb1391a79d59a2af493d84f6f3b31099d1d0ca410f134c9f965c55a",
+    "drum_planner/cli.py": "ac47e697828ddbf75c7115202edf81f435b064b2785eded15270fdc65e70a0c6",
+    "drum_planner/cpp/CMakeLists.txt": "86f406aac8ae7393a5155181aab31e4c40900b52338abe551780cefc341c39c7",
+    "drum_planner/cpp/experiment_oracle.cpp": "1d2bc1a0434cf041ba4f399ac5546f7f2f40f41fabe43e40e15e8303e14c8b2e",
+    "tests/test_planner_experiment.py": "1d0bd38f569a30a9efb3cc4f069b0539a1bfbe12287e8fc4d6c39879c336d3c9",
+    "setup_planner_experiment.sh": "f88cc66cc3c7f95375dbcc2102d2841e50d96c21e726f75ab7b38d4f8abaecd2",
+    "drum_planner/experiment/requirements.txt": "364d0028b5e6367fa6861f7255b396fd709b04a94c07cce5558389ef4840f608",
+    "DRUM_PLANNER.md": "e880fa050b413a4e458e78fbc625777fb33467ddc92552a5f245366c6c4af150",
+    "DRUM_PLANNER_EXPERIMENTS.md": "bbff30b562d5e964b41e39132a400a58a3d20c6de8535e8b37266c539bdd4eb1"
+  },
+  "can_queries": 0,
+  "motor_commands": 0,
+  "limitations": [
+    "Robust moderate default rejects the resting endpoint; zero-error robust control is explicitly nominal-only.",
+    "Software scene tests are not hardware validation or guarantees of feasibility for future scenes."
+  ]
+}

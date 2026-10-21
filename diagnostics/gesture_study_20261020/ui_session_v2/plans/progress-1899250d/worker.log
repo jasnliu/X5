@@ -1,0 +1,59 @@
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   3.8s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   6.7s] candidate 2: VALID; 44.05s; reversals=8; coordination=11.153; spatial=133.442
+[progress +   6.8s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  11.8s] candidate 3: VALID; 5.81s; reversals=6; coordination=11.173; spatial=110.683
+[progress +  11.8s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  13.7s] candidate 4: rejected by continuous joint bounds
+[progress +  16.1s] candidate 5: VALID; 32.89s; reversals=7; coordination=12.502; spatial=100.126
+[progress +  16.1s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  18.4s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  19.7s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  22.9s] candidate 8: VALID; 51.14s; reversals=5; coordination=13.749; spatial=71.180
+[progress +  23.0s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  24.1s] candidate 9: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  27.3s] candidate 10: VALID; 52.78s; reversals=4; coordination=12.537; spatial=120.553
+[progress +  27.4s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  29.5s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  29.9s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  31.9s] candidate 13: VALID; 25.40s; reversals=7; coordination=13.467; spatial=218.635
+[progress +  32.1s] arch search 1/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  32.3s] arch search 2/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  32.5s] arch search 3/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  32.7s] arch search 4/10: 3/60 coarse-feasible; best blocked samples 0
+[progress +  32.9s] arch search 5/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  33.1s] arch search 6/10: 6/60 coarse-feasible; best blocked samples 0
+[progress +  33.3s] arch search 7/10: 11/60 coarse-feasible; best blocked samples 0
+[progress +  33.5s] arch search 8/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  33.7s] arch search 9/10: 38/60 coarse-feasible; best blocked samples 0
+[progress +  33.9s] arch search 10/10: 30/60 coarse-feasible; best blocked samples 0
+[progress +  35.1s] candidate 14: VALID; 7.78s; reversals=3; coordination=6.851; spatial=33.805
+[progress +  36.3s] candidate 15: VALID; 7.79s; reversals=6; coordination=7.228; spatial=25.509
+[progress +  37.5s] candidate 16: VALID; 7.88s; reversals=5; coordination=6.791; spatial=27.237
+[progress +  40.0s] partial shortcut (economy): 18 accepted changes; objective 1.6565
+[progress +  40.3s] candidate 17: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  41.3s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  41.3s] candidate 19: timing rejected: Trajectory would be impractically slow; rejected instead of creeping
+[progress +  44.0s] partial shortcut (economy): 25 accepted changes; objective 1.9784
+[progress +  44.1s] candidate 20: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  46.3s] candidate 21: VALID; 31.21s; reversals=3; coordination=9.205; spatial=99.377
+[progress +  47.8s] elastic deformation: 0 accepted updates; objective 1.9871
+[progress +  47.9s] candidate 22: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  49.3s] candidate 23: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  55.3s] candidate 24: VALID; 114.29s; reversals=5; coordination=13.749; spatial=71.180
+[progress +  56.7s] elastic deformation: 0 accepted updates; objective 2.6605
+[progress +  56.8s] candidate 25: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  60.0s] candidate 26: VALID; 52.78s; reversals=4; coordination=12.537; spatial=120.553
+[progress +  60.1s] SHARED POOL COMPLETE: 12 validated candidates; 59.5s; no recording interiors
+[progress +  60.3s] progress: candidate 8, score=1.8935, duration=51.14s
+[progress +  60.3s] progress: candidate 21, score=2.0026, duration=31.21s
+[progress +  60.3s] progress: candidate 10, score=2.1893, duration=52.78s
+[progress +  60.3s] progress: candidate 5, score=2.3469, duration=32.89s
+[progress +  60.3s] progress: candidate 3, score=2.7538, duration=5.81s
+[progress +  60.3s] progress: candidate 2, score=3.3383, duration=44.05s
+[progress +  60.3s] progress: candidate 13, score=3.4606, duration=25.40s
+[progress +  60.3s] SELECTED candidate 8: lowest progress score; 7 eligible, equally checked candidates
+[progress +  60.4s] READY: 51.141s outward → 2s hold → exact reverse; SIMULATION ONLY

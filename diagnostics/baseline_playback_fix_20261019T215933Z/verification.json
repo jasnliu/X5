@@ -1,0 +1,198 @@
+{
+  "passed": true,
+  "physical_trials": [
+    {
+      "passed": true,
+      "trial": "normal",
+      "phases": [
+        "PREFLIGHT",
+        "ARMING",
+        "SETTLING_START",
+        "OUTWARD",
+        "SETTLING_GOAL",
+        "GOAL_HOLD",
+        "RETURN",
+        "SETTLING_REST",
+        "VERIFIED_START_POSITION",
+        "RELAXED"
+      ],
+      "goal_hold_s": 2.008000782021554,
+      "peak_tracking_error_deg": [
+        0.37914354533346295,
+        0.18347749901918814,
+        0.26456463253580453,
+        1.010651629492824,
+        0.6256848897050423,
+        0.4172035833769075,
+        0.07643397505536526
+      ],
+      "pre_release_error_deg": [
+        0.02197933771202081,
+        0.0,
+        0.02197933771202081,
+        0.0,
+        0.02197933771202081,
+        0.021979337712122585,
+        0.02197933771202081
+      ],
+      "right_disabled_confirmed": true,
+      "left_disabled_throughout": true,
+      "left_actuator_commands": 0,
+      "disable_commands": 8,
+      "all_disables_after_verified_rest": true,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 30.0,
+      "packets": {
+        "state_query": 14416,
+        "right_kind_18": 10491,
+        "right_kind_17": 8,
+        "right_kind_3": 8,
+        "right_kind_4": 8
+      },
+      "owner": "/home/jason/Proyectos3/X5/diagnostics/baseline_playback_fix_20261019T215933Z/physical_01/session/controller-9fa7aca7"
+    },
+    {
+      "passed": true,
+      "trial": "hold_return",
+      "phases": [
+        "PREFLIGHT",
+        "ARMING",
+        "SETTLING_START",
+        "OUTWARD",
+        "HELD",
+        "CHECKING_RETURN",
+        "RECOVERY",
+        "SETTLING_REST",
+        "VERIFIED_START_POSITION",
+        "RELAXED"
+      ],
+      "goal_hold_s": null,
+      "peak_tracking_error_deg": [
+        0.24259129354376457,
+        0.10978085821487692,
+        0.14565315948703467,
+        0.6555676252585532,
+        0.4145746424665824,
+        0.29670868167400327,
+        0.056202878635460876
+      ],
+      "pre_release_error_deg": [
+        0.02197933771202081,
+        0.0,
+        0.02197933771202081,
+        0.0,
+        0.02197933771202081,
+        0.02197933771202081,
+        0.0
+      ],
+      "right_disabled_confirmed": true,
+      "left_disabled_throughout": true,
+      "left_actuator_commands": 0,
+      "disable_commands": 8,
+      "all_disables_after_verified_rest": true,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 31.0,
+      "packets": {
+        "state_query": 11648,
+        "right_kind_18": 6592,
+        "right_kind_17": 8,
+        "right_kind_3": 8,
+        "right_kind_4": 8
+      },
+      "owner": "/home/jason/Proyectos3/X5/diagnostics/baseline_playback_fix_20261019T215933Z/physical_02/session/controller-5eff6bbc"
+    },
+    {
+      "passed": true,
+      "trial": "normal",
+      "phases": [
+        "PREFLIGHT",
+        "ARMING",
+        "SETTLING_START",
+        "OUTWARD",
+        "SETTLING_GOAL",
+        "GOAL_HOLD",
+        "RETURN",
+        "SETTLING_REST",
+        "VERIFIED_START_POSITION",
+        "RELAXED"
+      ],
+      "goal_hold_s": 2.002731157001108,
+      "peak_tracking_error_deg": [
+        0.3453055956176413,
+        0.15379129563978852,
+        0.17287738258063826,
+        0.6879881371090281,
+        0.4266633543079746,
+        0.26909162931503133,
+        0.12768082721498822
+      ],
+      "pre_release_error_deg": [
+        0.02197933771202081,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.02197933771202081,
+        0.02197933771202081
+      ],
+      "right_disabled_confirmed": true,
+      "left_disabled_throughout": true,
+      "left_actuator_commands": 0,
+      "disable_commands": 8,
+      "all_disables_after_verified_rest": true,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 31.0,
+      "packets": {
+        "state_query": 20480,
+        "right_kind_18": 14614,
+        "right_kind_17": 8,
+        "right_kind_3": 8,
+        "right_kind_4": 8
+      },
+      "owner": "/home/jason/Proyectos3/X5/diagnostics/baseline_playback_fix_20261019T215933Z/physical_03/session/controller-5892c88f"
+    }
+  ],
+  "notifications_accepted": 3,
+  "regression": "494 passed in 105.52s (0:01:45)",
+  "mock_ui_cases": [
+    "relax_while_moving",
+    "one_click_reverse",
+    "manual_relax_after_can_fault",
+    "one_click_controller_exit",
+    "close_window_and_reconnect",
+    "normal_cycle"
+  ],
+  "native_ui_windows": 1,
+  "resolution_layout_checks": [
+    [
+      1440,
+      900
+    ],
+    [
+      1120,
+      820
+    ],
+    [
+      1280,
+      800
+    ]
+  ],
+  "source_changes": [
+    "drum_planner/cli.py",
+    "drum_planner/baseline/app.py",
+    "drum_planner/baseline/motion.py",
+    "tests/test_baseline_hardware.py",
+    "BASELINE_HARDWARE.md"
+  ],
+  "added": [
+    "tests/test_baseline_ui.py"
+  ],
+  "protected_unchanged": 176,
+  "planner_algorithm_unchanged": true,
+  "recordings_unchanged": true,
+  "left_actuator_commands": 0,
+  "no_midair_relax": true,
+  "real_drive_fault_tests": false,
+  "active_can_lock_owners": [],
+  "first_trial_post_completion_ui_close_race": "Fixed; both subsequent physical trials and digital workflows close without errors"
+}

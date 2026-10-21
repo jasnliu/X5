@@ -58,11 +58,13 @@ def start(app):
         if getattr(getattr(app, 'dual', None), 'snare_template', None) is not None:
             raise RuntimeError('Left snare controller missing')
         return
+    # No acoustic snare offset: both real and simulated sessions start with
+    # zero advance. Keep the existing reference-descent lead and eighth grid.
     s.start_swing(app.strike_bpm)
     app.bus.left_monitor = None  # J6 intentionally leaves endpoint during hit.
     app.bus.left_playback_active = True  # Fresh running/gripper supervision remains.
     print('SNARE: powered +11°; 1 or 2 random eighth notes (1–8) per four-quarter-note measure; '
-          'spaced for full unchanged return, including bar boundaries', flush=True)
+          'no calibrated offset; spaced for full unchanged return, including bar boundaries', flush=True)
 
 
 def finish(app):
@@ -95,7 +97,9 @@ def tick(dual, now):
     if state.completed > getattr(dual, 'snare_seen_completed', 0):
         dual.snare_seen_completed = state.completed
         evidence = 'simulated reference' if getattr(a, 'test_mode', False) else 'measured peak'
-        print(f'SNARE measure {state.measure}, eighth note {state.beat}/8: +11° powered; '
+        label = (f'SNARE calibration pair {state.strike_index}' if state.calibrating else
+                 f'SNARE measure {state.measure}, eighth note {state.beat}/8')
+        print(f'{label}: +11° powered; '
               f'{evidence} {math.degrees(state.peak_drop):.2f}°; returned', flush=True)
 
 

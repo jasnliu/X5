@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "protected_files_checked": 158,
+  "unchanged_protected_files": 157,
+  "intentional_camera_bridge_change": {
+    "drum_planner/cpp/depth_capture.cpp": {
+      "before": "fa98d157b4703029e18f8d14750c1a00a87d343272e7ed33e1afcb7c545fdd49",
+      "after": "2676fb4a4d735c05e80bc35adf92a06c680b85e903e49d385b23bd5dc47c9942"
+    }
+  },
+  "camera_bridge_change_reason": "Optional --single-frame exits native SDK cleanly after one frame; default live mode unchanged",
+  "can_counters_unchanged": true,
+  "can_after": {
+    "can0": {
+      "tx_packets": 2298816,
+      "rx_packets": 2298856
+    },
+    "can1": {
+      "tx_packets": 1408,
+      "rx_packets": 1456
+    }
+  },
+  "recordings_calibration_original_robot_model_and_saved_plans_unchanged": true
+}

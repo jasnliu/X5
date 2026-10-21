@@ -1,0 +1,227 @@
+[baseline +   0.0s] Existing 40/30/20/10 workspace, bending, proximity, joint-economy score with a 2x fastest-valid duration cap.
+[baseline +   0.0s] building/loading model + frozen FCL world; no motor access
+Candidate 1/6, seed 19: blocked_after_smoothing
+Candidate 2/6, seed 7938: blocked_after_smoothing
+Candidate 3/6, seed 15857: planned
+Candidate 4/6, seed 23776: planned
+Candidate 5/6, seed 31695: planned
+Candidate 6/6, seed 39614: planned
+Checking candidate 6, smooth: 8.186s outward (fastest valid reference)
+Checking candidate 3, smooth: 8.541s outward (fastest valid reference)
+Route score candidate 3, smooth: 100.00 (lower is better), 8.541s
+Route score candidate 5, smooth: 85.76 (lower is better), 8.879s
+Checking candidate 5, smooth: 8.879s outward (best route score)
+Selected candidate 5/6 (seed 31695): route score 85.76, 8.879s outward, 19.758s full cycle
+[baseline +  21.2s] READY: 8.879s outward → 2s hold → exact reverse; SIMULATION ONLY
+[clearance +   0.0s] Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.
+[clearance +   0.0s] building/loading model + frozen FCL world; no motor access
+[clearance +   0.7s] search 1: 5.0s allocation, added clearance 0.0 mm
+[clearance +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +   7.9s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[clearance +   7.9s] search 2: 5.0s allocation, added clearance 0.0 mm
+[clearance +  12.4s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[clearance +  12.4s] search 3: 5.0s allocation, added clearance 5.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  20.0s] search 4: 5.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  26.6s] search 5: 5.0s allocation, added clearance 20.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  32.7s] search 6: 5.0s allocation, added clearance 40.0 mm
+[worker] FCL/solver operation running: 5s
+[worker] FCL/solver operation running: 10s
+[clearance +  45.6s] READY: 6.762s outward → 2s hold → exact reverse; SIMULATION ONLY
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.6s] robust envelope: +24.3 mm world, 22.1 mm self bound
+[robust +   1.1s] NO FEASIBLE ROUTE: endpoint_blocked_by_error_envelope
+[chance +   0.0s] From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.
+[chance +   0.0s] building/loading model + frozen FCL world; no motor access
+[chance +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chance +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   7.9s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[chance +   7.9s] search 2: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[chance +  15.1s] search 3: 3.0s allocation, added clearance 0.0 mm
+[chance +  18.9s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[chance +  18.9s] search 4: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[chance +  25.5s] candidate 1: evaluating 64 common uncertainty scenarios
+[chance +  28.8s] scenarios 8/64
+[chance +  32.1s] scenarios 16/64
+[chance +  35.4s] scenarios 24/64
+[chance +  38.7s] scenarios 32/64
+[chance +  42.1s] scenarios 40/64
+[chance +  45.4s] scenarios 48/64
+[chance +  48.7s] scenarios 56/64
+[chance +  52.0s] scenarios 64/64
+[chance +  52.0s] candidate rejected: scenario upper bound 0.997 > 0.150
+[chance +  52.0s] candidate 2: evaluating 64 common uncertainty scenarios
+[chance +  55.4s] scenarios 8/64
+[chance +  58.7s] scenarios 16/64
+[chance +  62.0s] scenarios 24/64
+[chance +  62.0s] budget reached; partial scenario estimates discarded
+[chance +  62.0s] NO FEASIBLE ROUTE: no_candidate_passed_complete_scenario_evaluation
+[cvar +   0.0s] From-scratch candidate search + CVaR of worst scenario clearance/collision losses. Optimizes the bad tail rather than mean proximity; nominal full-body validity remains mandatory.
+[cvar +   0.0s] building/loading model + frozen FCL world; no motor access
+[cvar +   0.7s] search 1: 3.0s allocation, added clearance 0.0 mm
+[cvar +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +   7.9s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[cvar +   7.9s] search 2: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[cvar +  15.1s] search 3: 3.0s allocation, added clearance 0.0 mm
+[cvar +  18.9s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[cvar +  18.9s] search 4: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[cvar +  25.4s] candidate 1: evaluating 64 common uncertainty scenarios
+[cvar +  28.7s] scenarios 8/64
+[cvar +  32.1s] scenarios 16/64
+[cvar +  35.4s] scenarios 24/64
+[cvar +  38.7s] scenarios 32/64
+[cvar +  42.0s] scenarios 40/64
+[cvar +  45.3s] scenarios 48/64
+[cvar +  48.6s] scenarios 56/64
+[cvar +  51.9s] scenarios 64/64
+[cvar +  51.9s] candidate 2: evaluating 64 common uncertainty scenarios
+[cvar +  55.3s] scenarios 8/64
+[cvar +  58.5s] scenarios 16/64
+[cvar +  61.8s] scenarios 24/64
+[cvar +  61.9s] budget reached; partial scenario estimates discarded
+[cvar +  61.9s] READY: 50.094s outward → 2s hold → exact reverse; SIMULATION ONLY
+[families +   0.0s] Joint-space waypoint and independent-route search, geometric route-family clustering, then clearance-first ranking. This is a diversity heuristic, not a proof of distinct mathematical homotopy classes.
+[families +   0.0s] building/loading model + frozen FCL world; no motor access
+[families +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[families +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +   7.9s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[families +   7.9s] search 2: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[families +  15.0s] search 3: 3.0s allocation, added clearance 0.0 mm
+[families +  18.9s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[families +  18.9s] search 4: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[families +  25.4s] search 5: 3.0s allocation, added clearance 0.0 mm
+[families +  28.7s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  33.0s] candidate 3: valid, 59.92s outward, transit clearance 30.0 mm
+[families +  33.1s] search 6: 3.0s allocation, added clearance 10.0 mm
+[families +  36.2s] search 7: 2.0s allocation, added clearance 0.0 mm
+[families +  38.8s] search 8: 2.0s allocation, added clearance 0.0 mm
+[families +  41.0s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  43.3s] candidate 4: valid, 20.60s outward, transit clearance 35.0 mm
+[families +  43.3s] search 9: 2.0s allocation, added clearance 0.0 mm
+[families +  44.8s] search 10: 2.0s allocation, added clearance 0.0 mm
+[families +  46.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  49.1s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  49.1s] candidate 5: rejected by final bounds/collision checks
+[families +  49.1s] READY: 20.604s outward → 2s hold → exact reverse; SIMULATION ONLY
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision points, iteratively refined convex regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+[iris_gcs +   0.7s] search 1: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   3.8s] search 2: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   6.8s] IRIS region 1/12: 7 full-body collision witnesses, 18 faces
+[iris_gcs +   6.8s] IRIS region 2/12: 38 full-body collision witnesses, 24 faces
+[iris_gcs +   6.9s] IRIS region 3/12: 15 full-body collision witnesses, 20 faces
+[iris_gcs +   6.9s] IRIS region 4/12: 15 full-body collision witnesses, 22 faces
+[iris_gcs +   6.9s] IRIS region 5/12: 23 full-body collision witnesses, 21 faces
+[iris_gcs +   7.0s] IRIS region 6/12: 80 full-body collision witnesses, 34 faces
+[iris_gcs +   7.0s] IRIS region 7/12: 18 full-body collision witnesses, 20 faces
+[iris_gcs +   7.1s] IRIS region 8/12: 16 full-body collision witnesses, 22 faces
+[iris_gcs +   7.2s] IRIS region 9/12: 114 full-body collision witnesses, 30 faces
+[iris_gcs +   7.3s] IRIS region 10/12: 68 full-body collision witnesses, 37 faces
+[iris_gcs +   7.4s] IRIS region 11/12: 108 full-body collision witnesses, 43 faces
+[iris_gcs +   7.5s] IRIS region 12/12: 148 full-body collision witnesses, 38 faces
+[iris_gcs +   7.5s] GCS: 12 regions, convex relaxation + rounding, refinement 0
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +   8.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +   8.4s] GCS: 12 regions, convex relaxation + rounding, refinement 1
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +   9.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +   9.4s] GCS: 12 regions, convex relaxation + rounding, refinement 2
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  10.1s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  10.1s] GCS: 12 regions, convex relaxation + rounding, refinement 3
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  10.8s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  10.8s] GCS: 12 regions, convex relaxation + rounding, refinement 4
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  11.4s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  11.5s] GCS: 12 regions, convex relaxation + rounding, refinement 5
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  12.0s] GCS refinement: 32 new whole-robot collision witnesses; rebuilding affected IRIS regions
+[iris_gcs +  12.0s] NO FEASIBLE ROUTE: sampled_regions_missed_collision_final_FCL_rejected
+[chomp +   0.0s] Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.
+[chomp +   0.0s] building/loading model + frozen FCL world; no motor access
+[chomp +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chomp +   3.8s] CHOMP: native MoveIt optimization, initialization 1 (new geometric path)
+[chomp +   7.9s] candidate 1: valid, 29.63s outward, transit clearance 70.0 mm
+[chomp +   7.9s] search 3: 3.0s allocation, added clearance 0.0 mm
+[chomp +  10.8s] CHOMP: native MoveIt optimization, initialization 2 (new geometric path)
+[chomp +  14.5s] candidate 2: valid, 20.66s outward, transit clearance 110.0 mm
+[chomp +  14.5s] search 5: 3.0s allocation, added clearance 0.0 mm
+[chomp +  16.6s] CHOMP: native MoveIt optimization, initialization 3 (new geometric path)
+[chomp +  18.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  23.9s] candidate 3: valid, 82.81s outward, transit clearance 30.0 mm
+[chomp +  23.9s] search 7: 3.0s allocation, added clearance 0.0 mm
+[chomp +  26.4s] CHOMP: native MoveIt optimization, initialization 4 (new geometric path)
+[chomp +  27.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  32.8s] candidate 4: valid, 69.99s outward, transit clearance 30.0 mm
+[chomp +  32.8s] search 9: 3.0s allocation, added clearance 0.0 mm
+[chomp +  35.1s] CHOMP: native MoveIt optimization, initialization 5 (new geometric path)
+[chomp +  36.6s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  42.3s] candidate 5: valid, 84.53s outward, transit clearance 30.0 mm
+[chomp +  42.3s] READY: 20.663s outward → 2s hold → exact reverse; SIMULATION ONLY
+[stomp +   0.0s] Installed MoveIt STOMP, initialized by a new camera/model-planned path. Native stochastic rollouts and smoothing followed by independent dense FCL validation.
+[stomp +   0.0s] building/loading model + frozen FCL world; no motor access
+-- Found moveit_core: 2.12.4 (/opt/ros/jazzy/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found tcb_span: 1.3.2 (/opt/ros/jazzy/share/tcb_span/cmake)
+-- Found rclcpp_lifecycle: 28.1.22 (/opt/ros/jazzy/share/rclcpp_lifecycle/cmake)
+-- Found parameter_traits: 0.7.6 (/opt/ros/jazzy/share/parameter_traits/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: serialization filesystem system 
+-- Found chomp_motion_planner: 2.12.4 (/opt/ros/jazzy/share/chomp_motion_planner/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jason/Proyectos3/X5/drum_planner/build/experiment
+[ 50%] Building CXX object CMakeFiles/experiment_oracle.dir/experiment_oracle.cpp.o
+[100%] Linking CXX executable experiment_oracle
+[100%] Built target experiment_oracle
+[stomp +  15.2s] search 1: 3.0s allocation, added clearance 0.0 mm
+[stomp +  18.3s] STOMP: native MoveIt optimization, initialization 1 (new geometric path)
+[stomp +  18.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  19.4s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  19.4s] candidate 1: rejected by final bounds/collision checks
+[stomp +  19.4s] search 3: 3.0s allocation, added clearance 0.0 mm
+[stomp +  22.3s] STOMP: native MoveIt optimization, initialization 2 (new geometric path)
+[stomp +  22.9s] search 5: 3.0s allocation, added clearance 0.0 mm
+[stomp +  25.0s] STOMP: native MoveIt optimization, initialization 3 (new geometric path)
+[stomp +  25.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  29.5s] candidate 3: valid, 44.30s outward, transit clearance 30.0 mm
+[stomp +  29.5s] search 7: 3.0s allocation, added clearance 0.0 mm
+[stomp +  32.0s] STOMP: native MoveIt optimization, initialization 4 (new geometric path)
+[stomp +  32.5s] search 9: 3.0s allocation, added clearance 0.0 mm
+[stomp +  34.7s] STOMP: native MoveIt optimization, initialization 5 (new geometric path)
+[stomp +  35.5s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  39.1s] candidate 5: valid, 45.17s outward, transit clearance 30.0 mm
+[stomp +  39.1s] search 11: 3.0s allocation, added clearance 0.0 mm
+[stomp +  41.7s] STOMP: native MoveIt optimization, initialization 6 (new geometric path)
+[stomp +  42.1s] READY: 45.169s outward → 2s hold → exact reverse; SIMULATION ONLY
+{'baseline': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/baseline-089b7ec5/plan.json'}, 'clearance': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/clearance-d8ac859a/plan.json'}, 'robust': {'status': 'no_feasible_route', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/robust-29631493/plan.json'}, 'chance': {'status': 'no_feasible_route', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/chance-a5dde488/plan.json'}, 'cvar': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/cvar-b1142037/plan.json'}, 'families': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/families-de6f39c4/plan.json'}, 'iris_gcs': {'status': 'no_feasible_route', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/iris_gcs-8c2ae3c1/plan.json'}, 'chomp': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/chomp-a013aae9/plan.json'}, 'stomp': {'status': 'planned', 'plan': '/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/stomp-b4a20f56/plan.json'}}

@@ -1,0 +1,298 @@
+Running as unit: x5-autocache-ui-1792429579.service; invocation ID: 55b299f3479441a180440fee33d26d4e
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json
+The physical pose is NOT measured. All modes use one frozen scene and record3 FINAL pose only.
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 122,954 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/capture_000/camera
+[experiment cache] Automatically queued: clearance, baseline, robust, chance, cvar, families, iris_gcs, chomp, stomp. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 8 other methods queued.
+[clearance +   0.0s] Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.
+[clearance +   0.0s] building/loading model + frozen FCL world; no motor access
+[clearance +   0.6s] search 1: 5.0s allocation, added clearance 0.0 mm
+[clearance +   4.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +   7.3s] candidate 1: valid, 23.17s outward, transit clearance 30.0 mm
+[clearance +   7.3s] search 2: 5.0s allocation, added clearance 0.0 mm
+[clearance +  10.3s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +  12.7s] candidate 2: valid, 23.08s outward, transit clearance 30.0 mm
+[clearance +  12.7s] search 3: 5.0s allocation, added clearance 5.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  20.3s] search 4: 5.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  26.9s] search 5: 5.0s allocation, added clearance 20.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  33.1s] search 6: 5.0s allocation, added clearance 40.0 mm
+[worker] FCL/solver operation running: 5s
+[worker] FCL/solver operation running: 10s
+[clearance +  46.3s] READY: 23.084s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting baseline; 7 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, bending, proximity, joint-economy score with a 2x fastest-valid duration cap.
+[baseline +   0.0s] building/loading model + frozen FCL world; no motor access
+Candidate 1/6, seed 19: blocked_after_smoothing
+Candidate 2/6, seed 7938: planned
+Candidate 3/6, seed 15857: planned
+Candidate 4/6, seed 23776: planned
+Candidate 5/6, seed 31695: planned
+Candidate 6/6, seed 39614: planned
+Checking candidate 5, smooth: 7.500s outward (fastest valid reference)
+Checking candidate 4, smooth: 8.503s outward (fastest valid reference)
+Checking candidate 2, smooth: 8.854s outward (fastest valid reference)
+Checking candidate 6, smooth: 10.368s outward (fastest valid reference)
+Route score candidate 3, smooth: 90.50 (lower is better), 13.098s
+Route score candidate 6, smooth: 100.00 (lower is better), 10.368s
+Checking candidate 3, smooth: 13.098s outward (best route score)
+Selected candidate 3/6 (seed 15857): route score 90.50, 13.098s outward, 28.196s full cycle
+[baseline +  24.9s] READY: 13.098s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting robust; 6 other methods queued.
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.7s] robust envelope: +24.3 mm world, 22.1 mm self bound
+[robust +   1.1s] search 1: 3.0s allocation, added clearance 24.3 mm
+[worker] FCL/solver operation running: 5s
+[robust +   7.3s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   7.8s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   7.8s] candidate 1: rejected by final bounds/collision checks
+[robust +   7.8s] search 2: 3.0s allocation, added clearance 24.3 mm
+[robust +  11.4s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  11.9s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  12.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  12.3s] candidate 2: rejected by final bounds/collision checks
+[robust +  12.3s] search 3: 3.0s allocation, added clearance 24.3 mm
+[robust +  15.4s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  15.8s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  16.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  16.3s] candidate 3: rejected by final bounds/collision checks
+[robust +  16.3s] search 4: 3.0s allocation, added clearance 24.3 mm
+[robust +  19.9s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  20.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  20.3s] candidate 4: rejected by final bounds/collision checks
+[robust +  20.3s] search 5: 3.0s allocation, added clearance 24.3 mm
+[robust +  23.7s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  24.1s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  24.1s] candidate 5: rejected by final bounds/collision checks
+[robust +  24.1s] NO FEASIBLE ROUTE: no_valid_route_within_budget
+[experiment cache] Cached robust: no_feasible_route.
+[experiment cache] Starting chance; 5 other methods queued.
+[chance +   0.0s] From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.
+[chance +   0.0s] building/loading model + frozen FCL world; no motor access
+[chance +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chance +   4.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   7.3s] candidate 1: valid, 23.17s outward, transit clearance 30.0 mm
+[chance +   7.3s] search 2: 3.0s allocation, added clearance 0.0 mm
+[chance +  10.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +  12.7s] candidate 2: valid, 23.08s outward, transit clearance 30.0 mm
+[chance +  12.7s] risk candidate pool: native CHOMP broad-route proposal from a newly planned seed
+[chance +  14.4s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +  14.8s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +  19.8s] candidate 3: valid, 70.22s outward, transit clearance 30.0 mm
+[chance +  19.8s] evaluating 64 common uncertainty scenarios across 3 candidates
+[chance +  23.4s] scenarios 8/64 × 3 candidates (shared scene work)
+[chance +  26.8s] scenarios 16/64 × 3 candidates (shared scene work)
+[chance +  30.3s] scenarios 24/64 × 3 candidates (shared scene work)
+[chance +  33.8s] scenarios 32/64 × 3 candidates (shared scene work)
+[chance +  37.3s] scenarios 40/64 × 3 candidates (shared scene work)
+[chance +  40.7s] scenarios 48/64 × 3 candidates (shared scene work)
+[chance +  44.2s] scenarios 56/64 × 3 candidates (shared scene work)
+[chance +  47.7s] scenarios 64/64 × 3 candidates (shared scene work)
+[chance +  47.7s] candidate 2 rejected: scenario upper bound 1.000 > 0.150
+[chance +  47.7s] candidate 3 rejected: scenario upper bound 1.000 > 0.150
+[chance +  47.7s] candidate 1 rejected: scenario upper bound 0.998 > 0.150
+[chance +  47.7s] NO FEASIBLE ROUTE: chance_bound_exceeded_for_all_candidates
+[experiment cache] Cached chance: no_feasible_route.
+[experiment cache] Starting cvar; 4 other methods queued.
+[cvar +   0.0s] From-scratch candidate search + CVaR of worst scenario clearance/collision losses. Optimizes the bad tail rather than mean proximity; nominal full-body validity remains mandatory.
+[cvar +   0.0s] building/loading model + frozen FCL world; no motor access
+[cvar +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[cvar +   4.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +   7.3s] candidate 1: valid, 23.17s outward, transit clearance 30.0 mm
+[cvar +   7.3s] search 2: 3.0s allocation, added clearance 0.0 mm
+[cvar +  10.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +  12.7s] candidate 2: valid, 23.08s outward, transit clearance 30.0 mm
+[cvar +  12.7s] risk candidate pool: native CHOMP broad-route proposal from a newly planned seed
+[cvar +  14.4s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +  14.8s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +  19.8s] candidate 3: valid, 70.22s outward, transit clearance 30.0 mm
+[cvar +  19.8s] evaluating 64 common uncertainty scenarios across 3 candidates
+[cvar +  23.3s] scenarios 8/64 × 3 candidates (shared scene work)
+[cvar +  26.8s] scenarios 16/64 × 3 candidates (shared scene work)
+[cvar +  30.2s] scenarios 24/64 × 3 candidates (shared scene work)
+[cvar +  33.7s] scenarios 32/64 × 3 candidates (shared scene work)
+[cvar +  37.1s] scenarios 40/64 × 3 candidates (shared scene work)
+[cvar +  40.6s] scenarios 48/64 × 3 candidates (shared scene work)
+[cvar +  44.1s] scenarios 56/64 × 3 candidates (shared scene work)
+[cvar +  47.5s] scenarios 64/64 × 3 candidates (shared scene work)
+[cvar +  47.5s] READY: 23.084s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached cvar: planned.
+[experiment cache] Starting families; 3 other methods queued.
+[families +   0.0s] Joint-space waypoint and independent-route search, geometric route-family clustering, then clearance-first ranking. This is a diversity heuristic, not a proof of distinct mathematical homotopy classes.
+[families +   0.0s] building/loading model + frozen FCL world; no motor access
+[families +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[families +   4.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +   7.3s] candidate 1: valid, 23.17s outward, transit clearance 30.0 mm
+[families +   7.3s] search 2: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[families +  14.4s] search 3: 3.0s allocation, added clearance 0.0 mm
+[families +  18.3s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[families +  18.3s] search 4: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[families +  24.8s] search 5: 3.0s allocation, added clearance 0.0 mm
+[families +  28.0s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  30.6s] candidate 3: valid, 25.17s outward, transit clearance 35.0 mm
+[families +  30.6s] search 6: 3.0s allocation, added clearance 10.0 mm
+[families +  33.9s] search 7: 2.0s allocation, added clearance 0.0 mm
+[families +  36.1s] search 8: 2.0s allocation, added clearance 0.0 mm
+[families +  39.7s] candidate 4: valid, 7.05s outward, transit clearance 35.0 mm
+[families +  39.7s] search 9: 2.0s allocation, added clearance 0.0 mm
+[families +  41.0s] search 10: 2.0s allocation, added clearance 0.0 mm
+[families +  42.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  43.7s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[families +  47.4s] candidate 5: valid, 48.76s outward, transit clearance 30.0 mm
+[families +  47.4s] search 11: 2.0s allocation, added clearance 0.0 mm
+[families +  50.2s] search 12: 2.0s allocation, added clearance 0.0 mm
+[families +  54.5s] candidate 6: valid, 10.93s outward, transit clearance 35.0 mm
+[families +  54.5s] READY: 10.933s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached families: planned.
+[experiment cache] Starting iris_gcs; 2 other methods queued.
+[iris_gcs +   0.0s] IRIS with sampled FCL configuration-space collision witnesses and inward-shrunk cells, iteratively refined regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.
+[iris_gcs +   0.0s] building/loading model + frozen FCL world; no motor access
+[iris_gcs +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   4.7s] search 2: 3.0s allocation, added clearance 0.0 mm
+[iris_gcs +   7.2s] IRIS seeding: adding a fresh native-CHOMP broad-route proposal
+[iris_gcs +   8.9s] IRIS region 1/32: 82 full-body collision witnesses, 31 faces
+[iris_gcs +   9.0s] IRIS region 2/32: 77 full-body collision witnesses, 33 faces
+[iris_gcs +   9.1s] IRIS region 3/32: 103 full-body collision witnesses, 41 faces
+[iris_gcs +   9.2s] IRIS region 4/32: 102 full-body collision witnesses, 36 faces
+[iris_gcs +   9.3s] IRIS region 5/32: 74 full-body collision witnesses, 27 faces
+[iris_gcs +   9.4s] IRIS region 6/32: 84 full-body collision witnesses, 36 faces
+[iris_gcs +   9.5s] IRIS region 7/32: 125 full-body collision witnesses, 46 faces
+[iris_gcs +   9.6s] IRIS region 8/32: 90 full-body collision witnesses, 34 faces
+[iris_gcs +   9.7s] IRIS region 9/32: 55 full-body collision witnesses, 27 faces
+[iris_gcs +   9.8s] IRIS region 10/32: 55 full-body collision witnesses, 26 faces
+[iris_gcs +   9.8s] IRIS region 11/32: 71 full-body collision witnesses, 28 faces
+[iris_gcs +   9.9s] IRIS region 12/32: 49 full-body collision witnesses, 21 faces
+[iris_gcs +   9.9s] IRIS region 13/32: 28 full-body collision witnesses, 24 faces
+[iris_gcs +  10.0s] IRIS region 14/32: 19 full-body collision witnesses, 25 faces
+[iris_gcs +  10.0s] IRIS region 15/32: 13 full-body collision witnesses, 20 faces
+[iris_gcs +  10.1s] IRIS region 16/32: 55 full-body collision witnesses, 33 faces
+[iris_gcs +  10.1s] IRIS region 17/32: 46 full-body collision witnesses, 34 faces
+[iris_gcs +  10.2s] IRIS region 18/32: 31 full-body collision witnesses, 20 faces
+[iris_gcs +  10.2s] IRIS region 19/32: 30 full-body collision witnesses, 23 faces
+[iris_gcs +  10.2s] IRIS region 20/32: 22 full-body collision witnesses, 24 faces
+[iris_gcs +  10.3s] IRIS region 21/32: 11 full-body collision witnesses, 19 faces
+[iris_gcs +  10.3s] IRIS region 22/32: 40 full-body collision witnesses, 32 faces
+[iris_gcs +  10.4s] IRIS region 23/32: 24 full-body collision witnesses, 31 faces
+[iris_gcs +  10.4s] IRIS region 24/32: 15 full-body collision witnesses, 19 faces
+[iris_gcs +  10.4s] IRIS region 25/32: 19 full-body collision witnesses, 19 faces
+[iris_gcs +  10.4s] IRIS region 26/32: 19 full-body collision witnesses, 21 faces
+[iris_gcs +  10.5s] IRIS region 27/32: 20 full-body collision witnesses, 22 faces
+[iris_gcs +  10.5s] IRIS region 28/32: 14 full-body collision witnesses, 21 faces
+[iris_gcs +  10.6s] IRIS region 29/32: 18 full-body collision witnesses, 22 faces
+[iris_gcs +  10.6s] IRIS region 30/32: 19 full-body collision witnesses, 20 faces
+[iris_gcs +  10.6s] IRIS region 31/32: 22 full-body collision witnesses, 27 faces
+[iris_gcs +  10.7s] IRIS region 32/32: 17 full-body collision witnesses, 24 faces
+[iris_gcs +  10.7s] GCS: 32 regions, convex relaxation + rounding, refinement 0; endpoint cells 2/5
+[iris_gcs +  10.7s] GCS sparse graph: 32 regions / 98 directed edges
+INFO:drake:Solved GCS shortest path using Clarabel with convex_relaxation=true and preprocessing=true and rounding.
+INFO:drake:Found 4 unique paths, discarded 0 duplicate paths.
+INFO:drake:Finished 4 rounding solutions with Clarabel.
+[iris_gcs +  13.5s] candidate 1: valid, 10.43s outward, transit clearance 35.0 mm
+[iris_gcs +  13.5s] READY: 10.426s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached iris_gcs: planned.
+[experiment cache] Starting chomp; 1 other methods queued.
+[chomp +   0.0s] Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.
+[chomp +   0.0s] building/loading model + frozen FCL world; no motor access
+[chomp +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chomp +   4.7s] CHOMP: native MoveIt optimization, initialization 1 (new geometric path)
+[chomp +   8.4s] candidate 1: valid, 21.56s outward, transit clearance 65.0 mm
+[chomp +   8.4s] search 3: 3.0s allocation, added clearance 0.0 mm
+[chomp +  11.0s] CHOMP: native MoveIt optimization, initialization 2 (new geometric path)
+[chomp +  12.7s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  13.1s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  18.0s] candidate 2: valid, 70.22s outward, transit clearance 30.0 mm
+[chomp +  18.1s] search 5: 3.0s allocation, added clearance 0.0 mm
+[chomp +  20.2s] CHOMP: native MoveIt optimization, initialization 3 (new geometric path)
+[chomp +  23.9s] candidate 3: valid, 22.26s outward, transit clearance 85.0 mm
+[chomp +  23.9s] search 7: 3.0s allocation, added clearance 0.0 mm
+[chomp +  26.3s] CHOMP: native MoveIt optimization, initialization 4 (new geometric path)
+[chomp +  27.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  32.5s] candidate 4: valid, 64.45s outward, transit clearance 30.0 mm
+[chomp +  32.5s] search 9: 3.0s allocation, added clearance 0.0 mm
+[chomp +  35.4s] CHOMP: native MoveIt optimization, initialization 5 (new geometric path)
+[chomp +  38.5s] candidate 5: valid, 9.59s outward, transit clearance 30.0 mm
+[chomp +  38.5s] search 11: 3.0s allocation, added clearance 0.0 mm
+[chomp +  41.2s] CHOMP: native MoveIt optimization, initialization 6 (new geometric path)
+[chomp +  45.0s] candidate 6: valid, 23.64s outward, transit clearance 95.0 mm
+[chomp +  45.0s] READY: 23.636s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached chomp: planned.
+[experiment cache] Starting stomp; 0 other methods queued.
+[stomp +   0.0s] Installed MoveIt STOMP, initialized by a new camera/model-planned path. Native stochastic rollouts and smoothing followed by independent dense FCL validation.
+[stomp +   0.0s] building/loading model + frozen FCL world; no motor access
+[stomp +   0.7s] search 1: 3.0s allocation, added clearance 0.0 mm
+[stomp +   4.8s] STOMP: native MoveIt optimization, initialization 1 (new geometric path)
+[worker] FCL/solver operation running: 5s
+[stomp +  13.3s] search 3: 3.0s allocation, added clearance 0.0 mm
+[stomp +  15.8s] STOMP: native MoveIt optimization, initialization 2 (new geometric path)
+[stomp +  16.7s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  16.9s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[stomp +  20.1s] candidate 2: valid, 36.13s outward, transit clearance 30.0 mm
+[stomp +  20.1s] search 5: 3.0s allocation, added clearance 0.0 mm
+[stomp +  22.3s] STOMP: native MoveIt optimization, initialization 3 (new geometric path)
+[stomp +  23.2s] search 7: 3.0s allocation, added clearance 0.0 mm
+[stomp +  25.6s] STOMP: native MoveIt optimization, initialization 4 (new geometric path)
+[stomp +  26.1s] search 9: 3.0s allocation, added clearance 0.0 mm
+[stomp +  29.1s] STOMP: native MoveIt optimization, initialization 5 (new geometric path)
+[stomp +  31.3s] candidate 5: valid, 8.93s outward, transit clearance 35.0 mm
+[stomp +  31.3s] search 11: 3.0s allocation, added clearance 0.0 mm
+[stomp +  34.0s] STOMP: native MoveIt optimization, initialization 6 (new geometric path)
+[stomp +  34.8s] READY: 8.935s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached stomp: planned.
+[experiment] Loading cached result for baseline (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for robust (same scene, state and settings).
+[experiment] Loading cached result for chance (same scene, state and settings).
+[experiment] Loading cached result for cvar (same scene, state and settings).
+[experiment] Loading cached result for families (same scene, state and settings).
+[experiment] Loading cached result for iris_gcs (same scene, state and settings).
+[experiment] Loading cached result for chomp (same scene, state and settings).
+[experiment] Loading cached result for stomp (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment cache] Starting clearance; 0 other methods queued.
+[experiment] Loading cached result for baseline (same scene, state and settings).
+[experiment cache] Automatically queued: clearance. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.
+[clearance +   0.0s] building/loading model + frozen FCL world; no motor access
+[clearance +   0.6s] search 1: 5.0s allocation, added clearance 0.0 mm
+[clearance +   4.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +   7.3s] candidate 1: valid, 23.17s outward, transit clearance 30.0 mm
+[clearance +   7.3s] search 2: 5.0s allocation, added clearance 0.0 mm
+[clearance +  10.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +  12.6s] candidate 2: valid, 23.08s outward, transit clearance 30.0 mm
+[clearance +  12.6s] search 3: 5.0s allocation, added clearance 5.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  20.2s] search 4: 5.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  26.7s] search 5: 5.0s allocation, added clearance 20.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  32.9s] search 6: 5.0s allocation, added clearance 40.0 mm
+[worker] FCL/solver operation running: 5s
+[worker] FCL/solver operation running: 10s
+[clearance +  45.9s] READY: 23.084s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Automatically queued: baseline, clearance, robust, chance, cvar, families, iris_gcs, chomp, stomp. One memory-limited worker at a time.
+[experiment cache] Starting baseline; 8 other methods queued.
+[experiment cache] Automatically queued: baseline, clearance, robust, chance, cvar, families, iris_gcs, chomp, stomp. One memory-limited worker at a time.
+[experiment cache] Starting baseline; 8 other methods queued.
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 121,991 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/capture_4fb8bf40/camera
+[experiment cache] Automatically queued: baseline, clearance, robust, chance, cvar, families, iris_gcs, chomp, stomp. One memory-limited worker at a time.
+[experiment cache] Starting baseline; 8 other methods queued.
+AUTOCACHE UI QA PASSED {"startup_immediate_queue": true, "all_nine_cached_without_any_selection": true, "complete_playback_while_background_planning": true, "cached_selection_does_not_regenerate": true, "cancel_and_resume_only_missing_methods": true, "background_result_keeps_other_selected_cached_plan": true, "budget_change_requeues_all": true, "uncertainty_change_requeues_all": true, "recapture_requeues_all_and_camera_stops": true}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 6min 42.213s
+CPU time consumed: 15.022s
+Memory peak: 256.0K
+Memory swap peak: 0B

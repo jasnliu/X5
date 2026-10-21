@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "regression": "466 passed in 103.80s (0:01:43)",
+  "gui_cases": [
+    "relax_while_moving",
+    "one_click_reverse",
+    "manual_relax_after_can_fault",
+    "one_click_controller_exit",
+    "close_window_and_reconnect",
+    "normal_cycle"
+  ],
+  "can_access": false,
+  "physical_motor_commands": 0,
+  "camera_access": false,
+  "preserved_files_checked": 197,
+  "changed_files": [
+    "BASELINE_HARDWARE.md",
+    "DRUM_PLANNER.md",
+    "drum_planner/baseline/app.py",
+    "drum_planner/baseline/motion.py",
+    "drum_planner/baseline/service.py",
+    "drum_planner/baseline/simulation.py",
+    "drum_planner/baseline/transport.py",
+    "tests/test_baseline_hardware.py"
+  ],
+  "all_test_owners_exited": true,
+  "limitation": "All motors simulated. Actual hardware motion, relaxation, tracking, support and CAN reliability not tested.",
+  "legacy_owner_compatibility": "Reverse and controller exit require no typing when reconnecting to an older owner; immediate Relax requires a newly started owner.",
+  "preexisting_real_owner_left_untouched": "/home/jason/Proyectos3/X5/planner_runs/20261019T211907Z-baseline-c6eab9/controller-ac12418e"
+}

@@ -1,0 +1,33 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 1,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "blocked_start",
+      "planning_wall_s": 0.7684398959972896,
+      "backend_folder": "candidates/01",
+      "variants": [],
+      "details": {
+        "contacts": [
+          [
+            "gemini_native_depth",
+            "right_drumstick"
+          ]
+        ],
+        "reason": "collision"
+      }
+    }
+  ],
+  "selected_candidate": null,
+  "selected_seed": null,
+  "selected_stop_at_corners": null,
+  "selected_duration_s": null,
+  "wall_time_s": 0.7737548870209139,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

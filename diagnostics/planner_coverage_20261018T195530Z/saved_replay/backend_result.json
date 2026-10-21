@@ -1,0 +1,691 @@
+{
+  "backend" : "MoveIt PlanningScene/FCL + OMPL RRTConnect + TOTG seed",
+  "collision_edge_l1_step_rad" : 0.0030000000000000001,
+  "details" : 
+  {
+    "link" : "openarmx_right_link1",
+    "reason" : "unknown_or_occluded_space",
+    "visibility" : 
+    {
+      "nearest_camera_z_m" : 0.088326177241731321,
+      "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+    }
+  },
+  "joint_limit_check" : 
+  {
+    "accepted_static_encoder_overshoot" : 
+    [
+      {
+        "handling" : "Static left measurement retained exactly for FK/collision checking; no commands or clipping",
+        "joint" : "openarmx_left_joint4",
+        "lower_rad" : 0.0,
+        "measured_rad" : -0.00057541771572466871,
+        "measurement_tolerance_rad" : 0.0011508354314488441,
+        "overshoot_rad" : 0.00057541771572466871,
+        "upper_rad" : 1.8
+      }
+    ],
+    "angles_clamped" : false,
+    "moving_right_limits_unchanged" : true,
+    "reason" : "joint_limits",
+    "static_left_encoder_tolerance_rad" : 0.0011508354314488441,
+    "valid" : true,
+    "violations" : []
+  },
+  "motion_authorized" : false,
+  "schema" : "x5-moveit-result-v1",
+  "self_filtered_voxels" : 0,
+  "status" : "blocked_start",
+  "strict_unknown_space" : true,
+  "visibility_coverage" : 
+  {
+    "goal" : 
+    {
+      "accepted_near_depth_m" : 0.14999999999999999,
+      "collision_checked" : false,
+      "depth_image_size_xy" : 
+      [
+        1280,
+        800
+      ],
+      "diagnostic_only" : true,
+      "links" : 
+      [
+        {
+          "blocked_probe_count" : 8,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                1065,
+                585,
+                1339,
+                795
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                908,
+                630
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 0.55489066746931492
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 2,
+            "missing_or_invalid_depth" : 6
+          },
+          "link" : "openarmx_right_hand",
+          "nominal_geometry_camera_z_max_m" : 0.50832805398200143,
+          "nominal_geometry_camera_z_min_m" : 0.42247942226420931,
+          "probe_count" : 8
+        },
+        {
+          "blocked_probe_count" : 6,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                1032,
+                532
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 0.5264693760258593
+            }
+          },
+          "failure_counts" : 
+          {
+            "missing_or_invalid_depth" : 6
+          },
+          "link" : "openarmx_right_left_finger",
+          "nominal_geometry_camera_z_max_m" : 0.52707506301095264,
+          "nominal_geometry_camera_z_min_m" : 0.44965147267085748,
+          "probe_count" : 6
+        },
+        {
+          "blocked_probe_count" : 27,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.052496309762549501,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 27
+          },
+          "link" : "openarmx_right_link1",
+          "nominal_geometry_camera_z_max_m" : 0.21655972431828802,
+          "nominal_geometry_camera_z_min_m" : 0.080730855493052797,
+          "probe_count" : 27
+        },
+        {
+          "blocked_probe_count" : 36,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.03978624144258841,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 36
+          },
+          "link" : "openarmx_right_link2",
+          "nominal_geometry_camera_z_max_m" : 0.224281167290099,
+          "nominal_geometry_camera_z_min_m" : 0.076936911588494625,
+          "probe_count" : 36
+        },
+        {
+          "blocked_probe_count" : 45,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                980,
+                1135,
+                1757,
+                2225
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.082197272116610237,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 14,
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 31
+          },
+          "link" : "openarmx_right_link3",
+          "nominal_geometry_camera_z_max_m" : 0.25729671573408874,
+          "nominal_geometry_camera_z_min_m" : 0.1083973415886593,
+          "probe_count" : 45
+        },
+        {
+          "blocked_probe_count" : 16,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                1007,
+                1090,
+                1661,
+                1954
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.14901417923969523,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 12,
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 4
+          },
+          "link" : "openarmx_right_link4",
+          "nominal_geometry_camera_z_max_m" : 0.33478746875078247,
+          "nominal_geometry_camera_z_min_m" : 0.16068474491482765,
+          "probe_count" : 16
+        },
+        {
+          "blocked_probe_count" : 12,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                947,
+                822,
+                1350,
+                1273
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 12
+          },
+          "link" : "openarmx_right_link5",
+          "nominal_geometry_camera_z_max_m" : 0.45594341480021433,
+          "nominal_geometry_camera_z_min_m" : 0.29935795616703603,
+          "probe_count" : 12
+        },
+        {
+          "blocked_probe_count" : 8,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                911,
+                699,
+                1177,
+                972
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 8
+          },
+          "link" : "openarmx_right_link6",
+          "nominal_geometry_camera_z_max_m" : 0.46414967699661802,
+          "nominal_geometry_camera_z_min_m" : 0.38640600375377515,
+          "probe_count" : 8
+        },
+        {
+          "blocked_probe_count" : 12,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                937,
+                672,
+                1198,
+                925
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                1114,
+                684
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 0.53059065284249973
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 9,
+            "missing_or_invalid_depth" : 3
+          },
+          "link" : "openarmx_right_link7",
+          "nominal_geometry_camera_z_max_m" : 0.49207702171463136,
+          "nominal_geometry_camera_z_min_m" : 0.39334393869934686,
+          "probe_count" : 12
+        },
+        {
+          "blocked_probe_count" : 6,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                1032,
+                532
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 0.53981780556729697
+            }
+          },
+          "failure_counts" : 
+          {
+            "missing_or_invalid_depth" : 6
+          },
+          "link" : "openarmx_right_right_finger",
+          "nominal_geometry_camera_z_max_m" : 0.52853390245889242,
+          "nominal_geometry_camera_z_min_m" : 0.45793698497292723,
+          "probe_count" : 6
+        },
+        {
+          "blocked_probe_count" : 8,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                1032,
+                532
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 0.52658167510535925
+            }
+          },
+          "failure_counts" : 
+          {
+            "missing_or_invalid_depth" : 8
+          },
+          "link" : "right_drumstick",
+          "nominal_geometry_camera_z_max_m" : 0.62944580065462608,
+          "nominal_geometry_camera_z_min_m" : 0.46110219828253179,
+          "probe_count" : 9
+        }
+      ],
+      "links_with_unobserved_clearance" : 11,
+      "moving_links_checked" : 11,
+      "unknown_space_policy" : "blocked; no exemptions or clearance changes"
+    },
+    "start" : 
+    {
+      "accepted_near_depth_m" : 0.14999999999999999,
+      "collision_checked" : false,
+      "depth_image_size_xy" : 
+      [
+        1280,
+        800
+      ],
+      "diagnostic_only" : true,
+      "links" : 
+      [
+        {
+          "blocked_probe_count" : 8,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                714,
+                792,
+                836,
+                967
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 8
+          },
+          "link" : "openarmx_right_hand",
+          "nominal_geometry_camera_z_max_m" : 0.66010069823852902,
+          "nominal_geometry_camera_z_min_m" : 0.63108118290835091,
+          "probe_count" : 8
+        },
+        {
+          "blocked_probe_count" : 6,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                774,
+                772,
+                917,
+                959
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 6
+          },
+          "link" : "openarmx_right_left_finger",
+          "nominal_geometry_camera_z_max_m" : 0.78691233744729416,
+          "nominal_geometry_camera_z_min_m" : 0.64073498807166551,
+          "probe_count" : 6
+        },
+        {
+          "blocked_probe_count" : 27,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.088326177241731321,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 27
+          },
+          "link" : "openarmx_right_link1",
+          "nominal_geometry_camera_z_max_m" : 0.22345295166755955,
+          "nominal_geometry_camera_z_min_m" : 0.081834355560080702,
+          "probe_count" : 27
+        },
+        {
+          "blocked_probe_count" : 36,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                1044,
+                754,
+                1859,
+                1525
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.03011608003377747,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 4,
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 32
+          },
+          "link" : "openarmx_right_link2",
+          "nominal_geometry_camera_z_max_m" : 0.24976298398962038,
+          "nominal_geometry_camera_z_min_m" : 0.070265439171512414,
+          "probe_count" : 36
+        },
+        {
+          "blocked_probe_count" : 45,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                872,
+                895,
+                1509,
+                1724
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 
+            {
+              "nearest_camera_z_m" : 0.12836473079354818,
+              "reason" : "body_or_clearance_buffer_too_near_or_behind_camera"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 42,
+            "body_or_clearance_buffer_too_near_or_behind_camera" : 3
+          },
+          "link" : "openarmx_right_link3",
+          "nominal_geometry_camera_z_max_m" : 0.38957787358882823,
+          "nominal_geometry_camera_z_min_m" : 0.17631697998234935,
+          "probe_count" : 45
+        },
+        {
+          "blocked_probe_count" : 16,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                845,
+                861,
+                1255,
+                1396
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 16
+          },
+          "link" : "openarmx_right_link4",
+          "nominal_geometry_camera_z_max_m" : 0.45858943699018884,
+          "nominal_geometry_camera_z_min_m" : 0.29660492778473491,
+          "probe_count" : 16
+        },
+        {
+          "blocked_probe_count" : 12,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                780,
+                831,
+                1024,
+                1166
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 12
+          },
+          "link" : "openarmx_right_link5",
+          "nominal_geometry_camera_z_max_m" : 0.58087134424943043,
+          "nominal_geometry_camera_z_min_m" : 0.42330703588129165,
+          "probe_count" : 12
+        },
+        {
+          "blocked_probe_count" : 8,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                757,
+                837,
+                935,
+                1091
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 8
+          },
+          "link" : "openarmx_right_link6",
+          "nominal_geometry_camera_z_max_m" : 0.57674387325330034,
+          "nominal_geometry_camera_z_min_m" : 0.5161003231059289,
+          "probe_count" : 8
+        },
+        {
+          "blocked_probe_count" : 12,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                769,
+                828,
+                938,
+                1063
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 12
+          },
+          "link" : "openarmx_right_link7",
+          "nominal_geometry_camera_z_max_m" : 0.65953413754480528,
+          "nominal_geometry_camera_z_min_m" : 0.52661256067973283,
+          "probe_count" : 12
+        },
+        {
+          "blocked_probe_count" : 6,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                749,
+                770,
+                886,
+                956
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 6
+          },
+          "link" : "openarmx_right_right_finger",
+          "nominal_geometry_camera_z_max_m" : 0.78701265496208472,
+          "nominal_geometry_camera_z_min_m" : 0.63703556492566604,
+          "probe_count" : 6
+        },
+        {
+          "blocked_probe_count" : 9,
+          "coverage_complete" : false,
+          "examples" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 
+            {
+              "pixel_bounds_xyxy" : 
+              [
+                767,
+                774,
+                887,
+                931
+              ],
+              "reason" : "body_or_clearance_buffer_outside_depth_fov"
+            },
+            "missing_or_invalid_depth" : 
+            {
+              "observed_depth_m" : 0.0,
+              "pixel_xy" : 
+              [
+                790,
+                708
+              ],
+              "reason" : "missing_or_invalid_depth",
+              "required_clear_depth_m" : 1.082819952958455
+            }
+          },
+          "failure_counts" : 
+          {
+            "body_or_clearance_buffer_outside_depth_fov" : 8,
+            "missing_or_invalid_depth" : 1
+          },
+          "link" : "right_drumstick",
+          "nominal_geometry_camera_z_max_m" : 1.0566482429550237,
+          "nominal_geometry_camera_z_min_m" : 0.65613139727862646,
+          "probe_count" : 9
+        }
+      ],
+      "links_with_unobserved_clearance" : 11,
+      "moving_links_checked" : 11,
+      "unknown_space_policy" : "blocked; no exemptions or clearance changes"
+    }
+  }
+}

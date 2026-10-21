@@ -1,0 +1,136 @@
+{
+  "method": "chomp",
+  "description": "Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "native": "chomp",
+      "status": "planned",
+      "code": 1
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.055,
+        "transit_low_decile_clearance_m": 0.06999999999999999,
+        "all_path_min_clearance_m": 0.055,
+        "transit_proximity": 0.03951298701298704,
+        "workspace_length_m": 2.0785480017989997,
+        "joint_length_rad": 3.24316462123242,
+        "bending_deg": 745.3629399812944
+      },
+      "duration_s": 29.81856451525667
+    },
+    {
+      "index": 3,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.2456597222222222,
+        "workspace_length_m": 1.6898514498577146,
+        "joint_length_rad": 2.59403162067136,
+        "bending_deg": 486.71325221069014
+      },
+      "duration_s": 36.13027915866904
+    },
+    {
+      "index": 4,
+      "metrics": {
+        "transit_min_clearance_m": 0.030000000000000002,
+        "transit_low_decile_clearance_m": 0.035,
+        "all_path_min_clearance_m": 0.030000000000000002,
+        "transit_proximity": 0.3064041095890411,
+        "workspace_length_m": 1.9252390051000052,
+        "joint_length_rad": 2.5470055336223028,
+        "bending_deg": 481.6469397849884
+      },
+      "duration_s": 67.67252609594294
+    },
+    {
+      "index": 5,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.04,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.2087666666666667,
+        "workspace_length_m": 2.1654472527152007,
+        "joint_length_rad": 2.700251010408116,
+        "bending_deg": 482.6711134709566
+      },
+      "duration_s": 8.388067847985694
+    }
+  ],
+  "selected": 1,
+  "elapsed_s": 40.76031652299571,
+  "budget_s": 60.0
+}

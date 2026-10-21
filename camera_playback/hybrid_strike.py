@@ -18,7 +18,7 @@ import queue
 import socket
 import time
 
-from .tempo import MAX_BPM
+from .tempo import MAX_BPM, SYNC_PERIOD
 from .mit_strike import (Command, Joint7Channel, Joint7Session, Joint7Worker,
                          Status, StrikeSettings)
 from strike_lab.config import Limits, Rules, StrikeGoal
@@ -51,6 +51,7 @@ class HybridStatus(Status):
     label: str = ''
     main_beat: bool = False
     swing: bool = False
+    calibrating: bool = False
     partial_returns: int = 0
     # Durable sequence numbers let the GUI detect a missed hi-hat event.
     main_count: int = 0
@@ -120,9 +121,24 @@ class HybridController:
         self.event_index = len(events)-1  # Opening pickup, as in the powered beat.
         self.next_event_at = None
         self.swing_pending = amount
-        self.status = replace(self.status, swing=True, count=0, bottoms=0,
+        self.status = replace(self.status, swing=True, calibrating=False, count=0, bottoms=0,
                               main_count=0, main_at=None, partial_returns=0,
                               closed_count=0, closed_peak=0., closed_label='')
+
+    def request_calibration(self, amount, epoch):
+        """Straight 80 BPM grid with a shared first deadline, not a pickup.
+
+        Uses the identical strike/catch/full return and all existing limits.
+        Neither the ride anchor nor any motion parameter is retuned here.
+        """
+        if not math.isfinite(epoch):
+            raise ValueError('Invalid synchronization calibration epoch')
+        self.request_swing(amount, (('sync pair', True, SYNC_PERIOD),))
+        self.swing_pending = None
+        self.amount = amount
+        self.event_index = 0
+        self.next_event_at = epoch
+        self.status = replace(self.status, calibrating=True)
 
     def stop_swing(self):
         """Cancel future releases, never interrupt the current catch/return."""
@@ -210,7 +226,7 @@ class HybridController:
         label, main, scheduled = '', False, None
         if swing:
             label, main, _ = self.events[self.event_index]
-            if self.status.count == 0:
+            if self.status.count == 0 and not self.status.calibrating:
                 label = 'pickup (extra before beat 1)'
             scheduled = self.next_event_at
         self.status = replace(self.status, phase='drive', ready=False,
@@ -273,7 +289,10 @@ class HybridController:
             remaining = self.next_event_at-now
             if remaining < -MAX_EVENT_LATENESS:
                 raise RuntimeError('Hybrid missed swing deadline; no catch-up burst')
-            if release_fresh and rebound >= MIN_REBOUND and remaining <= self.arrival_seconds(sample, now):
+            calibration_ready = (not self.status.calibrating
+                                 or (self.method is None and self.status.ready))
+            if (release_fresh and calibration_ready and rebound >= MIN_REBOUND
+                    and remaining <= self.arrival_seconds(sample, now)):
                 self._release(self.amount, sample, now, True)
 
         method = self.method
@@ -400,6 +419,8 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
                     controller.request_search(*args)
                 elif action == 'swing':
                     controller.request_swing(*args)
+                elif action == 'calibrate':
+                    controller.request_calibration(*args)
                 elif action == 'finish':
                     controller.stop_swing()
                 else:
@@ -409,7 +430,7 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
             command = controller.update(sample, now)
             # Publish the EXISTING ride grid, not a second clock or GUI beat
             # count. Snare can lead beat 1 by its exact reference descent time.
-            if snare_clock is not None and controller.status.swing:
+            if snare_clock is not None and controller.status.swing and not controller.status.calibrating:
                 with snare_clock.get_lock():
                     if (snare_clock[2] and not snare_clock[0]
                             and controller.status.bottoms == 1
@@ -504,7 +525,7 @@ class HybridSession(Joint7Session):
     def request(self, action, *args):
         if self.closed:
             raise RuntimeError('Hybrid session is closed')
-        if action in ('search', 'swing'):
+        if action in ('search', 'swing', 'calibrate'):
             self.controller.validate_depth(args[0])
         try:
             self.request_id += 1

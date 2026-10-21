@@ -1,0 +1,38 @@
+{
+  "schema": "x5-current-pose-plan-report-v1",
+  "passed": false,
+  "error": "CAN error or RTR frame",
+  "planning_status": null,
+  "motor_commands": 0,
+  "mode_changes": 0,
+  "gripper_commands": 0,
+  "relax_commands": 0,
+  "current_state_check": null,
+  "telemetry": {
+    "sample_batches": 3,
+    "error": "CAN error or RTR frame",
+    "thread_stopped": true,
+    "duration_s": 0.10684209200553596,
+    "observer": {
+      "batches": 3,
+      "requests_sent": {
+        "left": 32,
+        "right": 32
+      },
+      "feedback_frames_received": {
+        "left": 25,
+        "right": 24
+      },
+      "exact_query_allowlist": true,
+      "mode_changes": 0,
+      "enable_commands": 0,
+      "disable_commands": 0,
+      "motion_commands": 0,
+      "gripper_commands": 0,
+      "closed": true
+    }
+  },
+  "scene_source": "five synchronized native-depth frames; no manual obstacles",
+  "visualization": null,
+  "motion_authorized": false
+}

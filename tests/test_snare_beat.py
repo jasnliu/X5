@@ -63,6 +63,31 @@ class SnareBeatTests(unittest.TestCase):
     def prime(self, c):
         for i in range(60): c.update(self.sample(i*.002), i*.002, -self.anchor)
 
+    def test_swing_never_requires_or_uses_a_calibrated_snare_offset(self):
+        for old_advance in (None, .2, -.15):
+            with self.subTest(old_advance=old_advance):
+                worker=Mock()
+                sync=SimpleNamespace(calibrated_advance=old_advance)
+                app=SimpleNamespace(bus=SimpleNamespace(left_joint6_session=worker),
+                    hybrid_enabled=True, strike_bpm=110., snare_sync=sync)
+                workflow.start(app)
+                worker.start_swing.assert_called_once_with(110.)
+                worker.start_calibration.assert_not_called()
+                worker.set_calibration_advance.assert_not_called()
+                self.assertEqual(sync.calibrated_advance, old_advance)
+
+    def test_real_session_clears_any_old_snare_advance_before_swing(self):
+        from camera_playback.snare_beat import SnareSession
+        from unittest.mock import PropertyMock
+        session=SnareSession.__new__(SnareSession)  # No transport construction.
+        session.template, session.rules = self.template, self.rules
+        session.clock=[0., .75, 0., 1., .2]
+        with patch.object(SnareSession, 'status', new_callable=PropertyMock,
+                          return_value=SnareStatus(ready=True, at=10.)), \
+             patch('camera_playback.snare_beat.time.monotonic', return_value=10.):
+            session.start_swing(100.)
+        self.assertEqual(session.clock, [0., .6, 1., 0., 0.])
+
     def test_one_or_two_random_eighth_notes_per_measure_and_absolute_clock(self):
         g = MeasureGrid(10., .6, random.Random(221))
         counts = [0]*8

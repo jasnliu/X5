@@ -1,0 +1,710 @@
+....................F..F................................................ [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 25%]
+........................................................................ [ 33%]
+........................................................................ [ 42%]
+....................................F................................... [ 50%]
+........................................................................ [ 59%]
+...........................................................FFF.FFFFFF..F [ 67%]
+.FFFF................................................................... [ 76%]
+........................................................................ [ 84%]
+................................FFFFFFF................................. [ 93%]
+........................................................                 [100%]
+=================================== FAILURES ===================================
+_____ LaunchTests.test_missing_snare_bundle_is_never_a_motion_launch_gate ______
+
+self = <test_audio_waveform.LaunchTests testMethod=test_missing_snare_bundle_is_never_a_motion_launch_gate>
+
+    def test_missing_snare_bundle_is_never_a_motion_launch_gate(self):
+        actions,handlers=self.graph(['--hardware'],fail_snare=True)
+        self.assertTrue(any('camera_playback.app' in getattr(x,'cmd',[]) for x in actions))
+        snare=next(x for x in actions if '--instrument' in getattr(x,'cmd',[])
+                   and x.cmd[x.cmd.index('--instrument')+1]=='snare')
+>       self.assertFalse(any(h['target_action'] is snare for h in handlers))
+E       AssertionError: True is not false
+
+tests/test_audio_waveform.py:238: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+Snare detector unavailable (required for normal hardware timing calibration): missing snare model
+ST7 snare audio model snare_v1: waveform markers + pre-beat snare timing calibration; ride remains the absolute beat anchor
+_ LaunchTests.test_visual_process_is_unwatched_and_copies_use_separate_sockets _
+
+self = <test_audio_waveform.LaunchTests testMethod=test_visual_process_is_unwatched_and_copies_use_separate_sockets>
+
+    def test_visual_process_is_unwatched_and_copies_use_separate_sockets(self):
+        actions,handlers=self.graph(['--hardware'])
+        viewer=next(x for x in actions if 'camera_playback.audio_waveform' in getattr(x,'cmd',[]))
+        self.assertFalse(any(h['target_action'] is viewer for h in handlers))
+        bridges=[x for x in actions if 'camera_playback.audio_bridge' in getattr(x,'cmd',[])]
+        self.assertEqual(len(bridges),3)
+        for bridge,flag in zip(bridges[:2],('--ride-socket','--hihat-socket')):
+            self.assertEqual(bridge.cmd[bridge.cmd.index('--visual-socket')+1],viewer.cmd[viewer.cmd.index(flag)+1])
+            self.assertNotEqual(bridge.cmd[bridge.cmd.index('--socket')+1],bridge.cmd[bridge.cmd.index('--visual-socket')+1])
+        app=next(x for x in actions if 'camera_playback.app' in getattr(x,'cmd',[]))
+        self.assertNotIn('--visual-socket',app.cmd)
+        snare=bridges[2]
+        self.assertEqual(snare.cmd[snare.cmd.index('--instrument')+1],'snare')
+        path=snare.cmd[snare.cmd.index('--socket')+1]
+>       self.assertEqual(path,viewer.cmd[viewer.cmd.index('--snare-socket')+1])
+E       AssertionError: '/tmp/x5-snare-control-2026601.sock' != '/tmp/x5-wave-snare-2026601.sock'
+E       - /tmp/x5-snare-control-2026601.sock
+E       ?              --------
+E       + /tmp/x5-wave-snare-2026601.sock
+E       ?         +++++
+
+tests/test_audio_waveform.py:225: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 snare audio model snare_v1: waveform markers + pre-beat snare timing calibration; ride remains the absolute beat anchor
+_ WorkerTests.test_spawned_session_search_swing_finish_and_exclusive_ownership _
+
+self = <test_hybrid_strike.WorkerTests testMethod=test_spawned_session_search_swing_finish_and_exclusive_ownership>
+
+    def test_spawned_session_search_swing_finish_and_exclusive_ownership(self):
+        bus = SimpleNamespace(control_side='right', active=True, right_joint7_session=None,
+                              sockets={'right': Mock()})
+        bus.sockets['right'].getsockname.return_value = ('synthetic-only',)
+        session = HybridSession(bus, .5, .5-math.radians(12), .5+math.radians(.6),
+                                channel_factory=SyntheticChannel)
+        def wait_for(predicate, seconds=5):
+            end = time.monotonic()+seconds
+            while time.monotonic() < end:
+                s = session.status
+                self.assertIsNone(s.error, s.error)
+                if predicate(s):
+                    return s
+                time.sleep(.005)
+            self.fail(str(session.status))
+        try:
+            self.assertIs(bus.right_joint7_session, session)
+            session.request('search', math.radians(7))
+            wait_for(lambda s: s.completed == 1 and s.ready)
+            epoch = time.monotonic()+1.
+            session.request('calibrate', math.radians(7), epoch)
+            calibration = wait_for(lambda s: s.bottoms >= 3)
+            self.assertTrue(calibration.calibrating)
+            self.assertEqual(calibration.label, 'sync pair')
+            self.assertEqual(calibration.partial_returns, 0)
+>           self.assertAlmostEqual(calibration.scheduled_at, epoch+1.2)
+E           AssertionError: 904974.703864281 != 904974.4038642809 within 7 places (0.30000000004656613 difference)
+
+tests/test_hybrid_strike.py:356: AssertionError
+____ RecordingCacheTests.test_all_geometry_settings_and_versions_invalidate ____
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_all_geometry_settings_and_versions_invalidate>
+
+    def test_all_geometry_settings_and_versions_invalidate(self):
+>       before = self.key()
+
+tests/test_recording_cache.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpa630xmpw/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c1bbe90>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1ac140>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_atomic_write_failure_keeps_previous_entry_and_cleans_temp _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_atomic_write_failure_keeps_previous_entry_and_cleans_temp>
+
+    def test_atomic_write_failure_keeps_previous_entry_and_cleans_temp(self):
+>       path = self.seed()
+
+tests/test_recording_cache.py:285: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmph_ng5rls/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c1a8140>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1acbf0>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_background_worker_uses_cache_without_changing_queue_contract _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_background_worker_uses_cache_without_changing_queue_contract>
+
+    def test_background_worker_uses_cache_without_changing_queue_contract(self):
+        from camera_playback.recording_preflight import RecordingPreflight
+>       self.seed()
+
+tests/test_recording_cache.py:300: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpiwnom4oq/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c19c7d0>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1af740>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_________ RecordingCacheTests.test_cache_survives_fresh_python_process _________
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_cache_survives_fresh_python_process>
+
+    def test_cache_survives_fresh_python_process(self):
+>       self.seed()
+
+tests/test_recording_cache.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpjg2kz1nm/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c2fad50>
+zone = <safe_zone.geometry.Zone object at 0x757e5c19ebd0>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_______ RecordingCacheTests.test_changed_code_after_restart_gets_new_key _______
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_changed_code_after_restart_gets_new_key>
+
+    def test_changed_code_after_restart_gets_new_key(self):
+>       before = self.key()
+
+tests/test_recording_cache.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmp0zrey2x0/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c1bcfb0>
+zone = <safe_zone.geometry.Zone object at 0x757e5fea0920>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_changed_contents_same_size_and_mtime_cannot_inherit_pass _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_changed_contents_same_size_and_mtime_cannot_inherit_pass>
+
+    def test_changed_contents_same_size_and_mtime_cannot_inherit_pass(self):
+>       self.seed()
+
+tests/test_recording_cache.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmp148kxxxw/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c1afa10>
+zone = <safe_zone.geometry.Zone object at 0x757e5fea1910>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_changed_setting_runs_original_loader_not_cached_result _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_changed_setting_runs_original_loader_not_cached_result>
+
+    def test_changed_setting_runs_original_loader_not_cached_result(self):
+>       self.seed()
+
+tests/test_recording_cache.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmp5tcq3u0a/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c4aad50>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1bcec0>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_cold_runs_exact_loader_then_hit_restores_exact_result _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_cold_runs_exact_loader_then_hit_restores_exact_result>
+
+    def test_cold_runs_exact_loader_then_hit_restores_exact_result(self):
+        progress = []
+        before = (self.path.read_bytes(), self.path.stat().st_mtime_ns)
+        with patch.object(cache.smooth_recording, 'load_smooth_recording', wraps=load_smooth_recording) as loader:
+            cold = self.load(progress=progress.append)
+        loader.assert_called_once()
+        self.assertEqual(loader.call_args.args, self.args)
+        self.assertEqual(loader.call_args.kwargs['playback_speed'], .8)
+        self.assertIn('Reading JSON', progress[0])
+        self.assertTrue(any('31 representative recovery' in s for s in progress))
+>       self.assertEqual(len(list(self.cache_dir.glob('*.json'))), 1)
+E       AssertionError: 0 != 1
+
+tests/test_recording_cache.py:106: AssertionError
+___ RecordingCacheTests.test_corrupt_stale_and_incomplete_entries_fall_back ____
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_corrupt_stale_and_incomplete_entries_fall_back>
+
+    def test_corrupt_stale_and_incomplete_entries_fall_back(self):
+        for damage in ('truncate', 'checksum', 'key', 'format', 'structure'):
+            with self.subTest(damage=damage):
+>               path = self.seed()
+
+tests/test_recording_cache.py:221: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpzzdu6mh2/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c3e9820>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1bd220>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_inputs_changed_during_cache_read_force_original_preflight _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_inputs_changed_during_cache_read_force_original_preflight>
+
+    def test_inputs_changed_during_cache_read_force_original_preflight(self):
+>       self.seed()
+
+tests/test_recording_cache.py:264: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmp4_zq75qm/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5fc8fe00>
+zone = <safe_zone.geometry.Zone object at 0x757e5c1bfec0>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_____ RecordingCacheTests.test_live_code_edit_disables_cache_until_restart _____
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_live_code_edit_disables_cache_until_restart>
+
+    def test_live_code_edit_disables_cache_until_restart(self):
+>       self.seed()
+
+tests/test_recording_cache.py:204: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpt4bvcdw6/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5f9f4fe0>
+zone = <safe_zone.geometry.Zone object at 0x757e5fa43fe0>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_simulation_and_hardware_caches_are_separate_and_exact _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_simulation_and_hardware_caches_are_separate_and_exact>
+
+    def test_simulation_and_hardware_caches_are_separate_and_exact(self):
+>       self.seed('smooth')
+
+tests/test_recording_cache.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpllmweod7/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c3e8bc0>
+zone = <safe_zone.geometry.Zone object at 0x757e5fa40410>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+_ RecordingCacheTests.test_single_frame_and_stationary_roundtrip_preserve_shapes _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_single_frame_and_stationary_roundtrip_preserve_shapes>
+
+    def test_single_frame_and_stationary_roundtrip_preserve_shapes(self):
+        for count in (1, 3):
+            with self.subTest(count=count):
+                data = json.loads(self.raw)
+                sample = data['samples'][0]
+                data['samples'] = [dict(sample, time_s=i*.1) for i in range(count)]
+                data['sample_count'] = count
+                self.path.write_text(json.dumps(data))
+                cold = self.load()
+                with patch.object(cache.smooth_recording, 'load_smooth_recording', side_effect=AssertionError('must hit cache')):
+>                   warm = self.load()
+
+tests/test_recording_cache.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:63: in load
+    return cache.load_cached_smooth_recording(*self.args, cache_dir=self.cache_dir, **kwargs)
+camera_playback/recording_cache.py:257: in load_cached_smooth_recording
+    return _load('smooth', smooth_recording.load_smooth_recording, path, model,
+camera_playback/recording_cache.py:244: in _load
+    result = loader(*args, playback_speed=playback_speed, progress=progress,
+/usr/lib/python3.12/unittest/mock.py:1134: in __call__
+    return self._mock_call(*args, **kwargs)
+/usr/lib/python3.12/unittest/mock.py:1138: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='load_smooth_recording' id='129185630927232'>
+args = (PosixPath('/tmp/tmp6nrm2by1/recording.json'), <safe_zone.geometry.Model object at 0x757e56ca9a60>, <safe_zone.geometr..., 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ]), array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), ...)
+kwargs = {'playback_speed': 0.8, 'progress': None}
+effect = AssertionError('must hit cache')
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: must hit cache
+
+/usr/lib/python3.12/unittest/mock.py:1193: AssertionError
+_ RecordingCacheTests.test_source_missing_or_renamed_non_json_still_runs_original_errors _
+
+self = <test_recording_cache.RecordingCacheTests testMethod=test_source_missing_or_renamed_non_json_still_runs_original_errors>
+
+    def test_source_missing_or_renamed_non_json_still_runs_original_errors(self):
+>       self.seed()
+
+tests/test_recording_cache.py:274: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_recording_cache.py:57: in seed
+    key = self.key(kind)
+tests/test_recording_cache.py:53: in key
+    return cache._fingerprint(kind, *(args or self.args), playback_speed)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kind = 'smooth', path = PosixPath('/tmp/tmpeuzlrwox/recording.json')
+model = <safe_zone.geometry.Model object at 0x757e5c423650>
+zone = <safe_zone.geometry.Zone object at 0x757e56cabf50>
+lower = array([-1.25      , -0.12920367, -1.57      ,  0.        , -1.5       ,
+       -0.75      , -1.4       ])
+upper = array([3.        , 3.27079633, 1.57      , 1.8       , 1.5       ,
+       0.75      , 1.4       ])
+center = array([0. , 0. , 0. , 0. , 0. , 0. , 1.4]), speed = 0.4
+playback_speed = 0.8, side = 'right'
+
+    def _fingerprint(kind, path, model, zone, lower, upper, center, speed, playback_speed, side="right"):
+        # Custom implementations cannot inherit a pass from the built-in geometry.
+        if type(model) is not Model or type(zone) is not Zone:
+            raise ValueError('Uncacheable custom geometry')
+        code = _code_digest()
+        if code != _LOADED_CODE_DIGEST:
+>           raise ValueError('Code changed since import')
+E           ValueError: Code changed since import
+
+camera_playback/recording_cache.py:134: ValueError
+__________ WorkerIOTests.test_nontransient_can_failure_is_still_fatal __________
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_nontransient_can_failure_is_still_fatal>
+
+    
+>   def test_nontransient_can_failure_is_still_fatal(self):
+
+tests/test_snare_worker_io.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 1 not greater than 100
+_ WorkerIOTests.test_parent_heartbeat_loss_locks_out_future_strikes_without_disable _
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_parent_heartbeat_loss_locks_out_future_strikes_without_disable>
+
+    
+>   def test_parent_heartbeat_loss_locks_out_future_strikes_without_disable(self):
+
+tests/test_snare_worker_io.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 1 not greater than 100
+_____ WorkerIOTests.test_persistent_queue_pressure_is_not_silently_ignored _____
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_persistent_queue_pressure_is_not_silently_ignored>
+
+    
+>   def test_persistent_queue_pressure_is_not_silently_ignored(self):
+
+tests/test_snare_worker_io.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 1 not greater than 100
+_ WorkerIOTests.test_temporary_queue_pressure_recomputes_without_losing_full_strokes _
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_temporary_queue_pressure_recomputes_without_losing_full_strokes>
+
+    
+>   def test_temporary_queue_pressure_recomputes_without_losing_full_strokes(self):
+
+tests/test_snare_worker_io.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 0 not greater than 100
+_ WorkerIOTests.test_two_hits_per_bar_survive_quantized_feedback_and_queue_pressure _
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_two_hits_per_bar_survive_quantized_feedback_and_queue_pressure>
+
+    
+>   def test_two_hits_per_bar_survive_quantized_feedback_and_queue_pressure(self):
+
+tests/test_snare_worker_io.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 0 not greater than 100
+__ WorkerIOTests.test_worker_streams_only_j6_mit_and_finishes_on_grid_cancel ___
+
+self = <test_snare_worker_io.WorkerIOTests testMethod=test_worker_streams_only_j6_mit_and_finishes_on_grid_cancel>
+
+    
+>   def test_worker_streams_only_j6_mit_and_finishes_on_grid_cancel(self):
+
+tests/test_snare_worker_io.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_snare_worker_io.py:66: in run_worker
+    self.assertTrue(channel.closed)
+E   AssertionError: 1 not greater than 100
+_ ModelSelectionTests.test_all_audio_modes_preflight_v2_and_pass_sibling_root __
+
+self = <test_st7_model_selection.ModelSelectionTests testMethod=test_all_audio_modes_preflight_v2_and_pass_sibling_root>
+
+    def test_all_audio_modes_preflight_v2_and_pass_sibling_root(self):
+        for mode in ([], ['--hardware'], ['--hardwaretest']):
+            with self.subTest(mode=mode):
+                command, _, service, description, code = self.launch(mode)
+                self.assertEqual(code, 0)
+                self.assertEqual(command.call_args_list, [
+                    call(ROOT.parent / 'st7', 'pipewire'),
+                    call(ROOT.parent / 'st7', 'pipewire', 'hihat'),
+                    call(ROOT.parent / 'st7', 'pipewire', 'snare')])
+                audio = [a for a in description.actions if isinstance(a, SimpleNamespace)
+                         and 'camera_playback.audio_bridge' in getattr(a, 'cmd', [])]
+                self.assertEqual(len(audio), 3)
+                self.assertEqual(len({a.cmd[a.cmd.index('--socket')+1] for a in audio}), 3)
+                self.assertNotIn('--instrument', audio[0].cmd)  # default ride
+                self.assertEqual(audio[1].cmd[audio[1].cmd.index('--instrument')+1], 'hihat')
+                self.assertEqual(audio[2].cmd[audio[2].cmd.index('--instrument')+1], 'snare')
+                for a in audio:
+                    self.assertEqual(a.cmd[a.cmd.index('--root')+1], str(ROOT.parent / 'st7'))
+                app = next(a for a in description.actions if isinstance(a, SimpleNamespace)
+                           and 'camera_playback.app' in getattr(a, 'cmd', []))
+                self.assertEqual(app.cmd[app.cmd.index('--hihat-audio-socket')+1],
+                                 audio[1].cmd[audio[1].cmd.index('--socket')+1])
+>               self.assertNotIn(audio[2].cmd[audio[2].cmd.index('--socket')+1], app.cmd)
+E               AssertionError: '/tmp/x5-snare-control-2026601.sock' unexpectedly found in ['/usr/bin/python3', '-m', 'camera_playback.app', '--detection-socket', '/tmp/x5-right-camera-playback-2026601.sock', '--audio-socket', '/tmp/x5-right-camera-audio-2026601.sock', '--hihat-audio-socket', '/tmp/x5-right-hihat-audio-2026601.sock', '--snare-audio-socket', '/tmp/x5-snare-control-2026601.sock', '--esp-port', '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0', '--recording', '/home/jason/Proyectos3/X5/recordings/record3.json', '--left-recording', '/home/jason/Proyectos3/X5/left_recordings/record1.json']
+
+tests/test_st7_model_selection.py:125: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: visual only; ride v2 remains the only strike-search input
+ST7 snare audio model snare_v1: waveform markers only; ride remains the absolute beat anchor
+=========================== short test summary info ============================
+FAILED tests/test_audio_waveform.py::LaunchTests::test_missing_snare_bundle_is_never_a_motion_launch_gate
+FAILED tests/test_audio_waveform.py::LaunchTests::test_visual_process_is_unwatched_and_copies_use_separate_sockets
+FAILED tests/test_hybrid_strike.py::WorkerTests::test_spawned_session_search_swing_finish_and_exclusive_ownership
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_all_geometry_settings_and_versions_invalidate
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_atomic_write_failure_keeps_previous_entry_and_cleans_temp
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_background_worker_uses_cache_without_changing_queue_contract
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_cache_survives_fresh_python_process
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_changed_code_after_restart_gets_new_key
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_changed_contents_same_size_and_mtime_cannot_inherit_pass
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_changed_setting_runs_original_loader_not_cached_result
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_cold_runs_exact_loader_then_hit_restores_exact_result
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_corrupt_stale_and_incomplete_entries_fall_back
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_inputs_changed_during_cache_read_force_original_preflight
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_live_code_edit_disables_cache_until_restart
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_simulation_and_hardware_caches_are_separate_and_exact
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_single_frame_and_stationary_roundtrip_preserve_shapes
+FAILED tests/test_recording_cache.py::RecordingCacheTests::test_source_missing_or_renamed_non_json_still_runs_original_errors
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_nontransient_can_failure_is_still_fatal
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_parent_heartbeat_loss_locks_out_future_strikes_without_disable
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_persistent_queue_pressure_is_not_silently_ignored
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_temporary_queue_pressure_recomputes_without_losing_full_strokes
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_two_hits_per_bar_survive_quantized_feedback_and_queue_pressure
+FAILED tests/test_snare_worker_io.py::WorkerIOTests::test_worker_streams_only_j6_mit_and_finishes_on_grid_cancel
+FAILED tests/test_st7_model_selection.py::ModelSelectionTests::test_all_audio_modes_preflight_v2_and_pass_sibling_root
+24 failed, 824 passed in 258.76s (0:04:18)

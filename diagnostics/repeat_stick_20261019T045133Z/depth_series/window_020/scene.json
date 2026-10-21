@@ -1,0 +1,194 @@
+{
+  "schema": "x5-native-depth-scene-v1",
+  "synthetic": false,
+  "camera": {
+    "protocol": 1,
+    "serial": "AY6R463004K",
+    "name": "Orbbec Gemini 2",
+    "firmware": "1.4.92",
+    "depth_work_mode": "Unbinned Dense Default",
+    "depth": {
+      "width": 1280,
+      "height": 800,
+      "fps": 10,
+      "format_enum": 8,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 800,
+      "K": [
+        [
+          613.611877441,
+          0,
+          634.910949707
+        ],
+        [
+          0,
+          613.611877441,
+          400.3934021
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "color": {
+      "width": 1280,
+      "height": 720,
+      "fps": 15,
+      "format_enum": 0,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 720,
+      "K": [
+        [
+          690.735229492,
+          0,
+          647.398071289
+        ],
+        [
+          0,
+          690.641601562,
+          361.572753906
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        43.8931617737,
+        -99.6809844971,
+        6.35045580566e-05,
+        0.000259708933299,
+        106.131744385,
+        43.7220077515,
+        -99.2912826538,
+        106.184356689
+      ]
+    },
+    "T_color_depth_m": [
+      [
+        0.999998771667,
+        0.000881533622742,
+        -0.00127070999146,
+        -0.0139434547424
+      ],
+      [
+        -0.000879107117653,
+        0.999997776031,
+        0.00190857362747,
+        9.11664962769e-06
+      ],
+      [
+        0.00127239990234,
+        -0.00190747070312,
+        0.999997436523,
+        -0.00182580566406
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "depth_stream_enabled": true,
+    "color_stream_enabled": false,
+    "alignment": "native_depth"
+  },
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "T_base_depth": [
+    [
+      -0.045052558100081574,
+      -0.7443385240172491,
+      0.6662810850966814,
+      0.034195196764152364
+    ],
+    [
+      -0.9988181949234571,
+      0.04573537173282772,
+      -0.016444600525398697,
+      0.023050366975580924
+    ],
+    [
+      -0.018232269875979226,
+      -0.6662344970423257,
+      -0.7455194304414164,
+      0.9585032619308057
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "voxel_size_m": 0.01,
+  "obstacle_padding_m": 0.02,
+  "point_count": 158253,
+  "points_file": "points_base.f32",
+  "free_depth_file": "free_depth_m.bin",
+  "frames": [
+    {
+      "n": 2048000,
+      "sequence": 16,
+      "received_monotonic": 197577.83728163,
+      "device_timestamp_us": 46191139230,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 17,
+      "received_monotonic": 197577.937176001,
+      "device_timestamp_us": 46191239141,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 18,
+      "received_monotonic": 197578.037360681,
+      "device_timestamp_us": 46191339052,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 19,
+      "received_monotonic": 197578.137070377,
+      "device_timestamp_us": 46191438963,
+      "value_scale_m": 0.001
+    },
+    {
+      "n": 2048000,
+      "sequence": 20,
+      "received_monotonic": 197578.237234237,
+      "device_timestamp_us": 46191538874,
+      "value_scale_m": 0.001
+    }
+  ],
+  "captured_utc": "2026-10-19T04:52:49Z",
+  "observed_valid_fraction": 0.888537109375,
+  "fully_observed_fraction": 0.83531640625,
+  "unknown_space_policy": "unobserved; default planning checks detected obstacles only, not proof of free space",
+  "default_collision_policy": "observed_obstacles",
+  "files_sha256": {
+    "raw_depth.npz": "0a52f22851cdf5bc3d1c77685842def3324763c1a6e41599ca7a69d7447bd05a",
+    "depth_m.bin": "96f56b5074e14c1f30e255dbbba6fe599949f5117765e3e7d4dc321c95b54ed4",
+    "free_depth_m.bin": "f4616c28e8c431a524704993812d4192135c53c3532b82645eb6cbd4ccf22829",
+    "points_base.f32": "53b9dabe6f697650e19cfd79a533d10fa7c9cd27b42ae9df95f75d06993e832b"
+  },
+  "physical_depth_alignment_verified": false,
+  "motion_authorized": false
+}

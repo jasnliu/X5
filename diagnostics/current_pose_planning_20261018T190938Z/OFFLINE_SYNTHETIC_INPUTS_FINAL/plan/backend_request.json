@@ -1,0 +1,231 @@
+{
+  "schema": "x5-moveit-request-v1",
+  "execute": false,
+  "urdf": "/home/jason/Proyectos3/X5/diagnostics/current_pose_planning_20261018T190938Z/OFFLINE_SYNTHETIC_INPUTS_FINAL/plan/model/robot.urdf",
+  "srdf": "/home/jason/Proyectos3/X5/diagnostics/current_pose_planning_20261018T190938Z/OFFLINE_SYNTHETIC_INPUTS_FINAL/plan/model/robot.srdf",
+  "start": [
+    0.03011352712291071,
+    0.025510185397115137,
+    0.03586770428015562,
+    0.03893659876401934,
+    -0.0656846412604434,
+    -0.19545021744106172,
+    1.338613412680246
+  ],
+  "left": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.3386
+  ],
+  "left_opening_m": 0.0,
+  "goal": [
+    -0.6055312428473343,
+    0.21194552529182964,
+    0.24416891737239688,
+    1.7329663538567175,
+    0.20476168513003543,
+    -0.30516319523918334,
+    0.6001606775005737
+  ],
+  "scene": {
+    "schema": "x5-native-depth-scene-v1",
+    "synthetic": false,
+    "camera": {
+      "protocol": 1,
+      "serial": "AY6R463004K",
+      "color_encoding": "yuyv",
+      "uvc_backend": "libuvc",
+      "name": "Orbbec Gemini 2",
+      "firmware": "1.4.92",
+      "depth_work_mode": "Unbinned Dense Default",
+      "color": {
+        "width": 1280,
+        "height": 720,
+        "fps": 15,
+        "format_enum": 0,
+        "intrinsic_width": 1280,
+        "intrinsic_height": 720,
+        "K": [
+          [
+            690.735229492,
+            0,
+            647.398071289
+          ],
+          [
+            0,
+            690.641601562,
+            361.572753906
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "distortion_model": 4,
+        "D_opencv_order": [
+          43.8931617737,
+          -99.6809844971,
+          6.35045580566e-05,
+          0.000259708933299,
+          106.131744385,
+          43.7220077515,
+          -99.2912826538,
+          106.184356689
+        ]
+      },
+      "depth": {
+        "width": 1280,
+        "height": 800,
+        "fps": 10,
+        "format_enum": 8,
+        "intrinsic_width": 1280,
+        "intrinsic_height": 800,
+        "K": [
+          [
+            613.611877441,
+            0,
+            634.910949707
+          ],
+          [
+            0,
+            613.611877441,
+            400.3934021
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "distortion_model": 4,
+        "D_opencv_order": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "T_color_depth_m": [
+        [
+          0.999998771667,
+          0.000881533622742,
+          -0.00127070999146,
+          -0.0139434547424
+        ],
+        [
+          -0.000879107117653,
+          0.999997776031,
+          0.00190857362747,
+          9.11664962769e-06
+        ],
+        [
+          0.00127239990234,
+          -0.00190747070312,
+          0.999997436523,
+          -0.00182580566406
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "depth_stream_enabled": true,
+      "frame_decode_policy": "require_full_yuyv_frame",
+      "alignment": "native_depth",
+      "color_stream_enabled": false
+    },
+    "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+    "T_base_depth": [
+      [
+        -0.045052558100081574,
+        -0.7443385240172491,
+        0.6662810850966814,
+        0.034195196764152364
+      ],
+      [
+        -0.9988181949234571,
+        0.04573537173282772,
+        -0.016444600525398697,
+        0.023050366975580924
+      ],
+      [
+        -0.018232269875979226,
+        -0.6662344970423257,
+        -0.7455194304414164,
+        0.9585032619308057
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "voxel_size_m": 0.01,
+    "obstacle_padding_m": 0.02,
+    "point_count": 139479,
+    "points_file": "/home/jason/Proyectos3/X5/diagnostics/current_pose_planning_20261018T190938Z/OFFLINE_SYNTHETIC_INPUTS_FINAL/camera/points_base.f32",
+    "free_depth_file": "/home/jason/Proyectos3/X5/diagnostics/current_pose_planning_20261018T190938Z/OFFLINE_SYNTHETIC_INPUTS_FINAL/camera/free_depth_m.bin",
+    "frames": [
+      {
+        "sequence": 1,
+        "received_monotonic": 100.4000000000004,
+        "value_scale_m": 0.001,
+        "device_timestamp_us": 1000000
+      },
+      {
+        "sequence": 2,
+        "received_monotonic": 100.5000000000004,
+        "value_scale_m": 0.001,
+        "device_timestamp_us": 1100000
+      },
+      {
+        "sequence": 3,
+        "received_monotonic": 100.6000000000004,
+        "value_scale_m": 0.001,
+        "device_timestamp_us": 1200000
+      },
+      {
+        "sequence": 4,
+        "received_monotonic": 100.7000000000004,
+        "value_scale_m": 0.001,
+        "device_timestamp_us": 1300000
+      },
+      {
+        "sequence": 5,
+        "received_monotonic": 100.80000000000041,
+        "value_scale_m": 0.001,
+        "device_timestamp_us": 1400000
+      }
+    ],
+    "captured_utc": "2026-10-18T19:23:37Z",
+    "observed_valid_fraction": 1.0,
+    "fully_observed_fraction": 1.0,
+    "unknown_space_policy": "blocked by default; occupied-only option is explicitly preview-only",
+    "files_sha256": {
+      "raw_depth.npz": "997fff97ce74cba12f581aae2afbc03eec0b11da9a7778a7ec92b13edd947cc6",
+      "depth_m.bin": "b73bf3e1e60a56a645ab8ceba8e630165c0d573e3d317a0d08fad6bd46c1affe",
+      "free_depth_m.bin": "b73bf3e1e60a56a645ab8ceba8e630165c0d573e3d317a0d08fad6bd46c1affe",
+      "points_base.f32": "0b2fd5b798ef55b9e4e8cd190110f7d795eb31061b9de45eca98009242051c31"
+    },
+    "physical_depth_alignment_verified": false,
+    "motion_authorized": false,
+    "measured_state_sha256": "959b543bcba711be764585e687f1182475a007426a57884a7a0a9d9e62e39e0b",
+    "acquisition": "stationary encoder-bracketed five-frame planning capture",
+    "source_scene_sha256": "4d308986d76681ef9587cd4dce1bf82d6413488b0153efb7dc6613659f5c84a3"
+  },
+  "occupied_only_preview": false,
+  "planning_seconds": 8.0,
+  "seed": 19
+}

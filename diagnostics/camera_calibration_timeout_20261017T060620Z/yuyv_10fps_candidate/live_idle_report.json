@@ -1,0 +1,206 @@
+{
+  "success": false,
+  "reason": "completed",
+  "failure": null,
+  "wall_duration_s": 68.15351024499978,
+  "live_display_duration_s": 65.03045692799788,
+  "first_sequence": 1,
+  "final_displayed_sequence": 373,
+  "displayed_frames": 373,
+  "maximum_display_gap_s": 1.9272530890011694,
+  "pauses": [
+    {
+      "monotonic": 30348.711128691,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30352.658892015,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30356.553063422,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30360.421088189,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30364.350261457,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30368.245447397,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30372.135141554,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30376.013737362,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30379.898241385,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30383.807407499,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30387.698818743,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30391.629475784,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30395.520968743,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30399.518968348,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30403.39252085,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    },
+    {
+      "monotonic": 30407.321718161,
+      "status": "Waiting for fresh RGB frames. Captures are paused; keep supporting the arm."
+    }
+  ],
+  "quality_text": "Board: 15/15 corners | reprojection 0.37px | RGB 1280\u00d7720 | frame 373",
+  "status_text": "PREVIEW ONLY: fresh RGB frames restored; no CAN interface is open.",
+  "can_attempts": [],
+  "observer_absent": true,
+  "metadata": {
+    "protocol": 1,
+    "serial": "AY6R463004K",
+    "name": "Orbbec Gemini 2",
+    "firmware": "1.4.92",
+    "depth_work_mode": "Unbinned Dense Default",
+    "color": {
+      "width": 1280,
+      "height": 720,
+      "fps": 10,
+      "format_enum": 0,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 720,
+      "K": [
+        [
+          690.735229492,
+          0,
+          647.398071289
+        ],
+        [
+          0,
+          690.641601562,
+          361.572753906
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        43.8931617737,
+        -99.6809844971,
+        6.35045580566e-05,
+        0.000259708933299,
+        106.131744385,
+        43.7220077515,
+        -99.2912826538,
+        106.184356689
+      ]
+    },
+    "depth": {
+      "width": 1280,
+      "height": 800,
+      "fps": 10,
+      "format_enum": 8,
+      "intrinsic_width": 1280,
+      "intrinsic_height": 800,
+      "K": [
+        [
+          613.611877441,
+          0,
+          634.910949707
+        ],
+        [
+          0,
+          613.611877441,
+          400.3934021
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "distortion_model": 4,
+      "D_opencv_order": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "T_color_depth_m": [
+      [
+        0.999998771667,
+        0.000881533622742,
+        -0.00127070999146,
+        -0.0139434547424
+      ],
+      [
+        -0.000879107117653,
+        0.999997776031,
+        0.00190857362747,
+        9.11664962769e-06
+      ],
+      [
+        0.00127239990234,
+        -0.00190747070312,
+        0.999997436523,
+        -0.00182580566406
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "depth_stream_enabled": false,
+    "jpeg_decode_policy": "reject_decoder_warnings"
+  },
+  "session": "/home/jason/Proyectos3/X5/diagnostics/camera_calibration_timeout_20261017T060620Z/yuyv_10fps_candidate/live_idle_sessions/20261017T062533Z-fbfce63b",
+  "camera_released": true,
+  "jpeg_report": {
+    "policy": "reject_decoder_warnings",
+    "received": 373,
+    "accepted": 373,
+    "rejected": 0,
+    "consecutive_rejected": 0,
+    "last_rejection": null,
+    "rejection_examples": [],
+    "last_received_monotonic": 30410.168828226,
+    "last_accepted_monotonic": 30410.168828226,
+    "last_rejected_monotonic": null,
+    "maximum_received_gap_s": 1.9001104689996282,
+    "maximum_accepted_gap_s": 1.9001104689996282,
+    "error": null,
+    "stop_reason": null
+  }
+}

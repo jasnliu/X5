@@ -1,0 +1,52 @@
+{
+  "method": "independent OMPL RRTConnect seeds; best final quintic duration",
+  "objective": "minimum outward duration_s (equivalently 2 * outward + 2 second hold)",
+  "requested_candidates": 6,
+  "searched_candidates": 1,
+  "search_workers": 2,
+  "candidates": [
+    {
+      "index": 1,
+      "seed": 19,
+      "status": "blocked_start",
+      "planning_wall_s": 0.4165481340023689,
+      "backend_folder": "candidates/01",
+      "variants": [],
+      "details": {
+        "accepted_static_encoder_overshoot": [
+          {
+            "handling": "Static left measurement retained exactly for FK/collision checking; no commands or clipping",
+            "joint": "openarmx_left_joint4",
+            "lower_rad": 0.0,
+            "measured_rad": -0.00019180590524214836,
+            "measurement_tolerance_rad": 0.0011508354314488441,
+            "overshoot_rad": 0.00019180590524214836,
+            "upper_rad": 1.8
+          }
+        ],
+        "angles_clamped": false,
+        "moving_right_limits_unchanged": true,
+        "reason": "joint_limits",
+        "static_left_encoder_tolerance_rad": 0.0011508354314488441,
+        "valid": false,
+        "violations": [
+          {
+            "joint": "openarmx_right_joint4",
+            "lower_rad": 0.0,
+            "measured_rad": -0.019756008239872003,
+            "measurement_tolerance_rad": 0.0,
+            "overshoot_rad": 0.019756008239872003,
+            "upper_rad": 1.8
+          }
+        ]
+      }
+    }
+  ],
+  "selected_candidate": null,
+  "selected_seed": null,
+  "selected_stop_at_corners": null,
+  "selected_duration_s": null,
+  "wall_time_s": 0.4246386289887596,
+  "globally_time_optimal": false,
+  "collision_check_order": "ascending final duration; slower/equal unchecked variants cannot beat winner"
+}

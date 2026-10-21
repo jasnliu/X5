@@ -1,0 +1,16 @@
+Checking 6,842 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 188, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 182, in main
+    elif a.action=='prepare':prepare(folder,a.plan,a.capture,a.calibration)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 117, in prepare
+    proof=hard_check(r,[c.at(t) for t in times],folder)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 101, in hard_check
+    raise ValueError('Baseline collision/zone check failed; no motion: '+str(bad[:2] or result.get('error',result.get('status'))))
+ValueError: Baseline collision/zone check failed; no motion: [{'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision', 'stick_center_world': [0.5092312424463392, -0.3237298591673854, 0.42272202983602486], 'valid': False}]

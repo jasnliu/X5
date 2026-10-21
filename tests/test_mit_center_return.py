@@ -27,6 +27,56 @@ class MitCenterTests(unittest.TestCase):
         command = c.update(.6, 11.)
         self.assertLess(command.position, .601)
 
+    def test_native_velocity_keeps_real_pd_plus_feedforward_inside_torque_limit(self):
+        # A quantized/batched position jump is NOT 5 rad/s at the drive.
+        # Using that false derivative in the limiter used to add >6 Nm of
+        # feedforward even though the drive reports stationary feedback.
+        for q in (-.01, .01):
+            c = MitCenterReturn(0., 0., 0., 10.)
+            command = c.update(q, 10.002, measured_velocity=0.)
+            actual_torque = (command.torque+command.kp*(command.position-q)
+                             +command.kd*command.velocity)
+            self.assertLessEqual(abs(actual_torque), 3.)
+            self.assertLess(abs(command.torque), .01)
+
+    def test_invalid_native_velocity_fails_closed(self):
+        for v in (float('nan'), float('inf')):
+            with self.assertRaisesRegex(RuntimeError, 'velocity'):
+                MitCenterReturn(0., 0., 0., 10.).update(0., 10.002, measured_velocity=v)
+
+    def test_optional_left_load_estimator_does_not_change_right_default(self):
+        for gain in (10., 60.):
+            kwargs = {} if gain == 60. else dict(bias_gain=gain)
+            c = MitCenterReturn(0., 0., 0., 10., **kwargs)
+            c.update(.01, 10.002, measured_velocity=0.)
+            self.assertAlmostEqual(c.bias, -gain*.01*.002)
+        for gain in (-1., 61., float('nan')):
+            with self.assertRaises(ValueError):
+                MitCenterReturn(0., 0., 0., 10., bias_gain=gain)
+
+    def test_precision_left_path_does_not_increase_motion_or_torque_caps(self):
+        c = MitCenterReturn(0., .4, 0., 10., bias_gain=40., kp=160., kd=4.)
+        reference = MitCenterReturn(0., .4, 0., 10.)
+        q = v = 0.
+        for i in range(1, 1501):
+            cmd = c.update(q, 10.+i*.002, measured_velocity=v)
+            original = reference.update(q, 10.+i*.002)
+            self.assertLessEqual(abs(cmd.velocity), .35+1e-9)
+            # Preserve the complete existing reference, including its final
+            # snap to zero velocity at the exact endpoint.
+            self.assertEqual((cmd.position, cmd.velocity), (original.position, original.velocity))
+            net = cmd.torque+cmd.kp*(cmd.position-q)+cmd.kd*(cmd.velocity-v)
+            self.assertLessEqual(abs(net), 3.+1e-9)
+            q, v = cmd.position, cmd.velocity
+        self.assertAlmostEqual(q, .4)
+        # An obstructed/still joint must not receive a higher net torque cap.
+        c = MitCenterReturn(0., .4, 0., 10., bias_gain=40., kp=160., kd=4.)
+        for i in range(1, 1001):
+            cmd = c.update(0., 10.+i*.002, measured_velocity=0.)
+            self.assertLessEqual(abs(cmd.torque+cmd.kp*cmd.position+cmd.kd*cmd.velocity), 3.+1e-9)
+        right = MitCenterReturn(0., .4, 0., 10.)
+        self.assertEqual((right.kp, right.kd, right.bias_gain), (40., 1.8, 60.))
+
     def test_normal_exit_joins_then_centers_without_mode_switch_or_disable(self):
         a = app_fixture()
         a.single_run_mode = True

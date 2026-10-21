@@ -18,7 +18,7 @@ class AudioSender:
     """Best-effort sender used by the non-ROS ST7 bridge process."""
 
     def __init__(self, path: str | Path, instrument: str = "ride"):
-        if instrument not in {"ride", "hihat"}:
+        if instrument not in {"ride", "hihat", "snare"}:
             raise ValueError("Unknown audio instrument")
         self.instrument = instrument
         self.path = str(path)
@@ -71,7 +71,7 @@ class AudioReceiver:
     """Receive readiness heartbeats and timestamped ST7 HIT events."""
 
     def __init__(self, path: str | Path, instrument: str = "ride"):
-        if instrument not in {"ride", "hihat"}:
+        if instrument not in {"ride", "hihat", "snare"}:
             raise ValueError("Unknown audio instrument")
         self.instrument = instrument
         self.path = Path(path)
@@ -108,8 +108,8 @@ class AudioReceiver:
             if (not isinstance(message, dict)
                     or message.get("version") != AUDIO_PROTOCOL_VERSION
                     or message.get("instrument", "ride") != self.instrument):
-                # Legacy untagged messages belong ONLY to ride. Neither hi-hat
-                # hits nor its readiness/progress may affect the ride workflow.
+                # Legacy untagged messages belong ONLY to ride. Other models'
+                # hits/readiness/progress must never cross instrument sockets.
                 continue
             kind = message.get("kind")
             if kind == 'progress':

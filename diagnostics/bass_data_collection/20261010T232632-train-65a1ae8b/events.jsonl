@@ -1,0 +1,38 @@
+{"t": 5914.64637995, "phase": "INITIAL CENTER PATH VERIFIED", "outside_buffer_mm": 0.0, "recovery_only": false}
+{"t": 5914.899418771, "phase": "CHECKING INITIAL RIGHT CENTER"}
+{"t": 5915.098477416, "phase": "INITIAL RIGHT CENTER", "duration_s": 5.995705334663049}
+{"t": 5921.099193691, "phase": "INITIAL RIGHT CENTER SETTLED"}
+{"t": 5921.701431174, "phase": "INITIAL LEFT CENTER"}
+{"t": 5922.335480786, "phase": "LEFT MIT CENTER VERIFIED"}
+{"t": 5923.063369682, "phase": "RIGHT MIT CENTER VERIFIED"}
+{"t": 5925.620152748, "phase": "CHECKING RECORD3 START"}
+{"t": 5925.730581122, "phase": "RECORD3 START", "duration_s": 1.8038252703571256}
+{"t": 5927.541417027, "phase": "RECORD3 START SETTLED"}
+{"t": 5928.143922695, "phase": "START HOLD"}
+{"t": 5928.7452925, "phase": "TEMPORARY POSITION GAINS"}
+{"t": 5928.79406107, "phase": "PLAYBACK RECORD3", "duration_s": 4.8, "j7_mode": "powered MIT"}
+{"t": 5933.601990821, "phase": "ENDPOINT SOFT HOLD"}
+{"t": 5935.612614561, "phase": "ENDPOINT GAIN RESTORATION", "ramp_s": 0.5}
+{"t": 5936.167871441, "phase": "ENDPOINT HOLD"}
+{"t": 5937.710898758, "phase": "RECORD3 ENDPOINT VERIFIED", "goal_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7329663538567175, 0.20476168513003543, -0.30516319523918334, 0.6001606775005737], "actual_rad": [-0.6055312428473343, 0.21194552529182964, 0.24416891737239688, 1.7333499656672, 0.20514529694051795, -0.3047795834287008, 0.5993934538796069], "max_error_deg": 0.0439586754241434, "settle_range_deg": 0.02197933771202081, "settled_seconds": 0.6278459410004871, "tolerance_deg": 0.05}
+{"t": 5937.774282055, "phase": "LEFT RECORDING START", "duration_s": 2.6792887388418265}
+{"t": 5940.46546697, "phase": "LEFT RECORDING START SETTLED"}
+{"t": 5941.067644387, "phase": "LEFT RECORDING"}
+{"t": 5952.73905271, "phase": "LEFT ENDPOINT VERIFIED"}
+{"t": 5955.625021442, "phase": "SNARE ANCHOR VERIFIED"}
+{"t": 5956.229959224, "phase": "CAPTURING", "kind": "bass_only", "split": "train", "bass_hits": 1, "bpm": 120, "offset_s": 0.075, "ride_hits": 0, "ride_depth_deg": null, "snare_hits": 0, "hihat_closures": 0, "duration_s": 8.0, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "block": 3}
+{"t": 5964.230244465, "phase": "CAPTURED", "block": 3, "kind": "bass_only"}
+{"t": 5964.230369074, "phase": "SNARE ANCHOR VERIFIED"}
+{"t": 5964.831318862, "phase": "CAPTURING", "kind": "bass_only", "split": "train", "bass_hits": 4, "bpm": 80, "offset_s": 0.0, "ride_hits": 0, "ride_depth_deg": null, "snare_hits": 0, "hihat_closures": 0, "duration_s": 8.0, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "block": 4}
+{"t": 5972.832757287, "phase": "CAPTURED", "block": 4, "kind": "bass_only"}
+{"t": 5972.832816671, "phase": "FINITE BATCH COMPLETE", "clips": 2}
+{"t": 5972.849768331, "phase": "LEFT REVERSE START", "duration_s": 1.0}
+{"t": 5973.853127637, "phase": "LEFT REVERSE START SETTLED"}
+{"t": 5974.454273442, "phase": "LEFT REVERSE RECORDING", "reverse_from_seconds": 11.665686732078171}
+{"t": 5986.130174089, "phase": "LEFT RECORDING START VERIFIED"}
+{"t": 5986.791336671, "phase": "LEFT CENTER AFTER REVERSE", "duration_s": 2.680223312862137}
+{"t": 5989.479914242, "phase": "LEFT CENTER AFTER REVERSE SETTLED"}
+{"t": 5990.575081716, "phase": "CENTER BEFORE RELAX", "j7_mode": 0, "duration_s": 11.60725423437857}
+{"t": 6002.185648022, "phase": "CENTER SETTLED"}
+{"t": 6002.816767472, "phase": "RELAXED VERIFIED", "center": {"t": 6002.805381549, "goal_rad": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4], "actual_rad": [0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00019180590524214836, 0.00029659014262470307, 0.00019180590524214836, 1.399607690547036], "max_error_deg": 0.044457013629936544, "span_deg": 0.0439586754241434, "settled_s": 0.6481365860008736}}
+{"t": 6002.817341746, "phase": "HIHAT OPEN RETURN AND RELEASE ACK", "error": null, "shutdown_error": null, "closures_commanded": 0, "open_command_at": 5972.83337816, "normal_open_return_wait_s": 1.5, "release_ack": true, "encoder_position_verified": true, "open_proof": "firmware latched encoder-zero return; mechanism may coast afterward", "final_telemetry": {"v": 2, "min": 90, "max": 115, "angle": 90, "counts": 134, "pos": -2, "target": 0, "released": 1, "opened": 1, "fault": 0}, "kicks_commanded": 5, "bass_pulse": {"command": "K", "direction": "clockwise", "duty": 180, "pwm_bits": 8, "pwm_hz": 20000, "duration_ms": 50, "return_mode": "coast"}, "finished_at": 5974.357918074}

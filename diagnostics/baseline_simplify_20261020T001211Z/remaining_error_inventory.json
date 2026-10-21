@@ -1,0 +1,492 @@
+[
+  {
+    "file": "drum_planner/baseline/simulation.py",
+    "line": 12,
+    "check": "raise RuntimeError('SIMULATED '+self.fault)"
+  },
+  {
+    "file": "drum_planner/baseline/simulation.py",
+    "line": 22,
+    "check": "raise RuntimeError('Simulated drives disabled')"
+  },
+  {
+    "file": "drum_planner/baseline/simulation.py",
+    "line": 26,
+    "check": "raise RuntimeError('Mock release away from start')"
+  },
+  {
+    "file": "drum_planner/baseline/simulation.py",
+    "line": 29,
+    "check": "raise RuntimeError('SIMULATED '+self.fault)"
+  },
+  {
+    "file": "drum_planner/baseline/paths.py",
+    "line": 10,
+    "check": "raise ValueError('Hardware speed must be 0.25\u20131.00 (25\u2013100% of validated limits)')"
+  },
+  {
+    "file": "drum_planner/baseline/paths.py",
+    "line": 25,
+    "check": "raise ValueError('Curve exceeds validated velocity/acceleration/jerk limits')"
+  },
+  {
+    "file": "drum_planner/baseline/paths.py",
+    "line": 41,
+    "check": "raise ValueError('Invalid held pose/progress')"
+  },
+  {
+    "file": "drum_planner/baseline/paths.py",
+    "line": 55,
+    "check": "raise ValueError('Held pose is too far from the traveled path; no blind recovery or relaxation')"
+  },
+  {
+    "file": "drum_planner/baseline/paths.py",
+    "line": 29,
+    "check": "raise ValueError('Curve must start/end at rest with zero acceleration')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 115,
+    "check": "raise ValueError('No fresh arm feedback yet. '+self.reader_error+' Check power/connection, then click Calculate again; the live window reconnects automatically.')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 148,
+    "check": "raise ValueError('No valid Baseline trajectory. Click Calculate again after correcting the reported obstacle/pose.')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 216,
+    "check": "raise ValueError('No active controller/trajectory to recover. Click Calculate for a new cycle.')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 218,
+    "check": "raise ValueError('Controller connection unavailable. Restore CAN/controller connection and click Reverse again. No release or new controller was sent.')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 261,
+    "check": "raise ValueError('Controller state is unknown/active. Use Hold or Reverse; do not start another owner.')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 122,
+    "check": "raise ValueError(error)"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 212,
+    "check": "raise ValueError('Controller mode mismatch')"
+  },
+  {
+    "file": "drum_planner/baseline/workspace.py",
+    "line": 326,
+    "check": "raise ValueError(json.loads(path.read_text())['error'] if path.exists() else 'Worker stopped. See '+str(current.log_path))"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 52,
+    "check": "raise ValueError('Control message too large')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 55,
+    "check": "raise RuntimeError('Incomplete control write; reconnect before any motion')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 71,
+    "check": "raise RuntimeError('Controller response stale; no confirmed hold')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 64,
+    "check": "raise RuntimeError('Motor-owner connection lost; do not assume the arm is relaxed')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 66,
+    "check": "raise RuntimeError('Oversized controller response')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 132,
+    "check": "raise ValueError('Session already used; no automatic restart')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 133,
+    "check": "raise ValueError('Explicit MOVE RIGHT ARM confirmation required')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 223,
+    "check": "raise ValueError('Authentication failed')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 253,
+    "check": "raise ValueError('Operator connection lost during return verification; remain held')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 155,
+    "check": "raise ValueError('No active controller; this window has not enabled any motors')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 225,
+    "check": "raise ValueError('Connect with hello first')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 246,
+    "check": "raise ValueError(json.loads((folder/'error.json').read_text())['error'])"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 160,
+    "check": "raise ValueError('No active trajectory')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 187,
+    "check": "raise ValueError('Controller is holding. Use Reverse to rest + relax; closing does not release torque.')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 197,
+    "check": "raise ValueError('Unknown or unavailable control command')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 190,
+    "check": "raise ValueError('Start the simulated cycle first')"
+  },
+  {
+    "file": "drum_planner/baseline/service.py",
+    "line": 196,
+    "check": "raise ValueError('Unknown simulation fault')"
+  },
+  {
+    "file": "drum_planner/baseline/transport.py",
+    "line": 78,
+    "check": "raise RuntimeError('Relax transmission incomplete: '+'; '.join(errors))"
+  },
+  {
+    "file": "drum_planner/baseline/transport.py",
+    "line": 51,
+    "check": "raise RuntimeError('Waiting for complete fresh fault-free feedback after a bus/drive error; no motion commands')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 50,
+    "check": "raise RuntimeError('Missing/stale motor feedback; holding torque cannot be confirmed')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 51,
+    "check": "raise RuntimeError('Left arm is not relaxed')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 53,
+    "check": "raise RuntimeError('Non-finite feedback')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 56,
+    "check": "raise RuntimeError('Right drive not running; cannot guarantee hold or reverse')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 57,
+    "check": "raise RuntimeError('Both arms must initially be relaxed')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 60,
+    "check": "raise RuntimeError('Custom gripper is not at its closed position; opening/forcing it is forbidden')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 62,
+    "check": "raise RuntimeError('Right joint outside model bounds; no clipping')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 72,
+    "check": "raise ValueError('This session cannot be started again; make a new measured plan')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 77,
+    "check": "raise RuntimeError('Missing measured joint position')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 80,
+    "check": "raise RuntimeError('Invalid trajectory target')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 82,
+    "check": "raise RuntimeError('Target discontinuity rejected')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 113,
+    "check": "raise ValueError('Hold first; return is only available from a held state')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 114,
+    "check": "raise ValueError('Reverse requires an explicit operator request')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 122,
+    "check": "raise ValueError('Fresh hold established; wait for stationary feedback and press Reverse again')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 123,
+    "check": "raise ValueError('Wait for at least 0.5 s of healthy stationary hold feedback')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 124,
+    "check": "raise ValueError('Arm drifted from the hold; no unchecked reverse')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 132,
+    "check": "raise ValueError('Recheck hold is only available after a stop')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 143,
+    "check": "raise ValueError('Recovery was not collision/zone checked')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 145,
+    "check": "raise ValueError('Recovery left-arm snapshot does not match the requested collision check')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 146,
+    "check": "raise ValueError('Arm moved while checking return; hold and retry')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 147,
+    "check": "raise ValueError('Held position is not settled')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 148,
+    "check": "raise ValueError('Recovery cannot advance beyond traveled progress')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 283,
+    "check": "raise ValueError('Stop the trajectory before exiting the controller; no motor command is sent')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 135,
+    "check": "raise ValueError('Arm drifted from its held pose; will not chase drift or relax')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 195,
+    "check": "raise RuntimeError('Control scheduler missed 80 ms; trajectory stopped, no catch-up')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 175,
+    "check": "raise RuntimeError('Arm moved since preparation; replan before enable')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 179,
+    "check": "raise RuntimeError('Arm shifted during enable; no relax')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 180,
+    "check": "raise RuntimeError('Enable timeout; no retry/disable')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 172,
+    "check": "raise RuntimeError('No fresh initial encoders')"
+  },
+  {
+    "file": "drum_planner/baseline/motion.py",
+    "line": 217,
+    "check": "raise RuntimeError('Endpoint did not settle; holding, no release')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 39,
+    "check": "raise ValueError('Baseline found no valid trajectory: '+str(result.get('details',result.get('error'))))"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 52,
+    "check": "raise ValueError('Requires a newly acquired baseline hardware-session plan, not a demo or experiment cache')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 54,
+    "check": "raise ValueError('Plan is from another system boot; acquire again')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 56,
+    "check": "raise ValueError('Calibration or goal changed; replan')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 57,
+    "check": "raise ValueError('SRDF changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 59,
+    "check": "raise ValueError('zone3/reference model changed; replan')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 60,
+    "check": "raise ValueError('Starting state changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 63,
+    "check": "raise ValueError('Plan does not match the acquired joints')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 65,
+    "check": "raise ValueError('Scene changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 69,
+    "check": "raise ValueError('Curve endpoints changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 86,
+    "check": "raise ValueError('Invalid Baseline collision margins')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 112,
+    "check": "raise ValueError('Incomplete/invalid Baseline collision check; no motion: '+str(bad[:2] or result.get('error',result.get('status'))))"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 121,
+    "check": "raise ValueError('Arm changed since preview; capture/replan instead of moving to the old start')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 158,
+    "check": "raise ValueError('Invalid calculation packet; click Calculate again')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 159,
+    "check": "raise ValueError('Calculation is from another system boot; click Calculate again')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 161,
+    "check": "raise ValueError('Plan/calibration changed after preparation')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 163,
+    "check": "raise ValueError('Prepared curve differs from preview')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 167,
+    "check": "raise ValueError('Prepared request/scene changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 174,
+    "check": "raise ValueError('Missing or mismatched Baseline collision proof; click Calculate again')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 184,
+    "check": "raise ValueError('Recovery scene changed')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 191,
+    "check": "raise ValueError('Invalid measured left-arm recovery snapshot')"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 111,
+    "check": "raise PathBlocked(bad[:2])"
+  },
+  {
+    "file": "drum_planner/baseline/tasks.py",
+    "line": 130,
+    "check": "raise ValueError(str(exc)+' \u2014 click Calculate trajectory to replace this route') from exc"
+  },
+  {
+    "file": "drum_planner/baseline/feedback.py",
+    "line": 46,
+    "check": "raise ValueError('Invalid display feedback')"
+  },
+  {
+    "file": "drum_planner/baseline/feedback.py",
+    "line": 47,
+    "check": "raise ValueError('Invalid measured left gripper opening')"
+  },
+  {
+    "file": "drum_planner/baseline/feedback.py",
+    "line": 97,
+    "check": "raise RuntimeError('Display reader has not released CAN; no new owner started')"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 79,
+    "check": "raise RuntimeError(worker.error)"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 45,
+    "check": "raise RuntimeError(camera.error)"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 69,
+    "check": "raise RuntimeError(worker.error)"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 28,
+    "check": "raise ValueError(error)"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 41,
+    "check": "raise RuntimeError(camera.error)"
+  },
+  {
+    "file": "drum_planner/baseline/work.py",
+    "line": 42,
+    "check": "raise RuntimeError('Camera snapshot timed out; click Calculate to retry')"
+  }
+]

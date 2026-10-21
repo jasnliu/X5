@@ -1,0 +1,54 @@
+{
+  "method": "iris_gcs",
+  "description": "IRIS with sampled FCL configuration-space collision witnesses and inward-shrunk cells, iteratively refined regions, then real Drake Graphs of Convex Sets optimization. Regions are sampled approximations, not continuous certificates; the final curve is independently FCL-validated.",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": false
+      },
+      "status": "planned"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 1,
+      "metrics": {
+        "transit_min_clearance_m": 0.04,
+        "transit_low_decile_clearance_m": 0.05100000000000001,
+        "all_path_min_clearance_m": 0.04,
+        "transit_proximity": 0.05163194444444446,
+        "workspace_length_m": 1.60882705634049,
+        "joint_length_rad": 2.536182132954966,
+        "bending_deg": 551.4066313419593
+      },
+      "duration_s": 13.370274228739904
+    }
+  ],
+  "selected": 1,
+  "elapsed_s": 45.16414447600255,
+  "budget_s": 60.0,
+  "region_count": 27,
+  "directed_edges": 94,
+  "sparse_graph": true,
+  "solver": "Clarabel",
+  "solver_status": "SolutionResult.kSolutionFound",
+  "success": true,
+  "refinements": 19,
+  "region_certification": "sampled, not continuous",
+  "algorithm": "Drake IRIS + GcsTrajectoryOptimization",
+  "gcs_geometric_collision_check": {
+    "samples_checked": 801,
+    "edge_joint_l1_step_rad": 0.003,
+    "max_time_step_s": 0.002
+  }
+}

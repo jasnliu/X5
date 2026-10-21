@@ -1,0 +1,19 @@
+BASELINE HARDWARE MODE: startup only reads disabled encoders and the camera. It NEVER enables/moves the arm.
+READ ONLY: measuring relaxed stationary arms + five native depth frames; NO actuator commands
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 185, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 177, in main
+    if a.action=='capture':acquire(folder,a.calibration)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 22, in acquire
+    state,scene=capture_current(folder,worker,cal_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/current_plan.py", line 26, in capture_current
+    if worker.error:raise RuntimeError(worker.error)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CAN error or RTR frame
+Baseline stopped; no automatic relaxation. If a controller is already active, it retains ownership and requests HOLD; reconnect before recovery. CAN error or RTR frame

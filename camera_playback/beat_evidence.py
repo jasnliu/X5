@@ -91,7 +91,8 @@ class BeatEvidence:
                     self.faults.append(dict(message='Readiness timeout; no run'))
                     self.finish()
                     return
-            if a.continuous_strike_active and s is not None and s.swing:
+            if (a.continuous_strike_active and s is not None and s.swing
+                    and not getattr(a, 'sync_calibrating', False)):
                 if s.bottoms > self.last_bottom:
                     self.last_bottom = s.bottoms
                     self.bottoms.append(dict(at=s.bottom_at, count=s.count,

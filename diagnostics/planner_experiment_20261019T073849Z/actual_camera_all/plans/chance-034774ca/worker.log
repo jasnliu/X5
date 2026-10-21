@@ -1,0 +1,22 @@
+[chance +   0.0s] From-scratch candidate search + whole-path Monte Carlo scenario filter. Uses a one-sided Wilson upper bound on the assumed scenario failure rate, NOT a calibrated hardware probability.
+[chance +   0.0s] building/loading model + frozen FCL world; no motor access
+[chance +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chance +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   5.3s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chance +   9.3s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[chance +   9.3s] search 2: 3.0s allocation, added clearance 0.0 mm
+[chance +  13.8s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[chance +  13.8s] risk candidate pool: native CHOMP broad-route proposal from a newly planned seed
+[chance +  17.4s] candidate 3: valid, 20.66s outward, transit clearance 110.0 mm
+[chance +  17.4s] evaluating 64 common uncertainty scenarios across 3 candidates
+[chance +  21.0s] scenarios 8/64 × 3 candidates (shared scene work)
+[chance +  24.4s] scenarios 16/64 × 3 candidates (shared scene work)
+[chance +  27.9s] scenarios 24/64 × 3 candidates (shared scene work)
+[chance +  31.4s] scenarios 32/64 × 3 candidates (shared scene work)
+[chance +  34.9s] scenarios 40/64 × 3 candidates (shared scene work)
+[chance +  38.3s] scenarios 48/64 × 3 candidates (shared scene work)
+[chance +  41.8s] scenarios 56/64 × 3 candidates (shared scene work)
+[chance +  45.3s] scenarios 64/64 × 3 candidates (shared scene work)
+[chance +  45.3s] candidate 2 rejected: scenario upper bound 0.833 > 0.150
+[chance +  45.3s] candidate 1 rejected: scenario upper bound 0.998 > 0.150
+[chance +  45.3s] READY: 20.663s outward → 2s hold → exact reverse; SIMULATION ONLY

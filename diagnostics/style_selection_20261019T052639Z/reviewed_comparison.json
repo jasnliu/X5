@@ -1,0 +1,69 @@
+{
+  "planned": {
+    "total": 100.0,
+    "weighted_components": {
+      "workspace_economy": 40.0,
+      "broad_bending": 29.999999999999996,
+      "obstacle_proximity": 20.0,
+      "joint_economy": 10.0
+    }
+  },
+  "recorded": {
+    "total": 70.67474526986096,
+    "weighted_components": {
+      "workspace_economy": 19.478004497859164,
+      "broad_bending": 16.27631078864922,
+      "obstacle_proximity": 29.621371650357155,
+      "joint_economy": 5.299058332995431
+    }
+  },
+  "planned_metrics": {
+    "components": {
+      "workspace_economy": 2.471464210863023,
+      "broad_bending": 690.2326242126355,
+      "obstacle_proximity": 0.15061567164179107,
+      "joint_economy": 2.156140866683794
+    },
+    "wrist": {
+      "travel_m": 1.207860919475821,
+      "direct_distance_m": 0.3828223748017216,
+      "broad_turning_deg": 323.7289059578029
+    },
+    "tip": {
+      "travel_m": 1.9718467613434525,
+      "direct_distance_m": 0.9037459950104941,
+      "broad_turning_deg": 366.5037182548327
+    },
+    "joint_travel_rad": 8.072701950882463,
+    "joint_direct_rad": 3.7440512703135713,
+    "minimum_distal_padding_estimate_m": 0.0375,
+    "clearance_is_soft_estimate_not_safety_certificate": true,
+    "joint_arc_samples": 801,
+    "clearance_samples": 201
+  },
+  "recorded_metrics": {
+    "components": {
+      "workspace_economy": 1.203479775387198,
+      "broad_bending": 374.4813569383261,
+      "obstacle_proximity": 0.22307213930348258,
+      "joint_economy": 1.1425516226712749
+    },
+    "wrist": {
+      "travel_m": 0.34674238874144964,
+      "direct_distance_m": 0.2964904077421594,
+      "broad_turning_deg": 145.09666549098455
+    },
+    "tip": {
+      "travel_m": 0.6324115851009727,
+      "direct_distance_m": 0.5171119425984578,
+      "broad_turning_deg": 229.38469144734154
+    },
+    "joint_travel_rad": 4.390852298769353,
+    "joint_direct_rad": 3.8430231174181717,
+    "minimum_distal_padding_estimate_m": 0.0175,
+    "clearance_is_soft_estimate_not_safety_certificate": true,
+    "joint_arc_samples": 801,
+    "clearance_samples": 201
+  },
+  "note": "Style comparison only; recorded start differs and record3 has not become a valid replacement path. No hardware."
+}

@@ -1,4 +1,4 @@
-"""USB-serial control for the ESP32 hi-hat motor used during user-tempo swing playback."""
+"""Shared ESP32 serial control for the hi-hat and swing-only bass-drum pulses."""
 from __future__ import annotations
 
 import glob
@@ -80,12 +80,13 @@ def configure_serial(fd: int) -> None:
 
 
 class HiHatController:
-    """Drive only motor 2 of the copied motor_beat firmware.
+    """Drive the hi-hat and explicit bass kicks on one serial connection.
 
     Explicit beat-program edges close on 2/4 and open on 1/3. The legacy
     send_beat API starts closed for finite collection cycles. Legacy closure
     targets 100 degrees; calibrated closure uses B at the learned 90..115 degree
-    target. Open targets zero. Motor-1 kick commands are never sent.
+    target. Open targets zero. Only send_kick() commands motor 1; hi-hat
+    calibration and legacy collection edges never implicitly kick the bass.
     """
 
     def __init__(self, port: str | Path | None = DEFAULT_ESP_PORT):
@@ -345,6 +346,17 @@ class HiHatController:
         self.next_beat_closes = not closed
         self.beat_count += 1
         return command
+
+    def send_kick(self) -> bytes:
+        """Exact run_keys.sh F strike: firmware K, clockwise 180/255 for 50 ms.
+
+        Firmware releases motor 1 after the pulse, independently of motor 2.
+        There is no bass calibration, reverse command, or powered hold.
+        """
+        if not self.sequence_active or not self.ready():
+            raise RuntimeError("ESP32 bass drum beat sequence is not active/ready")
+        self._write(b"K")
+        return b"K"
 
     def stop_sequence(self) -> None:
         if self.fd is not None and self.sequence_active:

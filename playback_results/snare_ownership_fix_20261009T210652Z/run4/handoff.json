@@ -1,0 +1,125 @@
+{
+  "at": 3778.905884491,
+  "reason": "latched reverse endpoint failure; stationary powered left hold handed to exclusive centered recovery; right remains disabled",
+  "state": {
+    "at": 3778.837900847,
+    "phase": "CENTER RELAX RECENTERING",
+    "status": "LEFT RETURN halted; not relaxed; Emergency Relax remains available: Left reverse recording failed: RuntimeError: ENDPOINT HOLD: did not settle within 0.05 degrees; error=0.066",
+    "active": true,
+    "states": {
+      "left1": [
+        0.02090684367132134,
+        2,
+        3778.814552806
+      ],
+      "left2": [
+        0.010932936598763376,
+        2,
+        3778.814552806
+      ],
+      "left3": [
+        -0.28022842755779287,
+        2,
+        3778.814552806
+      ],
+      "left4": [
+        0.07269443808651843,
+        2,
+        3778.814552806
+      ],
+      "left5": [
+        -0.4724179446097523,
+        2,
+        3778.814552806
+      ],
+      "left6": [
+        0.07307804989700095,
+        2,
+        3778.814552806
+      ],
+      "left7": [
+        -0.06885831998168968,
+        2,
+        3778.814552806
+      ],
+      "left8": [
+        -0.2468542000457763,
+        2,
+        3778.814552806
+      ],
+      "right1": [
+        0.032415197985809385,
+        0,
+        3778.814552806
+      ],
+      "right2": [
+        0.0009590295262071891,
+        0,
+        3778.814552806
+      ],
+      "right3": [
+        0.00019180590524214836,
+        0,
+        3778.814552806
+      ],
+      "right4": [
+        0.0036443121995883843,
+        0,
+        3778.814552806
+      ],
+      "right5": [
+        -8.702166785959364e-05,
+        0,
+        3778.814552806
+      ],
+      "right6": [
+        0.0021098649576565265,
+        0,
+        3778.814552806
+      ],
+      "right7": [
+        0.49773632410162527,
+        0,
+        3778.814552806
+      ],
+      "right8": [
+        0.12371480888075048,
+        0,
+        3778.814552806
+      ]
+    },
+    "snare": {
+      "phase": "powered path/hold",
+      "ready": false,
+      "completed": 0,
+      "sample": {
+        "position": -0.07269443808651843,
+        "velocity": 0.10725566491187521,
+        "torque": 0.46250095368887045,
+        "state": 2,
+        "at": 3778.836605234847
+      },
+      "peak_drop": 0.0,
+      "overshoot": 0.0,
+      "error": null,
+      "rejected": null,
+      "last_gap": 0.0019804850003311003,
+      "max_gap": 0.019776841000293643,
+      "feedback_age": 0.001278709153211821,
+      "hold_recoveries": 0,
+      "commands_sent": 89722,
+      "at": 3778.837704391,
+      "armed": true,
+      "scheduled": false,
+      "moving": false,
+      "measure": 0,
+      "beat": 0,
+      "released_at": null,
+      "scheduled_at": null,
+      "queue_retries": 6749,
+      "strike_index": 0,
+      "advance": 0.0,
+      "calibrating": false
+    }
+  }
+}

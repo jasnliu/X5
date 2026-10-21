@@ -1,0 +1,645 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "normal_cycle",
+      "passed": true,
+      "status": {
+        "phase": "RELAXED",
+        "error": "",
+        "feedback_error": "",
+        "tau": 0.0,
+        "duration": 6.807909722783153,
+        "rate": 1.0,
+        "started": true,
+        "disabled": true,
+        "hold_confirmed": false,
+        "right_rad": [
+          0.0040279240100709055,
+          0.013234607461662051,
+          0.4532373540856032,
+          -0.019756008239872003,
+          -0.24406413313501255,
+          0.1781876859693288,
+          0.5579633783474468
+        ],
+        "can_retry_hold": false,
+        "can_return": false,
+        "safe_to_close": true,
+        "simulated": true,
+        "session": "/home/jason/Proyectos3/X5/diagnostics/baseline_hardware_20261019T190516Z/normal_cycle/controller-fa0d9a66",
+        "recovery_check_running": false,
+        "connection_error": ""
+      },
+      "events": [
+        {
+          "monotonic": 249730.905412268,
+          "phase": "PREFLIGHT",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249730.905784395,
+          "phase": "ARMING",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249730.922558454,
+          "phase": "SETTLING_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249731.534071838,
+          "phase": "OUTWARD",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249738.350463482,
+          "phase": "SETTLING_GOAL",
+          "tau": 6.807909722783153
+        },
+        {
+          "monotonic": 249738.960644825,
+          "phase": "GOAL_HOLD",
+          "tau": 6.807909722783153
+        },
+        {
+          "monotonic": 249740.962758362,
+          "phase": "RETURN",
+          "tau": 6.807909722783153
+        },
+        {
+          "monotonic": 249747.776865069,
+          "phase": "SETTLING_REST",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249748.3914365,
+          "phase": "VERIFIED_SUPPORTED_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249748.391542845,
+          "phase": "RELAXED",
+          "tau": 0.0
+        }
+      ],
+      "render": {
+        "type": "snapshot_mesh_trajectory_preview",
+        "rendered_updates": 1,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 5,
+        "max_age_at_display_s": 6419.930468538019,
+        "last_frame_compute_s": 0.08418515999801457,
+        "maximum_draw_s": 0.060763984016375616,
+        "worker_submissions": 0,
+        "maximum_pending_jobs": 0,
+        "modes_rendered": [
+          "surface mesh"
+        ],
+        "freeze_count": 0,
+        "resume_count": 0,
+        "mode_switches": 0,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 4,
+          "maximum_frame_s": 0.060756068996852264,
+          "median_frame_s": 0.009912307999911718,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 19526,
+          "render_errors": []
+        },
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+        "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+        "animation_draws": 3,
+        "animation_time_s": 0.0,
+        "animation_completed_cycles": 0,
+        "animation_play_clicks": 0,
+        "animation_seeks": 0,
+        "animation_phases_seen": [
+          "outward"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false,
+        "camera_updates": false,
+        "mesh_builds": 1,
+        "mesh": {
+          "vertices": 11758,
+          "triangles": 19526,
+          "candidate_triangles": 32000,
+          "rejected_triangles": 12474,
+          "grid_step_pixels": 8,
+          "native_resolution": [
+            1280,
+            800
+          ],
+          "valid_pixels": 811403,
+          "depth_jump_m": 0.03,
+          "relative_depth_jump": 0.02,
+          "max_edge_m": 0.12,
+          "hole_filling": false,
+          "hidden_surface_reconstruction": false,
+          "preview_only": true
+        },
+        "scene_immutable": true,
+        "collision_mesh": false
+      }
+    },
+    {
+      "case": "moving_can_fault",
+      "passed": true,
+      "status": {
+        "phase": "RELAXED",
+        "error": "",
+        "feedback_error": "",
+        "tau": 0.0,
+        "duration": 6.807909722783153,
+        "rate": 1.0,
+        "started": true,
+        "disabled": true,
+        "hold_confirmed": false,
+        "right_rad": [
+          0.0040279240100709055,
+          0.013234607461662051,
+          0.4532373540856032,
+          -0.019756008239872003,
+          -0.24406413313501255,
+          0.1781876859693288,
+          0.5579633783474468
+        ],
+        "can_retry_hold": false,
+        "can_return": false,
+        "safe_to_close": true,
+        "simulated": true,
+        "session": "/home/jason/Proyectos3/X5/diagnostics/baseline_hardware_20261019T190516Z/moving_can_fault/controller-d279d259",
+        "recovery_check_running": false,
+        "connection_error": ""
+      },
+      "events": [
+        {
+          "monotonic": 249749.291384973,
+          "phase": "PREFLIGHT",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249749.291731761,
+          "phase": "ARMING",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249749.308565764,
+          "phase": "SETTLING_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249749.917872692,
+          "phase": "OUTWARD",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249750.883407595,
+          "phase": "FAULT_HOLD",
+          "tau": 0.9568077180010732,
+          "error": "SIMULATED CAN failure",
+          "hold_confirmed": false,
+          "feedback_error": "SIMULATED CAN failure"
+        },
+        {
+          "monotonic": 249751.717895982,
+          "phase": "HELD",
+          "tau": 0.9568077180010732,
+          "reason": "Operator rechecked healthy feedback; measured pose held"
+        },
+        {
+          "monotonic": 249752.434631518,
+          "phase": "CHECKING_RETURN",
+          "tau": 0.9568077180010732
+        },
+        {
+          "monotonic": 249752.990453635,
+          "phase": "RECOVERY",
+          "tau": 0.9568077180010732,
+          "connector_l1_rad": 0.0
+        },
+        {
+          "monotonic": 249757.896076394,
+          "phase": "SETTLING_REST",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249758.50912362,
+          "phase": "VERIFIED_SUPPORTED_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249758.509218022,
+          "phase": "RELAXED",
+          "tau": 0.0
+        }
+      ],
+      "render": {
+        "type": "snapshot_mesh_trajectory_preview",
+        "rendered_updates": 1,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 5,
+        "max_age_at_display_s": 6438.311926685012,
+        "last_frame_compute_s": 0.08118250299594365,
+        "maximum_draw_s": 0.0594878540141508,
+        "worker_submissions": 0,
+        "maximum_pending_jobs": 0,
+        "modes_rendered": [
+          "surface mesh"
+        ],
+        "freeze_count": 0,
+        "resume_count": 0,
+        "mode_switches": 0,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 4,
+          "maximum_frame_s": 0.059480810014065355,
+          "median_frame_s": 0.009541298510157503,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 19526,
+          "render_errors": []
+        },
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+        "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+        "animation_draws": 3,
+        "animation_time_s": 0.0,
+        "animation_completed_cycles": 0,
+        "animation_play_clicks": 0,
+        "animation_seeks": 0,
+        "animation_phases_seen": [
+          "outward"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false,
+        "camera_updates": false,
+        "mesh_builds": 1,
+        "mesh": {
+          "vertices": 11758,
+          "triangles": 19526,
+          "candidate_triangles": 32000,
+          "rejected_triangles": 12474,
+          "grid_step_pixels": 8,
+          "native_resolution": [
+            1280,
+            800
+          ],
+          "valid_pixels": 811403,
+          "depth_jump_m": 0.03,
+          "relative_depth_jump": 0.02,
+          "max_edge_m": 0.12,
+          "hole_filling": false,
+          "hidden_surface_reconstruction": false,
+          "preview_only": true
+        },
+        "scene_immutable": true,
+        "collision_mesh": false
+      }
+    },
+    {
+      "case": "lost_ui_heartbeat",
+      "passed": true,
+      "status": {
+        "phase": "RELAXED",
+        "error": "",
+        "feedback_error": "",
+        "tau": 0.0,
+        "duration": 6.807909722783153,
+        "rate": 1.0,
+        "started": true,
+        "disabled": true,
+        "hold_confirmed": false,
+        "right_rad": [
+          0.0040279240100709055,
+          0.013234607461662051,
+          0.4532373540856032,
+          -0.019756008239872003,
+          -0.24406413313501255,
+          0.1781876859693288,
+          0.5579633783474468
+        ],
+        "can_retry_hold": false,
+        "can_return": false,
+        "safe_to_close": true,
+        "simulated": true,
+        "session": "/home/jason/Proyectos3/X5/diagnostics/baseline_hardware_20261019T190516Z/lost_ui_heartbeat/controller-25a66d75",
+        "recovery_check_running": false,
+        "connection_error": ""
+      },
+      "events": [
+        {
+          "monotonic": 249759.402122649,
+          "phase": "PREFLIGHT",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249759.402452083,
+          "phase": "ARMING",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249759.419307428,
+          "phase": "SETTLING_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249760.030849474,
+          "phase": "OUTWARD",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249761.991857171,
+          "phase": "FAULT_HOLD",
+          "tau": 1.952681646012934,
+          "error": "GUI heartbeat lost; no automatic recovery or relaxation",
+          "hold_confirmed": true,
+          "feedback_error": ""
+        },
+        {
+          "monotonic": 249763.016957911,
+          "phase": "CHECKING_RETURN",
+          "tau": 1.952681646012934
+        },
+        {
+          "monotonic": 249763.569597007,
+          "phase": "RECOVERY",
+          "tau": 1.952681646012934,
+          "connector_l1_rad": 0.0
+        },
+        {
+          "monotonic": 249771.508742254,
+          "phase": "SETTLING_REST",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249772.119743548,
+          "phase": "VERIFIED_SUPPORTED_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249772.119846025,
+          "phase": "RELAXED",
+          "tau": 0.0
+        }
+      ],
+      "render": {
+        "type": "snapshot_mesh_trajectory_preview",
+        "rendered_updates": 1,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 5,
+        "max_age_at_display_s": 6448.439319936995,
+        "last_frame_compute_s": 0.07912280299933627,
+        "maximum_draw_s": 0.05781633299193345,
+        "worker_submissions": 0,
+        "maximum_pending_jobs": 0,
+        "modes_rendered": [
+          "surface mesh"
+        ],
+        "freeze_count": 0,
+        "resume_count": 0,
+        "mode_switches": 0,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 4,
+          "maximum_frame_s": 0.05780602298909798,
+          "median_frame_s": 0.009376770991366357,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 19526,
+          "render_errors": []
+        },
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+        "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+        "animation_draws": 3,
+        "animation_time_s": 0.0,
+        "animation_completed_cycles": 0,
+        "animation_play_clicks": 0,
+        "animation_seeks": 0,
+        "animation_phases_seen": [
+          "outward"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false,
+        "camera_updates": false,
+        "mesh_builds": 1,
+        "mesh": {
+          "vertices": 11758,
+          "triangles": 19526,
+          "candidate_triangles": 32000,
+          "rejected_triangles": 12474,
+          "grid_step_pixels": 8,
+          "native_resolution": [
+            1280,
+            800
+          ],
+          "valid_pixels": 811403,
+          "depth_jump_m": 0.03,
+          "relative_depth_jump": 0.02,
+          "max_edge_m": 0.12,
+          "hole_filling": false,
+          "hidden_surface_reconstruction": false,
+          "preview_only": true
+        },
+        "scene_immutable": true,
+        "collision_mesh": false
+      }
+    },
+    {
+      "case": "controller_sigterm",
+      "passed": true,
+      "status": {
+        "phase": "RELAXED",
+        "error": "",
+        "feedback_error": "",
+        "tau": 0.0,
+        "duration": 6.807909722783153,
+        "rate": 1.0,
+        "started": true,
+        "disabled": true,
+        "hold_confirmed": false,
+        "right_rad": [
+          0.0040279240100709055,
+          0.013234607461662051,
+          0.4532373540856032,
+          -0.019756008239872003,
+          -0.24406413313501255,
+          0.1781876859693288,
+          0.5579633783474468
+        ],
+        "can_retry_hold": false,
+        "can_return": false,
+        "safe_to_close": true,
+        "simulated": true,
+        "session": "/home/jason/Proyectos3/X5/diagnostics/baseline_hardware_20261019T190516Z/controller_sigterm/controller-07ad95d5",
+        "recovery_check_running": false,
+        "connection_error": ""
+      },
+      "events": [
+        {
+          "monotonic": 249773.061281156,
+          "phase": "PREFLIGHT",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249773.061676308,
+          "phase": "ARMING",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249773.078459453,
+          "phase": "SETTLING_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249773.691512007,
+          "phase": "OUTWARD",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249774.664981404,
+          "phase": "FAULT_HOLD",
+          "tau": 0.9649416469910648,
+          "error": "Controller signal / terminal closed",
+          "hold_confirmed": true,
+          "feedback_error": ""
+        },
+        {
+          "monotonic": 249775.464442819,
+          "phase": "CHECKING_RETURN",
+          "tau": 0.9649416469910648
+        },
+        {
+          "monotonic": 249776.015565125,
+          "phase": "RECOVERY",
+          "tau": 0.9649416469910648,
+          "connector_l1_rad": 0.0
+        },
+        {
+          "monotonic": 249780.941460826,
+          "phase": "SETTLING_REST",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249781.554767924,
+          "phase": "VERIFIED_SUPPORTED_START",
+          "tau": 0.0
+        },
+        {
+          "monotonic": 249781.554867515,
+          "phase": "RELAXED",
+          "tau": 0.0
+        }
+      ],
+      "render": {
+        "type": "snapshot_mesh_trajectory_preview",
+        "rendered_updates": 1,
+        "first_displayed_sequence": 5,
+        "last_displayed_sequence": 5,
+        "max_age_at_display_s": 6462.074371326016,
+        "last_frame_compute_s": 0.12409376399591565,
+        "maximum_draw_s": 0.05819487100234255,
+        "worker_submissions": 0,
+        "maximum_pending_jobs": 0,
+        "modes_rendered": [
+          "surface mesh"
+        ],
+        "freeze_count": 0,
+        "resume_count": 0,
+        "mode_switches": 0,
+        "display_point_limit": 18000,
+        "planning_points_downsampled": false,
+        "robot_overlay": true,
+        "renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 4,
+          "maximum_frame_s": 0.05818779699620791,
+          "median_frame_s": 0.010506136502954178,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 19526,
+          "render_errors": []
+        },
+        "robot_overlay_source": "saved plan simulation, not encoders",
+        "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_zone3_20261019T172750Z/actual_camera/plans/baseline-11df7d05/plan.json",
+        "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+        "animation_draws": 3,
+        "animation_time_s": 0.0,
+        "animation_completed_cycles": 0,
+        "animation_play_clicks": 0,
+        "animation_seeks": 0,
+        "animation_phases_seen": [
+          "outward"
+        ],
+        "live_collision_revalidation": false,
+        "motion_authorized": false,
+        "hardware_execution_available": false,
+        "camera_updates": false,
+        "mesh_builds": 1,
+        "mesh": {
+          "vertices": 11758,
+          "triangles": 19526,
+          "candidate_triangles": 32000,
+          "rejected_triangles": 12474,
+          "grid_step_pixels": 8,
+          "native_resolution": [
+            1280,
+            800
+          ],
+          "valid_pixels": 811403,
+          "depth_jump_m": 0.03,
+          "relative_depth_jump": 0.02,
+          "max_edge_m": 0.12,
+          "hole_filling": false,
+          "hidden_surface_reconstruction": false,
+          "preview_only": true
+        },
+        "scene_immutable": true,
+        "collision_mesh": false
+      }
+    }
+  ],
+  "can_access": false,
+  "motor_commands": 0
+}

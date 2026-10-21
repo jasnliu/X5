@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "fix": "Three-of-five per-pixel depth confirmation within 20 mm; nearest confirmed reading, no spatial smoothing; uncertain pixels unknown not certified free",
+  "old_failed_capture_reprocessed_without_overwriting_original": true,
+  "old_failed_capture_now_plans": true,
+  "consecutive_live_capture_and_planning_runs": 5,
+  "full_native_gui_playback_cycles": 5,
+  "planner_tests_passed": 259,
+  "calibration_tests_passed": 110,
+  "source_files_changed": [
+    "DRUM_PLANNER.md",
+    "drum_planner/depth.py",
+    "drum_planner/live_view.py",
+    "drum_planner/planned_view.py",
+    "tests/test_drum_planner.py",
+    "tests/test_live_depth_view.py"
+  ],
+  "final_source_sha256": {
+    "DRUM_PLANNER.md": "f27fd3b376c5e7cc4576cb94a95f99c769d44fe912bd5aceeae0b00fe8bfda2d",
+    "drum_planner/depth.py": "6e58210354516991f767da2ab1f308abaac9091ab2aba79ac43d4093d63f2285",
+    "drum_planner/live_view.py": "3abacc2f33317658277007cd1c88c5f919030afda812c767532ff2e43e45dfc7",
+    "drum_planner/planned_view.py": "ae75055cb7e6f1c78b90cc26fb0318e09d699138eabebb8077aaf8ce8f1db9e5",
+    "tests/test_drum_planner.py": "b6162af3684a0ba62ad3c054f7feb1cea3ce95048b63c89838cdbbf663f8d04d",
+    "tests/test_live_depth_view.py": "ffc04ed8568227829180ee4be8349456cd3994ac0dd2d5fcabc31d4dd1b43dc3"
+  },
+  "collision_geometry_and_padding_unchanged": true,
+  "all_query_packets": 37728,
+  "motor_commands": 0,
+  "mode_changes": 0,
+  "gripper_commands": 0,
+  "relax_commands": 0,
+  "physical_motion_tested": false
+}

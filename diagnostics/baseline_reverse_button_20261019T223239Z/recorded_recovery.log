@@ -1,0 +1,6 @@
+Original fault: Static left arm moved; return needs original scene restored
+Measured left change (degrees): [ 0.          0.04395868  0.          0.02197934  0.         -0.39562808
+  0.02197934]
+Checking 6,444 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Traversed-prefix recovery checked; controller must recheck fresh stationary feedback before moving
+SAVED ACTUAL FAULT RECOVERY: PASSED {'samples': 6444, 'all_valid': True, 'collision_margin_policy': 'baseline_request', 'obstacle_padding_m': 0.02, 'minimum_self_clearance_m': 0.0} 0.008758871246683175

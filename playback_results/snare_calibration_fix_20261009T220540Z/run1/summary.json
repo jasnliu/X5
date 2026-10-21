@@ -1,0 +1,66 @@
+{
+  "success": true,
+  "criterion": "user-accepted 15-second timeout followed by verified center and relax",
+  "evidence": "/home/jason/Proyectos3/X5/playback_results/calibration_verification/20261009T221240-1cf1de4c",
+  "snare_timeline": "/home/jason/Proyectos3/X5/playback_results/snare_sync/20261009T221415-15ef7f7c/timeline.jsonl",
+  "physical": true,
+  "snare_calibrated": false,
+  "snare_elapsed_s": 15.010968669999784,
+  "snare_strikes": 19,
+  "snare_command_degrees": 11,
+  "measured_snare_peak_deg": [
+    10.7,
+    10.86
+  ],
+  "hihat_advance_ms": 96.77875200031849,
+  "snare_matches": 2,
+  "snare_skips": 16,
+  "both_recordings_and_left_reverse_verified": true,
+  "all_16_disabled": true,
+  "application_faults": 0,
+  "motor_fault_frames": 0,
+  "feedback_frames": 120072,
+  "max_temperature_c": 36.0,
+  "existing_right_j7_mode_handoff": {
+    "t": 1791584039.562994,
+    "side": "right",
+    "motor": 7,
+    "already_disabled": false,
+    "max_center_error_deg": 99.3136374518767,
+    "max_feedback_age_s": 0.014461040496826172,
+    "classification": "existing right-J7-only MIT setup, not whole-arm/final relaxation",
+    "mode_write_at": 1791584039.564728,
+    "enable_at": 1791584039.598032,
+    "running_feedback_at": 1791584039.598259,
+    "disable_to_enable_s": 0.035037994384765625
+  },
+  "final_arm_relax_center_proofs": {
+    "right": {
+      "at": 6071.775585748,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        -8.702166785959364e-05,
+        -0.00019180590524214836,
+        1.3980732433051042
+      ]
+    },
+    "left": {
+      "at": 6086.801855351,
+      "q": [
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        0.00019180590524214836,
+        -0.8725250629434651,
+        -0.0005754177157246687,
+        0.00019180590524214836
+      ]
+    }
+  },
+  "offline_tests": 911,
+  "protected_files_unchanged": 540,
+  "tested_sources_unchanged": true
+}

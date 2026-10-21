@@ -1,0 +1,277 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 2,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": 2387.948053125001,
+  "last_frame_compute_s": 0.07580098797916435,
+  "maximum_draw_s": 0.024933629989391193,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "depth points",
+    "mesh + points",
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 3,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 2561,
+    "maximum_frame_s": 0.024908111023250967,
+    "median_frame_s": 0.0017806219984777272,
+    "surface_geometry_uploads": 2,
+    "surface_color_uploads": 4,
+    "surface_triangles": 19986,
+    "render_errors": []
+  },
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/clearance-4b90b2c1/plan.json",
+  "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+  "animation_draws": 2559,
+  "animation_time_s": 17.060237583628854,
+  "animation_completed_cycles": 1,
+  "animation_play_clicks": 28,
+  "animation_seeks": 18,
+  "animation_phases_seen": [
+    "BLOCKED",
+    "HOLD (2 seconds)",
+    "hold_complete",
+    "outward",
+    "return"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 11997,
+    "triangles": 19986,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 12014,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 826074,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "experiment": true,
+  "saved_state_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "context": {
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json",
+    "state_sha256": "ec640c9d38ca47202b16a4bd0d9f01042e2381e3fb721fb5d71950e31aedce8d",
+    "scene": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_c2c568be/camera/scene.json",
+    "scene_sha256": "db24cf3a8c57c81ef933b10862b2be80c36f35a933013726492fa22af403edb6",
+    "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "saved_not_live": true,
+    "can_access": false,
+    "motor_commands": 0
+  },
+  "events": [
+    {
+      "event": "installed",
+      "method": "baseline",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "robust",
+      "status": "no_feasible_route"
+    },
+    {
+      "event": "installed",
+      "method": "chance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "cvar",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "families",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "iris_gcs",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "chomp",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "stomp",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "baseline",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "settings_changed"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "baseline"
+    },
+    {
+      "event": "cancel",
+      "kind": "plan"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "robust"
+    },
+    {
+      "event": "installed",
+      "method": "robust",
+      "status": "planned"
+    },
+    {
+      "event": "recapture"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "scene_installed",
+      "generation": 1
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    }
+  ],
+  "generations": 3,
+  "scene_generations": 1,
+  "displayed_method": "clearance",
+  "passed": true,
+  "feature_checks": [
+    {
+      "method": "baseline",
+      "played": true,
+      "duration": 19.758086592799412,
+      "completed_cycles": 1
+    },
+    {
+      "method": "clearance",
+      "played": true,
+      "duration": 15.523938649351305,
+      "completed_cycles": 1
+    },
+    {
+      "method": "robust",
+      "played": false,
+      "normal_blocked_result": "endpoint_blocked_by_error_envelope"
+    },
+    {
+      "method": "chance",
+      "played": true,
+      "duration": 43.325299503626574,
+      "completed_cycles": 1
+    },
+    {
+      "method": "cvar",
+      "played": true,
+      "duration": 43.325299503626574,
+      "completed_cycles": 1
+    },
+    {
+      "method": "families",
+      "played": true,
+      "duration": 43.20859205117978,
+      "completed_cycles": 1
+    },
+    {
+      "method": "iris_gcs",
+      "played": true,
+      "duration": 16.930755528807804,
+      "completed_cycles": 1
+    },
+    {
+      "method": "chomp",
+      "played": true,
+      "duration": 43.325299503626574,
+      "completed_cycles": 1
+    },
+    {
+      "method": "stomp",
+      "played": true,
+      "duration": 20.37771200839952,
+      "completed_cycles": 1
+    },
+    {
+      "method": "robust_explicit_zero_error_control",
+      "played": true,
+      "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/robust-137b1d2d/plan.json"
+    },
+    {
+      "recapture": true,
+      "scene": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_c2c568be/camera/scene.json"
+    },
+    {
+      "new_scene_generation": true,
+      "status": "planned"
+    }
+  ]
+}

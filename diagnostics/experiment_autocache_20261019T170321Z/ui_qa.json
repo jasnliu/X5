@@ -1,0 +1,414 @@
+{
+  "passed": true,
+  "checks": {
+    "startup_immediate_queue": true,
+    "all_nine_cached_without_any_selection": true,
+    "complete_playback_while_background_planning": true,
+    "cached_selection_does_not_regenerate": true,
+    "cancel_and_resume_only_missing_methods": true,
+    "background_result_keeps_other_selected_cached_plan": true,
+    "budget_change_requeues_all": true,
+    "uncertainty_change_requeues_all": true,
+    "recapture_requeues_all_and_camera_stops": true
+  },
+  "automatic_all_report": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/automatic_all_report.json",
+  "final": {
+    "type": "snapshot_mesh_trajectory_preview",
+    "rendered_updates": 2,
+    "first_displayed_sequence": 5,
+    "last_displayed_sequence": 5,
+    "max_age_at_display_s": 2.3369370069995057,
+    "last_frame_compute_s": 0.07627830299315974,
+    "maximum_draw_s": 0.0051619180012494326,
+    "worker_submissions": 0,
+    "maximum_pending_jobs": 0,
+    "modes_rendered": [
+      "surface mesh"
+    ],
+    "freeze_count": 0,
+    "resume_count": 0,
+    "mode_switches": 0,
+    "display_point_limit": 18000,
+    "planning_points_downsampled": false,
+    "robot_overlay": true,
+    "renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 1168,
+      "maximum_frame_s": 0.005059681017883122,
+      "median_frame_s": 0.0013579575024778023,
+      "surface_geometry_uploads": 2,
+      "surface_color_uploads": 2,
+      "surface_triangles": 19744,
+      "render_errors": []
+    },
+    "robot_overlay_source": "saved plan simulation, not encoders",
+    "plan_file": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/initial/plan.json",
+    "plan_warning": "NO TRAJECTORY \u2014 not_generated",
+    "animation_draws": 1167,
+    "animation_time_s": 0.0,
+    "animation_completed_cycles": 0,
+    "animation_play_clicks": 10,
+    "animation_seeks": 1,
+    "animation_phases_seen": [
+      "BLOCKED",
+      "HOLD (2 seconds)",
+      "outward",
+      "return"
+    ],
+    "live_collision_revalidation": false,
+    "motion_authorized": false,
+    "hardware_execution_available": false,
+    "camera_updates": false,
+    "mesh_builds": 1,
+    "mesh": {
+      "vertices": 11875,
+      "triangles": 19744,
+      "candidate_triangles": 32000,
+      "rejected_triangles": 12256,
+      "grid_step_pixels": 8,
+      "native_resolution": [
+        1280,
+        800
+      ],
+      "valid_pixels": 818429,
+      "depth_jump_m": 0.03,
+      "relative_depth_jump": 0.02,
+      "max_edge_m": 0.12,
+      "hole_filling": false,
+      "hidden_surface_reconstruction": false,
+      "preview_only": true
+    },
+    "scene_immutable": true,
+    "collision_mesh": false,
+    "experiment": true,
+    "saved_state_not_live": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "context": {
+      "state": "/home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json",
+      "state_sha256": "ec640c9d38ca47202b16a4bd0d9f01042e2381e3fb721fb5d71950e31aedce8d",
+      "scene": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/capture_4fb8bf40/camera/scene.json",
+      "scene_sha256": "9910e7b2f02224b0b61ad3dc0d444aa50a2bfda9af40a7be043fa5c55c0421a8",
+      "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+      "saved_not_live": true,
+      "can_access": false,
+      "motor_commands": 0
+    },
+    "events": [
+      {
+        "event": "cache_all",
+        "methods": [
+          "clearance",
+          "baseline",
+          "robust",
+          "chance",
+          "cvar",
+          "families",
+          "iris_gcs",
+          "chomp",
+          "stomp"
+        ]
+      },
+      {
+        "event": "generate",
+        "method": "clearance"
+      },
+      {
+        "event": "installed",
+        "method": "clearance",
+        "status": "planned"
+      },
+      {
+        "event": "cached",
+        "method": "clearance",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/clearance-f65d48d5/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "baseline"
+      },
+      {
+        "event": "cached",
+        "method": "baseline",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/baseline-74c3bb57/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "robust"
+      },
+      {
+        "event": "cached",
+        "method": "robust",
+        "status": "no_feasible_route",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/robust-45e34fe1/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "chance"
+      },
+      {
+        "event": "cached",
+        "method": "chance",
+        "status": "no_feasible_route",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/chance-b135a4f1/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "cvar"
+      },
+      {
+        "event": "cached",
+        "method": "cvar",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/cvar-1e37889d/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "families"
+      },
+      {
+        "event": "cached",
+        "method": "families",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/families-7e8c05d6/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "iris_gcs"
+      },
+      {
+        "event": "cached",
+        "method": "iris_gcs",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/iris_gcs-b993059e/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "chomp"
+      },
+      {
+        "event": "cached",
+        "method": "chomp",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/chomp-ed50a82d/plan.json"
+      },
+      {
+        "event": "generate",
+        "method": "stomp"
+      },
+      {
+        "event": "cached",
+        "method": "stomp",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/stomp-dc2fd676/plan.json"
+      },
+      {
+        "event": "installed",
+        "method": "baseline",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "clearance",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "robust",
+        "status": "no_feasible_route"
+      },
+      {
+        "event": "installed",
+        "method": "chance",
+        "status": "no_feasible_route"
+      },
+      {
+        "event": "installed",
+        "method": "cvar",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "families",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "iris_gcs",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "chomp",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "stomp",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": "clearance",
+        "status": "planned"
+      },
+      {
+        "event": "installed",
+        "method": null,
+        "status": "not_generated"
+      },
+      {
+        "event": "generate",
+        "method": "clearance"
+      },
+      {
+        "event": "cancel",
+        "kind": "plan"
+      },
+      {
+        "event": "installed",
+        "method": "baseline",
+        "status": "planned"
+      },
+      {
+        "event": "cache_all",
+        "methods": [
+          "clearance"
+        ]
+      },
+      {
+        "event": "generate",
+        "method": "clearance"
+      },
+      {
+        "event": "cached",
+        "method": "clearance",
+        "status": "planned",
+        "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_autocache_20261019T170321Z/actual_camera/plans/clearance-bef83b28/plan.json"
+      },
+      {
+        "event": "installed",
+        "method": null,
+        "status": "not_generated"
+      },
+      {
+        "event": "budget_changed"
+      },
+      {
+        "event": "cache_all",
+        "methods": [
+          "baseline",
+          "clearance",
+          "robust",
+          "chance",
+          "cvar",
+          "families",
+          "iris_gcs",
+          "chomp",
+          "stomp"
+        ]
+      },
+      {
+        "event": "generate",
+        "method": "baseline"
+      },
+      {
+        "event": "cancel",
+        "kind": "plan"
+      },
+      {
+        "event": "installed",
+        "method": null,
+        "status": "not_generated"
+      },
+      {
+        "event": "settings_changed"
+      },
+      {
+        "event": "cache_all",
+        "methods": [
+          "baseline",
+          "clearance",
+          "robust",
+          "chance",
+          "cvar",
+          "families",
+          "iris_gcs",
+          "chomp",
+          "stomp"
+        ]
+      },
+      {
+        "event": "generate",
+        "method": "baseline"
+      },
+      {
+        "event": "cancel",
+        "kind": "plan"
+      },
+      {
+        "event": "recapture"
+      },
+      {
+        "event": "scene_installed",
+        "generation": 1
+      },
+      {
+        "event": "installed",
+        "method": null,
+        "status": "not_generated"
+      },
+      {
+        "event": "scene_cache_restarted"
+      },
+      {
+        "event": "cache_all",
+        "methods": [
+          "baseline",
+          "clearance",
+          "robust",
+          "chance",
+          "cvar",
+          "families",
+          "iris_gcs",
+          "chomp",
+          "stomp"
+        ]
+      },
+      {
+        "event": "generate",
+        "method": "baseline"
+      },
+      {
+        "event": "cancel",
+        "kind": "plan"
+      }
+    ],
+    "generations": 14,
+    "scene_generations": 1,
+    "displayed_method": null,
+    "automatic_precompute": true,
+    "queued_methods": [],
+    "calculating_method": null,
+    "method_states": {
+      "baseline": "cancelled",
+      "clearance": "cancelled",
+      "robust": "cancelled",
+      "chance": "cancelled",
+      "cvar": "cancelled",
+      "families": "cancelled",
+      "iris_gcs": "cancelled",
+      "chomp": "cancelled",
+      "stomp": "cancelled"
+    },
+    "cached_results": {}
+  }
+}

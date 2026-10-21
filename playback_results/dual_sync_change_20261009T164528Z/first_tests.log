@@ -1,0 +1,261 @@
+....FF.F.FFF.F..F....................................................... [ 83%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+_ CalibrationTests.test_large_reversals_preserve_paired_open_and_minimum_open_gap _
+
+self = <test_prebeat_sync.CalibrationTests testMethod=test_large_reversals_preserve_paired_open_and_minimum_open_gap>
+
+    def test_large_reversals_preserve_paired_open_and_minimum_open_gap(self):
+        e=self.engine()
+        for i in range(24):
+            e.advance=.25 if (i//4)%2 else -.25
+            now=11.+(i//2)*.6+(0. if i%2==0 else .3)-e.pair_advance
+>           self.tick(e,now+1e-9)
+
+tests/test_prebeat_sync.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_prebeat_sync.py:35: in tick
+    e.tick(at, {'ride': True, 'hihat': True})
+camera_playback/hihat_sync.py:271: in tick
+    self._tick_calibration(now)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <camera_playback.hihat_sync.HiHatSynchronizer object at 0x7f6271f5cec0>
+now = 11.600000001
+
+    def _tick_calibration(self, now):
+        if self.epoch is None or self.complete:
+            return
+        closed = self.index % 2 == 0
+        target = self.epoch+(self.index//2)*self.period+(0. if closed else self.period/2)
+        advance = self.pair_advance
+        due = target-advance
+        if now < due:
+            return
+        if now-due > MAX_LATENESS:
+>           raise TimingFault('Calibration hi-hat deadline missed; refusing catch-up burst')
+E           camera_playback.hihat_sync.TimingFault: Calibration hi-hat deadline missed; refusing catch-up burst
+
+camera_playback/hihat_sync.py:312: TimingFault
+_____ CalibrationTests.test_lock_finishes_open_then_cancels_future_closes ______
+
+self = <test_prebeat_sync.CalibrationTests testMethod=test_lock_finishes_open_then_cancels_future_closes>
+
+    def test_lock_finishes_open_then_cancels_future_closes(self):
+        e=self.engine()
+        self.tick(e,11.)
+        e.locked=True
+        self.assertFalse(e.complete)
+        self.tick(e,11.3)
+>       self.assertTrue(e.complete)
+E       AssertionError: False is not true
+
+tests/test_prebeat_sync.py:103: AssertionError
+_ CalibrationTests.test_positive_negative_and_long_delayed_sound_converge_before_swing _
+
+self = <test_prebeat_sync.CalibrationTests testMethod=test_positive_negative_and_long_delayed_sound_converge_before_swing>
+
+    def test_positive_negative_and_long_delayed_sound_converge_before_swing(self):
+        for values in ((.11,-.025,.3),(.03,.11,.7),(.1,0.,2.4),(.24,0.,.3)):
+>           with self.subTest(values=values):self.simulate(*values)
+
+tests/test_prebeat_sync.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_prebeat_sync.py:161: in simulate
+    self.assertTrue(e.complete)
+E   AssertionError: False is not true
+_ CalibrationTests.test_straight_pairs_close_every_600ms_open_between_no_pickup _
+
+self = <test_prebeat_sync.CalibrationTests testMethod=test_straight_pairs_close_every_600ms_open_between_no_pickup>
+
+    def test_straight_pairs_close_every_600ms_open_between_no_pickup(self):
+        e = self.engine()
+        for i in range(12):
+>           self.tick(e, 11.+i*.3+1e-9)
+
+tests/test_prebeat_sync.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_prebeat_sync.py:35: in tick
+    e.tick(at, {'ride': True, 'hihat': True})
+camera_playback/hihat_sync.py:271: in tick
+    self._tick_calibration(now)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <camera_playback.hihat_sync.HiHatSynchronizer object at 0x7f6271f5ddf0>
+now = 11.600000001
+
+    def _tick_calibration(self, now):
+        if self.epoch is None or self.complete:
+            return
+        closed = self.index % 2 == 0
+        target = self.epoch+(self.index//2)*self.period+(0. if closed else self.period/2)
+        advance = self.pair_advance
+        due = target-advance
+        if now < due:
+            return
+        if now-due > MAX_LATENESS:
+>           raise TimingFault('Calibration hi-hat deadline missed; refusing catch-up burst')
+E           camera_playback.hihat_sync.TimingFault: Calibration hi-hat deadline missed; refusing catch-up burst
+
+camera_playback/hihat_sync.py:312: TimingFault
+_ CalibrationRideTests.test_real_controller_100bpm_deadlines_full_returns_then_user_swing _
+
+self = <test_prebeat_sync.CalibrationRideTests testMethod=test_real_controller_100bpm_deadlines_full_returns_then_user_swing>
+
+    def test_real_controller_100bpm_deadlines_full_returns_then_user_swing(self):
+        h=Harness(10)
+        h.until(lambda s:s.completed==1)
+        epoch=h.backend.now()+1.
+        h.c.request_calibration(math.radians(10.5),epoch)
+        seen=0;bottoms=[]
+        for _ in range(3500):
+            h.tick();s=h.c.status
+            if s.bottoms>seen:
+                seen=s.bottoms;bottoms.append(s)
+            if seen>=8:break
+        self.assertEqual(len(bottoms),8)
+        for i,s in enumerate(bottoms):
+            self.assertEqual(s.label,'sync pair')
+            self.assertTrue(s.main_beat)
+            self.assertTrue(s.calibrating)
+>           self.assertAlmostEqual(s.scheduled_at,epoch+i*.6)
+E           AssertionError: 3.1639999999999544 != 3.0139999999999545 within 7 places (0.1499999999999999 difference)
+
+tests/test_prebeat_sync.py:189: AssertionError
+_ CalibrationWorkflowTests.test_checkpoint_waits_for_worker_ack_fresh_return_then_swing_at_user_bpm _
+
+self = <test_prebeat_sync.CalibrationWorkflowTests testMethod=test_checkpoint_waits_for_worker_ack_fresh_return_then_swing_at_user_bpm>
+
+    def test_checkpoint_waits_for_worker_ack_fresh_return_then_swing_at_user_bpm(self):
+        a=self.app();hw.start_sync_calibration(a)
+        a.hihat_sync.calibration_complete=True
+        a.hihat_sync.finish_calibration.return_value=.1
+        a.hybrid_session.status=HybridStatus(swing=True,calibrating=True,at=10.)
+        with patch.object(hw,'start_swing') as start:
+            hw.tick(a,10.)
+            a.hybrid_session.request.assert_called_with('finish')
+            start.assert_not_called()
+            s=HybridStatus(ready=True,request_id=8,at=10.1,sample=Sample(0,0,0,2,10.1))
+            hw.tick_sync_calibration(a,s,10.1)  # allow hi-hat open return too
+            hw.tick_sync_calibration(a,replace(s,request_id=7,at=10.5),10.5)
+            hw.tick_sync_calibration(a,replace(s,at=10.5),10.5)  # stale sample
+            start.assert_not_called()
+>           hw.tick_sync_calibration(a,replace(s,at=10.5,sample=Sample(0,0,0,2,10.5)),10.5)
+
+tests/test_prebeat_sync.py:230: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+camera_playback/hybrid_workflow.py:188: in tick_sync_calibration
+    start_sync_calibration(app, 'snare')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+app = <camera_playback.app.App object at 0x7f6271f5f9e0>, instrument = 'snare'
+
+    def start_sync_calibration(app, instrument='hihat'):
+        sync = getattr(app, instrument+'_sync', None)
+        if sync is None:
+>           raise RuntimeError('Ride/'+instrument+' timing calibrator is missing')
+E           RuntimeError: Ride/snare timing calibrator is missing
+
+camera_playback/hybrid_workflow.py:139: RuntimeError
+----------------------------- Captured stdout call -----------------------------
+Ride + hihat timing calibration: 80 BPM simultaneous pairs; waiting for two consecutive onset differences within 15 ms; snare idle
+Ride + hihat synchronized: fixed advance +100.0 ms; finishing return before 80 BPM ride/snare calibration
+_ CalibrationWorkflowTests.test_runtime_carries_checkpoint_to_fresh_user_tempo_clock _
+
+self = <test_prebeat_sync.CalibrationWorkflowTests testMethod=test_runtime_carries_checkpoint_to_fresh_user_tempo_clock>
+
+    def test_runtime_carries_checkpoint_to_fresh_user_tempo_clock(self):
+        a=SimpleNamespace(root=Mock(),hihat=Mock())
+        r=HiHatSyncRuntime(a)
+        with self.assertRaises(TimingFault):r.start(.5)
+        with patch('camera_playback.hihat_sync_runtime.Path.open',Mock()), \
+             patch('camera_playback.hihat_sync_runtime.Path.mkdir'), \
+             patch('camera_playback.hihat_sync_runtime.time.monotonic',return_value=10.):
+            r.start_calibration(11.)
+>           self.assertEqual(r.engine.period,.6)
+E           AssertionError: 0.75 != 0.6
+
+tests/test_prebeat_sync.py:253: AssertionError
+----------------------------- Captured stdout call -----------------------------
+HIHAT SYNC: {"kind": "start", "at": 10.0, "advance": 0.0, "period": 0.75, "mode": "calibration", "close_beats": "every quarter", "open_beats": "halfway between", "correction_policy": "each_valid_absolute", "max_pair_step": 0.2, "estimate_agreement": 0.02, "lock_tolerance": 0.015, "lock_matches": 2}
+HIHAT SYNC: {"kind": "grid", "at": 10.0, "beat1": 11.0}
+_ EndToEndCalibrationTests.test_real_workflow_acoustic_checkpoint_and_fixed_user_tempo_handoff _
+
+self = <test_prebeat_sync.EndToEndCalibrationTests testMethod=test_real_workflow_acoustic_checkpoint_and_fixed_user_tempo_handoff>
+
+    def test_real_workflow_acoustic_checkpoint_and_fixed_user_tempo_handoff(self):
+        """Real calibration/runtime/workflow + hybrid plant, virtual I/O only."""
+        h=Harness(10)
+        h.until(lambda s:s.completed==1)
+        a=app_fixture();a._strike_bpm=80.
+        a.strike_active=False;a.continuous_strike_active=True
+        a.continuous_strike_degrees=10.5
+        a.audio_receiver=Mock();a.audio_receiver.ready.return_value=True
+        a.hihat_sound_monitor=SimpleNamespace(receiver=Mock())
+        a.hihat_sound_monitor.receiver.ready.return_value=True
+        a.root=Mock()
+        a.hihat_sync=r=HiHatSyncRuntime(a)
+        rows=[];r.log=rows.append
+        pending=[]
+        now=h.backend.now()
+        def hat_edge(closed):
+            if closed:pending.append((now+.1+.8,'hihat',now+.1))
+        a.hihat.send_state.side_effect=hat_edge
+        class Session:
+            request_id=0
+            @property
+            def status(self):return h.c.status
+            def request(self, action, *args):
+                self.request_id+=1
+                if action=='calibrate':h.c.request_calibration(*args)
+                elif action=='swing':h.c.request_swing(*args)
+                elif action=='finish':h.c.stop_swing()
+                else:raise AssertionError(action)
+                h.c.status=replace(h.c.status,request_id=self.request_id)
+                return self.request_id
+        a.hybrid_session=Session()
+        was_calibrating=True;checkpoint=None;seen_bottom=0;last_gui=last_hat=-1.
+        with patch('camera_playback.hihat_sync_runtime.time.monotonic',side_effect=lambda:now), \
+             patch('camera_playback.hihat_sync_runtime.Path.open',Mock()), \
+             patch('camera_playback.hihat_sync_runtime.Path.mkdir'), \
+             patch.object(hw.snare,'start') as snare:
+            hw.start_sync_calibration(a)
+            for _ in range(16000):
+                h.tick();now=h.backend.now();s=h.c.status
+                if s.bottoms>seen_bottom:
+                    seen_bottom=s.bottoms
+                    pending.append((s.bottom_at+.6,'ride',s.bottom_at))
+                ready=[p for p in pending if p[0]<=now]
+                pending=[p for p in pending if p[0]>now]
+                for _,instrument,onset in reversed(ready):
+                    r.feed(instrument,[dict(kind='hit',instrument=instrument,event_at=onset)])
+                for instrument,lag in [('ride',.6),('hihat',.8)]:
+                    r.feed(instrument,[dict(kind='progress',instrument=instrument,finalized_at=now-lag-.004)])
+                if now-last_gui>=.02:
+                    hw.tick(a,now);last_gui=now
+                if now-last_hat>=.006:
+                    r.tick();last_hat=now
+>               self.assertFalse(a.continuous_stop_requested)
+E               AssertionError: True is not false
+
+tests/test_prebeat_sync.py:333: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Ride + hihat timing calibration: 80 BPM simultaneous pairs; waiting for two consecutive onset differences within 15 ms; snare idle
+J7 STRIKE LOW strike 1 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+J7 STRIKE LOW strike 2 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+J7 STRIKE LOW strike 3 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+J7 STRIKE LOW strike 4 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+J7 STRIKE LOW strike 5 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+J7 STRIKE LOW strike 6 [sync pair, hybrid]: 10.45 deg down from anchor; lowest J7 encoder: -10.45 deg; commanded: 10.5 deg
+Ride + hihat synchronized: fixed advance +96.0 ms; finishing return before 80 BPM ride/snare calibration
+<Mock name='mock.get()' id='140060784625904'>
+=========================== short test summary info ============================
+FAILED tests/test_prebeat_sync.py::CalibrationTests::test_large_reversals_preserve_paired_open_and_minimum_open_gap
+FAILED tests/test_prebeat_sync.py::CalibrationTests::test_lock_finishes_open_then_cancels_future_closes
+FAILED tests/test_prebeat_sync.py::CalibrationTests::test_positive_negative_and_long_delayed_sound_converge_before_swing
+FAILED tests/test_prebeat_sync.py::CalibrationTests::test_straight_pairs_close_every_600ms_open_between_no_pickup
+FAILED tests/test_prebeat_sync.py::CalibrationRideTests::test_real_controller_100bpm_deadlines_full_returns_then_user_swing
+FAILED tests/test_prebeat_sync.py::CalibrationWorkflowTests::test_checkpoint_waits_for_worker_ack_fresh_return_then_swing_at_user_bpm
+FAILED tests/test_prebeat_sync.py::CalibrationWorkflowTests::test_runtime_carries_checkpoint_to_fresh_user_tempo_clock
+FAILED tests/test_prebeat_sync.py::EndToEndCalibrationTests::test_real_workflow_acoustic_checkpoint_and_fixed_user_tempo_handoff
+8 failed, 78 passed in 9.46s

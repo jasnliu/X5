@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "physical_motor_commands": 0,
+  "hardware_access": false,
+  "full_regression": "511 passed in 106.67s (0:01:46)",
+  "final_focused": "150 passed in 17.44s",
+  "last_addition": "3 deferred-start cancellation tests included in final focused run",
+  "gui_checks": [
+    "button enabled without controller",
+    "button enabled during unconfirmed fault hold",
+    "actual mouse click reaches owner despite fault",
+    "rejection stays visible",
+    "no queued motion after communication restored",
+    "retry establishes measured hold",
+    "retry reverses traveled path",
+    "relax only after verified rest"
+  ],
+  "saved_real_fault_recovery": {
+    "samples": 6444,
+    "all_valid": true,
+    "collision_margin_policy": "baseline_request",
+    "obstacle_padding_m": 0.02,
+    "minimum_self_clearance_m": 0.0
+  },
+  "original_fault": "Static left arm moved",
+  "left_joint6_shift_deg": -0.39562808,
+  "can_owners": [],
+  "protected_unchanged": 172
+}

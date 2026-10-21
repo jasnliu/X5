@@ -1,0 +1,26 @@
+Leave the arms still from this click until Start. State queries only.
+Checking 2,706 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 129, in prepare
+    try:proof=hard_check(r,[c.at(t) for t in times],folder)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 111, in hard_check
+    raise PathBlocked(bad[:2])
+drum_planner.baseline.tasks.PathBlocked: Baseline collision/zone check failed; no motion: [{'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision', 'stick_center_world': [0.3207722738410869, -0.3075468228328946, 0.07270228738729406], 'valid': False, 'sample_index': 558}]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/work.py", line 98, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/work.py", line 93, in main
+    calculate(folder,a.calibration,inputs['anchor'],plan=inputs.get('plan') if a.action=='check' else None)
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/work.py", line 65, in calculate
+    tasks.prepare(folder/'checked',plan,capture,cal_path,allow_replan=False)
+  File "/home/jason/Proyectos3/X5/drum_planner/baseline/tasks.py", line 131, in prepare
+    if not allow_replan:raise ValueError(str(exc)+' — click Calculate trajectory to replace this route') from exc
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Baseline collision/zone check failed; no motion: [{'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision', 'stick_center_world': [0.3207722738410869, -0.3075468228328946, 0.07270228738729406], 'valid': False, 'sample_index': 558}] — click Calculate trajectory to replace this route

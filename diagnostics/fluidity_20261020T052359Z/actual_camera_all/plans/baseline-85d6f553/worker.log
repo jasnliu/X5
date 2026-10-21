@@ -1,0 +1,35 @@
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.7s] SHARED POOL search 1/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +   5.2s] candidate 1: VALID; 7.52s; reversals=6; coordination=10.612; spatial=110.036
+[baseline +   7.1s] candidate 2: VALID; 17.03s; reversals=6; coordination=14.611; spatial=88.341
+[baseline +   7.1s] SHARED POOL search 2/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  12.3s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  15.4s] candidate 4: VALID; 43.45s; reversals=10; coordination=23.554; spatial=543.503
+[baseline +  15.4s] SHARED POOL search 3/6; allocation 8.0s; all five methods will reuse these candidates
+[worker] FCL/solver operation running: 5s
+[baseline +  21.0s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  26.3s] candidate 6: VALID; 81.98s; reversals=5; coordination=15.949; spatial=248.457
+[baseline +  26.5s] SHARED POOL search 4/6; allocation 8.0s; all five methods will reuse these candidates
+[worker] FCL/solver operation running: 5s
+[baseline +  32.2s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  36.6s] candidate 8: VALID; 69.10s; reversals=11; coordination=30.022; spatial=681.183
+[baseline +  36.7s] SHARED POOL search 5/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  39.5s] candidate 9: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005001387214461583, 'point_only': True, 'point_xyz_m': [0.21337569226711828, -0.5182090758623284, 0.2907453253459741], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[baseline +  40.3s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[baseline +  43.4s] candidate 11: VALID; 38.46s; reversals=7; coordination=15.906; spatial=273.933
+[baseline +  43.4s] SHARED POOL search 6/6; allocation 8.0s; all five methods will reuse these candidates
+[baseline +  47.4s] candidate 12: VALID; 7.94s; reversals=5; coordination=12.464; spatial=149.408
+[baseline +  50.5s] candidate 13: VALID; 41.95s; reversals=5; coordination=15.856; spatial=234.079
+[baseline +  50.6s] SHARED POOL COMPLETE: 8 validated candidates, 6 searches, 50.0s; no 2x duration cutoff
+[baseline +  50.8s] baseline: candidate 2, score=96.1865, duration=17.03s
+[baseline +  50.8s] baseline: candidate 1, score=100.0000, duration=7.52s
+[baseline +  50.8s] baseline: candidate 12, score=116.2140, duration=7.94s
+[baseline +  50.8s] baseline: candidate 6, score=117.0926, duration=81.98s
+[baseline +  50.8s] baseline: candidate 13, score=121.4302, duration=41.95s
+[baseline +  50.8s] baseline: candidate 11, score=126.5989, duration=38.46s
+[baseline +  50.8s] baseline: candidate 4, score=164.7515, duration=43.45s
+[baseline +  50.8s] baseline: candidate 8, score=181.9654, duration=69.10s
+[baseline +  50.8s] SELECTED candidate 2: lowest baseline score; 8 equally checked candidates
+[baseline +  50.8s] READY: 17.030s outward → 2s hold → exact reverse; SIMULATION ONLY

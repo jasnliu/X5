@@ -1,0 +1,26 @@
+[chomp +   0.0s] Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.
+[chomp +   0.0s] building/loading model + frozen FCL world; no motor access
+[chomp +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[chomp +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chomp +   3.1s] CHOMP: native MoveIt optimization, initialization 1 (new geometric path)
+[chomp +   7.2s] candidate 1: valid, 29.82s outward, transit clearance 55.0 mm
+[chomp +   7.2s] search 3: 3.0s allocation, added clearance 0.0 mm
+[chomp +  12.1s] CHOMP: native MoveIt optimization, initialization 2 (new geometric path)
+[chomp +  13.7s] hard constraint rejected (smooth): {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005000331546713865, 'point_only': True, 'point_xyz_m': [0.3044575795045848, -0.4026490102466723, 0.27655734616266026], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[chomp +  14.5s] hard constraint rejected (corner-stop): {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005003259498809864, 'point_only': True, 'point_xyz_m': [0.3013843989937275, -0.4064961222440396, 0.2767919343902026], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[chomp +  15.4s] hard constraint rejected (corner-stop): {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005001242406174, 'point_only': True, 'point_xyz_m': [0.3029713859418028, -0.40401089360520237, 0.2759562188163971], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[chomp +  15.4s] candidate 2: rejected by final bounds/zone/collision checks
+[chomp +  15.4s] search 5: 3.0s allocation, added clearance 0.0 mm
+[chomp +  18.4s] search 6: 3.0s allocation, added clearance 0.0 mm
+[chomp +  23.0s] CHOMP: native MoveIt optimization, initialization 4 (new geometric path)
+[chomp +  24.2s] candidate rejected by continuous polynomial joint bounds
+[chomp +  27.2s] candidate 3: valid, 36.13s outward, transit clearance 30.0 mm
+[chomp +  27.2s] search 8: 3.0s allocation, added clearance 0.0 mm
+[chomp +  29.1s] CHOMP: native MoveIt optimization, initialization 5 (new geometric path)
+[chomp +  30.4s] hard constraint rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  30.6s] hard constraint rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[chomp +  35.3s] candidate 4: valid, 67.67s outward, transit clearance 30.0 mm
+[chomp +  35.3s] search 10: 3.0s allocation, added clearance 0.0 mm
+[chomp +  38.5s] CHOMP: native MoveIt optimization, initialization 6 (new geometric path)
+[chomp +  41.4s] candidate 5: valid, 8.39s outward, transit clearance 35.0 mm
+[chomp +  41.4s] READY: 29.819s outward → 2s hold → exact reverse; SIMULATION ONLY

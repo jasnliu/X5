@@ -360,6 +360,23 @@ both arms and joins the left writer before disabling the independently
 verified centered arm. Faults do not authorize an off-center disable; the
 explicit severe-emergency path still stops all writers before shutdown.
 
+An idle J6 path hold does not have to be at the snare strike anchor to hand
+control back to recording/centering. The handoff still requires fresh running
+feedback and no pending/active strike; a started stroke must complete its full
+return and measured settling first. Strike-start readiness remains stricter.
+After a latched playback fault or a close request, audio teardown updates the
+status display without repeatedly restarting motor recovery.
+
+The 500 Hz left-J6 recording/path hold uses the drive's reported velocity for
+load estimation and the existing torque limiter, not a derivative of quantized
+positions divided by the command-loop interval. The strike reference and the
+right-arm centering controller are unchanged; no settling or safety limit was
+loosened. Left path/hold load compensation adapts at 40 rather than 60 Nm/rad/s
+to avoid the measured slow oscillation against static friction at the endpoint;
+left path-only position/damping gains are 160/4 for precise, damped endpoint
+holding. Path velocity/acceleration and the 3 Nm net-torque cap are unchanged.
+These are not the strike gains, which remain the snare.sh reference.
+
 `--test` visualizes the same 11° reference and random-measure scheduler using
 only in-memory simulation. It remains camera/microphone/serial/CAN-free.
 `--hardwaretest`, `--recording-only`, standalone `snare.sh`, the data collector,
@@ -406,14 +423,36 @@ clock still supports 20–180 BPM. Blank, nonnumeric, nonfinite, or out-of-range
 The box is locked from Start/RUN until the arm has completed **Center + Relax**;
 change the tempo before the next run, not in the middle of a stroke.
 
-Both the ride swing grid and the hi-hat use `quarter_note_seconds = 60 / BPM`.
+The ride swing grid, hi-hat and bass drum use `quarter_note_seconds = 60 / BPM`.
 The ride retains its pickup and 2:1 triplet swing. The hi-hat still **opens on
 beats 1 and 3** and **closes on beats 2 and 4**, at its calibrated angle. Its
-acoustic timing adjustment shifts both CLOSE and following OPEN together until
-two consecutive closure/ride matches are within 15 ms; then the applied offset
-is locked for the rest of that run. The ride has no offset. At faster tempos the signed advance is
-capped at the smaller of 250 ms and half a beat, with a proportionately bounded
-ride-onset matching window. At 100 BPM all timing defaults are unchanged.
+offset is learned in the separate **80 BPM pre-beat calibration**, then stays
+fixed throughout the user-tempo swing. Two consecutive paired closure/ride detections
+within 15 ms complete calibration. Hi-hat-only, ride-only and empty detection
+windows do not count, reset this streak or adjust the offset. An unsatisfactory
+pair still resets it. There is no snare timing calibration or learned
+snare offset: the snare keeps its random eighth-note grid and normal descent lead.
+The ride has no offset. At faster tempos the hi-hat signed advance remains bounded
+by the smaller of 250 ms and half a beat.
+
+The **Use bass drum (motor 1) in swing beat** checkbox below Beat BPM is checked
+by default. Uncheck it before **RUN** to leave motor 1 idle while ride, hi-hat
+and snare keep their existing behavior. The choice is locked during the run;
+change it after **Center + Relax** for the next run.
+
+When checked, in normal `--hardware` swing, **bass drum motor 1 strikes on every quarter note
+(1, 2, 3, 4)**, starting on beat 1 after the ride pickup. It uses exactly the
+`/home/jason/Proyectos3/esp-main/run_keys.sh` **F** strike: `K` commands clockwise
+**PWM 180/255 at 20 kHz for 50 ms**, then the firmware disables the driver and
+lets the motor relax until the next beat. Only the interval changes with BPM;
+the pulse strength/duration do not. There is **no bass calibration or timing
+offset**, and the learned hi-hat offset does not shift the bass. No bass hit is
+sent during setup, angle/timing calibration, pickup, or ride swing extras.
+The scheduler uses the same ride epoch and existing 5 ms ESP32 callback, not
+a second serial connection. Stop/fault cancels future kicks (an in-flight
+pulse releases after its 50 ms); Emergency Relax sends `S` to release both
+ESP32 motors. Missed deadlines stop playback instead of firing catch-up hits.
+This is command timing, not a claim of calibrated acoustic bass onset.
 
 **Estimated practical upper tempo: roughly 120 BPM**, not a hardware-verified
 limit. The shortest ride spacing is `20 / BPM` seconds (167 ms at 120 BPM), and
@@ -531,13 +570,13 @@ move, but the first fresh tip detection anywhere inside the visible pink
 rectangle immediately completes alignment. There is no smaller invisible goal,
 second confirmation, or timed hold. The launcher starts the scoring-enabled ST7 cymbal-sound
 detector from the sibling `/home/jason/Proyectos3/st7`, explicitly selecting
-`models/v2/config.yaml`, `models/v2/best.pt`, and the matching
-`models/v2/normality/reference.npz`. Missing V2 assets stop startup; there is no
-fallback to V1 or `/home/jason/st7`. This applies to every audio-enabled mode
+`models/ride_v4/config.yaml`, `models/ride_v4/best.pt`, and the matching
+`models/ride_v4/normality/reference.npz`. Missing ride_v4 assets stop startup; there is no
+fallback to older models or `/home/jason/st7`. This applies to every audio-enabled mode
 (including `--hardware` and `--hardwaretest`); pure `--test` still runs no audio
 model. ST7's own default launcher and the Y2 camera model are unchanged.
-The launcher also starts **`models/hihat_v1`** (its own config, checkpoint and
-normality reference) on the same TONOR source. A separate **Hi-hat sound v1**
+The launcher also starts **`models/hihat_v2`** (its own config, checkpoint and
+normality reference) on the same TONOR source. A separate **Hi-hat sound v2**
 panel flashes green for each detected closure and shows its count, last score
 and normality. The panel/layout is unchanged. In normal **--hardware**, hi-hat
 audio now selects the startup closure angle and then adjusts **only hi-hat
@@ -548,15 +587,15 @@ advance. During startup calibration, detector failure or exhaustion of the
 existing panels reflects calibration rather than claiming “visual only”. ESP32
 motor faults still use the existing controlled-stop safety path.
 
-Ride and hi-hat use independent listener processes and Unix sockets, with
-instrument-tagged messages checked at both the bridge and receiver. Each
-listener is explicitly pinned to TONOR through PipeWire and uses bounded
-single-thread CPU pools to avoid oversubscription. Independent listeners keep
-optional hi-hat failures out of ride control; the models, decoder thresholds,
-lookahead and normality references are not changed or retrained. Both audio
+Ride, hi-hat and snare share one microphone capture and frozen audio encoder,
+with separate unchanged model heads, decoders, normality references and Unix
+sockets. Instrument-tagged messages are checked at both the bridge and receiver.
+The shared listener is explicitly pinned to TONOR through PipeWire and uses
+single-thread CPU pools. A shared backend failure notifies all control receivers
+instead of silently losing one instrument. The models, decoder thresholds,
+lookahead and normality references are not changed or retrained. All three audio
 models run in audio-enabled modes; **`--test` still opens no microphone and
-starts neither model**. No new launch flags or workflow steps are needed.
-See [dual-detector verification](diagnostics/dual_sound_20261005/VERIFICATION.md).
+starts no audio models**. No new launch flags or workflow steps are needed.
 
 X5 explicitly routes audio input through PipeWire
 to the connected TONOR TD510 microphone, and will not enable the sequence until
@@ -632,8 +671,10 @@ commands in normal hardware mode are now `O`, `B`, `O`, `B`…: **OPEN on
 1/3, CLOSE on 2/4**. `B` uses the startup-calibrated **90°–115° close/hold** target;
 `O` retains the **0° return/release** target. Legacy `C`/`J` commands remain
 fixed at 100° for other programs and existing collection procedures. Commands use the unchanged ride grid minus one signed hi-hat
-advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
-motor 1. The ESP32 code is copied under
+advance (positive = earlier, negative = later), initially zero each run. Motor 1
+receives `K` for the bass drum on every unshifted quarter note during swing when
+the bass checkbox is checked (the default);
+right J7 remains the ride cymbal. The ESP32 code is copied under
 `esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
 `/dev/serial/by-id/` path.
 
@@ -687,10 +728,11 @@ weakened. The UI layout and RUN workflow are otherwise unchanged.
 `start_beat.sh` also opens a separate sound-debug window whenever the live
 detectors run (not in microphone-free `--test`). It shows a **fixed 10-second
 rolling waveform**, not an ever-growing recording. **Red** vertical lines label
-ride cymbal detections; **blue** dashed lines label hi-hat detections. Both use
-the ST7 event's original ADC-monotonic onset time. A delayed detection therefore
+ride cymbal detections; **blue** dashed lines label hi-hat detections; **purple**
+dotted lines label **`snare`** detections. All use the ST7 event's original
+ADC-monotonic onset time. A delayed detection therefore
 appears over the earlier sound, then scrolls left with that waveform; it is not
-placed at notification time. Overlapping ride/hi-hat labels occupy separate rows.
+placed at notification time. Overlapping ride/hi-hat/snare labels occupy separate rows and retain all colors.
 
 The viewer has its own read-only TONOR capture stream and uses the same
 ADC-to-monotonic mapping as ST7. It consumes nonblocking, one-way copies of
@@ -698,58 +740,123 @@ existing detector events, without changing model output, calibration, offsets,
 ride timing, or motor control. Visual gain is display-only. Audio gaps are not
 stitched together; only a bounded in-memory history is retained, and **no audio
 files are saved**. Closing or losing this window leaves the beat program and
-both detectors running normally. Exiting the beat program closes it too.
+all three detectors running normally. Exiting the beat program closes them too.
 
-### Background hi-hat synchronization (no ride offset)
+The existing sibling **`st7/models/snare_v2`** config, checkpoint, and normality
+reference run continuously alongside ride `ride_v4` and `hihat_v2`. The shared bridge
+requires `instrument=snare` / `label=snare_hit`. Snare detections are visual-only,
+with best-effort copies to the optional graph. The app drains its snare socket
+without calculating offsets or using detections/readiness as a motion gate. A
+missing snare bundle no longer blocks the beat; the ride and hi-hat detectors
+retain their existing requirements. Closing the graph never affects motion.
+Snare events cannot select ride depth or tune the hi-hat offset. The listener does not change
+the desktop's default microphone. `--test` starts no audio models.
 
-Only `--hardware` has the new servo. `--test`, `--hardwaretest`, data collectors,
-model assets/thresholds, the ride search and hybrid motion controller are unchanged.
-Both detectors' ADC-derived monotonic acoustic onsets share one internal timeline;
-notification delays never become timing offsets. The read-only ride pickup/grid
-starts a 5 ms host callback scheduler; no command is sent on the pickup or extras.
+### Shared audio computation and startup memory check
 
-A closure on beat 2/4 is matched against one unambiguous ride onset within
-a window around that scheduled beat (the smaller of 140 ms and one third of
-a beat), plus a neighboring ride-grid detection. One hi-hat onset must occur within 450 ms of its actual close command. Both detector
-watermarks must finalize the entire matching window. Duplicates, missing or
-ambiguous events, stale sources and corrections outside the signed safety
-bound (the smaller of 250 ms and half a beat) do not change the advance.
-This cannot eliminate classifier cross-talk:
-a missing real ride plus a false ride response to a hi-hat can still be ambiguous
-in reality even when the detector output looks unique. Better models may be needed.
+The normal complete-model launch uses `camera_playback.shared_audio_bridge` and
+ST7's `cymbal_detector.shared_listener`: one Python model process, one capture,
+one encoder evaluation per existing audio window, and three independent heads.
+This is inference reuse, **not retraining or a different classifier**. Model
+weights, thresholds, 16 kHz sampling, 6-second windows, update cadence, 0.4-second
+lookahead, normality scoring and ADC-onset timestamps are unchanged. The active
+80 BPM timing calibration is ride/hi-hat only. A shared-worker failure is
+reported to every instrument receiver; closing the graph still has no effect.
+When an optional model bundle is missing in a mode that previously allowed it,
+the legacy isolated listeners retain the old degraded-mode behavior.
 
-The estimate uses the **actual advance used for that historical command** plus
-`hihat_onset - ride_onset`, avoiding repeated integration of delayed errors.
-After **two consecutive valid estimates agree within 20 ms**, the controller
-applies the **full absolute correction**, using a rolling three-estimate median
-(the first update uses the two available estimates). The 15 ms deadband remains.
-Disagreeing estimates do not update the correction; missing/ambiguous pairs
-clear the confirmation history. This replaces the old three-pair wait and
-35%-gain, 10 ms incremental adjustments. Every close and following open share
-a latched advance, preserving their one-quarter-note separation (600 ms at
-100 BPM). New pairs can shift by up to **150 ms or one quarter of a beat,
-whichever is smaller** (150 ms at 100 BPM, 125 ms at 120 BPM), leaving at least
-three quarters of a beat of scheduled open time. A confirmed 100 ms offset can
-therefore be applied in one upcoming pair instead of many 10 ms steps. The
-total signed advance bound is unchanged. Already scheduled edges never jump,
-and delayed batches cannot compound the same historical error. Missed deadlines cause the
-existing controlled stop, never a burst or an airborne arm release. No guarantee
-of perfect acoustic synchronization is made at the models' finite time resolution.
+Before starting any perception/controller processes, Linux `MemAvailable` must
+be at least **2 GiB**. Swap is not counted as real-time headroom. The check only
+refuses startup; it never kills or relaxes an active arm. This guard cannot
+prevent another application from exhausting RAM after startup.
 
-**Offset checkpoint:** when the actual hi-hat/ride acoustic onset difference
-is at most **15 ms twice consecutively**, at the same currently applied offset,
-the controller logs `HIHAT SYNC: {"kind": "locked", ...}` with the offset value.
-That offset then stays **constant for the rest of the swing run**: later drift,
-outliers, or missing detections cannot resume automatic adjustment. Missing,
-ambiguous, or out-of-tolerance matches break the consecutive-success streak
-before locking. Delayed good detections from an older offset cannot certify a
-new one. A new run starts unlocked at zero and learns afresh; no offset is saved
-across runs. Audio availability and command-deadline supervision remain active.
+Camera resolution, model, frame selection, recording and inference thread count
+are unchanged: offline benchmarking found that lowering its CPU thread count
+slowed inference. No camera accuracy or update-rate reduction is used to save CPU.
 
-Each swing writes `playback_results/hihat_sync/<session>/timeline.jsonl` with
-common-clock detector onsets, beat IDs, actual commands, applied advances,
-accepted timing errors and rejected-pair reasons. No new UI or launch action is
-required. These logs are diagnostics, not training labels.
+### Pre-beat ride/hi-hat synchronization (no ride or snare offset)
+
+Normal `--hardware` runs these setup steps **before** the real beat:
+hi-hat closing angle → ride search and its existing +0.5° depth boost →
+**ride/hi-hat timing at 80 BPM** → **swing at the user-selected BPM**. The timing
+step is independent of the user's Beat BPM. During calibration there is no swing pickup, triplet
+extra, snare hit, or bass hit: right J7 strikes the ride once every **750 ms**, with the hi-hat
+closing toward that same acoustic deadline. It opens halfway between pairs
+(375 ms after its close command). The ride uses its unchanged hybrid strike
+and must complete a full settled return before another calibration strike.
+
+Both schedules receive the same future first deadline. The detectors' actual
+ADC-derived monotonic acoustic onsets, **not notification arrival times**, are
+paired. Each finalized pair requires exactly one ride onset within 140 ms of
+its scheduled deadline and one hi-hat onset within 450 ms of its actual close
+command. Both detectors must finalize those windows. Unlike swing matching,
+there is no ride-only neighboring-note requirement: every calibration note is
+paired. Finalized windows missing either instrument (including neither detected)
+do not tune the offset or change the consecutive-good-pair count. Duplicate/
+ambiguous pairs with both instruments or out-of-bound observations still break
+the streak without tuning the offset. Simultaneous detection is
+not rejected merely because the instruments sound together. Classifier
+cross-talk remains possible; this is not a guarantee of physical synchronization.
+
+Each valid pair immediately supplies an **absolute** estimate:
+`scheduled_ride_time - actual_close_command_time + hihat_onset - ride_onset`.
+This accounts for the offset actually used by that historical command and does
+not repeatedly integrate delayed errors. There is no two-estimate confirmation
+or median filter during this isolated calibration. The 15 ms deadband and
+**±250 ms total offset bound** remain. A new close/open pair can shift by up to
+**200 ms**, leaving at least 175 ms scheduled open
+time. Already scheduled edges never jump; a close and its following open share
+one latched offset and retain their 375 ms separation.
+
+**Completion checkpoint:** two consecutive valid pairs must have actual acoustic
+onset differences within **15 ms**, both at the current applied/target offset.
+Consecutive refers to paired detections, not adjacent beats: a good pair, any
+number of finalized hi-hat-only/ride-only/empty windows, then another good pair
+completes calibration. A bad pair resets the count. The existing 45-second
+timeout and detector-health safeguards remain in force.
+Delayed successful detections from an older offset cannot validate a new one.
+The console logs `HIHAT SYNC` / `locked`. Future calibration closes stop, the
+last open and ride return finish, and fresh settled feedback is required before
+starting swing directly. The left snare stays idle throughout setup and calibration.
+No ride/snare pairs are performed and no snare offset is calculated. Neither arm
+is relaxed during the calibration-to-swing handoff.
+
+The real swing then starts at the **user-selected BPM**, with its original
+pickup/triplets and 1–2 spaced random 11° snare hits on eighth notes per measure.
+When its checkbox is checked, the bass begins on beat 1 and repeats on all four
+quarter notes without calibration; unchecked leaves motor 1 idle.
+The hi-hat offset is **fixed from the first close onward**: hi-hat opens on 1/3
+and closes on 2/4, shifting each close and following open together. No offset
+learning occurs during swing, even after drift or outliers. Snare advance is
+always zero; its existing reference-descent lead still starts each stroke in
+time for the selected eighth note. Its powered curve, full return, settling,
+and spacing across measure boundaries are unchanged. A first-bar note that
+cannot fit after the pickup establishes the clock is excluded rather than hit
+late; subsequent bars retain all eight slots. The ride has no offset and its
+motion tuning is unchanged. Each new run learns only the hi-hat offset afresh.
+`--test`, `--hardwaretest`, playback-only verification, data collectors, model
+weights/thresholds, and hi-hat angle calibration are unchanged.
+
+Unavailable required ride/hi-hat detectors and missed command deadlines cancel
+calibration through the existing controlled return/center path, never a catch-up
+burst or automatic off-center relaxation. Hi-hat timing retains its 45-second
+limit. There is no snare calibration stage or 15-second snare calibration timeout.
+Automatic stop messages include the cause. Stop also works during calibration
+and prevents the transition into swing.
+
+Authorized bounded physical verification (this **moves both arms and strikes**):
+`./start_beat.sh --hardware --verify-calibration`. It uses the ordinary Run path,
+camera/search, both recordings and hi-hat timing calibration, then stops without
+swing or snare hits. Passing requires a hi-hat lock, verified centered relaxation
+of both arms, and no faults. Results go to
+`playback_results/calibration_verification/<session>/result.json`.
+
+Hi-hat calibration and swing each write
+`playback_results/hihat_sync/<session>/timeline.jsonl`, including mode, detector
+onsets, command times, applied offsets, accepted differences, rejection reasons,
+and the checkpoint. No new snare-calibration timeline is created. The legacy
+snare-calibration helpers and prior logs remain on disk but are not used by the
+main beat. Logs are diagnostics, not training labels.
 
 This automatic arm-and-hi-hat loop belongs to `--hardware`; its arm and hi-hat
 continue until the user presses **Stop [BPM] striking:

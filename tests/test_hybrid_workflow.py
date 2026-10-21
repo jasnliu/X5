@@ -98,6 +98,7 @@ class WorkflowTests(unittest.TestCase):
 
     def test_sound_uses_worker_release_timestamp_and_latches_until_full_return(self):
         a = app_fixture()
+        a.hihat_sync = Mock()
         a.hybrid_session.status = HybridStatus(phase='coast', count=1,
             peak_drop=math.radians(4), released_at=10., sample=Sample(-.07, -.5, 0, 2, 10.05), at=10.05)
         a._process_sound_hit({'event_at': 9.})
@@ -111,7 +112,8 @@ class WorkflowTests(unittest.TestCase):
             hw.tick(a, 10.4)
         self.assertTrue(a.continuous_strike_active)
         self.assertEqual(a.continuous_strike_degrees, 5.5)
-        a.hybrid_session.request.assert_called_once_with('swing', math.radians(5.5), SWING_EVENTS)
+        a.hybrid_session.request.assert_called_once_with('calibrate', math.radians(5.5), 11.4)
+        a.hihat_sync.start_calibration.assert_called_once_with(11.4)
         a.hihat.start_sequence.assert_called_once()
 
     def test_return_before_sound_display_tick_still_rejects_late_onset(self):

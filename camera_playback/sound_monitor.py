@@ -40,12 +40,12 @@ class HiHatSoundMonitor:
 
     def _poll_display(self, now=None):
         if self.disabled:
-            return "Hi-hat sound v1: ignored in test mode — no microphone", "#666666", False
+            return "Hi-hat sound v2: ignored in test mode — no microphone", "#666666", False
         if getattr(self, 'startup_error', None):
-            return ("Hi-hat sound v1: UNAVAILABLE — visual only; beat unaffected\n"
+            return ("Hi-hat sound v2: UNAVAILABLE — visual only; beat unaffected\n"
                     + self.startup_error[:220]), '#b00020', False
         if self.receiver is None:
-            return "Hi-hat sound v1: not connected — visual only", "#8a5a00", False
+            return "Hi-hat sound v2: not connected — visual only", "#8a5a00", False
         messages = self.receiver.poll()
         observer = getattr(self, 'on_messages', None)
         if observer is not None:
@@ -67,15 +67,15 @@ class HiHatSoundMonitor:
             summary += (f" | last score {self.last_hit['score']:.3f}"
                         f" | normality {self.last_hit['normality_score']:.1f}")
         if self.receiver.state in {'error', 'stopped'}:
-            return ("Hi-hat sound v1: UNAVAILABLE — visual only; beat unaffected\n"
+            return ("Hi-hat sound v2: UNAVAILABLE — visual only; beat unaffected\n"
                     + self.receiver.detail[:220] + " | " + summary), '#b00020', False
         if self.receiver.ready(now):
             flash = self.last_received_at is not None and now-self.last_received_at < .6
             status = 'CLOSURE DETECTED' if flash else 'READY'
-            return f"Hi-hat sound v1: {status} — visual only\n{summary}", '#087f23', flash
+            return f"Hi-hat sound v2: {status} — visual only\n{summary}", '#087f23', flash
         if self.receiver.state == 'ready':
-            return f"Hi-hat sound v1: STALE — visual only; beat unaffected\n{summary}", '#b00020', False
-        return f"Hi-hat sound v1: warming up on TONOR — visual only\n{summary}", '#8a5a00', False
+            return f"Hi-hat sound v2: STALE — visual only; beat unaffected\n{summary}", '#b00020', False
+        return f"Hi-hat sound v2: warming up on TONOR — visual only\n{summary}", '#8a5a00', False
 
     def tick(self):
         if self.closed:
@@ -85,7 +85,7 @@ class HiHatSoundMonitor:
         except Exception as exc:
             # Never propagate an optional visual monitor failure into the
             # hardware application's callback-failure/center recovery handler.
-            text = 'Hi-hat sound v1: display error — beat unaffected\n' + str(exc)[:220]
+            text = 'Hi-hat sound v2: display error — beat unaffected\n' + str(exc)[:220]
             color, flash = '#b00020', False
         self.text.set(text)
         self.label.config(fg=color, bg='#c8f5d2' if flash else self.normal_background)

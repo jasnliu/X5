@@ -1,0 +1,55 @@
+[chomp +   0.0s] Installed MoveIt CHOMP, initialized by a new camera/model-planned path, not a recording. Native distance-field optimization followed by exact same full-body FCL validation as other modes.
+[chomp +   0.0s] building/loading model + frozen FCL world; no motor access
+-- Found moveit_core: 2.12.4 (/opt/ros/jazzy/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found tcb_span: 1.3.2 (/opt/ros/jazzy/share/tcb_span/cmake)
+-- Found rclcpp_lifecycle: 28.1.22 (/opt/ros/jazzy/share/rclcpp_lifecycle/cmake)
+-- Found parameter_traits: 0.7.6 (/opt/ros/jazzy/share/parameter_traits/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0") found components: serialization filesystem system 
+-- Found chomp_motion_planner: 2.12.4 (/opt/ros/jazzy/share/chomp_motion_planner/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jason/Proyectos3/X5/drum_planner/build/experiment
+[ 50%] Building CXX object CMakeFiles/experiment_oracle.dir/experiment_oracle.cpp.o
+[100%] Linking CXX executable experiment_oracle
+[100%] Built target experiment_oracle
+[chomp +  15.1s] search 1: 3.0s allocation, added clearance 0.0 mm
+[chomp +  18.2s] CHOMP: native MoveIt optimization, initialization 1 (new geometric path)
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 45, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 124, in run
+    optimized=oracle.call('native',method=method,seconds=min(20.,max(1.,remaining()*.6)),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/runtime.py", line 113, in call
+    if result.get('error'):raise RuntimeError(result['error'])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Cannot clone native planning scene
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 104, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 101, in main
+    plan(context,a.folder,a.method,params,a.budget)
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/worker.py", line 45, in plan
+    winner,report=run(method,oracle,req,folder,params,seconds,log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/algorithms.py", line 124, in run
+    optimized=oracle.call('native',method=method,seconds=min(20.,max(1.,remaining()*.6)),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/experiment/runtime.py", line 113, in call
+    if result.get('error'):raise RuntimeError(result['error'])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Cannot clone native planning scene

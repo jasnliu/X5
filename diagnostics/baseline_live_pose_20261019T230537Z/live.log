@@ -1,0 +1,21 @@
+BASELINE HARDWARE MODE: startup only reads disabled encoders and the camera. It NEVER enables/moves the arm.
+READ ONLY: measuring relaxed stationary arms + five native depth frames; NO actuator commands
+BASELINE ONLY: independent candidates → weighted route score → dense final zone/collision check
+Candidate 1/6, seed 19: blocked_after_smoothing
+Candidate 2/6, seed 7938: planned
+Candidate 3/6, seed 15857: planned
+Candidate 4/6, seed 23776: blocked_after_smoothing
+Candidate 5/6, seed 31695: planned
+Candidate 6/6, seed 39614: planned
+Checking candidate 3, smooth: 6.122s outward (fastest valid reference)
+Checking candidate 6, smooth: 8.837s outward (fastest valid reference)
+Route score candidate 2, smooth: 129.99 (lower is better), 14.879s
+Route score candidate 6, smooth: 100.00 (lower is better), 8.837s
+Selected candidate 6/6 (seed 39614): route score 100.00, 8.837s outward, 19.674s full cycle
+BASELINE READY — preview/prepare only; no motors enabled
+Baseline stopped; no automatic relaxation. If a controller is already active, reconnect to it; startup does not take over its ownership. ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/diagnostics/baseline_live_pose_20261019T230537Z/qa_live.py", line 82, in <module>
+    assert code==0 and not attempts,(code,attempts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, [])

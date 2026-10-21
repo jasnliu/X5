@@ -1,0 +1,353 @@
+{
+  "recordings": 60,
+  "timestamp_files": 60,
+  "labels": {
+    "bass_hit": 222
+  },
+  "sessions": 5,
+  "category_counts": {
+    "bass_only": 12,
+    "bass_hihat": 12,
+    "bass_ride": 12,
+    "bass_snare": 8,
+    "bass_ride_hihat": 8,
+    "bass_ride_hihat_snare": 8
+  },
+  "training_performed": false,
+  "audio": {
+    "sample_rate": 16000,
+    "channels": 1,
+    "sample_width": 2,
+    "seconds": 480.04325,
+    "maximum_peak_fraction": 0.703033447265625,
+    "clipped_samples": 0,
+    "export_bytes_match_raw_captures": true
+  },
+  "split_counts": {
+    "train": 36,
+    "validation": 12,
+    "test": 12
+  },
+  "left_reverse_first_clips": 58,
+  "pre_instruction_pilot_clips": 2,
+  "session_evidence": {
+    "20261010T232155-train-63812811": {
+      "clips": 2,
+      "bass_hits": 5,
+      "left_reverse_verified": false,
+      "all_16_disabled_fault_free": true,
+      "center_before_relax": {
+        "left": {
+          "t": 5716.612491257,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8726646259971648,
+            0.0,
+            0.0
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -0.8725250629434651,
+            0.00019180590524214836,
+            0.00019180590524214836
+          ],
+          "max_error_deg": 0.032969006568082104,
+          "span_deg": 0.021979337712122585,
+          "settled_s": 0.6479363469998134
+        },
+        "right": {
+          "t": 5716.612759211,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.4
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00029659014262470307,
+            0.00019180590524214836,
+            1.399607690547036
+          ],
+          "max_error_deg": 0.044457013629936544,
+          "span_deg": 0.0439586754241434,
+          "settled_s": 0.6479366879993904
+        }
+      }
+    },
+    "20261010T232632-train-65a1ae8b": {
+      "clips": 2,
+      "bass_hits": 5,
+      "left_reverse_verified": true,
+      "all_16_disabled_fault_free": true,
+      "center_before_relax": {
+        "left": {
+          "t": 6002.804777408,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8726646259971648,
+            0.0,
+            0.0
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -0.8725250629434651,
+            0.00019180590524214836,
+            0.00019180590524214836
+          ],
+          "max_error_deg": 0.032969006568082104,
+          "span_deg": 0.0439586754241434,
+          "settled_s": 0.6481338809999215
+        },
+        "right": {
+          "t": 6002.804979166,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.4
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00029659014262470307,
+            0.00019180590524214836,
+            1.399607690547036
+          ],
+          "max_error_deg": 0.044457013629936544,
+          "span_deg": 0.0439586754241434,
+          "settled_s": 0.6481365860008736
+        }
+      }
+    },
+    "20261010T232851-train-4e7f0cb9": {
+      "clips": 32,
+      "bass_hits": 122,
+      "left_reverse_verified": true,
+      "all_16_disabled_fault_free": true,
+      "center_before_relax": {
+        "left": {
+          "t": 6400.152823974,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8726646259971648,
+            0.0,
+            0.0
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -0.8725250629434651,
+            -0.00019180590524214836,
+            0.00019180590524214836
+          ],
+          "max_error_deg": 0.032969006568082104,
+          "span_deg": 0.021979337712122585,
+          "settled_s": 0.6489071830001194
+        },
+        "right": {
+          "t": 6400.15312885,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.4
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -8.702166785959364e-05,
+            0.00019180590524214836,
+            1.399607690547036
+          ],
+          "max_error_deg": 0.06643635134195736,
+          "span_deg": 0.0439586754241434,
+          "settled_s": 0.6489122729999508
+        }
+      }
+    },
+    "20261010T233449-validation-5fd0ac49": {
+      "clips": 12,
+      "bass_hits": 45,
+      "left_reverse_verified": true,
+      "all_16_disabled_fault_free": true,
+      "center_before_relax": {
+        "left": {
+          "t": 6586.063416012,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8726646259971648,
+            0.0,
+            0.0
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -0.8725250629434651,
+            -0.00019180590524214836,
+            0.00019180590524214836
+          ],
+          "max_error_deg": 0.010989668856061292,
+          "span_deg": 0.021979337712122585,
+          "settled_s": 0.6466460999999981
+        },
+        "right": {
+          "t": 6586.063786538,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.4
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00029659014262470307,
+            0.0005754177157246687,
+            1.3992240787365535
+          ],
+          "max_error_deg": 0.06643635134195736,
+          "span_deg": 0.0439586754241434,
+          "settled_s": 0.6466598159995556
+        }
+      }
+    },
+    "20261010T233755-test-9e4798d8": {
+      "clips": 12,
+      "bass_hits": 45,
+      "left_reverse_verified": true,
+      "all_16_disabled_fault_free": true,
+      "center_before_relax": {
+        "left": {
+          "t": 6772.091396187,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8726646259971648,
+            0.0,
+            0.0
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            -0.8725250629434651,
+            -0.00019180590524214836,
+            0.00019180590524214836
+          ],
+          "max_error_deg": 0.032969006568082104,
+          "span_deg": 0.021979337712122585,
+          "settled_s": 0.6488073720001921
+        },
+        "right": {
+          "t": 6772.091691254,
+          "goal_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.4
+          ],
+          "actual_rad": [
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00019180590524214836,
+            0.00029659014262470307,
+            0.00019180590524214836,
+            1.3992240787365535
+          ],
+          "max_error_deg": 0.06643635134195736,
+          "span_deg": 0.04395867542404162,
+          "settled_s": 0.6488104469999598
+        }
+      }
+    }
+  },
+  "can_audits": {
+    "physical_pilot2": {
+      "feedback_frames": 120578,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 35.0,
+      "active_disable_commands": 20,
+      "unproven_center_disable_commands": []
+    },
+    "physical_pilot3": {
+      "feedback_frames": 103355,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 35.0,
+      "active_disable_commands": 20,
+      "unproven_center_disable_commands": []
+    },
+    "physical_reverse_check": {
+      "feedback_frames": 114705,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 35.0,
+      "active_disable_commands": 18,
+      "unproven_center_disable_commands": []
+    },
+    "physical_main": {
+      "feedback_frames": 691500,
+      "motor_fault_frames": 0,
+      "maximum_temperature_c": 38.0,
+      "active_disable_commands": 76,
+      "unproven_center_disable_commands": []
+    }
+  },
+  "preservation": {
+    "protected_files": 1072,
+    "changed": [],
+    "missing": []
+  },
+  "label_status": "assistant_visual_signal_review",
+  "auditory_review_performed": false,
+  "independent_human_verification": false
+}

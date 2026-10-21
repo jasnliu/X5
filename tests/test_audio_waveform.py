@@ -37,12 +37,13 @@ class TimelineTests(unittest.TestCase):
         self.assertAlmostEqual(t.fraction(m.event_at,101.85),.815)
         self.assertAlmostEqual(t.delays['ride'],.8)
 
-    def test_same_onset_keeps_both_instruments_and_correct_colors(self):
+    def test_same_onset_keeps_three_instruments_and_correct_colors(self):
         t=WaveformTimeline()
         t.add_hit(hit(),101.)
         t.add_hit(hit('hihat',delivered=100.6),101.)
-        self.assertEqual(len(t.markers),2)
-        self.assertEqual(COLORS,dict(ride='#dc2626',hihat='#2563eb'))
+        t.add_hit(hit('snare',delivered=100.9),101.)
+        self.assertEqual(len(t.markers),3)
+        self.assertEqual(COLORS,dict(ride='#dc2626',hihat='#2563eb',snare='#9333ea'))
         self.assertFalse(t.add_hit(hit(),101.))
 
     def test_out_of_order_delayed_hits_prune_by_onset_not_receipt_order(self):
@@ -182,7 +183,7 @@ class CaptureTests(unittest.TestCase):
 
 
 class LaunchTests(unittest.TestCase):
-    def graph(self,mode):
+    def graph(self,mode,fail_snare=False):
         processes=[];handlers=[];actions=[]
         modules={n:ModuleType(n) for n in ('launch','launch.actions','launch.event_handlers','launch.events','launch_ros','launch_ros.actions')}
         def process(**kw):
@@ -199,8 +200,11 @@ class LaunchTests(unittest.TestCase):
         modules['launch.event_handlers'].OnProcessExit=handler
         modules['launch.events'].Shutdown=Mock()
         modules['launch_ros.actions'].Node=lambda **kw:SimpleNamespace(**kw)
+        def preflight(root, device, instrument='ride'):
+            if fail_snare and instrument=='snare':raise RuntimeError('missing snare model')
         with patch.dict(sys.modules,modules),patch.object(sys,'argv',['launch',*mode]), \
-             patch('pathlib.Path.is_file',return_value=True),patch('camera_playback.audio_bridge.detector_command'):
+             patch('pathlib.Path.is_file',return_value=True), \
+             patch('camera_playback.audio_bridge.detector_command',side_effect=preflight):
             with self.assertRaises(SystemExit):runpy.run_path(str(ROOT/'launch_right_camera_playback.py'),run_name='__main__')
         return actions,handlers
 
@@ -208,17 +212,34 @@ class LaunchTests(unittest.TestCase):
         actions,handlers=self.graph(['--hardware'])
         viewer=next(x for x in actions if 'camera_playback.audio_waveform' in getattr(x,'cmd',[]))
         self.assertFalse(any(h['target_action'] is viewer for h in handlers))
-        bridges=[x for x in actions if 'camera_playback.audio_bridge' in getattr(x,'cmd',[])]
-        self.assertEqual(len(bridges),2)
-        for bridge,flag in zip(bridges,('--ride-socket','--hihat-socket')):
-            self.assertEqual(bridge.cmd[bridge.cmd.index('--visual-socket')+1],viewer.cmd[viewer.cmd.index(flag)+1])
-            self.assertNotEqual(bridge.cmd[bridge.cmd.index('--socket')+1],bridge.cmd[bridge.cmd.index('--visual-socket')+1])
+        bridge=next(x for x in actions if 'camera_playback.shared_audio_bridge' in getattr(x,'cmd',[]))
+        channels={bridge.cmd[i+1]:bridge.cmd[i+2:i+4]
+                  for i,arg in enumerate(bridge.cmd) if arg=='--channel'}
         app=next(x for x in actions if 'camera_playback.app' in getattr(x,'cmd',[]))
         self.assertNotIn('--visual-socket',app.cmd)
+        for name,flag in [('ride','--audio-socket'),('hihat','--hihat-audio-socket'),('snare','--snare-audio-socket')]:
+            control,visual=channels[name]
+            self.assertEqual(control,app.cmd[app.cmd.index(flag)+1])
+            self.assertEqual(visual,viewer.cmd[viewer.cmd.index('--'+name+'-socket')+1])
+            self.assertNotEqual(control,visual)
+        notices=[h['on_exit'][0].cmd for h in handlers if h['target_action'] is bridge]
+        self.assertEqual(len(notices),3)
+        self.assertEqual({n[n.index('--socket')+1] for n in notices},
+                         {p[0] for p in channels.values()})
+
+    def test_missing_snare_bundle_blocks_normal_hardware_before_motion(self):
+        actions,handlers=self.graph(['--hardware'],fail_snare=True)
+        self.assertEqual(actions,[])
+        self.assertEqual(handlers,[])
+
+    def test_missing_snare_bundle_remains_optional_for_manual_hardware_test(self):
+        actions,_=self.graph(['--hardwaretest'],fail_snare=True)
+        self.assertTrue(any('camera_playback.app' in getattr(x,'cmd',[]) for x in actions))
 
     def test_test_mode_still_has_no_capture_or_waveform_process(self):
         actions,_=self.graph(['--test'])
         self.assertFalse(any('camera_playback.audio_waveform' in getattr(x,'cmd',[]) for x in actions))
+        self.assertFalse(any(any(m in getattr(x,'cmd',[]) for m in ('camera_playback.audio_bridge','camera_playback.shared_audio_bridge')) for x in actions))
 
     def test_viewer_has_no_control_imports_or_audio_file_writer(self):
         for name in ('audio_waveform.py','waveform.py','audio_visual.py'):

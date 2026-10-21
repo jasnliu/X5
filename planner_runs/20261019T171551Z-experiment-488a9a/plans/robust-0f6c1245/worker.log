@@ -1,0 +1,27 @@
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.6s] robust envelope: +24.3 mm world, 22.1 mm self bound
+[robust +   1.0s] search 1: 3.0s allocation, added clearance 24.3 mm
+[worker] FCL/solver operation running: 5s
+[robust +   7.4s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   7.8s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   8.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +   8.3s] candidate 1: rejected by final bounds/collision checks
+[robust +   8.3s] search 2: 3.0s allocation, added clearance 24.3 mm
+[robust +  11.9s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  12.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  12.3s] candidate 2: rejected by final bounds/collision checks
+[robust +  12.3s] search 3: 3.0s allocation, added clearance 24.3 mm
+[robust +  15.4s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  15.8s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  16.2s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  16.2s] candidate 3: rejected by final bounds/collision checks
+[robust +  16.2s] search 4: 3.0s allocation, added clearance 24.3 mm
+[robust +  19.9s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  20.3s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  20.3s] candidate 4: rejected by final bounds/collision checks
+[robust +  20.3s] search 5: 3.0s allocation, added clearance 24.3 mm
+[robust +  23.2s] collision rejected (smooth): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  23.6s] collision rejected (corner-stop): {'distance_m': 0.012453720072879149, 'reason': 'insufficient_self_clearance'}
+[robust +  23.6s] candidate 5: rejected by final bounds/collision checks
+[robust +  23.6s] NO FEASIBLE ROUTE: no_valid_route_within_budget

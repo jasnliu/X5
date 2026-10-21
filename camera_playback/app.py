@@ -185,8 +185,10 @@ class App(CameraSearchApp):
                  hardware_test_settings: StrikeSettings | None = None,
                  recording_only: bool = False, auto_run: bool = False,
                  hihat_audio_socket: str | None = None,
-                 left_recording_path: str | Path | None = dual_control.DEFAULT_LEFT_RECORDING):
+                 left_recording_path: str | Path | None = dual_control.DEFAULT_LEFT_RECORDING,
+                 snare_audio_socket: str | None = None):
         self._strike_bpm = STRIKE_BPM
+        self._bass_drum_enabled = True
         self.dual = None
         self.recording_only = bool(recording_only)
         self.recording_only_result = None
@@ -215,8 +217,11 @@ class App(CameraSearchApp):
                   'one RUN button → center + close gripper → recording → '
                   'wait for hi-hat calibration → '
                   'experiment hybrid J7 search → first-hit depth +0.5° → '
-                  '20–120 BPM (default 100) hybrid swing plus 1–2 spaced random eighth-note 11° left snares per measure; ride v2 controls search; '
-                  'hi-hat v1 continuously tunes only hi-hat timing; ride timing unchanged', flush=True)
+                  '80 BPM ride/hi-hat timing calibration → '
+                  '20–120 BPM (default 100) hybrid swing plus 1–2 spaced random eighth-note 11° left snares per measure; ride_v4 controls search; '
+                  'hi-hat timing locks before swing; optional bass motor 1 on every quarter '
+                  '(clockwise PWM 180/255, 50 ms then released); '
+                  'no bass or snare calibration or offset; ride timing unchanged', flush=True)
         super().__init__(real_hardware, detection_socket)
         if real_hardware and isinstance(self.bus, Motors):
             self.bus = PlaybackMotors.adopt(self.bus, self.center_goal,
@@ -234,6 +239,9 @@ class App(CameraSearchApp):
             else HiHatController(esp_port)
         )
         self.hihat_sync = HiHatSyncRuntime(self) if self.hybrid_enabled else None
+        # Snare detections remain visual-only; no timing engine or motion gate.
+        self.snare_audio_receiver = (AudioReceiver(snare_audio_socket, 'snare')
+                                     if snare_audio_socket and not self.test_mode else None)
         self.hihat_calibration = None
         self.hihat_fault_detail = None
         if real_hardware and self.hihat is not None and not self.hihat.connect():
@@ -319,7 +327,8 @@ class App(CameraSearchApp):
             self.header.config(
                 text=(("ONE RUN: center + close → recording → " if self.single_run_mode else
                        "RIGHT arm: recorded motion → ") + "camera alignment → ST7 hit "
-                      "HYBRID search (5°, 6°, 7°…) → hybrid swing + ESP32 hi-hat at 100 BPM")
+                      "HYBRID search (5°, 6°, 7°…) → hi-hat timing calibration (80 bpm) → "
+                      "hybrid swing + ESP32 hi-hat + quarter-note bass at 100 BPM")
             )
         self.loading_status = tk.StringVar()
         self.loading_label = tk.Label(
@@ -347,7 +356,7 @@ class App(CameraSearchApp):
         else:
             continue_text = (
                 "CONTINUE: CLOSE → RECORDING → ALIGN → HYBRID HIT → "
-                "FIRST DEPTH HYBRID SWING + HI-HAT AT 100 BPM"
+                "FIRST DEPTH HYBRID SWING + HI-HAT + BASS AT 100 BPM"
             )
         self.continue_button.config(text=continue_text)
         self.hardware_test_button = None
@@ -545,6 +554,11 @@ class App(CameraSearchApp):
         return getattr(self, '_strike_bpm', STRIKE_BPM)
 
     @property
+    def bass_drum_enabled(self):
+        # Committed setup choice, never read a mutable Tk variable during swing.
+        return getattr(self, '_bass_drum_enabled', True)
+
+    @property
     def swing_events(self):
         return swing_events(self.strike_bpm)
 
@@ -564,6 +578,13 @@ class App(CameraSearchApp):
         self.bpm_entry.grid(row=0, column=1, sticky='w')
         self.tempo_hint = tk.Label(self.tempo_frame, wraplength=480, justify='left')
         self.tempo_hint.grid(row=0, column=2, sticky='w', padx=(10, 0))
+        if not self.test_mode:
+            self.bass_drum_selected = tk.BooleanVar(value=self.bass_drum_enabled)
+            self.bass_drum_checkbox = tk.Checkbutton(
+                self.tempo_frame, text='Use bass drum (motor 1) in swing beat',
+                variable=self.bass_drum_selected, font=('Sans', 12))
+            self.bass_drum_checkbox.grid(row=1, column=0, columnspan=3, sticky='w', pady=(4, 0))
+            self.bass_drum_selected.trace_add('write', lambda *_: self._refresh_buttons())
         self.tempo_frame.pack(fill='x', padx=20, pady=4, before=self.start_button)
         self.bpm_text.trace_add('write', lambda *_: self._refresh_buttons())
 
@@ -575,17 +596,32 @@ class App(CameraSearchApp):
         value = getattr(self, 'bpm_text', None)
         self._strike_bpm = parse_bpm(value.get() if value is not None else self.strike_bpm)
 
+    def _apply_selected_bass_drum(self):
+        value = getattr(self, 'bass_drum_selected', None)
+        if value is not None:
+            self._bass_drum_enabled = bool(value.get())
+
+    def _beat_setup_text(self, template):
+        text = template.replace('100 BPM', f'{self.strike_bpm:g} BPM')
+        if not self.bass_drum_enabled:
+            text = text.replace(' + quarter-note bass', ' (bass off)').replace(' + BASS', ' (BASS OFF)')
+        return text
+
     def _refresh_tempo_controls(self):
         if getattr(self, 'bpm_entry', None) is None:
             return True
         editable = self._tempo_editable()
         self.bpm_entry.config(state='normal' if editable else 'disabled')
+        checkbox = getattr(self, 'bass_drum_checkbox', None)
+        if checkbox is not None:
+            checkbox.config(state='normal' if editable else 'disabled')
         if not editable:
             self.tempo_hint.config(text=f'{self.strike_bpm:g} BPM locked for this run; '
                                    'Center + Relax before changing.', fg='#555555')
             return True
         try:
             self._apply_selected_tempo()
+            self._apply_selected_bass_drum()
             snare_control.check_tempo(self)
         except ValueError as exc:
             self.tempo_hint.config(text=str(exc), fg='#b00020')
@@ -595,10 +631,9 @@ class App(CameraSearchApp):
             text=f'{MIN_BPM:g}–{maximum:g} BPM; estimated practical upper '
                  f'~{ESTIMATED_PRACTICAL_MAX_BPM:g}. Set before Start/RUN.',
             fg='#8a5a00' if self.strike_bpm > ESTIMATED_PRACTICAL_MAX_BPM else '#555555')
-        tempo = f'{self.strike_bpm:g} BPM'
-        self.header.config(text=self.tempo_header_template.replace('100 BPM', tempo))
+        self.header.config(text=self._beat_setup_text(self.tempo_header_template))
         if not getattr(self, 'single_run_mode', False):
-            self.continue_button.config(text=self.tempo_continue_template.replace('100 BPM', tempo))
+            self.continue_button.config(text=self._beat_setup_text(self.tempo_continue_template))
         return True
 
     def choose_recording(self) -> None:
@@ -806,7 +841,9 @@ class App(CameraSearchApp):
         continuous = getattr(self, "continuous_strike_active", False)
         stop_requested = getattr(self, "continuous_stop_requested", False)
         self.center_relax_button.config(
-            text=(f"STOP {self.strike_bpm:g} BPM STRIKING: CENTER + RELAX"
+            text=("STOP 80 BPM SYNC CALIBRATION: CENTER + RELAX"
+                  if continuous and getattr(self, 'sync_calibrating', False) else
+                  f"STOP {self.strike_bpm:g} BPM STRIKING: CENTER + RELAX"
                   if continuous else "CENTER + RELAX")
         )
         if not self.hardware or not self.bus:
@@ -1048,6 +1085,7 @@ class App(CameraSearchApp):
             return
         try:
             self._apply_selected_tempo()
+            self._apply_selected_bass_drum()
             snare_control.check_tempo(self)
         except ValueError as exc:
             self.status.set('Cannot start: ' + str(exc))
@@ -1262,7 +1300,13 @@ class App(CameraSearchApp):
     def _sound_required_now(self) -> bool:
         if (getattr(self, "test_mode", False)
                 or getattr(self, 'recording_only', False)
-                or getattr(self, "hardware_test_mode", False)):
+                or getattr(self, "hardware_test_mode", False)
+                or getattr(self, 'close_requested', False)
+                or getattr(self, 'emergency_latched', False)
+                or self.phase == dual_control.FAULT):
+            # A latched dual-arm hold or requested shutdown is already under
+            # motor recovery supervision. Audio is still displayed, but its
+            # teardown must not restart recovery on every 20 ms GUI tick.
             return False
         if not self.bus or not self.bus.active:
             return False
@@ -1287,6 +1331,9 @@ class App(CameraSearchApp):
             sync = getattr(self, 'hihat_sync', None)
             if sync is not None:
                 sync.feed('ride', messages)
+            snare_receiver = getattr(self, 'snare_audio_receiver', None)
+            if snare_receiver is not None:
+                snare_receiver.poll()  # Drain only; hits/status never tune or gate motion.
             now = time.monotonic()
             for message in messages:
                 if message.get("kind") == "hit" and message.get('instrument', 'ride') == 'ride':
@@ -1318,9 +1365,9 @@ class App(CameraSearchApp):
                 color = "#b00020"
             elif self.audio_receiver.ready(now):
                 text = (
-                    "Sound: ST7 ride v2 READY — informational hit logging only"
+                    "Sound: ST7 ride_v4 READY — informational hit logging only"
                     if self.hardware_test_mode else
-                    "Sound: ST7 ride v2 READY — TONOR ride-only hit search"
+                    "Sound: ST7 ride_v4 READY — TONOR ride-only hit search"
                 )
                 color = "#087f23"
             else:
@@ -2432,9 +2479,9 @@ class App(CameraSearchApp):
             )
         elif hybrid_control.enabled(self):
             message = (
-                f"SWING STRIKE: J7 −{self.continuous_strike_degrees:g}° "
+                f"SYNC CALIBRATION: J7 −{self.continuous_strike_degrees:g}° "
                 f"(first detected +{hybrid_control.SWING_DEPTH_BOOST_DEG:g}°); "
-                f"starting triplet swing at {self.strike_bpm:g} BPM until Stop"
+                f"100 BPM ride/hi-hat pairs before {self.strike_bpm:g} BPM swing"
             )
         else:
             message = (
@@ -2448,9 +2495,9 @@ class App(CameraSearchApp):
 
         if hybrid_control.enabled(self):
             try:
-                hybrid_control.start_swing(self, self.swing_events)
+                hybrid_control.start_sync_calibration(self)
             except Exception as exc:
-                self.fail('Could not start hybrid swing: '+str(exc))
+                self.fail('Could not start ride/hi-hat timing calibration: '+str(exc))
         elif getattr(self, 'test_mode', False):
             snare_control.start_simulation(self)
 
@@ -2677,11 +2724,11 @@ class App(CameraSearchApp):
         )
         return True
 
-    def _request_continuous_stop(self) -> None:
+    def _request_continuous_stop(self, detail='Stop requested') -> None:
         if not self.continuous_strike_active:
             return
         if hybrid_control.enabled(self):
-            hybrid_control.request_stop(self)
+            hybrid_control.request_stop(self, detail)
             return
         self.continuous_stop_requested = True
         snare_control.finish(self)
@@ -2691,7 +2738,7 @@ class App(CameraSearchApp):
             self._finish_continuous_striking()
         else:
             self.status.set(
-                "Stop requested — finishing the current fast return, then "
+                detail + " — finishing the current fast return, then "
                 "centering and relaxing"
             )
 
@@ -3420,6 +3467,9 @@ class App(CameraSearchApp):
             self.root.mainloop = mainloop
             self._cancel_recording_preflight()
             self.audio_receiver.close()
+            snare_receiver = getattr(self, 'snare_audio_receiver', None)
+            if snare_receiver is not None:
+                snare_receiver.close()
             monitor = getattr(self, 'hihat_sound_monitor', None)
             if monitor is not None:
                 monitor.close()
@@ -3440,6 +3490,7 @@ def main():
     parser.add_argument("--detection-socket", required=True)
     parser.add_argument("--audio-socket", required=True)
     parser.add_argument("--hihat-audio-socket", help="hi-hat detector socket (required for normal hardware calibration)")
+    parser.add_argument("--snare-audio-socket", help="optional visual-only snare detector socket; no timing offset")
     parser.add_argument("--esp-port", default=DEFAULT_ESP_PORT)
     parser.add_argument("--recording", type=Path, default=DEFAULT_RECORDING)
     parser.add_argument("--left-recording", type=Path, default=dual_control.DEFAULT_LEFT_RECORDING)
@@ -3449,15 +3500,16 @@ def main():
                         help='authorized physical dual-arm playback check; skip alignment/beat and return to center')
     parser.add_argument('--verify-swing', action='store_true',
                         help='authorized physical acceptance run: auto RUN, 5 s swing, verified center/relax')
+    parser.add_argument('--verify-calibration', action='store_true',
+                        help='authorized physical Run through hi-hat timing calibration, then center/relax; no swing')
     parser.add_argument("--mit-fall-kd", type=float, default=StrikeSettings.fall_kd)
     parser.add_argument("--mit-inertia", type=float, default=StrikeSettings.inertia)
     parser.add_argument("--mit-brake-accel", type=float, default=StrikeSettings.brake_accel)
     parser.add_argument("--mit-latency-ms", type=float, default=StrikeSettings.command_latency*1000)
     args = parser.parse_args()
-    if args.verify_playback and (not args.hardware or args.recording_only or args.verify_swing):
-        parser.error('--verify-playback requires normal --hardware and no other verification mode')
-    if args.verify_swing and (not args.hardware or args.recording_only):
-        parser.error('--verify-swing requires normal --hardware')
+    verification = sum((args.verify_playback, args.verify_swing, args.verify_calibration))
+    if verification and (not args.hardware or args.recording_only or verification > 1):
+        parser.error('verification requires normal --hardware and exactly one verification mode')
     try:
         settings = StrikeSettings(fall_kd=args.mit_fall_kd, inertia=args.mit_inertia,
                                   brake_accel=args.mit_brake_accel,
@@ -3477,6 +3529,7 @@ def main():
             hardware_test_settings=settings,
             recording_only=args.recording_only, auto_run=args.auto_run,
             hihat_audio_socket=args.hihat_audio_socket,
+            snare_audio_socket=args.snare_audio_socket,
             left_recording_path=args.left_recording,
         )
         if args.verify_swing:
@@ -3485,6 +3538,10 @@ def main():
         if args.verify_playback:
             from .playback_evidence import PlaybackEvidence
             app.playback_evidence = PlaybackEvidence(app)
+        if args.verify_calibration:
+            from .calibration_evidence import CalibrationEvidence
+            app.verify_calibration = True
+            app.beat_evidence = CalibrationEvidence(app)
         app.run()
     finally:
         if rclpy.ok():

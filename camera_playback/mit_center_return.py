@@ -4,21 +4,27 @@ from .mit_strike import Command
 
 
 class MitCenterReturn:
-    def __init__(self, position, goal, bias, now):
-        if not all(math.isfinite(x) for x in (position, goal, bias, now)):
+    def __init__(self, position, goal, bias, now, *, bias_gain=60., kp=40., kd=1.8):
+        if (not all(math.isfinite(x) for x in (position, goal, bias, now, bias_gain, kp, kd))
+                or not 0. <= bias_gain <= 60. or not 0. < kp <= 160. or not 0. < kd <= 4.):
             raise ValueError('Invalid MIT center return')
         self.position = self.actual = float(position)
         self.goal = float(goal)
         self.velocity = 0.
         self.bias = max(-1.5, min(1.5, bias))
+        self.bias_gain = bias_gain
+        self.kp, self.kd = kp, kd
         self.at = now
 
-    def update(self, actual, now):
+    def update(self, actual, now, *, measured_velocity=None):
         if not math.isfinite(actual) or not math.isfinite(now) or now < self.at:
             raise RuntimeError('Invalid MIT center feedback')
         elapsed = now-self.at
         dt = min(.04, elapsed)
-        measured_velocity = (actual-self.actual)/elapsed if elapsed > .001 else 0.
+        if measured_velocity is None:
+            measured_velocity = (actual-self.actual)/elapsed if elapsed > .001 else 0.
+        elif not math.isfinite(measured_velocity):
+            raise RuntimeError('Invalid MIT center velocity feedback')
         if elapsed > .25:
             # Never catch up after a GUI delay. Resume from the measured hold.
             self.position, self.velocity = actual, 0.
@@ -34,8 +40,8 @@ class MitCenterReturn:
         # Do not accumulate a large position error against an obstruction.
         self.position = max(actual-.04, min(actual+.04, self.position))
         if abs(self.goal-actual) < .04 and abs(measured_velocity) < .1:
-            self.bias = max(-1.5, min(1.5, self.bias+60*(self.goal-actual)*dt))
-        kp, kd = 40., 1.8
+            self.bias = max(-1.5, min(1.5, self.bias+self.bias_gain*(self.goal-actual)*dt))
+        kp, kd = self.kp, self.kd
         pd = kp*(self.position-actual)+kd*(self.velocity-measured_velocity)
         torque = max(-3., min(3., pd+self.bias))-pd
         if abs(torque) > 12:

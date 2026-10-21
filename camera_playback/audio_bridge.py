@@ -21,9 +21,11 @@ DEFAULT_TONOR_SOURCE = (
     "alsa_input.usb-TONOR_TONOR_TD510_Dynamic_Mic_0000KT5a300000135-00.analog-stereo"
 )
 DEFAULT_AUDIO_DEVICE = "pipewire"
-ST7_MODEL_VERSION = "v2"
-HIHAT_MODEL_VERSION = "hihat_v1"
-MODEL_VERSIONS = {"ride": ST7_MODEL_VERSION, "hihat": HIHAT_MODEL_VERSION}
+ST7_MODEL_VERSION = "ride_v4"
+HIHAT_MODEL_VERSION = "hihat_v2"
+SNARE_MODEL_VERSION = "snare_v2"
+MODEL_VERSIONS = {"ride": ST7_MODEL_VERSION, "hihat": HIHAT_MODEL_VERSION,
+                  "snare": SNARE_MODEL_VERSION}
 HEARTBEAT_SECONDS = 0.5
 LISTENER_WARMUP_SECONDS = 2.0
 
@@ -54,7 +56,7 @@ def choose_tonor_source(sources: list[str], preferred: str) -> str:
     )
 
 
-def route_tonor(preferred: str) -> str:
+def route_tonor(preferred: str, *, change_default=True) -> str:
     result = subprocess.run(
         ["pactl", "list", "short", "sources"],
         check=True,
@@ -63,13 +65,14 @@ def route_tonor(preferred: str) -> str:
         stderr=subprocess.PIPE,
     )
     source = choose_tonor_source(capture_sources(result.stdout), preferred)
-    subprocess.run(
-        ["pactl", "set-default-source", source],
-        check=True,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    if change_default:
+        subprocess.run(
+            ["pactl", "set-default-source", source],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
     return source
 
 
@@ -95,12 +98,16 @@ def detector_command(root: Path, device: str, instrument: str = "ride") -> list[
 
 
 def validate_instrument(message, instrument):
-    """Ride's legacy runtime is untagged; hi-hat must identify its own target."""
+    """Ride's legacy runtime is untagged; other models must name their target."""
     if instrument == 'hihat':
         valid = message.get('instrument') == 'hihat' and message.get('label') == 'hihat_close'
-    else:
+    elif instrument == 'snare':
+        valid = message.get('instrument') == 'snare' and message.get('label') == 'snare_hit'
+    elif instrument == 'ride':
         valid = (message.get('instrument', 'ride') == 'ride'
                  and message.get('label', 'cymbal_hit') == 'cymbal_hit')
+    else:
+        valid = False
     if not valid:
         raise RuntimeError(f'ST7 {instrument} listener reported a different instrument/target')
 
@@ -162,13 +169,16 @@ def main() -> int:
         print(f"ST7 {args.instrument} audio model {version}: "
               f"{args.root.resolve() / 'models' / version} "
               "(matching config, checkpoint and normality reference)", flush=True)
-        source = route_tonor(args.source)
+        # Snare has an independent listener: target its own capture stream
+        # without changing the desktop or existing detectors' default source.
+        source = (route_tonor(args.source, change_default=False)
+                  if args.instrument == 'snare' else route_tonor(args.source))
         environment = os.environ.copy()
         environment['X5_AUDIO_TIMESTAMPS'] = '1'
         environment['PULSE_SOURCE'] = source
         environment['PIPEWIRE_PROPS'] = json.dumps({
             'application.name': f'X5-{args.instrument}-detector', 'target.object': source})
-        # Independent listeners isolate visual-only failures from ride control.
+        # Independent listeners retain instrument-specific control and graph delivery.
         # Bound CPU thread pools so their encoders cannot oversubscribe the host.
         for key in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS'):
             environment[key] = '1'

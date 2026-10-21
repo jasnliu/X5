@@ -9,7 +9,8 @@ from centering.motors import MOTOR_RUNNING_STATE
 from safe_zone.geometry import MEMBERSHIP_BUFFER_M
 from strike_lab.config import StrikeGoal
 from .hybrid_strike import HybridSession, load_tuning
-from .tempo import (CONTINUOUS_WAIT_PHASE, CONTINUOUS_OUT_PHASE, CONTINUOUS_RETURN_PHASE)
+from .tempo import (CONTINUOUS_WAIT_PHASE, CONTINUOUS_OUT_PHASE, CONTINUOUS_RETURN_PHASE,
+                    SYNC_BPM, SYNC_PERIOD)
 from .playback_transport import PlaybackMotors
 from .recording_only import refresh_feedback
 from .strike import StrikePlan, _path_inside
@@ -19,6 +20,8 @@ from . import snare_workflow as snare
 RESTORING = 'HYBRID LEAVING MIT SESSION'
 FINISHING = 'HYBRID FINISHING RETURN'
 FAULT = 'HYBRID HOLD FAULT'
+SYNC_CALIBRATION = 'RIDE + HI-HAT SYNC CALIBRATION'
+SYNC_RETURN = 'SYNC CALIBRATION FINISHING RETURN'
 # The lab's default 12-degree corridor silently truncated the original beat
 # search at 11 degrees. Allow the next integer goal (12), retaining one degree
 # of emergency margin and every geometric, torque and speed constraint.
@@ -129,18 +132,81 @@ def boosted_swing_target(app, detected_degrees):
     return degrees, target
 
 
+def start_sync_calibration(app):
+    sync = getattr(app, 'hihat_sync', None)
+    if sync is None:
+        raise RuntimeError('Ride/hi-hat timing calibrator is missing')
+    app.sync_instrument = 'hihat'
+    app.sync_calibrating = True
+    app.sync_finish_request = None
+    app.hybrid_main_count = app.hybrid_seen_bottoms = app.hybrid_seen_closed = 0
+    # The worker and hi-hat scheduler receive exactly the same future bottom
+    # deadline. Leave time for IPC and the unchanged downstroke prediction.
+    epoch = time.monotonic()+1.
+    sync.start_calibration(epoch)
+    app.hybrid_session.request('calibrate', math.radians(app.continuous_strike_degrees), epoch)
+    app.phase = SYNC_CALIBRATION
+    message = (f'Ride + hihat timing calibration: {SYNC_BPM:g} BPM simultaneous pairs; '
+               'waiting for two consecutive good ride/hi-hat pairs within 15 ms; '
+               'single-instrument detections ignored; snare and bass idle')
+    app.status.set(message)
+    app.result_status.set(message)
+    app._refresh_buttons()
+    print(message, flush=True)
+
+
+def tick_sync_calibration(app, s, now):
+    sync = app.hihat_sync
+    if app.sync_finish_request is None:
+        sync.observe(s, now)
+        if not sync.calibration_complete:
+            return
+        advance = sync.finish_calibration()
+        app.sync_finish_request = app.hybrid_session.request('finish')
+        app.sync_finish_started = now
+        app.phase = SYNC_RETURN
+        next_stage = ('verification Center + Relax' if getattr(app, 'verify_calibration', False)
+                      else f'{app.strike_bpm:g} BPM swing (no snare offset)')
+        message = (f'Ride + hihat synchronized: fixed advance {advance*1000:+.1f} ms; '
+                   f'finishing return before {next_stage}')
+        app.status.set(message)
+        app.result_status.set(message)
+        print(message, flush=True)
+        return
+    # Keep the existing worker powered at its anchor. Never restore modes or
+    # center/relax between calibration and swing; wait for fresh settled proof.
+    if now-app.sync_finish_started > 3.:
+        raise RuntimeError('Synchronization handoff did not finish returning')
+    if (s.request_id >= app.sync_finish_request and not s.swing and s.ready
+            and s.sample is not None and now-s.sample.at <= .020
+            and now-app.sync_finish_started >= SYNC_PERIOD/2 and snare.finished(app)):
+        if getattr(app, 'verify_calibration', False):
+            request_stop(app, 'Verification: hi-hat timing calibration completed; no swing requested')
+        else:
+            start_swing(app, app.swing_events)
+
+
 def start_swing(app, events):
+    sync = getattr(app, 'hihat_sync', None)
+    if sync is not None:
+        # Validate/seed the fixed learned offset before starting either arm.
+        # No hi-hat edge or bass kick until the actual ride pickup establishes epoch.
+        sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+    app.sync_calibrating = False
     snare.start(app)
     app.hybrid_main_count = app.hybrid_seen_bottoms = 0
     app.hybrid_seen_closed = 0
     app.hybrid_session.request('swing', math.radians(app.continuous_strike_degrees), events)
-    sync = getattr(app, 'hihat_sync', None)
-    if sync is not None:
-        sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
-    app.status.set(f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
-                   f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
-                   f'{app.strike_bpm:g} BPM swing + hi-hat + random 11° snare; 4° minimum rebound before partial-return releases')
-    print(app.status.get(), flush=True)
+    bass = ('bass on 1/2/3/4; clockwise PWM 180/255 for 50 ms then released, no calibration'
+            if getattr(app, 'bass_drum_enabled', True) else 'bass OFF (motor 1 idle)')
+    message = (f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
+               f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
+               f'{app.strike_bpm:g} BPM swing + hi-hat + random 11° snare; {bass}; '
+               '4° minimum rebound before partial-return releases')
+    app.status.set(message)
+    app.result_status.set(message)
+    app._refresh_buttons()
+    print(message, flush=True)
 
 
 def request_stop(app, detail='Stop requested'):
@@ -331,6 +397,12 @@ def tick(app, now):
                   f'measured peak {math.degrees(s.peak_drop):.3f}°; returned and settled', flush=True)
             app.complete_stage(s.returned_at)
     elif app.continuous_strike_active:
+        if getattr(app, 'sync_calibrating', False):
+            try:
+                tick_sync_calibration(app, s, now)
+            except Exception as exc:
+                request_stop(app, 'Timing calibration: '+str(exc))
+            return
         sync = getattr(app, 'hihat_sync', None)
         if sync is not None and sync.active:
             try:

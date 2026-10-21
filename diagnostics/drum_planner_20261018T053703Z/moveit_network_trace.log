@@ -1,0 +1,47 @@
+103299 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0) = 3
+103299 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/lttng/lttng-ust-sock-8"}, 110) = 0
+103300 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0) = 4
+103300 connect(4, {sa_family=AF_UNIX, sun_path="/home/jason/.lttng/lttng-ust-sock-8"}, 110) = -1 ENOENT (No such file or directory)
+103299 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0) = 4
+103299 connect(4, {sa_family=AF_UNIX, sun_path="/var/run/lttng/lttng-ust-sock-8"}, 110) = 0
+103268 socket(AF_NETLINK, SOCK_RAW|SOCK_CLOEXEC, NETLINK_ROUTE) = 24
+103268 socket(AF_UNIX, SOCK_DGRAM|SOCK_CLOEXEC, 0) = 24
+103268 socket(AF_NETLINK, SOCK_RAW|SOCK_CLOEXEC, NETLINK_ROUTE) = 24
+103268 socket(AF_UNIX, SOCK_DGRAM|SOCK_CLOEXEC, 0) = 24
+103268 socket(AF_NETLINK, SOCK_RAW|SOCK_CLOEXEC, NETLINK_ROUTE) = 24
+103268 socket(AF_UNIX, SOCK_DGRAM|SOCK_CLOEXEC, 0) = 24
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 24
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 25
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 26
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 27
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 28
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 29
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 30
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 31
+103268 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 32
+103268 connect(32, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+103268 socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 32
+103268 connect(32, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 36
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 36
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 36
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 38
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 39
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 40
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 42
+103268 socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP) = 42
+103302 +++ exited with 0 +++
+103311 +++ exited with 0 +++
+103304 +++ exited with 0 +++
+103305 +++ exited with 0 +++
+103306 +++ exited with 0 +++
+103307 +++ exited with 0 +++
+103309 +++ exited with 0 +++
+103310 +++ exited with 0 +++
+103308 +++ exited with 0 +++
+103303 +++ exited with 0 +++
+103301 +++ exited with 0 +++
+103299 --- SIGRTMIN {si_signo=SIGRTMIN, si_code=SI_TKILL, si_pid=103268, si_uid=1000} ---
+103299 +++ exited with 0 +++
+103300 +++ exited with 0 +++
+103268 +++ exited with 0 +++

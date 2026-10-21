@@ -1,0 +1,59 @@
+Running as unit: x5-experiment-ui-final-1792398621.service; invocation ID: e6e298d0f2634ba5a701790ac7c4e2cc
+[experiment] Loading cached result for baseline (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for robust (same scene, state and settings).
+[experiment] Loading cached result for chance (same scene, state and settings).
+[experiment] Loading cached result for cvar (same scene, state and settings).
+[experiment] Loading cached result for families (same scene, state and settings).
+[experiment] Loading cached result for iris_gcs (same scene, state and settings).
+[experiment] Loading cached result for chomp (same scene, state and settings).
+[experiment] Loading cached result for stomp (same scene, state and settings).
+[experiment] Loading cached result for baseline (same scene, state and settings).
+[baseline +   0.0s] Existing 40/30/20/10 workspace, bending, proximity, joint-economy score with a 2x fastest-valid duration cap.
+[baseline +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.0s] Full-body world padding from bounded geometric errors, plus conservative self-distance and joint-limit envelopes. No physical MPC controller. May legitimately reject a near-limit resting pose.
+[robust +   0.0s] building/loading model + frozen FCL world; no motor access
+[robust +   0.6s] robust envelope: +0.0 mm world, 0.0 mm self bound
+[robust +   0.6s] search 1: 3.0s allocation, added clearance 0.0 mm
+[robust +   3.8s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +   5.2s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +   9.2s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[robust +   9.2s] search 2: 3.0s allocation, added clearance 0.0 mm
+[robust +  13.7s] candidate 2: valid, 6.76s outward, transit clearance 35.0 mm
+[robust +  13.7s] search 3: 3.0s allocation, added clearance 0.0 mm
+[robust +  17.5s] candidate 3: valid, 8.50s outward, transit clearance 35.0 mm
+[robust +  17.5s] search 4: 3.0s allocation, added clearance 0.0 mm
+[robust +  20.2s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[robust +  22.9s] candidate 4: valid, 26.27s outward, transit clearance 30.0 mm
+[robust +  22.9s] search 5: 3.0s allocation, added clearance 0.0 mm
+[robust +  25.1s] candidate rejected by continuous polynomial joint bounds
+[robust +  29.4s] candidate 5: valid, 59.92s outward, transit clearance 30.0 mm
+[robust +  29.5s] READY: 6.762s outward → 2s hold → exact reverse; SIMULATION ONLY
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 124,522 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_c2c568be/camera
+[clearance +   0.0s] Search increasing distal clearance constraints, then rank bottleneck transit clearance before path economy. End approach tapers only the additional comfort objective; original collision margins never taper.
+[clearance +   0.0s] building/loading model + frozen FCL world; no motor access
+[clearance +   0.6s] search 1: 5.0s allocation, added clearance 0.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +   7.4s] candidate 1: valid, 7.53s outward, transit clearance 35.0 mm
+[clearance +   7.4s] search 2: 5.0s allocation, added clearance 0.0 mm
+[clearance +  10.6s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +  10.7s] collision rejected (corner-stop): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[clearance +  14.4s] candidate 2: valid, 48.13s outward, transit clearance 30.0 mm
+[clearance +  14.4s] search 3: 5.0s allocation, added clearance 5.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  22.0s] search 4: 5.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  28.6s] search 5: 5.0s allocation, added clearance 20.0 mm
+[worker] FCL/solver operation running: 5s
+[clearance +  34.7s] search 6: 5.0s allocation, added clearance 40.0 mm
+[worker] FCL/solver operation running: 5s
+[worker] FCL/solver operation running: 10s
+[clearance +  47.5s] READY: 7.530s outward → 2s hold → exact reverse; SIMULATION ONLY
+FULL UI QA PASSED [{"method": "baseline", "played": true, "duration": 19.758086592799412, "completed_cycles": 1}, {"method": "clearance", "played": true, "duration": 15.523938649351305, "completed_cycles": 1}, {"method": "robust", "played": false, "normal_blocked_result": "endpoint_blocked_by_error_envelope"}, {"method": "chance", "played": true, "duration": 43.325299503626574, "completed_cycles": 1}, {"method": "cvar", "played": true, "duration": 43.325299503626574, "completed_cycles": 1}, {"method": "families", "played": true, "duration": 43.20859205117978, "completed_cycles": 1}, {"method": "iris_gcs", "played": true, "duration": 16.930755528807804, "completed_cycles": 1}, {"method": "chomp", "played": true, "duration": 43.325299503626574, "completed_cycles": 1}, {"method": "stomp", "played": true, "duration": 20.37771200839952, "completed_cycles": 1}, {"method": "robust_explicit_zero_error_control", "played": true, "plan": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/plans/robust-137b1d2d/plan.json"}, {"recapture": true, "scene": "/home/jason/Proyectos3/X5/diagnostics/planner_experiment_20261019T073849Z/actual_camera_all/capture_c2c568be/camera/scene.json"}, {"new_scene_generation": true, "status": "planned"}]
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 4min 416ms
+CPU time consumed: 19.614s
+Memory peak: 256.0K
+Memory swap peak: 0B

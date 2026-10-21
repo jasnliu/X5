@@ -1,0 +1,80 @@
+{
+  "error": "ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''",
+  "simulated": false,
+  "hardware_status": {},
+  "controller": null,
+  "rendering": {
+    "type": "snapshot_mesh_trajectory_preview",
+    "rendered_updates": 1,
+    "first_displayed_sequence": 5,
+    "last_displayed_sequence": 5,
+    "max_age_at_display_s": 24.42328081501182,
+    "last_frame_compute_s": 0.07717519497964531,
+    "maximum_draw_s": 0.034321179962717,
+    "worker_submissions": 0,
+    "maximum_pending_jobs": 0,
+    "modes_rendered": [
+      "surface mesh"
+    ],
+    "freeze_count": 0,
+    "resume_count": 0,
+    "mode_switches": 0,
+    "display_point_limit": 18000,
+    "planning_points_downsampled": false,
+    "robot_overlay": true,
+    "renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 3,
+      "maximum_frame_s": 0.03430897498037666,
+      "median_frame_s": 0.01931244699517265,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 18972,
+      "render_errors": []
+    },
+    "robot_overlay_source": "live measured encoders",
+    "plan_file": "/home/jason/Proyectos3/X5/diagnostics/baseline_live_pose_20261019T230537Z/actual_startup/plan/result/plan.json",
+    "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+    "animation_draws": 0,
+    "animation_time_s": 0.0,
+    "animation_completed_cycles": 0,
+    "animation_play_clicks": 0,
+    "animation_seeks": 0,
+    "animation_phases_seen": [],
+    "live_collision_revalidation": false,
+    "motion_authorized": false,
+    "hardware_execution_available": true,
+    "camera_updates": false,
+    "mesh_builds": 1,
+    "mesh": {
+      "vertices": 11494,
+      "triangles": 18972,
+      "candidate_triangles": 32000,
+      "rejected_triangles": 13028,
+      "grid_step_pixels": 8,
+      "native_resolution": [
+        1280,
+        800
+      ],
+      "valid_pixels": 794189,
+      "depth_jump_m": 0.03,
+      "relative_depth_jump": 0.02,
+      "max_edge_m": 0.12,
+      "hole_filling": false,
+      "hidden_surface_reconstruction": false,
+      "preview_only": true
+    },
+    "scene_immutable": true,
+    "collision_mesh": false,
+    "feedback_draws": 3,
+    "latest_feedback_stamp": 263466.394696887,
+    "display_feedback_error": ""
+  },
+  "last_error": ""
+}

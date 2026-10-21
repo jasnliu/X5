@@ -1,0 +1,55 @@
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261019T055848Z-current-plan-56bee4/measured_start.json
+The physical pose is NOT measured. All modes use one frozen scene and record3 FINAL pose only.
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+CAMERA: capturing the initial full-FOV five-frame scene (no CAN).
+CAMERA OFF: 123,068 occupied voxels saved to /home/jason/Proyectos3/X5/diagnostics/fluidity_20261020T052359Z/cli_gui/capture_000/camera
+[experiment cache] Automatically queued: baseline, reversals, coordination, spatial, combined. One memory-limited worker at a time.
+[experiment cache] Starting baseline; 4 other methods queued.
+[baseline +   0.0s] Existing 40/30/20/10 workspace, broad bending, proximity and joint-economy score on the SAME candidate pool. No 2x fastest-duration filter in this experiment.
+[baseline +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[baseline +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[baseline +   0.7s] SHARED POOL search 1/6; allocation 0.8s; all five methods will reuse these candidates
+[baseline +   3.3s] candidate 1: rejected by final zone/collision check: {'buffer_m': 0.005, 'constraint_sha256': 'e87767f5e5407f9bb357ebfa3bc4eb6f456b9c925a9dbe66d1306b7077edfa43', 'enabled': True, 'max_signed_plane_distance_m': 0.005003673106716455, 'point_only': True, 'point_xyz_m': [0.2828866704284396, -0.35251293276390655, 0.19287403921096666], 'reason': 'outside_right_zone3', 'tcp': 'openarmx_right_hand_tcp', 'valid': False}
+[baseline +   5.9s] candidate 2: VALID; 32.87s; reversals=7; coordination=15.042; spatial=197.004
+[baseline +   6.0s] SHARED POOL COMPLETE: 1 validated candidates, 1 searches, 5.3s; no 2x duration cutoff
+[baseline +   6.1s] baseline: candidate 2, score=100.0000, duration=32.87s
+[baseline +   6.2s] SELECTED candidate 2: lowest baseline score; 1 equally checked candidates
+[baseline +   6.2s] READY: 32.873s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached baseline: planned.
+[experiment cache] Starting reversals; 3 other methods queued.
+[reversals +   0.0s] Minimize meaningful per-joint direction changes and excess angular travel. Small reversals below the editable threshold do not count; no speed preference.
+[reversals +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[reversals +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[reversals +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[reversals +   0.0s] reversals: candidate 2, score=100.0000, duration=32.87s
+[reversals +   0.1s] SELECTED candidate 2: lowest reversals score; 1 equally checked candidates
+[reversals +   0.1s] READY: 32.873s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached reversals: planned.
+[experiment cache] Starting coordination; 2 other methods queued.
+[coordination +   0.0s] Minimize changes in the direction of seven-joint progress: favor one coordinated gesture rather than shoulder-then-elbow-then-wrist steps. Scored over joint arc, not elapsed time.
+[coordination +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[coordination +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[coordination +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[coordination +   0.0s] coordination: candidate 2, score=100.0000, duration=32.87s
+[coordination +   0.1s] SELECTED candidate 2: lowest coordination score; 1 equally checked candidates
+[coordination +   0.1s] READY: 32.873s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached coordination: planned.
+[experiment cache] Starting spatial; 1 other methods queued.
+[spatial +   0.0s] Minimize wrist/stick curve bending energy, curvature variation and excess travel at a fixed physical spatial scale. Broad coherent arcs beat repeated turns; timing cannot improve this score.
+[spatial +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[spatial +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[spatial +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[spatial +   0.0s] spatial: candidate 2, score=100.0000, duration=32.87s
+[spatial +   0.1s] SELECTED candidate 2: lowest spatial score; 1 equally checked candidates
+[spatial +   0.1s] READY: 32.873s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached spatial: planned.
+[experiment cache] Starting combined; 0 other methods queued.
+[combined +   0.0s] Equal-weight reversal, joint-coordination and spatial-curve scores, each normalized against the shared-pool medians with fixed floors. This is an experimental preference, not a learned human-motion model.
+[combined +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[combined +   0.0s] ZONE3: original right gripper TCP only; legacy 5 mm membership tolerance; left/stick excluded from zone check
+[combined +   0.0s] REUSING SHARED POOL: 1 validated candidates; no repeat search or FCL world loading
+[combined +   0.0s] combined: candidate 2, score=100.0000, duration=32.87s
+[combined +   0.1s] SELECTED candidate 2: lowest combined score; 1 equally checked candidates
+[combined +   0.1s] READY: 32.873s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached combined: planned.

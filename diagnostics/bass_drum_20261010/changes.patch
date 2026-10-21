@@ -1,0 +1,742 @@
+--- before/README.md
++++ after/README.md
+@@ -423,7 +423,7 @@
+ The box is locked from Start/RUN until the arm has completed **Center + Relax**;
+ change the tempo before the next run, not in the middle of a stroke.
+ 
+-Both the ride swing grid and the hi-hat use `quarter_note_seconds = 60 / BPM`.
++The ride swing grid, hi-hat and bass drum use `quarter_note_seconds = 60 / BPM`.
+ The ride retains its pickup and 2:1 triplet swing. The hi-hat still **opens on
+ beats 1 and 3** and **closes on beats 2 and 4**, at its calibrated angle. Its
+ offset is learned in the separate **80 BPM pre-beat calibration**, then stays
+@@ -432,6 +432,20 @@
+ snare offset: the snare keeps its random eighth-note grid and normal descent lead.
+ The ride has no offset. At faster tempos the hi-hat signed advance remains bounded
+ by the smaller of 250 ms and half a beat.
++
++In normal `--hardware` swing, **bass drum motor 1 strikes on every quarter note
++(1, 2, 3, 4)**, starting on beat 1 after the ride pickup. It uses exactly the
++`/home/jason/Proyectos3/esp-main/run_keys.sh` **F** strike: `K` commands clockwise
++**PWM 180/255 at 20 kHz for 50 ms**, then the firmware disables the driver and
++lets the motor relax until the next beat. Only the interval changes with BPM;
++the pulse strength/duration do not. There is **no bass calibration or timing
++offset**, and the learned hi-hat offset does not shift the bass. No bass hit is
++sent during setup, angle/timing calibration, pickup, or ride swing extras.
++The scheduler uses the same ride epoch and existing 5 ms ESP32 callback, not
++a second serial connection. Stop/fault cancels future kicks (an in-flight
++pulse releases after its 50 ms); Emergency Relax sends `S` to release both
++ESP32 motors. Missed deadlines stop playback instead of firing catch-up hits.
++This is command timing, not a claim of calibrated acoustic bass onset.
+ 
+ **Estimated practical upper tempo: roughly 120 BPM**, not a hardware-verified
+ limit. The shortest ride spacing is `20 / BPM` seconds (167 ms at 120 BPM), and
+@@ -650,8 +664,9 @@
+ 1/3, CLOSE on 2/4**. `B` uses the startup-calibrated **90°–115° close/hold** target;
+ `O` retains the **0° return/release** target. Legacy `C`/`J` commands remain
+ fixed at 100° for other programs and existing collection procedures. Commands use the unchanged ride grid minus one signed hi-hat
+-advance (positive = earlier, negative = later), initially zero each run. The host never sends motor 1's `K` command because right J7 replaces
+-motor 1. The ESP32 code is copied under
++advance (positive = earlier, negative = later), initially zero each run. Motor 1
++now receives `K` for the bass drum on every unshifted quarter note during swing;
++right J7 remains the ride cymbal. The ESP32 code is copied under
+ `esp32_hihat/`, and the launcher defaults to the connected CP2102's stable
+ `/dev/serial/by-id/` path.
+ 
+@@ -757,7 +772,7 @@
+ hi-hat closing angle → ride search and its existing +0.5° depth boost →
+ **ride/hi-hat timing at 80 BPM** → **swing at the user-selected BPM**. The timing
+ step is independent of the user's Beat BPM. During calibration there is no swing pickup, triplet
+-extra, or snare hit: right J7 strikes the ride once every **750 ms**, with the hi-hat
++extra, snare hit, or bass hit: right J7 strikes the ride once every **750 ms**, with the hi-hat
+ closing toward that same acoustic deadline. It opens halfway between pairs
+ (375 ms after its close command). The ride uses its unchanged hybrid strike
+ and must complete a full settled return before another calibration strike.
+@@ -794,6 +809,7 @@
+ 
+ The real swing then starts at the **user-selected BPM**, with its original
+ pickup/triplets and 1–2 spaced random 11° snare hits on eighth notes per measure.
++The bass begins on beat 1 and repeats on all four quarter notes without calibration.
+ The hi-hat offset is **fixed from the first close onward**: hi-hat opens on 1/3
+ and closes on 2/4, shifting each close and following open together. No offset
+ learning occurs during swing, even after drift or outliers. Snare advance is
+--- before/RIGHT_CAMERA_PLAYBACK.md
++++ after/RIGHT_CAMERA_PLAYBACK.md
+@@ -436,10 +436,10 @@
+ 14. The first detected hit fixes the strike depth `D`. Do not test above or
+     below `D`, do not run a fine-tuning phase, and do not use `normality_score`
+     to select the depth.
+-15. In `--hardware`, first run the separate **100 BPM ride/hi-hat timing
++15. In `--hardware`, first run the separate **80 BPM ride/hi-hat timing
+     calibration**, using the first-detected depth plus the existing 0.5° boost.
+     Pair each quarter-note ride hit with a hi-hat closure; reopen halfway between
+-    pairs. Keep the snare idle. Two consecutive valid acoustic differences
++    pairs. Keep the snare and bass idle. Two consecutive valid acoustic differences
+     within 15 ms freeze the offset; finish the final open and full ride return.
+     Then repeat that same boosted depth in a
+     triplet-based swing ride at the selected BPM (default 100). Start with
+@@ -451,7 +451,10 @@
+     only when the encoder is at least 4° above the same absolute low target. Only the four main
+     quarter-note beats advance motor 2's existing alternating hi-hat sequence:
+     open at 0° on beats 1 and 3, and close to the calibrated angle on beats 2 and 4. The
+-    ride extras send no hi-hat command. No motor-1 `K` command is sent.
++    ride extras send no hi-hat command. Starting on beat 1, motor 1 also receives
++    `K` on **all four quarter notes** for the bass drum: the exact keyboard strike,
++    clockwise PWM 180/255 for 50 ms, then released until the next beat. Bass has
++    no calibration/offset and is not shifted by the hi-hat's learned advance.
+ 16. Continue indefinitely until the user presses
+     **Stop [BPM] striking: Center + Relax**. If Stop is pressed during a
+     stroke, finish its hybrid return and settle at the anchor, join the worker,
+@@ -603,8 +606,13 @@
+ throughout swing at the selected BPM. The next run calibrates afresh.
+ Thus the hi-hat still closes every other main beat even though right
+ J7 adds the swung ride notes. The controller sends a 100 ms `H` heartbeat for
+-the firmware's 400 ms watchdog and never sends `K`, so firmware motor 1 stays
+-released and is rhythmically replaced by right J7.
++the firmware's 400 ms watchdog. Motor 1 receives `K` on every quarter note of
++normal hardware swing, with no commands during setup, calibration, pickup or
++ride extras. The existing `esp-main/run_keys.sh` pulse is unchanged: clockwise
++PWM 180/255 at 20 kHz for 50 ms, then coast/release. Bass uses the same read-only
++ride epoch at `60 / BPM` intervals, without any learned advance. Stop/fault
++cancels future kicks; firmware finishes an in-flight pulse within its 50 ms.
++Emergency Relax/exit sends `S` to release both ESP32 outputs immediately.
+ 
+ The left snare uses eight straight eighth-note positions inside the same
+ four-quarter-note measure. Each bar randomly chooses one or two hits (equal
+--- before/camera_playback/app.py
++++ after/camera_playback/app.py
+@@ -218,7 +218,9 @@
+                   'experiment hybrid J7 search → first-hit depth +0.5° → '
+                   '80 BPM ride/hi-hat timing calibration → '
+                   '20–120 BPM (default 100) hybrid swing plus 1–2 spaced random eighth-note 11° left snares per measure; ride_v4 controls search; '
+-                  'hi-hat timing locks before swing; no snare calibration or offset; ride timing unchanged', flush=True)
++                  'hi-hat timing locks before swing; bass motor 1 on every quarter '
++                  '(clockwise PWM 180/255, 50 ms then released); '
++                  'no bass or snare calibration or offset; ride timing unchanged', flush=True)
+         super().__init__(real_hardware, detection_socket)
+         if real_hardware and isinstance(self.bus, Motors):
+             self.bus = PlaybackMotors.adopt(self.bus, self.center_goal,
+@@ -325,7 +327,7 @@
+                 text=(("ONE RUN: center + close → recording → " if self.single_run_mode else
+                        "RIGHT arm: recorded motion → ") + "camera alignment → ST7 hit "
+                       "HYBRID search (5°, 6°, 7°…) → hi-hat timing calibration (80 bpm) → "
+-                      "hybrid swing + ESP32 hi-hat at 100 BPM")
++                      "hybrid swing + ESP32 hi-hat + quarter-note bass at 100 BPM")
+             )
+         self.loading_status = tk.StringVar()
+         self.loading_label = tk.Label(
+@@ -353,7 +355,7 @@
+         else:
+             continue_text = (
+                 "CONTINUE: CLOSE → RECORDING → ALIGN → HYBRID HIT → "
+-                "FIRST DEPTH HYBRID SWING + HI-HAT AT 100 BPM"
++                "FIRST DEPTH HYBRID SWING + HI-HAT + BASS AT 100 BPM"
+             )
+         self.continue_button.config(text=continue_text)
+         self.hardware_test_button = None
+--- before/camera_playback/hihat.py
++++ after/camera_playback/hihat.py
+@@ -1,4 +1,4 @@
+-"""USB-serial control for the ESP32 hi-hat motor used during user-tempo swing playback."""
++"""Shared ESP32 serial control for the hi-hat and swing-only bass-drum pulses."""
+ from __future__ import annotations
+ 
+ import glob
+@@ -80,12 +80,13 @@
+ 
+ 
+ class HiHatController:
+-    """Drive only motor 2 of the copied motor_beat firmware.
++    """Drive the hi-hat and explicit bass kicks on one serial connection.
+ 
+     Explicit beat-program edges close on 2/4 and open on 1/3. The legacy
+     send_beat API starts closed for finite collection cycles. Legacy closure
+     targets 100 degrees; calibrated closure uses B at the learned 90..115 degree
+-    target. Open targets zero. Motor-1 kick commands are never sent.
++    target. Open targets zero. Only send_kick() commands motor 1; hi-hat
++    calibration and legacy collection edges never implicitly kick the bass.
+     """
+ 
+     def __init__(self, port: str | Path | None = DEFAULT_ESP_PORT):
+@@ -346,6 +347,17 @@
+         self.beat_count += 1
+         return command
+ 
++    def send_kick(self) -> bytes:
++        """Exact run_keys.sh F strike: firmware K, clockwise 180/255 for 50 ms.
++
++        Firmware releases motor 1 after the pulse, independently of motor 2.
++        There is no bass calibration, reverse command, or powered hold.
++        """
++        if not self.sequence_active or not self.ready():
++            raise RuntimeError("ESP32 bass drum beat sequence is not active/ready")
++        self._write(b"K")
++        return b"K"
++
+     def stop_sequence(self) -> None:
+         if self.fd is not None and self.sequence_active:
+             # Return motor 2 to encoder zero; the firmware releases it once the
+--- before/camera_playback/hihat_sync_runtime.py
++++ after/camera_playback/hihat_sync_runtime.py
+@@ -1,4 +1,8 @@
+-"""Nonvisual Tk background adapter. Never commands or retimes the ride arm."""
++"""Shared ESP32 beat adapter: calibrated hi-hat and uncalibrated quarter-note bass.
++
++Never commands or retimes the ride arm. Both use its grid, not each other's
++serial command times; the hi-hat's learned advance never moves the bass.
++"""
+ from datetime import datetime, timezone
+ import json
+ from pathlib import Path
+@@ -6,6 +10,7 @@
+ import uuid
+ 
+ from .hihat_sync import HiHatSynchronizer, TimingFault
++from .bass_drum import BassDrumScheduler
+ from .tempo import SYNC_PERIOD
+ 
+ 
+@@ -13,6 +18,7 @@
+     def __init__(self, app):
+         self.app = app
+         self.engine = None
++        self.bass_drum = None
+         self.after_id = None
+         self.stream = None
+         self.directory = None
+@@ -36,6 +42,10 @@
+ 
+     def send(self, closed):
+         self.app.hihat.send_state(closed)
++        return time.monotonic()
++
++    def send_kick(self):
++        self.app.hihat.send_kick()
+         return time.monotonic()
+ 
+     def start(self, period):
+@@ -69,6 +79,8 @@
+         except OSError as exc:
+             print('HIHAT SYNC: timeline file unavailable: '+str(exc), flush=True)
+         self.engine = HiHatSynchronizer(self.send, self.log, period, **options)
++        if not self.engine.calibration:
++            self.bass_drum = BassDrumScheduler(self.send_kick, period, self.log)
+         self.engine.start(time.monotonic())
+         self.last_observed = time.monotonic()
+         self.after_id = self.app.root.after(5, self.tick)
+@@ -101,7 +113,7 @@
+                 self.stop()
+                 return
+             if now-self.last_observed > .15:
+-                raise TimingFault('Ride status stale; cancelling future hi-hat edges')
++                raise TimingFault('Ride status stale; cancelling future hi-hat/bass commands')
+             monitor = getattr(a, 'hihat_sound_monitor', None)
+             receiver = getattr(monitor, 'receiver', None)
+             available = dict(ride=a.audio_receiver.ready(now),
+@@ -109,17 +121,22 @@
+             if self.engine.calibration and not all(available.values()):
+                 raise TimingFault('Ride/hi-hat detector unavailable during timing calibration')
+             self.engine.tick(now, available)
++            if self.bass_drum is not None:
++                self.bass_drum.tick(time.monotonic(), self.engine.epoch)
+         except Exception as exc:
+             self.log(dict(kind='fault', at=now, detail=str(exc)))
+             self.stop()
+             # Existing stop finishes the hybrid return then verifies center;
+             # no disable/relax is performed here.
+-            a._request_continuous_stop('Automatic hi-hat timing fault: '+str(exc))
++            a._request_continuous_stop('Automatic ESP32 beat timing fault: '+str(exc))
+             return
+         if self.active:
+             self.after_id = a.root.after(5, self.tick)
+ 
+     def stop(self):
++        # No new K commands after stop. A pulse already sent coasts after its
++        # firmware-owned 50 ms; emergency release_all still cuts both outputs.
++        self.bass_drum = None
+         if self.after_id is not None:
+             self.app.root.after_cancel(self.after_id)
+             self.after_id = None
+--- before/camera_playback/hybrid_workflow.py
++++ after/camera_playback/hybrid_workflow.py
+@@ -147,7 +147,7 @@
+     app.hybrid_session.request('calibrate', math.radians(app.continuous_strike_degrees), epoch)
+     app.phase = SYNC_CALIBRATION
+     message = (f'Ride + hihat timing calibration: {SYNC_BPM:g} BPM simultaneous pairs; '
+-               'waiting for two consecutive onset differences within 15 ms; snare idle')
++               'waiting for two consecutive onset differences within 15 ms; snare and bass idle')
+     app.status.set(message)
+     app.result_status.set(message)
+     app._refresh_buttons()
+@@ -189,7 +189,7 @@
+     sync = getattr(app, 'hihat_sync', None)
+     if sync is not None:
+         # Validate/seed the fixed learned offset before starting either arm.
+-        # No hi-hat edge is sent until the actual ride pickup establishes epoch.
++        # No hi-hat edge or bass kick until the actual ride pickup establishes epoch.
+         sync.start(sum(e[2] for e in events)/sum(bool(e[1]) for e in events))
+     app.sync_calibrating = False
+     snare.start(app)
+@@ -198,7 +198,8 @@
+     app.hybrid_session.request('swing', math.radians(app.continuous_strike_degrees), events)
+     message = (f'HYBRID swing depth {app.continuous_strike_degrees:g}° '
+                f'(first detected +{SWING_DEPTH_BOOST_DEG:g}°): '
+-               f'{app.strike_bpm:g} BPM swing + hi-hat + random 11° snare; '
++               f'{app.strike_bpm:g} BPM swing + hi-hat + bass on 1/2/3/4 + random 11° snare; '
++               'bass clockwise PWM 180/255 for 50 ms then released, no calibration; '
+                '4° minimum rebound before partial-return releases')
+     app.status.set(message)
+     app.result_status.set(message)
+--- before/esp32_hihat/README.md
++++ after/esp32_hihat/README.md
+@@ -1,4 +1,4 @@
+-# ESP32 hi-hat firmware used by right camera playback
++# ESP32 hi-hat and bass-drum firmware used by camera playback
+ 
+ This is the proven `motor_beat` firmware copied from
+ `/home/jason/Proyectos3/esp-main`. The integrated host is now
+@@ -21,6 +21,9 @@
+ - `B`: motor 2 closes to and holds the acknowledged calibrated angle;
+ - `C` or `J`: legacy fixed **100-degree** closure (unchanged for collectors/keyboard);
+ - `O`: motor 2 returns to encoder zero, then releases;
++- `K`: motor 1 bass strike, clockwise **PWM 180/255 at 20 kHz for 50 ms**,
++  then both enable pins go LOW and the motor coasts/releases. This is the exact
++  `esp-main/run_keys.sh` F-key strike, unchanged in this firmware;
+ - `Q`: read protocol bounds, configured angle, encoder position, active target,
+   released state, zero-return arrival latch (`opened`) and fault state, with no motion;
+ - `H`: 100 ms watchdog heartbeat;
+@@ -28,8 +31,19 @@
+ 
+ The beat program sends `O` on beats 1/3 and `B` on beats 2/4, shifted together
+ by its automatically tuned hi-hat advance. This changes timing, not the learned
+-rotation. The host never sends `K`; firmware motor 1 is
+-replaced rhythmically by right-arm joint 7 and remains released.
++rotation. During normal hardware swing, the host also sends `K` on **every
++quarter note (1, 2, 3, 4)** at the user's BPM. Bass starts at beat 1 after the
++ride pickup, never during calibration or on pickup/triplet extras. It has no
++calibration or timing offset and does not inherit the hi-hat advance. Right-arm
++joint 7 continues to play the ride cymbal. Both motors share the existing
++serial owner; no second port or host-side pulse timer is needed.
++
++Normal stop cancels future kicks and returns motor 2 to zero; any current bass
++pulse ends automatically after 50 ms. Emergency Relax/exit sends `S`, releasing
++both motors. Late commands trigger controlled stop rather than catch-up hits.
++Collectors, simulation, manual hardware-test and recording-only modes do not
++add bass strikes. Existing X5 calibration-v2 firmware already supports this
++unchanged `K` pulse, so the bass addition itself requires no reflash.
+ 
+ All calibrated angle commands are bounded to **90..115°** in firmware and host.
+ Travel retains encoder quantization and closed-loop tolerance; 115° is the
+--- before/tests/hihat_firmware_harness.cpp
++++ after/tests/hihat_firmware_harness.cpp
+@@ -18,10 +18,15 @@
+ unsigned long millis() { return clockMs; }
+ unsigned long micros() { return clockMs*1000; }
+ void noInterrupts() {} void interrupts() {}
+-void pinMode(int,int) {} void digitalWrite(int,int) {}
++int digitalLevels[40] = {}, pwmLevels[40] = {};
++int pwmFrequencies[40] = {}, pwmBits[40] = {};
++void pinMode(int,int) {}
++void digitalWrite(int pin,int level) { digitalLevels[pin] = level; }
+ int digitalRead(int) { return 0; }
+-bool ledcAttach(int,int,int) { return true; }
+-void ledcWrite(int,int) {}
++bool ledcAttach(int pin,int frequency,int bits) {
++  pwmFrequencies[pin] = frequency; pwmBits[pin] = bits; return true;
++}
++void ledcWrite(int pin,int duty) { pwmLevels[pin] = duty; }
+ int digitalPinToInterrupt(int p) { return p; }
+ void attachInterrupt(int,void(*)(),int) {}
+ struct SerialMock {
+@@ -43,8 +48,32 @@
+   clockMs += 10; loop();
+ }
+ void pos(long p) { enc2Raw = -p; }
++void assertKickReleased() {
++  assert(!kick1Active && pwmLevels[M1_RPWM]==0 && digitalLevels[M1_LPWM]==LOW);
++  assert(digitalLevels[M1_R_EN]==LOW && digitalLevels[M1_L_EN]==LOW);
++}
++void testBassPulse() {
++  assert(KICK_DUTY==180 && KICK_MS==50);
++  assert(M1_RPWM==16 && M1_LPWM==17 && M1_R_EN==18 && M1_L_EN==19);
++  assert(pwmFrequencies[M1_RPWM]==20000 && pwmBits[M1_RPWM]==8);
++  assertKickReleased();
++  send("J"); pos(KEY_TARGET_COUNTS); send("H");
++  send("K");
++  assert(kick1Active && pwmLevels[M1_RPWM]==180 && digitalLevels[M1_LPWM]==LOW);
++  assert(digitalLevels[M1_R_EN]==HIGH && digitalLevels[M1_L_EN]==HIGH);
++  clockMs+=49; loop();
++  assert(kick1Active && pwmLevels[M1_RPWM]==180);
++  assert(!released2 && setpoint2==KEY_TARGET_COUNTS);
++  clockMs+=1; loop(); assertKickReleased();
++  assert(!released2 && setpoint2==KEY_TARGET_COUNTS); // Bass release never opens hi-hat.
++  clockMs+=100; loop(); assertKickReleased(); // No autonomous repeat or reverse.
++  send("K"); assert(kick1Active); // Next host beat starts a fresh identical pulse.
++  send("S"); assertKickReleased(); assert(released2); // Emergency stop cuts pulse short.
++  send("O"); pos(0); send("H"); assert(released2 && openReached2);
++  std::cout << "Bass clockwise PWM 180/255 for 50 ms, release and independent hi-hat passed\n";
++}
+ int main() {
+-  setup(); send("Q");
++  setup(); testBassPulse(); send("Q");
+   assert(Serial.output.find("HIHAT v=2 min=90 max=115") != std::string::npos);
+   send("A115\n"); assert(calibratedDegrees==115 && calibratedCounts==172);
+   assert(released2 && setpoint2==0);  // Setting an angle never moves the motor.
+--- before/tests/test_hihat.py
++++ after/tests/test_hihat.py
+@@ -114,7 +114,7 @@
+                 self.controller._handle_line('STOP -- all motors released.')
+                 self.assertEqual(self.controller.state, 'error')
+ 
+-    def test_arm_beats_replace_motor1_and_alternate_motor2_close_open(self):
++    def test_legacy_collection_edges_alternate_motor2_without_implicit_bass(self):
+         handshake = self.make_ready()
+         self.controller.start_sequence()
+         commands = [self.controller.send_beat() for _ in range(4)]
+@@ -126,6 +126,42 @@
+         wire = handshake + self.drain()
+         self.assertEqual(wire, b"HSCOCOOS")
+         self.assertNotIn(b"K", wire)
++
++    def test_bass_reuses_keyboard_command_without_changing_hihat_state(self):
++        self.make_ready()
++        self.drain()
++        with self.assertRaises(RuntimeError):
++            self.controller.send_kick()
++        self.assertEqual(self.drain(), b'')
++        self.controller.start_sequence()
++        for closed in (False, True, False, True):
++            self.controller.send_state(closed)
++            before = (self.controller.motor2_closed, self.controller.next_beat_closes,
++                      self.controller.beat_count, self.controller.target_degrees)
++            self.assertEqual(self.controller.send_kick(), b'K')
++            self.assertEqual(before, (self.controller.motor2_closed,
++                self.controller.next_beat_closes, self.controller.beat_count,
++                self.controller.target_degrees))
++        self.assertEqual(self.drain(), b'OKCKOKCK')
++        self.controller.stop_sequence()
++        with self.assertRaises(RuntimeError):
++            self.controller.send_kick()
++        self.assertEqual(self.drain(), b'O')
++
++    def test_bass_rejects_faulted_connection_and_emergency_release(self):
++        self.make_ready()
++        self.controller.start_sequence()
++        self.controller.send_kick()
++        self.drain()
++        self.controller.release_all()
++        with self.assertRaises(RuntimeError):
++            self.controller.send_kick()
++        self.assertEqual(self.drain(), b'S')
++        self.controller.start_sequence()
++        self.controller._handle_line('FAULT: test')
++        with self.assertRaises(RuntimeError):
++            self.controller.send_kick()
++        self.assertEqual(self.drain(), b'')
+ 
+     def test_explicit_sync_edges_open13_close24_without_target_changes(self):
+         self.make_ready()
+--- before/tests/test_hihat_calibration_integration.py
++++ after/tests/test_hihat_calibration_integration.py
+@@ -137,6 +137,8 @@
+                            check=True,capture_output=True,text=True)
+             result = subprocess.run([str(binary)],check=True,capture_output=True,text=True)
+             self.assertIn('stall latch passed', result.stdout)
++            self.assertIn('Bass clockwise PWM 180/255 for 50 ms, release and independent hi-hat passed',
++                          result.stdout)
+ 
+ 
+ if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ camera_playback/bass_drum.py
+@@ -0,0 +1,38 @@
++"""Uncalibrated motor-1 quarter notes on the read-only swing grid.
++
++The ESP32 owns the exact keyboard strike: clockwise PWM 180/255 for 50 ms,
++then coast/release. The host only sends K; it never times the pulse or return.
++"""
++import math
++
++from .hihat_sync import MAX_LATENESS, TimingFault
++
++
++class BassDrumScheduler:
++    """One kick per quarter, with no pickup, extras, offset or catch-up burst.
++
++    Created only for swing, not calibration. Its owner cancels it on stop/fault.
++    send() returns the actual monotonic send time; epoch is beat 1 of the ride.
++    """
++
++    def __init__(self, send, period, log=lambda row: None):
++        if not math.isfinite(period) or period <= .050:
++            raise ValueError('Bass beat period must exceed the 50 ms strike pulse')
++        self.send, self.period, self.log = send, period, log
++        self.index = 0
++
++    def tick(self, now, epoch):
++        if epoch is None:
++            return  # Wait for the ride pickup to establish the common grid.
++        target = epoch + self.index * self.period
++        if now < target:
++            return
++        if now - target > MAX_LATENESS:
++            raise TimingFault('Bass drum deadline missed; refusing catch-up burst')
++        actual = self.send()
++        if not math.isfinite(actual) or actual < now - .001 or actual - target > MAX_LATENESS:
++            raise TimingFault('Bass drum serial delivery missed deadline')
++        self.log(dict(kind='bass_command', instrument='bass', at=actual,
++                      index=self.index, beat=self.index % 4 + 1, target=target,
++                      advance=0., lateness=actual - target))
++        self.index += 1
+--- /dev/null
++++ tests/test_bass_drum.py
+@@ -0,0 +1,250 @@
++"""Bass integration without CAN, a real serial device, microphone or motor."""
++import fcntl
++import math
++import os
++import pty
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++
++from camera_playback.bass_drum import BassDrumScheduler
++from camera_playback.hihat import HiHatController
++from camera_playback.hihat_sync import TimingFault
++from camera_playback.hihat_sync_runtime import HiHatSyncRuntime
++from camera_playback.hybrid_strike import HybridStatus
++from camera_playback import hybrid_workflow as hw
++from test_hybrid_workflow import app_fixture
++
++
++class BassSchedulerTests(unittest.TestCase):
++    def test_all_quarters_selected_bpm_no_pickup_extras_duplicates_or_drift(self):
++        for bpm in (20, 60, 87.5, 100, 120, 180):
++            with self.subTest(bpm=bpm):
++                period, epoch, rows = 60 / bpm, 10., []
++                send = Mock()
++                scheduler = BassDrumScheduler(send, period, rows.append)
++                scheduler.tick(9., None)
++                scheduler.tick(epoch - period / 3, epoch)  # Ride pickup.
++                send.assert_not_called()
++                for index in range(16):
++                    target = epoch + index * period
++                    now = target + .002 + (index % 3) * .001
++                    send.return_value = now
++                    scheduler.tick(now, epoch)
++                    scheduler.tick(now, epoch)  # Duplicate GUI observation.
++                    scheduler.tick(target + period * 2 / 3, epoch)  # Swing extra.
++                    self.assertEqual(send.call_count, index + 1)
++                    self.assertAlmostEqual(rows[-1]['target'], target)
++                self.assertEqual([r['beat'] for r in rows], [1, 2, 3, 4] * 4)
++                self.assertTrue(all(r['advance'] == 0. for r in rows))
++
++    def test_invalid_or_overlapping_pulse_period_rejected(self):
++        for period in (0., -.1, .05, math.inf, math.nan):
++            with self.assertRaises(ValueError):
++                BassDrumScheduler(Mock(), period)
++
++    def test_late_deadline_never_sends_a_catch_up_burst(self):
++        send = Mock(return_value=10.1)
++        scheduler = BassDrumScheduler(send, .6)
++        with self.assertRaisesRegex(TimingFault, 'refusing catch-up'):
++            scheduler.tick(10.1, 10.)
++        send.assert_not_called()
++
++    def test_delivery_failure_or_invalid_timestamp_propagates(self):
++        for actual in (10.1, 9.9, math.nan, math.inf):
++            scheduler = BassDrumScheduler(lambda: actual, .6)
++            with self.assertRaisesRegex(TimingFault, 'serial delivery'):
++                scheduler.tick(10., 10.)
++        scheduler = BassDrumScheduler(Mock(side_effect=OSError('serial failed')), .6)
++        with self.assertRaisesRegex(OSError, 'serial failed'):
++            scheduler.tick(10., 10.)
++
++
++class BassRuntimeTests(unittest.TestCase):
++    def setUp(self):
++        self.workflow_app = app_fixture()  # Load tuning before mocking timeline-file I/O.
++        self.now = 10.
++        self.rows = []
++        self.app = SimpleNamespace(
++            root=Mock(), hihat=Mock(), continuous_strike_active=True,
++            continuous_stop_requested=False, audio_receiver=Mock(),
++            hihat_sound_monitor=SimpleNamespace(receiver=Mock()),
++            _request_continuous_stop=Mock())
++        self.runtime = HiHatSyncRuntime(self.app)
++        self.runtime.log = self.rows.append
++        for target, options in (
++            ('time.monotonic', dict(side_effect=lambda: self.now)),
++            ('Path.open', dict(new=Mock())), ('Path.mkdir', dict(new=Mock())),
++        ):
++            patcher = patch('camera_playback.hihat_sync_runtime.' + target, **options)
++            patcher.start()
++            self.addCleanup(patcher.stop)
++        self.addCleanup(self.runtime.stop)
++
++    def start(self, bpm=100, advance=0.):
++        self.runtime.calibrated_advance = advance
++        self.runtime.start(60 / bpm)
++
++    def tick(self, now, *, observe=True):
++        self.now = now
++        if observe:
++            self.runtime.observe(HybridStatus(swing=True), now)
++        self.runtime.tick()
++
++    def seed_pickup(self, bottom=10.1):
++        self.now = bottom + .01
++        self.runtime.observe(HybridStatus(swing=True, count=1, bottoms=1,
++                                         bottom_at=bottom), self.now)
++        self.runtime.tick()
++        return bottom + self.runtime.engine.period / 3
++
++    def test_calibration_never_kicks_then_swing_waits_for_pickup_and_beat_one(self):
++        self.runtime.start_calibration(11.)
++        self.tick(11.)
++        self.tick(11.375)
++        self.app.hihat.send_kick.assert_not_called()
++        self.assertIsNone(self.runtime.bass_drum)
++        self.runtime.engine.locked = True
++        self.runtime.finish_calibration()
++        self.runtime.start(.6)
++        self.tick(11.5)  # No ride grid yet.
++        epoch = self.seed_pickup(11.6)
++        self.tick(epoch - .001)
++        self.app.hihat.send_kick.assert_not_called()
++        self.tick(epoch)
++        self.app.hihat.send_kick.assert_called_once_with()
++
++    def test_signed_hihat_advance_never_shifts_bass_and_open_close_stays_13_24(self):
++        for advance in (-.1, 0., .1):
++            with self.subTest(advance=advance):
++                self.now = 10.
++                self.rows.clear()
++                self.app.hihat.reset_mock()
++                self.start(bpm=87.5, advance=advance)
++                epoch = self.seed_pickup()
++                period = self.runtime.engine.period
++                # Visit both clocks' due times and every triplet extra.
++                targets = [epoch + i * period for i in range(8)]
++                hat_due = [t - (advance if i else 0.) for i, t in enumerate(targets)]
++                extras = [targets[i] + period * 2 / 3 for i in (1, 3, 5)]
++                for now in sorted(set(targets + hat_due + extras)):
++                    self.tick(now + 1e-9)
++                    self.tick(now + 1e-9)
++                bass = [r for r in self.rows if r['kind'] == 'bass_command']
++                hats = [r for r in self.rows if r['kind'] == 'command']
++                self.assertEqual(len(bass), 8)
++                self.assertEqual(len(hats), 8)
++                for row, target in zip(bass, targets):
++                    self.assertAlmostEqual(row['at'], target)
++                self.assertEqual([r['closed'] for r in hats], [False, True] * 4)
++                self.assertEqual([r['advance'] for r in hats], [0.] + [advance] * 7)
++                self.assertEqual(self.app.hihat.send_kick.call_count, 8)
++
++    def test_missed_pickup_can_seed_from_first_main_beat_without_duplicate(self):
++        self.start()
++        self.now = 10.5
++        status = HybridStatus(swing=True, main_count=1, main_at=10.5)
++        self.runtime.observe(status, self.now)
++        self.runtime.tick()
++        self.runtime.observe(status, self.now)
++        self.runtime.tick()
++        self.app.hihat.send_kick.assert_called_once()
++
++    def test_stop_and_restart_discard_old_bass_grid(self):
++        self.start()
++        epoch = self.seed_pickup()
++        self.tick(epoch)
++        self.runtime.stop()
++        self.tick(epoch + .6)
++        self.app.hihat.send_kick.assert_called_once()
++        self.assertIsNone(self.runtime.bass_drum)
++        self.start(bpm=120)
++        self.tick(12.)
++        self.app.hihat.send_kick.assert_called_once()
++        epoch = self.seed_pickup(12.1)
++        self.tick(epoch)
++        self.assertEqual(self.app.hihat.send_kick.call_count, 2)
++        self.assertEqual([r['beat'] for r in self.rows if r['kind'] == 'bass_command'], [1, 1])
++
++    def test_stop_request_inactive_run_and_stale_status_cancel_bass_before_send(self):
++        for condition in ('stop', 'inactive', 'stale'):
++            with self.subTest(condition=condition):
++                self.app.continuous_stop_requested = False
++                self.app.continuous_strike_active = True
++                self.now = 10.
++                self.start()
++                epoch = self.seed_pickup()
++                if condition == 'stop':
++                    self.app.continuous_stop_requested = True
++                elif condition == 'inactive':
++                    self.app.continuous_strike_active = False
++                self.tick(epoch, observe=False)
++                self.assertFalse(self.runtime.active)
++                self.assertIsNone(self.runtime.bass_drum)
++                self.app.hihat.send_kick.assert_not_called()
++        self.app._request_continuous_stop.assert_called_once()
++        self.app.hihat.release_all.assert_not_called()
++
++    def test_bass_serial_failure_cancels_both_schedules_via_controlled_stop(self):
++        self.start()
++        epoch = self.seed_pickup()
++        self.app.hihat.send_kick.side_effect = RuntimeError('serial failed')
++        self.tick(epoch)
++        self.app._request_continuous_stop.assert_called_once()
++        self.assertFalse(self.runtime.active)
++        self.assertIsNone(self.runtime.bass_drum)
++        self.tick(epoch + .6)
++        self.app.hihat.send_kick.assert_called_once()
++        self.app.hihat.release_all.assert_not_called()
++
++    def test_bass_deadline_fault_even_when_shifted_hihat_is_not_due(self):
++        self.start(advance=-.2)
++        epoch = self.seed_pickup()
++        self.tick(epoch)
++        self.tick(epoch + .7)  # Bass .1 s late, but hi-hat not due until +.8.
++        self.app.hihat.send_kick.assert_called_once()
++        self.app._request_continuous_stop.assert_called_once()
++        self.assertIn('Bass drum deadline missed', self.app._request_continuous_stop.call_args.args[0])
++        self.assertFalse(self.runtime.active)
++
++    def test_real_workflow_uses_shared_serial_and_stops_future_bass(self):
++        """Actual workflow -> scheduler -> serial controller -> PTY bytes."""
++        master, slave = pty.openpty()
++        self.addCleanup(os.close, master)
++        self.addCleanup(os.close, slave)
++        fcntl.fcntl(master, fcntl.F_SETFL, os.O_NONBLOCK)
++        controller = HiHatController(os.ttyname(slave))
++        self.addCleanup(controller.close)
++        self.assertTrue(controller.connect(now=10.))
++        controller.tick(10.31)
++        os.read(master, 256)  # Startup H/S probe, never K.
++        os.write(master, b'STOP -- all motors released.\n')
++        controller.tick(10.32)
++        self.assertTrue(controller.ready())
++        controller.calibrated = True
++        controller.start_sequence()
++        self.app.hihat = controller
++        a = self.workflow_app
++        a.continuous_strike_active, a.strike_active = True, False
++        a.continuous_strike_degrees, a._strike_bpm = 10.5, 100.
++        a.hihat, a.hihat_sync = controller, self.runtime
++        a.root = self.app.root
++        a.audio_receiver = self.app.audio_receiver
++        a.hihat_sound_monitor = self.app.hihat_sound_monitor
++        self.runtime.app = a
++        self.runtime.calibrated_advance = 0.
++        with patch.object(hw.snare, 'start'):
++            hw.start_swing(a, a.swing_events)
++        epoch = self.seed_pickup()
++        for index in range(8):
++            self.tick(epoch + index * .6 + 1e-9)
++        self.assertEqual(os.read(master, 256), b'OKBKOKBKOKBKOKBK')
++        hw.request_stop(a)
++        self.tick(epoch + 4.8)
++        self.assertEqual(os.read(master, 256), b'O')
++        self.assertFalse(controller.sequence_active)
++        self.assertIsNone(self.runtime.bass_drum)
++
++
++if __name__ == '__main__':
++    unittest.main()

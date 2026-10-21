@@ -1,0 +1,44 @@
+{
+  "reason": "no_candidate_passed_complete_scenario_evaluation",
+  "attempts": [
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.025,
+        "taper": true
+      },
+      "status": "no_path"
+    },
+    {
+      "parameters": {
+        "seconds": 3.0,
+        "margin": 0.0,
+        "taper": true
+      },
+      "status": "planned"
+    }
+  ],
+  "candidates": [
+    {
+      "index": 2,
+      "metrics": {
+        "transit_min_clearance_m": 0.035,
+        "transit_low_decile_clearance_m": 0.037500000000000006,
+        "all_path_min_clearance_m": 0.035,
+        "transit_proximity": 0.17981012658227852,
+        "workspace_length_m": 3.3365454480397823,
+        "joint_length_rad": 3.306170354264306,
+        "bending_deg": 741.4702641318792
+      },
+      "duration_s": 8.50198661828172
+    }
+  ]
+}

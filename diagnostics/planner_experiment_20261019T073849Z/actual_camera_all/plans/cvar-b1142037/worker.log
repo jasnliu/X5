@@ -1,0 +1,26 @@
+[cvar +   0.0s] From-scratch candidate search + CVaR of worst scenario clearance/collision losses. Optimizes the bad tail rather than mean proximity; nominal full-body validity remains mandatory.
+[cvar +   0.0s] building/loading model + frozen FCL world; no motor access
+[cvar +   0.7s] search 1: 3.0s allocation, added clearance 0.0 mm
+[cvar +   3.9s] collision rejected (smooth): {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[cvar +   7.9s] candidate 1: valid, 50.09s outward, transit clearance 30.0 mm
+[cvar +   7.9s] search 2: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[cvar +  15.1s] search 3: 3.0s allocation, added clearance 0.0 mm
+[cvar +  18.9s] candidate 2: valid, 8.50s outward, transit clearance 35.0 mm
+[cvar +  18.9s] search 4: 3.0s allocation, added clearance 10.0 mm
+[worker] FCL/solver operation running: 5s
+[cvar +  25.4s] candidate 1: evaluating 64 common uncertainty scenarios
+[cvar +  28.7s] scenarios 8/64
+[cvar +  32.1s] scenarios 16/64
+[cvar +  35.4s] scenarios 24/64
+[cvar +  38.7s] scenarios 32/64
+[cvar +  42.0s] scenarios 40/64
+[cvar +  45.3s] scenarios 48/64
+[cvar +  48.6s] scenarios 56/64
+[cvar +  51.9s] scenarios 64/64
+[cvar +  51.9s] candidate 2: evaluating 64 common uncertainty scenarios
+[cvar +  55.3s] scenarios 8/64
+[cvar +  58.5s] scenarios 16/64
+[cvar +  61.8s] scenarios 24/64
+[cvar +  61.9s] budget reached; partial scenario estimates discarded
+[cvar +  61.9s] READY: 50.094s outward → 2s hold → exact reverse; SIMULATION ONLY

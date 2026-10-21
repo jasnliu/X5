@@ -1,0 +1,49 @@
+{
+  "implemented": true,
+  "default_collision_policy": "observed_obstacles",
+  "full_arm_gripper_and_stick_collision_geometry_retained": true,
+  "unknown_space_veto_removed_from_new_plans": true,
+  "existing_buffers_joint_limits_self_collision_and_fault_handling_retained": true,
+  "tests": {
+    "planner": 179,
+    "calibration": 110
+  },
+  "saved_previous_failure_replanned": true,
+  "fresh_actual_camera_encoder_plan": {
+    "passed": true,
+    "live_planning_status": "planned",
+    "collision_policy": "observed_obstacles",
+    "motor_commands": 0,
+    "mode_changes": 0,
+    "relax_commands": 0,
+    "gripper_commands": 0,
+    "query_packets": 3776,
+    "all_packets_query_only": true,
+    "all_16_motors_disabled": true,
+    "encoder_batches": 236,
+    "can_interface_deltas": {
+      "can0": {
+        "tx": 1888,
+        "rx": 1888
+      },
+      "can1": {
+        "tx": 1888,
+        "rx": 1888
+      }
+    },
+    "outward_duration_s": 32.21785529506378,
+    "cycle_duration_s": 66.43571059012756,
+    "exact_start_goal_return": true,
+    "interpolated_path_samples": 16110,
+    "physical_motion_tested": false
+  },
+  "playback": {
+    "controls_endpoint_hold_return": true,
+    "complete_wall_clock_cycle": true,
+    "frozen_matching_scene": true
+  },
+  "physical_trajectory_executed": false,
+  "protected_existing_files": 380,
+  "unchanged_files": 364,
+  "sdk_startup_warnings_remain": true
+}

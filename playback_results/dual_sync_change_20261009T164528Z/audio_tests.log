@@ -1,0 +1,54 @@
+....................F..F                                                 [100%]
+=================================== FAILURES ===================================
+_____ LaunchTests.test_missing_snare_bundle_is_never_a_motion_launch_gate ______
+
+self = <test_audio_waveform.LaunchTests testMethod=test_missing_snare_bundle_is_never_a_motion_launch_gate>
+
+    def test_missing_snare_bundle_is_never_a_motion_launch_gate(self):
+        actions,handlers=self.graph(['--hardware'],fail_snare=True)
+        self.assertTrue(any('camera_playback.app' in getattr(x,'cmd',[]) for x in actions))
+        snare=next(x for x in actions if '--instrument' in getattr(x,'cmd',[])
+                   and x.cmd[x.cmd.index('--instrument')+1]=='snare')
+>       self.assertFalse(any(h['target_action'] is snare for h in handlers))
+E       AssertionError: True is not false
+
+tests/test_audio_waveform.py:238: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+Snare detector unavailable (required for normal hardware timing calibration): missing snare model
+ST7 snare audio model snare_v1: waveform markers + pre-beat snare timing calibration; ride remains the absolute beat anchor
+_ LaunchTests.test_visual_process_is_unwatched_and_copies_use_separate_sockets _
+
+self = <test_audio_waveform.LaunchTests testMethod=test_visual_process_is_unwatched_and_copies_use_separate_sockets>
+
+    def test_visual_process_is_unwatched_and_copies_use_separate_sockets(self):
+        actions,handlers=self.graph(['--hardware'])
+        viewer=next(x for x in actions if 'camera_playback.audio_waveform' in getattr(x,'cmd',[]))
+        self.assertFalse(any(h['target_action'] is viewer for h in handlers))
+        bridges=[x for x in actions if 'camera_playback.audio_bridge' in getattr(x,'cmd',[])]
+        self.assertEqual(len(bridges),3)
+        for bridge,flag in zip(bridges[:2],('--ride-socket','--hihat-socket')):
+            self.assertEqual(bridge.cmd[bridge.cmd.index('--visual-socket')+1],viewer.cmd[viewer.cmd.index(flag)+1])
+            self.assertNotEqual(bridge.cmd[bridge.cmd.index('--socket')+1],bridge.cmd[bridge.cmd.index('--visual-socket')+1])
+        app=next(x for x in actions if 'camera_playback.app' in getattr(x,'cmd',[]))
+        self.assertNotIn('--visual-socket',app.cmd)
+        snare=bridges[2]
+        self.assertEqual(snare.cmd[snare.cmd.index('--instrument')+1],'snare')
+        path=snare.cmd[snare.cmd.index('--socket')+1]
+>       self.assertEqual(path,viewer.cmd[viewer.cmd.index('--snare-socket')+1])
+E       AssertionError: '/tmp/x5-snare-control-2027142.sock' != '/tmp/x5-wave-snare-2027142.sock'
+E       - /tmp/x5-snare-control-2027142.sock
+E       ?              --------
+E       + /tmp/x5-wave-snare-2027142.sock
+E       ?         +++++
+
+tests/test_audio_waveform.py:225: AssertionError
+----------------------------- Captured stdout call -----------------------------
+ST7 audio model v2: /home/jason/Proyectos3/st7/models/v2
+ST7 hi-hat audio model hihat_v1: startup calibration and hi-hat-only timing; ride v2 remains the only strike-search input
+ST7 snare audio model snare_v1: waveform markers + pre-beat snare timing calibration; ride remains the absolute beat anchor
+=========================== short test summary info ============================
+FAILED tests/test_audio_waveform.py::LaunchTests::test_missing_snare_bundle_is_never_a_motion_launch_gate
+FAILED tests/test_audio_waveform.py::LaunchTests::test_visual_process_is_unwatched_and_copies_use_separate_sockets
+2 failed, 22 passed in 0.49s

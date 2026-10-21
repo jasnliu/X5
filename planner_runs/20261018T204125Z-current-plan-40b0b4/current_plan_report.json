@@ -1,0 +1,42 @@
+{
+  "schema": "x5-current-pose-plan-report-v1",
+  "passed": false,
+  "error": "KeyboardInterrupt",
+  "planning_status": "planned",
+  "motor_commands": 0,
+  "mode_changes": 0,
+  "gripper_commands": 0,
+  "relax_commands": 0,
+  "current_state_check": {
+    "checked_monotonic": 168105.186956024,
+    "maximum_difference_deg": 0.02197933771202081,
+    "note": "Valid at acquisition/check time only, not ongoing feedback or motion authorization"
+  },
+  "telemetry": {
+    "sample_batches": 205,
+    "error": null,
+    "thread_stopped": true,
+    "duration_s": 10.254805488977581,
+    "observer": {
+      "batches": 205,
+      "requests_sent": {
+        "left": 1640,
+        "right": 1640
+      },
+      "feedback_frames_received": {
+        "left": 1640,
+        "right": 1640
+      },
+      "exact_query_allowlist": true,
+      "mode_changes": 0,
+      "enable_commands": 0,
+      "disable_commands": 0,
+      "motion_commands": 0,
+      "gripper_commands": 0,
+      "closed": true
+    }
+  },
+  "scene_source": "five synchronized native-depth frames; no manual obstacles",
+  "visualization": null,
+  "motion_authorized": false
+}

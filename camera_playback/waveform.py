@@ -8,8 +8,11 @@ import numpy as np
 
 
 HISTORY_SECONDS = 10.
-COLORS = {'ride': '#dc2626', 'hihat': '#2563eb'}
-LABELS = {'ride': 'Ride cymbal', 'hihat': 'Hi-hat'}
+COLORS = {'ride': '#dc2626', 'hihat': '#2563eb', 'snare': '#9333ea'}
+LABELS = {'ride': 'Ride cymbal', 'hihat': 'Hi-hat', 'snare': 'snare'}
+MARKER_LABELS = {'ride': 'Ride', 'hihat': 'Hi-hat', 'snare': 'snare'}
+MARKER_ROWS = {'ride': 22, 'hihat': 58, 'snare': 94}
+MARKER_DASHES = {'ride': (), 'hihat': (5, 3), 'snare': (1, 5)}
 MAX_MARKERS = 256
 
 
@@ -40,8 +43,8 @@ class WaveformTimeline:
         self.blocks = deque(maxlen=math.ceil((history+1)/.02))
         self.markers = deque(maxlen=MAX_MARKERS)
         self.latest_sample = None
-        self.counts = dict(ride=0, hihat=0)
-        self.delays = dict(ride=None, hihat=None)
+        self.counts = dict.fromkeys(COLORS, 0)
+        self.delays = dict.fromkeys(COLORS)
 
     def add_audio(self, started_at, samples, sample_rate=16000):
         samples = np.asarray(samples, dtype=np.float32).reshape(-1)
@@ -111,23 +114,24 @@ class WaveformWindow:
                  anchor='w', padx=18, pady=10).pack(fill='x')
         legend = tk.Frame(root, bg='#f8fafc')
         legend.pack(fill='x', padx=18)
-        for instrument in ('ride', 'hihat'):
+        for instrument in COLORS:
             tk.Label(legend, text='│ '+LABELS[instrument], fg=COLORS[instrument],
                      bg='#f8fafc', font=('Sans', 11, 'bold')).pack(side='left', padx=(0, 24))
         tk.Label(legend, text='Markers arrive after detection, at the original sound time.',
                  bg='#f8fafc', fg='#475569', font=('Sans', 10)).pack(side='left')
-        self.canvas = tk.Canvas(root, bg='white', highlightthickness=1,
+        self.canvas = tk.Canvas(root, bg='white', height=160, highlightthickness=1,
                                 highlightbackground='#cbd5e1')
         self.canvas.pack(fill='both', expand=True, padx=18, pady=(12, 8))
         self.status = tk.StringVar(value='Starting TONOR capture…  |  Visual only; no audio saved')
         tk.Label(root, textvariable=self.status, bg='#f8fafc', fg='#475569',
-                 font=('Sans', 10), anchor='w', padx=18, pady=8).pack(fill='x')
+                 font=('Sans', 10), anchor='w', justify='left', wraplength=650,
+                 padx=18, pady=8).pack(fill='x')
         self.drawn_markers = []  # Read-only inspection aid for UI regression tests.
 
     def render(self, now, detail=''):
         c, timeline = self.canvas, self.timeline
         w, h = max(100, c.winfo_width()), max(100, c.winfo_height())
-        left, right, top, bottom = 62., w-20., 94., h-35.
+        left, right, top, bottom = 62., w-20., 120., h-35.
         width = max(1, int(right-left))
         low, high = timeline.envelope(now, width)
         valid = np.isfinite(low)
@@ -155,8 +159,9 @@ class WaveformWindow:
                                             left+group, middle-high[group]*gain)).ravel().tolist()
             c.create_line(*coordinates, fill='#334155', width=1, tags='waveform')
         self.drawn_markers = []
-        # Draw blue dashed over red if onsets coincide; both remain visible.
-        for instrument in ('ride', 'hihat'):
+        # Blue dashes and sparse purple dots leave all three colors visible
+        # over solid red when onsets coincide. Labels occupy independent rows.
+        for instrument in COLORS:
             for m in timeline.markers:
                 if m.instrument != instrument:
                     continue
@@ -164,12 +169,12 @@ class WaveformWindow:
                 if not 0 <= fraction <= 1:
                     continue
                 x = left + fraction*(right-left)
-                color, row = COLORS[instrument], (22 if instrument == 'ride' else 66)
+                color, row = COLORS[instrument], MARKER_ROWS[instrument]
                 c.create_line(x, top-5, x, bottom, fill=color, width=2,
-                              dash=() if instrument == 'ride' else (5, 3), tags=instrument)
+                              dash=MARKER_DASHES[instrument], tags=instrument)
                 # Compact vertical labels stay readable at 200 ms swung-hit
                 # spacing; full horizontal names remain in the fixed legend.
-                c.create_text(x, row, text='Ride' if instrument == 'ride' else 'Hi-hat',
+                c.create_text(x, row, text=MARKER_LABELS[instrument],
                               fill=color, angle=90, font=('Sans', 9, 'bold'), tags=instrument)
                 self.drawn_markers.append(dict(instrument=instrument, event_at=m.event_at,
                                                detected_at=m.detected_at, x=x, color=color))
