@@ -27,7 +27,8 @@ def view(tmp_path,monkeypatch):
     packet,mesh=snapshot_preview.prepare_scene(dict(sequence=5,received_monotonic=time.monotonic(),value_scale_m=.001),
         np.full((40,48),1000,dtype=np.uint16),{'depth':{'K':[[500,0,20],[0,500,16],[0,0,1]]}},np.eye(4))
     monkeypatch.setattr(workspace,'load_scene',lambda *a:(packet,mesh))
-    v=Workspace(tmp_path,simulate_plan=PLAN,autoscene=False)
+    archive_cal=ROOT/'calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json'
+    v=Workspace(tmp_path,cal_path=archive_cal,simulate_plan=PLAN,autoscene=False)
     v.poll()
     try:yield v
     finally:v.close()
@@ -171,10 +172,10 @@ def test_monitored_worker_publishes_motion_failure_and_closes_query_only(tmp_pat
 
 
 def test_start_check_never_replans_a_different_route(monkeypatch,tmp_path):
-    from drum_planner.baseline import work
+    from drum_planner.baseline import computation
     # Assert the production wrapper opts out of the older prepare auto-replan.
     import inspect
-    assert 'allow_replan=False' in inspect.getsource(work.calculate)
+    assert 'allow_replan=False' in inspect.getsource(computation.compute)
 
 
 def test_cli_no_longer_calls_automatic_initial_planner(monkeypatch,tmp_path):
@@ -246,14 +247,15 @@ def test_guarded_work_wrapper_keeps_observer_through_planning_and_always_closes(
         if worker.error:raise ValueError(worker.error)
         return dict(test=True)
     monkeypatch.setattr(work,'verify_unchanged',verify)
-    def make_plan(*a):
-        assert not holder['reader'].closed;calls.append('plan')
-        if failure=='planning_movement':holder['reader'].error='Arm moved during planning'
-        return tmp_path/'test_plan.json'
-    def prepare(*a,**kw):
-        assert not kw['allow_replan'];calls.append('check')
+    def compute(folder,cal,worker,*,plan=None,moving_side):
+        assert moving_side=='right'
+        assert worker is holder['reader'] and not worker.closed
+        if plan is None:calls.append('plan')
+        if failure=='planning_movement':worker.error='Arm moved during planning'
+        calls.append('check')
         if failure=='start_check':raise ValueError('Path blocked')
-    monkeypatch.setattr(work.tasks,'make_plan',make_plan);monkeypatch.setattr(work.tasks,'prepare',prepare)
+        return dict(plan=str(tmp_path/'test_plan.json'),prepared=str(folder/'checked/prepared.json'))
+    monkeypatch.setattr(work.computation,'run',compute)
     if failure:
         with pytest.raises((ValueError,RuntimeError)):work.calculate(tmp_path,DEFAULT_CALIBRATION,{},plan='test.json' if failure=='start_check' else None)
         assert not (tmp_path/'result.json').exists()

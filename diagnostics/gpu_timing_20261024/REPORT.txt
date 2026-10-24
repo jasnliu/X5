@@ -1,0 +1,100 @@
+GPU-native experiment timing — verified 2026-10-24 UTC
+====================================================
+Scope: ./plan_drums.sh experiment --right / --left only.
+All five path generators/ranking remain. Hardware and hardware-sparse retain their
+original CPU implementations; no physical, encoder, camera or CAN tests occurred.
+
+IMPLEMENTATION
+FP64 projected L-BFGS inside an augmented Lagrangian; parallel line search,
+constraint/gradient evaluation and optimizer state/updates run on the Radeon GPU.
+32 iterations per submission; local cubic support; one shared GPU solve slot.
+Python controls refinement/penalty scheduling and basis construction. Independent
+continuous polynomial extrema and full scene/zone verification remain on CPU.
+Not GPU-offloaded SLSQP callbacks. Not a claim of a globally optimal trajectory.
+Accepted movement duration <=1.01 times the exact-curve fully refined CPU reference,
+with no added detected internal stops/deep slowdowns. Original limits and approved
+left C3 geometry selection are retained. Failed numerical/quality checks reject
+rather than silently publish an inferior trajectory. No extra hardware authority.
+
+IMPORTANT PERFORMANCE LIMITATION
+An unseen curve still needs the old CPU reference solve once to enforce the literal
+1% guarantee. This qualification runs BEFORE the GPU phase and is separately logged.
+Therefore a completely cold first Calculate is not accelerated end-to-end by this
+strict version: it includes the old CPU solve plus GPU work and validation.
+Existing exact-input reference caches avoid repeating that qualification; GPU
+math itself can also be cached. Even a cache hit gets fresh scene verification.
+The original CPU implementation also benefits from caches: warm total times are
+not evidence of GPU acceleration. Removing cold qualification would require a
+changed guarantee or a new independently certified bound, not a hidden omission.
+
+DEVICE / CONTROLLED BENCHMARK
+AMD Radeon 780M Graphics (RADV PHOENIX)/4098/5567/104865800/4211006; FP64.
+Eight exact saved curves, two runs; accepted durations identical across runs.
+Final table uses run 2; existing compiled backend/shader cache.
+GPU phase includes device setup, optimizer and continuous checking, NOT CPU
+reference qualification, path generation, queue waiting, GUI startup or compilation.
+Final scene column includes dense independent collision/zone checks.
+
+Case                 GPU phase  Scene check   CPU movement  GPU movement  Longer
+rest_to_R1               4.06s       1.07s     4.205074s     4.246616s   0.988%
+R1_to_R4                13.26s       1.08s     3.493140s     3.505738s   0.361%
+R4_to_rest               7.59s       1.02s     2.702763s     2.727918s   0.931%
+left_clearance           2.29s       0.99s     2.609678s     2.631983s   0.855%
+right_single_arc         6.77s       0.99s     4.020221s     4.046005s   0.641%
+left_single_arc          4.47s       0.99s     2.834205s     2.857572s   0.824%
+right_clearance          9.74s       1.00s     4.114229s     4.137711s   0.571%
+left_workspace          16.58s       1.06s     2.839629s     2.860024s   0.718%
+
+For R1 -> R4, the earlier controlled original-CPU study measured 173.64–176.92 s
+for timing (plus about 1.09 s final scene checks), versus 13.26 s + 1.08 s here.
+Source: diagnostics/vulkan_feasibility_20261023/SUMMARY.json. This is a comparison
+of timing stages using DIFFERENT optimizers and a new <=1% stopping rule, not
+proof that GPU hardware alone caused the entire speedup. Cold reference costs
+remain as above. This earlier callback-only study is preserved unchanged.
+
+INTEGRATION AND FAILURE CHECKS
+- 468 passed, 1 warning in 103.26s (0:01:43) (fresh regression run; source/software tests, no motion).
+- Actual Qt/VTK windows: both arms, all five methods planned; controls, unselected
+  startup, rapid changes, cancellation/retry and unavailable-route display tested.
+- Right progress/sweep use the retained exact analytic CPU branch (no nonlinear
+  timing optimizer needed); label explicitly says analytic CPU, not GPU.
+- Saved R1 -> R4 -> independently planned rest: three GPU laws, exact same curve
+  coefficients/endpoints as saved CPU plans, each within 1%; two timing children
+  under one 3 GiB group, GPU work serialized. Entire contained run 45.16 s with
+  cached CPU references. Preview evaluates the exact laws and returns to rest.
+- Saved-input hardware-vs-experiment comparison passed for Workspace curve on
+  both arms: identical geometry/selection, GPU duration within 1%; no hardware UI
+  acquisition or execution was launched. Worker identity invalidates old pools.
+- Forced actual Vulkan loader to llvmpipe-only: both arms used original CPU
+  timing and prominently logged GPU UNAVAILABLE — CPU TIMING FALLBACK; software
+  Vulkan was not falsely counted as a GPU. No global driver settings changed.
+- Cancellation during real GPU iterations reaped the contained job in 0.112 s;
+  GPU was usable immediately afterward.
+- All six generated SPIR-V shaders passed spirv-val (Vulkan 1.2). Independent
+  NumPy FP64 cost/gradient checks match real GPU optimizer snapshots.
+- GPU cache hits still recheck current scenes; collision/quality failure tests
+  reject the result. Left C3 reconstruction tested on four retained rounded paths.
+- Benchmark job peak observed about 248 MB; checkpoint group peak about 571 MB
+  against 3 GiB cap. These are cgroup observations, not full-system VRAM accounting.
+- Preservation audit: 1977/1990 pre-existing files unchanged.
+  Changed files are only explicit experiment timing wiring, timeout, relevant
+  tests/docs and artifact allowlist. All baseline/actuator code, original CPU
+  solvers, path generators, model, recordings, destinations and calibration intact.
+
+Evidence: benchmark-2/{report.json,CASE/source.json,reference.json,law.json,proof.json};
+checkpoint/verification.json; parity-final/verification.json; runtime-final/;
+pytest-final.log; audit.json. Native UI reports/screenshots are at:
+/home/jason/Proyectos3/X5/planner_runs/gpu-20261024-ui-right-final
+/home/jason/Proyectos3/X5/planner_runs/gpu-20261024-ui-left
+
+REPRODUCE GPU BENCHMARK (software-only, new output folder required)
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 \
+ .venv-planner-experiment/bin/python diagnostics/gpu_timing_20261024/run_bounded.py \
+ --task benchmark --output diagnostics/gpu_timing_20261024/repeat-new
+
+replay_inputs/ retains byte-identical models/scene data (deduplicated against
+already curated assets); request path substitutions are recorded with SHA256.
+Prototype code/results are retained locally for investigation, not installed
+as alternate visible modes or confused with the validated production optimizer.

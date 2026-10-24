@@ -1,0 +1,1059 @@
+{
+  "cases": {
+    "left_single_arc": {
+      "v1": {
+        "duration_s": 5.173891859809524,
+        "internal_stops": 3,
+        "deep_slowdowns": 3,
+        "stop_times_s": [
+          1.686241396446482,
+          2.65323505457629,
+          3.4417344505918357
+        ],
+        "slowdown_times_s": [
+          1.686241396446482,
+          2.65323505457629,
+          3.4417344505918357
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.02281107629872042,
+        "interior_speed_cv": 0.7439524014447985,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.604540661115593,
+        "path_length_rad": 1.2732039813152143,
+        "endpoint_exclusion": "first/last 5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "variants": [
+        {
+          "index": 0,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.08798824567748026,
+            "certified_joint_tube_rad": 0.08903878442131974,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.05478808511427426,
+            "original_progress_backtrack": 0.00031411524788671485,
+            "reason": "deviation_bound"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.027989060967229307
+        },
+        {
+          "index": 1,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.08798824567748026,
+            "certified_joint_tube_rad": 0.08903878442131974,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.05478808511427426,
+            "original_progress_backtrack": 0.00031411524788671485,
+            "reason": "deviation_bound"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.02838587498990819
+        },
+        {
+          "index": 2,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 0.002
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.08798824567748026,
+            "certified_joint_tube_rad": 0.08903878442131974,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.05478808511427426,
+            "original_progress_backtrack": 0.00031411524788671485,
+            "reason": "deviation_bound"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.028647368948441
+        },
+        {
+          "index": 3,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.25,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0022239240174350217,
+            "certified_joint_tube_rad": 0.002789256611440749,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0015738174273644753,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0007790623927856261,
+            "tip_deviation_m": 0.00145284388933815,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 5.474057550219061,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.28003567825565473,
+            "interior_speed_p10_ratio": 0.3050842679398724,
+            "interior_speed_cv": 0.4543872403250375,
+            "peak_joint_speed_rad_s": 0.525633587358437,
+            "cruise_joint_norm_rad_s": 0.5272917531147583,
+            "path_length_rad": 1.2719554644430047,
+            "endpoint_exclusion": "first/last 5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2777,
+            "dense_peaks": [
+              [
+                0.07487343052595814,
+                0.17935784404809085,
+                0.2946049429094863,
+                0.016053404878502618,
+                0.059109012620103096,
+                0.06324172287456929,
+                0.5256338960589357
+              ],
+              [
+                0.18659210899192805,
+                0.4469777616717579,
+                0.7341851071972664,
+                0.10359514433219787,
+                0.1292937802912974,
+                0.15760472526175792,
+                0.9209973418246961
+              ],
+              [
+                2.9474121860306766,
+                3.3817247909321417,
+                4.978098544203895,
+                3.732447085908876,
+                2.464369760879719,
+                2.587813395036019,
+                5.871412179742457
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2777,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_03/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_03/law.json",
+          "elapsed_s": 4.096188288996927
+        },
+        {
+          "index": 4,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0040426840745682435,
+            "certified_joint_tube_rad": 0.004608016668573966,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0028965675769543273,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0014335992406172393,
+            "tip_deviation_m": 0.002674133753775359,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.831497281877701,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.3602983313269125,
+            "interior_speed_p10_ratio": 0.4838165780575685,
+            "interior_speed_cv": 0.2673891348980897,
+            "peak_joint_speed_rad_s": 0.5174744600119665,
+            "cruise_joint_norm_rad_s": 0.49187386153292223,
+            "path_length_rad": 1.270956666834928,
+            "endpoint_exclusion": "first/last 5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2455,
+            "dense_peaks": [
+              [
+                0.07133232070114418,
+                0.1708751844550327,
+                0.28067171652400785,
+                0.015294165328001775,
+                0.05819147144591866,
+                0.060250730146759475,
+                0.5174745524863917
+              ],
+              [
+                0.1643246414539017,
+                0.33627784155055757,
+                0.557235082405233,
+                0.08072567860065069,
+                0.11938238104320195,
+                0.1185718426593959,
+                0.892593985386511
+              ],
+              [
+                2.351785384217257,
+                3.567608079044339,
+                4.4846584974993196,
+                3.076659700866957,
+                1.776536708347076,
+                1.348344300028655,
+                5.770865771727301
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2455,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_04/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_04/law.json",
+          "elapsed_s": 4.079380107985344
+        },
+        {
+          "index": 5,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.49,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.004406449553539913,
+            "certified_joint_tube_rad": 0.004971782147545635,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.003161166615835799,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.001564504079882366,
+            "tip_deviation_m": 0.0029184603253003386,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.409232220754914,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.36946026502564805,
+            "interior_speed_p10_ratio": 0.4762126052009211,
+            "interior_speed_cv": 0.2806019054714121,
+            "peak_joint_speed_rad_s": 0.5739592724877094,
+            "cruise_joint_norm_rad_s": 0.537654693684687,
+            "path_length_rad": 1.2707569060560353,
+            "endpoint_exclusion": "first/last 5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2244,
+            "dense_peaks": [
+              [
+                0.079216491508652,
+                0.1897615620152443,
+                0.31169361139804014,
+                0.01698458855577542,
+                0.06452930158229768,
+                0.06691008236024347,
+                0.5739591928549107
+              ],
+              [
+                0.21529089617847635,
+                0.43616999603093115,
+                0.7367954045509857,
+                0.10185465245333442,
+                0.14997206157759063,
+                0.1537938982350502,
+                1.098092681016145
+              ],
+              [
+                3.3684884243098683,
+                4.421424772094054,
+                5.537888367057805,
+                4.264725704715033,
+                2.2170916754229166,
+                1.6723549329177125,
+                5.896032355108162
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2244,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_05/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_05/law.json",
+          "elapsed_s": 4.096318388998043
+        },
+        {
+          "index": 6,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.25,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0018450643604084646,
+            "certified_joint_tube_rad": 0.002465466833809162,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0012984216136344082,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0006427601840436562,
+            "tip_deviation_m": 0.0011985966262891945,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.419081230244118,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.3050398727443273,
+            "interior_speed_p10_ratio": 0.33799207701929684,
+            "interior_speed_cv": 0.3954256309098012,
+            "peak_joint_speed_rad_s": 0.5961140667674703,
+            "cruise_joint_norm_rad_s": 0.5957827862083253,
+            "path_length_rad": 1.2721532844989907,
+            "endpoint_exclusion": "first/last 5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2249,
+            "dense_peaks": [
+              [
+                0.0850414684262108,
+                0.20371518073184725,
+                0.33461318353720715,
+                0.018233505724502348,
+                0.06703470048245849,
+                0.07183013976089019,
+                0.5961140141549395
+              ],
+              [
+                0.24370699595678874,
+                0.5644141089346024,
+                0.9270806483122105,
+                0.21591266657841565,
+                0.1857590777767681,
+                0.19901287759774897,
+                1.184957879912882
+              ],
+              [
+                4.294442578908531,
+                4.656487738134777,
+                5.917668828104394,
+                5.436267281227621,
+                3.31431891340083,
+                3.388391031680563,
+                5.981936799047965
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2249,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_06/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_06/law.json",
+          "elapsed_s": 4.35518802999286
+        },
+        {
+          "index": 7,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003360640460472038,
+            "certified_joint_tube_rad": 0.003981042933872714,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0024005050003586895,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.001188158579937707,
+            "tip_deviation_m": 0.002216098343074211,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 3.9536885771245776,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.3809706826570002,
+            "interior_speed_p10_ratio": 0.46280131266590085,
+            "interior_speed_cv": 0.2648676366321812,
+            "peak_joint_speed_rad_s": 0.5841526349732173,
+            "cruise_joint_norm_rad_s": 0.5877388944836246,
+            "path_length_rad": 1.2713127445371664,
+            "endpoint_exclusion": "first/last 5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2016,
+            "dense_peaks": [
+              [
+                0.08263752878036522,
+                0.19795659014675146,
+                0.325154387577848,
+                0.017718083682704507,
+                0.06568960944849679,
+                0.06979965599886914,
+                0.5841526328139031
+              ],
+              [
+                0.22777904821646539,
+                0.4888170161276108,
+                0.7251597556273716,
+                0.13275833177564772,
+                0.19922305567619147,
+                0.1808837475637151,
+                1.1374410793366645
+              ],
+              [
+                1.8212360619237393,
+                4.389917873263506,
+                5.537676219889784,
+                2.626713888188999,
+                2.1724112532349587,
+                1.6579626823150952,
+                5.982035940090167
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2016,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_07/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/initial/left_single_arc/variant_07/law.json",
+          "elapsed_s": 4.454269789974205
+        },
+        {
+          "index": 8,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003663772514359095,
+            "certified_joint_tube_rad": 0.0042841749877598105,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.002620982928768008,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0012972499997650755,
+            "tip_deviation_m": 0.0024196714986800746,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "rejected_numerical",
+          "error": "Rounded path is not C2",
+          "elapsed_s": 0.4556592970038764
+        },
+        {
+          "index": 9,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.002
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003663772514359095,
+            "certified_joint_tube_rad": 0.0042841749877598105,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.002620982928768008,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0012972499997650755,
+            "tip_deviation_m": 0.0024196714986800746,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "rejected_numerical",
+          "error": "Rounded path is not C2",
+          "elapsed_s": 0.453308989002835
+        },
+        {
+          "index": 10,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.004
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003663772514359095,
+            "certified_joint_tube_rad": 0.0042841749877598105,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.002620982928768008,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0012972499997650755,
+            "tip_deviation_m": 0.0024196714986800746,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "rejected_numerical",
+          "error": "Rounded path is not C2",
+          "elapsed_s": 0.4559921390027739
+        }
+      ]
+    },
+    "left_clearance": {
+      "v1": {
+        "duration_s": 9.051092413028472,
+        "internal_stops": 11,
+        "deep_slowdowns": 11,
+        "stop_times_s": [
+          1.6659813488055728,
+          2.067975312535887,
+          2.6690793549616485,
+          3.4918235256825434,
+          3.9467146702136766,
+          4.719774793497845,
+          4.998131952969205,
+          5.559825161635855,
+          6.150168419643919,
+          6.74067847359824,
+          7.584509463064897
+        ],
+        "slowdown_times_s": [
+          1.6659813488055728,
+          2.067975312535887,
+          2.6690793549616485,
+          3.4918235256825434,
+          3.9467146702136766,
+          4.719774793497845,
+          4.998131952969205,
+          5.559825161635855,
+          6.150168419643919,
+          6.74067847359824,
+          7.584509463064897
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.009269933069582554,
+        "interior_speed_cv": 1.1098789187383085,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.42753764024058427,
+        "path_length_rad": 1.2709039382831537,
+        "endpoint_exclusion": "first/last 5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "variants": [
+        {
+          "index": 0,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.011910265669129632,
+            "certified_joint_tube_rad": 0.012482070472035277,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.007364845080739648,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.005578115166519334,
+            "tip_deviation_m": 0.008452343700596266,
+            "collision_zone": {
+              "samples_checked": 593,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2014,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.22692746500251815
+        },
+        {
+          "index": 1,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.03355379320617309,
+            "certified_joint_tube_rad": 0.034357122135642494,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.021249326018251746,
+            "original_progress_backtrack": 2.8493796982220765e-05,
+            "reason": "deviation_bound"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.08373384299920872
+        },
+        {
+          "index": 2,
+          "params": {
+            "kind": "quintic",
+            "fraction": 0.45,
+            "simplify": 0.002
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.06591559583570028,
+            "certified_joint_tube_rad": 0.06686199141577878,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.04590259577392587,
+            "original_progress_backtrack": 0.0001706180786564815,
+            "reason": "deviation_bound"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.06860633002361283
+        },
+        {
+          "index": 3,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.25,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0005176625402281967,
+            "certified_joint_tube_rad": 0.001079992967444118,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00037478889111280944,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00013432659109601053,
+            "tip_deviation_m": 0.00016844102447684118,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.41028236801503226
+        },
+        {
+          "index": 4,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.00094341009044713,
+            "certified_joint_tube_rad": 0.0015057405176630415,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0007140444041220939,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00024469003799075544,
+            "tip_deviation_m": 0.0003209434133343714,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.40831031900597736
+        },
+        {
+          "index": 5,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.49,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0010285651122676316,
+            "certified_joint_tube_rad": 0.0015908955394835422,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0007819735301813346,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00026676260261390846,
+            "tip_deviation_m": 0.00035148251460270606,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.41000338102458045
+        },
+        {
+          "index": 6,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.25,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0004289846698058423,
+            "certified_joint_tube_rad": 0.0010460891247990787,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00030439220224520724,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0001113375190095529,
+            "tip_deviation_m": 0.00013679995476223767,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.44159226602641866
+        },
+        {
+          "index": 7,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.45,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.000783751014676426,
+            "certified_joint_tube_rad": 0.0014008554696696104,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0005867737887984004,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00020330431727945986,
+            "tip_deviation_m": 0.0002637291691786797,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.4405991329695098
+        },
+        {
+          "index": 8,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.0005
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0008547111601784896,
+            "certified_joint_tube_rad": 0.0014718156151716803,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0006433475353463947,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00022169833739359707,
+            "tip_deviation_m": 0.00028916126756578536,
+            "collision_zone": {
+              "samples_checked": 1705,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2021,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.4421850279904902
+        },
+        {
+          "index": 9,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.002
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.002001555880727007,
+            "certified_joint_tube_rad": 0.0026185729109276727,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0016740267515592717,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0009149815687807342,
+            "tip_deviation_m": 0.0013071848406952969,
+            "collision_zone": {
+              "samples_checked": 877,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2013,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.26773236598819494
+        },
+        {
+          "index": 10,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 0.004
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0036482236783565553,
+            "certified_joint_tube_rad": 0.004265199378083616,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.002589327292940133,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0012615705456503962,
+            "tip_deviation_m": 0.002213345171218639,
+            "collision_zone": {
+              "samples_checked": 877,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.26004655903670937
+        }
+      ]
+    }
+  },
+  "reference_recording": {
+    "0.1": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 1,
+      "stop_times_s": [],
+      "slowdown_times_s": [
+        4.000134979423868
+      ],
+      "interior_speed_min_ratio": 0.07540473242534994,
+      "interior_speed_p10_ratio": 0.21683249352398515,
+      "interior_speed_cv": 0.4184959989153623,
+      "peak_joint_speed_rad_s": 0.7433376229775143,
+      "cruise_joint_norm_rad_s": 0.717996390279705,
+      "path_length_rad": 1.9036348628022752,
+      "endpoint_exclusion": "first/last 5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.1,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    },
+    "0.2": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.06868922964482382,
+      "interior_speed_p10_ratio": 0.20759910454946753,
+      "interior_speed_cv": 0.4148709931640994,
+      "peak_joint_speed_rad_s": 0.7330609410698182,
+      "cruise_joint_norm_rad_s": 0.7264415078736104,
+      "path_length_rad": 1.8962712852709234,
+      "endpoint_exclusion": "first/last 5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.2,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    },
+    "0.3": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.07135832066369721,
+      "interior_speed_p10_ratio": 0.21224579968766338,
+      "interior_speed_cv": 0.41404532552107287,
+      "peak_joint_speed_rad_s": 0.7198414790760677,
+      "cruise_joint_norm_rad_s": 0.721764439446077,
+      "path_length_rad": 1.8801383025191285,
+      "endpoint_exclusion": "first/last 5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.3,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    }
+  },
+  "reference_used_after_generation_only": true,
+  "motor_commands": 0,
+  "live_camera": false,
+  "levels": [
+    8,
+    16,
+    32
+  ]
+}

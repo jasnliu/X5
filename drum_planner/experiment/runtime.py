@@ -25,7 +25,8 @@ class Job:
         self.log_path=self.folder/'worker.log';self.log=self.log_path.open('wb');self.offset=0;self.cancelled=False
         self.started=time.monotonic();self.last_limits=0.;self.last_stop=0.;self.limits={};self.reaped=False
         env=[f'--setenv={k}={v}' for k,v in os.environ.items() if k in (
-            'PATH','LD_LIBRARY_PATH','AMENT_PREFIX_PATH','CMAKE_PREFIX_PATH','PYTHONPATH','ROS_DISTRO','DISPLAY','XAUTHORITY')]
+            'PATH','LD_LIBRARY_PATH','AMENT_PREFIX_PATH','CMAKE_PREFIX_PATH','PYTHONPATH','ROS_DISTRO','DISPLAY','XAUTHORITY',
+            'XDG_CACHE_HOME','X5_PLANNER_CACHE_DIR')]
         args=['systemd-run','--user','--wait','--pipe','--quiet','--unit='+self.unit,
               '-p','MemoryAccounting=yes','-p','MemoryMax=3G','-p','MemorySwapMax=128M',
               '-p','TasksMax=96','-p','OOMPolicy=stop','-p','KillMode=control-group',

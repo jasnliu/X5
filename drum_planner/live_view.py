@@ -121,7 +121,7 @@ class LiveDepthView:
         self.freeze_button=QtWidgets.QPushButton('Freeze view [Space]')
         self.freeze_button.clicked.connect(self.toggle_freeze); controls.addWidget(self.freeze_button)
         controls.addWidget(QtWidgets.QLabel('3D layer:'))
-        self.mode=QtWidgets.QComboBox(); self.mode.addItems(['Raw depth points','Obstacle voxels (10 mm)'])
+        self.mode=QtWidgets.QComboBox(); self.mode.addItems(['Raw depth points','Obstacle voxels (5 mm)'])
         self.mode.currentIndexChanged.connect(self.change_mode); controls.addWidget(self.mode)
         controls.addWidget(QtWidgets.QLabel('Color:'))
         self.color=QtWidgets.QComboBox(); self.color.addItems(['Camera depth','World height'])
@@ -210,14 +210,14 @@ class LiveDepthView:
             mid=packet.bounds.mean(axis=0);half=max(.1,float(np.max(np.ptp(packet.bounds,axis=0)))*.53)
             self.viewport.fit(np.array([mid-half,mid+half]))
             self.fit_needed=False
-        layer='10 mm occupied voxel centers' if voxel else 'Raw depth returns'
+        layer='5 mm occupied voxel centers' if voxel else 'Raw depth returns'
         prefix='FROZEN' if self.frozen else 'LIVE'
         self.viewport.set_title(f'{prefix} — {layer}\nFrame {packet.sequence:,} | showing {len(points):,} / {full_count:,}')
         self.image_title.setText(prefix+' — '+('nearest confirmed return (3 of 5 frames)' if voxel else 'latest displayed depth frame'))
         image=self.QtGui.QImage(rgb.data,rgb.shape[1],rgb.shape[0],rgb.strides[0],self.QtGui.QImage.Format_RGB888).copy()
         self.image.setPixmap(self.QtGui.QPixmap.fromImage(image).scaled(
             self.image.size(),self.QtCore.Qt.KeepAspectRatio,self.QtCore.Qt.SmoothTransformation))
-        self.detail.setText(('Three-of-five confirmed depth, 10 mm voxel centers. ' if voxel else 'Single-frame raw returns. ')+
+        self.detail.setText(('Three-of-five confirmed depth, 5 mm voxel centers. ' if voxel else 'Single-frame raw returns. ')+
                             'Empty/hidden regions are UNKNOWN; no reconstructed back surfaces or robot pose is implied.')
         self.modes_rendered.add('voxels' if voxel else 'raw')
         self.draw_canvas()

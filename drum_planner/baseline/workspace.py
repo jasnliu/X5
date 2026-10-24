@@ -9,20 +9,26 @@ from pathlib import Path
 
 from PyQt5 import QtCore,QtGui,QtWidgets
 
-from ..common import DEFAULT_CALIBRATION,JOINTS,LEFT_JOINTS,atomic_json
+from ..common import DEFAULT_CALIBRATION,JOINTS,LEFT_JOINTS,arm_side,arm_joints,atomic_json
 from ..experiment.runtime import Job
 from ..planned_view import load,load_scene
-from ..trajectory_view import PlanDisplay
+from .sequence import PlanDisplay
 from . import service,tasks
+from .arms import side_of,other_side,require_side
 from .feedback import DisplayTelemetry,normalized_pose,movement_error,STALE_SECONDS
 from .windows import DisplayModel,ArmWindow,PlanWindow,ControlWindow
 
 
 class Workspace:
-    def __init__(self,folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,autoscene=True):
+    def __init__(self,folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,autoscene=True,moving_side=None,timing_backend='adaptive'):
+        if timing_backend not in ('adaptive','sparse'):raise ValueError('Unknown hardware timing backend')
+        self.timing_backend=timing_backend
+        self.side=arm_side(moving_side or (side_of(resume) if resume else 'right'));self.other=other_side(self.side)
+        if resume:require_side(resume,self.side)
         self.session=Path(folder).resolve();self.session.mkdir(parents=True,exist_ok=True);self.cal_path=Path(cal_path)
         self.simulated=simulate_plan is not None or bool(resume and resume['simulated'])
         self.simulate_plan=Path(simulate_plan or resume['plan']) if self.simulated else None
+        self.simulation_recalculate=False;self.destination_binding=None
         self.plan=None;self.plan_valid=False;self.anchor=None;self.prepared=None
         self.pose=None;self.initial_preview_pose=False;self.reader=None;self.reader_retry=0.;self.reader_error=''
         self.job=None;self.job_kind=None;self.work_scene=None;self.want_start=False;self.start_rate=rate
@@ -31,25 +37,31 @@ class Workspace:
         self.closed=False;self.close_requested=False;self.last_error='';self.messages=[];self.scene_path=None
         self.initial_scene_pending=autoscene and not self.simulated and not resume
         self.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([]);self.app.setQuitOnLastWindowClosed(False)
-        model=PlanDisplay(self.simulate_plan or resume['plan']) if self.simulated or resume else DisplayModel(self.session/'display_model',self.cal_path)
+        model=PlanDisplay(self.simulate_plan or resume['plan']) if self.simulated or resume else DisplayModel(self.session/'display_model',self.cal_path,moving_side=self.side)
+        if model.side!=self.side:raise ValueError('Preview plan arm does not match selected mode')
+        if self.simulated and not model.playable:self.simulation_recalculate=True
         self.preview=PlanWindow(model,rate,self.speed_changed)
-        self.live=ArmWindow('X5 · Live arm — measured status',model)
+        self.live=ArmWindow(f'X5 · {self.side.capitalize()} live arm — measured status',model)
         self.live.viewport.set_title('LIVE ARM — encoder feedback only')
         self.control=ControlWindow(self);self.preview.notice=self.message
+        if model.obj.get('destination_bindings'):self.control.destinations.restore(model.obj['destination_bindings'])
         self.shortcuts=[]
         for window in self.windows:
             shortcut=QtWidgets.QShortcut(QtGui.QKeySequence('Space'),window)
             shortcut.activated.connect(lambda:self.action(self.hold));self.shortcuts.append(shortcut)
         if self.simulated:
-            self.sim_joints=dict(zip(JOINTS,model.req['start']))|dict(zip(LEFT_JOINTS,model.req['left']))
+            self.sim_joints=dict(zip(arm_joints(self.side),model.req['start']))|dict(zip(arm_joints(self.other),model.req[self.other]))
             self.sim_joints['openarmx_left_finger_joint1']=model.req['left_opening_m']
-            self.control.setWindowTitle('X5 · Baseline controls — OFFLINE simulated motors')
+            self.control.setWindowTitle(f'X5 · Workspace curve {self.side.upper()} — OFFLINE simulated motors')
             self.control.buttons['start'].setText('2 · Start SIMULATED trajectory')
             try:self.set_scene(model.obj['provenance']['scene'])
             except Exception as exc:self.message('Offline scene unavailable: '+str(exc),error=True)
         if resume:
             self.install_plan(model);self.plan_valid=False
             self.set_scene(model.obj['provenance']['scene']);self.connect_owner()
+        if self.timing_backend=='sparse':
+            self.control.setWindowTitle(self.control.windowTitle()+' · SPARSE IPOPT FORK')
+            if self.simulated and not resume:self.simulation_recalculate=True
         self.arrange()
         for window in self.windows:window.show()
         self.message('Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.')
@@ -66,7 +78,7 @@ class Workspace:
     def arrange(self):
         r=self.app.primaryScreen().availableGeometry();cw=min(430,max(350,r.width()//4));pw=(r.width()-cw)//2
         for window,x,w in [(self.control,r.x(),cw),(self.preview,r.x()+cw,pw),(self.live,r.x()+cw+pw,pw)]:
-            window.resize(w,min(740 if window is self.control else 900,r.height()));window.move(x,r.y())
+            window.resize(w,min(900,r.height()));window.move(x,r.y())
 
     def message(self,text,*,error=False):
         text=str(text)
@@ -104,7 +116,7 @@ class Workspace:
         if not self.initial_preview_pose and self.preview.plan is None:
             self.preview.set_pose(copy.deepcopy(pose));self.initial_preview_pose=True
         if self.anchor is not None and not self.active:
-            error=movement_error(self.anchor,pose)
+            error=movement_error(self.anchor,pose,self.side)
             if error:self.invalidate(error)
 
     def fresh_pose(self):
@@ -127,12 +139,12 @@ class Workspace:
             if error and self.anchor is not None:
                 self.invalidate(error);raise ValueError(error)
 
-    def invalidate(self,message):
+    def invalidate(self,message,*,error=True):
         self.plan_valid=False;self.anchor=None;self.prepared=None;self.want_start=False
         if self.reader:self.reader.set_guard(None)
         if self.job and self.job_kind!='scene':self.cancel_job()
         self.preview.caption.setText('Preview only — previous calculation invalid. Click Calculate trajectory again.')
-        self.message(message,error=True)
+        self.message(message,error=error)
 
     def cancel_job(self):
         self.want_start=False
@@ -142,36 +154,64 @@ class Workspace:
 
     def launch_job(self,kind,anchor=None):
         folder=self.session/(kind+'-'+uuid.uuid4().hex[:8]);folder.mkdir()
-        cmd=['/usr/bin/python3','-m','drum_planner.baseline.work',kind,'--folder',str(folder),'--calibration',str(self.cal_path)]
+        cmd=['/usr/bin/python3','-m','drum_planner.baseline.work',kind,'--folder',str(folder),'--calibration',str(self.cal_path),'--side',self.side]
+        if self.timing_backend=='sparse':cmd+=['--timing-backend','sparse']
         if anchor is not None:
-            inputs=dict(anchor=anchor)
+            inputs=dict(anchor=anchor,destinations=self.destination_binding)
             if kind=='check':inputs['plan']=str(self.plan.path)
             atomic_json(folder/'input.json',inputs);cmd+=['--input',str(folder/'input.json')]
-        self.job=Job(cmd,folder,timeout=300 if kind=='calculate' else 180,allow_can=kind!='scene')
+        count=len((self.destination_binding or {}).get('checkpoints',[]))
+        timeout=(120+600)*(count+1 if count>1 else 1) if kind=='calculate' else 180
+        self.job=Job(cmd,folder,timeout=timeout,allow_can=kind!='scene')
         self.job_kind=kind;self.work_scene=None
 
     def install_plan(self,plan):
-        if not plan.playable:raise ValueError('No valid Baseline trajectory. Click Calculate again after correcting the reported obstacle/pose.')
+        if plan.side!=self.side:raise ValueError('Plan arm does not match selected mode')
+        if not plan.playable:raise ValueError('No valid Workspace curve trajectory. Click Calculate again after correcting the reported obstacle/pose.')
         self.plan=plan;self.preview.install_plan(plan)
         # The live robot remains at encoder positions, NOT the new path's time.
         self.live.robot.plan=plan
         if self.pose:self.live.set_pose(self.pose)
-        self.preview.caption.setText('Calculated Baseline trajectory. Play/Pause/scrub here affect only this preview.')
+        self.preview.caption.setText('Calculated Workspace curve trajectory. Play/Pause/scrub here affect only this preview.')
+
+    def destinations_changed(self):
+        self.simulation_recalculate=True;self.destination_binding=None
+        self.invalidate('Destination selection changed. Click Calculate trajectory when ready.',error=False)
+        self.preview.clock.pause()
+
+    def launch_simulation_job(self,anchor,binding):
+        folder=self.session/('calculate-'+uuid.uuid4().hex[:8]);folder.mkdir()
+        atomic_json(folder/'input.json',dict(anchor=anchor,destinations=binding,scene=str(self.scene_path)))
+        count=len(binding.get('checkpoints',[]));timeout=(120+600)*(count+1 if count>1 else 1)
+        self.job=Job(['/usr/bin/python3','-m','drum_planner.baseline.work','offline','--folder',str(folder),
+            '--input',str(folder/'input.json'),'--calibration',str(self.cal_path),'--side',self.side]+
+            (['--timing-backend','sparse'] if self.timing_backend=='sparse' else []),folder,timeout=timeout)
+        self.job_kind='calculate';self.work_scene=None
+        self.message('OFFLINE CALCULATING selected checkpoints from simulated joints and saved scene. No camera/CAN.')
 
     def calculate(self):
         self.want_start=False;self.reverse_intent=None
         if self.active:
             self.message('Arm is running or held. Use Emergency Hold / Reverse to rest + relax, then Calculate. No plan or motor state changed.');return
+        from ..experiment.checkpoints import freeze
+        selected=self.control.destinations.paths()
+        if not all(selected):
+            self.message('Select a destination in each dropdown, or remove the extra checkpoint, then Calculate.',error=True);return
+        binding=freeze(selected,self.side,self.session)
         self.detach_finished_owner()
+        self.destination_binding=binding
         self.cancel_job();self.initial_scene_pending=False;self.anchor=None;self.plan_valid=False;self.prepared=None
         if self.reader:self.reader.set_guard(None)
         anchor=self.fresh_pose();self.anchor=anchor
         if self.reader:self.reader.set_guard(anchor)
+        self.last_error=''
         if self.simulated:
+            if self.simulation_recalculate:
+                self.launch_simulation_job(anchor,binding);return
             self.install_plan(PlanDisplay(self.simulate_plan));self.plan_valid=True
             self.message('OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.');return
         self.stop_reader();self.launch_job('calculate',anchor);self.last_error=''
-        self.message('CALCULATING — leave the right arm still; passive left sway is allowed. Progress is in the terminal. Calculate again restarts; Hold cancels. No motors enabled.')
+        self.message(f'CALCULATING — leave the {self.side} arm still; passive {self.other} sway is allowed. Progress is in the terminal. Calculate again restarts; Hold cancels. No motors enabled.')
 
     def start(self):
         if self.active:
@@ -216,6 +256,7 @@ class Workspace:
             folder=Path(shlex.split(next(iter(found)))[-1])
             info=json.loads((folder/'control.json').read_text())
             if bool(info['simulated'])!=self.simulated:raise ValueError('Controller mode mismatch')
+            require_side(info,self.side)
             self.owner_info=info;self.last_owner_info=info
     def ensure_owner(self):
         if not self.owner_info:self.discover_owner()
@@ -240,7 +281,7 @@ class Workspace:
     def launch_owner(self):
         self.stop_reader()
         folder=self.session/('controller-'+uuid.uuid4().hex[:8]);folder.mkdir()
-        try:info=service.launch(folder,prepared=self.prepared,simulate_plan=self.plan.path if self.simulated else None,rate=self.start_rate)
+        try:info=service.launch(folder,prepared=self.prepared,simulate_plan=self.plan.path if self.simulated else None,rate=self.start_rate,moving_side=self.side)
         except Exception:
             # systemd may have accepted a launch before its client timed out.
             # Retain the address for reconnect/cleanup, but cancel Start intent.
@@ -251,11 +292,13 @@ class Workspace:
             raise
         self.owner_info=info;self.last_owner_info=info;self.owner_status={};self.client=None;self.start_sent=False
         self.owner_connect_deadline=time.monotonic()+10;self.owner_retry=0.
-        print('Recovery: ./plan_drums.sh baseline --resume '+str(folder),flush=True)
+        mode='--hardware-sparse' if self.timing_backend=='sparse' else '--hardware'
+        print(f'Recovery: ./plan_drums.sh {mode} --{self.side} --resume '+str(folder),flush=True)
 
     def connect_owner(self):
         if not self.owner_info:return
         try:
+            require_side(self.owner_info,self.side)
             self.client=service.Client(self.owner_info);self.owner_retry=0.
         except Exception as exc:
             self.client=None;self.owner_retry=time.monotonic()+1.
@@ -285,7 +328,7 @@ class Workspace:
             if s.get('measured_pose'):self.set_pose(s['measured_pose'])
             if self.want_start and s.get('phase')=='READY' and not self.start_sent:
                 self.start_sent=True;self.want_start=False;self.anchor=None
-                self.client.send('start',confirmation='MOVE RIGHT ARM')
+                self.client.send('start',confirmation=f'MOVE {self.side.upper()} ARM')
             self.control.run_status.setText(('SIMULATED ' if self.simulated else 'ARM: ')+s['phase']+
                 (' · '+s['error'] if s.get('error') else '')+(' · '+s['feedback_error'] if s.get('feedback_error') else '')+
                 (' · Warning: '+'; '.join(s['warnings']) if s.get('warnings') else ''))
@@ -334,9 +377,9 @@ class Workspace:
             result=json.loads((current.folder/'result.json').read_text());self.set_scene(result['scene'])
             if kind=='calculate':
                 plan=PlanDisplay(result['plan']);plan.check_live_calibration(self.cal_path)
-                self.prepared=Path(result['prepared'])
+                self.prepared=Path(result['prepared']) if result.get('prepared') else None
                 self.install_plan(plan);self.plan_valid=True
-                self.message('READY — path checked on the captured scene. Preview, then Start. Keep the right arm and obstacles in place; passive left sway is allowed.')
+                self.message(f'READY — path checked on the captured scene. Preview, then Start. Keep the {self.side} arm and obstacles in place; passive {self.other} sway is allowed.')
             elif self.want_start:
                 self.prepared=Path(result['prepared']);tasks.check_packet(self.prepared)
                 self.launch_owner()
@@ -351,7 +394,7 @@ class Workspace:
         if self.simulated:
             self.set_pose(normalized_pose(self.sim_joints,now));self.reader_error='';return
         if self.reader is None and now>=self.reader_retry:
-            self.reader=DisplayTelemetry(self.session/'live-encoders');self.reader.set_guard(self.anchor)
+            self.reader=DisplayTelemetry(self.session/'live-encoders',moving_side=self.side);self.reader.set_guard(self.anchor)
         if self.reader:
             pose=self.reader.snapshot()
             if pose:self.set_pose(pose)
@@ -390,8 +433,8 @@ class Workspace:
         self.want_start=False;self.reverse_intent=None;self.close_requested=True
 
     def report(self):
-        return dict(type='baseline_three_windows',plan=None if self.plan is None else str(self.plan.path),
-            plan_valid=self.plan_valid,simulated=self.simulated,owner=self.last_owner_info,owner_status=self.owner_status,
+        return dict(type='baseline_three_windows',moving_side=self.side,plan=None if self.plan is None else str(self.plan.path),
+            plan_valid=self.plan_valid,simulated=self.simulated,selected_destinations=self.control.destinations.paths(),owner=self.last_owner_info,owner_status=self.owner_status,
             last_error=self.last_error,button_states={k:b.isEnabled() for k,b in self.control.buttons.items()},
             preview_renderer=self.preview.viewport.report(),live_renderer=self.live.viewport.report())
 
@@ -406,8 +449,9 @@ class Workspace:
         self.preview.shutdown();self.live.shutdown();self.control.hide();self.control.deleteLater();self.app.processEvents()
 
 
-def show(folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,seconds=0.):
-    view=Workspace(folder,cal_path,rate=rate,simulate_plan=simulate_plan,resume=resume)
+def show(folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,seconds=0.,moving_side=None,timing_backend='adaptive'):
+    view=Workspace(folder,cal_path,rate=rate,simulate_plan=simulate_plan,resume=resume,moving_side=moving_side,
+                   **({'timing_backend':timing_backend} if timing_backend!='adaptive' else {}))
     old={s:signal.signal(s,lambda *_:view.request_close()) for s in (signal.SIGINT,signal.SIGTERM)}
     began=time.monotonic()
     try:

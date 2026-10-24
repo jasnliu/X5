@@ -1,0 +1,8 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "common.glsl"
+void main(){uint l=gl_LocalInvocationID.x,c=gl_WorkGroupID.x;double f=0.0,v=-1e30;
+ for(uint r=l;r<p.m;r+=64){f+=a[AUX()+(c*p.m+r)*5];v=max(v,a[AUX()+(c*p.m+r)*5+4]);}
+ for(uint j=l;j<p.n;j+=64)f+=a[W()+j]*candidate(c,j);
+ double total=sum64(f),peak=max64(v);if(l==0){a[F()+c]=total;a[V()+c]=peak;}
+}

@@ -1,0 +1,183 @@
+[checkpoints progress] LEG 1/3: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   3.3s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   5.4s] candidate 2: VALID; 25.84s; reversals=2; coordination=14.280; spatial=55.725
+[progress +   5.5s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   8.9s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  10.1s] candidate 4: VALID; 7.74s; reversals=4; coordination=8.693; spatial=51.343
+[progress +  10.2s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  12.5s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  12.8s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  16.0s] candidate 7: VALID; 47.56s; reversals=3; coordination=7.869; spatial=103.284
+[progress +  16.1s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  18.5s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  19.8s] candidate 9: VALID; 10.59s; reversals=5; coordination=12.719; spatial=85.155
+[progress +  19.9s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  23.1s] candidate 10: VALID; 8.24s; reversals=11; coordination=17.523; spatial=373.748
+[progress +  23.1s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  26.9s] candidate 11: VALID; 10.01s; reversals=13; coordination=14.201; spatial=95.864
+[progress +  27.1s] arch search 1/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  27.3s] arch search 2/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  27.5s] arch search 3/10: 3/60 coarse-feasible; best blocked samples 0
+[progress +  27.7s] arch search 4/10: 2/60 coarse-feasible; best blocked samples 0
+[progress +  27.9s] arch search 5/10: 10/60 coarse-feasible; best blocked samples 0
+[progress +  28.2s] arch search 6/10: 16/60 coarse-feasible; best blocked samples 0
+[progress +  28.4s] arch search 7/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  28.6s] arch search 8/10: 28/60 coarse-feasible; best blocked samples 0
+[progress +  28.8s] arch search 9/10: 37/60 coarse-feasible; best blocked samples 0
+[progress +  29.0s] arch search 10/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  30.1s] candidate 12: VALID; 7.24s; reversals=5; coordination=5.390; spatial=14.640
+[progress +  31.4s] candidate 13: VALID; 7.82s; reversals=4; coordination=6.100; spatial=25.447
+[progress +  32.6s] candidate 14: VALID; 7.61s; reversals=5; coordination=5.500; spatial=19.734
+[progress +  35.5s] partial shortcut (economy): 34 accepted changes; objective 1.2159
+[progress +  35.7s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  37.8s] candidate 16: VALID; 26.89s; reversals=2; coordination=13.928; spatial=55.380
+[progress +  40.0s] partial shortcut (economy): 22 accepted changes; objective 0.9489
+[progress +  41.1s] candidate 17: VALID; 6.18s; reversals=6; coordination=10.031; spatial=55.944
+[progress +  42.6s] elastic deformation: 16 accepted updates; objective 1.0500
+[progress +  42.8s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  43.5s] candidate 19: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  43.5s] candidate 20: timing rejected: Trajectory would be impractically slow; rejected instead of creeping
+[progress +  44.6s] elastic deformation: 1 accepted updates; objective 1.4665
+[progress +  44.8s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  46.0s] candidate 22: VALID; 8.36s; reversals=6; coordination=9.225; spatial=51.746
+[progress +  46.0s] SHARED POOL COMPLETE: 12 validated candidates; 45.3s; no recording interiors
+[progress +  46.2s] progress: candidate 16, score=1.2329, duration=26.89s
+[progress +  46.2s] progress: candidate 2, score=1.2732, duration=25.84s
+[progress +  46.2s] progress: candidate 4, score=1.3397, duration=7.74s
+[progress +  46.2s] progress: candidate 17, score=1.6849, duration=6.18s
+[progress +  46.2s] progress: candidate 9, score=1.9108, duration=10.59s
+[progress +  46.2s] progress: candidate 7, score=1.9447, duration=47.56s
+[progress +  46.2s] progress: candidate 11, score=4.3369, duration=10.01s
+[progress +  46.2s] progress: candidate 10, score=6.2081, duration=8.24s
+[progress +  46.2s] SELECTED candidate 16: lowest progress score; 8 eligible, equally checked candidates
+[checkpoints progress] LEG 2/3: destinationR1 → destinationR4; budget 120s; frozen scene unchanged
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   2.3s] candidate 1: rejected by continuous joint bounds
+[progress +   3.8s] candidate 2: VALID; 10.52s; reversals=0; coordination=1.203; spatial=12.929
+[progress +   3.8s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   5.2s] candidate 3: rejected by continuous joint bounds
+[progress +   6.4s] candidate 4: VALID; 7.48s; reversals=0; coordination=1.747; spatial=6.549
+[progress +   6.5s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +   9.4s] candidate 5: VALID; 5.42s; reversals=0; coordination=2.239; spatial=13.872
+[progress +   9.4s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  11.9s] candidate 6: VALID; 5.99s; reversals=0; coordination=3.722; spatial=15.014
+[progress +  11.9s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  14.6s] candidate 7: VALID; 4.96s; reversals=0; coordination=1.000; spatial=7.049
+[progress +  14.6s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  17.6s] candidate 8: VALID; 6.88s; reversals=0; coordination=7.526; spatial=39.045
+[progress +  17.9s] arch search 1/10: 16/60 coarse-feasible; best blocked samples 0
+[progress +  18.1s] arch search 2/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  18.3s] arch search 3/10: 37/60 coarse-feasible; best blocked samples 0
+[progress +  18.5s] arch search 4/10: 30/60 coarse-feasible; best blocked samples 0
+[progress +  18.7s] arch search 5/10: 39/60 coarse-feasible; best blocked samples 0
+[progress +  18.9s] arch search 6/10: 36/60 coarse-feasible; best blocked samples 0
+[progress +  19.1s] arch search 7/10: 40/60 coarse-feasible; best blocked samples 0
+[progress +  19.3s] arch search 8/10: 47/60 coarse-feasible; best blocked samples 0
+[progress +  19.5s] arch search 9/10: 42/60 coarse-feasible; best blocked samples 0
+[progress +  19.7s] arch search 10/10: 37/60 coarse-feasible; best blocked samples 0
+[progress +  20.9s] candidate 9: VALID; 7.04s; reversals=0; coordination=2.310; spatial=4.221
+[progress +  22.1s] candidate 10: VALID; 6.20s; reversals=0; coordination=1.201; spatial=3.669
+[progress +  23.2s] candidate 11: VALID; 6.58s; reversals=0; coordination=1.654; spatial=3.648
+[progress +  24.9s] partial shortcut (economy): 21 accepted changes; objective 0.3173
+[progress +  26.0s] candidate 12: VALID; 6.77s; reversals=0; coordination=2.766; spatial=10.687
+[progress +  27.9s] partial shortcut (economy): 21 accepted changes; objective 0.3531
+[progress +  29.0s] candidate 13: VALID; 6.69s; reversals=2; coordination=34.135; spatial=61.839
+[progress +  30.8s] elastic deformation: 22 accepted updates; objective 0.3233
+[progress +  31.9s] candidate 14: VALID; 5.89s; reversals=0; coordination=2.178; spatial=5.232
+[progress +  33.6s] elastic deformation: 20 accepted updates; objective 0.3699
+[progress +  34.7s] candidate 15: VALID; 5.98s; reversals=0; coordination=1.682; spatial=4.023
+[progress +  34.7s] SHARED POOL COMPLETE: 13 validated candidates; 34.1s; no recording interiors
+[progress +  34.9s] progress: candidate 4, score=0.3266, duration=7.48s
+[progress +  34.9s] progress: candidate 12, score=0.3819, duration=6.77s
+[progress +  34.9s] progress: candidate 5, score=0.4220, duration=5.42s
+[progress +  34.9s] progress: candidate 2, score=0.4445, duration=10.52s
+[progress +  34.9s] progress: candidate 6, score=0.5145, duration=5.99s
+[progress +  34.9s] progress: candidate 7, score=0.6622, duration=4.96s
+[progress +  34.9s] progress: candidate 8, score=0.8501, duration=6.88s
+[progress +  34.9s] progress: candidate 13, score=0.8757, duration=6.69s
+[progress +  34.9s] SELECTED candidate 4: lowest progress score; 8 eligible, equally checked candidates
+[checkpoints progress] LEG 3/3: destinationR4 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   1.4s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   2.9s] candidate 2: VALID; 12.47s; reversals=0; coordination=4.268; spatial=18.103
+[progress +   2.9s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   3.7s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   5.3s] candidate 4: VALID; 15.36s; reversals=0; coordination=3.132; spatial=25.951
+[progress +   5.4s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +   6.0s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   7.2s] candidate 6: VALID; 7.67s; reversals=0; coordination=3.863; spatial=28.712
+[progress +   7.2s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   8.0s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   9.2s] candidate 8: VALID; 8.14s; reversals=0; coordination=5.428; spatial=23.185
+[progress +   9.2s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  10.0s] candidate 9: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  11.2s] candidate 10: VALID; 7.11s; reversals=2; coordination=4.906; spatial=35.743
+[progress +  11.2s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  13.1s] candidate 11: VALID; 4.95s; reversals=0; coordination=5.348; spatial=31.217
+[progress +  13.3s] arch search 1/10: 3/60 coarse-feasible; best blocked samples 0
+[progress +  13.5s] arch search 2/10: 4/60 coarse-feasible; best blocked samples 0
+[progress +  13.7s] arch search 3/10: 9/60 coarse-feasible; best blocked samples 0
+[progress +  13.9s] arch search 4/10: 17/60 coarse-feasible; best blocked samples 0
+[progress +  14.1s] arch search 5/10: 25/60 coarse-feasible; best blocked samples 0
+[progress +  14.3s] arch search 6/10: 31/60 coarse-feasible; best blocked samples 0
+[progress +  14.5s] arch search 7/10: 31/60 coarse-feasible; best blocked samples 0
+[progress +  14.7s] arch search 8/10: 32/60 coarse-feasible; best blocked samples 0
+[progress +  14.9s] arch search 9/10: 29/60 coarse-feasible; best blocked samples 0
+[progress +  15.1s] arch search 10/10: 29/60 coarse-feasible; best blocked samples 0
+[progress +  16.3s] candidate 12: VALID; 7.65s; reversals=2; coordination=5.404; spatial=13.046
+[progress +  17.6s] candidate 13: VALID; 8.03s; reversals=0; coordination=6.136; spatial=14.652
+[progress +  18.8s] candidate 14: VALID; 7.06s; reversals=2; coordination=5.627; spatial=19.119
+[progress +  19.9s] partial shortcut (economy): 21 accepted changes; objective 1.0840
+[progress +  21.1s] candidate 15: VALID; 7.25s; reversals=0; coordination=5.672; spatial=26.446
+[progress +  22.4s] partial shortcut (economy): 28 accepted changes; objective 1.3931
+[progress +  23.5s] candidate 16: VALID; 6.78s; reversals=0; coordination=6.419; spatial=24.684
+[progress +  24.1s] elastic deformation: 6 accepted updates; objective 1.1354
+[progress +  25.3s] candidate 17: VALID; 7.15s; reversals=1; coordination=4.362; spatial=15.562
+[progress +  25.8s] elastic deformation: 6 accepted updates; objective 1.6752
+[progress +  27.0s] candidate 18: VALID; 6.29s; reversals=0; coordination=5.756; spatial=25.899
+[progress +  27.0s] SHARED POOL COMPLETE: 13 validated candidates; 26.3s; no recording interiors
+[progress +  27.2s] progress: candidate 2, score=1.1511, duration=12.47s
+[progress +  27.2s] progress: candidate 15, score=1.3299, duration=7.25s
+[progress +  27.2s] progress: candidate 16, score=1.4328, duration=6.78s
+[progress +  27.2s] progress: candidate 8, score=1.5813, duration=8.14s
+[progress +  27.2s] progress: candidate 4, score=1.7516, duration=15.36s
+[progress +  27.2s] progress: candidate 11, score=1.7542, duration=4.95s
+[progress +  27.2s] progress: candidate 6, score=2.2096, duration=7.67s
+[progress +  27.2s] progress: candidate 10, score=2.5457, duration=7.11s
+[progress +  27.2s] SELECTED candidate 2: lowest progress score; 8 eligible, equally checked candidates
+[checkpoints] All 3 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right checkpoint_1 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right checkpoint_1 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 26.895s; path and ranking locked
+[right checkpoint_2 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right checkpoint_2 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right checkpoint_2 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.478s; path and ranking locked
+[right checkpoint_1 timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   1.3s] CPU REFERENCE | TIMING READY: 7.478s → 4.058s outward; limits unchanged
+[right checkpoint_2 timing +   1.3s] CPU REFERENCE READY: 4.057958s movement; 1.18s reference lookup/qualification; cached=False. GPU acceptance ceiling 4.098537s.
+[right checkpoint_2 timing +   1.3s] ANALYTIC TIMING: retained exact straight-block solution; no GPU optimization necessary.
+[right checkpoint_2 timing +   1.3s] LEG READY: 4.058s; exact timing and collision/zone checks complete; NO motor commands.
+[right checkpoint_1 timing +   1.3s] CPU REFERENCE | TIMING READY: 26.895s → 5.631s outward; limits unchanged
+[right checkpoint_1 timing +   1.3s] CPU REFERENCE READY: 5.631435s movement; 1.21s reference lookup/qualification; cached=False. GPU acceptance ceiling 5.687750s.
+[right checkpoint_1 timing +   1.3s] ANALYTIC TIMING: retained exact straight-block solution; no GPU optimization necessary.
+[right checkpoint_1 timing +   1.3s] LEG READY: 5.631s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right return_to_start timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right return_to_start timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 12.466s; path and ranking locked
+[right return_to_start timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right return_to_start timing +   1.2s] CPU REFERENCE | TIMING READY: 12.466s → 3.691s outward; limits unchanged
+[right return_to_start timing +   1.2s] CPU REFERENCE READY: 3.691161s movement; 1.10s reference lookup/qualification; cached=False. GPU acceptance ceiling 3.728073s.
+[right return_to_start timing +   1.2s] ANALYTIC TIMING: retained exact straight-block solution; no GPU optimization necessary.
+[right return_to_start timing +   1.2s] LEG READY: 3.691s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 2 destinations; 11.689s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 3.691s return to original start; SIMULATION ONLY

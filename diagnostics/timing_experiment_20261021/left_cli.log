@@ -1,0 +1,141 @@
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261021T032100Z-left-experiment-start/measured_start.json
+LEFT ARM ONLY in simulation. Frozen start; left_recordings/record1.json FINAL pose only. The opposite arm stays fixed. No live tracking or physical movement.
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[progress +   4.2s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[progress +   6.4s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +   8.9s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  10.9s] candidate 5: VALID; 15.29s; reversals=4; coordination=6.290; spatial=21.345
+[progress +  11.0s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  12.0s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  12.2s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  13.9s] candidate 8: VALID; 13.11s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  13.9s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  15.8s] candidate 9: VALID; 3.36s; reversals=3; coordination=3.086; spatial=13.703
+[progress +  15.8s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  17.0s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  18.8s] candidate 11: VALID; 12.59s; reversals=4; coordination=5.974; spatial=6.638
+[progress +  19.1s] arch search 1/10: 2/60 coarse-feasible; best blocked samples 0
+[progress +  19.4s] arch search 2/10: 6/60 coarse-feasible; best blocked samples 0
+[progress +  19.7s] arch search 3/10: 15/60 coarse-feasible; best blocked samples 0
+[progress +  19.9s] arch search 4/10: 21/60 coarse-feasible; best blocked samples 0
+[progress +  20.2s] arch search 5/10: 34/60 coarse-feasible; best blocked samples 0
+[progress +  20.4s] arch search 6/10: 38/60 coarse-feasible; best blocked samples 0
+[progress +  20.7s] arch search 7/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  20.9s] arch search 8/10: 42/60 coarse-feasible; best blocked samples 0
+[progress +  21.2s] arch search 9/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  21.4s] arch search 10/10: 39/60 coarse-feasible; best blocked samples 0
+[progress +  22.6s] candidate 12: VALID; 5.91s; reversals=3; coordination=3.653; spatial=8.754
+[progress +  23.8s] candidate 13: VALID; 6.52s; reversals=4; coordination=3.768; spatial=10.521
+[progress +  25.0s] candidate 14: VALID; 6.03s; reversals=4; coordination=3.943; spatial=11.671
+[progress +  26.4s] partial shortcut (economy): 11 accepted changes; objective 0.8058
+[progress +  26.5s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  27.1s] candidate 16: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  34.9s] candidate 17: VALID; 98.10s; reversals=0; coordination=3.657; spatial=4.794
+[progress +  35.7s] partial shortcut (economy): 2 accepted changes; objective 1.0304
+[progress +  35.8s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  36.0s] candidate 19: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  40.4s] candidate 20: VALID; 48.70s; reversals=2; coordination=3.624; spatial=10.066
+[progress +  41.1s] elastic deformation: 1 accepted updates; objective 0.6464
+[progress +  41.4s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  42.0s] candidate 22: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  45.3s] candidate 23: VALID; 36.35s; reversals=0; coordination=3.458; spatial=4.685
+[progress +  45.8s] elastic deformation: 0 accepted updates; objective 0.8415
+[progress +  45.8s] candidate 24: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  46.0s] candidate 25: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  51.3s] candidate 26: VALID; 59.86s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  51.4s] SHARED POOL COMPLETE: 13 validated candidates; 50.7s; no recording interiors
+[progress +  51.6s] progress: candidate 17, score=0.8095, duration=98.10s
+[progress +  51.6s] progress: candidate 2, score=0.9289, duration=19.88s
+[progress +  51.6s] progress: candidate 20, score=1.0405, duration=48.70s
+[progress +  51.6s] progress: candidate 8, score=1.0405, duration=13.11s
+[progress +  51.6s] progress: candidate 11, score=1.5528, duration=12.59s
+[progress +  51.6s] progress: candidate 3, score=1.9778, duration=3.95s
+[progress +  51.6s] progress: candidate 9, score=2.1263, duration=3.36s
+[progress +  51.6s] progress: candidate 5, score=2.3518, duration=15.29s
+[progress +  51.6s] SELECTED candidate 17: lowest progress score; 8 eligible, equally checked candidates
+[progress +  51.7s] TIMING: Adaptive fixed-path retiming; reference 98.102s; path and ranking locked
+[progress +  51.8s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[progress +  53.4s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[progress +  53.4s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 23, score=0.6473, duration=36.35s
+[sweep +   0.1s] sweep: candidate 2, score=0.6668, duration=19.88s
+[sweep +   0.1s] sweep: candidate 8, score=0.8503, duration=13.11s
+[sweep +   0.1s] sweep: candidate 26, score=0.8503, duration=59.86s
+[sweep +   0.1s] sweep: candidate 11, score=1.0281, duration=12.59s
+[sweep +   0.1s] sweep: candidate 9, score=1.4996, duration=3.36s
+[sweep +   0.1s] sweep: candidate 3, score=1.6114, duration=3.95s
+[sweep +   0.1s] sweep: candidate 5, score=1.7729, duration=15.29s
+[sweep +   0.1s] SELECTED candidate 23: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   0.1s] TIMING: Adaptive fixed-path retiming; reference 36.353s; path and ranking locked
+[sweep +   0.2s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[sweep +   1.6s] TIMING READY: 36.353s → 8.022s outward; limits unchanged
+[sweep +   1.6s] READY: 8.022s outward → 2s hold → exact reverse; SIMULATION ONLY
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] single_arc: candidate 2, score=0.6668, duration=19.88s
+[single_arc +   0.1s] single_arc: candidate 8, score=0.8503, duration=13.11s
+[single_arc +   0.1s] single_arc: candidate 11, score=1.0281, duration=12.59s
+[single_arc +   0.1s] single_arc: candidate 12, score=1.1965, duration=5.91s
+[single_arc +   0.1s] single_arc: candidate 13, score=1.3841, duration=6.52s
+[single_arc +   0.1s] single_arc: candidate 14, score=1.4329, duration=6.03s
+[single_arc +   0.1s] single_arc: candidate 9, score=1.4996, duration=3.36s
+[single_arc +   0.1s] single_arc: candidate 3, score=1.6114, duration=3.95s
+[single_arc +   0.1s] single_arc: candidate 5, score=1.7729, duration=15.29s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 9 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING: Adaptive fixed-path retiming; reference 19.876s; path and ranking locked
+[single_arc +   0.1s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[single_arc +   1.3s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[single_arc +   1.3s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.1s] TIMING cache: Adaptive fixed-path retiming, 9.051s; same exact selected path
+[clearance +   0.1s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[clearance +   0.1s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+{
+  "progress": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/progress-1fced4af/plan.json"
+  },
+  "sweep": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/sweep-7961ccee/plan.json"
+  },
+  "single_arc": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/single_arc-13ad5e7b/plan.json"
+  },
+  "clearance": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/clearance-99bc0c89/plan.json"
+  }
+}

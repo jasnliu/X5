@@ -73,11 +73,12 @@ def test_empty_returns_remain_empty_display_not_fake_surface():
     assert not p.raw_image.any() and not p.voxel_image.any()
 
 
-def test_integer_voxelization_exactly_matches_original_full_resolution_algorithm():
+@pytest.mark.parametrize('voxel',[.005,.01])
+def test_integer_voxelization_exactly_matches_original_full_resolution_algorithm(voxel):
     points=np.random.default_rng(7).uniform(-5,5,(100000,3))
     points=np.r_[points,points[:500],[[0,0,0],[-.01,0,.01],[.02,-.02,.03]]]
-    original=(np.unique(np.floor(points/.01).astype(np.int32),axis=0).astype(float)+.5)*.01
-    assert np.array_equal(depth.occupied_voxels(points),original)
+    original=(np.unique(np.floor(points/voxel).astype(np.int32),axis=0).astype(float)+.5)*voxel
+    assert np.array_equal(depth.occupied_voxels(points,voxel),original)
     assert depth.occupied_voxels(np.empty((0,3))).shape==(0,3)
     with pytest.raises(ValueError):depth.occupied_voxels(points,0)
     with pytest.raises(ValueError):depth.occupied_voxels(np.array([[np.nan,0,0]]))

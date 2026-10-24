@@ -310,6 +310,17 @@ class Session:
         K, D = camera_parameters(self.data['camera'])
         training = [s for s in self.data['samples'] if s['phase'] == 'training']
         fit = solve_with_kinematics(training, K, D, board, self.path / 'model.urdf')
+        if not fit['training_passed'] and len(training) >= 20:
+            # One fixed, bounded recovery policy; no per-session parameter
+            # sweep and no use of the five reserved validation observations.
+            from .bundle import solve as solve_bundle
+            previous = fit
+            try:
+                recovered = solve_bundle(training, K, D, board, self.path / 'model.urdf')
+                recovered['previous_solver_report'] = previous
+                fit = recovered
+            except ValueError as exc:
+                fit['bundle_recovery_error'] = str(exc)
         fit['input_sha256'] = self.training_signature()
         if fit.get('kinematic_correction'):
             fit['kinematic_correction']['encoder_convention'] = self.data['encoder_convention']
@@ -358,7 +369,9 @@ class Session:
         K, D = camera_parameters(self.data['camera'])
         C, X = checked_transform(fit['T_base_color']), checked_transform(fit['T_hand_board'])
         correction = fit.get('kinematic_correction')
-        evaluated = corrected_samples(heldout, correction, self.path / 'model.urdf') if correction else heldout
+        from .bundle import evaluation_samples
+        observations = evaluation_samples(heldout, fit, K, D, board)
+        evaluated = corrected_samples(observations, correction, self.path / 'model.urdf') if correction else observations
         report = metrics(evaluated, C, X, K, D, board.points)
         self.data['validation'] = dict(passed=passes(report), metrics=report,
                                        used_for_fitting=False, heldout_ids=[s['id'] for s in heldout],

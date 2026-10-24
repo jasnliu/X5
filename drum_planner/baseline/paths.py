@@ -1,7 +1,8 @@
 """Device-free exact-curve timing and checked-prefix recovery construction."""
 import numpy as np
 from scipy.optimize import minimize_scalar
-from ..execution import Curve, TRACK_L1
+from ..execution import TRACK_L1
+from .curve import Curve
 
 
 def speed(value):
@@ -15,6 +16,7 @@ def blend(s):return 10*s**3-15*s**4+6*s**5
 
 
 def peaks(curve):
+    if getattr(curve,'retimed',None) is not None:return curve._peaks.copy()
     from ..planning import extrema
     return np.array([[extrema(p,k)/curve.scale**k for p in curve.curves] for k in (1,2,3)])
 
@@ -23,6 +25,11 @@ def validate_timing(curve):
     p=peaks(curve)
     if np.any(p>np.array([.6,1.2,6.])[:,None]+1e-8):
         raise ValueError('Curve exceeds validated velocity/acceleration/jerk limits')
+    if getattr(curve,'retimed',None) is not None:
+        _,v,a,_=curve.retimed([0,curve.duration])
+        if max(np.max(abs(v)),np.max(abs(a)))>1e-7:
+            raise ValueError('Curve must start/end at rest with zero acceleration')
+        return
     for ppoly in curve.curves:
         for k in (1,2):
             if np.max(abs(ppoly.derivative(k)([0,curve.duration/curve.scale])))/curve.scale**k>1e-7:

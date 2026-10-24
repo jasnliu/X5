@@ -1,0 +1,113 @@
+{
+  "side": "right",
+  "errors": [],
+  "rows": [
+    {
+      "checkpoints": 1,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/calculate-7965e719/plan/plan.json",
+      "native_proof": {
+        "samples": 2104,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0,
+        "world_padding": {
+          "policy": "occupied_volume_v1",
+          "requested_clearance_m": 0.02,
+          "edge_sampling_allowance_m": 0.005,
+          "additional_voxel_radius_m": 0.0,
+          "robot_padding_m": 0.025,
+          "occupied_octree_cells_are_volumes": true,
+          "octree_resolution_m": 0.005
+        }
+      }
+    },
+    {
+      "checkpoints": 3,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/calculate-08362c9a/plan/plan.json",
+      "native_proof": {
+        "samples": 9192,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0,
+        "world_padding": {
+          "policy": "occupied_volume_v1",
+          "requested_clearance_m": 0.02,
+          "edge_sampling_allowance_m": 0.005,
+          "additional_voxel_radius_m": 0.0,
+          "robot_padding_m": 0.025,
+          "occupied_octree_cells_are_volumes": true,
+          "octree_resolution_m": 0.005
+        }
+      }
+    }
+  ],
+  "motor_commands": 0,
+  "camera_access": false,
+  "simulated_owner_cycles": 3,
+  "reused_generated_plans": false,
+  "controls": "select/add/remove/calculate/cancel/preview/pause/scrub/speed/start/hold/reverse/relax",
+  "report": {
+    "type": "baseline_three_windows",
+    "moving_side": "right",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/calculate-08362c9a/plan/plan.json",
+    "plan_valid": false,
+    "simulated": true,
+    "selected_destinations": [
+      "/home/jason/Proyectos3/X5/destinations/right/destinationR1.json",
+      "/home/jason/Proyectos3/X5/destinations/right/destinationR2.json"
+    ],
+    "owner": {
+      "schema": "x5-baseline-control-v1",
+      "folder": "/home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/controller-ab0634a3",
+      "unit": "x5-baseline-owner-0defaafb7a85",
+      "simulated": true,
+      "rate": 1.0,
+      "moving_side": "right",
+      "prepared": null,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/calculate-08362c9a/plan/plan.json"
+    },
+    "owner_status": {},
+    "last_error": "",
+    "button_states": {
+      "calculate": true,
+      "start": true,
+      "hold": true,
+      "reverse": true,
+      "cancel": true
+    },
+    "preview_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 54,
+      "maximum_frame_s": 0.09668732399586588,
+      "median_frame_s": 0.0016991469892673194,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20184,
+      "render_errors": []
+    },
+    "live_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 348,
+      "maximum_frame_s": 0.10253423289395869,
+      "median_frame_s": 0.0016895629814825952,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20184,
+      "render_errors": []
+    }
+  }
+}

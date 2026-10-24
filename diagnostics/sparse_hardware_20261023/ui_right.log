@@ -1,0 +1,521 @@
+Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.
+OFFLINE CALCULATING selected checkpoints from simulated joints and saved scene. No camera/CAN.
+[Workspace curve right +   0.0s] same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands
+[Workspace curve right +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[Workspace curve right +   0.8s] workspace 1: fit max 3.0 mm, 9 evaluations
+[Workspace curve right +   1.1s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.1s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[Workspace curve right +   1.3s] workspace 2: fit max 6.8 mm, 11 evaluations
+[Workspace curve right +   1.3s] candidate 2: rejected by continuous joint bounds
+[Workspace curve right +   1.3s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[Workspace curve right +   1.4s] workspace 3: fit max 0.4 mm, 8 evaluations
+[Workspace curve right +   1.4s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.4s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[Workspace curve right +   1.6s] workspace 4: fit max 3.7 mm, 10 evaluations
+[Workspace curve right +   1.7s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[Workspace curve right +   1.8s] workspace 5: fit max 2.9 mm, 14 evaluations
+[Workspace curve right +   1.8s] candidate 5: rejected by continuous joint bounds
+[Workspace curve right +   1.8s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   1.9s] workspace 6: fit max 6.1 mm, 11 evaluations
+[Workspace curve right +   3.2s] candidate 6: VALID; 8.00s; reversals=3; coordination=6.466; spatial=16.353
+[Workspace curve right +   3.2s] WORKSPACE VALID 6: turn=105.1deg, score=3.4764
+[Workspace curve right +   3.2s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   3.4s] workspace 7: fit max 5.5 mm, 15 evaluations
+[Workspace curve right +   3.4s] candidate 7: rejected by continuous joint bounds
+[Workspace curve right +   3.4s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   3.5s] workspace 8: fit max 3.7 mm, 9 evaluations
+[Workspace curve right +   3.8s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   3.8s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   3.9s] workspace 9: fit max 8.3 mm, 11 evaluations
+[Workspace curve right +   3.9s] candidate 9: rejected by continuous joint bounds
+[Workspace curve right +   3.9s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.0s] workspace 10: fit max 0.7 mm, 10 evaluations
+[Workspace curve right +   4.1s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   4.1s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.2s] workspace 11: fit max 4.5 mm, 11 evaluations
+[Workspace curve right +   4.3s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   4.3s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.4s] workspace 12: fit max 3.6 mm, 15 evaluations
+[Workspace curve right +   4.4s] candidate 12: rejected by continuous joint bounds
+[Workspace curve right +   4.4s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.5s] workspace 13: fit max 7.5 mm, 12 evaluations
+[Workspace curve right +   5.8s] candidate 13: VALID; 7.88s; reversals=3; coordination=6.646; spatial=19.561
+[Workspace curve right +   5.8s] WORKSPACE VALID 13: turn=114.1deg, score=3.8095
+[Workspace curve right +   5.8s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.9s] workspace 14: fit max 6.9 mm, 14 evaluations
+[Workspace curve right +   5.9s] candidate 14: rejected by continuous joint bounds
+[Workspace curve right +   6.1s] WORKSPACE SELECTED 6: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[right plan timing +   0.0s] SPARSE TIMING FORK: IPOPT; unchanged Workspace curve, limits and refinement levels; no timing-cache lookup
+SPARSE IPOPT 8 controls: building locally supported constraints
+  8 controls: refining 1.002476 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000073 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000042 limit ratio; Solve_Succeeded
+SPARSE IPOPT 8: best 4.443616s; 0.8s computation; 14700/29568 Jacobian entries
+SPARSE IPOPT 12 controls: building locally supported constraints
+  12 controls: refining 1.002477 limit ratio; Solve_Succeeded
+  12 controls: refining 1.000598 limit ratio; Solve_Succeeded
+  12 controls: refining 1.000141 limit ratio; Solve_Succeeded
+SPARSE IPOPT 12: best 4.369891s; 0.9s computation; 14700/44352 Jacobian entries
+SPARSE IPOPT 20 controls: building locally supported constraints
+  20 controls: refining 1.002731 limit ratio; Solve_Succeeded
+  20 controls: refining 1.000564 limit ratio; Solve_Succeeded
+  20 controls: refining 1.000111 limit ratio; Solve_Succeeded
+SPARSE IPOPT 20: best 4.282531s; 1.5s computation; 17556/88200 Jacobian entries
+SPARSE IPOPT 32 controls: building locally supported constraints
+  32 controls: refining 1.011486 limit ratio; Solve_Succeeded
+  32 controls: refining 1.000708 limit ratio; Solve_Succeeded
+  32 controls: refining 1.000165 limit ratio; Solve_Succeeded
+SPARSE IPOPT 32: best 4.246619s; 1.6s computation; 24990/200928 Jacobian entries
+SPARSE IPOPT 48 controls: building locally supported constraints
+  48 controls: refining 1.000702 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000584 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000286 limit ratio; Solve_Succeeded
+SPARSE IPOPT 48: best 4.228825s; 2.5s computation; 36246/436464 Jacobian entries
+SPARSE IPOPT 64 controls: building locally supported constraints
+  64 controls: refining 1.002367 limit ratio; Solve_Succeeded
+  64 controls: refining 1.000207 limit ratio; Solve_Succeeded
+  64 controls: refining 1.000162 limit ratio; Solve_Succeeded
+SPARSE IPOPT 64: best 4.214886s; 16.5s computation; 46935/752640 Jacobian entries
+SPARSE IPOPT 96 controls: building locally supported constraints
+  96 controls: refining 1.000168 limit ratio; Solve_Succeeded
+  96 controls: refining 1.000162 limit ratio; Solve_Succeeded
+  96 controls: refining 1.000080 limit ratio; Solve_Succeeded
+SPARSE IPOPT 96: best 4.210313s; 34.5s computation; 68334/1643040 Jacobian entries
+SPARSE IPOPT 128 controls: building locally supported constraints
+  128 controls: refining 1.000116 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000088 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000078 limit ratio; Solve_Succeeded
+SPARSE IPOPT 128: best 4.207285s; 7.3s computation; 89859/2878848 Jacobian entries
+SPARSE IPOPT 192 controls: building locally supported constraints
+  192 controls: refining 1.000059 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000031 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000025 limit ratio; Solve_Succeeded
+SPARSE IPOPT 192: best 4.205074s; 11.2s computation; 132825/6382656 Jacobian entries
+[right plan timing +  77.1s] SPARSE VERIFY: unchanged exact extrema, rest endpoints, dense collision and zone checks
+[right plan timing +  78.2s] SPARSE READY: 4.205s movement; 78.2s computation/checking
+[right plan timing +  78.2s] LEG READY: 4.205s; exact timing and collision/zone checks complete; NO motor commands.
+Preview / next Start speed: 1.00×.
+READY — path checked on the captured scene. Preview, then Start. Keep the right arm and obstacles in place; passive left sway is allowed.
+Checking 2,104 exact-curve samples + edges: right arm zone, full arm/stick, Baseline collision margins (world 20 mm + 5 mm edge allowance; occupied voxel volumes counted once; extra self-clearance 0 mm)
+Preview / next Start speed: 0.25×.
+Preview / next Start speed: 0.60×.
+Preview / next Start speed: 1.00×.
+Recovery: ./plan_drums.sh --hardware --right --resume /home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/controller-c949f3b0
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Destination selection changed. Click Calculate trajectory when ready.
+OFFLINE CALCULATING selected checkpoints from simulated joints and saved scene. No camera/CAN.
+[checkpoints workspace_curve] LEG 1/4: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[Workspace curve right +   0.0s] same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands
+[Workspace curve right +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[Workspace curve right +   0.8s] workspace 1: fit max 3.0 mm, 9 evaluations
+[Workspace curve right +   1.2s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.2s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[Workspace curve right +   1.3s] workspace 2: fit max 6.8 mm, 11 evaluations
+[Workspace curve right +   1.3s] candidate 2: rejected by continuous joint bounds
+[Workspace curve right +   1.3s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[Workspace curve right +   1.4s] workspace 3: fit max 0.4 mm, 8 evaluations
+[Workspace curve right +   1.5s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.5s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[Workspace curve right +   1.6s] workspace 4: fit max 3.7 mm, 10 evaluations
+[Workspace curve right +   1.7s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[Workspace curve right +   1.9s] workspace 5: fit max 2.9 mm, 14 evaluations
+[Workspace curve right +   1.9s] candidate 5: rejected by continuous joint bounds
+[Workspace curve right +   1.9s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   2.0s] workspace 6: fit max 6.1 mm, 11 evaluations
+[Workspace curve right +   3.3s] candidate 6: VALID; 8.00s; reversals=3; coordination=6.466; spatial=16.353
+[Workspace curve right +   3.3s] WORKSPACE VALID 6: turn=105.1deg, score=3.4764
+[Workspace curve right +   3.3s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   3.5s] workspace 7: fit max 5.5 mm, 15 evaluations
+[Workspace curve right +   3.5s] candidate 7: rejected by continuous joint bounds
+[Workspace curve right +   3.5s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   3.6s] workspace 8: fit max 3.7 mm, 9 evaluations
+[Workspace curve right +   3.9s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   3.9s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.1s] workspace 9: fit max 8.3 mm, 11 evaluations
+[Workspace curve right +   4.1s] candidate 9: rejected by continuous joint bounds
+[Workspace curve right +   4.1s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.2s] workspace 10: fit max 0.7 mm, 10 evaluations
+[Workspace curve right +   4.3s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   4.3s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.4s] workspace 11: fit max 4.5 mm, 11 evaluations
+[Workspace curve right +   4.5s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   4.5s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.7s] workspace 12: fit max 3.6 mm, 15 evaluations
+[Workspace curve right +   4.7s] candidate 12: rejected by continuous joint bounds
+[Workspace curve right +   4.7s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   4.8s] workspace 13: fit max 7.5 mm, 12 evaluations
+[Workspace curve right +   6.1s] candidate 13: VALID; 7.88s; reversals=3; coordination=6.646; spatial=19.561
+[Workspace curve right +   6.1s] WORKSPACE VALID 13: turn=114.1deg, score=3.8095
+[Workspace curve right +   6.1s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   6.2s] workspace 14: fit max 6.9 mm, 14 evaluations
+[Workspace curve right +   6.2s] candidate 14: rejected by continuous joint bounds
+[Workspace curve right +   6.4s] WORKSPACE SELECTED 6: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 2/4: destinationR1 → destinationR2; budget 120s; frozen scene unchanged
+[Workspace curve right +   0.0s] same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands
+[Workspace curve right +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[Workspace curve right +   0.8s] workspace 1: fit max 0.0 mm, 6 evaluations
+[Workspace curve right +   1.9s] candidate 1: VALID; 4.68s; reversals=0; coordination=0.889; spatial=0.154
+[Workspace curve right +   1.9s] WORKSPACE VALID 1: turn=4.9deg, score=0.7126
+[Workspace curve right +   1.9s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.1s fit allowance
+[Workspace curve right +   2.0s] workspace 2: fit max 0.4 mm, 10 evaluations
+[Workspace curve right +   2.0s] candidate 2: rejected by continuous joint bounds
+[Workspace curve right +   2.0s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 9.9s fit allowance
+[Workspace curve right +   2.1s] workspace 3: fit max 0.2 mm, 8 evaluations
+[Workspace curve right +   2.2s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   2.2s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[Workspace curve right +   2.3s] workspace 4: fit max 0.3 mm, 8 evaluations
+[Workspace curve right +   2.5s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   2.5s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.8s fit allowance
+[Workspace curve right +   2.6s] workspace 5: fit max 0.4 mm, 11 evaluations
+[Workspace curve right +   3.8s] candidate 5: VALID; 5.08s; reversals=4; coordination=5.382; spatial=11.318
+[Workspace curve right +   3.8s] WORKSPACE VALID 5: turn=98.2deg, score=2.8753
+[Workspace curve right +   3.8s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   3.9s] workspace 6: fit max 0.3 mm, 8 evaluations
+[Workspace curve right +   5.1s] candidate 6: VALID; 5.37s; reversals=2; coordination=3.718; spatial=14.814
+[Workspace curve right +   5.1s] WORKSPACE VALID 6: turn=110.6deg, score=3.0408
+[Workspace curve right +   5.1s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   5.3s] workspace 7: fit max 0.5 mm, 11 evaluations
+[Workspace curve right +   5.3s] candidate 7: rejected by continuous joint bounds
+[Workspace curve right +   5.3s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.4s] workspace 8: fit max 0.0 mm, 6 evaluations
+[Workspace curve right +   6.4s] candidate 8: VALID; 4.68s; reversals=0; coordination=0.895; spatial=0.157
+[Workspace curve right +   6.5s] WORKSPACE VALID 8: turn=4.8deg, score=0.7077
+[Workspace curve right +   6.5s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   6.6s] workspace 9: fit max 0.5 mm, 10 evaluations
+[Workspace curve right +   6.6s] candidate 9: rejected by continuous joint bounds
+[Workspace curve right +   6.6s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   6.7s] workspace 10: fit max 0.2 mm, 9 evaluations
+[Workspace curve right +   6.8s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   6.8s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   6.9s] workspace 11: fit max 0.3 mm, 8 evaluations
+[Workspace curve right +   7.0s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   7.0s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   7.1s] workspace 12: fit max 0.5 mm, 11 evaluations
+[Workspace curve right +   7.1s] candidate 12: rejected by continuous joint bounds
+[Workspace curve right +   7.1s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   7.3s] workspace 13: fit max 0.3 mm, 9 evaluations
+[Workspace curve right +   8.4s] candidate 13: VALID; 5.33s; reversals=2; coordination=4.007; spatial=18.329
+[Workspace curve right +   8.5s] WORKSPACE VALID 13: turn=116.2deg, score=3.4168
+[Workspace curve right +   8.5s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   8.6s] workspace 14: fit max 0.6 mm, 11 evaluations
+[Workspace curve right +   8.6s] candidate 14: rejected by continuous joint bounds
+[Workspace curve right +   8.8s] WORKSPACE SELECTED 8: geometry + clearance; 5 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 3/4: destinationR2 → destinationR3; budget 120s; frozen scene unchanged
+[Workspace curve right +   0.0s] same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands
+[Workspace curve right +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[Workspace curve right +   0.8s] workspace 1: fit max 0.2 mm, 6 evaluations
+[Workspace curve right +   2.0s] candidate 1: VALID; 5.72s; reversals=0; coordination=1.018; spatial=1.034
+[Workspace curve right +   2.0s] WORKSPACE VALID 1: turn=15.2deg, score=0.3845
+[Workspace curve right +   2.0s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.1s fit allowance
+[Workspace curve right +   2.2s] workspace 2: fit max 1.2 mm, 12 evaluations
+[Workspace curve right +   3.4s] candidate 2: VALID; 7.11s; reversals=2; coordination=4.066; spatial=31.034
+[Workspace curve right +   3.4s] WORKSPACE VALID 2: turn=139.5deg, score=4.4912
+[Workspace curve right +   3.4s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 9.8s fit allowance
+[Workspace curve right +   3.5s] workspace 3: fit max 0.3 mm, 8 evaluations
+[Workspace curve right +   3.7s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   3.7s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.6s fit allowance
+[Workspace curve right +   3.8s] workspace 4: fit max 0.2 mm, 9 evaluations
+[Workspace curve right +   5.0s] candidate 4: VALID; 7.04s; reversals=1; coordination=3.130; spatial=21.720
+[Workspace curve right +   5.0s] WORKSPACE VALID 4: turn=125.4deg, score=4.2909
+[Workspace curve right +   5.0s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.6s fit allowance
+[Workspace curve right +   5.2s] workspace 5: fit max 1.0 mm, 14 evaluations
+[Workspace curve right +   5.2s] candidate 5: rejected by continuous joint bounds
+[Workspace curve right +   5.2s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   5.2s] workspace 6: fit max 0.5 mm, 8 evaluations
+[Workspace curve right +   6.4s] candidate 6: VALID; 5.96s; reversals=1; coordination=2.429; spatial=24.702
+[Workspace curve right +   6.4s] WORKSPACE VALID 6: turn=129.8deg, score=4.0504
+[Workspace curve right +   6.4s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   6.6s] workspace 7: fit max 1.4 mm, 14 evaluations
+[Workspace curve right +   6.6s] candidate 7: rejected by continuous joint bounds
+[Workspace curve right +   6.6s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   6.6s] workspace 8: fit max 0.3 mm, 6 evaluations
+[Workspace curve right +   7.8s] candidate 8: VALID; 5.71s; reversals=0; coordination=1.061; spatial=1.116
+[Workspace curve right +   7.8s] WORKSPACE VALID 8: turn=15.3deg, score=0.3767
+[Workspace curve right +   7.8s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   8.0s] workspace 9: fit max 1.4 mm, 15 evaluations
+[Workspace curve right +   9.2s] candidate 9: VALID; 7.12s; reversals=2; coordination=4.391; spatial=34.577
+[Workspace curve right +   9.3s] WORKSPACE VALID 9: turn=143.3deg, score=4.8032
+[Workspace curve right +   9.3s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   9.4s] workspace 10: fit max 0.3 mm, 9 evaluations
+[Workspace curve right +   9.5s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   9.5s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   9.6s] workspace 11: fit max 0.2 mm, 9 evaluations
+[Workspace curve right +   9.8s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   9.8s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +  10.0s] workspace 12: fit max 1.2 mm, 14 evaluations
+[Workspace curve right +  10.0s] candidate 12: rejected by continuous joint bounds
+[Workspace curve right +  10.0s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +  10.1s] workspace 13: fit max 0.6 mm, 8 evaluations
+[Workspace curve right +  11.2s] candidate 13: VALID; 5.97s; reversals=1; coordination=2.633; spatial=27.020
+[Workspace curve right +  11.2s] WORKSPACE VALID 13: turn=133.5deg, score=4.3025
+[Workspace curve right +  11.2s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +  11.4s] workspace 14: fit max 1.7 mm, 14 evaluations
+[Workspace curve right +  11.4s] candidate 14: rejected by continuous joint bounds
+[Workspace curve right +  11.6s] WORKSPACE SELECTED 8: geometry + clearance; 7 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 4/4: destinationR3 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[Workspace curve right +   0.0s] same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands
+[Workspace curve right +   0.8s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[Workspace curve right +   0.9s] workspace 1: fit max 1.1 mm, 10 evaluations
+[Workspace curve right +   1.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   1.0s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[Workspace curve right +   1.1s] workspace 2: fit max 6.1 mm, 16 evaluations
+[Workspace curve right +   2.4s] candidate 2: VALID; 5.84s; reversals=4; coordination=6.961; spatial=33.342
+[Workspace curve right +   2.4s] WORKSPACE VALID 2: turn=123.2deg, score=3.8512
+[Workspace curve right +   2.4s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 9.9s fit allowance
+[Workspace curve right +   2.6s] workspace 3: fit max 2.8 mm, 14 evaluations
+[Workspace curve right +   2.6s] candidate 3: rejected by continuous joint bounds
+[Workspace curve right +   2.6s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.7s fit allowance
+[Workspace curve right +   2.7s] workspace 4: fit max 1.7 mm, 15 evaluations
+[Workspace curve right +   2.7s] candidate 4: rejected by continuous joint bounds
+[Workspace curve right +   2.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.8s fit allowance
+[Workspace curve right +   2.9s] workspace 5: fit max 1.5 mm, 10 evaluations
+[Workspace curve right +   2.9s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   2.9s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   3.1s] workspace 6: fit max 4.7 mm, 12 evaluations
+[Workspace curve right +   3.1s] candidate 6: rejected by continuous joint bounds
+[Workspace curve right +   3.1s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[Workspace curve right +   3.2s] workspace 7: fit max 4.5 mm, 11 evaluations
+[Workspace curve right +   3.3s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   3.3s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   3.5s] workspace 8: fit max 1.4 mm, 10 evaluations
+[Workspace curve right +   3.5s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   3.5s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   3.7s] workspace 9: fit max 7.9 mm, 16 evaluations
+[Workspace curve right +   4.9s] candidate 9: VALID; 5.98s; reversals=4; coordination=7.387; spatial=37.292
+[Workspace curve right +   4.9s] WORKSPACE VALID 9: turn=135.6deg, score=4.4096
+[Workspace curve right +   4.9s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.1s] workspace 10: fit max 11.5 mm, 15 evaluations
+[Workspace curve right +   5.2s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   5.2s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.3s] workspace 11: fit max 2.2 mm, 16 evaluations
+[Workspace curve right +   5.3s] candidate 11: rejected by continuous joint bounds
+[Workspace curve right +   5.3s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.4s] workspace 12: fit max 1.9 mm, 10 evaluations
+[Workspace curve right +   5.5s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   5.5s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.7s] workspace 13: fit max 6.1 mm, 16 evaluations
+[Workspace curve right +   5.7s] candidate 13: rejected by continuous joint bounds
+[Workspace curve right +   5.7s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[Workspace curve right +   5.8s] workspace 14: fit max 6.0 mm, 10 evaluations
+[Workspace curve right +   5.9s] candidate 14: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Workspace curve right +   6.1s] WORKSPACE SELECTED 2: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints] All 4 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.0s] SPARSE TIMING FORK: IPOPT; unchanged Workspace curve, limits and refinement levels; no timing-cache lookup
+[right checkpoint_2 timing +   0.0s] SPARSE TIMING FORK: IPOPT; unchanged Workspace curve, limits and refinement levels; no timing-cache lookup
+SPARSE IPOPT 8 controls: building locally supported constraints
+SPARSE IPOPT 8 controls: building locally supported constraints
+  8 controls: refining 1.002476 limit ratio; Solve_Succeeded
+  8 controls: refining 1.001108 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000073 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000042 limit ratio; Solve_Succeeded
+SPARSE IPOPT 8: best 4.443616s; 0.9s computation; 14700/29568 Jacobian entries
+SPARSE IPOPT 12 controls: building locally supported constraints
+  8 controls: refining 1.002499 limit ratio; Solve_Succeeded
+  12 controls: refining 1.002477 limit ratio; Solve_Succeeded
+  12 controls: refining 1.000598 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000348 limit ratio; Solve_Succeeded
+SPARSE IPOPT 8: best 2.639348s; 1.7s computation; 14763/29736 Jacobian entries
+SPARSE IPOPT 12 controls: building locally supported constraints
+  12 controls: refining 1.000141 limit ratio; Solve_Succeeded
+SPARSE IPOPT 12: best 4.369891s; 1.0s computation; 14700/44352 Jacobian entries
+SPARSE IPOPT 20 controls: building locally supported constraints
+  12 controls: refining 1.084571 limit ratio; Solve_Succeeded
+  20 controls: refining 1.002731 limit ratio; Solve_Succeeded
+  20 controls: refining 1.000564 limit ratio; Solve_Succeeded
+  20 controls: refining 1.000111 limit ratio; Solve_Succeeded
+SPARSE IPOPT 20: best 4.282531s; 1.6s computation; 17556/88200 Jacobian entries
+SPARSE IPOPT 32 controls: building locally supported constraints
+  12 controls: refining 1.007287 limit ratio; Solve_Succeeded
+  32 controls: refining 1.011486 limit ratio; Solve_Succeeded
+  12 controls: refining 1.003488 limit ratio; Solve_Succeeded
+SPARSE IPOPT 12: best 2.239364s; 2.8s computation; 14805/44856 Jacobian entries
+SPARSE IPOPT 20 controls: building locally supported constraints
+  32 controls: refining 1.000708 limit ratio; Solve_Succeeded
+  32 controls: refining 1.000165 limit ratio; Solve_Succeeded
+SPARSE IPOPT 32: best 4.246619s; 1.7s computation; 24990/200928 Jacobian entries
+SPARSE IPOPT 48 controls: building locally supported constraints
+  48 controls: refining 1.000702 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000584 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000286 limit ratio; Solve_Succeeded
+  20 controls: refining 1.060204 limit ratio; Solve_Succeeded
+SPARSE IPOPT 48: best 4.228825s; 2.7s computation; 36246/436464 Jacobian entries
+SPARSE IPOPT 64 controls: building locally supported constraints
+  20 controls: refining 1.006407 limit ratio; Solve_Succeeded
+  64 controls: refining 1.002367 limit ratio; Solve_Succeeded
+  20 controls: refining 1.004727 limit ratio; Solve_Succeeded
+SPARSE IPOPT 20: best 2.146992s; 12.6s computation; 17367/87780 Jacobian entries
+SPARSE IPOPT 32 controls: building locally supported constraints
+  32 controls: refining 1.024027 limit ratio; Solve_Succeeded
+  64 controls: refining 1.000207 limit ratio; Solve_Succeeded
+  32 controls: refining 1.016826 limit ratio; Solve_Succeeded
+  32 controls: refining 1.005268 limit ratio; Solve_Succeeded
+SPARSE IPOPT 32: best 2.044663s; 3.8s computation; 25137/202944 Jacobian entries
+SPARSE IPOPT 48 controls: building locally supported constraints
+  64 controls: refining 1.000162 limit ratio; Solve_Succeeded
+SPARSE IPOPT 64: best 4.214886s; 17.7s computation; 46935/752640 Jacobian entries
+SPARSE IPOPT 96 controls: building locally supported constraints
+  48 controls: refining 1.018271 limit ratio; Solve_Succeeded
+  48 controls: refining 1.010946 limit ratio; Solve_Succeeded
+  48 controls: refining 1.002841 limit ratio; Solve_Succeeded
+SPARSE IPOPT 48: best 1.981286s; 7.6s computation; 35868/432432 Jacobian entries
+SPARSE IPOPT 64 controls: building locally supported constraints
+  96 controls: refining 1.000168 limit ratio; Solve_Succeeded
+  64 controls: refining 1.018875 limit ratio; Solve_Succeeded
+  64 controls: refining 1.006633 limit ratio; Solve_Succeeded
+  64 controls: refining 1.004412 limit ratio; Solve_Succeeded
+SPARSE IPOPT 64: best 1.966572s; 10.3s computation; 46725/751296 Jacobian entries
+SPARSE IPOPT 96 controls: building locally supported constraints
+  96 controls: refining 1.000162 limit ratio; Solve_Succeeded
+  96 controls: refining 1.004487 limit ratio; Solve_Succeeded
+  96 controls: refining 1.003368 limit ratio; Solve_Succeeded
+  96 controls: refining 1.002747 limit ratio; Solve_Succeeded
+SPARSE IPOPT 96: best 1.948608s; 23.2s computation; 68229/1643040 Jacobian entries
+SPARSE IPOPT 128 controls: building locally supported constraints
+  96 controls: refining 1.000080 limit ratio; Solve_Succeeded
+SPARSE IPOPT 96: best 4.210313s; 38.0s computation; 68334/1643040 Jacobian entries
+SPARSE IPOPT 128 controls: building locally supported constraints
+  128 controls: refining 1.002351 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000116 limit ratio; Solve_Succeeded
+  128 controls: refining 1.001574 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000088 limit ratio; Solve_Succeeded
+  128 controls: refining 1.001489 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000078 limit ratio; Solve_Succeeded
+SPARSE IPOPT 128: best 1.941026s; 9.3s computation; 89796/2881536 Jacobian entries
+SPARSE IPOPT 192 controls: building locally supported constraints
+SPARSE IPOPT 128: best 4.207285s; 8.3s computation; 89859/2878848 Jacobian entries
+SPARSE IPOPT 192 controls: building locally supported constraints
+  192 controls: refining 1.000059 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000031 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000025 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000968 limit ratio; Solve_Succeeded
+SPARSE IPOPT 192: best 4.205074s; 13.0s computation; 132825/6382656 Jacobian entries
+[right checkpoint_1 timing +  85.3s] SPARSE VERIFY: unchanged exact extrema, rest endpoints, dense collision and zone checks
+[right checkpoint_1 timing +  86.4s] SPARSE READY: 4.205s movement; 86.4s computation/checking
+[right checkpoint_1 timing +  86.4s] LEG READY: 4.205s; exact timing and collision/zone checks complete; NO motor commands.
+[right checkpoint_3 timing +   0.0s] SPARSE TIMING FORK: IPOPT; unchanged Workspace curve, limits and refinement levels; no timing-cache lookup
+SPARSE IPOPT 8 controls: building locally supported constraints
+  8 controls: refining 1.001445 limit ratio; Solve_Succeeded
+  192 controls: refining 1.000911 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000205 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000069 limit ratio; Solve_Succeeded
+SPARSE IPOPT 8: best 3.134615s; 1.4s computation; 14763/29736 Jacobian entries
+SPARSE IPOPT 12 controls: building locally supported constraints
+  12 controls: refining 1.082294 limit ratio; Solve_Succeeded
+  12 controls: refining 1.008297 limit ratio; Solve_Succeeded
+  12 controls: refining 1.002003 limit ratio; Solve_Succeeded
+SPARSE IPOPT 12: best 2.907846s; 1.8s computation; 14742/44604 Jacobian entries
+SPARSE IPOPT 20 controls: building locally supported constraints
+  192 controls: refining 1.000789 limit ratio; Solve_Succeeded
+  20 controls: refining 1.014343 limit ratio; Solve_Succeeded
+SPARSE IPOPT 192: best 1.937870s; 20.7s computation; 132699/6382656 Jacobian entries
+[right checkpoint_2 timing +  92.4s] SPARSE VERIFY: unchanged exact extrema, rest endpoints, dense collision and zone checks
+  20 controls: refining 1.004632 limit ratio; Solve_Succeeded
+[right checkpoint_2 timing +  93.5s] SPARSE READY: 1.938s movement; 93.5s computation/checking
+[right checkpoint_2 timing +  93.5s] LEG READY: 1.938s; exact timing and collision/zone checks complete; NO motor commands.
+  20 controls: refining 1.002052 limit ratio; Solve_Succeeded
+[right return_to_start timing +   0.0s] SPARSE TIMING FORK: IPOPT; unchanged Workspace curve, limits and refinement levels; no timing-cache lookup
+SPARSE IPOPT 20: best 2.636908s; 3.6s computation; 17430/87780 Jacobian entries
+SPARSE IPOPT 32 controls: building locally supported constraints
+SPARSE IPOPT 8 controls: building locally supported constraints
+  8 controls: refining 1.001513 limit ratio; Solve_Succeeded
+  8 controls: refining 1.001192 limit ratio; Solve_Succeeded
+  8 controls: refining 1.000025 limit ratio; Solve_Succeeded
+SPARSE IPOPT 8: best 4.336251s; 0.9s computation; 14700/29568 Jacobian entries
+SPARSE IPOPT 12 controls: building locally supported constraints
+  12 controls: refining 1.012365 limit ratio; Solve_Succeeded
+  12 controls: refining 1.002690 limit ratio; Solve_Succeeded
+  12 controls: refining 1.000595 limit ratio; Solve_Succeeded
+SPARSE IPOPT 12: best 3.989023s; 1.7s computation; 14742/44604 Jacobian entries
+SPARSE IPOPT 20 controls: building locally supported constraints
+  20 controls: refining 1.013243 limit ratio; Solve_Succeeded
+  20 controls: refining 1.002399 limit ratio; Solve_Succeeded
+  20 controls: refining 1.000668 limit ratio; Solve_Succeeded
+SPARSE IPOPT 20: best 3.911508s; 1.3s computation; 17094/86100 Jacobian entries
+SPARSE IPOPT 32 controls: building locally supported constraints
+  32 controls: refining 1.010161 limit ratio; Solve_Succeeded
+  32 controls: refining 1.000848 limit ratio; Solve_Succeeded
+  32 controls: refining 1.000527 limit ratio; Solve_Succeeded
+SPARSE IPOPT 32: best 3.869045s; 2.1s computation; 24990/200928 Jacobian entries
+SPARSE IPOPT 48 controls: building locally supported constraints
+  48 controls: refining 1.002334 limit ratio; Solve_Succeeded
+  32 controls: refining 1.025739 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000666 limit ratio; Solve_Succeeded
+  48 controls: refining 1.000362 limit ratio; Solve_Succeeded
+SPARSE IPOPT 48: best 3.855867s; 7.4s computation; 35700/430416 Jacobian entries
+SPARSE IPOPT 64 controls: building locally supported constraints
+  32 controls: refining 1.026081 limit ratio; Solve_Succeeded
+  64 controls: refining 1.008456 limit ratio; Solve_Succeeded
+  64 controls: refining 1.000229 limit ratio; Solve_Succeeded
+  64 controls: refining 1.000152 limit ratio; Solve_Succeeded
+  32 controls: refining 1.022408 limit ratio; Solve_Succeeded
+SPARSE IPOPT 64: best 3.851416s; 8.2s computation; 46578/747264 Jacobian entries
+SPARSE IPOPT 96 controls: building locally supported constraints
+SPARSE IPOPT 32: best 2.520963s; 21.9s computation; 25473/204960 Jacobian entries
+SPARSE IPOPT 48 controls: building locally supported constraints
+  48 controls: refining 1.015173 limit ratio; Solve_Succeeded
+  48 controls: refining 1.011610 limit ratio; Solve_Succeeded
+  48 controls: refining 1.005733 limit ratio; Solve_Succeeded
+SPARSE IPOPT 48: best 2.441852s; 5.2s computation; 36015/434448 Jacobian entries
+SPARSE IPOPT 64 controls: building locally supported constraints
+  64 controls: refining 1.016648 limit ratio; Solve_Succeeded
+  64 controls: refining 1.006131 limit ratio; Solve_Succeeded
+  64 controls: refining 1.005779 limit ratio; Solve_Succeeded
+SPARSE IPOPT 64: best 2.432507s; 15.2s computation; 46788/751296 Jacobian entries
+SPARSE IPOPT 96 controls: building locally supported constraints
+  96 controls: refining 1.007304 limit ratio; Solve_Succeeded
+  96 controls: refining 1.004851 limit ratio; Solve_Succeeded
+  96 controls: refining 1.003974 limit ratio; Solve_Succeeded
+  96 controls: refining 1.003020 limit ratio; Solve_Succeeded
+SPARSE IPOPT 96: best 2.406489s; 11.8s computation; 68439/1647072 Jacobian entries
+SPARSE IPOPT 128 controls: building locally supported constraints
+  128 controls: refining 1.004216 limit ratio; Solve_Succeeded
+  128 controls: refining 1.002499 limit ratio; Solve_Succeeded
+  128 controls: refining 1.001774 limit ratio; Solve_Succeeded
+SPARSE IPOPT 128: best 2.400038s; 9.5s computation; 90006/2886912 Jacobian entries
+SPARSE IPOPT 192 controls: building locally supported constraints
+  96 controls: refining 1.000104 limit ratio; Solve_Succeeded
+  192 controls: refining 1.001560 limit ratio; Solve_Succeeded
+  192 controls: refining 1.001449 limit ratio; Solve_Succeeded
+  96 controls: refining 1.000069 limit ratio; Solve_Succeeded
+SPARSE IPOPT 96: best 3.846314s; 53.7s computation; 68229/1641024 Jacobian entries
+SPARSE IPOPT 128 controls: building locally supported constraints
+  192 controls: refining 1.000899 limit ratio; Solve_Succeeded
+SPARSE IPOPT 192: best 2.395114s; 14.0s computation; 132804/6386688 Jacobian entries
+[right checkpoint_3 timing +  84.9s] SPARSE VERIFY: unchanged exact extrema, rest endpoints, dense collision and zone checks
+  128 controls: refining 1.013621 limit ratio; Solve_Succeeded
+[right checkpoint_3 timing +  85.9s] SPARSE READY: 2.395s movement; 85.9s computation/checking
+[right checkpoint_3 timing +  85.9s] LEG READY: 2.395s; exact timing and collision/zone checks complete; NO motor commands.
+  128 controls: refining 1.000067 limit ratio; Solve_Succeeded
+  128 controls: refining 1.000050 limit ratio; Solve_Succeeded
+SPARSE IPOPT 128: best 3.843710s; 44.1s computation; 89565/2870784 Jacobian entries
+SPARSE IPOPT 192 controls: building locally supported constraints
+  192 controls: refining 1.019003 limit ratio; Solve_Succeeded
+  192 controls: refining 1.002065 limit ratio; Solve_Succeeded
+SPARSE IPOPT 192: best 3.842788s; 11.3s computation; 132552/6374592 Jacobian entries
+[right return_to_start timing + 131.0s] SPARSE VERIFY: unchanged exact extrema, rest endpoints, dense collision and zone checks
+[right return_to_start timing + 132.1s] SPARSE READY: 3.843s movement; 132.1s computation/checking
+[right return_to_start timing + 132.1s] LEG READY: 3.843s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 3 destinations; 12.538s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 3.843s return to original start; SIMULATION ONLY
+Preview / next Start speed: 1.00×.
+READY — path checked on the captured scene. Preview, then Start. Keep the right arm and obstacles in place; passive left sway is allowed.
+Checking 9,192 exact-curve samples + edges: right arm zone, full arm/stick, Baseline collision margins (world 20 mm + 5 mm edge allowance; occupied voxel volumes counted once; extra self-clearance 0 mm)
+Preview / next Start speed: 0.25×.
+Preview / next Start speed: 0.60×.
+Preview / next Start speed: 1.00×.
+Recovery: ./plan_drums.sh --hardware --right --resume /home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/controller-e67cd625
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh --hardware --right --resume /home/jason/Proyectos3/X5/planner_runs/sparse-20261023-ui-right/ui/controller-ab0634a3
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+HOLD requested. No relaxation. Reverse to rest remains available.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Destination selection changed. Click Calculate trajectory when ready.
+OFFLINE CALCULATING selected checkpoints from simulated joints and saved scene. No camera/CAN.
+Calculation/pending Start cancelled. Click Calculate to try again. No motor commands sent.
+HARDWARE WORKSPACE UI PASS right

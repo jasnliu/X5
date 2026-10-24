@@ -1,0 +1,423 @@
+{
+  "software_only": true,
+  "camera_access": false,
+  "physical_motor_commands": 0,
+  "ui": {
+    "right": {
+      "side": "right",
+      "errors": [],
+      "rows": [
+        {
+          "checkpoints": 1,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-c788c1fa/plan/plan.json",
+          "native_proof": {
+            "samples": 2104,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.01
+            }
+          }
+        },
+        {
+          "checkpoints": 3,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/plan.json",
+          "native_proof": {
+            "samples": 9378,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.01
+            }
+          }
+        }
+      ],
+      "motor_commands": 0,
+      "camera_access": false,
+      "simulated_owner_cycles": 3,
+      "reused_generated_plans": true,
+      "controls": "select/add/remove/calculate/cancel/preview/pause/scrub/speed/start/hold/reverse/relax",
+      "report": {
+        "type": "baseline_three_windows",
+        "moving_side": "right",
+        "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/plan.json",
+        "plan_valid": false,
+        "simulated": true,
+        "selected_destinations": [
+          "/home/jason/Proyectos3/X5/destinations/right/destinationR1.json",
+          "/home/jason/Proyectos3/X5/destinations/right/destinationR2.json"
+        ],
+        "owner": {
+          "schema": "x5-baseline-control-v1",
+          "folder": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-verified-20261022/ui/controller-0f4d3f22",
+          "unit": "x5-baseline-owner-a91defa2c840",
+          "simulated": true,
+          "rate": 1.0,
+          "moving_side": "right",
+          "prepared": null,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/plan.json"
+        },
+        "owner_status": {},
+        "last_error": "",
+        "button_states": {
+          "calculate": true,
+          "start": true,
+          "hold": true,
+          "reverse": true,
+          "cancel": true
+        },
+        "preview_renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 52,
+          "maximum_frame_s": 0.07893907994730398,
+          "median_frame_s": 0.0017069414898287505,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 20184,
+          "render_errors": []
+        },
+        "live_renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 359,
+          "maximum_frame_s": 0.08703529799822718,
+          "median_frame_s": 0.001759346981998533,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 20184,
+          "render_errors": []
+        }
+      }
+    },
+    "left": {
+      "side": "left",
+      "errors": [],
+      "rows": [
+        {
+          "checkpoints": 1,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-1919690e/plan/plan.json",
+          "native_proof": {
+            "samples": 1421,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.01
+            }
+          }
+        },
+        {
+          "checkpoints": 3,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/plan.json",
+          "native_proof": {
+            "samples": 6298,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.01
+            }
+          }
+        }
+      ],
+      "motor_commands": 0,
+      "camera_access": false,
+      "simulated_owner_cycles": 3,
+      "reused_generated_plans": false,
+      "controls": "select/add/remove/calculate/cancel/preview/pause/scrub/speed/start/hold/reverse/relax",
+      "report": {
+        "type": "baseline_three_windows",
+        "moving_side": "left",
+        "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/plan.json",
+        "plan_valid": false,
+        "simulated": true,
+        "selected_destinations": [
+          "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+          "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/test-only-variation-1.json"
+        ],
+        "owner": {
+          "schema": "x5-baseline-control-v1",
+          "folder": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/controller-8eb44133",
+          "unit": "x5-baseline-owner-7aef8a518b27",
+          "simulated": true,
+          "rate": 1.0,
+          "moving_side": "left",
+          "prepared": null,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/plan.json"
+        },
+        "owner_status": {},
+        "last_error": "",
+        "button_states": {
+          "calculate": true,
+          "start": true,
+          "hold": true,
+          "reverse": true,
+          "cancel": true
+        },
+        "preview_renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 54,
+          "maximum_frame_s": 0.07870399404782802,
+          "median_frame_s": 0.0016514415037818253,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 20184,
+          "render_errors": []
+        },
+        "live_renderer": {
+          "engine": "VTK/OpenGL",
+          "capabilities": [
+            "OpenGL vendor string:  AMD",
+            "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+            "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+          ],
+          "qt_offscreen": false,
+          "render_count": 227,
+          "maximum_frame_s": 0.09381597198080271,
+          "median_frame_s": 0.001737562008202076,
+          "surface_geometry_uploads": 1,
+          "surface_color_uploads": 1,
+          "surface_triangles": 20184,
+          "render_errors": []
+        }
+      }
+    }
+  },
+  "experiment_parity": [
+    {
+      "side": "right",
+      "checkpoints": 1,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-c788c1fa/plan/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-right-final-20261022/right-1-leg-1/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 4.205074117720795
+    },
+    {
+      "side": "right",
+      "checkpoints": 3,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/checkpoint_1/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-right-final-20261022/right-3-leg-1/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 4.205074117720795
+    },
+    {
+      "side": "right",
+      "checkpoints": 3,
+      "leg": 2,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/checkpoint_2/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-right-final-20261022/right-3-leg-2/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 2.3099546122264245
+    },
+    {
+      "side": "right",
+      "checkpoints": 3,
+      "leg": 3,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/checkpoint_3/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-right-final-20261022/right-3-leg-3/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 2.395114113833516
+    },
+    {
+      "side": "right",
+      "checkpoints": 3,
+      "leg": 4,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-66cb5a51/plan/return_to_start/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-right-final-20261022/right-3-leg-4/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 3.842788381431485
+    },
+    {
+      "side": "left",
+      "checkpoints": 1,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-1919690e/plan/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-left-final-20261022/left-1-leg-1/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 2.8396293748050616
+    },
+    {
+      "side": "left",
+      "checkpoints": 3,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/checkpoint_1/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-left-final-20261022/left-3-leg-1/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 2.8396293748050616
+    },
+    {
+      "side": "left",
+      "checkpoints": 3,
+      "leg": 2,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/checkpoint_2/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-left-final-20261022/left-3-leg-2/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 0.4581487568380863
+    },
+    {
+      "side": "left",
+      "checkpoints": 3,
+      "leg": 3,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/checkpoint_3/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-left-final-20261022/left-3-leg-3/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 0.458148760253268
+    },
+    {
+      "side": "left",
+      "checkpoints": 3,
+      "leg": 4,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-6fa1588c/plan/return_to_start/plan.json",
+      "experiment": "planner_runs/hardware-workspace-parity-left-final-20261022/left-3-leg-4/plan.json",
+      "bit_identical_fields": [
+        "timing",
+        "outward",
+        "path_waypoints",
+        "source_timing",
+        "duration_outward_s"
+      ],
+      "same_pool_and_selection": true,
+      "duration_s": 2.837767579253342
+    }
+  ],
+  "regression_log": "regression.log",
+  "same_generators_timing_models_zones_recordings": true,
+  "notes": [
+    "Right native UI reused current-turn generated plans after validating controller startup fix.",
+    "Left has one saved destination; two small J1 variants were created ONLY inside its ignored test run.",
+    "Exact full-mission native collision/zone proofs use unchanged approved margins.",
+    "Simulated owner cycles are not evidence of physical motion performance."
+  ],
+  "pytest": {
+    "main_passed": 484,
+    "supplemental_passed": 99,
+    "artifact_policy_passed": 10,
+    "total_passed": 593
+  },
+  "launcher_offline_smoke": {
+    "right": {
+      "passed": true,
+      "no_calculation": true,
+      "no_owner": true,
+      "error": ""
+    },
+    "left": {
+      "passed": true,
+      "no_calculation": true,
+      "no_owner": true,
+      "error": ""
+    }
+  }
+}

@@ -30,10 +30,10 @@ namespace ob = ompl::base;
 namespace og = ompl::geometric;
 using Q = std::vector<double>;
 constexpr double EDGE_L1 = .003;  // <= 4.5 mm conservative lever-arm bound at 1.5 m.
-// Measurement acceptance ONLY for the stationary, non-commanded left arm.
+// Measurement acceptance ONLY for the stationary, non-commanded opposite arm.
 // Same three-count resolution allowance as X5 smooth_playback/trajectory.py.
-// Never changes URDF limits, right-arm sampling/commands, or measured geometry.
-constexpr double STATIC_LEFT_ENCODER_MARGIN = 3. * 25.14 / 65535.;
+// Never changes URDF limits, moving-arm sampling/commands, or measured geometry.
+constexpr double STATIC_ENCODER_MARGIN = 3. * 25.14 / 65535.;
 
 std::string textfile(const std::string& path) {
   std::ifstream f(path); if (!f) throw std::runtime_error("Cannot read " + path);
@@ -63,34 +63,35 @@ template<class T> std::vector<T> binary(const std::string& path) {
 }
 
 // Independently compiled ORIGINAL-URDF FK: the zone was recorded in that
-// convention, not in the camera-corrected collision model. Only one right-hand
-// TCP point is restricted; the stick, fingers and left arm are NOT zone probes.
-struct RightZone {
+// convention, not in the camera-corrected collision model. Only the selected
+// hand TCP is restricted; the stick and opposite arm are NOT zone probes.
+struct ArmZone {
   struct Joint {Eigen::Isometry3d origin;Eigen::Vector3d axis;int index;};
   std::vector<Joint> chain;
   std::vector<Eigen::Vector4d> planes;
   Json::Value metadata;
   bool enabled=false;
   double buffer=.005,epsilon=1e-9;
-  RightZone(const Json::Value& spec) {
+  std::string side;
+  ArmZone(const Json::Value& spec,const std::string& selected="right"):side(selected) {
     metadata["enabled"]=false;
     // Historical requests retain their meaning. Every newly constructed
     // production/experiment request supplies the mandatory zone3 snapshot.
     if(spec.isNull())return;
-    if(spec["schema"]!="x5-right-zone-constraint-v1" || spec["enabled"]!=true ||
-       spec["frame"]!="world" || spec["tcp"]!="openarmx_right_hand_tcp" ||
+    if(spec["schema"]!="x5-"+side+"-zone-constraint-v1" || spec["enabled"]!=true ||
+       spec["frame"]!="world" || spec["tcp"]!="openarmx_"+side+"_hand_tcp" ||
        spec["buffer_m"]!=.005 || spec["numerical_tolerance_m"]!=1e-9 ||
-       spec["point_only"]!=true || spec["left_arm_constrained"]!=false || spec["stick_constrained"]!=false)
-      throw std::runtime_error("Invalid right zone3 point constraint");
+       spec["point_only"]!=true || spec[side=="right"?"left_arm_constrained":"right_arm_constrained"]!=false || spec["stick_constrained"]!=false)
+      throw std::runtime_error("Invalid selected-arm point constraint");
     const auto& ps=spec["planes"];const auto& js=spec["kinematic_chain"];
     if(!ps.isArray() || ps.size()<4 || ps.size()>100000 || !js.isArray() || js.empty() || js.size()>32)
-      throw std::runtime_error("Invalid right-zone hull/chain size");
+      throw std::runtime_error("Invalid arm-zone hull/chain size");
     auto number=[](const Json::Value& v){
       if(!v.isNumeric() || !std::isfinite(v.asDouble()))throw std::runtime_error("Nonfinite zone geometry");
       return v.asDouble();
     };
     for(const auto& row:ps) {
-      if(!row.isArray()||row.size()!=4)throw std::runtime_error("Invalid right-zone plane");
+      if(!row.isArray()||row.size()!=4)throw std::runtime_error("Invalid arm-zone plane");
       Eigen::Vector4d p;for(int j=0;j<4;j++)p[j]=number(row[j]);
       double norm=p.head<3>().norm();if(norm<1e-12)throw std::runtime_error("Degenerate zone plane");
       planes.push_back(p/norm);
@@ -100,8 +101,8 @@ struct RightZone {
       if(!row["q_index"].isInt())throw std::runtime_error("Invalid zone joint index");
       Joint joint;joint.index=row["q_index"].asInt();
       if(joint.index< -1 || joint.index>6 || (joint.index>=0 &&
-         (joint.index!=next++ || row["joint"].asString()!="openarmx_right_joint"+std::to_string(joint.index+1))))
-        throw std::runtime_error("Zone FK may use only the seven original right joints");
+         (joint.index!=next++ || row["joint"].asString()!="openarmx_"+side+"_joint"+std::to_string(joint.index+1))))
+        throw std::runtime_error("Zone FK must match the seven original selected-arm joints");
       const auto& origin=row["origin"];const auto& axis=row["axis"];
       if(origin.size()!=4 || axis.size()!=3)throw std::runtime_error("Invalid zone FK transform");
       joint.origin=Eigen::Isometry3d::Identity();
@@ -113,10 +114,10 @@ struct RightZone {
       if((joint.origin.linear().transpose()*joint.origin.linear()-Eigen::Matrix3d::Identity()).norm()>1e-9 ||
          std::abs(joint.origin.linear().determinant()-1)>1e-9 ||
          (joint.origin.matrix().row(3)-Eigen::RowVector4d(0,0,0,1)).norm()>1e-9 ||
-         std::abs(joint.axis.norm()-1)>1e-9)throw std::runtime_error("Invalid rigid right-zone FK chain");
+         std::abs(joint.axis.norm()-1)>1e-9)throw std::runtime_error("Invalid rigid arm-zone FK chain");
       chain.push_back(joint);
     }
-    if(next!=7)throw std::runtime_error("Incomplete right-zone FK chain");
+    if(next!=7)throw std::runtime_error("Incomplete arm-zone FK chain");
     metadata=spec;metadata.removeMember("planes");metadata.removeMember("kinematic_chain");enabled=true;
   }
   bool check(const Q& q,Json::Value* report=nullptr,bool include_valid=false) const {
@@ -130,9 +131,9 @@ struct RightZone {
     for(const auto& plane:planes)distance=std::max(distance,plane.head<3>().dot(point)+plane[3]);
     bool valid=point.allFinite() && distance<=buffer+epsilon;
     if(report && (!valid || include_valid)) {
-      (*report)["reason"]=valid?"inside_right_zone3":"outside_right_zone3";
+      (*report)["reason"]=side=="right"?(valid?"inside_right_zone3":"outside_right_zone3"):(valid?"inside_left_zone":"outside_left_zone");
       (*report)["enabled"]=true;(*report)["valid"]=valid;
-      (*report)["tcp"]="openarmx_right_hand_tcp";(*report)["point_only"]=true;
+      (*report)["tcp"]="openarmx_"+side+"_hand_tcp";(*report)["point_only"]=true;
       (*report)["point_xyz_m"]=jsonQ(Q{point.x(),point.y(),point.z()});
       (*report)["max_signed_plane_distance_m"]=distance;(*report)["buffer_m"]=buffer;
       (*report)["constraint_sha256"]=metadata["constraint_sha256"];
@@ -154,21 +155,22 @@ struct Checker {
   bool strict=false;
   std::string collision_policy;
   size_t checks=0, masked=0;
-  Json::Value last, initial_bounds, self_filter;
-  RightZone right_zone;
+  Json::Value last, initial_bounds, self_filter, world_padding;
+  std::string moving_side,static_side,group_name,hand_link,stick_link;
+  ArmZone zone;
   Json::Value positionBounds() const {
     Json::Value report;
     report["reason"]="joint_limits";report["valid"]=true;
-    report["angles_clamped"]=false;report["moving_right_limits_unchanged"]=true;
-    report["static_left_encoder_tolerance_rad"]=STATIC_LEFT_ENCODER_MARGIN;
+    report["angles_clamped"]=false;report["moving_"+moving_side+"_limits_unchanged"]=true;
+    report["static_"+static_side+"_encoder_tolerance_rad"]=STATIC_ENCODER_MARGIN;
     report["violations"]=Json::Value(Json::arrayValue);
     report["accepted_static_encoder_overshoot"]=Json::Value(Json::arrayValue);
     for(const auto& name:model->getVariableNames()) {
       const auto& bounds=model->getVariableBounds(name);
       double value=state.getVariablePosition(name);
-      bool static_left=false;
-      for(int i=1;i<=7;i++) if(name=="openarmx_left_joint"+std::to_string(i))static_left=true;
-      double tolerance=static_left?STATIC_LEFT_ENCODER_MARGIN:0.;
+      bool static_joint=false;
+      for(int i=1;i<=7;i++) if(name=="openarmx_"+static_side+"_joint"+std::to_string(i))static_joint=true;
+      double tolerance=static_joint?STATIC_ENCODER_MARGIN:0.;
       double outside=bounds.position_bounded_?
         std::max({0.,bounds.min_position_-value,value-bounds.max_position_}):0.;
       if(std::isfinite(value) && outside==0.)continue;
@@ -177,7 +179,7 @@ struct Checker {
       row["lower_rad"]=bounds.min_position_;row["upper_rad"]=bounds.max_position_;
       row["overshoot_rad"]=outside;row["measurement_tolerance_rad"]=tolerance;
       if(std::isfinite(value) && outside<=tolerance) {
-        row["handling"]="Static left measurement retained exactly for FK/collision checking; no commands or clipping";
+        row["handling"]="Static "+static_side+" measurement retained exactly for FK/collision checking; no commands or clipping";
         report["accepted_static_encoder_overshoot"].append(row);
       } else {
         report["valid"]=false;report["violations"].append(row);
@@ -185,7 +187,11 @@ struct Checker {
     }
     return report;
   }
-  Checker(moveit::core::RobotModelPtr m,const Json::Value& r):model(m),scene(m),state(m),right_zone(r.get("right_zone",Json::Value())) {
+  Checker(moveit::core::RobotModelPtr m,const Json::Value& r):model(m),scene(m),state(m),
+      moving_side(r.get("moving_side","right").asString()),static_side(moving_side=="right"?"left":"right"),
+      group_name(moving_side+"_arm"),hand_link("openarmx_"+moving_side+"_hand"),stick_link(moving_side+"_drumstick"),
+      zone(r.get(moving_side+"_zone",Json::Value()),moving_side) {
+    if(moving_side!="left" && moving_side!="right")throw std::runtime_error("Invalid moving arm");
     // New requests explicitly select the observed-obstacle policy. Preserve the
     // meaning of historical requests without this field when replayed offline.
     collision_policy=r.get("collision_policy",r.get("occupied_only_preview",false).asBool()?
@@ -194,12 +200,14 @@ struct Checker {
       throw std::runtime_error("Unknown collision policy");
     if(collision_policy=="observed_free_space" && r.get("occupied_only_preview",false).asBool())
       throw std::runtime_error("Conflicting collision policies");
-    group=model->getJointModelGroup("right_arm");
-    if (!group || group->getVariableCount()!=7) throw std::runtime_error("Missing seven-joint right_arm group");
+    group=model->getJointModelGroup(group_name);
+    if (!group || group->getVariableCount()!=7) throw std::runtime_error("Missing seven-joint "+group_name+" group");
     state.setToDefaultValues();
-    auto left=vector7(r["left"]);
-    for (size_t i=0;i<7;i++) state.setVariablePosition("openarmx_left_joint"+std::to_string(i+1),left[i]);
-    state.setVariablePosition("openarmx_left_finger_joint1",r["left_opening_m"].asDouble());
+    auto stationary=vector7(r[static_side]);
+    for (size_t i=0;i<7;i++) state.setVariablePosition("openarmx_"+static_side+"_joint"+std::to_string(i+1),stationary[i]);
+    const auto& variables=model->getVariableNames();
+    if(std::find(variables.begin(),variables.end(),"openarmx_left_finger_joint1")!=variables.end())
+      state.setVariablePosition("openarmx_left_finger_joint1",r["left_opening_m"].asDouble());
     state.setJointGroupPositions(group,vector7(r["start"])); state.update();
     initial_bounds=positionBounds();
     // A bounds failure is a normal blocked result with joint-level evidence,
@@ -226,9 +234,27 @@ struct Checker {
       throw std::runtime_error("Invalid self clearance requirement");
     padding=sc["obstacle_padding_m"].asDouble();
     if (!std::isfinite(padding) || padding<.02 || padding>.10) throw std::runtime_error("Obstacle padding must be 20-100 mm");
-    // World padding includes point voxelization and finite edge sampling. Self
-    // collision uses exact nominal bodies; attachments remain whole-body links.
-    scene.getCollisionEnvNonConst()->setPadding(padding + .009 + .005);
+    double voxel=sc.get("voxel_size_m",.01).asDouble();
+    if(!sc.get("voxel_size_m",.01).isNumeric() || (voxel!=.005 && voxel!=.01))
+      throw std::runtime_error("Unsupported scene voxel size; require 5 mm or legacy 10 mm");
+    // An occupied OctoMap leaf is already a FULL cube containing the
+    // original returns, not a point at its center. Adding its half-diagonal to
+    // the robot as well counts voxelization twice. New requests use the whole
+    // occupied volume + requested clearance + the unchanged edge allowance.
+    // Missing policy preserves historical plans/checks with the old padding.
+    std::string padding_policy=r.get("world_padding_policy","legacy_voxel_radius_v1").asString();
+    if(padding_policy!="occupied_volume_v1" && padding_policy!="legacy_voxel_radius_v1")
+      throw std::runtime_error("Unknown world padding policy");
+    double extra_voxel=padding_policy=="legacy_voxel_radius_v1"?.009:0.;
+    double effective_padding=padding+extra_voxel+.005;
+    world_padding["policy"]=padding_policy;
+    world_padding["requested_clearance_m"]=padding;
+    world_padding["edge_sampling_allowance_m"]=.005;
+    world_padding["additional_voxel_radius_m"]=extra_voxel;
+    world_padding["robot_padding_m"]=effective_padding;
+    world_padding["occupied_octree_cells_are_volumes"]=true;
+    world_padding["octree_resolution_m"]=voxel;
+    scene.getCollisionEnvNonConst()->setPadding(effective_padding);
     if (sc.get("synthetic",false).asBool()) {
       for (const auto& box:sc["boxes"]) {
         if (box["size"].size()!=3 || box["xyz"].size()!=3) throw std::runtime_error("Bad synthetic box");
@@ -240,7 +266,7 @@ struct Checker {
     } else {
       auto points=binary<float>(sc["points_file"].asString());
       if (points.empty() || points.size()%3) throw std::runtime_error("No usable camera obstacle points");
-      auto tree=std::make_shared<octomap::OcTree>(.01);
+      auto tree=std::make_shared<octomap::OcTree>(voxel);
       std::vector<std::pair<std::string,bodies::BodyPtr>> robot;
       bodies::BodyPtr nominal_stick;
       Eigen::Vector3d camera_origin=Eigen::Vector3d::Zero();
@@ -258,9 +284,9 @@ struct Checker {
         for (size_t s=0;s<link->getShapes().size();s++) {
           bodies::BodyPtr body(bodies::createBodyFromShape(link->getShapes()[s].get()));
           body->setPose(state.getCollisionBodyTransform(link,s));
-          body->setPadding(link->getName()=="right_drumstick"?stick_mask:.005);
+          body->setPadding((link->getName()=="right_drumstick" || link->getName()=="left_drumstick")?stick_mask:.005);
           robot.emplace_back(link->getName(),body);
-          if(filter_shadow && link->getName()=="right_drumstick") {
+          if(filter_shadow && link->getName()==stick_link) {
             nominal_stick.reset(bodies::createBodyFromShape(link->getShapes()[s].get()));
             nominal_stick->setPose(state.getCollisionBodyTransform(link,s));
             nominal_stick->setPadding(0.);  // NO dilation of the shadow silhouette
@@ -439,9 +465,9 @@ struct Checker {
     state.setJointGroupPositions(group,q);state.update();
     auto bounds=positionBounds();
     if(!bounds["valid"].asBool()) {last=bounds;return false;}
-    if(!right_zone.check(q,&last))return false;
+    if(!zone.check(q,&last))return false;
     collision_detection::CollisionRequest req; collision_detection::CollisionResult res;
-    req.group_name="right_arm";req.contacts=details;req.max_contacts=20;req.max_contacts_per_pair=1;
+    req.group_name=group_name;req.contacts=details;req.max_contacts=20;req.max_contacts_per_pair=1;
     scene.checkCollision(req,res,state);
     if(res.collision) {
       last["reason"]="collision";
@@ -451,7 +477,7 @@ struct Checker {
     if(self_clearance>0) {
       collision_detection::CollisionRequest near_req;
       collision_detection::CollisionResult near_res;
-      near_req.group_name="right_arm";near_req.distance=true;
+      near_req.group_name=group_name;near_req.distance=true;
       scene.checkSelfCollision(near_req,near_res,state);
       if(near_res.collision || near_res.distance<self_clearance) {
         last["reason"]="insufficient_self_clearance";
@@ -487,9 +513,9 @@ struct Edges:ob::MotionValidator {
 Json::Value styleFeatures(Checker& checker,const Json::Value& paths) {
   if(!paths.isArray() || paths.empty() || paths.size()>64)
     throw std::runtime_error("Expected 1-64 style paths");
-  const std::set<std::string> distal={"openarmx_right_link5","openarmx_right_link6",
-      "openarmx_right_link7","openarmx_right_hand","openarmx_right_left_finger",
-      "openarmx_right_right_finger","right_drumstick"};
+  const auto prefix="openarmx_"+checker.moving_side+"_";
+  const std::set<std::string> distal={prefix+"link5",prefix+"link6",prefix+"link7",
+      checker.hand_link,prefix+"left_finger",prefix+"right_finger",checker.stick_link};
   auto cost_acm=checker.scene.getAllowedCollisionMatrix();
   const auto world_ids=checker.scene.getWorld()->getObjectIds();
   for(auto link:checker.model->getLinkModelsWithCollisionGeometry())
@@ -497,7 +523,7 @@ Json::Value styleFeatures(Checker& checker,const Json::Value& paths) {
   struct Sample {moveit::core::RobotState state;size_t path;size_t index;bool found=false;};
   std::vector<Sample> samples;
   Json::Value output(Json::arrayValue);
-  auto stick=checker.model->getLinkModel("right_drumstick");
+  auto stick=checker.model->getLinkModel(checker.stick_link);
   if(!stick || stick->getShapes().size()!=1 || stick->getShapes()[0]->type!=shapes::CYLINDER)
     throw std::runtime_error("Style scoring requires the actual stick collision cylinder");
   double half=static_cast<const shapes::Cylinder*>(stick->getShapes()[0].get())->length*.5;
@@ -509,7 +535,7 @@ Json::Value styleFeatures(Checker& checker,const Json::Value& paths) {
       checker.state.setJointGroupPositions(checker.group,vector7(points[Json::ArrayIndex(i)]));checker.state.update();
       auto bounds=checker.positionBounds();
       if(!bounds["valid"].asBool()) {row["joint_bounds_valid"]=false;row["bounds_failure"]=bounds;}
-      Eigen::Vector3d wrist=checker.state.getGlobalLinkTransform("openarmx_right_hand").translation();
+      Eigen::Vector3d wrist=checker.state.getGlobalLinkTransform(checker.hand_link).translation();
       Eigen::Vector3d tip=checker.state.getCollisionBodyTransform(stick,0)*Eigen::Vector3d(0,0,half);
       row["wrist_xyz_m"].append(jsonQ(Q{wrist.x(),wrist.y(),wrist.z()}));
       row["tip_xyz_m"].append(jsonQ(Q{tip.x(),tip.y(),tip.z()}));
@@ -521,7 +547,7 @@ Json::Value styleFeatures(Checker& checker,const Json::Value& paths) {
     output.append(row);
   }
   if(world_ids.empty())return output;
-  collision_detection::CollisionRequest query;query.group_name="right_arm";
+  collision_detection::CollisionRequest query;query.group_name=checker.group_name;
   // Estimate the same 0-100 mm comfort distance using cheap, cached FCL
   // overlap probes, not expensive exact mesh/OctoMap distance queries. Each
   // positive estimate is the midpoint of a 5 mm padding band. It is a SOFT
@@ -560,13 +586,14 @@ Json::Value run(const Json::Value& r) {
   out["strict_unknown_space"]=checker.strict;
   out["unobserved_space_blocks_motion"]=checker.strict;
   out["joint_limit_check"]=checker.initial_bounds;
-  out["right_zone_constraint"]=checker.right_zone.metadata;
-  if(r.isMember("right_zone_states")) {
-    if(!r["right_zone_states"].isArray() || r["right_zone_states"].size()>10000)
+  out[checker.moving_side+"_zone_constraint"]=checker.zone.metadata;
+  out["moving_side"]=checker.moving_side;
+  if(r.isMember(checker.moving_side+"_zone_states")) {
+    if(!r[checker.moving_side+"_zone_states"].isArray() || r[checker.moving_side+"_zone_states"].size()>10000)
       throw std::runtime_error("Zone-only diagnostic batch must contain <=10000 states");
     out["status"]="zone_checked";out["hard_collision_checked"]=false;
-    for(const auto& q:r["right_zone_states"]) {
-      Json::Value row;checker.right_zone.check(vector7(q),&row,true);out["zone_checks"].append(row);
+    for(const auto& q:r[checker.moving_side+"_zone_states"]) {
+      Json::Value row;checker.zone.check(vector7(q),&row,true);out["zone_checks"].append(row);
     }
     return out;
   }
@@ -575,6 +602,7 @@ Json::Value run(const Json::Value& r) {
   }
   out["self_filtered_voxels"]=Json::UInt64(checker.masked);
   out["robot_self_filter"]=checker.self_filter;
+  out["world_padding"]=checker.world_padding;
   out["collision_edge_l1_step_rad"]=EDGE_L1;
   if(r.isMember("style_paths")) {
     if(r.isMember("check_states"))throw std::runtime_error("Style scoring and hard validation must be separate");
@@ -590,7 +618,7 @@ Json::Value run(const Json::Value& r) {
       bool ok=checker.valid(q,true);
       if(ok && r.get("check_path",false).asBool() && !previous.empty()) ok=checker.edge(previous,q);
       auto row=checker.last;row["valid"]=ok;previous=q;
-      Eigen::Vector3d tool=checker.state.getGlobalLinkTransform("right_drumstick").translation();
+      Eigen::Vector3d tool=checker.state.getGlobalLinkTransform(checker.stick_link).translation();
       row["stick_center_world"]=jsonQ(Q{tool.x(),tool.y(),tool.z()});out["checks"].append(row);
       // Best-of-N ranking only needs the first failure to reject a candidate.
       // Successful candidates still require every state and edge. Diagnostic
@@ -627,7 +655,7 @@ Json::Value run(const Json::Value& r) {
   auto path=setup.getSolutionPath();
   // Explicit endpoint restoration is allowed only with collision rechecking;
   // no goal clipping or approximate-goal acceptance.
-  robot_trajectory::RobotTrajectory trajectory(model,"right_arm");
+  robot_trajectory::RobotTrajectory trajectory(model,checker.group_name);
   for(size_t i=0;i<path.getStateCount();i++) {
     Q q=fromState(path.getState(i));if(i==0)q=start;if(i+1==path.getStateCount())q=goal;
     out["path_waypoints"].append(jsonQ(q));

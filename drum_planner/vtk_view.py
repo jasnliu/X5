@@ -223,13 +223,15 @@ class VtkViewport(QtWidgets.QWidget):
 class RobotActors:
     """Same URDF visual surfaces as the old preview, unchanged triangle counts."""
     def __init__(self,viewport,plan):
+        from .model import stick_length
         self.viewport=viewport;self.plan=plan;self.mesh_entries=[]
+        self.stick_length=stick_length(plan.root,plan.stick_link)
         self.last_positions=None;self.last_tip=None
         for name,triangles,local,colors in visual_surfaces(plan.root):
             layer=MeshLayer(viewport,lighting=True)
             layer.set_geometry(triangles.reshape(-1,3),np.arange(triangles.size//3).reshape(-1,3))
             layer.set_colors(colors);self.mesh_entries.append((name,triangles,local,layer))
-            if name=='right_drumstick':self.stick_artist=layer
+            if name==plan.stick_link:self.stick_artist=layer
 
     def set_visible(self,visible):
         for _,_,_,layer in self.mesh_entries:layer.set_visible(visible)
@@ -238,12 +240,11 @@ class RobotActors:
         self.draw_frames(self.plan.frames(t),self.plan.positions(t))
 
     def draw_joints(self,joints):
-        from .common import JOINTS
-        self.draw_frames(self.plan.model.transforms(joints),np.array([joints[j] for j in JOINTS]))
+        self.draw_frames(self.plan.model.transforms(joints),np.array([joints[j] for j in self.plan.joints]))
 
     def draw_frames(self,frames,positions):
         self.last_positions=positions
-        T=frames['right_drumstick'];self.last_tip=T[:3,3]+T[:3,2]*self.plan.obj['model']['stick_length_from_mount_m']/2
+        T=frames[self.plan.stick_link];self.last_tip=T[:3,3]+T[:3,2]*self.stick_length/2
         for name,_,local,layer in self.mesh_entries:layer.set_transform(frames[name]@local)
 
     def focus_bounds(self):

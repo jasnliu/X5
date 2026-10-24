@@ -1,0 +1,22 @@
+{
+  "same_start_goal_and_passive_arm": true,
+  "same_self_filter_settings": true,
+  "identical_capture_files": {
+    "depth_m.bin": true,
+    "free_depth_m.bin": true,
+    "points_base.f32": true,
+    "raw_depth.npz": true
+  },
+  "requested_obstacle_padding_m": 0.02,
+  "world_padding_policy": "occupied_volume_v1",
+  "nominal_endpoint_valid": [
+    true,
+    true
+  ],
+  "selected": 13,
+  "actual_plan_status": "planned",
+  "motor_commands": 0,
+  "model_urdf_identical": true,
+  "software_only": true,
+  "hardware_eligibility_revoked": true
+}

@@ -1,0 +1,510 @@
+[experiment cache] Automatically queued: progress, sweep, single_arc, clearance. One memory-limited worker at a time.
+[experiment cache] Starting progress; 3 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[progress +   0.1s] progress: candidate 17, score=0.8095, duration=98.10s
+[progress +   0.1s] progress: candidate 2, score=0.9289, duration=19.88s
+[progress +   0.1s] progress: candidate 20, score=1.0405, duration=48.70s
+[progress +   0.1s] progress: candidate 8, score=1.0405, duration=13.11s
+[progress +   0.1s] progress: candidate 11, score=1.5528, duration=12.59s
+[progress +   0.1s] progress: candidate 3, score=1.9778, duration=3.95s
+[progress +   0.1s] progress: candidate 9, score=2.1263, duration=3.36s
+[progress +   0.1s] progress: candidate 5, score=2.3518, duration=15.29s
+[progress +   0.1s] SELECTED candidate 17: lowest progress score; 8 eligible, equally checked candidates
+[progress +   1.1s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +   1.5s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +   1.5s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +   1.9s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +   1.9s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +   3.1s]   8 controls: refining 11.995907 limit ratio
+[progress +   3.4s]   8 controls: refining 3.466235 limit ratio
+[progress +   3.7s]   8 controls: refining 1.007567 limit ratio
+[progress +   4.0s] ADAPTIVE 8 controls: 7.374589s; best 7.374589s; 1.2s computation
+[progress +   4.4s]   16 controls: refining 13.427030 limit ratio
+[progress +   4.7s]   16 controls: refining 1.012402 limit ratio
+[progress +   5.1s]   16 controls: refining 1.011763 limit ratio
+[progress +   5.4s] ADAPTIVE 16 controls: 5.029163s; best 5.029163s; 1.5s computation
+[progress +   6.1s]   32 controls: refining 16.282975 limit ratio
+[progress +   6.7s]   32 controls: refining 1.007619 limit ratio
+[progress +   7.2s]   32 controls: refining 1.006014 limit ratio
+[progress +   7.7s] ADAPTIVE 32 controls: 3.959526s; best 3.959526s; 2.3s computation
+[progress +   9.3s]   64 controls: refining 1.032254 limit ratio
+[progress +  10.8s]   64 controls: refining 1.032809 limit ratio
+[progress +  12.7s]   64 controls: refining 1.009434 limit ratio
+[progress +  13.5s] ADAPTIVE 64 controls: 3.579062s; best 3.579062s; 5.8s computation
+[progress +  17.5s]   96 controls: refining 1.436438 limit ratio
+[progress +  20.8s]   96 controls: refining 1.018592 limit ratio
+[progress +  22.3s]   96 controls: refining 1.007128 limit ratio
+[progress +  23.3s] ADAPTIVE 96 controls: 3.472868s; best 3.472868s; 9.8s computation
+[progress +  23.3s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[progress +  23.3s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[progress +  24.6s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[progress +  24.6s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 2 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 23, score=0.6473, duration=36.35s
+[sweep +   0.1s] sweep: candidate 2, score=0.6668, duration=19.88s
+[sweep +   0.1s] sweep: candidate 8, score=0.8503, duration=13.11s
+[sweep +   0.1s] sweep: candidate 26, score=0.8503, duration=59.86s
+[sweep +   0.1s] sweep: candidate 11, score=1.0281, duration=12.59s
+[sweep +   0.1s] sweep: candidate 9, score=1.4996, duration=3.36s
+[sweep +   0.1s] sweep: candidate 3, score=1.6114, duration=3.95s
+[sweep +   0.1s] sweep: candidate 5, score=1.7729, duration=15.29s
+[sweep +   0.1s] SELECTED candidate 23: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   1.0s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.4s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.4s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.8s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.8s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   2.2s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   2.2s] SMOOTH V2: C3 halfwidth 0.030; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   3.2s]   8 controls: refining 15.399940 limit ratio
+[sweep +   3.4s]   8 controls: refining 3.568704 limit ratio
+[sweep +   3.6s]   8 controls: refining 1.006142 limit ratio
+[sweep +   3.9s] ADAPTIVE 8 controls: 7.250577s; best 7.250577s; 0.9s computation
+[sweep +   4.2s]   16 controls: refining 16.441314 limit ratio
+[sweep +   4.5s]   16 controls: refining 1.015196 limit ratio
+[sweep +   4.8s]   16 controls: refining 1.003361 limit ratio
+[sweep +   5.1s] ADAPTIVE 16 controls: 4.975513s; best 4.975513s; 1.2s computation
+[sweep +   5.7s]   32 controls: refining 17.279865 limit ratio
+[sweep +   6.2s]   32 controls: refining 1.007386 limit ratio
+[sweep +   6.6s]   32 controls: refining 1.007119 limit ratio
+[sweep +   7.1s] ADAPTIVE 32 controls: 3.992014s; best 3.992014s; 2.0s computation
+[sweep +   8.0s]   64 controls: refining 1.033481 limit ratio
+[sweep +   8.8s]   64 controls: refining 1.028990 limit ratio
+[sweep +   9.7s]   64 controls: refining 1.025842 limit ratio
+[sweep +  10.4s] ADAPTIVE 64 controls: 3.590196s; best 3.590196s; 3.3s computation
+[sweep +  12.9s]   96 controls: refining 1.483991 limit ratio
+[sweep +  14.9s]   96 controls: refining 1.014717 limit ratio
+[sweep +  16.1s]   96 controls: refining 1.010198 limit ratio
+[sweep +  17.1s] ADAPTIVE 96 controls: 3.397695s; best 3.397695s; 6.7s computation
+[sweep +  17.1s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[sweep +  17.1s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[sweep +  18.4s] SMOOTH V2 READY: 10 → 0 internal stops; 8.022s → 3.398s; tip deviation 1.22 mm
+[sweep +  18.4s] READY: 3.398s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 1 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] single_arc: candidate 2, score=0.6668, duration=19.88s
+[single_arc +   0.1s] single_arc: candidate 8, score=0.8503, duration=13.11s
+[single_arc +   0.1s] single_arc: candidate 11, score=1.0281, duration=12.59s
+[single_arc +   0.1s] single_arc: candidate 12, score=1.1965, duration=5.91s
+[single_arc +   0.1s] single_arc: candidate 13, score=1.3841, duration=6.52s
+[single_arc +   0.1s] single_arc: candidate 14, score=1.4329, duration=6.03s
+[single_arc +   0.1s] single_arc: candidate 9, score=1.4996, duration=3.36s
+[single_arc +   0.1s] single_arc: candidate 3, score=1.6114, duration=3.95s
+[single_arc +   0.1s] single_arc: candidate 5, score=1.7729, duration=15.29s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 9 eligible, equally checked candidates
+[single_arc +   0.9s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[single_arc +   1.2s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[single_arc +   1.2s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[single_arc +   1.8s]   8 controls: refining 11.561670 limit ratio
+[single_arc +   2.0s]   8 controls: refining 3.495807 limit ratio
+[single_arc +   2.1s]   8 controls: refining 1.014065 limit ratio
+[single_arc +   2.2s] ADAPTIVE 8 controls: 7.270887s; best 7.270887s; 0.5s computation
+[single_arc +   2.5s]   16 controls: refining 14.712392 limit ratio
+[single_arc +   2.7s]   16 controls: refining 1.012415 limit ratio
+[single_arc +   2.9s]   16 controls: refining 1.010393 limit ratio
+[single_arc +   3.1s] ADAPTIVE 16 controls: 4.916026s; best 4.916026s; 0.9s computation
+[single_arc +   3.7s]   32 controls: refining 16.843808 limit ratio
+[single_arc +   4.2s]   32 controls: refining 1.007090 limit ratio
+[single_arc +   4.5s]   32 controls: refining 1.003568 limit ratio
+[single_arc +   4.9s] ADAPTIVE 32 controls: 3.873616s; best 3.873616s; 1.7s computation
+[single_arc +   5.8s]   64 controls: refining 1.031373 limit ratio
+[single_arc +   6.5s]   64 controls: refining 1.031941 limit ratio
+[single_arc +   7.2s]   64 controls: refining 1.009515 limit ratio
+[single_arc +   7.8s] ADAPTIVE 64 controls: 3.497658s; best 3.497658s; 3.0s computation
+[single_arc +  12.2s]   96 controls: refining 1.531183 limit ratio
+[single_arc +  14.2s]   96 controls: refining 1.019829 limit ratio
+[single_arc +  15.3s]   96 controls: refining 1.007129 limit ratio
+[single_arc +  16.2s] ADAPTIVE 96 controls: 3.391496s; best 3.391496s; 8.4s computation
+[single_arc +  16.2s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[single_arc +  16.2s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[single_arc +  17.4s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[single_arc +  17.4s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.3s] SMOOTH V2 cache: 3.473s outward; same validated rounded curve
+[clearance +   0.3s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[clearance +   0.3s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+AUTO-CACHE: all survivors ready on one shared proposal pool
+PLAYBACK PASSED: progress
+[experiment] Loading cached result for sweep (same scene, state and settings).
+PLAYBACK PASSED: sweep
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+PLAYBACK PASSED: single_arc
+[experiment] Loading cached result for clearance (same scene, state and settings).
+PLAYBACK PASSED: clearance
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 4.0s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.2s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 4.0s search
+[clearance +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.7s] arch search 1/10: 2/60 coarse-feasible; best blocked samples 0
+[clearance +   7.0s] arch search 2/10: 6/60 coarse-feasible; best blocked samples 0
+[clearance +   7.3s] arch search 3/10: 13/60 coarse-feasible; best blocked samples 0
+[clearance +   7.6s] arch search 4/10: 24/60 coarse-feasible; best blocked samples 0
+[clearance +   7.8s] arch search 5/10: 35/60 coarse-feasible; best blocked samples 0
+[clearance +   8.0s] arch search 6/10: 39/60 coarse-feasible; best blocked samples 0
+[clearance +   8.3s] arch search 7/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +   8.5s] arch search 8/10: 41/60 coarse-feasible; best blocked samples 0
+[clearance +   8.8s] arch search 9/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +   9.1s] arch search 10/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +  10.2s] candidate 4: VALID; 6.52s; reversals=3; coordination=4.408; spatial=12.063
+[clearance +  11.4s] candidate 5: VALID; 5.81s; reversals=4; coordination=4.305; spatial=8.615
+[clearance +  12.6s] candidate 6: VALID; 5.57s; reversals=4; coordination=4.401; spatial=5.035
+[clearance +  13.9s] partial shortcut (economy): 11 accepted changes; objective 1.0597
+[clearance +  14.1s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  14.7s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  22.6s] candidate 9: VALID; 98.10s; reversals=0; coordination=3.657; spatial=4.794
+[clearance +  23.4s] partial shortcut (economy): 0 accepted changes; objective 2.2057
+[clearance +  24.5s] candidate 10: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +  25.1s] elastic deformation: 1 accepted updates; objective 0.7633
+[clearance +  25.4s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  26.0s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  29.4s] candidate 13: VALID; 36.35s; reversals=0; coordination=3.458; spatial=4.685
+[clearance +  30.2s] elastic deformation: 8 accepted updates; objective 1.1017
+[clearance +  31.3s] candidate 14: VALID; 4.20s; reversals=3; coordination=3.324; spatial=5.247
+[clearance +  31.3s] SHARED POOL COMPLETE: 9 validated candidates; 30.7s; no recording interiors
+[clearance +  31.5s] clearance: candidate 9, score=1.8067, duration=98.10s
+[clearance +  31.5s] clearance: candidate 13, score=1.8383, duration=36.35s
+[clearance +  31.5s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +  31.5s] clearance: candidate 14, score=2.1250, duration=4.20s
+[clearance +  31.5s] clearance: candidate 4, score=2.4687, duration=6.52s
+[clearance +  31.5s] clearance: candidate 5, score=2.4705, duration=5.81s
+[clearance +  31.5s] clearance: candidate 6, score=2.5419, duration=5.57s
+[clearance +  31.5s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +  31.5s] clearance: candidate 10, score=2.9014, duration=3.95s
+[clearance +  31.6s] SELECTED candidate 9: lowest clearance score; 9 eligible, equally checked candidates
+[clearance +  32.5s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +  32.9s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[clearance +  32.9s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +  33.3s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[clearance +  33.3s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +  34.5s]   8 controls: refining 11.995907 limit ratio
+[clearance +  34.8s]   8 controls: refining 3.466235 limit ratio
+[clearance +  35.1s]   8 controls: refining 1.007567 limit ratio
+[clearance +  35.3s] ADAPTIVE 8 controls: 7.374589s; best 7.374589s; 1.2s computation
+[clearance +  35.7s]   16 controls: refining 13.427030 limit ratio
+[clearance +  36.1s]   16 controls: refining 1.012402 limit ratio
+[clearance +  36.4s]   16 controls: refining 1.011763 limit ratio
+[clearance +  36.8s] ADAPTIVE 16 controls: 5.029163s; best 5.029163s; 1.4s computation
+[clearance +  37.5s]   32 controls: refining 16.282975 limit ratio
+[clearance +  38.1s]   32 controls: refining 1.007619 limit ratio
+[clearance +  38.6s]   32 controls: refining 1.006014 limit ratio
+[clearance +  39.1s] ADAPTIVE 32 controls: 3.959526s; best 3.959526s; 2.3s computation
+[clearance +  40.7s]   64 controls: refining 1.032254 limit ratio
+[clearance +  42.2s]   64 controls: refining 1.032809 limit ratio
+[clearance +  44.1s]   64 controls: refining 1.009434 limit ratio
+[clearance +  44.8s] ADAPTIVE 64 controls: 3.579062s; best 3.579062s; 5.8s computation
+[clearance +  48.8s]   96 controls: refining 1.436438 limit ratio
+[clearance +  52.0s]   96 controls: refining 1.018592 limit ratio
+[clearance +  53.5s]   96 controls: refining 1.007128 limit ratio
+[clearance +  54.5s] ADAPTIVE 96 controls: 3.472868s; best 3.472868s; 9.7s computation
+[clearance +  54.5s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[clearance +  54.5s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[clearance +  55.7s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[clearance +  55.8s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.0s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[progress +   0.0s] progress: candidate 9, score=1.0647, duration=98.10s
+[progress +   0.0s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.0s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.0s] progress: candidate 10, score=2.5820, duration=3.95s
+[progress +   0.1s] SELECTED candidate 9: lowest progress score; 4 eligible, equally checked candidates
+[progress +   0.2s] SMOOTH V2 cache: 3.473s outward; same validated rounded curve
+[progress +   0.2s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[progress +   0.2s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 13, score=0.7644, duration=36.35s
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 14, score=1.1373, duration=4.20s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.1s] SELECTED candidate 13: lowest sweep score; 4 eligible, equally checked candidates
+[sweep +   1.0s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.4s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.4s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.8s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.8s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   2.1s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   2.1s] SMOOTH V2: C3 halfwidth 0.030; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   3.1s]   8 controls: refining 15.399940 limit ratio
+[sweep +   3.3s]   8 controls: refining 3.568704 limit ratio
+[sweep +   3.6s]   8 controls: refining 1.006142 limit ratio
+[sweep +   3.8s] ADAPTIVE 8 controls: 7.250577s; best 7.250577s; 0.9s computation
+[sweep +   4.1s]   16 controls: refining 16.441314 limit ratio
+[sweep +   4.4s]   16 controls: refining 1.015196 limit ratio
+[sweep +   4.7s]   16 controls: refining 1.003361 limit ratio
+[sweep +   5.0s] ADAPTIVE 16 controls: 4.975513s; best 4.975513s; 1.2s computation
+[sweep +   5.6s]   32 controls: refining 17.279865 limit ratio
+[sweep +   6.1s]   32 controls: refining 1.007386 limit ratio
+[sweep +   6.6s]   32 controls: refining 1.007119 limit ratio
+[sweep +   7.0s] ADAPTIVE 32 controls: 3.992014s; best 3.992014s; 2.0s computation
+[sweep +   8.0s]   64 controls: refining 1.033481 limit ratio
+[sweep +   8.8s]   64 controls: refining 1.028990 limit ratio
+[sweep +   9.6s]   64 controls: refining 1.025842 limit ratio
+[sweep +  10.4s] ADAPTIVE 64 controls: 3.590196s; best 3.590196s; 3.4s computation
+[sweep +  12.9s]   96 controls: refining 1.483991 limit ratio
+[sweep +  14.9s]   96 controls: refining 1.014717 limit ratio
+[sweep +  16.1s]   96 controls: refining 1.010198 limit ratio
+[sweep +  17.1s] ADAPTIVE 96 controls: 3.397695s; best 3.397695s; 6.8s computation
+[sweep +  17.1s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[sweep +  17.1s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[sweep +  18.4s] SMOOTH V2 READY: 10 → 0 internal stops; 8.022s → 3.398s; tip deviation 1.22 mm
+[sweep +  18.4s] READY: 3.398s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.1s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.1s] single_arc: candidate 4, score=1.6426, duration=6.52s
+[single_arc +   0.1s] single_arc: candidate 5, score=1.6507, duration=5.81s
+[single_arc +   0.1s] single_arc: candidate 6, score=1.6906, duration=5.57s
+[single_arc +   0.1s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 5 eligible, equally checked candidates
+[single_arc +   0.9s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[single_arc +   1.2s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[single_arc +   1.2s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[single_arc +   1.9s]   8 controls: refining 11.561670 limit ratio
+[single_arc +   2.0s]   8 controls: refining 3.495807 limit ratio
+[single_arc +   2.1s]   8 controls: refining 1.014065 limit ratio
+[single_arc +   2.2s] ADAPTIVE 8 controls: 7.270887s; best 7.270887s; 0.5s computation
+[single_arc +   2.5s]   16 controls: refining 14.712392 limit ratio
+[single_arc +   2.7s]   16 controls: refining 1.012415 limit ratio
+[single_arc +   2.9s]   16 controls: refining 1.010393 limit ratio
+[single_arc +   3.1s] ADAPTIVE 16 controls: 4.916026s; best 4.916026s; 0.9s computation
+[single_arc +   3.7s]   32 controls: refining 16.843808 limit ratio
+[single_arc +   4.2s]   32 controls: refining 1.007090 limit ratio
+[single_arc +   4.5s]   32 controls: refining 1.003568 limit ratio
+[single_arc +   4.8s] ADAPTIVE 32 controls: 3.873616s; best 3.873616s; 1.7s computation
+[single_arc +   5.8s]   64 controls: refining 1.031373 limit ratio
+[single_arc +   6.5s]   64 controls: refining 1.031941 limit ratio
+[single_arc +   7.2s]   64 controls: refining 1.009515 limit ratio
+[single_arc +   7.8s] ADAPTIVE 64 controls: 3.497658s; best 3.497658s; 3.0s computation
+[single_arc +  12.2s]   96 controls: refining 1.531183 limit ratio
+[single_arc +  14.2s]   96 controls: refining 1.019829 limit ratio
+[single_arc +  15.3s]   96 controls: refining 1.007129 limit ratio
+[single_arc +  16.2s] ADAPTIVE 96 controls: 3.391496s; best 3.391496s; 8.4s computation
+[single_arc +  16.2s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[single_arc +  16.2s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[single_arc +  17.4s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[single_arc +  17.4s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 1.2s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.1s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 0.5s search
+[clearance +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.4s] SHARED POOL COMPLETE: 2 validated candidates; 5.7s; no recording interiors
+[clearance +   6.6s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   6.6s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   6.6s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   7.4s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +   7.7s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[clearance +   7.7s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +   8.3s]   8 controls: refining 11.561670 limit ratio
+[clearance +   8.4s]   8 controls: refining 3.495807 limit ratio
+[clearance +   8.6s]   8 controls: refining 1.014065 limit ratio
+[clearance +   8.7s] ADAPTIVE 8 controls: 7.270887s; best 7.270887s; 0.5s computation
+[clearance +   8.9s]   16 controls: refining 14.712392 limit ratio
+[clearance +   9.1s]   16 controls: refining 1.012415 limit ratio
+[clearance +   9.4s]   16 controls: refining 1.010393 limit ratio
+[clearance +   9.6s] ADAPTIVE 16 controls: 4.916026s; best 4.916026s; 0.9s computation
+[clearance +  10.1s]   32 controls: refining 16.843808 limit ratio
+[clearance +  10.6s]   32 controls: refining 1.007090 limit ratio
+[clearance +  10.9s]   32 controls: refining 1.003568 limit ratio
+[clearance +  11.2s] ADAPTIVE 32 controls: 3.873616s; best 3.873616s; 1.7s computation
+[clearance +  12.2s]   64 controls: refining 1.031373 limit ratio
+[clearance +  12.9s]   64 controls: refining 1.031941 limit ratio
+[clearance +  13.6s]   64 controls: refining 1.009515 limit ratio
+[clearance +  14.2s] ADAPTIVE 64 controls: 3.497658s; best 3.497658s; 2.9s computation
+[clearance +  18.6s]   96 controls: refining 1.531183 limit ratio
+[clearance +  20.5s]   96 controls: refining 1.019829 limit ratio
+[clearance +  21.6s]   96 controls: refining 1.007129 limit ratio
+[clearance +  22.5s] ADAPTIVE 96 controls: 3.391496s; best 3.391496s; 8.3s computation
+[clearance +  22.5s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[clearance +  22.5s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[clearance +  23.7s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[clearance +  23.7s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[progress +   0.0s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.0s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.0s] SELECTED candidate 2: lowest progress score; 2 eligible, equally checked candidates
+[progress +   0.1s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[progress +   0.1s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[progress +   0.1s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.0s] SELECTED candidate 2: lowest sweep score; 2 eligible, equally checked candidates
+[sweep +   0.1s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[sweep +   0.1s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[sweep +   0.1s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.0s] SELECTED candidate 2: lowest single_arc score; 2 eligible, equally checked candidates
+[single_arc +   0.1s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[single_arc +   0.2s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[single_arc +   0.2s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[clearance +   0.0s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   0.0s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   0.0s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   0.1s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[clearance +   0.1s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[clearance +   0.1s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+RuntimeError: Intentional offline capture-failure test
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 1.2s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.2s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.2s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 0.5s search
+[clearance +   6.5s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.5s] SHARED POOL COMPLETE: 2 validated candidates; 5.8s; no recording interiors
+[clearance +   6.7s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   6.7s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   6.7s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   7.5s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +   7.8s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[clearance +   7.8s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[clearance +   8.5s]   8 controls: refining 11.561670 limit ratio
+[clearance +   8.6s]   8 controls: refining 3.495807 limit ratio
+[clearance +   8.7s]   8 controls: refining 1.014065 limit ratio
+[clearance +   8.9s] ADAPTIVE 8 controls: 7.270887s; best 7.270887s; 0.5s computation
+[clearance +   9.1s]   16 controls: refining 14.712392 limit ratio
+[clearance +   9.3s]   16 controls: refining 1.012415 limit ratio
+[clearance +   9.6s]   16 controls: refining 1.010393 limit ratio
+[clearance +   9.7s] ADAPTIVE 16 controls: 4.916026s; best 4.916026s; 0.9s computation
+[clearance +  10.3s]   32 controls: refining 16.843808 limit ratio
+[clearance +  10.8s]   32 controls: refining 1.007090 limit ratio
+[clearance +  11.1s]   32 controls: refining 1.003568 limit ratio
+[clearance +  11.5s] ADAPTIVE 32 controls: 3.873616s; best 3.873616s; 1.7s computation
+[clearance +  12.4s]   64 controls: refining 1.031373 limit ratio
+[clearance +  13.2s]   64 controls: refining 1.031941 limit ratio
+[clearance +  13.8s]   64 controls: refining 1.009515 limit ratio
+[clearance +  14.4s] ADAPTIVE 64 controls: 3.497658s; best 3.497658s; 3.0s computation
+[clearance +  18.8s]   96 controls: refining 1.531183 limit ratio
+[clearance +  20.7s]   96 controls: refining 1.019829 limit ratio
+[clearance +  21.9s]   96 controls: refining 1.007129 limit ratio
+[clearance +  22.8s] ADAPTIVE 96 controls: 3.391496s; best 3.391496s; 8.3s computation
+[clearance +  22.8s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[clearance +  22.8s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[clearance +  24.0s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[clearance +  24.0s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[progress +   0.0s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.0s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.0s] SELECTED candidate 2: lowest progress score; 2 eligible, equally checked candidates
+[progress +   0.2s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[progress +   0.2s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[progress +   0.2s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.0s] SELECTED candidate 2: lowest sweep score; 2 eligible, equally checked candidates
+[sweep +   0.2s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[sweep +   0.2s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[sweep +   0.2s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.0s] SELECTED candidate 2: lowest single_arc score; 2 eligible, equally checked candidates
+[single_arc +   0.1s] SMOOTH V2 cache: 3.391s outward; same validated rounded curve
+[single_arc +   0.2s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[single_arc +   0.2s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+ALL GESTURE UI FEATURES PASSED

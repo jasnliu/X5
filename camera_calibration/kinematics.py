@@ -6,6 +6,7 @@ and board-mount transforms. Neither the source URDF nor joint converters change.
 """
 import xml.etree.ElementTree as ET
 
+import cv2
 import numpy as np
 from scipy.optimize import least_squares
 from scipy.spatial.transform import Rotation
@@ -124,9 +125,12 @@ def corrected_samples(samples, correction, model_path):
     return [dict(s, T_base_hand=a.tolist()) for s, a in zip(samples, A)]
 
 
-def _refine(samples, K, D, board, model, baseline):
+def _refine(samples, K, D, board, model, baseline, *, corner_residuals=False):
     q = model.measured(samples)
     B = np.array([core.checked_transform(s['T_color_board']) for s in samples])
+    objects = [np.ascontiguousarray(board.points[np.asarray(s['corner_ids'], dtype=int)])
+               for s in samples] if corner_residuals else []
+    observed = [np.asarray(s['corners_px'], dtype=float) for s in samples] if corner_residuals else []
 
     def unpack(p):
         delta = np.r_[0., p[12:], 0.]
@@ -138,13 +142,24 @@ def _refine(samples, K, D, board, model, baseline):
         pos = (lhs[:, :3, 3] - rhs[:, :3, 3]) / .005
         rot = Rotation.from_matrix(lhs[:, :3, :3].transpose(0, 2, 1)
                                    @ rhs[:, :3, :3]).as_rotvec() / np.radians(1)
-        return np.c_[pos, rot].ravel()
+        pose = np.c_[pos, rot].ravel()
+        if not corner_residuals:
+            return pose
+        # Fixed recovery policy: retain the original 5 mm / 1 degree pose
+        # scales and add each observed corner at a one-pixel residual scale.
+        # No intrinsics, board dimensions, joints or thresholds are relaxed.
+        pred = core.inverse(C) @ lhs
+        rv = Rotation.from_matrix(pred[:, :3, :3]).as_rotvec()
+        pixels = [
+            (cv2.projectPoints(obj, rv[i], pred[i, :3, 3], K, D)[0].reshape(-1, 2)-uv).ravel()
+            for i, (obj, uv) in enumerate(zip(objects, observed))]
+        return np.r_[np.concatenate(pixels), pose]
 
     seed = np.r_[core._pack(np.array(baseline['T_base_color'])),
                  core._pack(np.array(baseline['T_hand_board'])), np.zeros(5)]
     lower = np.r_[np.full(12, -np.inf), np.full(5, -MAX_OFFSET_RAD)]
     upper = -lower
-    opt = least_squares(residual, seed, loss='soft_l1', bounds=(lower, upper),
+    opt = least_squares(residual, seed, loss='linear' if corner_residuals else 'soft_l1', bounds=(lower, upper),
                         max_nfev=350, xtol=1e-10, ftol=1e-10, gtol=1e-10)
     if not opt.success or not np.isfinite(opt.x).all():
         raise ValueError('Kinematic refinement did not converge')
@@ -185,7 +200,8 @@ def _refine(samples, K, D, board, model, baseline):
                 coverage=baseline['coverage'], training_metrics=m,
                 training_passed=core.passes(m), training_ids=[s['id'] for s in samples],
                 kinematic_correction=correction,
-                method='Park initialization + bounded J2-J6 and rigid-transform soft-L1 refinement')
+                method=('Park initialization + bounded J2-J6 corner/pose bundle least-squares'
+                        if corner_residuals else 'Park initialization + bounded J2-J6 and rigid-transform soft-L1 refinement'))
 
 
 def solve_with_kinematics(training, K, D, board, model_path):
@@ -209,7 +225,11 @@ def solve_with_kinematics(training, K, D, board, model_path):
         candidate = _refine(training, K, D, board, model, baseline)
         candidate['baseline_training_metrics'] = baseline['training_metrics']
         if not candidate['training_passed']:
-            raise ValueError('Local kinematic refinement still fails the unchanged training limits')
+            # Retain the actual refined errors instead of showing the much
+            # worse discarded rigid fit as though refinement never improved it.
+            candidate['refinement_rejection'] = 'Local kinematic refinement still fails the unchanged training limits'
+            candidate['solver_policy'] = baseline['solver_policy']
+            return candidate
         rows, baseline_rows, folds = [], [], []
         for fold in range(5):
             fit_samples = [s for i, s in enumerate(training) if i % 5 != fold]

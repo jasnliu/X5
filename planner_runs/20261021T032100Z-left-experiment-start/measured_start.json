@@ -1,0 +1,144 @@
+{
+  "schema": "x5-planner-start-state-v1",
+  "coordinate_convention": "encoder_to_joint",
+  "left_rad": [
+    0.02320851453421824,
+    0.009782101167315815,
+    -0.035100480659188804,
+    0.07192721446555339,
+    -0.9147223620965885,
+    -0.017837949187457625,
+    -0.016303501945525767
+  ],
+  "right_rad": [
+    0.016303501945525767,
+    0.004795147631037722,
+    0.1735843442435332,
+    0.03701853971160496,
+    -0.043818768062914876,
+    -0.12333119707026796,
+    0.501572442206454
+  ],
+  "left_gripper_opening_m": 0.0,
+  "right_gripper_closed_motor_joint_rad": 0.12217304763960307,
+  "preview_only": true,
+  "measured_side": "left",
+  "source": "One-shot selected-arm read-only encoder snapshot",
+  "captured_utc": "2026-10-21T03:21:02Z",
+  "side_sources": {
+    "left": "live encoder snapshot",
+    "right": "/home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/measured_start.json"
+  },
+  "static_state_sha256": "821b647e3ff1b0159e4d3a10f2db8534e39083f853f115a91d668af6497adafc",
+  "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+  "encoder_source_sha256": "03e56325d0a593b75921e6bff6b80b443551af6eeb29473c6da949ac353f7887",
+  "calibration_sha256": "181b9caf39e58d1b892f9367a6d41336ea9aad4fcb67f0f91ddb1a112545fd80",
+  "motor_telemetry": {
+    "left": [
+      {
+        "motor": 1,
+        "received_monotonic": 364871.306592739,
+        "request_monotonic": 364871.305525253,
+        "encoder_count": 32707,
+        "raw_rad": -0.02320851453421824,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 2,
+        "received_monotonic": 364871.306992438,
+        "request_monotonic": 364871.30570014,
+        "encoder_count": 32742,
+        "raw_rad": -0.009782101167315815,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 3,
+        "received_monotonic": 364871.307729919,
+        "request_monotonic": 364871.305754755,
+        "encoder_count": 32859,
+        "raw_rad": 0.035100480659188804,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 4,
+        "received_monotonic": 364871.30815129,
+        "request_monotonic": 364871.30580923,
+        "encoder_count": 32580,
+        "raw_rad": -0.07192721446555339,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 5,
+        "received_monotonic": 364871.308824947,
+        "request_monotonic": 364871.305887982,
+        "encoder_count": 35152,
+        "raw_rad": 0.9147223620965885,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 6,
+        "received_monotonic": 364871.309450612,
+        "request_monotonic": 364871.305944019,
+        "encoder_count": 32814,
+        "raw_rad": 0.017837949187457625,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 7,
+        "received_monotonic": 364871.309977387,
+        "request_monotonic": 364871.30598558,
+        "encoder_count": 32810,
+        "raw_rad": 0.016303501945525767,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      },
+      {
+        "motor": 8,
+        "received_monotonic": 364871.310515493,
+        "request_monotonic": 364871.306054552,
+        "encoder_count": 33428,
+        "raw_rad": 0.25337560082398625,
+        "mode": 0,
+        "fault_bits": 0,
+        "temperature_c": 24.0
+      }
+    ]
+  },
+  "motor8_feedback": {
+    "left": {
+      "encoder_count": 33428,
+      "raw_rad": 0.25337560082398625
+    }
+  },
+  "synchronization": {
+    "batch_count": 20,
+    "joint_spread_deg": [
+      0.0,
+      0.021979337712122585,
+      0.0,
+      0.021979337712122585,
+      0.0,
+      0.021979337712122585,
+      0.02197933771202081
+    ],
+    "camera_synchronized": false,
+    "scene": "separately saved frozen scene"
+  },
+  "motor_commands": 0,
+  "gripper_commands": 0,
+  "motion_authorized": false,
+  "hardware_execution_available": false
+}

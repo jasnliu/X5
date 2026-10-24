@@ -1,0 +1,219 @@
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261021T032100Z-left-experiment-start/measured_start.json
+LEFT ARM ONLY in simulation. Frozen start; left_recordings/record1.json FINAL pose only. The opposite arm stays fixed. No live tracking or physical movement.
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[progress +   4.2s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[progress +   6.4s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +   9.0s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  11.0s] candidate 5: VALID; 15.29s; reversals=4; coordination=6.290; spatial=21.345
+[progress +  11.1s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  12.1s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  12.3s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  14.0s] candidate 8: VALID; 13.11s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  14.0s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  15.9s] candidate 9: VALID; 3.36s; reversals=3; coordination=3.086; spatial=13.703
+[progress +  15.9s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  17.2s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  19.0s] candidate 11: VALID; 12.59s; reversals=4; coordination=5.974; spatial=6.638
+[progress +  19.3s] arch search 1/10: 2/60 coarse-feasible; best blocked samples 0
+[progress +  19.6s] arch search 2/10: 6/60 coarse-feasible; best blocked samples 0
+[progress +  19.9s] arch search 3/10: 15/60 coarse-feasible; best blocked samples 0
+[progress +  20.1s] arch search 4/10: 21/60 coarse-feasible; best blocked samples 0
+[progress +  20.4s] arch search 5/10: 34/60 coarse-feasible; best blocked samples 0
+[progress +  20.6s] arch search 6/10: 38/60 coarse-feasible; best blocked samples 0
+[progress +  20.9s] arch search 7/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  21.1s] arch search 8/10: 42/60 coarse-feasible; best blocked samples 0
+[progress +  21.4s] arch search 9/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  21.6s] arch search 10/10: 39/60 coarse-feasible; best blocked samples 0
+[progress +  22.8s] candidate 12: VALID; 5.91s; reversals=3; coordination=3.653; spatial=8.754
+[progress +  24.0s] candidate 13: VALID; 6.52s; reversals=4; coordination=3.768; spatial=10.521
+[progress +  25.2s] candidate 14: VALID; 6.03s; reversals=4; coordination=3.943; spatial=11.671
+[progress +  26.6s] partial shortcut (economy): 11 accepted changes; objective 0.8058
+[progress +  26.8s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  27.4s] candidate 16: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  35.2s] candidate 17: VALID; 98.10s; reversals=0; coordination=3.657; spatial=4.794
+[progress +  36.0s] partial shortcut (economy): 2 accepted changes; objective 1.0304
+[progress +  36.1s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  36.3s] candidate 19: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  40.7s] candidate 20: VALID; 48.70s; reversals=2; coordination=3.624; spatial=10.066
+[progress +  41.4s] elastic deformation: 1 accepted updates; objective 0.6464
+[progress +  41.7s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  42.3s] candidate 22: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  45.6s] candidate 23: VALID; 36.35s; reversals=0; coordination=3.458; spatial=4.685
+[progress +  46.1s] elastic deformation: 0 accepted updates; objective 0.8415
+[progress +  46.2s] candidate 24: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  46.4s] candidate 25: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  51.6s] candidate 26: VALID; 59.86s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  51.8s] SHARED POOL COMPLETE: 13 validated candidates; 51.1s; no recording interiors
+[progress +  51.9s] progress: candidate 17, score=0.8095, duration=98.10s
+[progress +  51.9s] progress: candidate 2, score=0.9289, duration=19.88s
+[progress +  51.9s] progress: candidate 20, score=1.0405, duration=48.70s
+[progress +  51.9s] progress: candidate 8, score=1.0405, duration=13.11s
+[progress +  51.9s] progress: candidate 11, score=1.5528, duration=12.59s
+[progress +  51.9s] progress: candidate 3, score=1.9778, duration=3.95s
+[progress +  51.9s] progress: candidate 9, score=2.1263, duration=3.36s
+[progress +  51.9s] progress: candidate 5, score=2.3518, duration=15.29s
+[progress +  52.0s] SELECTED candidate 17: lowest progress score; 8 eligible, equally checked candidates
+[progress +  52.9s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  53.3s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +  53.3s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  53.7s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +  53.7s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  54.9s]   8 controls: refining 11.995907 limit ratio
+[progress +  55.2s]   8 controls: refining 3.466235 limit ratio
+[progress +  55.4s]   8 controls: refining 1.007567 limit ratio
+[progress +  55.7s] ADAPTIVE 8 controls: 7.374589s; best 7.374589s; 1.1s computation
+[progress +  56.1s]   16 controls: refining 13.427030 limit ratio
+[progress +  56.4s]   16 controls: refining 1.012402 limit ratio
+[progress +  56.8s]   16 controls: refining 1.011763 limit ratio
+[progress +  57.1s] ADAPTIVE 16 controls: 5.029163s; best 5.029163s; 1.4s computation
+/usr/lib/python3/dist-packages/scipy/optimize/_optimize.py:404: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  warnings.warn("Values in x were outside bounds during a "
+[progress +  57.8s]   32 controls: refining 16.282975 limit ratio
+[progress +  58.4s]   32 controls: refining 1.007619 limit ratio
+[progress +  58.9s]   32 controls: refining 1.006014 limit ratio
+[progress +  59.4s] ADAPTIVE 32 controls: 3.959526s; best 3.959526s; 2.3s computation
+[progress +  60.9s]   64 controls: refining 1.032254 limit ratio
+[progress +  62.4s]   64 controls: refining 1.032809 limit ratio
+[progress +  64.3s]   64 controls: refining 1.009434 limit ratio
+[progress +  65.0s] ADAPTIVE 64 controls: 3.579062s; best 3.579062s; 5.7s computation
+[progress +  69.0s]   96 controls: refining 1.436438 limit ratio
+[progress +  72.3s]   96 controls: refining 1.018592 limit ratio
+[progress +  73.8s]   96 controls: refining 1.007128 limit ratio
+[progress +  74.9s] ADAPTIVE 96 controls: 3.472868s; best 3.472868s; 9.8s computation
+[progress +  74.9s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[progress +  76.2s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[progress +  76.2s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 23, score=0.6473, duration=36.35s
+[sweep +   0.1s] sweep: candidate 2, score=0.6668, duration=19.88s
+[sweep +   0.1s] sweep: candidate 8, score=0.8503, duration=13.11s
+[sweep +   0.1s] sweep: candidate 26, score=0.8503, duration=59.86s
+[sweep +   0.1s] sweep: candidate 11, score=1.0281, duration=12.59s
+[sweep +   0.1s] sweep: candidate 9, score=1.4996, duration=3.36s
+[sweep +   0.1s] sweep: candidate 3, score=1.6114, duration=3.95s
+[sweep +   0.1s] sweep: candidate 5, score=1.7729, duration=15.29s
+[sweep +   0.1s] SELECTED candidate 23: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   1.0s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.4s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.4s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.8s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.8s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   2.2s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   2.2s] SMOOTH V2: C3 halfwidth 0.030; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   3.2s]   8 controls: refining 15.399940 limit ratio
+[sweep +   3.4s]   8 controls: refining 3.568704 limit ratio
+[sweep +   3.6s]   8 controls: refining 1.006142 limit ratio
+[sweep +   3.9s] ADAPTIVE 8 controls: 7.250577s; best 7.250577s; 0.9s computation
+/usr/lib/python3/dist-packages/scipy/optimize/_optimize.py:404: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  warnings.warn("Values in x were outside bounds during a "
+[sweep +   4.2s]   16 controls: refining 16.441314 limit ratio
+[sweep +   4.5s]   16 controls: refining 1.015196 limit ratio
+[sweep +   4.8s]   16 controls: refining 1.003361 limit ratio
+[sweep +   5.2s] ADAPTIVE 16 controls: 4.975513s; best 4.975513s; 1.3s computation
+[sweep +   5.8s]   32 controls: refining 17.279865 limit ratio
+[sweep +   6.3s]   32 controls: refining 1.007386 limit ratio
+[sweep +   6.7s]   32 controls: refining 1.007119 limit ratio
+[sweep +   7.1s] ADAPTIVE 32 controls: 3.992014s; best 3.992014s; 2.0s computation
+[sweep +   8.1s]   64 controls: refining 1.033481 limit ratio
+[sweep +   8.9s]   64 controls: refining 1.028990 limit ratio
+[sweep +   9.7s]   64 controls: refining 1.025842 limit ratio
+[sweep +  10.4s] ADAPTIVE 64 controls: 3.590196s; best 3.590196s; 3.3s computation
+[sweep +  12.9s]   96 controls: refining 1.483991 limit ratio
+[sweep +  14.8s]   96 controls: refining 1.014717 limit ratio
+[sweep +  16.1s]   96 controls: refining 1.010198 limit ratio
+[sweep +  17.0s] ADAPTIVE 96 controls: 3.397695s; best 3.397695s; 6.6s computation
+[sweep +  17.0s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[sweep +  18.3s] SMOOTH V2 READY: 10 → 0 internal stops; 8.022s → 3.398s; tip deviation 1.22 mm
+[sweep +  18.3s] READY: 3.398s outward → 2s hold → exact reverse; SIMULATION ONLY
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] single_arc: candidate 2, score=0.6668, duration=19.88s
+[single_arc +   0.1s] single_arc: candidate 8, score=0.8503, duration=13.11s
+[single_arc +   0.1s] single_arc: candidate 11, score=1.0281, duration=12.59s
+[single_arc +   0.1s] single_arc: candidate 12, score=1.1965, duration=5.91s
+[single_arc +   0.1s] single_arc: candidate 13, score=1.3841, duration=6.52s
+[single_arc +   0.1s] single_arc: candidate 14, score=1.4329, duration=6.03s
+[single_arc +   0.1s] single_arc: candidate 9, score=1.4996, duration=3.36s
+[single_arc +   0.1s] single_arc: candidate 3, score=1.6114, duration=3.95s
+[single_arc +   0.1s] single_arc: candidate 5, score=1.7729, duration=15.29s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 9 eligible, equally checked candidates
+[single_arc +   0.9s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[single_arc +   1.2s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[single_arc +   1.2s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+/usr/lib/python3/dist-packages/scipy/optimize/_optimize.py:404: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  warnings.warn("Values in x were outside bounds during a "
+[single_arc +   1.8s]   8 controls: refining 11.561670 limit ratio
+[single_arc +   2.0s]   8 controls: refining 3.495807 limit ratio
+[single_arc +   2.1s]   8 controls: refining 1.014065 limit ratio
+[single_arc +   2.2s] ADAPTIVE 8 controls: 7.270887s; best 7.270887s; 0.5s computation
+[single_arc +   2.5s]   16 controls: refining 14.712392 limit ratio
+[single_arc +   2.7s]   16 controls: refining 1.012415 limit ratio
+[single_arc +   2.9s]   16 controls: refining 1.010393 limit ratio
+[single_arc +   3.1s] ADAPTIVE 16 controls: 4.916026s; best 4.916026s; 0.9s computation
+[single_arc +   3.7s]   32 controls: refining 16.843808 limit ratio
+[single_arc +   4.2s]   32 controls: refining 1.007090 limit ratio
+[single_arc +   4.5s]   32 controls: refining 1.003568 limit ratio
+[single_arc +   4.9s] ADAPTIVE 32 controls: 3.873616s; best 3.873616s; 1.7s computation
+[single_arc +   5.8s]   64 controls: refining 1.031373 limit ratio
+[single_arc +   6.6s]   64 controls: refining 1.031941 limit ratio
+[single_arc +   7.2s]   64 controls: refining 1.009515 limit ratio
+[single_arc +   7.8s] ADAPTIVE 64 controls: 3.497658s; best 3.497658s; 3.0s computation
+[single_arc +  12.3s]   96 controls: refining 1.531183 limit ratio
+[single_arc +  14.2s]   96 controls: refining 1.019829 limit ratio
+[single_arc +  15.4s]   96 controls: refining 1.007129 limit ratio
+[single_arc +  16.3s] ADAPTIVE 96 controls: 3.391496s; best 3.391496s; 8.4s computation
+[single_arc +  16.3s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[single_arc +  17.5s] SMOOTH V2 READY: 4 → 0 internal stops; 5.174s → 3.391s; tip deviation 3.32 mm
+[single_arc +  17.5s] READY: 3.391s outward → 2s hold → exact reverse; SIMULATION ONLY
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.2s] SMOOTH V2 cache: 3.473s outward; same validated rounded curve
+[clearance +   0.2s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[clearance +   0.2s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+{
+  "progress": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/corner_v2_left_20261021/plans/progress-6fe369af/plan.json"
+  },
+  "sweep": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/corner_v2_left_20261021/plans/sweep-cd8b6822/plan.json"
+  },
+  "single_arc": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/corner_v2_left_20261021/plans/single_arc-b4ce9716/plan.json"
+  },
+  "clearance": {
+    "status": "planned",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/corner_v2_left_20261021/plans/clearance-7a4d24a8/plan.json"
+  }
+}

@@ -1,0 +1,51 @@
+R1 + R4: full five-method cold-session comparison
+================================================
+Route: saved rest -> R1 -> R4 -> independently planned saved rest.
+Both tests calculate all five methods, in identical default GUI order.
+Original CPU worker is byte-identical to the pre-GPU snapshot; CPU timing,
+path generators, limits, scene, endpoints, seed and settings are unchanged.
+No current program was edited. No CAN, camera, encoder or motor access.
+
+Version                         All-five wall time
+Current GPU version             9m 17.7s (557.712 s)
+Original CPU-only version       8m 23.9s (503.937 s)
+GPU minus CPU: +53.775 s (+10.67%).
+
+Method                   GPU version     CPU-only       Difference
+progress                    1m 52.4s       1m 52.5s       -0.12 s
+sweep                       0m 55.7s       0m 44.8s       10.91 s
+single_arc                  2m 49.5s       2m 26.0s       23.45 s
+clearance                   0m 06.7s       0m 03.6s        3.04 s
+workspace_curve             3m 33.2s       3m 16.7s       16.55 s
+
+Timing interpretation:
+- Wall-clock calculation time, NOT movement duration. Includes path generation,
+  selection, CPU/GPU timing, verification, checkpoint composition and worker startup.
+- Both versions begin with empty isolated run-local and persistent caches; no
+  pre-existing trajectory or CPU reference results are available. Normal reuse
+  BETWEEN METHODS WITHIN that same session remains enabled, as in the real GUI.
+  Thus later rows can be fast; these are not five independently cold programs.
+- Current GPU version includes its full CPU-reference qualification on every new
+  curve. That is why a fast GPU solver alone does not imply a faster cold total.
+- GUI rendering/startup and frozen-scene preparation before destination selection
+  are excluded. Already-installed native/GPU binaries are not recompiled; OS/driver
+  file/shader caches are not purged. No physical playback is timed.
+- Same 120 s search budget per leg; serial method/route searches; at most two
+  timing children under the same 3 GiB job cap. GPU solves share one slot.
+- One complete run per version, GPU first then CPU. This is a measured comparison,
+  not a statistical average or guarantee for every endpoint/system load.
+
+Completion status: {'gpu': 'complete', 'cpu': 'complete'}
+Validated leg comparisons: 15
+All requests identical: True
+All selected curves/clocks identical: True
+All selections identical: True
+Production source unchanged: True
+Frozen input hashes unchanged: True
+
+Evidence: comparison.json, protocol.json, source_before.json, validation.json,
+gpu/summary.json, cpu/summary.json and each plans/METHOD/worker.log + job.json.
+CPU executable copy: cpu_worker_before_gpu.py, loaded only by cpu_entry.py.
+Reproduction: run_comparison.py in a NEW diagnostic folder, with the sourced ROS
+environment and OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1. It refuses existing
+protocol/caches rather than silently turning a repeat into a warm benchmark.

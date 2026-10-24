@@ -1,0 +1,73 @@
+[checkpoints clearance] LEG 1/3: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 12, score=1.6429, duration=7.24s
+[clearance +   0.1s] clearance: candidate 13, score=1.7209, duration=7.82s
+[clearance +   0.1s] clearance: candidate 14, score=1.7415, duration=7.61s
+[clearance +   0.1s] clearance: candidate 22, score=1.9935, duration=8.36s
+[clearance +   0.1s] clearance: candidate 17, score=2.1172, duration=6.18s
+[clearance +   0.1s] clearance: candidate 16, score=2.2257, duration=26.89s
+[clearance +   0.1s] clearance: candidate 4, score=2.2266, duration=7.74s
+[clearance +   0.1s] clearance: candidate 2, score=2.2685, duration=25.84s
+[clearance +   0.1s] clearance: candidate 9, score=2.5361, duration=10.59s
+[clearance +   0.1s] clearance: candidate 7, score=3.0072, duration=47.56s
+[clearance +   0.1s] clearance: candidate 11, score=3.7260, duration=10.01s
+[clearance +   0.1s] clearance: candidate 10, score=6.5507, duration=8.24s
+[clearance +   0.1s] SELECTED candidate 12: lowest clearance score; 12 eligible, equally checked candidates
+[checkpoints clearance] LEG 2/3: destinationR1 → destinationR4; budget 120s; frozen scene unchanged
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.0s] clearance: candidate 14, score=0.6079, duration=5.89s
+[clearance +   0.0s] clearance: candidate 15, score=0.6918, duration=5.98s
+[clearance +   0.0s] clearance: candidate 10, score=0.6936, duration=6.20s
+[clearance +   0.0s] clearance: candidate 11, score=0.7136, duration=6.58s
+[clearance +   0.0s] clearance: candidate 9, score=0.7751, duration=7.04s
+[clearance +   0.0s] clearance: candidate 4, score=1.0990, duration=7.48s
+[clearance +   0.0s] clearance: candidate 5, score=1.1335, duration=5.42s
+[clearance +   0.0s] clearance: candidate 2, score=1.1936, duration=10.52s
+[clearance +   0.0s] clearance: candidate 7, score=1.2466, duration=4.96s
+[clearance +   0.0s] clearance: candidate 12, score=1.2528, duration=6.77s
+[clearance +   0.0s] clearance: candidate 13, score=1.5075, duration=6.69s
+[clearance +   0.0s] clearance: candidate 6, score=1.5352, duration=5.99s
+[clearance +   0.0s] clearance: candidate 8, score=1.7491, duration=6.88s
+[clearance +   0.0s] SELECTED candidate 14: lowest clearance score; 13 eligible, equally checked candidates
+[checkpoints clearance] LEG 3/3: destinationR4 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.0s] clearance: candidate 17, score=1.5137, duration=7.15s
+[clearance +   0.0s] clearance: candidate 12, score=1.7171, duration=7.65s
+[clearance +   0.0s] clearance: candidate 2, score=1.8457, duration=12.47s
+[clearance +   0.0s] clearance: candidate 13, score=1.8727, duration=8.03s
+[clearance +   0.0s] clearance: candidate 14, score=1.9706, duration=7.06s
+[clearance +   0.0s] clearance: candidate 15, score=2.0908, duration=7.25s
+[clearance +   0.0s] clearance: candidate 18, score=2.1491, duration=6.29s
+[clearance +   0.0s] clearance: candidate 16, score=2.2143, duration=6.78s
+[clearance +   0.0s] clearance: candidate 8, score=2.2999, duration=8.14s
+[clearance +   0.0s] clearance: candidate 4, score=2.5542, duration=15.36s
+[clearance +   0.0s] clearance: candidate 11, score=2.7117, duration=4.95s
+[clearance +   0.0s] clearance: candidate 6, score=3.0732, duration=7.67s
+[clearance +   0.0s] clearance: candidate 10, score=3.2664, duration=7.11s
+[clearance +   0.0s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[checkpoints] All 3 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 7.237s; path and ranking locked
+[right checkpoint_1 timing +   0.0s] TIMING MATH CACHE: identical curve/clock/limits; 3.854s. Current scene is checked separately.
+[right checkpoint_1 timing +   0.0s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 5.895s; path and ranking locked
+[right checkpoint_2 timing +   0.0s] TIMING MATH CACHE: identical curve/clock/limits; 3.342s. Current scene is checked separately.
+[right checkpoint_2 timing +   0.0s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_1 timing +   1.1s] TIMING READY: 7.237s → 3.854s outward; limits unchanged
+[right checkpoint_1 timing +   1.1s] LEG READY: 3.854s; exact timing and collision/zone checks complete; NO motor commands.
+[right checkpoint_2 timing +   1.1s] TIMING READY: 5.895s → 3.342s outward; limits unchanged
+[right checkpoint_2 timing +   1.1s] LEG READY: 3.342s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 7.146s; path and ranking locked
+[right return_to_start timing +   0.0s] TIMING MATH CACHE: identical curve/clock/limits; 2.787s. Current scene is checked separately.
+[right return_to_start timing +   0.0s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right return_to_start timing +   1.1s] TIMING READY: 7.146s → 2.787s outward; limits unchanged
+[right return_to_start timing +   1.1s] LEG READY: 2.787s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 2 destinations; 9.196s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 2.787s return to original start; SIMULATION ONLY

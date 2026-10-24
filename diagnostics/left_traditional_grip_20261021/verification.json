@@ -1,0 +1,212 @@
+{
+  "schema": "x5-left-traditional-grip-draft-verification-v1",
+  "run": "/home/jason/Proyectos3/X5/planner_runs/20261021T040821Z-left-traditional-grip",
+  "hardware_access": false,
+  "motor_commands": 0,
+  "camera_access": false,
+  "scene": "reused frozen scene",
+  "mounting_physically_verified": false,
+  "left_tool": {
+    "stick_link": "left_drumstick",
+    "stick_length_m": 0.38684999999999997,
+    "stick_radius_m": 0.0074,
+    "stick_exposed_length_m": 0.26034999999999997,
+    "sleeve_length_m": 0.1265,
+    "bore_axis_hand": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "sleeve_rear_center_hand_m": [
+      0.0,
+      -0.03075,
+      0.0274
+    ],
+    "sleeve_front_center_hand_m": [
+      0.0,
+      0.09575,
+      0.0274
+    ],
+    "tip_hand_m": [
+      0.0,
+      0.35609999999999997,
+      0.0274
+    ],
+    "rear_stick_protrusion_m": 0.0,
+    "closed_motor_raw_rad": 0.24713862208239706,
+    "closed_motor_joint_rad": -0.24713862208239706,
+    "closure": "fixed CAD halves meeting at bore; no inferred motor-to-slider conversion",
+    "mounting_physically_verified": false,
+    "mounting_assumption": "nominal 15 mm hand mount plane; draft hand +Y clocking selected for forward center / snare goal"
+  },
+  "geometry_basis": "CAD bore alignment and dimensions; draft mount clocking chosen by center direction and goal plausibility, not measured screw registration",
+  "model_urdf_sha256": "f7a288a7086985e96cc4e5110d2189504eb59687bcfe64293d1f39ecd6654b5f",
+  "methods": {
+    "progress": {
+      "status": "planned",
+      "outward_s": 98.1018638332064,
+      "final_curve_check": {
+        "samples_checked": 49064,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      },
+      "simulation": {
+        "status": "software_cycle_verified",
+        "events": [
+          "START",
+          "OUTWARD",
+          "HOLD_2_SECONDS",
+          "RETURN_TO_SAVED_START",
+          "RELAX_INTENT_ONLY"
+        ],
+        "supported_rest_is_synthetic": true,
+        "right_gripper": "static, no commands",
+        "left_arm": "simulated only",
+        "motor_commands": 0,
+        "recoverable_fault": "RETURN_TO_SAVED_START_INTENT",
+        "stall": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "missing_feedback": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsafe_return": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsupported_rest": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "physical_recovery_implemented": false,
+        "moving_side": "left",
+        "right_arm": "static, no commands",
+        "left_gripper": "fixed modeled attachment; no commands"
+      },
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T040821Z-left-traditional-grip/plans/progress-714d2558/plan.json",
+      "plan_sha256": "1cd3f6296154ec29202347fa1003fd5c5985c36a6493663d910c193ac0d5878c",
+      "pool_reused": false
+    },
+    "sweep": {
+      "status": "planned",
+      "outward_s": 36.353303027206955,
+      "final_curve_check": {
+        "samples_checked": 18182,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      },
+      "simulation": {
+        "status": "software_cycle_verified",
+        "events": [
+          "START",
+          "OUTWARD",
+          "HOLD_2_SECONDS",
+          "RETURN_TO_SAVED_START",
+          "RELAX_INTENT_ONLY"
+        ],
+        "supported_rest_is_synthetic": true,
+        "right_gripper": "static, no commands",
+        "left_arm": "simulated only",
+        "motor_commands": 0,
+        "recoverable_fault": "RETURN_TO_SAVED_START_INTENT",
+        "stall": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "missing_feedback": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsafe_return": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsupported_rest": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "physical_recovery_implemented": false,
+        "moving_side": "left",
+        "right_arm": "static, no commands",
+        "left_gripper": "fixed modeled attachment; no commands"
+      },
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T040821Z-left-traditional-grip/plans/sweep-05b0d5f9/plan.json",
+      "plan_sha256": "c8bc645fb0af2dbc3772d09964213b12bbef6f09655defe3cd485ed3a5b542c1",
+      "pool_reused": true
+    },
+    "single_arc": {
+      "status": "planned",
+      "outward_s": 19.87641336757051,
+      "final_curve_check": {
+        "samples_checked": 9942,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      },
+      "simulation": {
+        "status": "software_cycle_verified",
+        "events": [
+          "START",
+          "OUTWARD",
+          "HOLD_2_SECONDS",
+          "RETURN_TO_SAVED_START",
+          "RELAX_INTENT_ONLY"
+        ],
+        "supported_rest_is_synthetic": true,
+        "right_gripper": "static, no commands",
+        "left_arm": "simulated only",
+        "motor_commands": 0,
+        "recoverable_fault": "RETURN_TO_SAVED_START_INTENT",
+        "stall": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "missing_feedback": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsafe_return": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsupported_rest": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "physical_recovery_implemented": false,
+        "moving_side": "left",
+        "right_arm": "static, no commands",
+        "left_gripper": "fixed modeled attachment; no commands"
+      },
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T040821Z-left-traditional-grip/plans/single_arc-97321fa3/plan.json",
+      "plan_sha256": "14adc6b03466f906d08ab685103960ae1dfdc002cca60b94441e38ec1df2e511",
+      "pool_reused": true
+    },
+    "clearance": {
+      "status": "planned",
+      "outward_s": 98.1018638332064,
+      "final_curve_check": {
+        "samples_checked": 49064,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      },
+      "simulation": {
+        "status": "software_cycle_verified",
+        "events": [
+          "START",
+          "OUTWARD",
+          "HOLD_2_SECONDS",
+          "RETURN_TO_SAVED_START",
+          "RELAX_INTENT_ONLY"
+        ],
+        "supported_rest_is_synthetic": true,
+        "right_gripper": "static, no commands",
+        "left_arm": "simulated only",
+        "motor_commands": 0,
+        "recoverable_fault": "RETURN_TO_SAVED_START_INTENT",
+        "stall": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "missing_feedback": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsafe_return": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "unsupported_rest": "STOP_AND_HOLD_INTENT_NO_RELAX_OPERATOR_REQUIRED",
+        "physical_recovery_implemented": false,
+        "moving_side": "left",
+        "right_arm": "static, no commands",
+        "left_gripper": "fixed modeled attachment; no commands"
+      },
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T040821Z-left-traditional-grip/plans/clearance-44033c4c/plan.json",
+      "plan_sha256": "a8322506a2e0794b61c41c1dfba17a0108ca36eb17e45d7ac4bf759124064be3",
+      "pool_reused": true
+    }
+  },
+  "unchanged_right_urdf_sha256": "3506326e6c598a1251ccd5de62a6f7dd96b7ff6c3be46d646957719fd5e5b3ed",
+  "hashes": {
+    "gripper_models/gripper2left.stl": "f7583f7b2cc4807522da8638614035fc1ff1f8250a84da803016660bacf95dc0",
+    "gripper_models/gripper2right.stl": "cc20ce3c0168149ee49fd4095628f57400684956d41037bfb80c237fe8b50c02",
+    "gripper_models/gripperLeft.stl": "2bfd32ef8ca7ca063f6e010f84cf7076b5a1f45181367b172a244adee823ca41",
+    "gripper_models/gripperRight.stl": "358e103a5c4bb14da21c1b1da13aba478dc1fe2290ffe09bd08ac5361bec3e0d",
+    "left_recordings/record1.json": "f7481678e48b4296cb4517dba3ff6b400b3655cccb58fbd38b439345b481c268",
+    "recordings/record3.json": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "model/openarmx.urdf": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+    "camera_playback/left_hold.py": "e4b1298be64e54d05353e629150bee6b9b4b34061a3f8c15b21e4471d98e3746"
+  },
+  "worker_peak_sampled_bytes": 359112704,
+  "worker_memory_limit_bytes": 3221225472,
+  "regression": {
+    "passed": 787,
+    "failed": 0,
+    "elapsed_s": 242.91,
+    "log_sha256": "3a458585fe7a6b4b7f09bb4b3e3a10d25062dbb075b167bc1693bbee72f4758a"
+  },
+  "native_ui": {
+    "methods_tested": 4,
+    "errors": [],
+    "scene_geometry_uploads": 1,
+    "render_count": 362,
+    "median_frame_s": 0.0010184264974668622
+  }
+}

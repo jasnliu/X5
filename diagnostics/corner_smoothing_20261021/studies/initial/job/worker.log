@@ -1,0 +1,149 @@
+
+ROUNDING left_single_arc 0: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 1e-12}
+REJECT deviation_bound
+
+ROUNDING left_single_arc 1: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 0.0005}
+REJECT deviation_bound
+
+ROUNDING left_single_arc 2: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 0.002}
+REJECT deviation_bound
+
+ROUNDING left_single_arc 3: {'kind': 'local_c2', 'fraction': 0.25, 'simplify': 0.0005}
+  8 controls: refining 1.288696 limit ratio
+  8 controls: refining 1.288442 limit ratio
+  8 controls: refining 1.288339 limit ratio
+ADAPTIVE 8 controls: 8.308827s; best 8.308827s; 0.5s computation
+  16 controls: refining 1.314034 limit ratio
+  16 controls: refining 1.313990 limit ratio
+  16 controls: refining 1.313996 limit ratio
+ADAPTIVE 16 controls: 6.482600s; best 6.482600s; 0.7s computation
+  32 controls: refining 1.140496 limit ratio
+  32 controls: refining 1.140169 limit ratio
+  32 controls: refining 1.140342 limit ratio
+ADAPTIVE 32 controls: 5.474058s; best 5.474058s; 1.3s computation
+VALID {"duration_s": 5.474057550219061, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.28003567825565473, "interior_speed_p10_ratio": 0.3050842679398724, "interior_speed_cv": 0.4543872403250375, "peak_joint_speed_rad_s": 0.525633587358437, "cruise_joint_norm_rad_s": 0.5272917531147583, "path_length_rad": 1.2719554644430047, "endpoint_exclusion": "first/last 5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 4: {'kind': 'local_c2', 'fraction': 0.45, 'simplify': 0.0005}
+  8 controls: refining 1.100991 limit ratio
+  8 controls: refining 1.101141 limit ratio
+  8 controls: refining 1.101141 limit ratio
+ADAPTIVE 8 controls: 5.698928s; best 5.698928s; 0.5s computation
+  16 controls: refining 1.126942 limit ratio
+  16 controls: refining 1.127751 limit ratio
+  16 controls: refining 1.127696 limit ratio
+ADAPTIVE 16 controls: 5.061065s; best 5.061065s; 0.7s computation
+  32 controls: refining 1.158322 limit ratio
+  32 controls: refining 1.158322 limit ratio
+  32 controls: refining 1.158321 limit ratio
+ADAPTIVE 32 controls: 4.831497s; best 4.831497s; 1.3s computation
+VALID {"duration_s": 4.831497281877701, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.3602983313269125, "interior_speed_p10_ratio": 0.4838165780575685, "interior_speed_cv": 0.2673891348980897, "peak_joint_speed_rad_s": 0.5174744600119665, "cruise_joint_norm_rad_s": 0.49187386153292223, "path_length_rad": 1.270956666834928, "endpoint_exclusion": "first/last 5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 5: {'kind': 'local_c2', 'fraction': 0.49, 'simplify': 0.0005}
+  8 controls: refining 1.035304 limit ratio
+  8 controls: refining 1.035384 limit ratio
+  8 controls: refining 1.035384 limit ratio
+ADAPTIVE 8 controls: 5.237960s; best 5.237960s; 0.4s computation
+  16 controls: refining 1.153234 limit ratio
+  16 controls: refining 1.153232 limit ratio
+  16 controls: refining 1.153232 limit ratio
+ADAPTIVE 16 controls: 5.107585s; best 5.107585s; 0.8s computation
+  32 controls: refining 1.044329 limit ratio
+  32 controls: refining 1.044326 limit ratio
+  32 controls: refining 1.044326 limit ratio
+ADAPTIVE 32 controls: 4.409232s; best 4.409232s; 1.3s computation
+VALID {"duration_s": 4.409232220754914, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.36946026502564805, "interior_speed_p10_ratio": 0.4762126052009211, "interior_speed_cv": 0.2806019054714121, "peak_joint_speed_rad_s": 0.5739592724877094, "cruise_joint_norm_rad_s": 0.537654693684687, "path_length_rad": 1.2707569060560353, "endpoint_exclusion": "first/last 5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 6: {'kind': 'local_c3', 'fraction': 0.25, 'simplify': 0.0005}
+  8 controls: refining 1.139882 limit ratio
+  8 controls: refining 1.013135 limit ratio
+  8 controls: refining 1.005574 limit ratio
+ADAPTIVE 8 controls: 6.452426s; best 6.452426s; 0.5s computation
+  16 controls: refining 1.084928 limit ratio
+  16 controls: refining 1.026475 limit ratio
+  16 controls: refining 1.006930 limit ratio
+ADAPTIVE 16 controls: 4.847327s; best 4.847327s; 0.8s computation
+  32 controls: refining 1.050298 limit ratio
+  32 controls: refining 1.025163 limit ratio
+  32 controls: refining 1.005520 limit ratio
+ADAPTIVE 32 controls: 4.419081s; best 4.419081s; 1.4s computation
+VALID {"duration_s": 4.419081230244118, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.3050398727443273, "interior_speed_p10_ratio": 0.33799207701929684, "interior_speed_cv": 0.3954256309098012, "peak_joint_speed_rad_s": 0.5961140667674703, "cruise_joint_norm_rad_s": 0.5957827862083253, "path_length_rad": 1.2721532844989907, "endpoint_exclusion": "first/last 5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 7: {'kind': 'local_c3', 'fraction': 0.45, 'simplify': 0.0005}
+/usr/lib/python3/dist-packages/scipy/optimize/_optimize.py:404: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  warnings.warn("Values in x were outside bounds during a "
+  8 controls: refining 1.038017 limit ratio
+  8 controls: refining 1.007416 limit ratio
+  8 controls: refining 1.001876 limit ratio
+ADAPTIVE 8 controls: 4.916394s; best 4.916394s; 0.5s computation
+  16 controls: refining 1.130325 limit ratio
+  16 controls: refining 1.011464 limit ratio
+  16 controls: refining 1.003602 limit ratio
+ADAPTIVE 16 controls: 4.125037s; best 4.125037s; 0.8s computation
+  32 controls: refining 1.161846 limit ratio
+  32 controls: refining 1.036751 limit ratio
+  32 controls: refining 1.026103 limit ratio
+ADAPTIVE 32 controls: 3.953689s; best 3.953689s; 1.5s computation
+VALID {"duration_s": 3.9536885771245776, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.3809706826570002, "interior_speed_p10_ratio": 0.46280131266590085, "interior_speed_cv": 0.2648676366321812, "peak_joint_speed_rad_s": 0.5841526349732173, "cruise_joint_norm_rad_s": 0.5877388944836246, "path_length_rad": 1.2713127445371664, "endpoint_exclusion": "first/last 5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 8: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.0005}
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding_study.py", line 36, in run
+    rounded=rounding.as_source(pp,source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding.py", line 55, in as_source
+    if np.any(jumps>[1e-9,1e-8,1e-7]):raise ValueError('Rounded path is not C2')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Rounded path is not C2
+
+ROUNDING left_single_arc 9: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.002}
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding_study.py", line 36, in run
+    rounded=rounding.as_source(pp,source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding.py", line 55, in as_source
+    if np.any(jumps>[1e-9,1e-8,1e-7]):raise ValueError('Rounded path is not C2')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Rounded path is not C2
+
+ROUNDING left_single_arc 10: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.004}
+Traceback (most recent call last):
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding_study.py", line 36, in run
+    rounded=rounding.as_source(pp,source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jason/Proyectos3/X5/drum_planner/timing/rounding.py", line 55, in as_source
+    if np.any(jumps>[1e-9,1e-8,1e-7]):raise ValueError('Rounded path is not C2')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Rounded path is not C2
+
+ROUNDING left_clearance 0: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 1e-12}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 1: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 0.0005}
+REJECT deviation_bound
+
+ROUNDING left_clearance 2: {'kind': 'quintic', 'fraction': 0.45, 'simplify': 0.002}
+REJECT deviation_bound
+
+ROUNDING left_clearance 3: {'kind': 'local_c2', 'fraction': 0.25, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 4: {'kind': 'local_c2', 'fraction': 0.45, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 5: {'kind': 'local_c2', 'fraction': 0.49, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 6: {'kind': 'local_c3', 'fraction': 0.25, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 7: {'kind': 'local_c3', 'fraction': 0.45, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 8: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.0005}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 9: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.002}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 10: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 0.004}
+REJECT collision_or_zone

@@ -1,0 +1,340 @@
+{
+  "passed": true,
+  "software_only": true,
+  "can_opened": false,
+  "camera_opened": false,
+  "physical_motor_commands": 0,
+  "same_input_baseline_experiment_exact_parity": true,
+  "original_incident_duration_s": 6.344721604141903,
+  "original_incident_quality": {
+    "duration_s": 6.344721604141903,
+    "internal_stops": 4,
+    "deep_slowdowns": 4,
+    "stop_times_s": [
+      2.4665943568390367,
+      3.8740635886178256,
+      4.659887013164349,
+      5.309364389398522
+    ],
+    "slowdown_times_s": [
+      2.4665943568390367,
+      3.8740635886178256,
+      4.659887013164349,
+      5.309364389398522
+    ],
+    "interior_speed_min_ratio": 0.0,
+    "interior_speed_p10_ratio": 0.026076029198579848,
+    "interior_speed_cv": 0.7165067048049848,
+    "peak_joint_speed_rad_s": 0.5994005994005994,
+    "cruise_joint_norm_rad_s": 0.6437018685282401,
+    "path_length_rad": 2.116288061067003,
+    "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+    "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+  },
+  "rows": {
+    "baseline_incident": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/baseline/plan.json",
+      "selected": 12,
+      "source": "single_arc",
+      "selection_class": "continuous_arc",
+      "quality": {
+        "duration_s": 3.8688236292893388,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.7469156762873049,
+        "interior_speed_p10_ratio": 0.8170446299955528,
+        "interior_speed_cv": 0.07339056568998323,
+        "peak_joint_speed_rad_s": 0.5993545133638508,
+        "cruise_joint_norm_rad_s": 0.7853454710087817,
+        "path_length_rad": 2.274085522639979,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 1936,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "experiment_incident": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/matched_experiment/plans/single_arc/plan.json",
+      "selected": 12,
+      "source": "single_arc",
+      "selection_class": "continuous_arc",
+      "quality": {
+        "duration_s": 3.8688236292893388,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.7469156762873049,
+        "interior_speed_p10_ratio": 0.8170446299955528,
+        "interior_speed_cv": 0.07339056568998323,
+        "peak_joint_speed_rad_s": 0.5993545133638508,
+        "cruise_joint_norm_rad_s": 0.7853454710087817,
+        "path_length_rad": 2.274085522639979,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 1936,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "right_progress": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_right/plans/progress/plan.json",
+      "selected": 8,
+      "source": "corridor",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 8.073394290944444,
+        "internal_stops": 7,
+        "deep_slowdowns": 7,
+        "stop_times_s": [
+          1.5259673154639446,
+          3.3566193176986197,
+          4.355351824669948,
+          5.517188876481158,
+          6.120623388033862,
+          6.541700388909641,
+          6.955380279620873
+        ],
+        "slowdown_times_s": [
+          1.5259673154639446,
+          3.3566193176986197,
+          4.355351824669948,
+          5.517188876481158,
+          6.120623388033862,
+          6.541700388909641,
+          6.955380279620873
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.015135202261380749,
+        "interior_speed_cv": 0.834711424314001,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.6292397251655912,
+        "path_length_rad": 2.194847441454494,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 4038,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "right_sweep": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_right/plans/sweep/plan.json",
+      "selected": 8,
+      "source": "corridor",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 8.073394290944444,
+        "internal_stops": 7,
+        "deep_slowdowns": 7,
+        "stop_times_s": [
+          1.5259673154639446,
+          3.3566193176986197,
+          4.355351824669948,
+          5.517188876481158,
+          6.120623388033862,
+          6.541700388909641,
+          6.955380279620873
+        ],
+        "slowdown_times_s": [
+          1.5259673154639446,
+          3.3566193176986197,
+          4.355351824669948,
+          5.517188876481158,
+          6.120623388033862,
+          6.541700388909641,
+          6.955380279620873
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.015135202261380749,
+        "interior_speed_cv": 0.834711424314001,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.6292397251655912,
+        "path_length_rad": 2.194847441454494,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 4038,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "right_single_arc": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_right/plans/single_arc/plan.json",
+      "selected": 14,
+      "source": "single_arc",
+      "selection_class": "continuous_arc",
+      "quality": {
+        "duration_s": 4.127994858280934,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.6451002433885005,
+        "interior_speed_p10_ratio": 0.7280174995314302,
+        "interior_speed_cv": 0.113695078682106,
+        "peak_joint_speed_rad_s": 0.5988739719873224,
+        "cruise_joint_norm_rad_s": 0.7116907313887486,
+        "path_length_rad": 2.294271085486275,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 2065,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "right_clearance": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_right/plans/clearance/plan.json",
+      "selected": 15,
+      "source": "single_arc",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 4.22955156038221,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.6356170221542199,
+        "interior_speed_p10_ratio": 0.7313852669254932,
+        "interior_speed_cv": 0.11208890039100285,
+        "peak_joint_speed_rad_s": 0.5992840245677111,
+        "cruise_joint_norm_rad_s": 0.7307960614045732,
+        "path_length_rad": 2.399403435311487,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples": 2116,
+        "all_valid": true,
+        "collision_margin_policy": "baseline_request",
+        "obstacle_padding_m": 0.02,
+        "minimum_self_clearance_m": 0.0
+      }
+    },
+    "left_progress": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_left/plans/progress/plan.json",
+      "selected": 17,
+      "source": "progress",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 3.4728680621715338,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.4907781934946041,
+        "interior_speed_p10_ratio": 0.5566219873492289,
+        "interior_speed_cv": 0.22086558145048502,
+        "peak_joint_speed_rad_s": 0.5951582615459057,
+        "cruise_joint_norm_rad_s": 0.6001601283530026,
+        "path_length_rad": 1.2688169210370692,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples_checked": 1858,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      }
+    },
+    "left_sweep": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_left/plans/sweep/plan.json",
+      "selected": 23,
+      "source": "sweep",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 3.3976951261030686,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.4406527492220505,
+        "interior_speed_p10_ratio": 0.5222461284376595,
+        "interior_speed_cv": 0.22468220395163155,
+        "peak_joint_speed_rad_s": 0.5933499033106046,
+        "cruise_joint_norm_rad_s": 0.5984377446871813,
+        "path_length_rad": 1.2697389372448478,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples_checked": 1814,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      }
+    },
+    "left_single_arc": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_left/plans/single_arc/plan.json",
+      "selected": 12,
+      "source": "single_arc",
+      "selection_class": "continuous_arc",
+      "quality": {
+        "duration_s": 2.748484020757091,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.5682897427902658,
+        "interior_speed_p10_ratio": 0.7892419885106843,
+        "interior_speed_cv": 0.09691491372491173,
+        "peak_joint_speed_rad_s": 0.599288019832798,
+        "cruise_joint_norm_rad_s": 0.7235253994723387,
+        "path_length_rad": 1.381333796459709,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples_checked": 1571,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      }
+    },
+    "left_clearance": {
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_left/plans/clearance/plan.json",
+      "selected": 17,
+      "source": "progress",
+      "selection_class": null,
+      "quality": {
+        "duration_s": 3.4728680621715338,
+        "internal_stops": 0,
+        "deep_slowdowns": 0,
+        "stop_times_s": [],
+        "slowdown_times_s": [],
+        "interior_speed_min_ratio": 0.4907781934946041,
+        "interior_speed_p10_ratio": 0.5566219873492289,
+        "interior_speed_cv": 0.22086558145048502,
+        "peak_joint_speed_rad_s": 0.5951582615459057,
+        "cruise_joint_norm_rad_s": 0.6001601283530026,
+        "path_length_rad": 1.2688169210370692,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "collision_check": {
+        "samples_checked": 1858,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      }
+    }
+  }
+}

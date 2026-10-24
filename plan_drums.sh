@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Camera/MoveIt planner. Only explicitly armed baseline / live --execute permits motor control.
+# Camera/MoveIt planner. Only explicit --hardware Start / live --execute permits motor control.
 # Never configures CAN interfaces or launches vendor ROS hardware controllers.
 set -eo pipefail
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")"

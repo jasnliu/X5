@@ -1,0 +1,33 @@
+{
+  "legacy_valid": [
+    false,
+    true
+  ],
+  "corrected_valid": [
+    true,
+    true
+  ],
+  "old_margin": {
+    "additional_voxel_radius_m": 0.009,
+    "edge_sampling_allowance_m": 0.005,
+    "occupied_octree_cells_are_volumes": true,
+    "octree_resolution_m": 0.01,
+    "policy": "legacy_voxel_radius_v1",
+    "requested_clearance_m": 0.02,
+    "robot_padding_m": 0.033999999999999996
+  },
+  "new_margin": {
+    "additional_voxel_radius_m": 0.0,
+    "edge_sampling_allowance_m": 0.005,
+    "occupied_octree_cells_are_volumes": true,
+    "octree_resolution_m": 0.01,
+    "policy": "occupied_volume_v1",
+    "requested_clearance_m": 0.02,
+    "robot_padding_m": 0.025
+  },
+  "self_filter_identical": true,
+  "nearest_voxel_center_distance_m": 0.03831981971147452,
+  "nominal_stick_to_occupied_cell_lower_bound_m": 0.029659565673630137,
+  "point_count": 122667,
+  "all_obstacles_retained": true
+}

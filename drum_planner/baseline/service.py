@@ -1,27 +1,31 @@
 """Separate motor-owner service. GUI loss means HOLD, not disable or auto-return.
 
 An independent user service survives GUI/editor closure. Local authenticated IPC
-can reconnect with `baseline --resume SESSION`. No execution time limit kills a
+can reconnect with `--hardware --resume SESSION`. No execution time limit kills a
 holding controller. Closing the window leaves the owner holding. Controller
 exit and manual torque off are separate explicit commands.
 """
 import argparse,json,os,secrets,signal,socket,struct,subprocess,sys,time,uuid
 from pathlib import Path
-from ..common import ROOT,atomic_json
+from ..common import ROOT,atomic_json,arm_side,arm_joints,digest
+from .arms import side_of,require_side
 from .motion import Controller,HOLD_PHASES,RELAX_PHASES,TERMINAL
 
 MAX_MESSAGE=8192
 HEARTBEAT_TIMEOUT=1.
 
 
-def launch(folder,*,prepared=None,simulate_plan=None,rate=1.):
+def launch(folder,*,prepared=None,simulate_plan=None,rate=1.,moving_side=None):
     folder=Path(folder).resolve();folder.mkdir(parents=True,exist_ok=True)
     simulated=simulate_plan is not None
+    source=(json.loads((Path(simulate_plan).parent/'backend_request.json').read_text()) if simulated
+            else json.loads(Path(prepared).read_text())['request'])
+    side=arm_side(moving_side or side_of(source));require_side(source,side)
     unit='x5-baseline-owner-'+uuid.uuid4().hex[:12]
     runtime=Path(os.environ.get('XDG_RUNTIME_DIR',f'/run/user/{os.getuid()}'))/unit
     runtime.mkdir(mode=0o700)
     info=dict(schema='x5-baseline-control-v1',folder=str(folder),socket=str(runtime/'control.sock'),
-              token=secrets.token_hex(32),unit=unit,simulated=simulated,rate=rate,
+              token=secrets.token_hex(32),unit=unit,simulated=simulated,rate=rate,moving_side=side,
               prepared=None if prepared is None else str(Path(prepared).resolve()),
               plan=str(Path(simulate_plan).resolve()) if simulated else json.loads(Path(prepared).read_text())['plan'])
     atomic_json(folder/'control.json',info);os.chmod(folder/'control.json',0o600)
@@ -75,9 +79,18 @@ class Client:
 
 class Server:
     def __init__(self,info):
-        self.info=info;self.folder=Path(info['folder']);self.engine=None;self.bus=None
+        self.info=info;self.side=side_of(info);self.folder=Path(info['folder']);self.engine=None;self.bus=None
         self.clients={};self.owner=None;self.heartbeat=time.monotonic();self.last_status=0.;self.quit=False;self.signal_pending=False
         self.job=None;self.pending=None;self.job_generation=None;self.connection_error='';self.start_error='';self.status_warning=''
+        # Expensive exact-law verification happens BEFORE accepting IPC and
+        # before constructing any motor transport. Multi-leg root finding must
+        # not stall the owner's heartbeat/feedback loop on Start.
+        self.motion_data=None;self.validation_hashes={}
+        if info['simulated']:
+            from ..experiment.config import no_can
+            no_can()
+        try:self.prepare_motion()
+        except Exception as exc:self.start_error=str(exc)
         self.socket=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
         self.socket.bind(info['socket']);os.chmod(info['socket'],0o600);self.socket.listen(4);self.socket.setblocking(False)
         self.log=(self.folder/'events.jsonl').open('a',buffering=1)
@@ -85,6 +98,30 @@ class Server:
             from ..experiment.config import no_can
             no_can()
         self.original_handlers={s:signal.signal(s,self.interrupt) for s in (signal.SIGINT,signal.SIGTERM,signal.SIGHUP)}
+    def prepare_motion(self):
+        from .curve import Curve
+        from .paths import validate_timing
+        paths=[self.info['plan']]
+        if self.info['simulated']:
+            from .sequence import PlanDisplay
+            import xml.etree.ElementTree as ET
+            plan=PlanDisplay(self.info['plan']);obj=plan.obj;req=plan.req.copy()
+            root=ET.parse(req['urdf']).getroot()
+            req['execution_joint_limits']=[[float(root.find(f"joint[@name='{j}']/limit").get(k))
+                for k in ('lower','upper')] for j in arm_joints(self.side)]
+            curve=Curve(obj);validate_timing(curve)
+        else:
+            from .tasks import check_packet
+            packet,curve=check_packet(self.info['prepared']);obj=packet['object'];req=packet['request']
+            # check_packet constructed the curve from an equal immutable copy.
+            curve.plan=obj
+            paths += [self.info['prepared'],packet['calibration'],packet['fresh_scene']]
+        require_side(req,self.side);require_side(obj,self.side)
+        paths += [req['urdf'],req['srdf']]
+        paths += [b['goal_recording'] for b in obj.get('destination_bindings',[])]
+        self.validation_hashes={str(p):digest(p) for p in paths}
+        self.motion_data=(obj,req,curve)
+
     def interrupt(self,*_):
         # Do not manipulate an arming generator inside a Python signal handler
         # while it is executing a CAN write. Process the request at the next tick.
@@ -94,7 +131,7 @@ class Server:
     def status(self):
         value=self.engine.status() if self.engine else dict(phase='REJECTED' if self.start_error else 'READY',error=self.start_error,started=False,disabled=False,safe_to_close=True,can_return=False)
         value['warnings']=value.get('warnings',[])+([self.status_warning] if getattr(self,'status_warning','') else [])
-        return dict(value,simulated=self.info['simulated'],session=str(self.folder),
+        return dict(value,simulated=self.info['simulated'],moving_side=self.side,session=str(self.folder),
                     recovery_check_running=self.job is not None,connection_error=self.connection_error,
                     bus_released=self.engine is not None and self.bus is None)
 
@@ -130,22 +167,19 @@ class Server:
         if op in ('heartbeat','hello'):self.heartbeat=time.monotonic();return
         if op=='start':
             if self.engine is not None:raise ValueError('Session already used; no automatic restart')
-            if msg.get('confirmation')!='MOVE RIGHT ARM':raise ValueError('Explicit MOVE RIGHT ARM confirmation required')
+            side=side_of(self.info)
+            if msg.get('confirmation')!=f'MOVE {side.upper()} ARM':raise ValueError(f'Explicit MOVE {side.upper()} ARM confirmation required')
+            if self.start_error or self.motion_data is None:raise ValueError(self.start_error or 'Missing prepared motion')
+            if any(digest(path)!=sha for path,sha in self.validation_hashes.items()):
+                raise ValueError('Calculated inputs changed before Start; Calculate again')
+            obj,req,curve=self.motion_data
             if self.info['simulated']:
-                from ..trajectory_view import PlanDisplay
-                from ..common import JOINTS
                 from .simulation import SimulatedBus
-                import xml.etree.ElementTree as ET
-                plan=PlanDisplay(self.info['plan']);obj=plan.obj;req=plan.req.copy()
-                root=ET.parse(req['urdf']).getroot()
-                req['execution_joint_limits']=[[float(root.find(f"joint[@name='{j}']/limit").get(k)) for k in ('lower','upper')] for j in JOINTS]
                 self.bus=SimulatedBus(req)
             else:
-                from .tasks import check_packet
                 from .transport import BaselineMotors
-                packet,_=check_packet(self.info['prepared']);obj=packet['object'];req=packet['request']
-                self.bus=BaselineMotors(self.folder,req['start'])
-            self.engine=Controller(self.bus,obj,req,rate=self.info['rate'],event=self.event)
+                self.bus=BaselineMotors(self.folder,req['start'],moving_side=side)
+            self.engine=Controller(self.bus,obj,req,rate=self.info['rate'],event=self.event,curve=curve)
             self.engine.start();self.heartbeat=time.monotonic()
         elif op=='hold':
             if self.engine:self.engine.halt('Operator EMERGENCY HOLD')
@@ -164,7 +198,7 @@ class Server:
                 if self.info['simulated']:
                     from .paths import recovery
                     spec=recovery(self.engine.curve,request['held'],request['tau'],request['rate'])
-                    spec['left_snapshot']=request['left_snapshot']
+                    key=self.engine.snapshot_key;spec[key]=request[key]
                     spec['proof']=dict(all_valid=True,simulation_only=True,not_a_hardware_validation=True)
                     self.pending=spec
                 else:
@@ -282,6 +316,6 @@ class Server:
 def main():
     p=argparse.ArgumentParser();p.add_argument('folder');a=p.parse_args()
     info=json.loads((Path(a.folder)/'control.json').read_text())
-    print('Independent baseline owner started; NO enable until authenticated explicit UI START + automatic checks',flush=True)
+    print('Independent Workspace curve owner started; NO enable until authenticated explicit UI START + automatic checks',flush=True)
     Server(info).run()
 if __name__=='__main__':main()

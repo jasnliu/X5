@@ -14,7 +14,9 @@ def output_folder(label):
 
 def main(argv=None):
     from .planning import candidate_count, DEFAULT_CANDIDATES
-    parser=argparse.ArgumentParser(description='Gemini/MoveIt planner. Hardware only through explicitly armed baseline or live --execute.')
+    parser=argparse.ArgumentParser(description='Gemini/MoveIt planner. Hardware only through explicit --hardware Start or live --execute.')
+    parser.add_argument('--hardware',action='store_true',help='Workspace curve hardware UI; --right (default) or --left')
+    parser.add_argument('--hardware-sparse',action='store_true',help='Separate hardware fork: same Workspace curve/UI, sparse IPOPT timing')
     sub=parser.add_subparsers(dest='command')
     sub.add_parser('build',help='Compile camera-only SDK bridge and standalone MoveIt/OMPL backend')
     p=sub.add_parser('camera',help='Full-FOV native depth preview/snapshot; no robot connection')
@@ -64,19 +66,30 @@ def main(argv=None):
     p.add_argument('--calibration',default=str(DEFAULT_CALIBRATION))
     p=sub.add_parser('simulate',help='Verify the saved cycle/recovery policy without hardware')
     p.add_argument('plan')
-    p=sub.add_parser('experiment',help='SOFTWARE ONLY: saved scene/pose, endpoint-only gesture candidates')
-    from .experiment.config import METHODS, budget, DEFAULT_METHOD
+    p=sub.add_parser('experiment',help='SIMULATION ONLY: fresh camera/encoder snapshot at startup; no motor commands')
+    from .experiment.config import budget
+    from .experiment.fast_config import METHODS, DEFAULT_METHOD
+    arms=p.add_mutually_exclusive_group()
+    arms.add_argument('--right',dest='side',action='store_const',const='right',help='Right-arm experiment (default): choose from destinations/right in the GUI')
+    arms.add_argument('--left',dest='side',action='store_const',const='left',help='Left-arm experiment: choose from destinations/left in the GUI')
+    p.set_defaults(side='right')
     p.add_argument('--method',choices=[*METHODS,'all'],default=DEFAULT_METHOD)
     p.add_argument('--list-methods',action='store_true')
-    p.add_argument('--state',help='Saved measurement; default the frozen study pose; NEVER queries CAN')
-    p.add_argument('--scene',help='Saved five-frame Gemini scene; defaults to the frozen study scene, camera stays closed')
-    p.add_argument('--settings',help='JSON gesture preferences and candidate-pool settings')
-    p.add_argument('--budget',type=budget,default=120.,help='Shared candidate-pool search budget in seconds (5–600); final verification/setup is separate')
+    p.add_argument('--offline',action='store_true',help='Explicit saved-input study: skip startup camera/CAN acquisition')
+    p.add_argument('--state',help='Offline saved measurement; supply with --scene, or use --offline for study defaults')
+    p.add_argument('--capture-start',action='store_true',help='Compatibility alias for the default fresh camera + BOTH arm poses; no motion')
+    p.add_argument('--zone',help='Selected-arm envelope; default right zone3 / left zone1. Left only: "none" disables its point envelope')
+    p.add_argument('--scene',help='Offline saved five-frame scene; supply with --state, or use --offline for study defaults')
+    p.add_argument('--settings',help='JSON workspace curve preferences')
+    p.add_argument('--budget',type=budget,default=120.,help='Workspace proposal search cap per leg (5–600 s); final verification/setup is separate')
     p.add_argument('--headless',action='store_true');p.add_argument('--output')
     p.add_argument('--calibration',default=str(DEFAULT_CALIBRATION))
     p.add_argument('--seconds',type=float,default=0.,help='Close the GUI after N seconds; 0 until closed')
     p.add_argument('--autoplay',action='store_true',help='Play the simulated result when ready')
-    p=sub.add_parser('baseline',help='Baseline-only GUI: current pose, preview, speed, explicitly armed right-arm play / hold / checked reverse')
+    p=sub.add_parser('hardware',aliases=['singlearc','baseline','hardware-sparse'],help='Workspace curve hardware GUI: saved destinations/checkpoints, explicit Calculate / Start / Hold / Reverse')
+    arms=p.add_mutually_exclusive_group()
+    arms.add_argument('--right',dest='moving_side',action='store_const',const='right',help='Right arm; choose destinations/right (default arm)')
+    arms.add_argument('--left',dest='moving_side',action='store_const',const='left',help='Left arm; choose destinations/left')
     from .baseline.paths import speed as hardware_speed
     p.add_argument('--speed',type=hardware_speed,default=1.,help='Movement speed scale 0.25–1.0; never exceeds validated limits')
     p.add_argument('--output',help='New session directory')
@@ -85,7 +98,10 @@ def main(argv=None):
     p.add_argument('--resume',metavar='SESSION',help='Reconnect to an existing motor-owner session without re-enabling or releasing it')
     p.add_argument('--seconds',type=float,default=0.,help='Simulation-only preview auto-close timer; NEVER closes an active hold')
     sub.add_parser('test',help='Offline tests only, including actual MoveIt/FCL planning')
-    args=parser.parse_args(argv if argv is not None else (sys.argv[1:] or ['camera']))
+    arguments=list(argv if argv is not None else (sys.argv[1:] or ['camera']))
+    if arguments and arguments[0]=='--hardware':arguments[0]='hardware'
+    if arguments and arguments[0]=='--hardware-sparse':arguments[0]='hardware-sparse'
+    args=parser.parse_args(arguments)
     try:
         if args.command=='build':
             from .depth import build_depth
@@ -147,7 +163,8 @@ def main(argv=None):
             from .workflow import simulate
             report=simulate(json.loads(Path(args.plan).read_text()));print(json.dumps(report,indent=2))
         elif args.command=='experiment':
-            from .experiment.config import METHODS, DESCRIPTIONS, settings
+            from .experiment.config import settings
+            from .experiment.fast_config import METHODS, DESCRIPTIONS
             from .experiment.app import prepare, headless, show
             if args.list_methods:
                 for key in METHODS:print(key+' — '+METHODS[key]+'\n  '+DESCRIPTIONS[key])
@@ -158,30 +175,36 @@ def main(argv=None):
             if args.headless and (args.seconds or args.autoplay):raise ValueError('Playback options need the GUI')
             params=settings(json.loads(Path(args.settings).read_text()) if args.settings else None)
             folder=Path(args.output or output_folder('experiment')).resolve()
-            prepare(folder,args.state,args.scene,args.calibration)
+            if args.capture_start and (args.offline or args.state or args.scene):
+                raise ValueError('--capture-start requests fresh inputs; cannot combine it with offline/saved inputs')
+            if not args.offline and bool(args.state)!=bool(args.scene):
+                raise ValueError('Supply both --state and --scene for an offline pair, or --offline for saved study defaults')
+            fresh=not (args.offline or (args.state and args.scene))
+            prepare(folder,args.state,args.scene,args.calibration,side=args.side,zone=args.zone,fresh=fresh)
             if args.headless:
                 results=headless(folder,list(METHODS) if args.method=='all' else [args.method],params,args.budget)
                 print(json.dumps(results,indent=2))
                 return 1 if any(r['status'] in ('error','experiment_error') for r in results.values()) else 0
             show(folder,params,args.budget,args.method,args.autoplay,args.seconds)
-        elif args.command=='baseline':
+        elif args.command in ('hardware','singlearc','baseline','hardware-sparse'):
             import math
             if args.simulate and args.resume:raise ValueError('Choose --simulate or --resume, not both')
             if not math.isfinite(args.seconds) or args.seconds<0 or (args.seconds and not args.simulate):
                 raise ValueError('--seconds is only for an offline simulation preview')
             from .baseline.workspace import show
+            variant={'timing_backend':'sparse'} if args.command=='hardware-sparse' else {}
             if args.resume:
                 if args.output:raise ValueError('--resume uses its existing session; do not supply --output')
                 folder=Path(args.resume).resolve();info=json.loads((folder/'control.json').read_text())
                 cal=args.calibration if info['simulated'] else json.loads(Path(info['prepared']).read_text())['calibration']
-                show(folder,cal,rate=info['rate'],resume=info)
+                show(folder,cal,rate=info['rate'],resume=info,moving_side=args.moving_side,**variant)
             else:
-                folder=Path(args.output or output_folder('baseline')).resolve()
+                folder=Path(args.output or output_folder(('hardware-sparse-' if variant else 'hardware-')+(args.moving_side or 'right'))).resolve()
                 if args.simulate:
                     from .experiment.config import no_can
                     no_can()
                 folder.mkdir(parents=True,exist_ok=False)
-                show(folder,args.calibration,rate=args.speed,simulate_plan=args.simulate,seconds=args.seconds)
+                show(folder,args.calibration,rate=args.speed,simulate_plan=args.simulate,seconds=args.seconds,moving_side=args.moving_side,**variant)
         elif args.command=='test':
             from .planning import build_moveit
             build_moveit()
@@ -192,12 +215,14 @@ def main(argv=None):
                                 str(ROOT/'tests/test_snapshot_mesh.py'),str(ROOT/'tests/test_readonly_hardware.py'),
                                 str(ROOT/'tests/test_current_plan.py'),str(ROOT/'tests/test_planner_execution.py'),
                                 str(ROOT/'tests/test_baseline_hardware.py'),str(ROOT/'tests/test_baseline_ui.py'),
-                                str(ROOT/'tests/test_baseline_workspace.py'),'-q'])
+                                str(ROOT/'tests/test_baseline_workspace.py'),str(ROOT/'tests/test_singlearc_arms.py'),
+                                str(ROOT/'tests/test_baseline_single_arc.py'),str(ROOT/'tests/test_baseline_computation.py'),
+                                str(ROOT/'tests/test_hardware_workspace.py'),'-q'])
         else:parser.print_help()
         return 0
     except Exception as e:
-        label=('Baseline stopped; no automatic relaxation. If a controller is already active, reconnect to it; startup does not take over its ownership. '
-               if getattr(args,'command',None)=='baseline' else
+        label=('Hardware mode stopped; no automatic relaxation. If a controller is already active, reconnect to it; startup does not take over its ownership. '
+               if getattr(args,'command',None) in ('hardware','singlearc','baseline','hardware-sparse') else
                'Execution stopped; check execution report and physical support. ' if getattr(args,'execute',False)
                else 'Planner stopped (no motor commands): ')
         print(label+str(e),file=sys.stderr)

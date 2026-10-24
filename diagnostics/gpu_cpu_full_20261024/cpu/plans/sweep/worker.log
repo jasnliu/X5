@@ -1,0 +1,125 @@
+[checkpoints sweep] LEG 1/3: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 4, score=1.5130, duration=7.74s
+[sweep +   0.1s] sweep: candidate 22, score=1.5445, duration=8.36s
+[sweep +   0.1s] sweep: candidate 2, score=1.6397, duration=25.84s
+[sweep +   0.1s] sweep: candidate 9, score=2.1518, duration=10.59s
+[sweep +   0.1s] sweep: candidate 7, score=2.3340, duration=47.56s
+[sweep +   0.1s] sweep: candidate 11, score=3.5483, duration=10.01s
+[sweep +   0.1s] sweep: candidate 10, score=6.1239, duration=8.24s
+[sweep +   0.1s] SELECTED candidate 4: lowest sweep score; 7 eligible, equally checked candidates
+[checkpoints sweep] LEG 2/3: destinationR1 → destinationR4; budget 120s; frozen scene unchanged
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 14, score=0.3340, duration=5.89s
+[sweep +   0.0s] sweep: candidate 15, score=0.3675, duration=5.98s
+[sweep +   0.0s] sweep: candidate 4, score=0.6122, duration=7.48s
+[sweep +   0.0s] sweep: candidate 5, score=0.8065, duration=5.42s
+[sweep +   0.0s] sweep: candidate 2, score=0.8096, duration=10.52s
+[sweep +   0.0s] sweep: candidate 6, score=0.9080, duration=5.99s
+[sweep +   0.0s] sweep: candidate 7, score=1.0214, duration=4.96s
+[sweep +   0.0s] sweep: candidate 8, score=1.3072, duration=6.88s
+[sweep +   0.0s] SELECTED candidate 14: lowest sweep score; 8 eligible, equally checked candidates
+[checkpoints sweep] LEG 3/3: destinationR4 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 17, score=1.1414, duration=7.15s
+[sweep +   0.0s] sweep: candidate 2, score=1.4702, duration=12.47s
+[sweep +   0.0s] sweep: candidate 18, score=1.7664, duration=6.29s
+[sweep +   0.0s] sweep: candidate 8, score=1.9038, duration=8.14s
+[sweep +   0.0s] sweep: candidate 4, score=2.1965, duration=15.36s
+[sweep +   0.0s] sweep: candidate 11, score=2.2177, duration=4.95s
+[sweep +   0.0s] sweep: candidate 6, score=2.6666, duration=7.67s
+[sweep +   0.0s] sweep: candidate 10, score=2.9163, duration=7.11s
+[sweep +   0.0s] SELECTED candidate 17: lowest sweep score; 8 eligible, equally checked candidates
+[checkpoints] All 3 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 7.740s; path and ranking locked
+[right checkpoint_2 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 5.895s; path and ranking locked
+[right checkpoint_1 timing +   0.1s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   0.1s]   8 controls: refining 1.000354 limit ratio
+[right checkpoint_2 timing +   0.2s]   8 controls: refining 1.000090 limit ratio
+[right checkpoint_2 timing +   0.2s]   8 controls: refining 1.000055 limit ratio
+[right checkpoint_2 timing +   0.3s] ADAPTIVE 8 controls: 3.634328s; best 3.634328s; 0.2s computation
+[right checkpoint_2 timing +   0.3s]   12 controls: refining 1.003144 limit ratio
+[right checkpoint_2 timing +   0.4s]   12 controls: refining 1.000944 limit ratio
+[right checkpoint_2 timing +   0.5s]   12 controls: refining 1.000050 limit ratio
+[right checkpoint_2 timing +   0.6s] ADAPTIVE 12 controls: 3.588568s; best 3.588568s; 0.3s computation
+[right checkpoint_2 timing +   0.7s]   20 controls: refining 1.003420 limit ratio
+[right checkpoint_2 timing +   0.8s]   20 controls: refining 1.000911 limit ratio
+[right checkpoint_2 timing +   0.9s]   20 controls: refining 1.000218 limit ratio
+[right checkpoint_2 timing +   1.0s] ADAPTIVE 20 controls: 3.395480s; best 3.395480s; 0.5s computation
+[right checkpoint_1 timing +   1.2s] TIMING READY: 7.740s → 5.149s outward; limits unchanged
+[right checkpoint_1 timing +   1.2s] LEG READY: 5.149s; exact timing and collision/zone checks complete; NO motor commands.
+[right checkpoint_2 timing +   1.2s]   32 controls: refining 1.011010 limit ratio
+[right checkpoint_2 timing +   1.4s]   32 controls: refining 1.000854 limit ratio
+[right return_to_start timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 7.146s; path and ranking locked
+[right checkpoint_2 timing +   1.6s]   32 controls: refining 1.000206 limit ratio
+[right return_to_start timing +   0.1s]   8 controls: refining 1.003536 limit ratio
+[right return_to_start timing +   0.2s]   8 controls: refining 1.000109 limit ratio
+[right checkpoint_2 timing +   1.7s] ADAPTIVE 32 controls: 3.367224s; best 3.367224s; 0.7s computation
+[right return_to_start timing +   0.2s]   8 controls: refining 1.000045 limit ratio
+[right return_to_start timing +   0.3s] ADAPTIVE 8 controls: 3.258748s; best 3.258748s; 0.2s computation
+[right return_to_start timing +   0.4s]   12 controls: refining 1.008689 limit ratio
+[right return_to_start timing +   0.5s]   12 controls: refining 1.000347 limit ratio
+[right checkpoint_2 timing +   2.1s]   48 controls: refining 1.015719 limit ratio
+[right return_to_start timing +   0.5s]   12 controls: refining 1.000295 limit ratio
+[right return_to_start timing +   0.6s] ADAPTIVE 12 controls: 2.951024s; best 2.951024s; 0.3s computation
+[right return_to_start timing +   0.7s]   20 controls: refining 1.004537 limit ratio
+[right checkpoint_2 timing +   2.3s]   48 controls: refining 1.000419 limit ratio
+[right return_to_start timing +   0.9s]   20 controls: refining 1.001543 limit ratio
+[right return_to_start timing +   1.0s]   20 controls: refining 1.000723 limit ratio
+[right checkpoint_2 timing +   2.6s]   48 controls: refining 1.000185 limit ratio
+[right return_to_start timing +   1.1s] ADAPTIVE 20 controls: 2.881191s; best 2.881191s; 0.5s computation
+[right checkpoint_2 timing +   2.8s] ADAPTIVE 48 controls: 3.355555s; best 3.355555s; 1.1s computation
+[right return_to_start timing +   1.3s]   32 controls: refining 1.004395 limit ratio
+[right return_to_start timing +   1.5s]   32 controls: refining 1.002117 limit ratio
+[right return_to_start timing +   1.7s]   32 controls: refining 1.001982 limit ratio
+[right checkpoint_2 timing +   3.4s]   64 controls: refining 1.006220 limit ratio
+[right return_to_start timing +   1.8s] ADAPTIVE 32 controls: 2.826053s; best 2.826053s; 0.7s computation
+[right return_to_start timing +   2.1s]   48 controls: refining 1.010368 limit ratio
+[right checkpoint_2 timing +   3.7s]   64 controls: refining 1.009295 limit ratio
+[right return_to_start timing +   2.4s]   48 controls: refining 1.004987 limit ratio
+[right checkpoint_2 timing +   4.1s]   64 controls: refining 1.000472 limit ratio
+[right return_to_start timing +   2.7s]   48 controls: refining 1.001552 limit ratio
+[right checkpoint_2 timing +   4.4s] ADAPTIVE 64 controls: 3.351103s; best 3.351103s; 1.6s computation
+[right return_to_start timing +   2.9s] ADAPTIVE 48 controls: 2.812718s; best 2.812718s; 1.1s computation
+[right return_to_start timing +   3.3s]   64 controls: refining 1.003608 limit ratio
+[right return_to_start timing +   3.7s]   64 controls: refining 1.002330 limit ratio
+[right return_to_start timing +   4.1s]   64 controls: refining 1.001910 limit ratio
+[right return_to_start timing +   4.4s] ADAPTIVE 64 controls: 2.801706s; best 2.801706s; 1.5s computation
+[right return_to_start timing +   5.2s]   96 controls: refining 1.007523 limit ratio
+[right return_to_start timing +   5.9s]   96 controls: refining 1.001639 limit ratio
+[right checkpoint_2 timing +   7.7s]   96 controls: refining 1.012409 limit ratio
+[right return_to_start timing +   6.7s]   96 controls: refining 1.001211 limit ratio
+[right checkpoint_2 timing +   8.4s]   96 controls: refining 1.003124 limit ratio
+[right return_to_start timing +   7.2s] ADAPTIVE 96 controls: 2.794876s; best 2.794876s; 2.8s computation
+[right checkpoint_2 timing +   9.0s]   96 controls: refining 1.002623 limit ratio
+[right checkpoint_2 timing +   9.5s] ADAPTIVE 96 controls: 3.354054s; best 3.351103s; 5.1s computation
+[right return_to_start timing +   8.7s]   128 controls: refining 1.001261 limit ratio
+[right return_to_start timing +  10.0s]   128 controls: refining 1.000836 limit ratio
+[right return_to_start timing +  11.0s]   128 controls: refining 1.000757 limit ratio
+[right return_to_start timing +  11.6s] ADAPTIVE 128 controls: 2.790317s; best 2.790317s; 4.4s computation
+[right checkpoint_2 timing +  14.3s]   128 controls: refining 1.021158 limit ratio
+[right checkpoint_2 timing +  15.6s]   128 controls: refining 1.000669 limit ratio
+[right checkpoint_2 timing +  17.0s]   128 controls: refining 1.000052 limit ratio
+[right checkpoint_2 timing +  17.6s] ADAPTIVE 128 controls: 3.342645s; best 3.342645s; 8.1s computation
+[right return_to_start timing +  17.9s]   192 controls: refining 1.018569 limit ratio
+[right return_to_start timing +  24.9s]   192 controls: refining 1.000362 limit ratio
+[right checkpoint_2 timing +  31.7s]   192 controls: refining 1.019814 limit ratio
+[right checkpoint_2 timing +  35.7s] ADAPTIVE 192 controls: 3.341885s; best 3.341885s; 18.1s computation
+[right checkpoint_2 timing +  35.7s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +  36.8s] TIMING READY: 5.895s → 3.342s outward; limits unchanged
+[right checkpoint_2 timing +  36.8s] LEG READY: 3.342s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +  40.3s]   192 controls: refining 1.000356 limit ratio
+[right return_to_start timing +  41.2s] ADAPTIVE 192 controls: 2.787361s; best 2.787361s; 29.6s computation
+[right return_to_start timing +  41.2s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right return_to_start timing +  42.2s] TIMING READY: 7.146s → 2.787s outward; limits unchanged
+[right return_to_start timing +  42.2s] LEG READY: 2.787s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 2 destinations; 10.491s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 2.787s return to original start; SIMULATION ONLY

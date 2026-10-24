@@ -1,0 +1,1266 @@
+{
+  "cases": {
+    "left_single_arc": {
+      "v1": {
+        "duration_s": 5.173891859809524,
+        "internal_stops": 4,
+        "deep_slowdowns": 4,
+        "stop_times_s": [
+          1.686241396446482,
+          2.65323505457629,
+          3.4417344505918357,
+          4.598356358962421
+        ],
+        "slowdown_times_s": [
+          1.686241396446482,
+          2.65323505457629,
+          3.4417344505918357,
+          4.598356358962421
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.02281107629872042,
+        "interior_speed_cv": 0.7439524014447985,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.604540661115593,
+        "path_length_rad": 1.2732039813152143,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "variants": [
+        {
+          "index": 0,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.004042684074568133,
+            "certified_joint_tube_rad": 0.004608016668573857,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0028965675769543064,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0014335992406171898,
+            "tip_deviation_m": 0.0026741337537752,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.831497281877731,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.3602983313268693,
+            "interior_speed_p10_ratio": 0.4838165780578997,
+            "interior_speed_cv": 0.26738913489806815,
+            "peak_joint_speed_rad_s": 0.5174744600119672,
+            "cruise_joint_norm_rad_s": 0.49187386153289203,
+            "path_length_rad": 1.270956666834925,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2455,
+            "dense_peaks": [
+              [
+                0.07133232070114742,
+                0.17087518445504085,
+                0.2806717165240201,
+                0.015294165328002379,
+                0.05819147144587248,
+                0.06025073014676228,
+                0.5174745524863924
+              ],
+              [
+                0.16432464145388176,
+                0.33627784155059715,
+                0.5572350824051472,
+                0.08072567860065188,
+                0.11938238104309964,
+                0.11857184265940969,
+                0.892593985386512
+              ],
+              [
+                2.351785384217175,
+                3.567608079043181,
+                4.484658497497785,
+                3.076659700866986,
+                1.7765367083456989,
+                1.348344300028251,
+                5.770865771731664
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2455,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_00/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_00/law.json",
+          "elapsed_s": 4.127195430046413
+        },
+        {
+          "index": 1,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003360640460472186,
+            "certified_joint_tube_rad": 0.0039810429338728815,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.002400505000358835,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0011881585799376829,
+            "tip_deviation_m": 0.002216098343073749,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 3.953688422338116,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.38097068180311805,
+            "interior_speed_p10_ratio": 0.46279846057869856,
+            "interior_speed_cv": 0.2648686732586103,
+            "peak_joint_speed_rad_s": 0.58415263453932,
+            "cruise_joint_norm_rad_s": 0.5877389185013313,
+            "path_length_rad": 1.271312744537246,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2016,
+            "dense_peaks": [
+              [
+                0.08263769472003617,
+                0.19795698765199987,
+                0.32515504050168126,
+                0.017718119261370003,
+                0.06568960943948375,
+                0.06979979615954554,
+                0.5841526327328135
+              ],
+              [
+                0.22777909403047425,
+                0.4888196860772381,
+                0.725159927220516,
+                0.1327583640803251,
+                0.1992220165013862,
+                0.18088462966829352,
+                1.1374410789907856
+              ],
+              [
+                1.821234592952666,
+                4.389921357926507,
+                5.53767372775576,
+                2.6267137090757586,
+                2.172410944754122,
+                1.6579638241643446,
+                5.9820359400892436
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2016,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_01/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_01/law.json",
+          "elapsed_s": 4.460987558995839
+        },
+        {
+          "index": 2,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0036637725143590758,
+            "certified_joint_tube_rad": 0.004284174987759772,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0026209829287680425,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0012972499997651048,
+            "tip_deviation_m": 0.002419671498680018,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 3.728571549989385,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.3869445647027782,
+            "interior_speed_p10_ratio": 0.4879671090828597,
+            "interior_speed_cv": 0.24944210562431238,
+            "peak_joint_speed_rad_s": 0.5907801026251069,
+            "cruise_joint_norm_rad_s": 0.5936401106941731,
+            "path_length_rad": 1.2711446367615846,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 1904,
+            "dense_peaks": [
+              [
+                0.08428078478956025,
+                0.20189297790083044,
+                0.3316201170011407,
+                0.018070409652669386,
+                0.06643466549480703,
+                0.07118762954857094,
+                0.5907802935233686
+              ],
+              [
+                0.24105928973963434,
+                0.5128450033094396,
+                0.7802904285125746,
+                0.13488387805762572,
+                0.2101146088323643,
+                0.18987768931750673,
+                1.1634279928881073
+              ],
+              [
+                1.8764072531840077,
+                4.538406010208685,
+                5.730237513406841,
+                2.647039222088035,
+                2.243263527771739,
+                1.7137355073971252,
+                5.981844613272663
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 1904,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_02/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_02/law.json",
+          "elapsed_s": 4.474061694985721
+        },
+        {
+          "index": 3,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.01,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0009623284853616711,
+            "certified_joint_tube_rad": 0.0015827309587623656,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0006702139357577241,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0003253677361877468,
+            "tip_deviation_m": 0.0006066607294396209,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.917005017601538,
+            "internal_stops": 0,
+            "deep_slowdowns": 1,
+            "stop_times_s": [],
+            "slowdown_times_s": [
+              2.902016361388428
+            ],
+            "interior_speed_min_ratio": 0.20850738281249537,
+            "interior_speed_p10_ratio": 0.22429686374114682,
+            "interior_speed_cv": 0.5180047371019113,
+            "peak_joint_speed_rad_s": 0.5946128698571845,
+            "cruise_joint_norm_rad_s": 0.5674600975817952,
+            "path_length_rad": 1.2725848398589885,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2498,
+            "dense_peaks": [
+              [
+                0.08474406169220815,
+                0.20300274869498952,
+                0.33344297545035456,
+                0.018169739570329385,
+                0.06686582795110338,
+                0.07157893564054026,
+                0.5946122951679305
+              ],
+              [
+                0.24805948497556726,
+                0.5590557650236428,
+                0.9182792791256366,
+                0.22027971937968657,
+                0.14883729730380735,
+                0.19712352114120912,
+                1.178653348170729
+              ],
+              [
+                4.907629576260036,
+                5.359889036201168,
+                5.882967111543235,
+                5.3236572853493564,
+                3.9007147052674447,
+                4.572072659005109,
+                5.982035940089877
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2498,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_03/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_03/law.json",
+          "elapsed_s": 4.432375175005291
+        },
+        {
+          "index": 4,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.02,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.001973577988438208,
+            "certified_joint_tube_rad": 0.0025939804618389014,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0013918439459663923,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0006889989692153732,
+            "tip_deviation_m": 0.0012848437974895194,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.142375191990667,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.32071991725496024,
+            "interior_speed_p10_ratio": 0.3539652759480976,
+            "interior_speed_cv": 0.3556386668122332,
+            "peak_joint_speed_rad_s": 0.5906261792461313,
+            "cruise_joint_norm_rad_s": 0.5844608196192099,
+            "path_length_rad": 1.2719657198612746,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2111,
+            "dense_peaks": [
+              [
+                0.08611307635965287,
+                0.2062821966580152,
+                0.33882964579671954,
+                0.01846326621371564,
+                0.06641748871586468,
+                0.07273527168126358,
+                0.5906253854137573
+              ],
+              [
+                0.3113748167589918,
+                0.49496832945879543,
+                0.8484440060137751,
+                0.22650904879632544,
+                0.1699321014370998,
+                0.17452623881299842,
+                1.16279002693711
+              ],
+              [
+                4.836159459354879,
+                5.2789810504668475,
+                5.766506091620139,
+                5.231133588631808,
+                3.6969591143697724,
+                4.502274427322192,
+                5.981839579349259
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2111,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_04/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_04/law.json",
+          "elapsed_s": 4.335824050009251
+        },
+        {
+          "index": 5,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.04,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.003996620068696035,
+            "certified_joint_tube_rad": 0.0046170225420967305,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0028630827314488974,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0014170326766010412,
+            "tip_deviation_m": 0.0026432149296595343,
+            "collision_zone": {
+              "samples_checked": 2011,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 3.9391727089504505,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.4777889355268462,
+            "interior_speed_p10_ratio": 0.5238394516561637,
+            "interior_speed_cv": 0.2213080753017962,
+            "peak_joint_speed_rad_s": 0.5965081125530834,
+            "cruise_joint_norm_rad_s": 0.5998361219857199,
+            "path_length_rad": 1.2708605207738728,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2009,
+            "dense_peaks": [
+              [
+                0.08954501077355412,
+                0.21450332868132183,
+                0.35233329902823474,
+                0.019199097766721917,
+                0.0670787318661047,
+                0.0756340495735413,
+                0.5965071356969348
+              ],
+              [
+                0.3251620017728247,
+                0.5511331250959454,
+                1.0049584021444369,
+                0.19052457848016563,
+                0.2193577337347508,
+                0.20045533137029378,
+                1.1860634259450429
+              ],
+              [
+                2.8278076138360464,
+                4.673321589142628,
+                5.902383471166617,
+                3.5017683725917244,
+                2.56447681702689,
+                2.5180276977746425,
+                5.9816215303151905
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2009,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_05/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_single_arc/variant_05/law.json",
+          "elapsed_s": 4.5771845689741895
+        },
+        {
+          "index": 6,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.06,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.006019782847423053,
+            "certified_joint_tube_rad": 0.006640185320823747,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00433476071935595,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0021450073211101033,
+            "tip_deviation_m": 0.00400223177341675,
+            "collision_zone": {
+              "samples_checked": 1343,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2011,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.2783495080075227
+        }
+      ]
+    },
+    "left_clearance": {
+      "v1": {
+        "duration_s": 9.051092413028472,
+        "internal_stops": 13,
+        "deep_slowdowns": 13,
+        "stop_times_s": [
+          1.6659813488055728,
+          2.067975312535887,
+          2.6690793549616485,
+          3.4918235256825434,
+          3.9467146702136766,
+          4.719774793497845,
+          4.998131952969205,
+          5.559825161635855,
+          6.150168419643919,
+          6.74067847359824,
+          7.584509463064897,
+          8.169731070164287,
+          8.475556912181368
+        ],
+        "slowdown_times_s": [
+          1.6659813488055728,
+          2.067975312535887,
+          2.6690793549616485,
+          3.4918235256825434,
+          3.9467146702136766,
+          4.719774793497845,
+          4.998131952969205,
+          5.559825161635855,
+          6.150168419643919,
+          6.74067847359824,
+          7.584509463064897,
+          8.169731070164287,
+          8.475556912181368
+        ],
+        "interior_speed_min_ratio": 0.0,
+        "interior_speed_p10_ratio": 0.009269933069582554,
+        "interior_speed_cv": 1.1098789187383085,
+        "peak_joint_speed_rad_s": 0.5994005994005994,
+        "cruise_joint_norm_rad_s": 0.42753764024058427,
+        "path_length_rad": 1.2709039382831537,
+        "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+        "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+      },
+      "variants": [
+        {
+          "index": 0,
+          "params": {
+            "kind": "local_c2",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0003694170765865995,
+            "certified_joint_tube_rad": 0.0009317504213298017,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00032053197112385384,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 7.475440350944875e-05,
+            "tip_deviation_m": 0.00019020373404641502,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 8.755843250158007,
+            "internal_stops": 0,
+            "deep_slowdowns": 1,
+            "stop_times_s": [],
+            "slowdown_times_s": [
+              4.98557714663997
+            ],
+            "interior_speed_min_ratio": 0.0776393242196384,
+            "interior_speed_p10_ratio": 0.08305253007839909,
+            "interior_speed_cv": 0.7903219726973403,
+            "peak_joint_speed_rad_s": 0.4068591947391456,
+            "cruise_joint_norm_rad_s": 0.37359921489286996,
+            "path_length_rad": 1.2707386609041698,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 4435,
+            "dense_peaks": [
+              [
+                0.06543461870567356,
+                0.15687811278185587,
+                0.2569809880127834,
+                0.0002679187535028021,
+                0.04575236577953824,
+                0.05715707674752555,
+                0.406858331963345
+              ],
+              [
+                0.15808251387867467,
+                0.38062566840666556,
+                0.6209777843949963,
+                0.0006483334906709372,
+                0.1322930633712301,
+                0.13808492441664907,
+                0.8588881482846121
+              ],
+              [
+                3.073664160366452,
+                4.510941614094989,
+                5.854436842677391,
+                0.004564255306330362,
+                3.6553332349595666,
+                3.4586927565186047,
+                3.9161679761756334
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 4436,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_00/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_00/law.json",
+          "elapsed_s": 6.122933541948441
+        },
+        {
+          "index": 1,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.45,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.00030479942643488645,
+            "certified_joint_tube_rad": 0.0009219067327840396,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00026446519975557164,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 6.205632258680207e-05,
+            "tip_deviation_m": 0.00015693514859532737,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 9.349628371536797,
+            "internal_stops": 0,
+            "deep_slowdowns": 1,
+            "stop_times_s": [],
+            "slowdown_times_s": [
+              5.172214415134156
+            ],
+            "interior_speed_min_ratio": 0.11277300903893632,
+            "interior_speed_p10_ratio": 0.115202937408262,
+            "interior_speed_cv": 0.8038058539863429,
+            "peak_joint_speed_rad_s": 0.425054415988374,
+            "cruise_joint_norm_rad_s": 0.343233645439436,
+            "path_length_rad": 1.2707648086457857,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 4716,
+            "dense_peaks": [
+              [
+                0.04151595019763101,
+                0.0995336115068576,
+                0.16304534375091698,
+                0.00025833081793990453,
+                0.04779849686861545,
+                0.03626414272185095,
+                0.42505379503276736
+              ],
+              [
+                0.12892560489414862,
+                0.26878608502720897,
+                0.43387060040719405,
+                0.0007061763825463906,
+                0.13066257397786005,
+                0.11402794689486961,
+                1.1619324157974893
+              ],
+              [
+                4.992753521155474,
+                5.7864173122267015,
+                5.81343161461461,
+                0.005671496959430828,
+                3.8814983152995124,
+                5.563449907281134,
+                5.981284638834355
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 4717,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_01/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_01/law.json",
+          "elapsed_s": 6.866186382016167
+        },
+        {
+          "index": 2,
+          "params": {
+            "kind": "local_c3",
+            "fraction": 0.49,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0003335207381390846,
+            "certified_joint_tube_rad": 0.0009506280444882372,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0002893858091082835,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 6.769998489043705e-05,
+            "tip_deviation_m": 0.00017172247540074968,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 9.300371475875814,
+            "internal_stops": 0,
+            "deep_slowdowns": 1,
+            "stop_times_s": [],
+            "slowdown_times_s": [
+              5.156125946225551
+            ],
+            "interior_speed_min_ratio": 0.11321515778279624,
+            "interior_speed_p10_ratio": 0.11587435148039718,
+            "interior_speed_cv": 0.7810090783631031,
+            "peak_joint_speed_rad_s": 0.41115084084822034,
+            "cruise_joint_norm_rad_s": 0.34576613275744766,
+            "path_length_rad": 1.2707524458624075,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 4692,
+            "dense_peaks": [
+              [
+                0.03957361381856032,
+                0.09487690116662092,
+                0.1554172176668953,
+                0.0002498812993255979,
+                0.04623509730116162,
+                0.03456751375565468,
+                0.41115107919788624
+              ],
+              [
+                0.11976389254706583,
+                0.26014994868957947,
+                0.3892464327254993,
+                0.0006417424658797789,
+                0.11874047970903695,
+                0.10589327859087709,
+                1.055913780365694
+              ],
+              [
+                4.277798622900856,
+                5.138823662572327,
+                5.981277082830114,
+                0.004831618098196493,
+                3.332238805027988,
+                4.765808451150014,
+                5.729903647740616
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 4693,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_02/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_02/law.json",
+          "elapsed_s": 6.966796305961907
+        },
+        {
+          "index": 3,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.01,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0007407795851728634,
+            "certified_joint_tube_rad": 0.0013578868915220194,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0004863584225235362,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.00029512633103901694,
+            "tip_deviation_m": 0.0004455251506063097,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.9734138965885935,
+            "internal_stops": 0,
+            "deep_slowdowns": 1,
+            "stop_times_s": [],
+            "slowdown_times_s": [
+              2.922378005635457
+            ],
+            "interior_speed_min_ratio": 0.2360411173662383,
+            "interior_speed_p10_ratio": 0.24675266456173933,
+            "interior_speed_cv": 0.4824864293197609,
+            "peak_joint_speed_rad_s": 0.5943576982087573,
+            "cruise_joint_norm_rad_s": 0.5387424088609041,
+            "path_length_rad": 1.2704120658633,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2544,
+            "dense_peaks": [
+              [
+                0.07035587545041672,
+                0.16867672162074787,
+                0.2763082102927387,
+                0.00036122704832716436,
+                0.06683720539429323,
+                0.061455789799079924,
+                0.5943577656912166
+              ],
+              [
+                0.24517970563455108,
+                0.45361326127651597,
+                0.7380342359851236,
+                0.0007705988492376935,
+                0.22324932021543242,
+                0.19364404288283532,
+                1.1775401646066725
+              ],
+              [
+                4.892332336110198,
+                5.343163197790588,
+                5.832379777006833,
+                0.005757866688780855,
+                5.819551722660284,
+                5.950468197866283,
+                5.9820359400898315
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2544,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_03/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_03/law.json",
+          "elapsed_s": 7.033116740989499
+        },
+        {
+          "index": 4,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.02,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0017073498980490975,
+            "certified_joint_tube_rad": 0.002324457204398252,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0011294260213852159,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0006385646649353491,
+            "tip_deviation_m": 0.0010057930902163858,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 4.122441211901404,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.33431208971914866,
+            "interior_speed_p10_ratio": 0.36616249074451934,
+            "interior_speed_cv": 0.3442842428338056,
+            "peak_joint_speed_rad_s": 0.5914166110487395,
+            "cruise_joint_norm_rad_s": 0.5718841135923759,
+            "path_length_rad": 1.2698520316684747,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2119,
+            "dense_peaks": [
+              [
+                0.08449258042056722,
+                0.2025691724447763,
+                0.3318272074586763,
+                0.0003594389836827923,
+                0.06650636293814934,
+                0.07380418804635142,
+                0.5914157099623834
+              ],
+              [
+                0.3163969999891784,
+                0.47898829442941465,
+                0.8612671501315191,
+                0.0008129358465595002,
+                0.19287687864967146,
+                0.20197030683178943,
+                1.166151146246339
+              ],
+              [
+                4.845201743306139,
+                5.288113063741481,
+                5.817152300392088,
+                0.007056865146970869,
+                3.72356250823131,
+                5.46020382969479,
+                5.977211723261021
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2119,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_04/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_04/law.json",
+          "elapsed_s": 6.623047805042006
+        },
+        {
+          "index": 5,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.04,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.0037100206941691844,
+            "certified_joint_tube_rad": 0.004327127597613169,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.0025325375708259087,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0013342621511927375,
+            "tip_deviation_m": 0.0021569304797906443,
+            "collision_zone": {
+              "samples_checked": 2029,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "valid": true
+          },
+          "status": "valid",
+          "quality": {
+            "duration_s": 3.959525916764953,
+            "internal_stops": 0,
+            "deep_slowdowns": 0,
+            "stop_times_s": [],
+            "slowdown_times_s": [],
+            "interior_speed_min_ratio": 0.48080091013402215,
+            "interior_speed_p10_ratio": 0.5312455148075746,
+            "interior_speed_cv": 0.2192963438433093,
+            "peak_joint_speed_rad_s": 0.5958182789207694,
+            "cruise_joint_norm_rad_s": 0.5990935172990038,
+            "path_length_rad": 1.2688169185766496,
+            "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+            "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+          },
+          "proof": {
+            "geometry": {
+              "type": "original spline coefficients bit-identical; positive monotone time density",
+              "max_error_rad": 0.0
+            },
+            "dense_samples": 2037,
+            "dense_peaks": [
+              [
+                0.08995655708262873,
+                0.21566893750112726,
+                0.3532858958283284,
+                0.00036832260953965245,
+                0.06700144180650981,
+                0.07857686810829206,
+                0.5958182574403005
+              ],
+              [
+                0.32445093136423864,
+                0.5757529718838759,
+                1.0005783943384126,
+                0.0009457451157117683,
+                0.19826258354795084,
+                0.2014378922934728,
+                1.1833333129375379
+              ],
+              [
+                2.805338154478442,
+                5.135684201142667,
+                5.959939488763553,
+                0.006432491885826981,
+                2.5764307881246973,
+                2.99774889793016,
+                5.981735300734281
+              ]
+            ],
+            "motor_commands": 0,
+            "collision_zone": {
+              "samples_checked": 2037,
+              "edge_joint_l1_step_rad": 0.003,
+              "max_time_step_s": 0.002
+            }
+          },
+          "source": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_05/source.json",
+          "law": "diagnostics/corner_smoothing_20261021/studies/refined/left_clearance/variant_05/law.json",
+          "elapsed_s": 6.827006249979604
+        },
+        {
+          "index": 6,
+          "params": {
+            "kind": "overlap_c3",
+            "fraction": 0.06,
+            "simplify": 1e-12
+          },
+          "geometry": {
+            "max_joint_l2_deviation_rad": 0.00571199538341744,
+            "certified_joint_tube_rad": 0.006329102138485549,
+            "joint_tube_limit_rad": 0.017453292519943295,
+            "max_joint_component_deviation_rad": 0.00408514728566501,
+            "original_progress_backtrack": 0.0,
+            "wrist_deviation_m": 0.0019893858879067926,
+            "tip_deviation_m": 0.003273416829868795,
+            "collision_zone": {
+              "samples_checked": 883,
+              "details": {
+                "contacts": [
+                  [
+                    "gemini_native_depth",
+                    "left_drumstick"
+                  ]
+                ],
+                "reason": "collision"
+              },
+              "max_parameter_step": 0.000500000000000056
+            },
+            "workspace_limit_m": 0.01,
+            "geometry_samples": 2029,
+            "reason": "collision_or_zone"
+          },
+          "status": "rejected_geometry",
+          "elapsed_s": 0.40968070598319173
+        }
+      ]
+    }
+  },
+  "reference_recording": {
+    "0.1": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 3,
+      "stop_times_s": [],
+      "slowdown_times_s": [
+        4.000134979423868,
+        4.25514358436214,
+        4.485151345679013
+      ],
+      "interior_speed_min_ratio": 0.07540473242534994,
+      "interior_speed_p10_ratio": 0.21683249352398515,
+      "interior_speed_cv": 0.4184959989153623,
+      "peak_joint_speed_rad_s": 0.7433376229775143,
+      "cruise_joint_norm_rad_s": 0.717996390279705,
+      "path_length_rad": 1.9036348628022752,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.1,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    },
+    "0.2": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 2,
+      "stop_times_s": [],
+      "slowdown_times_s": [
+        4.26014375308642,
+        4.480151176954733
+      ],
+      "interior_speed_min_ratio": 0.06868922964482382,
+      "interior_speed_p10_ratio": 0.20759910454946753,
+      "interior_speed_cv": 0.4148709931640994,
+      "peak_joint_speed_rad_s": 0.7330609410698182,
+      "cruise_joint_norm_rad_s": 0.7264415078736104,
+      "path_length_rad": 1.8962712852709234,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.2,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    },
+    "0.3": {
+      "duration_s": 6.075205,
+      "internal_stops": 0,
+      "deep_slowdowns": 1,
+      "stop_times_s": [],
+      "slowdown_times_s": [
+        4.25514358436214
+      ],
+      "interior_speed_min_ratio": 0.07135832066369721,
+      "interior_speed_p10_ratio": 0.21224579968766338,
+      "interior_speed_cv": 0.41404532552107287,
+      "peak_joint_speed_rad_s": 0.7198414790760677,
+      "cruise_joint_norm_rad_s": 0.721764439446077,
+      "path_length_rad": 1.8801383025191285,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%",
+      "encoder_filter_window_s": 0.3,
+      "reference_only": true,
+      "not_a_safety_certificate": true
+    }
+  },
+  "reference_used_after_generation_only": true,
+  "motor_commands": 0,
+  "live_camera": false,
+  "levels": [
+    8,
+    16,
+    32
+  ],
+  "phase": "refined"
+}

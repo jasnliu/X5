@@ -1,0 +1,188 @@
+
+ROUNDING left_single_arc 0: {'kind': 'local_c2', 'fraction': 0.45, 'simplify': 1e-12}
+  8 controls: refining 1.100991 limit ratio
+  8 controls: refining 1.101141 limit ratio
+  8 controls: refining 1.101141 limit ratio
+ADAPTIVE 8 controls: 5.698928s; best 5.698928s; 0.5s computation
+  16 controls: refining 1.126942 limit ratio
+  16 controls: refining 1.127751 limit ratio
+  16 controls: refining 1.127696 limit ratio
+ADAPTIVE 16 controls: 5.061065s; best 5.061065s; 0.7s computation
+  32 controls: refining 1.158322 limit ratio
+  32 controls: refining 1.158322 limit ratio
+  32 controls: refining 1.158321 limit ratio
+ADAPTIVE 32 controls: 4.831497s; best 4.831497s; 1.3s computation
+VALID {"duration_s": 4.831497281877731, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.3602983313268693, "interior_speed_p10_ratio": 0.4838165780578997, "interior_speed_cv": 0.26738913489806815, "peak_joint_speed_rad_s": 0.5174744600119672, "cruise_joint_norm_rad_s": 0.49187386153289203, "path_length_rad": 1.270956666834925, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 1: {'kind': 'local_c3', 'fraction': 0.45, 'simplify': 1e-12}
+/usr/lib/python3/dist-packages/scipy/optimize/_optimize.py:404: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  warnings.warn("Values in x were outside bounds during a "
+  8 controls: refining 1.038017 limit ratio
+  8 controls: refining 1.007416 limit ratio
+  8 controls: refining 1.001876 limit ratio
+ADAPTIVE 8 controls: 4.916394s; best 4.916394s; 0.5s computation
+  16 controls: refining 1.130325 limit ratio
+  16 controls: refining 1.011464 limit ratio
+  16 controls: refining 1.003602 limit ratio
+ADAPTIVE 16 controls: 4.125037s; best 4.125037s; 0.8s computation
+  32 controls: refining 1.161846 limit ratio
+  32 controls: refining 1.036751 limit ratio
+  32 controls: refining 1.026103 limit ratio
+ADAPTIVE 32 controls: 3.953688s; best 3.953688s; 1.5s computation
+VALID {"duration_s": 3.953688422338116, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.38097068180311805, "interior_speed_p10_ratio": 0.46279846057869856, "interior_speed_cv": 0.2648686732586103, "peak_joint_speed_rad_s": 0.58415263453932, "cruise_joint_norm_rad_s": 0.5877389185013313, "path_length_rad": 1.271312744537246, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 2: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 1e-12}
+  8 controls: refining 1.075374 limit ratio
+  8 controls: refining 1.006973 limit ratio
+  8 controls: refining 1.003169 limit ratio
+ADAPTIVE 8 controls: 4.756875s; best 4.756875s; 0.5s computation
+  16 controls: refining 1.020839 limit ratio
+  16 controls: refining 1.011337 limit ratio
+  16 controls: refining 1.002906 limit ratio
+ADAPTIVE 16 controls: 4.043627s; best 4.043627s; 0.8s computation
+  32 controls: refining 1.075061 limit ratio
+  32 controls: refining 1.038962 limit ratio
+  32 controls: refining 1.014596 limit ratio
+ADAPTIVE 32 controls: 3.728572s; best 3.728572s; 1.5s computation
+VALID {"duration_s": 3.728571549989385, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.3869445647027782, "interior_speed_p10_ratio": 0.4879671090828597, "interior_speed_cv": 0.24944210562431238, "peak_joint_speed_rad_s": 0.5907801026251069, "cruise_joint_norm_rad_s": 0.5936401106941731, "path_length_rad": 1.2711446367615846, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 3: {'kind': 'overlap_c3', 'fraction': 0.01, 'simplify': 1e-12}
+  8 controls: refining 1.185139 limit ratio
+  8 controls: refining 1.001878 limit ratio
+  8 controls: refining 1.000245 limit ratio
+ADAPTIVE 8 controls: 7.036832s; best 7.036832s; 0.5s computation
+  16 controls: refining 1.122057 limit ratio
+  16 controls: refining 1.030138 limit ratio
+  16 controls: refining 1.011087 limit ratio
+ADAPTIVE 16 controls: 5.574117s; best 5.574117s; 0.8s computation
+  32 controls: refining 1.155752 limit ratio
+  32 controls: refining 1.062098 limit ratio
+  32 controls: refining 1.008051 limit ratio
+ADAPTIVE 32 controls: 4.917005s; best 4.917005s; 1.4s computation
+VALID {"duration_s": 4.917005017601538, "internal_stops": 0, "deep_slowdowns": 1, "stop_times_s": [], "slowdown_times_s": [2.902016361388428], "interior_speed_min_ratio": 0.20850738281249537, "interior_speed_p10_ratio": 0.22429686374114682, "interior_speed_cv": 0.5180047371019113, "peak_joint_speed_rad_s": 0.5946128698571845, "cruise_joint_norm_rad_s": 0.5674600975817952, "path_length_rad": 1.2725848398589885, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 4: {'kind': 'overlap_c3', 'fraction': 0.02, 'simplify': 1e-12}
+  8 controls: refining 5.491836 limit ratio
+  8 controls: refining 1.038051 limit ratio
+  8 controls: refining 1.006739 limit ratio
+ADAPTIVE 8 controls: 6.412955s; best 6.412955s; 0.5s computation
+  16 controls: refining 6.797834 limit ratio
+  16 controls: refining 1.034863 limit ratio
+  16 controls: refining 1.030021 limit ratio
+ADAPTIVE 16 controls: 4.959056s; best 4.959056s; 0.8s computation
+  32 controls: refining 1.058286 limit ratio
+  32 controls: refining 1.044956 limit ratio
+  32 controls: refining 1.014859 limit ratio
+ADAPTIVE 32 controls: 4.142375s; best 4.142375s; 1.4s computation
+VALID {"duration_s": 4.142375191990667, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.32071991725496024, "interior_speed_p10_ratio": 0.3539652759480976, "interior_speed_cv": 0.3556386668122332, "peak_joint_speed_rad_s": 0.5906261792461313, "cruise_joint_norm_rad_s": 0.5844608196192099, "path_length_rad": 1.2719657198612746, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 5: {'kind': 'overlap_c3', 'fraction': 0.04, 'simplify': 1e-12}
+  8 controls: refining 11.732799 limit ratio
+  8 controls: refining 3.430554 limit ratio
+  8 controls: refining 1.014036 limit ratio
+ADAPTIVE 8 controls: 7.392072s; best 7.392072s; 0.5s computation
+  16 controls: refining 14.176042 limit ratio
+  16 controls: refining 1.013373 limit ratio
+  16 controls: refining 1.012098 limit ratio
+ADAPTIVE 16 controls: 5.040223s; best 5.040223s; 0.8s computation
+  32 controls: refining 16.826859 limit ratio
+  32 controls: refining 1.007042 limit ratio
+  32 controls: refining 1.004854 limit ratio
+ADAPTIVE 32 controls: 3.939173s; best 3.939173s; 1.7s computation
+VALID {"duration_s": 3.9391727089504505, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.4777889355268462, "interior_speed_p10_ratio": 0.5238394516561637, "interior_speed_cv": 0.2213080753017962, "peak_joint_speed_rad_s": 0.5965081125530834, "cruise_joint_norm_rad_s": 0.5998361219857199, "path_length_rad": 1.2708605207738728, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_single_arc 6: {'kind': 'overlap_c3', 'fraction': 0.06, 'simplify': 1e-12}
+REJECT collision_or_zone
+
+ROUNDING left_clearance 0: {'kind': 'local_c2', 'fraction': 0.45, 'simplify': 1e-12}
+  8 controls: refining 1.041666 limit ratio
+  8 controls: refining 1.041667 limit ratio
+  8 controls: refining 1.041667 limit ratio
+ADAPTIVE 8 controls: 15.446803s; best 15.446803s; 1.0s computation
+  16 controls: refining 1.049642 limit ratio
+  16 controls: refining 1.049840 limit ratio
+  16 controls: refining 1.049831 limit ratio
+ADAPTIVE 16 controls: 10.027772s; best 10.027772s; 1.2s computation
+  32 controls: refining 1.180832 limit ratio
+  32 controls: refining 1.180832 limit ratio
+  32 controls: refining 1.180832 limit ratio
+ADAPTIVE 32 controls: 8.755843s; best 8.755843s; 1.8s computation
+VALID {"duration_s": 8.755843250158007, "internal_stops": 0, "deep_slowdowns": 1, "stop_times_s": [], "slowdown_times_s": [4.98557714663997], "interior_speed_min_ratio": 0.0776393242196384, "interior_speed_p10_ratio": 0.08305253007839909, "interior_speed_cv": 0.7903219726973403, "peak_joint_speed_rad_s": 0.4068591947391456, "cruise_joint_norm_rad_s": 0.37359921489286996, "path_length_rad": 1.2707386609041698, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 1: {'kind': 'local_c3', 'fraction': 0.45, 'simplify': 1e-12}
+  8 controls: refining 1.261122 limit ratio
+  8 controls: refining 1.008733 limit ratio
+  8 controls: refining 1.007706 limit ratio
+ADAPTIVE 8 controls: 14.648179s; best 14.648179s; 1.1s computation
+  16 controls: refining 2.788898 limit ratio
+  16 controls: refining 1.036074 limit ratio
+  16 controls: refining 1.011119 limit ratio
+ADAPTIVE 16 controls: 9.349628s; best 9.349628s; 1.4s computation
+  32 controls: refining 1.550447 limit ratio
+  32 controls: refining 1.060842 limit ratio
+  32 controls: refining 2.095284 limit ratio
+ADAPTIVE 32 controls: 15.025047s; best 9.349628s; 2.0s computation
+VALID {"duration_s": 9.349628371536797, "internal_stops": 0, "deep_slowdowns": 1, "stop_times_s": [], "slowdown_times_s": [5.172214415134156], "interior_speed_min_ratio": 0.11277300903893632, "interior_speed_p10_ratio": 0.115202937408262, "interior_speed_cv": 0.8038058539863429, "peak_joint_speed_rad_s": 0.425054415988374, "cruise_joint_norm_rad_s": 0.343233645439436, "path_length_rad": 1.2707648086457857, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 2: {'kind': 'local_c3', 'fraction': 0.49, 'simplify': 1e-12}
+  8 controls: refining 1.284976 limit ratio
+  8 controls: refining 1.009120 limit ratio
+  8 controls: refining 1.008694 limit ratio
+ADAPTIVE 8 controls: 13.909858s; best 13.909858s; 1.1s computation
+  16 controls: refining 2.785907 limit ratio
+  16 controls: refining 1.885658 limit ratio
+  16 controls: refining 1.064982 limit ratio
+ADAPTIVE 16 controls: 9.300371s; best 9.300371s; 1.4s computation
+  32 controls: refining 1.402639 limit ratio
+  32 controls: refining 1.109517 limit ratio
+  32 controls: refining 2.408208 limit ratio
+ADAPTIVE 32 controls: 16.576627s; best 9.300371s; 2.1s computation
+VALID {"duration_s": 9.300371475875814, "internal_stops": 0, "deep_slowdowns": 1, "stop_times_s": [], "slowdown_times_s": [5.156125946225551], "interior_speed_min_ratio": 0.11321515778279624, "interior_speed_p10_ratio": 0.11587435148039718, "interior_speed_cv": 0.7810090783631031, "peak_joint_speed_rad_s": 0.41115084084822034, "cruise_joint_norm_rad_s": 0.34576613275744766, "path_length_rad": 1.2707524458624075, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 3: {'kind': 'overlap_c3', 'fraction': 0.01, 'simplify': 1e-12}
+  8 controls: refining 1.219163 limit ratio
+  8 controls: refining 1.003220 limit ratio
+  8 controls: refining 1.000868 limit ratio
+ADAPTIVE 8 controls: 6.862065s; best 6.862065s; 1.1s computation
+  16 controls: refining 1.148475 limit ratio
+  16 controls: refining 1.060764 limit ratio
+  16 controls: refining 1.011113 limit ratio
+ADAPTIVE 16 controls: 5.532077s; best 5.532077s; 1.4s computation
+  32 controls: refining 1.217653 limit ratio
+  32 controls: refining 1.059951 limit ratio
+  32 controls: refining 1.008484 limit ratio
+ADAPTIVE 32 controls: 4.973414s; best 4.973414s; 2.5s computation
+VALID {"duration_s": 4.9734138965885935, "internal_stops": 0, "deep_slowdowns": 1, "stop_times_s": [], "slowdown_times_s": [2.922378005635457], "interior_speed_min_ratio": 0.2360411173662383, "interior_speed_p10_ratio": 0.24675266456173933, "interior_speed_cv": 0.4824864293197609, "peak_joint_speed_rad_s": 0.5943576982087573, "cruise_joint_norm_rad_s": 0.5387424088609041, "path_length_rad": 1.2704120658633, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 4: {'kind': 'overlap_c3', 'fraction': 0.02, 'simplify': 1e-12}
+  8 controls: refining 5.731879 limit ratio
+  8 controls: refining 1.008398 limit ratio
+  8 controls: refining 1.002963 limit ratio
+ADAPTIVE 8 controls: 6.405178s; best 6.405178s; 1.2s computation
+  16 controls: refining 6.684599 limit ratio
+  16 controls: refining 1.024110 limit ratio
+  16 controls: refining 1.017004 limit ratio
+ADAPTIVE 16 controls: 4.892956s; best 4.892956s; 1.4s computation
+  32 controls: refining 1.034802 limit ratio
+  32 controls: refining 1.030046 limit ratio
+  32 controls: refining 1.013507 limit ratio
+ADAPTIVE 32 controls: 4.122441s; best 4.122441s; 2.0s computation
+VALID {"duration_s": 4.122441211901404, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.33431208971914866, "interior_speed_p10_ratio": 0.36616249074451934, "interior_speed_cv": 0.3442842428338056, "peak_joint_speed_rad_s": 0.5914166110487395, "cruise_joint_norm_rad_s": 0.5718841135923759, "path_length_rad": 1.2698520316684747, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 5: {'kind': 'overlap_c3', 'fraction': 0.04, 'simplify': 1e-12}
+  8 controls: refining 11.995907 limit ratio
+  8 controls: refining 3.467888 limit ratio
+  8 controls: refining 1.007567 limit ratio
+ADAPTIVE 8 controls: 7.374589s; best 7.374589s; 1.1s computation
+  16 controls: refining 13.427030 limit ratio
+  16 controls: refining 1.012402 limit ratio
+  16 controls: refining 1.011763 limit ratio
+ADAPTIVE 16 controls: 5.029163s; best 5.029163s; 1.4s computation
+  32 controls: refining 16.282927 limit ratio
+  32 controls: refining 1.007618 limit ratio
+  32 controls: refining 1.006014 limit ratio
+ADAPTIVE 32 controls: 3.959526s; best 3.959526s; 2.3s computation
+VALID {"duration_s": 3.959525916764953, "internal_stops": 0, "deep_slowdowns": 0, "stop_times_s": [], "slowdown_times_s": [], "interior_speed_min_ratio": 0.48080091013402215, "interior_speed_p10_ratio": 0.5312455148075746, "interior_speed_cv": 0.2192963438433093, "peak_joint_speed_rad_s": 0.5958182789207694, "cruise_joint_norm_rad_s": 0.5990935172990038, "path_length_rad": 1.2688169185766496, "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc", "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"}
+
+ROUNDING left_clearance 6: {'kind': 'overlap_c3', 'fraction': 0.06, 'simplify': 1e-12}
+REJECT collision_or_zone

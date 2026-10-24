@@ -1,0 +1,81 @@
+{
+  "scope": "Small software-only viability fork; no actuator or camera access",
+  "new_method": "workspace_curve",
+  "comparators": [
+    "progress",
+    "sweep",
+    "single_arc",
+    "clearance"
+  ],
+  "destinations": [
+    "destinationR1",
+    "destinationR2",
+    "destinationR3",
+    "destinationL1"
+  ],
+  "controlled_inputs": "Saved per-arm starts, one saved camera scene, exact destination joint poses, models, collision margins, zones and timing policies",
+  "development_variants": [
+    {
+      "label": "initial",
+      "prior_weight": 0.5,
+      "tip_weight": 0.025
+    },
+    {
+      "label": "broad",
+      "prior_weight": 5.0,
+      "tip_weight": 0.025
+    },
+    {
+      "label": "moderate",
+      "prior_weight": 2.0,
+      "tip_weight": 0.025
+    },
+    {
+      "label": "tool",
+      "prior_weight": 5.0,
+      "tip_weight": 0.08
+    },
+    {
+      "label": "posture",
+      "prior_weights": [
+        2.0,
+        5.0
+      ],
+      "tip_weight": 0.025,
+      "joint_weight": 0.05,
+      "posture_weight": 0.1
+    }
+  ],
+  "retained_shared_search": {
+    "prior_weights": [
+      2.0,
+      5.0
+    ],
+    "tip_weight": 0.025,
+    "broad_route_directions": 7
+  },
+  "retention_reason": "Low prior collapsed route alternatives and failed all cases. Moderate and broad priors both helped, but neither alone dominated. Combining them uses the same settings and geometry/clearance ranking for every task. Stronger tip regularization lost right R1/R2 feasibility, so it was not retained. A final stronger joint/posture penalty also lost R1/R3 feasibility; tuning stopped rather than starting a larger search.",
+  "primary_comparison": [
+    "successful valid path",
+    "gripper-base total turning",
+    "curvature variation",
+    "stick-tip turning",
+    "length",
+    "joint reversals",
+    "soft clearance"
+  ],
+  "secondary_comparison": [
+    "movement duration",
+    "generation compute time",
+    "retiming compute time"
+  ],
+  "not_used": [
+    "recording interiors",
+    "per-destination parameters",
+    "preference learning",
+    "new collision exemptions",
+    "new timing policies",
+    "GPU work"
+  ],
+  "limitation": "All four available destinations were used during development; there is no held-out generalization claim. Only one left-arm destination is available. Clearance is a 5 mm padding-band proxy, not certified exact physical distance."
+}

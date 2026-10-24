@@ -6,7 +6,8 @@ from pathlib import Path
 import numpy as np
 from PyQt5 import QtCore,QtGui,QtWidgets
 from safe_zone.geometry import Model
-from ..common import JOINTS,LEFT_JOINTS
+from ..common import JOINTS,LEFT_JOINTS,arm_side,arm_joints
+from .arms import other_side
 from ..model import generate
 from ..trajectory_view import PlaybackClock
 from ..vtk_view import VtkViewport,RobotActors
@@ -15,8 +16,10 @@ from .paths import speed
 
 class DisplayModel:
     """Calibrated visuals before Calculate; no fabricated trajectory file."""
-    def __init__(self,folder,cal_path):
-        manifest=generate(folder,cal_path)
+    def __init__(self,folder,cal_path,*,moving_side='right'):
+        self.side=arm_side(moving_side);self.other_side=other_side(self.side)
+        self.joints=arm_joints(self.side);self.stick_link=self.side+'_drumstick'
+        manifest=generate(folder,cal_path,moving_side=self.side)
         self.model=Model(Path(folder)/'robot.urdf');self.root=ET.parse(Path(folder)/'robot.urdf').getroot()
         self.obj={'model':manifest};self.duration=0.
     def positions(self,t):return np.zeros(7)
@@ -58,7 +61,7 @@ class ArmWindow(QtWidgets.QWidget):
 
 class PlanWindow(ArmWindow):
     def __init__(self,model,rate,on_speed=lambda *_:None):
-        super().__init__('X5 · Planned trajectory — disconnected preview',model)
+        super().__init__(f'X5 · {model.side.capitalize()} planned trajectory — disconnected preview',model)
         self.plan=None;self.source_outward=None;self.clock=PlaybackClock(0.);self.clock.loop=False
         self.notice=lambda message:None;self.on_speed=on_speed
         self.caption.setText('No trajectory yet. Click Calculate trajectory in the control panel.')
@@ -79,7 +82,11 @@ class PlanWindow(ArmWindow):
         self.plan=copy.copy(plan);self.source_outward=copy.deepcopy(plan.obj['outward'])
         self.robot.plan=self.plan;self.rate_changed(self.rate.value())
     def rate_changed(self,value):
-        if self.plan is not None:
+        if self.plan is not None and self.plan.obj.get('checkpoint_sequence'):
+            self.plan.set_preview_rate(value)
+            self.clock.pause();self.clock.duration=self.plan.duration;self.clock.seek(0)
+            self.timeline.setRange(0,max(1,round(self.plan.duration*1000)));self.draw_plan()
+        elif self.plan is not None:
             from ..planning import cycle
             outward=copy.deepcopy(self.source_outward)
             for p in outward:
@@ -87,6 +94,10 @@ class PlanWindow(ArmWindow):
                 for key,power in [('velocities_rad_s',1),('accelerations_rad_s2',2)]:
                     if key in p:p[key]=(np.asarray(p[key])*value**power).tolist()
             self.plan.obj=dict(self.plan.obj,outward=outward,cycle=cycle(outward))
+            # Scale the analytic clock too; changing only preview samples would
+            # leave a retimed curve playing at 1x and mis-time its goal/return.
+            self.plan.preview_rate=value
+            self.plan.obj['duration_outward_s']=outward[-1]['time_s']
             self.plan.curves=self.plan.obj['cycle'];self.plan.times=np.array([p['time_s'] for p in self.plan.curves])
             self.plan.values=np.array([p['positions_rad'] for p in self.plan.curves]);self.plan.duration=float(self.plan.times[-1])
             self.clock.pause();self.clock.duration=self.plan.duration;self.clock.seek(0)
@@ -113,25 +124,27 @@ class PlanWindow(ArmWindow):
 
 class ControlWindow(QtWidgets.QWidget):
     def __init__(self,owner):
-        super().__init__();self.setWindowTitle('X5 · Baseline control panel');self.resize(510,440)
-        self.owner=owner;layout=QtWidgets.QVBoxLayout(self);layout.setContentsMargins(18,18,18,18);layout.setSpacing(12)
+        super().__init__();self.setWindowTitle(f'X5 · Hardware · Workspace curve — {owner.side.upper()} arm controls');self.resize(510,440)
+        self.owner=owner;layout=QtWidgets.QVBoxLayout(self);layout.setContentsMargins(18,18,18,18);layout.setSpacing(6)
         self.menu=QtWidgets.QMenuBar(self);windows=self.menu.addMenu('Windows')
         for name,window in [('Planned preview',owner.preview),('Live arm',owner.live)]:
             action=windows.addAction(name);action.triggered.connect(lambda _,w=window:(w.show(),w.raise_()))
         layout.setMenuBar(self.menu)
-        title=QtWidgets.QLabel('Baseline controls');title.setStyleSheet('font-size:22px;font-weight:600');layout.addWidget(title)
+        title=QtWidgets.QLabel(f'Workspace curve · {owner.side.upper()}');title.setStyleSheet('font-size:22px;font-weight:600');layout.addWidget(title)
         self.status=QtWidgets.QLabel('Click Calculate trajectory to begin.');self.status.setWordWrap(True)
-        self.status.setMinimumHeight(60);self.status.setMaximumHeight(120);layout.addWidget(self.status)
+        self.status.setMinimumHeight(40);self.status.setMaximumHeight(75);layout.addWidget(self.status)
+        from .destinations import Selector
+        self.destinations=Selector(owner);layout.addWidget(self.destinations)
         self.buttons={}
         for name,label,callback in [('calculate','1 · Calculate trajectory',owner.calculate),
-            ('start','2 · START trajectory on arm',owner.start),('hold','EMERGENCY HOLD  [Space]',owner.hold),
+            ('start',f'2 · START trajectory on {owner.side} arm',owner.start),('hold','EMERGENCY HOLD  [Space]',owner.hold),
             ('reverse','Reverse to rest + relax',owner.reverse),('cancel','Cancel calculation / pending start',owner.cancel_calculation)]:
-            button=QtWidgets.QPushButton(label,self);button.setMinimumHeight(45)
+            button=QtWidgets.QPushButton(label,self);button.setMinimumHeight(40)
             button.clicked.connect(lambda _,f=callback:owner.action(f));layout.addWidget(button);self.buttons[name]=button
         self.buttons['hold'].setStyleSheet('background:#b22222;color:white;font-weight:bold')
         self.run_status=QtWidgets.QLabel('Arm: not commanded by this program');self.run_status.setWordWrap(True)
         self.run_status.setMaximumHeight(85);layout.addWidget(self.run_status)
-        note=QtWidgets.QLabel('Calculate is read-only. Keep the right arm still afterward.\nPassive left sway is allowed. Keep obstacles as captured.\nHold keeps torque; Reverse returns to start before relaxing.')
+        note=QtWidgets.QLabel(f'Calculate is read-only. Keep the {owner.side} arm still afterward.\nPassive {owner.other} sway is allowed. Keep obstacles as captured.\nHold keeps torque; Reverse returns to start before relaxing.')
         note.setWordWrap(True);layout.addWidget(note)
         self.log=QtWidgets.QPlainTextEdit(self);self.log.setReadOnly(True);self.log.setMaximumBlockCount(120)
         self.log.setMaximumHeight(100);layout.addWidget(self.log)

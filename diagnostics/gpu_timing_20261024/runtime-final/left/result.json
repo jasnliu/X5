@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "method": "adaptive",
+    "label": "CPU FALLBACK \u2014 GPU unavailable; Adaptive fixed-path retiming",
+    "fingerprint": "7835de8ce19513062bfddd6cc572fdcede7ab58c936c12b4e3e09c0069348733",
+    "source_path_sha256": "29002474870a15b73118d14fb3a5136a441b745cb6316ce578670ebab7194de9",
+    "original_duration_s": 6.166876446976601,
+    "duration_s": 2.8342045646868628,
+    "cached": false,
+    "elapsed_s": 58.79245449905284,
+    "geometry_preserved": true,
+    "limits": [
+      0.6,
+      1.2,
+      6.0
+    ],
+    "exact_extrema_peaks": [
+      [
+        0.12122977126066987,
+        0.20164943615894215,
+        0.43639134898094367,
+        0.07339773846746517,
+        0.09351753505907276,
+        0.16498318621945754,
+        0.5993287723754959
+      ],
+      [
+        0.4270602634676568,
+        0.6499059529563834,
+        1.1973343500326308,
+        0.30218041009193175,
+        0.39315819214339354,
+        0.6008326608051276,
+        1.1973196302192604
+      ],
+      [
+        2.23800732842241,
+        5.980173300091285,
+        5.981031868045057,
+        1.4673733440227998,
+        4.419330247339516,
+        3.03048083281172,
+        5.982035940089879
+      ]
+    ],
+    "verification": {
+      "geometry": {
+        "type": "original spline coefficients bit-identical; positive monotone time density",
+        "max_error_rad": 0.0
+      },
+      "dense_samples": 1614,
+      "dense_peaks": [
+        [
+          0.12122951058728497,
+          0.2016465750016266,
+          0.43638930283552696,
+          0.073397464701526,
+          0.09351753000959843,
+          0.1649830366473466,
+          0.599328739930051
+        ],
+        [
+          0.4270538134007207,
+          0.6498949752911002,
+          1.1973202484819598,
+          0.3021702401620546,
+          0.393147427955386,
+          0.6008312290069687,
+          1.1973186641669498
+        ],
+        [
+          2.2380073284224102,
+          5.980169821374037,
+          5.980950612920898,
+          1.467373344022802,
+          4.418297396430575,
+          3.030480832811726,
+          5.982024888866526
+        ]
+      ],
+      "motor_commands": 0,
+      "collision_zone": {
+        "samples_checked": 1614,
+        "edge_joint_l1_step_rad": 0.003,
+        "max_time_step_s": 0.002
+      }
+    },
+    "math_cache": {
+      "cached": false,
+      "key": "35aa1dfd67e8499cdfe1c9899bcdb039157f701350f1d5df0d8f0159d652c223"
+    },
+    "requested_backend": "vulkan",
+    "actual_backend": "cpu",
+    "gpu_used": false,
+    "fallback_reason": "AMD integrated GPU required; refusing llvmpipe"
+  },
+  "proof": {
+    "samples_checked": 1614,
+    "edge_joint_l1_step_rad": 0.003,
+    "max_time_step_s": 0.002
+  },
+  "duration_s": 2.8342045646868628,
+  "motor_commands": 0
+}

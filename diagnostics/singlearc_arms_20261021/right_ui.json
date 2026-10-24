@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "checks": [
+    "real no-plan startup DisplayModel path (no polling/devices)",
+    "exactly three native windows",
+    "no plan until Calculate",
+    "no overlapping controls",
+    "all five actions always clickable",
+    "prerequisite errors do not block retry",
+    "passive arm sway does not invalidate selected-arm plan",
+    "preview play pause scrub speed",
+    "live movement affects only connected window",
+    "movement invalidates plan",
+    "recalculate in same process",
+    "saved owner reconnect restores selected arm without enable",
+    "busy buttons explain without second owner",
+    "preview speed never changes active arm speed",
+    "one click Reverse holds checks returns and relaxes",
+    "completed owner removed without restart",
+    "new cycle after return in same program",
+    "full outward goal-hold reverse-rest-release cycle",
+    "CAN failure marks live pose stale",
+    "fault leaves every button enabled",
+    "no queued return after failed request",
+    "one click recovery after restored feedback",
+    "no automatic midair relaxation"
+  ],
+  "sessions": [
+    "/home/jason/Proyectos3/X5/planner_runs/singlearc_arms_20261021/right/ui/mock/controller-44d9842f",
+    "/home/jason/Proyectos3/X5/planner_runs/singlearc_arms_20261021/right/ui/mock/controller-44d9842f/controller-0064cf91",
+    "/home/jason/Proyectos3/X5/planner_runs/singlearc_arms_20261021/right/ui/mock/controller-44d9842f/controller-8045e6d6"
+  ],
+  "physical_motor_commands": 0,
+  "can_access": false,
+  "moving_side": "right",
+  "report": {
+    "type": "baseline_three_windows",
+    "moving_side": "right",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/singlearc_arms_20261021/right/calculation/plan/result/plan.json",
+    "plan_valid": false,
+    "simulated": true,
+    "owner_status": {},
+    "last_error": "SIMULATED CAN failure Correct the cause and retry the button; no automatic release.",
+    "button_states": {
+      "calculate": true,
+      "start": true,
+      "hold": true,
+      "reverse": true,
+      "cancel": true
+    },
+    "preview_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 3,
+      "maximum_frame_s": 0.0034357329714111984,
+      "median_frame_s": 0.0015564349596388638,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20184,
+      "render_errors": []
+    },
+    "live_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 205,
+      "maximum_frame_s": 0.030172110011335462,
+      "median_frame_s": 0.0017828609561547637,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20184,
+      "render_errors": []
+    }
+  }
+}

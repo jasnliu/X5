@@ -1,0 +1,514 @@
+{
+  "left_single_arc": [
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.005,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0004572465244625864,
+        "certified_joint_tube_rad": 0.001077648997863281,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0003184494665108284,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.00014450173576340442,
+        "tip_deviation_m": 0.0002694104500736642,
+        "collision_zone": {
+          "samples_checked": 2011,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.01,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0009623284853616711,
+        "certified_joint_tube_rad": 0.0015827309587623656,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0006702139357577241,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0003253677361877468,
+        "tip_deviation_m": 0.0006066607294396209,
+        "collision_zone": {
+          "samples_checked": 2011,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.02,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.001973577988438208,
+        "certified_joint_tube_rad": 0.0025939804618389014,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0013918439459663923,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0006889989692153732,
+        "tip_deviation_m": 0.0012848437974895194,
+        "collision_zone": {
+          "samples_checked": 2011,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.04,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.003996620068696035,
+        "certified_joint_tube_rad": 0.0046170225420967305,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0028630827314488974,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0014170326766010412,
+        "tip_deviation_m": 0.0026432149296595343,
+        "collision_zone": {
+          "samples_checked": 2011,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.08,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.008043069651472723,
+        "certified_joint_tube_rad": 0.008663472124873419,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0058066958312368785,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.00287280877695429,
+        "tip_deviation_m": 0.0053616974826667515,
+        "collision_zone": {
+          "samples_checked": 1314,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "reason": "collision_or_zone"
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.12,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.012246914227603304,
+        "certified_joint_tube_rad": 0.012867316701003998,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.008925862621566104,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0043871665189129825,
+        "tip_deviation_m": 0.008212121166032127,
+        "collision_zone": {
+          "samples_checked": 1267,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2011,
+        "reason": "collision_or_zone"
+      }
+    }
+  ],
+  "left_clearance": [
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.005,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0003156765495145497,
+        "certified_joint_tube_rad": 0.0009327838558637039,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.00021477946571936066,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.00013039262995525529,
+        "tip_deviation_m": 0.00018879176651173804,
+        "collision_zone": {
+          "samples_checked": 2029,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.01,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0007407795851728634,
+        "certified_joint_tube_rad": 0.0013578868915220194,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0004863584225235362,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.00029512633103901694,
+        "tip_deviation_m": 0.0004455251506063097,
+        "collision_zone": {
+          "samples_checked": 2029,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.02,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0017073498980490975,
+        "certified_joint_tube_rad": 0.002324457204398252,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0011294260213852159,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0006385646649353491,
+        "tip_deviation_m": 0.0010057930902163858,
+        "collision_zone": {
+          "samples_checked": 2029,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.04,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0037100206941691844,
+        "certified_joint_tube_rad": 0.004327127597613169,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0025325375708259087,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0013342621511927375,
+        "tip_deviation_m": 0.0021569304797906443,
+        "collision_zone": {
+          "samples_checked": 2029,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.08,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.007683901191252155,
+        "certified_joint_tube_rad": 0.008301007915890661,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.005534264090444226,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.002690258470845546,
+        "tip_deviation_m": 0.004502441860473631,
+        "collision_zone": {
+          "samples_checked": 869,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "reason": "collision_or_zone"
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.12,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.011919879926406803,
+        "certified_joint_tube_rad": 0.01253698665104531,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.008766707479642664,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.004219611435260309,
+        "tip_deviation_m": 0.007238701617994615,
+        "collision_zone": {
+          "samples_checked": 850,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2029,
+        "reason": "collision_or_zone"
+      }
+    }
+  ],
+  "left_sweep": [
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.005,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0002749213036438368,
+        "certified_joint_tube_rad": 0.0008973476617657997,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.00019602294934745884,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 9.688451905238273e-05,
+        "tip_deviation_m": 0.0001814789320591132,
+        "collision_zone": {
+          "samples_checked": 2023,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.01,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.0005704809465820196,
+        "certified_joint_tube_rad": 0.0011929073047039847,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.00040676133938465087,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.00020103619035123264,
+        "tip_deviation_m": 0.0003765855845536357,
+        "collision_zone": {
+          "samples_checked": 2023,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.02,
+        "simplify": 1e-12
+      },
+      "valid": true,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.001166875628576969,
+        "certified_joint_tube_rad": 0.0017893019866989349,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0008319995547950293,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0004111797003357064,
+        "tip_deviation_m": 0.0007702942331107766,
+        "collision_zone": {
+          "samples_checked": 2023,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "valid": true
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.04,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.002613155339745452,
+        "certified_joint_tube_rad": 0.003235581697867421,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0018632183465258634,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0009206833292937435,
+        "tip_deviation_m": 0.0017251256819582998,
+        "collision_zone": {
+          "samples_checked": 1354,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "reason": "collision_or_zone"
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.08,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.006190098594813845,
+        "certified_joint_tube_rad": 0.006812524952935811,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.0043647507875517605,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0021495958866482043,
+        "tip_deviation_m": 0.00403430555600894,
+        "collision_zone": {
+          "samples_checked": 1305,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "reason": "collision_or_zone"
+      }
+    },
+    {
+      "params": {
+        "kind": "overlap_c3",
+        "fraction": 0.12,
+        "simplify": 1e-12
+      },
+      "valid": false,
+      "proof": {
+        "max_joint_l2_deviation_rad": 0.01037454753940801,
+        "certified_joint_tube_rad": 0.010996973897529974,
+        "joint_tube_limit_rad": 0.017453292519943295,
+        "max_joint_component_deviation_rad": 0.007443097432909433,
+        "original_progress_backtrack": 0.0,
+        "wrist_deviation_m": 0.0036217970457367355,
+        "tip_deviation_m": 0.006831623169689522,
+        "collision_zone": {
+          "samples_checked": 1261,
+          "details": {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "left_drumstick"
+              ]
+            ],
+            "reason": "collision"
+          },
+          "max_parameter_step": 0.000500000000000056
+        },
+        "workspace_limit_m": 0.01,
+        "geometry_samples": 2023,
+        "reason": "collision_or_zone"
+      }
+    }
+  ]
+}

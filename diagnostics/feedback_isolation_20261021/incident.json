@@ -1,0 +1,34 @@
+[
+  {
+    "run": "planner_runs/20261021T163337Z-baseline-44f5f6/calculate-d8cb37d0",
+    "error": "Missing fresh feedback: {'left': [], 'right': [7, 8]}",
+    "final_request_monotonic": 412505.427524975,
+    "last_read_monotonic": 412505.812884475,
+    "last_read_gap_s": 0.3814595619915053,
+    "batch_count": 1250,
+    "maximum_batch_start_gap_s": 0.45352420798735693,
+    "final_log_lines": [
+      "[Single arc +  54.7s]   128 controls: refining 1.000747 limit ratio",
+      "[Single arc +  56.1s]   128 controls: refining 1.000167 limit ratio",
+      "[Single arc +  57.6s]   128 controls: refining 1.000081 limit ratio",
+      "[Single arc +  58.7s] ADAPTIVE 128 controls: 4.105809s; best 4.105809s; 5.8s computation",
+      "[Single arc +  62.5s]   192 controls: refining 1.000084 limit ratio"
+    ]
+  },
+  {
+    "run": "planner_runs/20261021T163651Z-baseline-c04d74/calculate-6f024196",
+    "error": "Missing fresh feedback: {'left': [4, 5, 6, 7, 8], 'right': [4, 5, 6, 7, 8]}",
+    "final_request_monotonic": 412707.045505494,
+    "last_read_monotonic": 412707.245468508,
+    "last_read_gap_s": 0.19876111997291446,
+    "batch_count": 1457,
+    "maximum_batch_start_gap_s": 0.2292271750047803,
+    "final_log_lines": [
+      "[Single arc +  58.0s] ADAPTIVE 64 controls: 3.956747s; best 3.956747s; 3.1s computation",
+      "[Single arc +  61.8s]   96 controls: refining 1.000191 limit ratio",
+      "[Single arc +  64.7s]   96 controls: refining 1.000109 limit ratio",
+      "[Single arc +  65.8s]   96 controls: refining 1.000101 limit ratio",
+      "[Single arc +  66.6s] ADAPTIVE 96 controls: 3.949398s; best 3.949398s; 8.6s computation"
+    ]
+  }
+]

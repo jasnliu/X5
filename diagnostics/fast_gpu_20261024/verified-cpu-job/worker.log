@@ -1,0 +1,16 @@
+[checkpoints workspace_curve] LEG 1/3: saved rest → destinationR1; budget 60s; frozen scene unchanged
+[GPU fast checkpoint_1 + 1.66s] FAST PATH: ranked 1/7 broad curves in 0.946s; geometry + clearance, final timed collision check still required
+[GPU fast checkpoint_1 + 1.68s] *** GPU UNAVAILABLE — FAST CPU TIMING FALLBACK *** AMD integrated GPU required; refusing llvmpipe
+[GPU fast checkpoint_1 + 1.97s] FAST CPU TIMING: 4.3160s movement; 0.303s calculation; 24 controls; no CPU reference / no result cache
+[GPU fast checkpoint_1 + 2.20s] READY: candidate 6, 4.316s movement; continuous limits + dense collision/zone verified; SIMULATION ONLY
+[checkpoints workspace_curve] LEG 2/3: destinationR1 → destinationR4; budget 60s; frozen scene unchanged
+[GPU fast checkpoint_2 + 0.84s] FAST PATH: ranked 1/7 broad curves in 0.836s; geometry + clearance, final timed collision check still required
+[GPU fast checkpoint_2 + 0.85s] *** GPU UNAVAILABLE — FAST CPU TIMING FALLBACK *** AMD integrated GPU required; refusing llvmpipe
+[GPU fast checkpoint_2 + 1.36s] FAST CPU TIMING: 3.6581s movement; 0.514s calculation; 24 controls; no CPU reference / no result cache
+[GPU fast checkpoint_2 + 1.61s] READY: candidate 4, 3.658s movement; continuous limits + dense collision/zone verified; SIMULATION ONLY
+[checkpoints workspace_curve] LEG 3/3: destinationR4 → original saved rest (new return path); budget 60s; frozen scene unchanged
+[GPU fast return_to_start + 0.96s] FAST PATH: ranked 1/7 broad curves in 0.952s; geometry + clearance, final timed collision check still required
+[GPU fast return_to_start + 0.96s] *** GPU UNAVAILABLE — FAST CPU TIMING FALLBACK *** AMD integrated GPU required; refusing llvmpipe
+[GPU fast return_to_start + 1.62s] FAST CPU TIMING: 2.7941s movement; 0.665s calculation; 24 controls; no CPU reference / no result cache
+[GPU fast return_to_start + 1.81s] READY: candidate 7, 2.794s movement; continuous limits + dense collision/zone verified; SIMULATION ONLY
+[checkpoints] READY: 2 destinations; 9.974s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 2.794s return to original start; SIMULATION ONLY

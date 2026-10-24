@@ -1,0 +1,80 @@
+{
+  "reconstruction_wall_s": 0.14971886796411127,
+  "source": "/home/jason/Proyectos3/X5/planner_runs/20261022T203104Z-hardware-right-5e5d2b/calculate-f2ec86b8",
+  "software_only": true,
+  "motor_commands": 0,
+  "10mm": {
+    "world_padding": {
+      "additional_voxel_radius_m": 0.0,
+      "edge_sampling_allowance_m": 0.005,
+      "occupied_octree_cells_are_volumes": true,
+      "octree_resolution_m": 0.01,
+      "policy": "occupied_volume_v1",
+      "requested_clearance_m": 0.02,
+      "robot_padding_m": 0.025
+    },
+    "checks": [
+      {
+        "contacts": [
+          [
+            "gemini_native_depth",
+            "right_drumstick"
+          ]
+        ],
+        "reason": "collision",
+        "stick_center_world": [
+          0.181680483176179,
+          -0.19415188892829732,
+          -0.024199900068792246
+        ],
+        "valid": false
+      },
+      {
+        "reason": "valid",
+        "stick_center_world": [
+          0.37994374500915407,
+          -0.398744993719802,
+          0.5454060135051718
+        ],
+        "valid": true
+      }
+    ],
+    "point_count": 120527,
+    "self_filtered_voxels": 79,
+    "wall_s": 11.757760149019305
+  },
+  "5mm": {
+    "world_padding": {
+      "additional_voxel_radius_m": 0.0,
+      "edge_sampling_allowance_m": 0.005,
+      "occupied_octree_cells_are_volumes": true,
+      "octree_resolution_m": 0.005,
+      "policy": "occupied_volume_v1",
+      "requested_clearance_m": 0.02,
+      "robot_padding_m": 0.025
+    },
+    "checks": [
+      {
+        "reason": "valid",
+        "stick_center_world": [
+          0.181680483176179,
+          -0.19415188892829732,
+          -0.024199900068792246
+        ],
+        "valid": true
+      },
+      {
+        "reason": "valid",
+        "stick_center_world": [
+          0.37994374500915407,
+          -0.398744993719802,
+          0.5454060135051718
+        ],
+        "valid": true
+      }
+    ],
+    "point_count": 329428,
+    "self_filtered_voxels": 222,
+    "wall_s": 0.8698947190423496
+  }
+}

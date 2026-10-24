@@ -1,0 +1,8 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "common.glsl"
+void main(){uint l=gl_LocalInvocationID.x;double slope=0.0;for(uint j=l;j<p.n;j+=64)slope+=a[G()+j]*a[D()+j];slope=sum64(slope);
+ if(l==0){uint best=0;double f=a[F()];for(uint c=1;c<K;c++)if(a[F()+c]<f && a[F()+c]<=a[F()]+0.0001*step(c)*slope){best=c;f=a[F()+c];}
+ a[3]=double(best);a[5]=f;a[7]=best==0?a[7]+1.0:0.0;a[8]=a[V()+best];a[9]=step(best);}
+ syncbuf();uint best=uint(a[3]);for(uint j=l;j<p.n;j+=64){double x=candidate(best,j);a[OX()+j]=a[X()+j];a[OG()+j]=a[G()+j];a[X()+j]=x;}
+}

@@ -1,0 +1,50 @@
+{
+  "software_only": true,
+  "scope": "warm native process load and two endpoint checks; no trajectory speed claim",
+  "rows": {
+    "10mm": {
+      "seconds": [
+        0.7695241569890641,
+        0.7722969599999487,
+        0.7742726659635082
+      ],
+      "median_s": 0.7722969599999487,
+      "point_count": 120527,
+      "world_padding": {
+        "additional_voxel_radius_m": 0.0,
+        "edge_sampling_allowance_m": 0.005,
+        "occupied_octree_cells_are_volumes": true,
+        "octree_resolution_m": 0.01,
+        "policy": "occupied_volume_v1",
+        "requested_clearance_m": 0.02,
+        "robot_padding_m": 0.025
+      },
+      "valid": [
+        false,
+        true
+      ]
+    },
+    "5mm": {
+      "seconds": [
+        0.8708894769661129,
+        0.8741931410040706,
+        0.8741635030019097
+      ],
+      "median_s": 0.8741635030019097,
+      "point_count": 329428,
+      "world_padding": {
+        "additional_voxel_radius_m": 0.0,
+        "edge_sampling_allowance_m": 0.005,
+        "occupied_octree_cells_are_volumes": true,
+        "octree_resolution_m": 0.005,
+        "policy": "occupied_volume_v1",
+        "requested_clearance_m": 0.02,
+        "robot_padding_m": 0.025
+      },
+      "valid": [
+        true,
+        true
+      ]
+    }
+  }
+}

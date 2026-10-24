@@ -1,0 +1,433 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "leg": "checkpoint_1",
+      "identical_to_saved_geometry": true,
+      "metadata": {
+        "method": "vulkan_al_lbfgs",
+        "label": "GPU Vulkan FP64 timing",
+        "fingerprint": "7835de8ce19513062bfddd6cc572fdcede7ab58c936c12b4e3e09c0069348733",
+        "source_path_sha256": "62eb9440bbd661f25bb1bfe495ec7c39fb34f924a7578a4d0a794a74f90d9273",
+        "original_duration_s": 8.000160992996502,
+        "duration_s": 4.24661587780493,
+        "cached": false,
+        "elapsed_s": 6.452889161999337,
+        "geometry_preserved": true,
+        "limits": [
+          0.6,
+          1.2,
+          6.0
+        ],
+        "exact_extrema_peaks": [
+          [
+            0.5238091923802227,
+            0.2637507906661039,
+            0.06824883523722795,
+            0.599311084611335,
+            0.15138778058553637,
+            0.07526941733935764,
+            0.4125727061533806
+          ],
+          [
+            1.1972587413450018,
+            0.5684701598489795,
+            0.2307907218694789,
+            1.1974032848273317,
+            0.28832096567035326,
+            0.12240025769591106,
+            0.9024871491969266
+          ],
+          [
+            5.982035940089874,
+            3.138098993417944,
+            0.9807451963417255,
+            5.981068509229319,
+            2.202460253234285,
+            0.6144756451049039,
+            5.842194597512833
+          ]
+        ],
+        "verification": {
+          "geometry": {
+            "type": "original spline coefficients bit-identical; positive monotone time density",
+            "max_error_rad": 0.0
+          },
+          "dense_samples": 2160,
+          "dense_peaks": [
+            [
+              0.5238091144906123,
+              0.2637504268163055,
+              0.06824872699547914,
+              0.5993106426620112,
+              0.15138755711382307,
+              0.07526936873861761,
+              0.4125726551111012
+            ],
+            [
+              1.197258740707372,
+              0.5684672512869658,
+              0.23079071140162513,
+              1.1974021845368914,
+              0.2883201376359535,
+              0.1224000617629524,
+              0.902486848192212
+            ],
+            [
+              5.9820354036681005,
+              3.138098993417944,
+              0.980738918183648,
+              5.9810552539300685,
+              2.202460253234285,
+              0.6144756451049039,
+              5.842194597512833
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 2160,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "math_cache": {
+          "cached": false,
+          "key": "2cb93993614736683d0c37e12d5e56d87f5c6ec54b6bde3d6f4a1033ac88c808"
+        },
+        "requested_backend": "vulkan",
+        "actual_backend": "vulkan",
+        "gpu_used": true,
+        "gpu_device": {
+          "name": "AMD Radeon 780M Graphics (RADV PHOENIX)",
+          "identity": "AMD Radeon 780M Graphics (RADV PHOENIX)/4098/5567/104865800/4211006",
+          "precision": "float64"
+        },
+        "implementation_sha256": "f25d7662513c5e8ae555eb0b3e2c320dad2f730e1808e09902067b906d25b961",
+        "cpu_reference_elapsed_s": 1.1286708830157295,
+        "cpu_reference_cached": true,
+        "cpu_reference_duration_s": 4.205074117720795,
+        "duration_ratio": 1.0098789602563893,
+        "max_duration_ratio": 1.01,
+        "gpu_phase_elapsed_s": 4.0127725140191615,
+        "verification_elapsed_s": 1.2580884560011327,
+        "gpu_quality": {
+          "duration_s": 4.24661587780493,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.6521262138802086,
+          "interior_speed_p10_ratio": 0.7587381546074047,
+          "interior_speed_cv": 0.11096762964764499,
+          "peak_joint_speed_rad_s": 0.5993110198285491,
+          "cruise_joint_norm_rad_s": 0.8297735247539454,
+          "path_length_rad": 2.625098928142047,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        },
+        "reference_quality": {
+          "duration_s": 4.205074117720795,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.657234396312718,
+          "interior_speed_p10_ratio": 0.7739696069529166,
+          "interior_speed_cv": 0.10756842008179432,
+          "peak_joint_speed_rad_s": 0.5993866591677349,
+          "cruise_joint_norm_rad_s": 0.8330403926669508,
+          "path_length_rad": 2.625098929144499,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        }
+      }
+    },
+    {
+      "leg": "checkpoint_2",
+      "identical_to_saved_geometry": true,
+      "metadata": {
+        "method": "vulkan_al_lbfgs",
+        "label": "GPU Vulkan FP64 timing",
+        "fingerprint": "7835de8ce19513062bfddd6cc572fdcede7ab58c936c12b4e3e09c0069348733",
+        "source_path_sha256": "037e80335083b90208e3ad4b4e818bcae78bdcaf12caa5bce63dfed9ae5d5a37",
+        "original_duration_s": 7.582198747224669,
+        "duration_s": 3.5057381540246135,
+        "cached": false,
+        "elapsed_s": 20.160147476010025,
+        "geometry_preserved": true,
+        "limits": [
+          0.6,
+          1.2,
+          6.0
+        ],
+        "exact_extrema_peaks": [
+          [
+            0.48044266115795525,
+            0.06699511122815584,
+            0.4172542577893437,
+            0.5979320440269292,
+            0.23464171789345903,
+            0.20433048549919475,
+            0.3639425830037173
+          ],
+          [
+            1.1309991809340842,
+            0.19043970573309274,
+            0.9863561478608008,
+            1.1919320958857802,
+            0.4327846666521199,
+            0.46201297734024854,
+            0.6778425506092
+          ],
+          [
+            5.9407376849660904,
+            2.114633322100836,
+            5.9386450105061845,
+            5.9820359400898715,
+            2.726320254404344,
+            2.3624449243955583,
+            5.941559110707
+          ]
+        ],
+        "verification": {
+          "geometry": {
+            "type": "original spline coefficients bit-identical; positive monotone time density",
+            "max_error_rad": 0.0
+          },
+          "dense_samples": 1853,
+          "dense_peaks": [
+            [
+              0.48044263634610257,
+              0.06699509039804134,
+              0.41725365266814146,
+              0.5979307187833276,
+              0.23464094814202116,
+              0.2043301550877319,
+              0.3639422305506802
+            ],
+            [
+              1.1309782530243957,
+              0.19043957382322177,
+              0.9863427427361808,
+              1.1919318335544136,
+              0.43277936892422375,
+              0.4620022316829008,
+              0.6778418868442507
+            ],
+            [
+              5.940399334943242,
+              2.1146216755140634,
+              5.938635544155023,
+              5.9820359400898475,
+              2.7263202544043352,
+              2.362210489130912,
+              5.9408312350995205
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 1853,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "math_cache": {
+          "cached": false,
+          "key": "bab5c1252c01a7077206681e9cbe0051abc0362d01a00fdbed97f5be78f80fea"
+        },
+        "requested_backend": "vulkan",
+        "actual_backend": "vulkan",
+        "gpu_used": true,
+        "gpu_device": {
+          "name": "AMD Radeon 780M Graphics (RADV PHOENIX)",
+          "identity": "AMD Radeon 780M Graphics (RADV PHOENIX)/4098/5567/104865800/4211006",
+          "precision": "float64"
+        },
+        "implementation_sha256": "f25d7662513c5e8ae555eb0b3e2c320dad2f730e1808e09902067b906d25b961",
+        "cpu_reference_elapsed_s": 1.1328755990834907,
+        "cpu_reference_cached": true,
+        "cpu_reference_duration_s": 3.493139999547328,
+        "duration_ratio": 1.0036065415296604,
+        "max_duration_ratio": 1.01,
+        "gpu_phase_elapsed_s": 17.322849060990848,
+        "verification_elapsed_s": 1.6583930850028992,
+        "gpu_quality": {
+          "duration_s": 3.5057381540246135,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.6252171544305629,
+          "interior_speed_p10_ratio": 0.697325657361055,
+          "interior_speed_cv": 0.1305084101576616,
+          "peak_joint_speed_rad_s": 0.5979319979466221,
+          "cruise_joint_norm_rad_s": 0.8586632390391711,
+          "path_length_rad": 2.178036361583557,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        },
+        "reference_quality": {
+          "duration_s": 3.493139999547328,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.6266832170602746,
+          "interior_speed_p10_ratio": 0.6987978259963196,
+          "interior_speed_cv": 0.12950416284448052,
+          "peak_joint_speed_rad_s": 0.5991521394716406,
+          "cruise_joint_norm_rad_s": 0.860485569783472,
+          "path_length_rad": 2.178036361694289,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        }
+      }
+    },
+    {
+      "leg": "return_to_start",
+      "identical_to_saved_geometry": true,
+      "metadata": {
+        "method": "vulkan_al_lbfgs",
+        "label": "GPU Vulkan FP64 timing",
+        "fingerprint": "7835de8ce19513062bfddd6cc572fdcede7ab58c936c12b4e3e09c0069348733",
+        "source_path_sha256": "6bbc4d82ae5603c3e513d16576ec731be547d059469dbeb14ec53b81f70c3b58",
+        "original_duration_s": 6.260102574343961,
+        "duration_s": 2.727918404368059,
+        "cached": false,
+        "elapsed_s": 20.422670185915194,
+        "geometry_preserved": true,
+        "limits": [
+          0.6,
+          1.2,
+          6.0
+        ],
+        "exact_extrema_peaks": [
+          [
+            0.1823928524699737,
+            0.19367021670205406,
+            0.38511414214601414,
+            0.3381251061913763,
+            0.19685597845819355,
+            0.20421213211930886,
+            0.5989961910742586
+          ],
+          [
+            0.6296012255373206,
+            0.844104987063997,
+            1.1959761772006063,
+            1.0635752584787481,
+            0.5765384795975286,
+            0.4627385097426006,
+            1.1960295846105748
+          ],
+          [
+            5.676905907154725,
+            5.969843367861597,
+            5.982035940089875,
+            5.971987149123662,
+            2.8988460594364645,
+            2.557498362526599,
+            5.971811899680998
+          ]
+        ],
+        "verification": {
+          "geometry": {
+            "type": "original spline coefficients bit-identical; positive monotone time density",
+            "max_error_rad": 0.0
+          },
+          "dense_samples": 1416,
+          "dense_peaks": [
+            [
+              0.18239277288689915,
+              0.19366943276402032,
+              0.38511351246827547,
+              0.33812377316683295,
+              0.19685497843949792,
+              0.20421184124335984,
+              0.5989960132051814
+            ],
+            [
+              0.6295684881106627,
+              0.844104971816039,
+              1.195953097508754,
+              1.063574525435303,
+              0.5765295841958591,
+              0.46271501435466156,
+              1.1960233230632893
+            ],
+            [
+              5.67684840462418,
+              5.969605258234181,
+              5.981297082648392,
+              5.971767449562687,
+              2.89884605943642,
+              2.557498362526577,
+              5.971666068085811
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 1416,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "math_cache": {
+          "cached": false,
+          "key": "d6d9c1d6479166851c6b0d8c8ba22218778c91a80a04ade5a12181f8fe5766d7"
+        },
+        "requested_backend": "vulkan",
+        "actual_backend": "vulkan",
+        "gpu_used": true,
+        "gpu_device": {
+          "name": "AMD Radeon 780M Graphics (RADV PHOENIX)",
+          "identity": "AMD Radeon 780M Graphics (RADV PHOENIX)/4098/5567/104865800/4211006",
+          "precision": "float64"
+        },
+        "implementation_sha256": "f25d7662513c5e8ae555eb0b3e2c320dad2f730e1808e09902067b906d25b961",
+        "cpu_reference_elapsed_s": 1.0627506440505385,
+        "cpu_reference_cached": true,
+        "cpu_reference_duration_s": 2.7027626229525863,
+        "duration_ratio": 1.0093074327733567,
+        "max_duration_ratio": 1.01,
+        "gpu_phase_elapsed_s": 18.010143015999347,
+        "verification_elapsed_s": 1.3025846970267594,
+        "gpu_quality": {
+          "duration_s": 2.727918404368059,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.41674077221980904,
+          "interior_speed_p10_ratio": 0.47841399892642694,
+          "interior_speed_cv": 0.24898741708305172,
+          "peak_joint_speed_rad_s": 0.5989961591912356,
+          "cruise_joint_norm_rad_s": 0.7685612309953689,
+          "path_length_rad": 1.3535764143209608,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        },
+        "reference_quality": {
+          "duration_s": 2.7027626229525863,
+          "internal_stops": 0,
+          "deep_slowdowns": 0,
+          "stop_times_s": [],
+          "slowdown_times_s": [],
+          "interior_speed_min_ratio": 0.435624388561916,
+          "interior_speed_p10_ratio": 0.49827530887742777,
+          "interior_speed_cv": 0.23768622840752593,
+          "peak_joint_speed_rad_s": 0.5991475169360853,
+          "cruise_joint_norm_rad_s": 0.7700719872871367,
+          "path_length_rad": 1.353576414515471,
+          "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+          "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+        }
+      }
+    }
+  ],
+  "parallel_timing_workers": 2,
+  "camera_access": false,
+  "motor_commands": 0,
+  "exact_return_to_start": true,
+  "preview_duration_s": 14.480272436197602
+}

@@ -10,17 +10,33 @@ import numpy as np
 from scipy.interpolate import BPoly, PPoly, make_interp_spline
 
 from .common import (ROOT, atomic_json, calibration, endpoint, read_state, digest,
-                     DEFAULT_CALIBRATION, DEFAULT_RECORDING)
-from .depth import check_metadata
+                     DEFAULT_CALIBRATION, DEFAULT_RECORDING, arm_side)
+from .depth import check_metadata, scene_voxel_size
 from .model import generate
 
 COLLISION_POLICY = 'observed_obstacles'
+WORLD_PADDING_POLICY = 'occupied_volume_v1'
 DEFAULT_CANDIDATES = 6
 MAX_CANDIDATES = 32
 # Perception-only exclusion of the thin stick at the MEASURED initial pose.
-# 20 mm depth/model allowance + 9 mm half-diagonal of a 10 mm input voxel.
+# Retained 29 mm perception allowance; refining the map does not change this mask.
 # Not obstacle padding, not a collision exemption, and never a swept-path mask.
 DRUMSTICK_SELF_FILTER_PADDING_M = .029
+
+
+def world_padding_metadata(req):
+    """Versioned margin accounting; occupied cells already enclose returns."""
+    policy=req.get('world_padding_policy','legacy_voxel_radius_v1')
+    if policy not in ('occupied_volume_v1','legacy_voxel_radius_v1'):
+        raise ValueError('Unknown world padding policy')
+    padding=float(req['scene']['obstacle_padding_m'])
+    if not np.isfinite(padding) or not .02<=padding<=.10:
+        raise ValueError('Invalid world clearance')
+    extra=.009 if policy=='legacy_voxel_radius_v1' else 0.
+    return dict(policy=policy,requested_clearance_m=padding,
+                edge_sampling_allowance_m=.005,additional_voxel_radius_m=extra,
+                robot_padding_m=padding+extra+.005,
+                occupied_octree_cells_are_volumes=True,octree_resolution_m=scene_voxel_size(req['scene']))
 
 
 def candidate_count(value):
@@ -57,7 +73,8 @@ def scene(path, cal_path=DEFAULT_CALIBRATION):
     check_metadata(data['camera'],calibration(cal_path))
     if not np.allclose(data['T_base_depth'],calibration(cal_path)['T_base_depth'],atol=1e-10):
         raise ValueError('Scene transform differs from calibration')
-    if data['voxel_size_m'] != .01 or data['obstacle_padding_m'] < .02:
+    scene_voxel_size(data)
+    if data['obstacle_padding_m'] < .02:
         raise ValueError('Unsupported/unsafe scene voxelization or buffer')
     for name, sha in data['files_sha256'].items():
         file=(path.parent/name).resolve()
@@ -75,20 +92,29 @@ def scene(path, cal_path=DEFAULT_CALIBRATION):
 
 
 def request(folder, start, world, cal_path=DEFAULT_CALIBRATION, occupied_only=False,
-            candidates=DEFAULT_CANDIDATES):
+            candidates=DEFAULT_CANDIDATES, *, moving_side='right', zone_path=None):
+    arm_side(moving_side)
     candidates=candidate_count(candidates)
     folder=Path(folder).resolve()
-    model=generate(folder/'model',cal_path)
+    model=(generate(folder/'model',cal_path) if moving_side=='right'
+           else generate(folder/'model',cal_path,moving_side=moving_side))
     from .right_zone import constraint
-    return dict(schema='x5-moveit-request-v1',execute=False,urdf=str(folder/'model/robot.urdf'),
-                srdf=str(folder/'model/robot.srdf'),start=start['right_rad'],left=start['left_rad'],
-                left_opening_m=start['left_gripper_opening_m'],goal=endpoint().tolist(),scene=world,
+    req=dict(schema='x5-moveit-request-v1',execute=False,urdf=str(folder/'model/robot.urdf'),
+                srdf=str(folder/'model/robot.srdf'),start=start[moving_side+'_rad'],left=start['left_rad'],
+                left_opening_m=start['left_gripper_opening_m'],goal=endpoint(side=moving_side).tolist(),scene=world,
                 collision_policy=COLLISION_POLICY,
+                world_padding_policy=WORLD_PADDING_POLICY,
                 drumstick_self_filter_padding_m=DRUMSTICK_SELF_FILTER_PADDING_M,
                 filter_drumstick_depth_shadow=True,
-                right_zone=constraint(),
                 occupied_only_preview=bool(occupied_only),planning_seconds=8.,seed=19,
-                candidate_count=candidates),model
+                candidate_count=candidates)
+    if moving_side=='right':
+        req['right_zone']=constraint() if zone_path is None else constraint(zone_path)
+    else:
+        req.update(moving_side='left',right=start['right_rad'])
+        req['left_zone']=(None if zone_path=='none' else
+                          constraint(zone_path or ROOT/'left_zones/zone1.json',side='left'))
+    return req,model
 
 
 def backend(req, folder, name='backend'):

@@ -1,0 +1,486 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 2,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": 99384.85663000599,
+  "last_frame_compute_s": 0.07506442401790991,
+  "maximum_draw_s": 0.06462530902354047,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "depth points",
+    "mesh + points",
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 3,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 691,
+    "maximum_frame_s": 0.06461592199048027,
+    "median_frame_s": 0.0017739320173859596,
+    "surface_geometry_uploads": 2,
+    "surface_color_uploads": 4,
+    "surface_triangles": 20184,
+    "render_errors": []
+  },
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/clearance-7b0ca933/plan.json",
+  "plan_warning": "DETECTED-OBSTACLE PLAN \u2014 full arm + stick checked against the saved scene; unseen space unverified",
+  "animation_draws": 688,
+  "animation_time_s": 0.0,
+  "animation_completed_cycles": 0,
+  "animation_play_clicks": 14,
+  "animation_seeks": 18,
+  "animation_phases_seen": [
+    "BLOCKED",
+    "HOLD (2 seconds)",
+    "hold_complete",
+    "outward",
+    "return"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 12074,
+    "triangles": 20184,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 11816,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 827092,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "experiment": true,
+  "saved_state_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "context": {
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261021T032100Z-left-experiment-start/measured_start.json",
+    "state_sha256": "67507e152f39688c78e824e1e958f3295a28d12dc73b0027c59668e63b1027ca",
+    "scene": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/capture_675b7c66/camera/scene.json",
+    "scene_sha256": "3f1ab1bd4ced6dfd2e9b5898c6d92644f88b1d9625cb11100de7df0d41e3bacd",
+    "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "saved_not_live": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "pool_root": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/capture_675b7c66/shared_pools",
+    "moving_side": "left",
+    "goal_recording": "/home/jason/Proyectos3/X5/left_recordings/record1.json",
+    "left_zone": {
+      "schema": "x5-left-zone-constraint-v1",
+      "enabled": true,
+      "zone_file": "/home/jason/Proyectos3/X5/left_zones/zone1.json",
+      "zone_sha256": "81e17d8b857f3b8a0df3a4f487dc4c8c56c0fdb5396268017fea3245abdbf540",
+      "reference_urdf": "/home/jason/Proyectos3/X5/model/openarmx.urdf",
+      "reference_urdf_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+      "frame": "world",
+      "tcp": "openarmx_left_hand_tcp",
+      "buffer_m": 0.005,
+      "numerical_tolerance_m": 1e-09,
+      "point_only": true,
+      "stick_constrained": false,
+      "kinematics": "original URDF, saved joint coordinates; identical to safe_zone.geometry.Model",
+      "membership": "recomputed convex hull; signed plane distance <= buffer_m + 1e-9",
+      "point_count": 1197,
+      "plane_count": 596,
+      "right_arm_constrained": false,
+      "constraint_sha256": "af73ab423d1a3c98a23cd0db99ed75ddd26921a9b1ebfb0f11fd3362c331da49"
+    },
+    "zone_path": "/home/jason/Proyectos3/X5/left_zones/zone1.json"
+  },
+  "events": [
+    {
+      "event": "cache_all",
+      "methods": [
+        "progress",
+        "sweep",
+        "single_arc",
+        "clearance"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "installed",
+      "method": "progress",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/progress-02f333c6/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/sweep-b01fc919/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/single_arc-1992aba5/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/clearance-1476635a/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": "sweep",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "settings_changed"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "cancel",
+      "kind": "plan"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/clearance-6ab174d1/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/progress-6778fe44/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/sweep-b9d90f6a/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/single_arc-72eb4151/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "budget_changed"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/clearance-ea59bb04/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/progress-820d432a/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/sweep-5f1d7405/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/single_arc-d58ead63/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/clearance-a9322857/plan.json"
+    },
+    {
+      "event": "recapture"
+    },
+    {
+      "event": "worker_stopped",
+      "kind": "capture",
+      "method": null,
+      "log": "planner_runs/timing_winner_left_20261021/capture_566c198b/job/worker.log"
+    },
+    {
+      "event": "recapture"
+    },
+    {
+      "event": "scene_installed",
+      "generation": 1
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "scene_cache_restarted"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "clearance",
+        "progress",
+        "sweep",
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/clearance-7b0ca933/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/progress-ee67a5af/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/sweep-65fee1b1/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/timing_winner_left_20261021/plans/single_arc-d252fddb/plan.json"
+    }
+  ],
+  "generations": 18,
+  "scene_generations": 1,
+  "displayed_method": "clearance",
+  "automatic_precompute": true,
+  "queued_methods": [],
+  "calculating_method": null,
+  "method_states": {
+    "progress": "ready",
+    "sweep": "ready",
+    "single_arc": "ready",
+    "clearance": "ready"
+  },
+  "cached_results": {
+    "clearance": "planner_runs/timing_winner_left_20261021/plans/clearance-7b0ca933/plan.json",
+    "progress": "planner_runs/timing_winner_left_20261021/plans/progress-ee67a5af/plan.json",
+    "sweep": "planner_runs/timing_winner_left_20261021/plans/sweep-65fee1b1/plan.json",
+    "single_arc": "planner_runs/timing_winner_left_20261021/plans/single_arc-d252fddb/plan.json"
+  },
+  "passed": true,
+  "feature_checks": [
+    {
+      "method": "progress",
+      "played_entire_cycle": true,
+      "duration_s": 20.102184826056945,
+      "selected": 17
+    },
+    {
+      "method": "sweep",
+      "played_entire_cycle": true,
+      "duration_s": 18.043974179943213,
+      "selected": 23
+    },
+    {
+      "method": "single_arc",
+      "played_entire_cycle": true,
+      "duration_s": 12.347783719619049,
+      "selected": 2
+    },
+    {
+      "method": "clearance",
+      "played_entire_cycle": true,
+      "duration_s": 20.102184826056945,
+      "selected": 17
+    },
+    {
+      "play_pause_seek_speed_loop_layers_color_navigation_save": true,
+      "mesh_uploads": 1
+    },
+    {
+      "settings_accept_cancel_presets": true,
+      "cancel_resume": true,
+      "budget_invalidation": true,
+      "generate_reranks_shared_pool": true
+    },
+    {
+      "offline_capture_fixture_and_requeue": true,
+      "capture_failure_recovery": true,
+      "actual_camera_opened": false
+    }
+  ]
+}

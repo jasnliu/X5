@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "software_only": true,
+  "physical_can_opened": false,
+  "physical_camera_opened": false,
+  "physical_motor_commands": 0,
+  "elapsed_s": 105.16394927899819,
+  "moving_side": "left",
+  "source_state": "/home/jason/Proyectos3/X5/planner_runs/20261021T032100Z-left-experiment-start/measured_start.json",
+  "source_scene": "/home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/camera/scene.json",
+  "sample_batches": 2005,
+  "duration_outward_s": 2.8342045646868628,
+  "maximum_batch_s": 0.009052069974131882,
+  "maximum_batch_start_gap_s": 0.05049935699207708,
+  "collision_zone": {
+    "samples": 1419,
+    "all_valid": true,
+    "collision_margin_policy": "baseline_request",
+    "obstacle_padding_m": 0.02,
+    "minimum_self_clearance_m": 0.0,
+    "world_padding": {
+      "policy": "occupied_volume_v1",
+      "requested_clearance_m": 0.02,
+      "edge_sampling_allowance_m": 0.005,
+      "additional_voxel_radius_m": 0.0,
+      "robot_padding_m": 0.025,
+      "occupied_octree_cells_are_volumes": true,
+      "octree_resolution_m": 0.01
+    }
+  },
+  "recovery_proof": {
+    "samples": 3090,
+    "all_valid": true,
+    "collision_margin_policy": "baseline_request",
+    "obstacle_padding_m": 0.02,
+    "minimum_self_clearance_m": 0.0,
+    "world_padding": {
+      "policy": "occupied_volume_v1",
+      "requested_clearance_m": 0.02,
+      "edge_sampling_allowance_m": 0.005,
+      "additional_voxel_radius_m": 0.0,
+      "robot_padding_m": 0.025,
+      "occupied_octree_cells_are_volumes": true,
+      "octree_resolution_m": 0.01
+    }
+  },
+  "plan": "/home/jason/Proyectos3/X5/planner_runs/singlearc_arms_20261021/left/calculation/plan/result/plan.json",
+  "process_isolation": true,
+  "hardware_eligibility_revoked": true
+}

@@ -1,10 +1,12 @@
 # Gemini / MoveIt drum trajectory planner
 
-**Default camera and preview commands never actuate motors. `live` automatically
-queries current joints and captures a real depth planning scene. Only explicitly
-armed `live --execute --commissioning PATH`, followed by a typed confirmation,
-can command the right arm. The left remains query-only. Physical commissioning
-is NOT complete; the execution adapter has only been tested offline.**
+**Default camera and preview commands never actuate motors. `--hardware --right`
+and `--hardware --left` calculate from measured joints and a frozen
+camera scene, then move only the selected arm after an explicit Start click.
+The opposite arm stays relaxed/query-only. `singlearc` / `baseline` are compatibility aliases; all use Workspace curve.
+The older `live --execute --commissioning PATH` right-arm interface remains
+separate. New selected-arm integration has been verified with simulated motors,
+not physical playback.**
 It does not change `start_beat.sh`, recordings, calibration captures, shared URDF,
 encoder conversion, centering or existing playback programs.
 
@@ -16,6 +18,39 @@ verified empty. Joint limits, self-collision, detected-obstacle collision checks
 clearance buffers and existing execution/fault handling remain in place.
 
 ## Commands
+
+All modes now default to the held-out validated **2026-10-24** calibration:
+`calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json`.
+This includes both arms, experiments, hardware, sparse hardware, and camera views.
+Restart existing windows to load it. Previously saved scenes/plans remain bound to
+their original calibration: supply their original `--calibration PATH` for archived
+replays rather than applying the new transform to old camera data. New acquisitions
+use the new transform and its matching calibration-local robot geometry together.
+See `CAMERA_CALIBRATION.md` for the saved-data checks and their limitations.
+
+Experiment GUIs start with **no destination selected and no trajectory calculation**.
+Choose from `destinations/right` or `destinations/left` in the dropdown; selecting
+or changing the destination calculates all five methods against the same frozen
+scene/start. Hardware mode has its own destination/checkpoint selectors and starts
+calculation only when **Calculate trajectory** is clicked.
+
+The separate software `experiment --right` / `experiment --left` modes now
+automatically apply **GPU-native Vulkan FP64 timing** after geometric path selection,
+with a hard <=1% movement-duration gate against an exact-input CPU reference.
+An unseen curve still needs its original CPU reference solve once; logs separate
+that qualification from GPU calculation. Unavailable GPU support produces an
+explicitly labelled CPU fallback. All five experiment path choices remain, as does
+the approved left **v2 bounded C3 corner geometry** selection. The old v1/v2 CPU
+code is preserved; v2 rechecks the changed path without reducing collision
+margins. `./plan_drums.sh --hardware [--right|--left]` now uses **Workspace curve** with
+the original CPU arm-aware timing policy (not the experiment GPU optimizer).
+Choose saved destinations and optionally up to
+three checkpoints in its three-window UI. Calculate captures the measured start
+and camera scene; Start alone authorizes playback. Multi-checkpoint normal returns
+are newly planned from the final checkpoint directly to the original start, not
+through previous checkpoints. Hold and checked prefix-recovery/relax remain.
+`live` and recording playback are unchanged. See
+`DRUM_PLANNER_EXPERIMENTS.md` and `drum_planner/timing/README.md`.
 
 Run from X5, or use the launcher's absolute path:
 
@@ -362,7 +397,7 @@ orientation and fits the observed scene. Updating data does not reset your view.
 - **Freeze / Resume (Space)** freezes both displayed views for inspection;
   camera acquisition, frame counters and stale-frame checks keep running.
 - **Raw depth points** shows valid returns from the displayed single frame.
-- **Obstacle voxels (10 mm)** shows the same nearest temporally confirmed depth
+- **Obstacle voxels (5 mm)** shows the same nearest temporally confirmed depth
   (three of five frames within 20 mm) and voxel centers saved for the planner, **before robot self-filtering and
   collision padding**. These are occupied centers, not a buffered safety verdict.
 - **Color** selects camera depth or calibrated base-frame height for the 3D
@@ -574,7 +609,7 @@ fallback exists, and no code in this package can presently hold or relax motors.
 
 ### Custom tool geometry: what is known and what is provisional
 
-The two STL files are loaded in **millimetres**, with 0.001 scaling. Their upper
+The right tool's two STL files are loaded in **millimetres**, with 0.001 scaling. Their upper
 semicircle edges numerically match an inner radius of **7.4 mm** and outer radius
 12.4 mm. The assembly aligns the bore centers at CAD coordinates
 `(-14.75, -23.35)` and `(+14.75, -23.35)` mm so the halves form one continuous
@@ -595,14 +630,24 @@ the actual shared mounting face before motion. It is not claimed as an automatic
 physical registration. The static left arm's actual pose and stick geometry
 also need verification. These limitations remain explicit in every plan.
 
+The **left experiment** instead uses the perpendicular traditional-grip
+`gripper2left.stl` / `gripper2right.stl` pair and a **10.25-inch exposed stick**.
+Its 126.5 mm sleeve plus 260.35 mm projection gives a 386.85 mm collision
+cylinder, oriented along hand +Y rather than the right tool's +Z. The preview
+and native collision/trajectory metrics use each stick's actual URDF transform
+and length. This is an official but provisional mounting draft; see
+`DRUM_PLANNER_EXPERIMENTS.md` for the mounting assumptions. Right-only model
+generation and hardware control are unchanged.
+
 ## Camera obstacles and unseen space
 
 Real scenes contain **only Gemini-derived returns**, not manually drawn drum,
 cymbal or table primitives. Every temporally confirmed pixel is deprojected with the matching
 native-depth intrinsics and transformed using `T_base_depth`. Voxelization is
-10 mm; there is no point stride that simply skips thin objects. The world is a
-MoveIt OctoMap. Default robot/world padding is 20 mm plus 9 mm voxel uncertainty
-and 5 mm finite edge-check allowance. Buffer failure at the goal is a real
+5 mm for new captures/calculations; there is no point stride that simply skips
+thin objects. The world is a MoveIt OctoMap. Default robot/world padding is
+20 mm plus the unchanged 5 mm finite edge-check allowance. Occupied cell volume
+is counted once, not added again as a voxel-radius buffer. Buffer failure at the goal is a real
 rejection, not a reason to remove the cymbal or shrink the buffer automatically.
 
 Points inside the initial robot perception mask are removed (5 mm for arm
@@ -1148,21 +1193,29 @@ systemd-run --user --wait --pipe \
 This creates a separate user service instead of putting the tests in VS Code's
 application group. The actual cgroup memory limit was verified during testing.
 
-## Software-only multi-method experiment mode
+## Simulation-only fast workspace experiment mode
 
-Run `./plan_drums.sh experiment` with the robot disconnected; the camera is not
-needed at startup. It reuses the study's saved resting pose and frozen scene,
-with four retained endpoint-only gesture methods, terminal progress and the existing native
-GPU playback controls. All methods calculate/cache automatically,
-sequentially to bound memory. Ready methods remain playable while the
-rest calculate; Cancel stops the queue and Cache all resumes missing results.
-No CAN or motor access is available. See
-[DRUM_PLANNER_EXPERIMENTS.md](DRUM_PLANNER_EXPERIMENTS.md) for algorithms, gesture
-settings, limitations, memory isolation, offline commands and output files.
+Run `./plan_drums.sh experiment --right` or `./plan_drums.sh experiment --left`.
+Startup captures a new camera scene and both arm poses through read-only state
+queries, then closes the devices. The frozen-snapshot GUI starts unselected.
+Selecting destinations calculates one fresh workspace-curve pipeline with the
+current bounded sparse CPU timing (selected by measurement). No full
+CPU reference or persistent trajectory cache is used. The former five-method
+implementations remain available in source for historical comparisons.
+
+Both arms retain the same limits, tools, zones, dense collision checks, exact
+preview, optional checkpoints and independent multi-checkpoint return. A
+timing-solver fallback is explicitly labelled. Hardware modes are not
+changed. Details and measured cold-start results: `DRUM_PLANNER_EXPERIMENTS.md`.
+Normal startup requires the camera and encoder buses with already-disabled
+motors; it never changes motor modes. Acquisition failure does not fall back to
+old inputs. Use `--offline` (or an explicit `--state`/`--scene` pair) for a
+device-free saved-input study. `--capture-start` is now a redundant fresh-startup
+alias. Calculation/preview remain disconnected, with no motor control available.
 
 ## Baseline-only hardware interface
 
-`./plan_drums.sh baseline` opens three windows: disconnected planned preview,
+`./plan_drums.sh --hardware --right` (ride) or `--left` (snare) opens three windows: disconnected planned preview,
 live measured arm status, and an always-clickable five-button control panel.
 Startup captures a display scene and reads encoders, but **does not calculate**.
 Click **Calculate trajectory** to capture/plan from the current relaxed pose;
@@ -1185,3 +1238,40 @@ endpoint-only use of record3, custom-closed gripper and query-only left arm are
 unchanged. Faults never automatically relax. See
 [BASELINE_HARDWARE.md](BASELINE_HARDWARE.md) for the workflow, resource limits,
 error recovery, physical limitations and offline `--simulate PLAN` rehearsal.
+
+### Occupied-volume margin accounting (2026-10-21)
+
+New requests carry `world_padding_policy: occupied_volume_v1`. FCL checks full
+10 mm occupied OctoMap cells, which already enclose the depth returns. Robot
+padding is now the requested obstacle buffer plus the existing 5 mm edge
+allowance; it no longer includes a second 9 mm voxel-radius expansion. Neither
+voxel geometry, obstacle points, requested clearance, nor robot/stick dimensions
+are reduced. The bounded self-filter remains separate and unchanged.
+
+The native oracle and final checker report `world_padding`; Baseline preparation
+checks that metadata against the request and binds it into the execution proof.
+Pool/cache identities include this policy. Historical requests without a policy
+keep the old additional 9 mm so old saved plans retain their original meaning.
+Evidence and software-only verification: `diagnostics/start_collision_20261021/REPORT.md`.
+
+### Finer occupancy, unchanged clearance (2026-10-22)
+
+New captures retain the full **1280×800 native depth** and group confirmed
+returns into **5 mm occupied cells**, previously 10 mm. This is finer spatial
+representation, not a change to the camera FOV, depth accuracy, five-frame
+temporal fusion, 20 mm buffer or 5 mm edge allowance. Workspace fitting, timing,
+zones and robot/tool geometry are unchanged. Both native collision checkers
+use the scene's recorded `voxel_size_m`; cache/proof identities include it.
+
+New experiments (both arms) and simulated-hardware recalculations derive a
+traceable `scene_5mm/` from the saved, hash-verified full-resolution `depth_m.bin`,
+not by subdividing occupied 10 mm cubes. Source captures remain untouched. Raw
+frames, fused/free-depth images and calibration are copied unchanged. The preview
+mesh is therefore unchanged. Reopening an archived plan still uses its original
+10 mm scene and margins; only a new calculation uses the new map.
+
+The finer map costs more cells/memory, with the existing serial 3 GiB planning
+limit retained. It corrects cell-size overestimation but does not guarantee that
+the current set of Workspace proposals finds a valid route for every start.
+Software evidence and remaining incident limitations:
+`diagnostics/voxel_5mm_20261022/REPORT.md`.

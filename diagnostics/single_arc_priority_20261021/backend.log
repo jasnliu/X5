@@ -1,0 +1,533 @@
+=== FRESH BASELINE: incident start/scene; no hardware acquisition ===
+[Single arc +   0.0s] RIGHT arm; current acquisition; record3 FINAL pose only; same Single arc method/settings as experiment --right
+[Single arc +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[Single arc +   2.8s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +   4.9s] candidate 2: VALID; 24.04s; reversals=2; coordination=9.083; spatial=91.335
+[Single arc +   4.9s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[Single arc +   6.8s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +   9.2s] candidate 4: VALID; 27.46s; reversals=7; coordination=14.765; spatial=110.138
+[Single arc +   9.2s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[Single arc +  11.3s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  13.6s] candidate 6: VALID; 30.07s; reversals=5; coordination=10.200; spatial=94.062
+[Single arc +  13.7s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[Single arc +  16.5s] candidate 7: VALID; 5.09s; reversals=6; coordination=8.030; spatial=65.368
+[Single arc +  16.5s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[Single arc +  18.6s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  19.9s] candidate 9: VALID; 8.42s; reversals=8; coordination=13.121; spatial=132.417
+[Single arc +  19.9s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[Single arc +  21.4s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  23.9s] candidate 11: VALID; 32.47s; reversals=3; coordination=11.131; spatial=108.552
+[Single arc +  24.2s] arch search 1/10: 1/60 coarse-feasible; best blocked samples 0
+[Single arc +  24.4s] arch search 2/10: 0/60 coarse-feasible; best blocked samples 0
+[Single arc +  24.7s] arch search 3/10: 0/60 coarse-feasible; best blocked samples 0
+[Single arc +  24.9s] arch search 4/10: 0/60 coarse-feasible; best blocked samples 0
+[Single arc +  25.1s] arch search 5/10: 0/60 coarse-feasible; best blocked samples 0
+[Single arc +  25.3s] arch search 6/10: 1/60 coarse-feasible; best blocked samples 0
+[Single arc +  25.6s] arch search 7/10: 1/60 coarse-feasible; best blocked samples 0
+[Single arc +  25.8s] arch search 8/10: 2/60 coarse-feasible; best blocked samples 0
+[Single arc +  26.0s] arch search 9/10: 2/60 coarse-feasible; best blocked samples 0
+[Single arc +  26.2s] arch search 10/10: 7/60 coarse-feasible; best blocked samples 0
+[Single arc +  27.4s] candidate 12: VALID; 7.57s; reversals=3; coordination=5.533; spatial=47.980
+[Single arc +  28.7s] candidate 13: VALID; 7.96s; reversals=7; coordination=6.681; spatial=86.862
+[Single arc +  30.0s] candidate 14: VALID; 7.73s; reversals=4; coordination=6.745; spatial=129.700
+[Single arc +  32.8s] partial shortcut (economy): 21 accepted changes; objective 1.2086
+[Single arc +  33.0s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  34.9s] candidate 16: VALID; 21.77s; reversals=2; coordination=8.677; spatial=76.764
+[Single arc +  38.0s] partial shortcut (economy): 17 accepted changes; objective 1.5390
+[Single arc +  39.2s] candidate 17: VALID; 6.70s; reversals=6; coordination=11.494; spatial=80.119
+[Single arc +  41.0s] elastic deformation: 0 accepted updates; objective 1.9574
+[Single arc +  41.3s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  43.4s] candidate 19: VALID; 24.04s; reversals=2; coordination=9.083; spatial=91.335
+[Single arc +  45.0s] elastic deformation: 0 accepted updates; objective 2.2734
+[Single arc +  45.1s] candidate 20: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[Single arc +  47.7s] candidate 21: VALID; 32.47s; reversals=3; coordination=11.131; spatial=108.552
+[Single arc +  47.7s] SHARED POOL COMPLETE: 13 validated candidates; 47.1s; no recording interiors
+[Single arc +  47.9s] SINGLE ARC PRIORITY: 3 continuous arcs, 1 continuous fallbacks, 5 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[Single arc +  47.9s] single_arc: candidate 12, continuous_arc, score=1.9782, duration=7.57s
+[Single arc +  47.9s] single_arc: candidate 13, continuous_arc, score=2.2276, duration=7.96s
+[Single arc +  47.9s] single_arc: candidate 14, continuous_arc, score=2.4560, duration=7.73s
+[Single arc +  47.9s] single_arc: candidate 7, continuous_fallback, score=2.2869, duration=5.09s
+[Single arc +  47.9s] single_arc: candidate 2, segmented_fallback, score=1.9623, duration=24.04s
+[Single arc +  47.9s] single_arc: candidate 11, segmented_fallback, score=2.2983, duration=32.47s
+[Single arc +  47.9s] single_arc: candidate 6, segmented_fallback, score=2.3454, duration=30.07s
+[Single arc +  47.9s] single_arc: candidate 9, segmented_fallback, score=2.3511, duration=8.42s
+[Single arc +  47.9s] single_arc: candidate 4, segmented_fallback, score=2.3799, duration=27.46s
+[Single arc +  47.9s] SELECTED candidate 12: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[Single arc +  47.9s] TIMING: Adaptive fixed-path retiming; reference 7.574s; path and ranking locked
+[Single arc +  48.0s]   8 controls: refining 1.003566 limit ratio
+[Single arc +  48.1s]   8 controls: refining 1.000279 limit ratio
+[Single arc +  48.2s]   8 controls: refining 1.000223 limit ratio
+[Single arc +  48.3s] ADAPTIVE 8 controls: 4.330907s; best 4.330907s; 0.4s computation
+[Single arc +  48.4s]   12 controls: refining 1.002200 limit ratio
+[Single arc +  48.6s]   12 controls: refining 1.000104 limit ratio
+[Single arc +  48.7s]   12 controls: refining 1.000041 limit ratio
+[Single arc +  48.8s] ADAPTIVE 12 controls: 4.120601s; best 4.120601s; 0.5s computation
+[Single arc +  49.0s]   20 controls: refining 1.003408 limit ratio
+[Single arc +  49.2s]   20 controls: refining 1.001817 limit ratio
+[Single arc +  49.4s]   20 controls: refining 1.000204 limit ratio
+[Single arc +  49.6s] ADAPTIVE 20 controls: 3.966161s; best 3.966161s; 0.7s computation
+[Single arc +  49.8s]   32 controls: refining 1.016390 limit ratio
+[Single arc +  50.1s]   32 controls: refining 1.002211 limit ratio
+[Single arc +  50.4s]   32 controls: refining 1.001562 limit ratio
+[Single arc +  50.7s] ADAPTIVE 32 controls: 3.927490s; best 3.927490s; 1.1s computation
+[Single arc +  51.1s]   48 controls: refining 1.014062 limit ratio
+[Single arc +  51.5s]   48 controls: refining 1.000971 limit ratio
+[Single arc +  51.9s]   48 controls: refining 1.001105 limit ratio
+[Single arc +  52.3s] ADAPTIVE 48 controls: 3.895404s; best 3.895404s; 1.6s computation
+[Single arc +  53.0s]   64 controls: refining 1.000928 limit ratio
+[Single arc +  53.6s]   64 controls: refining 1.000298 limit ratio
+[Single arc +  54.1s]   64 controls: refining 1.000313 limit ratio
+[Single arc +  54.7s] ADAPTIVE 64 controls: 3.880939s; best 3.880939s; 2.4s computation
+[Single arc +  55.6s]   96 controls: refining 1.002790 limit ratio
+[Single arc +  56.6s]   96 controls: refining 1.000263 limit ratio
+[Single arc +  57.4s]   96 controls: refining 1.000343 limit ratio
+[Single arc +  58.2s] ADAPTIVE 96 controls: 3.876547s; best 3.876547s; 3.5s computation
+[Single arc +  60.4s]   128 controls: refining 1.001041 limit ratio
+[Single arc +  61.7s]   128 controls: refining 1.000210 limit ratio
+[Single arc +  63.0s]   128 controls: refining 1.000198 limit ratio
+[Single arc +  64.0s] ADAPTIVE 128 controls: 3.870862s; best 3.870862s; 5.8s computation
+[Single arc +  70.1s]   192 controls: refining 1.000456 limit ratio
+[Single arc +  72.6s]   192 controls: refining 1.000115 limit ratio
+[Single arc +  75.5s]   192 controls: refining 1.000078 limit ratio
+[Single arc +  77.0s] ADAPTIVE 192 controls: 3.868824s; best 3.868824s; 13.0s computation
+[Single arc +  77.0s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[Single arc +  78.0s] TIMING READY: 7.574s → 3.869s outward; limits unchanged
+[Single arc +  78.0s] READY: 3.869s outward → 2s hold → reverse to acquired start. NO motor commands.
+Checking 1,936 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Checking 2,439 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Checking 5,257 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+Checking 8,157 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+=== EXPERIMENT: exactly same incident inputs and validated candidate pool ===
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] SINGLE ARC PRIORITY: 3 continuous arcs, 1 continuous fallbacks, 5 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[single_arc +   0.0s] single_arc: candidate 12, continuous_arc, score=1.9782, duration=7.57s
+[single_arc +   0.0s] single_arc: candidate 13, continuous_arc, score=2.2276, duration=7.96s
+[single_arc +   0.0s] single_arc: candidate 14, continuous_arc, score=2.4560, duration=7.73s
+[single_arc +   0.0s] single_arc: candidate 7, continuous_fallback, score=2.2869, duration=5.09s
+[single_arc +   0.0s] single_arc: candidate 2, segmented_fallback, score=1.9623, duration=24.04s
+[single_arc +   0.0s] single_arc: candidate 11, segmented_fallback, score=2.2983, duration=32.47s
+[single_arc +   0.0s] single_arc: candidate 6, segmented_fallback, score=2.3454, duration=30.07s
+[single_arc +   0.0s] single_arc: candidate 9, segmented_fallback, score=2.3511, duration=8.42s
+[single_arc +   0.0s] single_arc: candidate 4, segmented_fallback, score=2.3799, duration=27.46s
+[single_arc +   0.0s] SELECTED candidate 12: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[single_arc +   0.0s] TIMING cache: Adaptive fixed-path retiming, 3.869s; same exact selected path
+[single_arc +   0.0s] TIMING READY: 7.574s → 3.869s outward; limits unchanged
+[single_arc +   0.0s] READY: 3.869s outward → 2s hold → exact reverse; SIMULATION ONLY
+Checking 1,936 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+=== FRESH RIGHT EXPERIMENT: all four choices ===
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[progress +   0.6s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   4.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   6.9s] candidate 2: VALID; 44.05s; reversals=8; coordination=11.153; spatial=133.442
+[progress +   7.0s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  12.2s] candidate 3: VALID; 5.81s; reversals=6; coordination=11.173; spatial=110.683
+[progress +  12.3s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  14.2s] candidate 4: rejected by continuous joint bounds
+[progress +  16.7s] candidate 5: VALID; 32.89s; reversals=7; coordination=12.502; spatial=100.126
+[progress +  16.8s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  19.2s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  20.6s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  23.8s] candidate 8: VALID; 51.14s; reversals=5; coordination=13.749; spatial=71.180
+[progress +  23.9s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  25.2s] candidate 9: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  27.5s] candidate 10: VALID; 32.08s; reversals=4; coordination=9.814; spatial=104.192
+[progress +  27.6s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  29.8s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  30.2s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  32.2s] candidate 13: VALID; 25.40s; reversals=7; coordination=13.467; spatial=218.635
+[progress +  32.5s] arch search 1/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  32.7s] arch search 2/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  32.9s] arch search 3/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  33.1s] arch search 4/10: 3/60 coarse-feasible; best blocked samples 0
+[progress +  33.3s] arch search 5/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  33.5s] arch search 6/10: 6/60 coarse-feasible; best blocked samples 0
+[progress +  33.7s] arch search 7/10: 11/60 coarse-feasible; best blocked samples 0
+[progress +  33.9s] arch search 8/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  34.1s] arch search 9/10: 38/60 coarse-feasible; best blocked samples 0
+[progress +  34.3s] arch search 10/10: 30/60 coarse-feasible; best blocked samples 0
+[progress +  35.5s] candidate 14: VALID; 7.78s; reversals=3; coordination=6.851; spatial=33.805
+[progress +  36.7s] candidate 15: VALID; 7.79s; reversals=6; coordination=7.228; spatial=25.509
+[progress +  38.0s] candidate 16: VALID; 7.88s; reversals=5; coordination=6.791; spatial=27.237
+[progress +  40.6s] partial shortcut (economy): 18 accepted changes; objective 1.6565
+[progress +  40.9s] candidate 17: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  41.9s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  41.9s] candidate 19: timing rejected: Trajectory would be impractically slow; rejected instead of creeping
+[progress +  43.9s] partial shortcut (economy): 13 accepted changes; objective 1.7643
+[progress +  45.1s] candidate 20: VALID; 8.03s; reversals=3; coordination=11.104; spatial=82.147
+[progress +  46.7s] elastic deformation: 0 accepted updates; objective 1.9871
+[progress +  46.8s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  48.2s] candidate 22: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  54.5s] candidate 23: VALID; 114.29s; reversals=5; coordination=13.749; spatial=71.180
+[progress +  55.9s] elastic deformation: 0 accepted updates; objective 2.4242
+[progress +  56.1s] candidate 24: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  58.5s] candidate 25: VALID; 32.08s; reversals=4; coordination=9.814; spatial=104.192
+[progress +  58.5s] SHARED POOL COMPLETE: 12 validated candidates; 57.9s; no recording interiors
+[progress +  58.7s] progress: candidate 8, score=1.8935, duration=51.14s
+[progress +  58.7s] progress: candidate 20, score=2.0219, duration=8.03s
+[progress +  58.7s] progress: candidate 10, score=2.0619, duration=32.08s
+[progress +  58.7s] progress: candidate 5, score=2.3469, duration=32.89s
+[progress +  58.7s] progress: candidate 3, score=2.7538, duration=5.81s
+[progress +  58.7s] progress: candidate 2, score=3.3383, duration=44.05s
+[progress +  58.7s] progress: candidate 13, score=3.4606, duration=25.40s
+[progress +  58.7s] SELECTED candidate 8: lowest progress score; 7 eligible, equally checked candidates
+[progress +  58.7s] TIMING: Adaptive fixed-path retiming; reference 51.141s; path and ranking locked
+[progress +  58.9s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[progress +  60.1s] TIMING READY: 51.141s → 8.073s outward; limits unchanged
+[progress +  60.1s] READY: 8.073s outward → 2s hold → exact reverse; SIMULATION ONLY
+Checking 4,038 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 8, score=2.0113, duration=51.14s
+[sweep +   0.0s] sweep: candidate 23, score=2.0113, duration=114.29s
+[sweep +   0.0s] sweep: candidate 5, score=2.4519, duration=32.89s
+[sweep +   0.0s] sweep: candidate 10, score=2.4555, duration=32.08s
+[sweep +   0.0s] sweep: candidate 25, score=2.4555, duration=32.08s
+[sweep +   0.0s] sweep: candidate 3, score=3.3269, duration=5.81s
+[sweep +   0.0s] sweep: candidate 2, score=3.5902, duration=44.05s
+[sweep +   0.0s] sweep: candidate 13, score=3.7541, duration=25.40s
+[sweep +   0.1s] SELECTED candidate 8: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   0.1s] TIMING cache: Adaptive fixed-path retiming, 8.073s; same exact selected path
+[sweep +   0.1s] TIMING READY: 51.141s → 8.073s outward; limits unchanged
+[sweep +   0.1s] READY: 8.073s outward → 2s hold → exact reverse; SIMULATION ONLY
+Checking 4,038 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] SINGLE ARC PRIORITY: 3 continuous arcs, 1 continuous fallbacks, 5 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[single_arc +   0.0s] single_arc: candidate 14, continuous_arc, score=1.8534, duration=7.78s
+[single_arc +   0.0s] single_arc: candidate 15, continuous_arc, score=2.0054, duration=7.79s
+[single_arc +   0.0s] single_arc: candidate 16, continuous_arc, score=2.1508, duration=7.88s
+[single_arc +   0.0s] single_arc: candidate 3, continuous_fallback, score=3.3269, duration=5.81s
+[single_arc +   0.0s] single_arc: candidate 8, segmented_fallback, score=2.0113, duration=51.14s
+[single_arc +   0.0s] single_arc: candidate 5, segmented_fallback, score=2.4519, duration=32.89s
+[single_arc +   0.0s] single_arc: candidate 10, segmented_fallback, score=2.4555, duration=32.08s
+[single_arc +   0.0s] single_arc: candidate 2, segmented_fallback, score=3.5902, duration=44.05s
+[single_arc +   0.0s] single_arc: candidate 13, segmented_fallback, score=3.7541, duration=25.40s
+[single_arc +   0.1s] SELECTED candidate 14: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING: Adaptive fixed-path retiming; reference 7.775s; path and ranking locked
+[single_arc +   0.2s]   8 controls: refining 1.001489 limit ratio
+[single_arc +   0.3s]   8 controls: refining 1.000065 limit ratio
+[single_arc +   0.5s] ADAPTIVE 8 controls: 4.556624s; best 4.556624s; 0.4s computation
+[single_arc +   0.6s]   12 controls: refining 1.003805 limit ratio
+[single_arc +   0.7s]   12 controls: refining 1.000262 limit ratio
+[single_arc +   0.8s]   12 controls: refining 1.000133 limit ratio
+[single_arc +   1.0s] ADAPTIVE 12 controls: 4.431778s; best 4.431778s; 0.5s computation
+[single_arc +   1.2s]   20 controls: refining 1.006069 limit ratio
+[single_arc +   1.3s]   20 controls: refining 1.003314 limit ratio
+[single_arc +   1.5s]   20 controls: refining 1.000495 limit ratio
+[single_arc +   1.7s] ADAPTIVE 20 controls: 4.234589s; best 4.234589s; 0.7s computation
+[single_arc +   2.0s]   32 controls: refining 1.009185 limit ratio
+[single_arc +   2.3s]   32 controls: refining 1.002721 limit ratio
+[single_arc +   2.6s]   32 controls: refining 1.001610 limit ratio
+[single_arc +   2.8s] ADAPTIVE 32 controls: 4.186628s; best 4.186628s; 1.1s computation
+[single_arc +   3.3s]   48 controls: refining 1.007100 limit ratio
+[single_arc +   3.7s]   48 controls: refining 1.004204 limit ratio
+[single_arc +   4.1s]   48 controls: refining 1.001119 limit ratio
+[single_arc +   4.5s] ADAPTIVE 48 controls: 4.158014s; best 4.158014s; 1.7s computation
+[single_arc +   5.2s]   64 controls: refining 1.003123 limit ratio
+[single_arc +   5.8s]   64 controls: refining 1.002384 limit ratio
+[single_arc +   6.4s]   64 controls: refining 1.000699 limit ratio
+[single_arc +   6.9s] ADAPTIVE 64 controls: 4.143715s; best 4.143715s; 2.3s computation
+[single_arc +   7.9s]   96 controls: refining 1.002098 limit ratio
+[single_arc +   8.9s]   96 controls: refining 1.003206 limit ratio
+[single_arc +   9.8s]   96 controls: refining 1.000609 limit ratio
+[single_arc +  10.6s] ADAPTIVE 96 controls: 4.133315s; best 4.133315s; 3.7s computation
+[single_arc +  12.3s]   128 controls: refining 1.002542 limit ratio
+[single_arc +  13.8s]   128 controls: refining 1.001424 limit ratio
+[single_arc +  15.2s]   128 controls: refining 1.000771 limit ratio
+[single_arc +  16.2s] ADAPTIVE 128 controls: 4.130629s; best 4.130629s; 5.6s computation
+[single_arc +  21.3s]   192 controls: refining 1.007766 limit ratio
+[single_arc +  25.4s]   192 controls: refining 1.001368 limit ratio
+[single_arc +  28.8s]   192 controls: refining 1.000881 limit ratio
+[single_arc +  30.3s] ADAPTIVE 192 controls: 4.127995s; best 4.127995s; 14.2s computation
+[single_arc +  30.3s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[single_arc +  31.3s] TIMING READY: 7.775s → 4.128s outward; limits unchanged
+[single_arc +  31.3s] READY: 4.128s outward → 2s hold → exact reverse; SIMULATION ONLY
+Checking 2,065 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[clearance +   0.0s] clearance: candidate 15, score=2.1486, duration=7.79s
+[clearance +   0.0s] clearance: candidate 14, score=2.1572, duration=7.78s
+[clearance +   0.0s] clearance: candidate 16, score=2.2759, duration=7.88s
+[clearance +   0.0s] clearance: candidate 23, score=2.6905, duration=114.29s
+[clearance +   0.0s] clearance: candidate 8, score=2.6905, duration=51.14s
+[clearance +   0.0s] clearance: candidate 20, score=3.0091, duration=8.03s
+[clearance +   0.0s] clearance: candidate 10, score=3.0441, duration=32.08s
+[clearance +   0.0s] clearance: candidate 25, score=3.0441, duration=32.08s
+[clearance +   0.0s] clearance: candidate 5, score=3.0485, duration=32.89s
+[clearance +   0.0s] clearance: candidate 3, score=3.5844, duration=5.81s
+[clearance +   0.0s] clearance: candidate 2, score=4.2973, duration=44.05s
+[clearance +   0.0s] clearance: candidate 13, score=4.3966, duration=25.40s
+[clearance +   0.1s] SELECTED candidate 15: lowest clearance score; 12 eligible, equally checked candidates
+[clearance +   0.1s] TIMING: Adaptive fixed-path retiming; reference 7.793s; path and ranking locked
+[clearance +   0.2s]   8 controls: refining 1.003470 limit ratio
+[clearance +   0.3s]   8 controls: refining 1.000300 limit ratio
+[clearance +   0.4s]   8 controls: refining 1.000076 limit ratio
+[clearance +   0.4s] ADAPTIVE 8 controls: 4.624351s; best 4.624351s; 0.4s computation
+[clearance +   0.6s]   12 controls: refining 1.003309 limit ratio
+[clearance +   0.7s]   12 controls: refining 1.000094 limit ratio
+[clearance +   0.8s]   12 controls: refining 1.000050 limit ratio
+[clearance +   0.9s] ADAPTIVE 12 controls: 4.416001s; best 4.416001s; 0.5s computation
+[clearance +   1.1s]   20 controls: refining 1.005341 limit ratio
+[clearance +   1.3s]   20 controls: refining 1.002136 limit ratio
+[clearance +   1.5s]   20 controls: refining 1.000475 limit ratio
+[clearance +   1.7s] ADAPTIVE 20 controls: 4.354542s; best 4.354542s; 0.7s computation
+[clearance +   2.0s]   32 controls: refining 1.017144 limit ratio
+[clearance +   2.3s]   32 controls: refining 1.001869 limit ratio
+[clearance +   2.6s]   32 controls: refining 1.000527 limit ratio
+[clearance +   2.9s] ADAPTIVE 32 controls: 4.297394s; best 4.297394s; 1.2s computation
+[clearance +   3.3s]   48 controls: refining 1.005478 limit ratio
+[clearance +   3.8s]   48 controls: refining 1.001964 limit ratio
+[clearance +   4.2s]   48 controls: refining 1.001142 limit ratio
+[clearance +   4.5s] ADAPTIVE 48 controls: 4.263412s; best 4.263412s; 1.6s computation
+[clearance +   5.2s]   64 controls: refining 1.002351 limit ratio
+[clearance +   5.8s]   64 controls: refining 1.000720 limit ratio
+[clearance +   6.4s]   64 controls: refining 1.000323 limit ratio
+[clearance +   6.9s] ADAPTIVE 64 controls: 4.244446s; best 4.244446s; 2.4s computation
+[clearance +   8.0s]   96 controls: refining 1.002394 limit ratio
+[clearance +   8.9s]   96 controls: refining 1.000647 limit ratio
+[clearance +   9.9s]   96 controls: refining 1.000609 limit ratio
+[clearance +  10.6s] ADAPTIVE 96 controls: 4.237531s; best 4.237531s; 3.7s computation
+[clearance +  12.6s]   128 controls: refining 1.001686 limit ratio
+[clearance +  14.1s]   128 controls: refining 1.000617 limit ratio
+[clearance +  15.6s]   128 controls: refining 1.000367 limit ratio
+[clearance +  16.5s] ADAPTIVE 128 controls: 4.232088s; best 4.232088s; 5.9s computation
+[clearance +  27.7s]   192 controls: refining 1.000715 limit ratio
+[clearance +  30.9s]   192 controls: refining 1.000271 limit ratio
+[clearance +  34.0s]   192 controls: refining 1.000196 limit ratio
+[clearance +  35.5s] ADAPTIVE 192 controls: 4.229552s; best 4.229552s; 18.9s computation
+[clearance +  35.5s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[clearance +  36.5s] TIMING READY: 7.793s → 4.230s outward; limits unchanged
+[clearance +  36.5s] READY: 4.230s outward → 2s hold → exact reverse; SIMULATION ONLY
+Checking 2,116 exact-curve samples + edges: zone3, full arm/stick, Baseline collision margins (world 20 mm + native voxel/edge allowances; extra self-clearance 0 mm)
+=== FRESH LEFT EXPERIMENT: all four choices ===
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[progress +   4.1s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[progress +   6.4s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +   8.9s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  10.9s] candidate 5: VALID; 15.29s; reversals=4; coordination=6.290; spatial=21.345
+[progress +  11.0s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  12.0s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  12.2s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  13.9s] candidate 8: VALID; 13.11s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  13.9s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  15.8s] candidate 9: VALID; 3.36s; reversals=3; coordination=3.086; spatial=13.703
+[progress +  15.8s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  17.1s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  18.8s] candidate 11: VALID; 12.59s; reversals=4; coordination=5.974; spatial=6.638
+[progress +  19.1s] arch search 1/10: 2/60 coarse-feasible; best blocked samples 0
+[progress +  19.4s] arch search 2/10: 6/60 coarse-feasible; best blocked samples 0
+[progress +  19.7s] arch search 3/10: 15/60 coarse-feasible; best blocked samples 0
+[progress +  20.0s] arch search 4/10: 21/60 coarse-feasible; best blocked samples 0
+[progress +  20.2s] arch search 5/10: 34/60 coarse-feasible; best blocked samples 0
+[progress +  20.5s] arch search 6/10: 38/60 coarse-feasible; best blocked samples 0
+[progress +  20.7s] arch search 7/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  21.0s] arch search 8/10: 42/60 coarse-feasible; best blocked samples 0
+[progress +  21.2s] arch search 9/10: 41/60 coarse-feasible; best blocked samples 0
+[progress +  21.5s] arch search 10/10: 39/60 coarse-feasible; best blocked samples 0
+[progress +  22.6s] candidate 12: VALID; 5.91s; reversals=3; coordination=3.653; spatial=8.754
+[progress +  23.8s] candidate 13: VALID; 6.52s; reversals=4; coordination=3.768; spatial=10.521
+[progress +  25.0s] candidate 14: VALID; 6.03s; reversals=4; coordination=3.943; spatial=11.671
+[progress +  26.4s] partial shortcut (economy): 11 accepted changes; objective 0.8058
+[progress +  26.6s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  27.2s] candidate 16: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  34.9s] candidate 17: VALID; 98.10s; reversals=0; coordination=3.657; spatial=4.794
+[progress +  35.8s] partial shortcut (economy): 2 accepted changes; objective 1.0304
+[progress +  35.9s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  36.1s] candidate 19: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  40.5s] candidate 20: VALID; 48.70s; reversals=2; coordination=3.624; spatial=10.066
+[progress +  41.2s] elastic deformation: 1 accepted updates; objective 0.6464
+[progress +  41.5s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  42.1s] candidate 22: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  45.4s] candidate 23: VALID; 36.35s; reversals=0; coordination=3.458; spatial=4.685
+[progress +  45.9s] elastic deformation: 0 accepted updates; objective 0.8415
+[progress +  46.0s] candidate 24: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  46.2s] candidate 25: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[progress +  51.5s] candidate 26: VALID; 59.86s; reversals=2; coordination=3.593; spatial=10.066
+[progress +  51.6s] SHARED POOL COMPLETE: 13 validated candidates; 50.9s; no recording interiors
+[progress +  51.8s] progress: candidate 17, score=0.8095, duration=98.10s
+[progress +  51.8s] progress: candidate 2, score=0.9289, duration=19.88s
+[progress +  51.8s] progress: candidate 20, score=1.0405, duration=48.70s
+[progress +  51.8s] progress: candidate 8, score=1.0405, duration=13.11s
+[progress +  51.8s] progress: candidate 11, score=1.5528, duration=12.59s
+[progress +  51.8s] progress: candidate 3, score=1.9778, duration=3.95s
+[progress +  51.8s] progress: candidate 9, score=2.1263, duration=3.36s
+[progress +  51.8s] progress: candidate 5, score=2.3518, duration=15.29s
+[progress +  51.8s] SELECTED candidate 17: lowest progress score; 8 eligible, equally checked candidates
+[progress +  52.7s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  53.1s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +  53.1s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  53.5s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[progress +  53.5s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[progress +  54.6s]   8 controls: refining 11.995907 limit ratio
+[progress +  54.9s]   8 controls: refining 3.466235 limit ratio
+[progress +  55.2s]   8 controls: refining 1.007567 limit ratio
+[progress +  55.5s] ADAPTIVE 8 controls: 7.374589s; best 7.374589s; 1.1s computation
+[progress +  55.8s]   16 controls: refining 13.427030 limit ratio
+[progress +  56.2s]   16 controls: refining 1.012402 limit ratio
+[progress +  56.5s]   16 controls: refining 1.011763 limit ratio
+[progress +  56.9s] ADAPTIVE 16 controls: 5.029163s; best 5.029163s; 1.4s computation
+[progress +  57.6s]   32 controls: refining 16.282975 limit ratio
+[progress +  58.1s]   32 controls: refining 1.007619 limit ratio
+[progress +  58.6s]   32 controls: refining 1.006014 limit ratio
+[progress +  59.1s] ADAPTIVE 32 controls: 3.959526s; best 3.959526s; 2.2s computation
+[progress +  60.7s]   64 controls: refining 1.032254 limit ratio
+[progress +  62.2s]   64 controls: refining 1.032809 limit ratio
+[progress +  64.0s]   64 controls: refining 1.009434 limit ratio
+[progress +  64.7s] ADAPTIVE 64 controls: 3.579062s; best 3.579062s; 5.6s computation
+[progress +  68.7s]   96 controls: refining 1.436438 limit ratio
+[progress +  71.9s]   96 controls: refining 1.018592 limit ratio
+[progress +  73.3s]   96 controls: refining 1.007128 limit ratio
+[progress +  74.3s] ADAPTIVE 96 controls: 3.472868s; best 3.472868s; 9.6s computation
+[progress +  74.3s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[progress +  74.3s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[progress +  75.5s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[progress +  75.5s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 23, score=0.6473, duration=36.35s
+[sweep +   0.0s] sweep: candidate 2, score=0.6668, duration=19.88s
+[sweep +   0.0s] sweep: candidate 8, score=0.8503, duration=13.11s
+[sweep +   0.0s] sweep: candidate 26, score=0.8503, duration=59.86s
+[sweep +   0.0s] sweep: candidate 11, score=1.0281, duration=12.59s
+[sweep +   0.0s] sweep: candidate 9, score=1.4996, duration=3.36s
+[sweep +   0.0s] sweep: candidate 3, score=1.6114, duration=3.95s
+[sweep +   0.0s] sweep: candidate 5, score=1.7729, duration=15.29s
+[sweep +   0.1s] SELECTED candidate 23: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   0.9s] SMOOTH V2: C3 halfwidth 0.060; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.3s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.3s] SMOOTH V2: C3 halfwidth 0.050; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   1.6s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   1.6s] SMOOTH V2: C3 halfwidth 0.040; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   2.0s] SMOOTH V2 rejected: collision_or_zone; trying a smaller blend
+[sweep +   2.0s] SMOOTH V2: C3 halfwidth 0.030; checking bounded deviation, joint limits, full robot/stick and zone
+[sweep +   3.0s]   8 controls: refining 15.399940 limit ratio
+[sweep +   3.2s]   8 controls: refining 3.568704 limit ratio
+[sweep +   3.4s]   8 controls: refining 1.006142 limit ratio
+[sweep +   3.7s] ADAPTIVE 8 controls: 7.250577s; best 7.250577s; 0.9s computation
+[sweep +   4.0s]   16 controls: refining 16.441314 limit ratio
+[sweep +   4.3s]   16 controls: refining 1.015196 limit ratio
+[sweep +   4.6s]   16 controls: refining 1.003361 limit ratio
+[sweep +   4.9s] ADAPTIVE 16 controls: 4.975513s; best 4.975513s; 1.2s computation
+[sweep +   5.5s]   32 controls: refining 17.279865 limit ratio
+[sweep +   5.9s]   32 controls: refining 1.007386 limit ratio
+[sweep +   6.4s]   32 controls: refining 1.007119 limit ratio
+[sweep +   6.8s] ADAPTIVE 32 controls: 3.992014s; best 3.992014s; 1.9s computation
+[sweep +   7.8s]   64 controls: refining 1.033481 limit ratio
+[sweep +   8.5s]   64 controls: refining 1.028990 limit ratio
+[sweep +   9.3s]   64 controls: refining 1.025842 limit ratio
+[sweep +  10.0s] ADAPTIVE 64 controls: 3.590196s; best 3.590196s; 3.2s computation
+[sweep +  12.5s]   96 controls: refining 1.483991 limit ratio
+[sweep +  14.4s]   96 controls: refining 1.014717 limit ratio
+[sweep +  15.7s]   96 controls: refining 1.010198 limit ratio
+[sweep +  16.6s] ADAPTIVE 96 controls: 3.397695s; best 3.397695s; 6.6s computation
+[sweep +  16.6s] SMOOTH V2 solver: 1 trial time-density bound adjustments; no robot joints clipped
+[sweep +  16.6s] SMOOTH V2: independent final timed-curve collision/zone + derivative checks
+[sweep +  17.9s] SMOOTH V2 READY: 10 → 0 internal stops; 8.022s → 3.398s; tip deviation 1.22 mm
+[sweep +  17.9s] READY: 3.398s outward → 2s hold → exact reverse; SIMULATION ONLY
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] SINGLE ARC PRIORITY: 3 continuous arcs, 2 continuous fallbacks, 4 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[single_arc +   0.0s] single_arc: candidate 12, continuous_arc, score=1.1965, duration=5.91s
+[single_arc +   0.0s] single_arc: candidate 13, continuous_arc, score=1.3841, duration=6.52s
+[single_arc +   0.0s] single_arc: candidate 14, continuous_arc, score=1.4329, duration=6.03s
+[single_arc +   0.0s] single_arc: candidate 9, continuous_fallback, score=1.4996, duration=3.36s
+[single_arc +   0.0s] single_arc: candidate 3, continuous_fallback, score=1.6114, duration=3.95s
+[single_arc +   0.0s] single_arc: candidate 2, segmented_fallback, score=0.6668, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 8, segmented_fallback, score=0.8503, duration=13.11s
+[single_arc +   0.0s] single_arc: candidate 11, segmented_fallback, score=1.0281, duration=12.59s
+[single_arc +   0.0s] single_arc: candidate 5, segmented_fallback, score=1.7729, duration=15.29s
+[single_arc +   0.1s] SELECTED candidate 12: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[single_arc +   0.1s] SMOOTH V2: selected left path already continuous; retain original v1 retiming
+[single_arc +   0.1s] TIMING: Adaptive fixed-path retiming; reference 5.913s; path and ranking locked
+[single_arc +   0.2s]   8 controls: refining 1.001552 limit ratio
+[single_arc +   0.3s]   8 controls: refining 1.000358 limit ratio
+[single_arc +   0.4s]   8 controls: refining 1.000179 limit ratio
+[single_arc +   0.5s] ADAPTIVE 8 controls: 3.462524s; best 3.462524s; 0.4s computation
+[single_arc +   0.6s]   12 controls: refining 1.002554 limit ratio
+[single_arc +   0.7s]   12 controls: refining 1.001551 limit ratio
+[single_arc +   0.8s]   12 controls: refining 1.000531 limit ratio
+[single_arc +   0.9s] ADAPTIVE 12 controls: 3.333873s; best 3.333873s; 0.5s computation
+[single_arc +   1.2s]   20 controls: refining 1.068009 limit ratio
+[single_arc +   1.4s]   20 controls: refining 1.003362 limit ratio
+[single_arc +   1.6s]   20 controls: refining 1.003481 limit ratio
+[single_arc +   1.8s] ADAPTIVE 20 controls: 2.835596s; best 2.835596s; 0.8s computation
+[single_arc +   2.1s]   32 controls: refining 1.014249 limit ratio
+[single_arc +   2.3s]   32 controls: refining 1.002806 limit ratio
+[single_arc +   2.6s]   32 controls: refining 1.000616 limit ratio
+[single_arc +   2.9s] ADAPTIVE 32 controls: 2.782914s; best 2.782914s; 1.1s computation
+[single_arc +   3.3s]   48 controls: refining 1.016717 limit ratio
+[single_arc +   3.7s]   48 controls: refining 1.001258 limit ratio
+[single_arc +   4.1s]   48 controls: refining 1.000458 limit ratio
+[single_arc +   4.5s] ADAPTIVE 48 controls: 2.770591s; best 2.770591s; 1.6s computation
+[single_arc +   5.2s]   64 controls: refining 1.010871 limit ratio
+[single_arc +   5.7s]   64 controls: refining 1.000705 limit ratio
+[single_arc +   6.3s]   64 controls: refining 1.000464 limit ratio
+[single_arc +   6.8s] ADAPTIVE 64 controls: 2.762869s; best 2.762869s; 2.3s computation
+[single_arc +   9.5s]   96 controls: refining 1.008807 limit ratio
+[single_arc +  10.7s]   96 controls: refining 1.000719 limit ratio
+[single_arc +  11.6s]   96 controls: refining 1.000600 limit ratio
+[single_arc +  12.3s] ADAPTIVE 96 controls: 2.753004s; best 2.753004s; 5.5s computation
+[single_arc +  16.4s]   128 controls: refining 1.005238 limit ratio
+[single_arc +  20.9s]   128 controls: refining 1.016039 limit ratio
+[single_arc +  25.3s]   128 controls: refining 1.000499 limit ratio
+[single_arc +  26.2s] ADAPTIVE 128 controls: 2.751422s; best 2.751422s; 13.9s computation
+[single_arc +  44.7s]   192 controls: refining 1.006636 limit ratio
+[single_arc +  60.8s]   192 controls: refining 1.000272 limit ratio
+[single_arc +  79.5s]   192 controls: refining 1.000188 limit ratio
+[single_arc +  81.0s] ADAPTIVE 192 controls: 2.748484s; best 2.748484s; 54.7s computation
+[single_arc +  81.0s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[single_arc +  82.0s] TIMING READY: 5.913s → 2.748s outward; limits unchanged
+[single_arc +  82.0s] READY: 2.748s outward → 2s hold → exact reverse; SIMULATION ONLY
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.1s] SMOOTH V2 cache: 3.473s outward; same validated rounded curve
+[clearance +   0.1s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[clearance +   0.1s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+baseline_incident 12 single_arc 3.8688236292893388 0
+experiment_incident 12 single_arc 3.8688236292893388 0
+right_progress 8 corridor 8.073394290944444 7
+right_sweep 8 corridor 8.073394290944444 7
+right_single_arc 14 single_arc 4.127994858280934 0
+right_clearance 15 single_arc 4.22955156038221 0
+left_progress 17 progress 3.4728680621715338 0
+left_sweep 23 sweep 3.3976951261030686 0
+left_single_arc 12 single_arc 2.748484020757091 0
+left_clearance 17 progress 3.4728680621715338 0
+ALL FRESH BACKEND CHECKS PASSED

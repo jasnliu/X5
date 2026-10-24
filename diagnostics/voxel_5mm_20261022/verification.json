@@ -1,0 +1,603 @@
+{
+  "schema": "x5-voxel-refinement-verification-v1",
+  "software_only": true,
+  "physical_camera_access": false,
+  "physical_CAN_access": false,
+  "physical_motor_commands": 0,
+  "voxel_size_m": 0.005,
+  "world_padding_m": 0.025,
+  "regression": {
+    "passed": 870,
+    "failed": 0,
+    "warnings": 1,
+    "warning": "Existing SLSQP internal optimization trial-bound warning; no measured-joint clipping"
+  },
+  "incident_endpoints": {
+    "reconstruction_wall_s": 0.14971886796411127,
+    "source": "/home/jason/Proyectos3/X5/planner_runs/20261022T203104Z-hardware-right-5e5d2b/calculate-f2ec86b8",
+    "software_only": true,
+    "motor_commands": 0,
+    "10mm": {
+      "world_padding": {
+        "additional_voxel_radius_m": 0.0,
+        "edge_sampling_allowance_m": 0.005,
+        "occupied_octree_cells_are_volumes": true,
+        "octree_resolution_m": 0.01,
+        "policy": "occupied_volume_v1",
+        "requested_clearance_m": 0.02,
+        "robot_padding_m": 0.025
+      },
+      "checks": [
+        {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision",
+          "stick_center_world": [
+            0.181680483176179,
+            -0.19415188892829732,
+            -0.024199900068792246
+          ],
+          "valid": false
+        },
+        {
+          "reason": "valid",
+          "stick_center_world": [
+            0.37994374500915407,
+            -0.398744993719802,
+            0.5454060135051718
+          ],
+          "valid": true
+        }
+      ],
+      "point_count": 120527,
+      "self_filtered_voxels": 79,
+      "wall_s": 11.757760149019305
+    },
+    "5mm": {
+      "world_padding": {
+        "additional_voxel_radius_m": 0.0,
+        "edge_sampling_allowance_m": 0.005,
+        "occupied_octree_cells_are_volumes": true,
+        "octree_resolution_m": 0.005,
+        "policy": "occupied_volume_v1",
+        "requested_clearance_m": 0.02,
+        "robot_padding_m": 0.025
+      },
+      "checks": [
+        {
+          "reason": "valid",
+          "stick_center_world": [
+            0.181680483176179,
+            -0.19415188892829732,
+            -0.024199900068792246
+          ],
+          "valid": true
+        },
+        {
+          "reason": "valid",
+          "stick_center_world": [
+            0.37994374500915407,
+            -0.398744993719802,
+            0.5454060135051718
+          ],
+          "valid": true
+        }
+      ],
+      "point_count": 329428,
+      "self_filtered_voxels": 222,
+      "wall_s": 0.8698947190423496
+    }
+  },
+  "incident_full_mission_passed": false,
+  "incident_remaining_failures": {
+    "software_only": true,
+    "motor_commands": 0,
+    "candidates": [
+      {
+        "index": 1,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11022803440823857,
+            "max": 0.21194552529182975,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.12057097994004472,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          },
+          {
+            "joint": 4,
+            "min": 0.056582742046234806,
+            "max": 1.7736057608613234,
+            "lower": -0.027614306757365363,
+            "upper": 1.7723856932426347
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "bounds": [],
+        "first_rejection": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "sample_index": 354,
+        "fraction": 0.08523958584156031,
+        "position": [
+          0.01658066755651753,
+          0.07788570709495955,
+          0.44747983745442466,
+          0.16078366779279224,
+          -0.017736958210454318,
+          0.17762169740966133,
+          0.4668452566291545
+        ],
+        "native_details": [
+          {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "right_drumstick"
+              ]
+            ],
+            "reason": "collision",
+            "stick_center_world": [
+              0.2522190626427986,
+              -0.27199717430560033,
+              0.0021770719465447896
+            ],
+            "valid": false
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "bounds": [],
+        "first_rejection": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "sample_index": 723,
+        "fraction": 0.23076923076923078,
+        "position": [
+          -0.3286023334683525,
+          0.00978451012808747,
+          0.492774862764238,
+          0.45979130848678545,
+          -0.04463389962009279,
+          0.32906959977190203,
+          0.7308028371528577
+        ],
+        "native_details": [
+          {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "right_drumstick"
+              ]
+            ],
+            "reason": "collision",
+            "stick_center_world": [
+              0.1941712780892873,
+              -0.29240929249573494,
+              0.06750413313202253
+            ],
+            "valid": false
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11548687812293806,
+            "max": 0.21194552529182967,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.10968296266464506,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.12085422177511362,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 8,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.10904952475365641,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 9,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11614890959741808,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          },
+          {
+            "joint": 4,
+            "min": 0.05658274204623481,
+            "max": 1.7737146159957766,
+            "lower": -0.027614306757365363,
+            "upper": 1.7723856932426347
+          }
+        ]
+      },
+      {
+        "index": 10,
+        "bounds": [],
+        "first_rejection": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "sample_index": 377,
+        "fraction": 0.09744119927629878,
+        "position": [
+          0.06128103018263266,
+          0.10092509905216816,
+          0.44832909376698704,
+          0.10935582812862418,
+          -0.011848321234818961,
+          0.14974747282401885,
+          0.4078735327713352
+        ],
+        "native_details": [
+          {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "right_drumstick"
+              ]
+            ],
+            "reason": "collision",
+            "stick_center_world": [
+              0.24612296978045217,
+              -0.27837467132636956,
+              -0.00981343021432371
+            ],
+            "valid": false
+          }
+        ]
+      },
+      {
+        "index": 11,
+        "bounds": [],
+        "first_rejection": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "sample_index": 708,
+        "fraction": 0.2274333440411179,
+        "position": [
+          -0.3292903840201617,
+          0.010807265948966222,
+          0.5006375489932273,
+          0.4496804072448971,
+          -0.044850532772624796,
+          0.3438354284177287,
+          0.7389731234563304
+        ],
+        "native_details": [
+          {
+            "contacts": [
+              [
+                "gemini_native_depth",
+                "right_drumstick"
+              ]
+            ],
+            "reason": "collision",
+            "stick_center_world": [
+              0.191429143188873,
+              -0.29211944437489856,
+              0.06749005459696669
+            ],
+            "valid": false
+          }
+        ]
+      },
+      {
+        "index": 12,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11835440790117573,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 13,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11235052480847038,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      },
+      {
+        "index": 14,
+        "bounds": [
+          {
+            "joint": 2,
+            "min": -0.11517293947914148,
+            "max": 0.21194552529182964,
+            "lower": -0.10888604045169557,
+            "upper": 3.2911139595483045
+          }
+        ]
+      }
+    ]
+  },
+  "virtual_encoder_monitor": {
+    "sample_batches": 343,
+    "error": null,
+    "thread_stopped": true,
+    "duration_s": 17.142474080028478,
+    "observer": {
+      "batches": 343,
+      "requests_sent": {
+        "left": 2744,
+        "right": 2744
+      },
+      "feedback_frames_received": {
+        "left": 2744,
+        "right": 2744
+      },
+      "recovery_notices": {
+        "left": 0,
+        "right": 0
+      },
+      "exact_query_allowlist": true,
+      "mode_changes": 0,
+      "enable_commands": 0,
+      "disable_commands": 0,
+      "motion_commands": 0,
+      "gripper_commands": 0,
+      "closed": true
+    }
+  },
+  "preservation": {
+    "passed": true,
+    "protected_files": 114,
+    "authorized_files": [
+      "drum_planner/baseline/work.py",
+      "drum_planner/cpp/moveit_plan.cpp",
+      "drum_planner/depth.py",
+      "drum_planner/experiment/algorithms.py",
+      "drum_planner/experiment/worker.py",
+      "drum_planner/live_view.py",
+      "drum_planner/planning.py"
+    ],
+    "unchanged_original_incident": true
+  },
+  "warm_native_map_load": {
+    "software_only": true,
+    "scope": "warm native process load and two endpoint checks; no trajectory speed claim",
+    "rows": {
+      "10mm": {
+        "seconds": [
+          0.7695241569890641,
+          0.7722969599999487,
+          0.7742726659635082
+        ],
+        "median_s": 0.7722969599999487,
+        "point_count": 120527,
+        "world_padding": {
+          "additional_voxel_radius_m": 0.0,
+          "edge_sampling_allowance_m": 0.005,
+          "occupied_octree_cells_are_volumes": true,
+          "octree_resolution_m": 0.01,
+          "policy": "occupied_volume_v1",
+          "requested_clearance_m": 0.02,
+          "robot_padding_m": 0.025
+        },
+        "valid": [
+          false,
+          true
+        ]
+      },
+      "5mm": {
+        "seconds": [
+          0.8708894769661129,
+          0.8741931410040706,
+          0.8741635030019097
+        ],
+        "median_s": 0.8741635030019097,
+        "point_count": 329428,
+        "world_padding": {
+          "additional_voxel_radius_m": 0.0,
+          "edge_sampling_allowance_m": 0.005,
+          "occupied_octree_cells_are_volumes": true,
+          "octree_resolution_m": 0.005,
+          "policy": "occupied_volume_v1",
+          "requested_clearance_m": 0.02,
+          "robot_padding_m": 0.025
+        },
+        "valid": [
+          true,
+          true
+        ]
+      }
+    }
+  },
+  "native_ui": {
+    "right": {
+      "passed": true,
+      "simulated_owner_cycles": 3,
+      "errors": [],
+      "controls": "select/add/remove/calculate/cancel/preview/pause/scrub/speed/start/hold/reverse/relax",
+      "rows": [
+        {
+          "checkpoints": 1,
+          "plan": "/home/jason/Proyectos3/X5/diagnostics/voxel_5mm_20261022/ui_right/ui/calculate-ea397805/plan/plan.json",
+          "native_proof": {
+            "samples": 2104,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.005
+            }
+          }
+        },
+        {
+          "checkpoints": 3,
+          "plan": "/home/jason/Proyectos3/X5/diagnostics/voxel_5mm_20261022/ui_right/ui/calculate-5d6f22e8/plan/plan.json",
+          "native_proof": {
+            "samples": 9192,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.005
+            }
+          }
+        }
+      ],
+      "ui_elapsed_s": 454.6195941560436,
+      "ui_peak_bytes": 505135104,
+      "calculation_peaks_bytes": [
+        374640640,
+        357371904
+      ]
+    },
+    "left": {
+      "passed": true,
+      "simulated_owner_cycles": 3,
+      "errors": [],
+      "controls": "select/add/remove/calculate/cancel/preview/pause/scrub/speed/start/hold/reverse/relax",
+      "rows": [
+        {
+          "checkpoints": 1,
+          "plan": "/home/jason/Proyectos3/X5/diagnostics/voxel_5mm_20261022/ui_left/ui/calculate-f5b82c4a/plan/plan.json",
+          "native_proof": {
+            "samples": 1421,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.005
+            }
+          }
+        },
+        {
+          "checkpoints": 3,
+          "plan": "/home/jason/Proyectos3/X5/diagnostics/voxel_5mm_20261022/ui_left/ui/calculate-5d4f7485/plan/plan.json",
+          "native_proof": {
+            "samples": 6298,
+            "all_valid": true,
+            "collision_margin_policy": "baseline_request",
+            "obstacle_padding_m": 0.02,
+            "minimum_self_clearance_m": 0.0,
+            "world_padding": {
+              "policy": "occupied_volume_v1",
+              "requested_clearance_m": 0.02,
+              "edge_sampling_allowance_m": 0.005,
+              "additional_voxel_radius_m": 0.0,
+              "robot_padding_m": 0.025,
+              "occupied_octree_cells_are_volumes": true,
+              "octree_resolution_m": 0.005
+            }
+          }
+        }
+      ],
+      "ui_elapsed_s": 423.10716382501414,
+      "ui_peak_bytes": 493588480,
+      "calculation_peaks_bytes": [
+        381739008,
+        354340864
+      ]
+    }
+  },
+  "incident_fresh_capture_point_count": 329429
+}

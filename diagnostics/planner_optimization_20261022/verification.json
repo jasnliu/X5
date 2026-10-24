@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "scope": "software only, saved scenes, fake motor ownership in native UI tests",
+  "camera_access": false,
+  "motor_commands": 0,
+  "reference_cases": 6,
+  "full_policy_exact_numerical_parity": true,
+  "hardware_experiment_exact_leg_parity_cases": 10,
+  "hardware_experiment_exact_mission_parity_sides": [
+    "right",
+    "left"
+  ],
+  "native_ui_sides": [
+    "right",
+    "left"
+  ],
+  "regression_suite": {
+    "passed": 883,
+    "warnings": 1,
+    "seconds": 492.57,
+    "additional_checks": "48 cache/checkpoint tests after final lock fix; 2 mission scalar/batch tests"
+  },
+  "four_leg_timing_benchmark": {
+    "serial_reference_s": 1278.0923474410083,
+    "parallel_cold_s": 878.2701080030529,
+    "cold_reduction_percent": 31.282734791306588,
+    "parallel_warm_and_validation_s": 3.3213478910038248,
+    "caveats": "Timing only: camera and route search additional. Fluctuating background CPU load; observed speedup not a universal guarantee."
+  },
+  "calculation_job_aggregate_memory_limit_bytes": 3221225472,
+  "evidence": {
+    "reference": "diagnostics/planner_optimization_20261022/evidence/reference.json",
+    "cold": "diagnostics/planner_optimization_20261022/evidence/cold.json",
+    "warm": "diagnostics/planner_optimization_20261022/evidence/warm.json",
+    "smoothing": "diagnostics/planner_optimization_20261022/evidence/smoothing.json",
+    "left_full_policy": "diagnostics/planner_optimization_20261022/evidence/left_full_policy.json",
+    "ui_right": "diagnostics/planner_optimization_20261022/evidence/ui_right.json",
+    "ui_left": "diagnostics/planner_optimization_20261022/evidence/ui_left.json",
+    "mission_parity": "diagnostics/planner_optimization_20261022/evidence/mission_parity.json",
+    "leg_parity": "diagnostics/planner_optimization_20261022/evidence/leg_parity.json",
+    "cancellation": "diagnostics/planner_optimization_20261022/evidence/cancellation.json"
+  },
+  "preservation": {
+    "changed_sources": [
+      "drum_planner/timing/integration.py",
+      "drum_planner/timing/smooth_v2.py",
+      "drum_planner/timing/benchmark.py",
+      "drum_planner/timing/adaptive.py",
+      "drum_planner/timing/core.py",
+      "drum_planner/experiment/checkpoints.py",
+      "drum_planner/experiment/worker.py",
+      "drum_planner/experiment/cache.py",
+      "drum_planner/baseline/planner.py",
+      "drum_planner/baseline/tasks.py"
+    ],
+    "new_sources": [
+      "drum_planner/timing/pipeline.py",
+      "drum_planner/timing/math_cache.py",
+      "drum_planner/experiment/inputs.py"
+    ],
+    "unchanged_sources_and_inputs": 87,
+    "policies_unchanged": true,
+    "physical_motion_code_unchanged": true
+  },
+  "final_audit": {
+    "passed": 84,
+    "warnings": 0,
+    "seconds": 32.3,
+    "log": "diagnostics/planner_optimization_20261022/final_audit.log"
+  }
+}

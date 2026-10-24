@@ -1,0 +1,25 @@
+{
+  "schema": "x5-experiment-retiming-policy-v1",
+  "method": "adaptive",
+  "label": "Adaptive fixed-path retiming",
+  "limits": [
+    0.6,
+    1.2,
+    6.0
+  ],
+  "levels": [
+    8,
+    12,
+    20,
+    32,
+    48,
+    64,
+    96,
+    128,
+    192
+  ],
+  "ftol": 1e-11,
+  "maxiter": 1000,
+  "benchmark": "diagnostics/timing_experiment_20261021/report.json",
+  "selection": "minimum unweighted mean outward duration across four frozen paths"
+}

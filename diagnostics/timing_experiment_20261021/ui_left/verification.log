@@ -1,0 +1,311 @@
+[experiment cache] Automatically queued: progress, sweep, single_arc, clearance. One memory-limited worker at a time.
+[experiment cache] Starting progress; 3 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[progress +   0.1s] progress: candidate 17, score=0.8095, duration=98.10s
+[progress +   0.1s] progress: candidate 2, score=0.9289, duration=19.88s
+[progress +   0.1s] progress: candidate 20, score=1.0405, duration=48.70s
+[progress +   0.1s] progress: candidate 8, score=1.0405, duration=13.11s
+[progress +   0.1s] progress: candidate 11, score=1.5528, duration=12.59s
+[progress +   0.1s] progress: candidate 3, score=1.9778, duration=3.95s
+[progress +   0.1s] progress: candidate 9, score=2.1263, duration=3.36s
+[progress +   0.1s] progress: candidate 5, score=2.3518, duration=15.29s
+[progress +   0.1s] SELECTED candidate 17: lowest progress score; 8 eligible, equally checked candidates
+[progress +   0.1s] TIMING cache: Adaptive fixed-path retiming, 9.051s; same exact selected path
+[progress +   0.1s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[progress +   0.1s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 2 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 23, score=0.6473, duration=36.35s
+[sweep +   0.1s] sweep: candidate 2, score=0.6668, duration=19.88s
+[sweep +   0.1s] sweep: candidate 8, score=0.8503, duration=13.11s
+[sweep +   0.1s] sweep: candidate 26, score=0.8503, duration=59.86s
+[sweep +   0.1s] sweep: candidate 11, score=1.0281, duration=12.59s
+[sweep +   0.1s] sweep: candidate 9, score=1.4996, duration=3.36s
+[sweep +   0.1s] sweep: candidate 3, score=1.6114, duration=3.95s
+[sweep +   0.1s] sweep: candidate 5, score=1.7729, duration=15.29s
+[sweep +   0.1s] SELECTED candidate 23: lowest sweep score; 8 eligible, equally checked candidates
+[sweep +   0.1s] TIMING cache: Adaptive fixed-path retiming, 8.022s; same exact selected path
+[sweep +   0.1s] TIMING READY: 36.353s → 8.022s outward; limits unchanged
+[sweep +   0.1s] READY: 8.022s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 1 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] single_arc: candidate 2, score=0.6668, duration=19.88s
+[single_arc +   0.1s] single_arc: candidate 8, score=0.8503, duration=13.11s
+[single_arc +   0.1s] single_arc: candidate 11, score=1.0281, duration=12.59s
+[single_arc +   0.1s] single_arc: candidate 12, score=1.1965, duration=5.91s
+[single_arc +   0.1s] single_arc: candidate 13, score=1.3841, duration=6.52s
+[single_arc +   0.1s] single_arc: candidate 14, score=1.4329, duration=6.03s
+[single_arc +   0.1s] single_arc: candidate 9, score=1.4996, duration=3.36s
+[single_arc +   0.1s] single_arc: candidate 3, score=1.6114, duration=3.95s
+[single_arc +   0.1s] single_arc: candidate 5, score=1.7729, duration=15.29s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 9 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[single_arc +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[single_arc +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.1s] TIMING cache: Adaptive fixed-path retiming, 9.051s; same exact selected path
+[clearance +   0.1s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[clearance +   0.1s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+AUTO-CACHE: all survivors ready on one shared proposal pool
+PLAYBACK PASSED: progress
+[experiment] Loading cached result for sweep (same scene, state and settings).
+PLAYBACK PASSED: sweep
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+PLAYBACK PASSED: single_arc
+[experiment] Loading cached result for clearance (same scene, state and settings).
+PLAYBACK PASSED: clearance
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 4.0s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.1s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 4.0s search
+[clearance +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.7s] arch search 1/10: 2/60 coarse-feasible; best blocked samples 0
+[clearance +   7.0s] arch search 2/10: 6/60 coarse-feasible; best blocked samples 0
+[clearance +   7.2s] arch search 3/10: 13/60 coarse-feasible; best blocked samples 0
+[clearance +   7.5s] arch search 4/10: 24/60 coarse-feasible; best blocked samples 0
+[clearance +   7.7s] arch search 5/10: 35/60 coarse-feasible; best blocked samples 0
+[clearance +   8.0s] arch search 6/10: 39/60 coarse-feasible; best blocked samples 0
+[clearance +   8.2s] arch search 7/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +   8.5s] arch search 8/10: 41/60 coarse-feasible; best blocked samples 0
+[clearance +   8.8s] arch search 9/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +   9.0s] arch search 10/10: 37/60 coarse-feasible; best blocked samples 0
+[clearance +  10.2s] candidate 4: VALID; 6.52s; reversals=3; coordination=4.408; spatial=12.063
+[clearance +  11.3s] candidate 5: VALID; 5.81s; reversals=4; coordination=4.305; spatial=8.615
+[clearance +  12.5s] candidate 6: VALID; 5.57s; reversals=4; coordination=4.401; spatial=5.035
+[clearance +  13.9s] partial shortcut (economy): 11 accepted changes; objective 1.0597
+[clearance +  14.0s] candidate 7: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  14.6s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  22.3s] candidate 9: VALID; 98.10s; reversals=0; coordination=3.657; spatial=4.794
+[clearance +  23.1s] partial shortcut (economy): 0 accepted changes; objective 2.2057
+[clearance +  24.2s] candidate 10: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +  24.8s] elastic deformation: 1 accepted updates; objective 0.7633
+[clearance +  25.1s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  25.7s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +  29.0s] candidate 13: VALID; 36.35s; reversals=0; coordination=3.458; spatial=4.685
+[clearance +  29.8s] elastic deformation: 8 accepted updates; objective 1.1017
+[clearance +  30.9s] candidate 14: VALID; 4.20s; reversals=3; coordination=3.324; spatial=5.247
+[clearance +  30.9s] SHARED POOL COMPLETE: 9 validated candidates; 30.2s; no recording interiors
+[clearance +  31.1s] clearance: candidate 9, score=1.8067, duration=98.10s
+[clearance +  31.1s] clearance: candidate 13, score=1.8383, duration=36.35s
+[clearance +  31.1s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +  31.1s] clearance: candidate 14, score=2.1250, duration=4.20s
+[clearance +  31.1s] clearance: candidate 4, score=2.4687, duration=6.52s
+[clearance +  31.1s] clearance: candidate 5, score=2.4705, duration=5.81s
+[clearance +  31.1s] clearance: candidate 6, score=2.5419, duration=5.57s
+[clearance +  31.1s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +  31.1s] clearance: candidate 10, score=2.9014, duration=3.95s
+[clearance +  31.1s] SELECTED candidate 9: lowest clearance score; 9 eligible, equally checked candidates
+[clearance +  31.1s] TIMING: Adaptive fixed-path retiming; reference 98.102s; path and ranking locked
+[clearance +  31.3s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[clearance +  32.8s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[clearance +  32.8s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.1s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[progress +   0.1s] progress: candidate 9, score=1.0647, duration=98.10s
+[progress +   0.1s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.1s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.1s] progress: candidate 10, score=2.5820, duration=3.95s
+[progress +   0.1s] SELECTED candidate 9: lowest progress score; 4 eligible, equally checked candidates
+[progress +   0.1s] TIMING cache: Adaptive fixed-path retiming, 9.051s; same exact selected path
+[progress +   0.1s] TIMING READY: 98.102s → 9.051s outward; limits unchanged
+[progress +   0.1s] READY: 9.051s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 13, score=0.7644, duration=36.35s
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 14, score=1.1373, duration=4.20s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.1s] SELECTED candidate 13: lowest sweep score; 4 eligible, equally checked candidates
+[sweep +   0.1s] TIMING: Adaptive fixed-path retiming; reference 36.353s; path and ranking locked
+[sweep +   0.2s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[sweep +   1.6s] TIMING READY: 36.353s → 8.022s outward; limits unchanged
+[sweep +   1.6s] READY: 8.022s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 9 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 4, score=1.6426, duration=6.52s
+[single_arc +   0.0s] single_arc: candidate 5, score=1.6507, duration=5.81s
+[single_arc +   0.0s] single_arc: candidate 6, score=1.6906, duration=5.57s
+[single_arc +   0.0s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 5 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING: Adaptive fixed-path retiming; reference 19.876s; path and ranking locked
+[single_arc +   0.1s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[single_arc +   1.3s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[single_arc +   1.3s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 1.2s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.2s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 0.5s search
+[clearance +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.4s] SHARED POOL COMPLETE: 2 validated candidates; 5.7s; no recording interiors
+[clearance +   6.6s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   6.6s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   6.6s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   6.6s] TIMING: Adaptive fixed-path retiming; reference 19.876s; path and ranking locked
+[clearance +   6.7s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[clearance +   7.8s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[clearance +   7.8s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[progress +   0.0s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.0s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.0s] SELECTED candidate 2: lowest progress score; 2 eligible, equally checked candidates
+[progress +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[progress +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[progress +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.0s] SELECTED candidate 2: lowest sweep score; 2 eligible, equally checked candidates
+[sweep +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[sweep +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[sweep +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.1s] SELECTED candidate 2: lowest single_arc score; 2 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[single_arc +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[single_arc +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[clearance +   0.0s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   0.0s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   0.0s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[clearance +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[clearance +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+RuntimeError: Intentional offline capture-failure test
+[experiment cache] Automatically queued: clearance, progress, sweep, single_arc. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 3 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.7s] CORRIDOR 1/2: endpoint joint range + 4.5deg; 1.2s search
+[clearance +   2.0s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'left_drumstick']], 'reason': 'collision'}
+[clearance +   4.1s] candidate 2: VALID; 19.88s; reversals=0; coordination=3.745; spatial=4.877
+[clearance +   4.2s] CORRIDOR 2/2: endpoint joint range + 7.0deg; 0.5s search
+[clearance +   6.4s] candidate 3: VALID; 3.95s; reversals=2; coordination=3.902; spatial=15.252
+[clearance +   6.4s] SHARED POOL COMPLETE: 2 validated candidates; 5.7s; no recording interiors
+[clearance +   6.6s] clearance: candidate 2, score=1.8517, duration=19.88s
+[clearance +   6.6s] clearance: candidate 3, score=2.9014, duration=3.95s
+[clearance +   6.6s] SELECTED candidate 2: lowest clearance score; 2 eligible, equally checked candidates
+[clearance +   6.6s] TIMING: Adaptive fixed-path retiming; reference 19.876s; path and ranking locked
+[clearance +   6.7s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[clearance +   7.8s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[clearance +   7.8s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment cache] Starting progress; 2 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[progress +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[progress +   0.0s] progress: candidate 2, score=1.2451, duration=19.88s
+[progress +   0.0s] progress: candidate 3, score=2.5820, duration=3.95s
+[progress +   0.0s] SELECTED candidate 2: lowest progress score; 2 eligible, equally checked candidates
+[progress +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[progress +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[progress +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 1 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[sweep +   0.0s] sweep: candidate 2, score=0.7894, duration=19.88s
+[sweep +   0.0s] sweep: candidate 3, score=1.8685, duration=3.95s
+[sweep +   0.0s] SELECTED candidate 2: lowest sweep score; 2 eligible, equally checked candidates
+[sweep +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[sweep +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[sweep +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 2 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.0s] single_arc: candidate 2, score=0.7894, duration=19.88s
+[single_arc +   0.0s] single_arc: candidate 3, score=1.8685, duration=3.95s
+[single_arc +   0.0s] SELECTED candidate 2: lowest single_arc score; 2 eligible, equally checked candidates
+[single_arc +   0.1s] TIMING cache: Adaptive fixed-path retiming, 5.174s; same exact selected path
+[single_arc +   0.1s] TIMING READY: 19.876s → 5.174s outward; limits unchanged
+[single_arc +   0.1s] READY: 5.174s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+ALL GESTURE UI FEATURES PASSED

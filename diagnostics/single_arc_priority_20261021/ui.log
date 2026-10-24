@@ -1,0 +1,171 @@
+Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.
+Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.
+No current usable trajectory. Click Calculate trajectory first.
+No active trajectory to hold. Calculate and Start remain available.
+No active controller/trajectory to recover. Click Calculate for a new cycle. No automatic relaxation. You can retry using the same buttons.
+No calculation or pending Start to cancel. Use Emergency Hold to stop actual arm motion.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Preview / next Start speed: 0.65×.
+Right arm moved since Calculate (4.58° on one joint). Plan discarded. Click Calculate again and leave the right arm still.
+Preview / next Start speed: 0.65×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/baseline_ui/mock/controller-35f8b976
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+Arm is running or held. Use Emergency Hold / Reverse to rest + relax, then Calculate. No plan or motor state changed.
+A real-arm cycle/hold already exists. Use Hold or Reverse to rest; Start will not create a second controller.
+Preview / next Start speed: 0.50×. The requested/current arm run keeps 1.00×.
+HOLD requested. No relaxation. Reverse to rest remains available.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/baseline_ui/mock/controller-ec5f69ae
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+Preview / next Start speed: 1.00×.
+OFFLINE: saved test route loaded by Calculate. No camera/CAN. Preview, then Start simulated cycle.
+Recovery: ./plan_drums.sh baseline --resume /home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/baseline_ui/mock/controller-a3548a48
+START REQUESTED (1.00×) — playing the calculated route on its frozen scene. No camera recapture or replanning.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+SIMULATED CAN failure Correct the cause and retry the button; no automatic release.
+REVERSE requested — establishing a stationary hold, checking the traveled return, then returning to rest before relaxing.
+RELAXED. Controller session finished. Click Calculate for another attempt/cycle; no restart needed.
+THREE-WINDOW MOCK WORKFLOW PASSED
+[experiment] Loading cached result for progress (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment cache] Starting clearance; 0 other methods queued.
+[experiment cache] Automatically queued: clearance. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 15, score=2.1486, duration=7.79s
+[clearance +   0.1s] clearance: candidate 14, score=2.1572, duration=7.78s
+[clearance +   0.1s] clearance: candidate 16, score=2.2759, duration=7.88s
+[clearance +   0.1s] clearance: candidate 23, score=2.6905, duration=114.29s
+[clearance +   0.1s] clearance: candidate 8, score=2.6905, duration=51.14s
+[clearance +   0.1s] clearance: candidate 20, score=3.0091, duration=8.03s
+[clearance +   0.1s] clearance: candidate 10, score=3.0441, duration=32.08s
+[clearance +   0.1s] clearance: candidate 25, score=3.0441, duration=32.08s
+[clearance +   0.1s] clearance: candidate 5, score=3.0485, duration=32.89s
+[clearance +   0.1s] clearance: candidate 3, score=3.5844, duration=5.81s
+[clearance +   0.1s] clearance: candidate 2, score=4.2973, duration=44.05s
+[clearance +   0.1s] clearance: candidate 13, score=4.3966, duration=25.40s
+[clearance +   0.1s] SELECTED candidate 15: lowest clearance score; 12 eligible, equally checked candidates
+[clearance +   0.1s] TIMING cache: Adaptive fixed-path retiming, 4.230s; same exact selected path
+[clearance +   0.1s] TIMING READY: 7.793s → 4.230s outward; limits unchanged
+[clearance +   0.1s] READY: 4.230s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+{
+  "side": "right",
+  "methods": 4,
+  "errors": [],
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 362,
+    "maximum_frame_s": 0.05852466099895537,
+    "median_frame_s": 0.0008441464742645621,
+    "surface_geometry_uploads": 1,
+    "surface_color_uploads": 2,
+    "surface_triangles": 20184,
+    "render_errors": []
+  },
+  "report": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_right/arm_ui_verification.json"
+}
+[experiment] Loading cached result for progress (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment cache] Starting clearance; 0 other methods queued.
+[experiment cache] Automatically queued: clearance. One memory-limited worker at a time.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: left; ZONE: zone1.json, original left gripper TCP only; 5 mm membership tolerance
+[clearance +   0.1s] REUSING SHARED POOL: 13 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 17, score=1.7094, duration=98.10s
+[clearance +   0.1s] clearance: candidate 23, score=1.7211, duration=36.35s
+[clearance +   0.1s] clearance: candidate 2, score=1.7291, duration=19.88s
+[clearance +   0.1s] clearance: candidate 8, score=1.9255, duration=13.11s
+[clearance +   0.1s] clearance: candidate 26, score=1.9255, duration=59.86s
+[clearance +   0.1s] clearance: candidate 20, score=1.9264, duration=48.70s
+[clearance +   0.1s] clearance: candidate 13, score=1.9593, duration=6.52s
+[clearance +   0.1s] clearance: candidate 12, score=2.0507, duration=5.91s
+[clearance +   0.1s] clearance: candidate 11, score=2.0873, duration=12.59s
+[clearance +   0.1s] clearance: candidate 14, score=2.1503, duration=6.03s
+[clearance +   0.1s] clearance: candidate 9, score=2.4353, duration=3.36s
+[clearance +   0.1s] clearance: candidate 3, score=2.6443, duration=3.95s
+[clearance +   0.1s] clearance: candidate 5, score=2.8059, duration=15.29s
+[clearance +   0.1s] SELECTED candidate 17: lowest clearance score; 13 eligible, equally checked candidates
+[clearance +   0.3s] SMOOTH V2 cache: 3.473s outward; same validated rounded curve
+[clearance +   0.3s] SMOOTH V2 READY: 13 → 0 internal stops; 9.051s → 3.473s; tip deviation 2.16 mm
+[clearance +   0.3s] READY: 3.473s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+{
+  "side": "left",
+  "methods": 4,
+  "errors": [],
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 362,
+    "maximum_frame_s": 0.06347685097716749,
+    "median_frame_s": 0.0007452709833160043,
+    "surface_geometry_uploads": 1,
+    "surface_color_uploads": 2,
+    "surface_triangles": 20184,
+    "render_errors": []
+  },
+  "report": "/home/jason/Proyectos3/X5/planner_runs/single_arc_priority_20261021/experiment_left/arm_ui_verification.json"
+}
+Click Calculate trajectory to begin. Opening this program does not calculate or move the arm.
+	Command being timed: "bash diagnostics/single_arc_priority_20261021/run_ui.sh"
+	User time (seconds): 14.54
+	System time (seconds): 2.05
+	Percent of CPU this job got: 27%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 616344
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 4
+	Minor (reclaiming a frame) page faults: 381981
+	Voluntary context switches: 37171
+	Involuntary context switches: 10899
+	Swaps: 0
+	File system inputs: 54320
+	File system outputs: 4968
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

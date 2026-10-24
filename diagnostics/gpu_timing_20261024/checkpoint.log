@@ -1,0 +1,208 @@
+[checkpoints workspace_curve] LEG 1/3: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 3.0 mm, 9 evaluations
+[workspace_curve +   1.2s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.2s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   1.3s] workspace 2: fit max 6.8 mm, 11 evaluations
+[workspace_curve +   1.3s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   1.3s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.4s] workspace 3: fit max 0.4 mm, 8 evaluations
+[workspace_curve +   1.5s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.5s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[workspace_curve +   1.6s] workspace 4: fit max 3.7 mm, 10 evaluations
+[workspace_curve +   1.7s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[workspace_curve +   1.8s] workspace 5: fit max 2.9 mm, 14 evaluations
+[workspace_curve +   1.8s] candidate 5: rejected by continuous joint bounds
+[workspace_curve +   1.8s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   2.0s] workspace 6: fit max 6.1 mm, 11 evaluations
+[workspace_curve +   3.2s] candidate 6: VALID; 8.00s; reversals=3; coordination=6.466; spatial=16.353
+[workspace_curve +   3.2s] WORKSPACE VALID 6: turn=105.1deg, score=3.4764
+[workspace_curve +   3.2s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 7: fit max 5.5 mm, 15 evaluations
+[workspace_curve +   3.4s] candidate 7: rejected by continuous joint bounds
+[workspace_curve +   3.4s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.5s] workspace 8: fit max 3.7 mm, 9 evaluations
+[workspace_curve +   3.8s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.8s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.9s] workspace 9: fit max 8.3 mm, 11 evaluations
+[workspace_curve +   3.9s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.9s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.0s] workspace 10: fit max 0.7 mm, 10 evaluations
+[workspace_curve +   4.1s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.1s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.2s] workspace 11: fit max 4.5 mm, 11 evaluations
+[workspace_curve +   4.3s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.3s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.5s] workspace 12: fit max 3.6 mm, 15 evaluations
+[workspace_curve +   4.5s] candidate 12: rejected by continuous joint bounds
+[workspace_curve +   4.5s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.6s] workspace 13: fit max 7.5 mm, 12 evaluations
+[workspace_curve +   5.8s] candidate 13: VALID; 7.88s; reversals=3; coordination=6.646; spatial=19.561
+[workspace_curve +   5.9s] WORKSPACE VALID 13: turn=114.1deg, score=3.8095
+[workspace_curve +   5.9s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   6.0s] workspace 14: fit max 6.9 mm, 14 evaluations
+[workspace_curve +   6.0s] candidate 14: rejected by continuous joint bounds
+[workspace_curve +   6.2s] WORKSPACE SELECTED 6: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 2/3: destinationR1 → destinationR4; budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 1.1 mm, 9 evaluations
+[workspace_curve +   0.8s] candidate 1: rejected by continuous joint bounds
+[workspace_curve +   0.8s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   0.9s] workspace 2: fit max 4.0 mm, 11 evaluations
+[workspace_curve +   0.9s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   0.9s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.0s] workspace 3: fit max 0.3 mm, 8 evaluations
+[workspace_curve +   1.1s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.1s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.9s fit allowance
+[workspace_curve +   1.2s] workspace 4: fit max 1.0 mm, 7 evaluations
+[workspace_curve +   2.4s] candidate 4: VALID; 7.58s; reversals=0; coordination=2.426; spatial=19.965
+[workspace_curve +   2.5s] WORKSPACE VALID 4: turn=113.7deg, score=3.5812
+[workspace_curve +   2.5s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.8s fit allowance
+[workspace_curve +   2.6s] workspace 5: fit max 2.3 mm, 10 evaluations
+[workspace_curve +   2.6s] candidate 5: rejected by continuous joint bounds
+[workspace_curve +   2.6s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   2.7s] workspace 6: fit max 2.5 mm, 10 evaluations
+[workspace_curve +   2.7s] candidate 6: rejected by continuous joint bounds
+[workspace_curve +   2.7s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   2.9s] workspace 7: fit max 3.9 mm, 13 evaluations
+[workspace_curve +   2.9s] candidate 7: rejected by continuous joint bounds
+[workspace_curve +   2.9s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.0s] workspace 8: fit max 1.3 mm, 8 evaluations
+[workspace_curve +   3.0s] candidate 8: rejected by continuous joint bounds
+[workspace_curve +   3.0s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.1s] workspace 9: fit max 4.9 mm, 12 evaluations
+[workspace_curve +   3.1s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.1s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.2s] workspace 10: fit max 0.4 mm, 9 evaluations
+[workspace_curve +   3.3s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.3s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 11: fit max 1.1 mm, 7 evaluations
+[workspace_curve +   4.6s] candidate 11: VALID; 7.74s; reversals=0; coordination=2.654; spatial=21.990
+[workspace_curve +   4.6s] WORKSPACE VALID 11: turn=119.0deg, score=3.8215
+[workspace_curve +   4.6s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.7s] workspace 12: fit max 2.8 mm, 11 evaluations
+[workspace_curve +   4.7s] candidate 12: rejected by continuous joint bounds
+[workspace_curve +   4.7s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.9s] workspace 13: fit max 3.0 mm, 10 evaluations
+[workspace_curve +   4.9s] candidate 13: rejected by continuous joint bounds
+[workspace_curve +   4.9s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   5.0s] workspace 14: fit max 4.8 mm, 13 evaluations
+[workspace_curve +   5.0s] candidate 14: rejected by continuous joint bounds
+[workspace_curve +   5.2s] WORKSPACE SELECTED 4: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 3/3: destinationR4 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 0.4 mm, 7 evaluations
+[workspace_curve +   0.8s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   0.8s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   0.9s] workspace 2: fit max 2.9 mm, 12 evaluations
+[workspace_curve +   0.9s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   0.9s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.1s] workspace 3: fit max 1.2 mm, 20 evaluations
+[workspace_curve +   1.1s] candidate 3: rejected by continuous joint bounds
+[workspace_curve +   1.1s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.9s fit allowance
+[workspace_curve +   1.2s] workspace 4: fit max 1.0 mm, 12 evaluations
+[workspace_curve +   1.3s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.3s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[workspace_curve +   1.3s] workspace 5: fit max 0.5 mm, 7 evaluations
+[workspace_curve +   1.4s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.4s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.5s] workspace 6: fit max 2.5 mm, 14 evaluations
+[workspace_curve +   1.5s] candidate 6: rejected by continuous joint bounds
+[workspace_curve +   1.5s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.6s] workspace 7: fit max 1.9 mm, 7 evaluations
+[workspace_curve +   2.8s] candidate 7: VALID; 6.26s; reversals=3; coordination=4.448; spatial=26.448
+[workspace_curve +   2.8s] WORKSPACE VALID 7: turn=135.1deg, score=4.3955
+[workspace_curve +   2.8s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   2.9s] workspace 8: fit max 0.5 mm, 7 evaluations
+[workspace_curve +   2.9s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   2.9s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.0s] workspace 9: fit max 3.9 mm, 10 evaluations
+[workspace_curve +   3.0s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.0s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.2s] workspace 10: fit max 5.0 mm, 23 evaluations
+[workspace_curve +   3.2s] candidate 10: rejected by continuous joint bounds
+[workspace_curve +   3.2s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 11: fit max 1.2 mm, 13 evaluations
+[workspace_curve +   3.4s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.4s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.5s] workspace 12: fit max 0.6 mm, 7 evaluations
+[workspace_curve +   3.5s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.5s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.7s] workspace 13: fit max 3.3 mm, 12 evaluations
+[workspace_curve +   3.7s] candidate 13: rejected by continuous joint bounds
+[workspace_curve +   3.7s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.8s] workspace 14: fit max 2.6 mm, 8 evaluations
+[workspace_curve +   4.9s] candidate 14: VALID; 6.21s; reversals=3; coordination=4.810; spatial=29.824
+[workspace_curve +   5.0s] WORKSPACE VALID 14: turn=141.5deg, score=4.9521
+[workspace_curve +   5.2s] WORKSPACE SELECTED 7: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints] All 3 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right checkpoint_1 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right checkpoint_1 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 8.000s; path and ranking locked
+[right checkpoint_2 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right checkpoint_2 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right checkpoint_2 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.582s; path and ranking locked
+[right checkpoint_1 timing +   0.2s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 4.205s. Current scene is checked separately.
+[right checkpoint_1 timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   0.2s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 3.493s. Current scene is checked separately.
+[right checkpoint_2 timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_1 timing +   1.3s] CPU REFERENCE | TIMING READY: 8.000s → 4.205s outward; limits unchanged
+[right checkpoint_1 timing +   1.3s] CPU REFERENCE READY: 4.205074s movement; 1.13s reference lookup/qualification; cached=True. GPU acceptance ceiling 4.247125s.
+[right checkpoint_1 timing +   1.3s] GPU QUEUE: waiting for the bounded Vulkan timing slot
+[right checkpoint_1 timing +   1.3s] GPU OPTIMIZATION START: optimizer state/updates on device; no CPU SLSQP in this phase
+[right checkpoint_2 timing +   1.3s] CPU REFERENCE | TIMING READY: 7.582s → 3.493s outward; limits unchanged
+[right checkpoint_2 timing +   1.3s] CPU REFERENCE READY: 3.493140s movement; 1.13s reference lookup/qualification; cached=True. GPU acceptance ceiling 3.528071s.
+[right checkpoint_2 timing +   1.3s] GPU QUEUE: waiting for the bounded Vulkan timing slot
+[right checkpoint_1 timing +   1.5s] GPU VULKAN 8 controls / pass 1: 4.451939s movement, +5.871% vs CPU reference; 0.27s GPU optimization + continuous checking
+[right checkpoint_1 timing +   1.9s] GPU VULKAN 12 controls / pass 1: 4.377089s movement, +4.091% vs CPU reference; 0.62s GPU optimization + continuous checking
+[right checkpoint_1 timing +   2.4s] GPU VULKAN 20 controls / pass 1: 4.291936s movement, +2.066% vs CPU reference; 1.11s GPU optimization + continuous checking
+[right checkpoint_1 timing +   3.3s] GPU VULKAN 32 controls / pass 1: 4.293049s movement, +2.092% vs CPU reference; 1.99s GPU optimization + continuous checking
+[right checkpoint_1 timing +   4.2s] GPU VULKAN 32 controls / pass 2: 4.248679s movement, +1.037% vs CPU reference; 2.92s GPU optimization + continuous checking
+[right checkpoint_1 timing +   5.3s] GPU VULKAN 32 controls / pass 3: 4.246616s movement, +0.988% vs CPU reference; 3.99s GPU optimization + continuous checking
+[right checkpoint_2 timing +   5.2s] GPU OPTIMIZATION START: optimizer state/updates on device; no CPU SLSQP in this phase
+[right checkpoint_1 timing +   5.5s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right checkpoint_2 timing +   5.6s] GPU VULKAN 8 controls / pass 1: 3.931105s movement, +12.538% vs CPU reference; 0.32s GPU optimization + continuous checking
+[right checkpoint_2 timing +   5.9s] GPU VULKAN 12 controls / pass 1: 3.881030s movement, +11.104% vs CPU reference; 0.64s GPU optimization + continuous checking
+[right checkpoint_2 timing +   6.5s] GPU VULKAN 20 controls / pass 1: 3.854510s movement, +10.345% vs CPU reference; 1.25s GPU optimization + continuous checking
+[right checkpoint_1 timing +   6.6s] GPU TIMING READY: 4.246616s movement (+0.988% vs CPU); GPU phase 4.01s, final checks 1.26s, CPU qualification 1.13s; GPU result cached=False.
+[right checkpoint_1 timing +   6.6s] LEG READY: 4.247s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right return_to_start timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right return_to_start timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 6.260s; path and ranking locked
+[right return_to_start timing +   0.2s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 2.703s. Current scene is checked separately.
+[right return_to_start timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +   7.7s] GPU VULKAN 32 controls / pass 1: 3.627748s movement, +3.853% vs CPU reference; 2.42s GPU optimization + continuous checking
+[right return_to_start timing +   1.2s] CPU REFERENCE | TIMING READY: 6.260s → 2.703s outward; limits unchanged
+[right return_to_start timing +   1.2s] CPU REFERENCE READY: 2.702763s movement; 1.06s reference lookup/qualification; cached=True. GPU acceptance ceiling 2.729790s.
+[right return_to_start timing +   1.2s] GPU QUEUE: waiting for the bounded Vulkan timing slot
+[right checkpoint_2 timing +   9.5s] GPU VULKAN 48 controls / pass 1: 3.579269s movement, +2.466% vs CPU reference; 4.21s GPU optimization + continuous checking
+[right checkpoint_2 timing +  11.5s] GPU VULKAN 64 controls / pass 1: 3.528553s movement, +1.014% vs CPU reference; 6.27s GPU optimization + continuous checking
+[right checkpoint_2 timing +  13.5s] GPU VULKAN 64 controls / pass 2: 3.534013s movement, +1.170% vs CPU reference; 8.28s GPU optimization + continuous checking
+[right checkpoint_2 timing +  15.7s] GPU VULKAN 64 controls / pass 3: 3.529020s movement, +1.027% vs CPU reference; 10.48s GPU optimization + continuous checking
+[right checkpoint_2 timing +  18.6s] GPU VULKAN 96 controls / pass 1: 3.505738s movement, +0.361% vs CPU reference; 13.33s GPU optimization + continuous checking
+[right return_to_start timing +  11.6s] GPU OPTIMIZATION START: optimizer state/updates on device; no CPU SLSQP in this phase
+[right return_to_start timing +  11.9s] GPU VULKAN 8 controls / pass 1: 3.067822s movement, +13.507% vs CPU reference; 0.23s GPU optimization + continuous checking
+[right checkpoint_2 timing +  19.2s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right return_to_start timing +  12.3s] GPU VULKAN 12 controls / pass 1: 2.848744s movement, +5.401% vs CPU reference; 0.71s GPU optimization + continuous checking
+[right return_to_start timing +  13.0s] GPU VULKAN 20 controls / pass 1: 2.791786s movement, +3.294% vs CPU reference; 1.37s GPU optimization + continuous checking
+[right checkpoint_2 timing +  20.3s] GPU TIMING READY: 3.505738s movement (+0.361% vs CPU); GPU phase 17.32s, final checks 1.66s, CPU qualification 1.13s; GPU result cached=False.
+[right checkpoint_2 timing +  20.3s] LEG READY: 3.506s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +  14.2s] GPU VULKAN 32 controls / pass 1: 2.767439s movement, +2.393% vs CPU reference; 2.58s GPU optimization + continuous checking
+[right return_to_start timing +  16.0s] GPU VULKAN 48 controls / pass 1: 2.736534s movement, +1.250% vs CPU reference; 4.36s GPU optimization + continuous checking
+[right return_to_start timing +  17.6s] GPU VULKAN 48 controls / pass 2: 2.729813s movement, +1.001% vs CPU reference; 5.93s GPU optimization + continuous checking
+[right return_to_start timing +  19.2s] GPU VULKAN 48 controls / pass 3: 2.727918s movement, +0.931% vs CPU reference; 7.57s GPU optimization + continuous checking
+[right return_to_start timing +  19.5s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right return_to_start timing +  20.5s] GPU TIMING READY: 2.727918s movement (+0.931% vs CPU); GPU phase 18.01s, final checks 1.30s, CPU qualification 1.06s; GPU result cached=False.
+[right return_to_start timing +  20.5s] LEG READY: 2.728s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 2 destinations; 9.752s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 2.728s return to original start; SIMULATION ONLY
+PASS actual saved-input R1 -> R4 -> independently planned rest experiment

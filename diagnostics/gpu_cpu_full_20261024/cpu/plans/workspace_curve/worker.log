@@ -1,0 +1,267 @@
+[checkpoints workspace_curve] LEG 1/3: saved rest → destinationR1; budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 3.0 mm, 9 evaluations
+[workspace_curve +   1.2s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.2s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   1.3s] workspace 2: fit max 6.8 mm, 11 evaluations
+[workspace_curve +   1.3s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   1.3s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.4s] workspace 3: fit max 0.4 mm, 8 evaluations
+[workspace_curve +   1.4s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.4s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[workspace_curve +   1.6s] workspace 4: fit max 3.7 mm, 10 evaluations
+[workspace_curve +   1.7s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[workspace_curve +   1.8s] workspace 5: fit max 2.9 mm, 14 evaluations
+[workspace_curve +   1.8s] candidate 5: rejected by continuous joint bounds
+[workspace_curve +   1.8s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.9s] workspace 6: fit max 6.1 mm, 11 evaluations
+[workspace_curve +   3.2s] candidate 6: VALID; 8.00s; reversals=3; coordination=6.466; spatial=16.353
+[workspace_curve +   3.2s] WORKSPACE VALID 6: turn=105.1deg, score=3.4764
+[workspace_curve +   3.2s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 7: fit max 5.5 mm, 15 evaluations
+[workspace_curve +   3.4s] candidate 7: rejected by continuous joint bounds
+[workspace_curve +   3.4s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.5s] workspace 8: fit max 3.7 mm, 9 evaluations
+[workspace_curve +   3.8s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.8s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.9s] workspace 9: fit max 8.3 mm, 11 evaluations
+[workspace_curve +   3.9s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.9s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.0s] workspace 10: fit max 0.7 mm, 10 evaluations
+[workspace_curve +   4.1s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.1s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.2s] workspace 11: fit max 4.5 mm, 11 evaluations
+[workspace_curve +   4.3s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.3s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.5s] workspace 12: fit max 3.6 mm, 15 evaluations
+[workspace_curve +   4.5s] candidate 12: rejected by continuous joint bounds
+[workspace_curve +   4.5s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.6s] workspace 13: fit max 7.5 mm, 12 evaluations
+[workspace_curve +   5.8s] candidate 13: VALID; 7.88s; reversals=3; coordination=6.646; spatial=19.561
+[workspace_curve +   5.9s] WORKSPACE VALID 13: turn=114.1deg, score=3.8095
+[workspace_curve +   5.9s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   6.0s] workspace 14: fit max 6.9 mm, 14 evaluations
+[workspace_curve +   6.0s] candidate 14: rejected by continuous joint bounds
+[workspace_curve +   6.2s] WORKSPACE SELECTED 6: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 2/3: destinationR1 → destinationR4; budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 1.1 mm, 9 evaluations
+[workspace_curve +   0.8s] candidate 1: rejected by continuous joint bounds
+[workspace_curve +   0.8s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   0.9s] workspace 2: fit max 4.0 mm, 11 evaluations
+[workspace_curve +   0.9s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   0.9s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.0s] workspace 3: fit max 0.3 mm, 8 evaluations
+[workspace_curve +   1.1s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.1s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.9s fit allowance
+[workspace_curve +   1.2s] workspace 4: fit max 1.0 mm, 7 evaluations
+[workspace_curve +   2.4s] candidate 4: VALID; 7.58s; reversals=0; coordination=2.426; spatial=19.965
+[workspace_curve +   2.5s] WORKSPACE VALID 4: turn=113.7deg, score=3.5812
+[workspace_curve +   2.5s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.8s fit allowance
+[workspace_curve +   2.6s] workspace 5: fit max 2.3 mm, 10 evaluations
+[workspace_curve +   2.6s] candidate 5: rejected by continuous joint bounds
+[workspace_curve +   2.6s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   2.7s] workspace 6: fit max 2.5 mm, 10 evaluations
+[workspace_curve +   2.7s] candidate 6: rejected by continuous joint bounds
+[workspace_curve +   2.7s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   2.9s] workspace 7: fit max 3.9 mm, 13 evaluations
+[workspace_curve +   2.9s] candidate 7: rejected by continuous joint bounds
+[workspace_curve +   2.9s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   2.9s] workspace 8: fit max 1.3 mm, 8 evaluations
+[workspace_curve +   2.9s] candidate 8: rejected by continuous joint bounds
+[workspace_curve +   2.9s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.1s] workspace 9: fit max 4.9 mm, 12 evaluations
+[workspace_curve +   3.1s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.1s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.2s] workspace 10: fit max 0.4 mm, 9 evaluations
+[workspace_curve +   3.3s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.3s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.3s] workspace 11: fit max 1.1 mm, 7 evaluations
+[workspace_curve +   4.6s] candidate 11: VALID; 7.74s; reversals=0; coordination=2.654; spatial=21.990
+[workspace_curve +   4.6s] WORKSPACE VALID 11: turn=119.0deg, score=3.8215
+[workspace_curve +   4.6s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.8s] workspace 12: fit max 2.8 mm, 11 evaluations
+[workspace_curve +   4.8s] candidate 12: rejected by continuous joint bounds
+[workspace_curve +   4.8s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.9s] workspace 13: fit max 3.0 mm, 10 evaluations
+[workspace_curve +   4.9s] candidate 13: rejected by continuous joint bounds
+[workspace_curve +   4.9s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   5.0s] workspace 14: fit max 4.8 mm, 13 evaluations
+[workspace_curve +   5.0s] candidate 14: rejected by continuous joint bounds
+[workspace_curve +   5.3s] WORKSPACE SELECTED 4: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints workspace_curve] LEG 3/3: destinationR4 → original saved rest (new return path); budget 120s; frozen scene unchanged
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 0.4 mm, 7 evaluations
+[workspace_curve +   0.8s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   0.8s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   1.0s] workspace 2: fit max 2.9 mm, 12 evaluations
+[workspace_curve +   1.0s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   1.0s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.2s] workspace 3: fit max 1.2 mm, 20 evaluations
+[workspace_curve +   1.2s] candidate 3: rejected by continuous joint bounds
+[workspace_curve +   1.2s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.9s fit allowance
+[workspace_curve +   1.3s] workspace 4: fit max 1.0 mm, 12 evaluations
+[workspace_curve +   1.3s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.3s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[workspace_curve +   1.4s] workspace 5: fit max 0.5 mm, 7 evaluations
+[workspace_curve +   1.5s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.5s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.6s] workspace 6: fit max 2.5 mm, 14 evaluations
+[workspace_curve +   1.6s] candidate 6: rejected by continuous joint bounds
+[workspace_curve +   1.6s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.7s] workspace 7: fit max 1.9 mm, 7 evaluations
+[workspace_curve +   2.9s] candidate 7: VALID; 6.26s; reversals=3; coordination=4.448; spatial=26.448
+[workspace_curve +   2.9s] WORKSPACE VALID 7: turn=135.1deg, score=4.3955
+[workspace_curve +   2.9s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.0s] workspace 8: fit max 0.5 mm, 7 evaluations
+[workspace_curve +   3.0s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.0s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.2s] workspace 9: fit max 3.9 mm, 10 evaluations
+[workspace_curve +   3.2s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.2s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 10: fit max 5.0 mm, 23 evaluations
+[workspace_curve +   3.4s] candidate 10: rejected by continuous joint bounds
+[workspace_curve +   3.4s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.5s] workspace 11: fit max 1.2 mm, 13 evaluations
+[workspace_curve +   3.6s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.6s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.7s] workspace 12: fit max 0.6 mm, 7 evaluations
+[workspace_curve +   3.7s] candidate 12: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.7s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.8s] workspace 13: fit max 3.3 mm, 12 evaluations
+[workspace_curve +   3.8s] candidate 13: rejected by continuous joint bounds
+[workspace_curve +   3.8s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.9s] workspace 14: fit max 2.6 mm, 8 evaluations
+[workspace_curve +   5.1s] candidate 14: VALID; 6.21s; reversals=3; coordination=4.810; spatial=29.824
+[workspace_curve +   5.1s] WORKSPACE VALID 14: turn=141.5deg, score=4.9521
+[workspace_curve +   5.3s] WORKSPACE SELECTED 7: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[checkpoints] All 3 geometric routes locked. Timing with two workers; same refinement/limits, shared job memory cap; no concurrent path searches.
+[right checkpoint_1 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 8.000s; path and ranking locked
+[right checkpoint_2 timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 7.582s; path and ranking locked
+[right checkpoint_1 timing +   0.1s]   8 controls: refining 1.002476 limit ratio
+[right checkpoint_2 timing +   0.1s]   8 controls: refining 1.002663 limit ratio
+[right checkpoint_1 timing +   0.2s]   8 controls: refining 1.000073 limit ratio
+[right checkpoint_2 timing +   0.2s]   8 controls: refining 1.000083 limit ratio
+[right checkpoint_1 timing +   0.2s]   8 controls: refining 1.000042 limit ratio
+[right checkpoint_1 timing +   0.3s] ADAPTIVE 8 controls: 4.443616s; best 4.443616s; 0.2s computation
+[right checkpoint_2 timing +   0.3s] ADAPTIVE 8 controls: 3.923856s; best 3.923856s; 0.2s computation
+[right checkpoint_1 timing +   0.4s]   12 controls: refining 1.002477 limit ratio
+[right checkpoint_2 timing +   0.4s]   12 controls: refining 1.000914 limit ratio
+[right checkpoint_1 timing +   0.4s]   12 controls: refining 1.000598 limit ratio
+[right checkpoint_2 timing +   0.4s]   12 controls: refining 1.000213 limit ratio
+[right checkpoint_1 timing +   0.5s]   12 controls: refining 1.000141 limit ratio
+[right checkpoint_2 timing +   0.5s]   12 controls: refining 1.000029 limit ratio
+[right checkpoint_1 timing +   0.6s] ADAPTIVE 12 controls: 4.369891s; best 4.369891s; 0.3s computation
+[right checkpoint_2 timing +   0.6s] ADAPTIVE 12 controls: 3.879106s; best 3.879106s; 0.3s computation
+[right checkpoint_1 timing +   0.7s]   20 controls: refining 1.002731 limit ratio
+[right checkpoint_2 timing +   0.7s]   20 controls: refining 1.002894 limit ratio
+[right checkpoint_1 timing +   0.8s]   20 controls: refining 1.000564 limit ratio
+[right checkpoint_2 timing +   0.8s]   20 controls: refining 1.002778 limit ratio
+[right checkpoint_1 timing +   1.0s]   20 controls: refining 1.000111 limit ratio
+[right checkpoint_2 timing +   1.0s]   20 controls: refining 1.002613 limit ratio
+[right checkpoint_1 timing +   1.1s] ADAPTIVE 20 controls: 4.282531s; best 4.282531s; 0.5s computation
+[right checkpoint_2 timing +   1.1s] ADAPTIVE 20 controls: 3.854364s; best 3.854364s; 0.5s computation
+[right checkpoint_1 timing +   1.3s]   32 controls: refining 1.011486 limit ratio
+[right checkpoint_2 timing +   1.3s]   32 controls: refining 1.016603 limit ratio
+[right checkpoint_1 timing +   1.5s]   32 controls: refining 1.000708 limit ratio
+[right checkpoint_2 timing +   1.5s]   32 controls: refining 1.006608 limit ratio
+[right checkpoint_1 timing +   1.6s]   32 controls: refining 1.000165 limit ratio
+[right checkpoint_2 timing +   1.7s]   32 controls: refining 1.003342 limit ratio
+[right checkpoint_1 timing +   1.8s] ADAPTIVE 32 controls: 4.246619s; best 4.246619s; 0.7s computation
+[right checkpoint_2 timing +   1.9s] ADAPTIVE 32 controls: 3.581244s; best 3.581244s; 0.8s computation
+[right checkpoint_1 timing +   2.1s]   48 controls: refining 1.000702 limit ratio
+[right checkpoint_2 timing +   2.3s]   48 controls: refining 1.014229 limit ratio
+[right checkpoint_1 timing +   2.4s]   48 controls: refining 1.000584 limit ratio
+[right checkpoint_2 timing +   2.5s]   48 controls: refining 1.006919 limit ratio
+[right checkpoint_1 timing +   2.7s]   48 controls: refining 1.000286 limit ratio
+[right checkpoint_2 timing +   2.8s]   48 controls: refining 1.001164 limit ratio
+[right checkpoint_1 timing +   2.9s] ADAPTIVE 48 controls: 4.228825s; best 4.228825s; 1.1s computation
+[right checkpoint_2 timing +   3.1s] ADAPTIVE 48 controls: 3.533943s; best 3.533943s; 1.2s computation
+[right checkpoint_1 timing +   3.4s]   64 controls: refining 1.002367 limit ratio
+[right checkpoint_1 timing +   3.7s]   64 controls: refining 1.000207 limit ratio
+[right checkpoint_1 timing +   4.1s]   64 controls: refining 1.000162 limit ratio
+[right checkpoint_2 timing +   4.1s]   64 controls: refining 1.005561 limit ratio
+[right checkpoint_1 timing +   4.4s] ADAPTIVE 64 controls: 4.214886s; best 4.214886s; 1.5s computation
+[right checkpoint_2 timing +   4.4s]   64 controls: refining 1.006683 limit ratio
+[right checkpoint_2 timing +   4.8s]   64 controls: refining 1.004963 limit ratio
+[right checkpoint_1 timing +   5.1s]   96 controls: refining 1.000168 limit ratio
+[right checkpoint_2 timing +   5.2s] ADAPTIVE 64 controls: 3.529000s; best 3.529000s; 2.1s computation
+[right checkpoint_1 timing +   5.7s]   96 controls: refining 1.000162 limit ratio
+[right checkpoint_1 timing +   6.3s]   96 controls: refining 1.000080 limit ratio
+[right checkpoint_1 timing +   6.8s] ADAPTIVE 96 controls: 4.210313s; best 4.210313s; 2.4s computation
+[right checkpoint_1 timing +   7.9s]   128 controls: refining 1.000116 limit ratio
+[right checkpoint_1 timing +   8.9s]   128 controls: refining 1.000088 limit ratio
+[right checkpoint_1 timing +   9.8s]   128 controls: refining 1.000078 limit ratio
+[right checkpoint_2 timing +  10.2s]   96 controls: refining 1.001444 limit ratio
+[right checkpoint_1 timing +  10.4s] ADAPTIVE 128 controls: 4.207285s; best 4.207285s; 3.6s computation
+[right checkpoint_1 timing +  13.8s]   192 controls: refining 1.000059 limit ratio
+[right checkpoint_1 timing +  15.9s]   192 controls: refining 1.000031 limit ratio
+[right checkpoint_1 timing +  18.0s]   192 controls: refining 1.000025 limit ratio
+[right checkpoint_1 timing +  18.9s] ADAPTIVE 192 controls: 4.205074s; best 4.205074s; 8.5s computation
+[right checkpoint_1 timing +  18.9s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing +  19.5s]   96 controls: refining 1.001341 limit ratio
+[right checkpoint_1 timing +  20.0s] TIMING READY: 8.000s → 4.205s outward; limits unchanged
+[right checkpoint_1 timing +  20.0s] LEG READY: 4.205s; exact timing and collision/zone checks complete; NO motor commands.
+[right return_to_start timing +   0.0s] TIMING: Adaptive fixed-path retiming; reference 6.260s; path and ranking locked
+[right return_to_start timing +   0.1s]   8 controls: refining 1.001569 limit ratio
+[right return_to_start timing +   0.2s]   8 controls: refining 1.000487 limit ratio
+[right return_to_start timing +   0.3s] ADAPTIVE 8 controls: 3.064805s; best 3.064805s; 0.2s computation
+[right return_to_start timing +   0.4s]   12 controls: refining 1.003461 limit ratio
+[right return_to_start timing +   0.5s]   12 controls: refining 1.004785 limit ratio
+[right return_to_start timing +   0.5s]   12 controls: refining 1.001170 limit ratio
+[right return_to_start timing +   0.6s] ADAPTIVE 12 controls: 2.845430s; best 2.845430s; 0.3s computation
+[right checkpoint_2 timing +  21.2s]   96 controls: refining 1.000468 limit ratio
+[right return_to_start timing +   0.8s]   20 controls: refining 1.003776 limit ratio
+[right return_to_start timing +   0.9s]   20 controls: refining 1.002484 limit ratio
+[right return_to_start timing +   1.0s]   20 controls: refining 1.001124 limit ratio
+[right return_to_start timing +   1.1s] ADAPTIVE 20 controls: 2.786231s; best 2.786231s; 0.5s computation
+[right checkpoint_2 timing +  21.6s] ADAPTIVE 96 controls: 3.498728s; best 3.498728s; 16.5s computation
+[right return_to_start timing +   1.5s]   32 controls: refining 1.004524 limit ratio
+[right return_to_start timing +   1.7s]   32 controls: refining 1.001041 limit ratio
+[right return_to_start timing +   1.8s]   32 controls: refining 1.000953 limit ratio
+[right return_to_start timing +   2.0s] ADAPTIVE 32 controls: 2.758253s; best 2.758253s; 0.9s computation
+[right return_to_start timing +   2.6s]   48 controls: refining 1.003915 limit ratio
+[right return_to_start timing +   3.4s]   48 controls: refining 1.001377 limit ratio
+[right return_to_start timing +   3.9s]   48 controls: refining 1.000687 limit ratio
+[right return_to_start timing +   4.1s] ADAPTIVE 48 controls: 2.727924s; best 2.727924s; 2.1s computation
+[right return_to_start timing +   5.2s]   64 controls: refining 1.002931 limit ratio
+[right return_to_start timing +   5.6s]   64 controls: refining 1.001191 limit ratio
+[right return_to_start timing +   6.0s]   64 controls: refining 1.000353 limit ratio
+[right return_to_start timing +   6.4s] ADAPTIVE 64 controls: 2.719187s; best 2.719187s; 2.2s computation
+[right return_to_start timing +   7.6s]   96 controls: refining 1.003344 limit ratio
+[right return_to_start timing +   8.5s]   96 controls: refining 1.001413 limit ratio
+[right return_to_start timing +   9.3s]   96 controls: refining 1.000889 limit ratio
+[right return_to_start timing +   9.8s] ADAPTIVE 96 controls: 2.712313s; best 2.712313s; 3.4s computation
+[right return_to_start timing +  12.1s]   128 controls: refining 1.013091 limit ratio
+[right return_to_start timing +  13.6s]   128 controls: refining 1.000940 limit ratio
+[right return_to_start timing +  14.9s]   128 controls: refining 1.000562 limit ratio
+[right return_to_start timing +  15.6s] ADAPTIVE 128 controls: 2.707984s; best 2.707984s; 5.8s computation
+[right checkpoint_2 timing +  36.6s]   128 controls: refining 1.001403 limit ratio
+[right return_to_start timing +  23.5s]   192 controls: refining 1.001445 limit ratio
+[right checkpoint_2 timing +  46.1s]   128 controls: refining 1.001256 limit ratio
+[right return_to_start timing +  26.1s]   192 controls: refining 1.000505 limit ratio
+[right return_to_start timing +  29.6s]   192 controls: refining 1.000423 limit ratio
+[right checkpoint_2 timing +  50.2s]   128 controls: refining 1.000796 limit ratio
+[right checkpoint_2 timing +  50.8s] ADAPTIVE 128 controls: 3.496740s; best 3.496740s; 29.2s computation
+[right return_to_start timing +  30.5s] ADAPTIVE 192 controls: 2.702763s; best 2.702763s; 15.0s computation
+[right return_to_start timing +  30.5s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right return_to_start timing +  31.6s] TIMING READY: 6.260s → 2.703s outward; limits unchanged
+[right return_to_start timing +  31.6s] LEG READY: 2.703s; exact timing and collision/zone checks complete; NO motor commands.
+[right checkpoint_2 timing +  95.5s]   192 controls: refining 1.000625 limit ratio
+[right checkpoint_2 timing + 135.6s]   192 controls: refining 1.000499 limit ratio
+[right checkpoint_2 timing + 176.9s]   192 controls: refining 1.000415 limit ratio
+[right checkpoint_2 timing + 177.8s] ADAPTIVE 192 controls: 3.493140s; best 3.493140s; 127.0s computation
+[right checkpoint_2 timing + 177.8s] TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right checkpoint_2 timing + 178.9s] TIMING READY: 7.582s → 3.493s outward; limits unchanged
+[right checkpoint_2 timing + 178.9s] LEG READY: 3.493s; exact timing and collision/zone checks complete; NO motor commands.
+[checkpoints] READY: 2 destinations; 9.698s to final checkpoint (includes intermediate holds) → 2s hold → newly planned 2.703s return to original start; SIMULATION ONLY

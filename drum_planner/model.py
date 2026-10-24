@@ -9,12 +9,86 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from camera_calibration.core import ROOT, JOINTS, digest
-from .common import calibration, atomic_json, DEFAULT_CALIBRATION
+from .common import calibration, atomic_json, DEFAULT_CALIBRATION, arm_side, arm_joints
 
 MOUNT_Z = .015  # Provisional nominal finger attachment plane; physical check REQUIRED.
 STICK_RADIUS = .0148 / 2
 GRIPPER_LENGTH = .130
 STICK_EXPOSED = 11 * .0254
+
+# Left traditional-grip draft, dimensions recovered from gripper2*.stl (mm).
+# Both CAD bores are parallel to CAD Y, centered at X=-27.15, Z=12.4.
+# Rotate the second half 180 degrees about Z, then translate the halves in X:
+# they form ONE sleeve, not two opposed projecting tubes. This draft clocks
+# the sleeve along hand +Y: forward at LEFT_CENTER, near the snare at record1.
+# The shared nominal mounting plane is retained, but mounting yaw/translation
+# are NOT independently measured. In particular, do not claim that the raw
+# motor angle is a calibrated conversion to slider displacement.
+LEFT_BORE_OFFSET = .02715
+LEFT_BORE_HEIGHT = .0124
+LEFT_BORE_REAR = -.03075
+LEFT_BORE_FRONT = .09575
+LEFT_STICK_EXPOSED = 10.25 * .0254
+LEFT_STICK_LENGTH = LEFT_BORE_FRONT - LEFT_BORE_REAR + LEFT_STICK_EXPOSED
+LEFT_CLOSED_MOTOR_RAW_RAD = float(np.radians(14.16))
+
+
+def stick_length(root, link):
+    """Length of this arm's actual URDF cylinder, including historical models.
+
+    Do not use the right-arm manifest length for a different/custom left tool.
+    Native FK/collision already uses this same cylinder and its fixed transform.
+    """
+    cylinder = root.find(f"link[@name='{link}']/collision/geometry/cylinder")
+    if cylinder is None:
+        raise ValueError(f'Missing stick collision cylinder: {link}')
+    length = float(cylinder.get('length'))
+    if not np.isfinite(length) or length <= 0:
+        raise ValueError(f'Invalid stick length: {link}')
+    return length
+
+
+def _left_traditional_tool(root, assemblies):
+    for suffix, file, x, yaw, front_y in (
+            ('left', 'gripper2left.stl', LEFT_BORE_OFFSET, 0., 95.75),
+            ('right', 'gripper2right.stl', -LEFT_BORE_OFFSET, np.pi, -95.75)):
+        path = ROOT / 'gripper_models' / file
+        v = stl_vertices(path).reshape(-1, 3)
+        expected_y = [-30.75, 95.75] if front_y > 0 else [-95.75, 30.75]
+        if not np.allclose([v.min(0), v.max(0)],
+                           [[-27.15, expected_y[0], -12.5], [14.75, expected_y[1], 24.8]], atol=.001):
+            raise ValueError('Traditional-grip CAD dimensions changed; review left placement')
+        front = v[np.abs(v[:, 1] - front_y) < .001]
+        radii = np.linalg.norm(front[:, [0, 2]] - [-27.15, 12.4], axis=1)
+        if not len(front) or not np.all(np.minimum(abs(radii - 7.4), abs(radii - 12.4)) < .01):
+            raise ValueError('Traditional-grip CAD bore no longer matches 14.8 mm stick')
+        link_name = f'openarmx_left_{suffix}_finger'
+        link = root.find(f"link[@name='{link_name}']")
+        for child in list(link): link.remove(child)
+        for kind in ('visual', 'collision'):
+            geom = ET.SubElement(ET.SubElement(link, kind), 'geometry')
+            ET.SubElement(geom, 'mesh', filename='file://' + str(path), scale='.001 .001 .001')
+        joint = next(j for j in root.findall('joint') if j.find('child').get('link') == link_name)
+        joint.set('type', 'fixed')
+        for tag in ('axis', 'limit', 'mimic'):
+            el = joint.find(tag)
+            if el is not None: joint.remove(el)
+        xyz = [x, 0., MOUNT_Z]; rpy = [0., 0., float(yaw)]
+        joint.find('origin').set('xyz', ' '.join(map(str, xyz)))
+        joint.find('origin').set('rpy', ' '.join(map(str, rpy)))
+        assemblies.append(dict(link=link_name, mesh=str(path), sha256=digest(path), scale=.001,
+                               xyz_m=xyz, rpy_rad=rpy, bore_radius_m=STICK_RADIUS))
+    stick = ET.SubElement(root, 'link', name='left_drumstick')
+    for kind in ('visual', 'collision'):
+        geom = ET.SubElement(ET.SubElement(stick, kind), 'geometry')
+        ET.SubElement(geom, 'cylinder', radius=str(STICK_RADIUS), length=str(LEFT_STICK_LENGTH))
+    center_y = LEFT_BORE_REAR + LEFT_STICK_LENGTH / 2
+    joint = ET.SubElement(root, 'joint', name='left_drumstick_fixed', type='fixed')
+    ET.SubElement(joint, 'parent', link='openarmx_left_hand')
+    ET.SubElement(joint, 'child', link='left_drumstick')
+    # URDF cylinder +Z points along hand +Y, toward the exposed tip.
+    ET.SubElement(joint, 'origin', xyz=f'0 {center_y} {MOUNT_Z + LEFT_BORE_HEIGHT}',
+                  rpy=f'{-np.pi/2} 0 0')
 
 
 def stl_vertices(path):
@@ -26,7 +100,8 @@ def stl_vertices(path):
     return np.frombuffer(data, dtype=dtype, count=n, offset=84)['vertices'].copy()
 
 
-def generate(folder, calibration_path=DEFAULT_CALIBRATION):
+def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right'):
+    arm_side(moving_side)
     folder = Path(folder).resolve(); folder.mkdir(parents=True, exist_ok=True)
     cal = calibration(calibration_path)
     root = ET.parse(ROOT / 'model/openarmx.urdf').getroot()
@@ -58,47 +133,51 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION):
                                   saved_coordinate_upper_rad=mapped_upper)
 
     assemblies = []
-    # The two inner semicircles fit radius 7.4 mm and centers (+/-14.75,-23.35)
-    # in STL mm coordinates. Opposing halves are translated so these axes coincide.
-    # The yaw/mount plane remain provisional: hardware execution is unavailable.
-    for suffix, file, cx in [('left', 'gripperLeft.stl', -14.75), ('right', 'gripperRight.stl', 14.75)]:
-        path = ROOT / 'gripper_models' / file
-        v = stl_vertices(path)
-        if not np.allclose([v[:, :, 2].min(), v[:, :, 2].max()], [-12.5, 130.], atol=.001):
-            raise ValueError('CAD dimensions changed; review gripper placement')
-        top = v.reshape(-1, 3); top = top[top[:, 2] > 129.99]
-        radii = np.linalg.norm(top[:, :2] - [cx, -23.35], axis=1)
-        if not np.all(np.minimum(abs(radii - 7.4), abs(radii - 12.4)) < .01):
-            raise ValueError('CAD bore no longer matches the measured 14.8 mm stick')
-        link_name = f'openarmx_right_{suffix}_finger'
-        link = root.find(f"link[@name='{link_name}']")
-        for child in list(link):
-            link.remove(child)
-        for kind in ('visual', 'collision'):
-            part = ET.SubElement(link, kind)
-            geom = ET.SubElement(part, 'geometry')
-            ET.SubElement(geom, 'mesh', filename='file://' + str(path), scale='.001 .001 .001')
-        joint = next(j for j in root.findall('joint') if j.find('child').get('link') == link_name)
-        joint.set('type', 'fixed')
-        for tag in ('axis', 'limit', 'mimic'):
-            el = joint.find(tag)
-            if el is not None: joint.remove(el)
-        xyz = [-.02335, -cx * .001, MOUNT_Z]
-        joint.find('origin').set('xyz', ' '.join(map(str, xyz)))
-        joint.find('origin').set('rpy', '0 0 1.5707963267948966')
-        assemblies.append(dict(link=link_name, mesh=str(path), sha256=digest(path), scale=.001,
-                               xyz_m=xyz, rpy_rad=[0., 0., np.pi/2], bore_radius_m=STICK_RADIUS))
+    for arm in (('right', 'left') if moving_side == 'left' else ('right',)):
+        if arm == 'left':
+            _left_traditional_tool(root, assemblies)
+            continue
+        # The two inner semicircles fit radius 7.4 mm and centers (+/-14.75,-23.35)
+        # in STL mm coordinates. Opposing halves are translated so these axes coincide.
+        # The yaw/mount plane remain provisional: hardware execution is unavailable.
+        for suffix, file, cx in [('left', 'gripperLeft.stl', -14.75), ('right', 'gripperRight.stl', 14.75)]:
+            path = ROOT / 'gripper_models' / file
+            v = stl_vertices(path)
+            if not np.allclose([v[:, :, 2].min(), v[:, :, 2].max()], [-12.5, 130.], atol=.001):
+                raise ValueError('CAD dimensions changed; review gripper placement')
+            top = v.reshape(-1, 3); top = top[top[:, 2] > 129.99]
+            radii = np.linalg.norm(top[:, :2] - [cx, -23.35], axis=1)
+            if not np.all(np.minimum(abs(radii - 7.4), abs(radii - 12.4)) < .01):
+                raise ValueError('CAD bore no longer matches the measured 14.8 mm stick')
+            link_name = f'openarmx_{arm}_{suffix}_finger'
+            link = root.find(f"link[@name='{link_name}']")
+            for child in list(link):
+                link.remove(child)
+            for kind in ('visual', 'collision'):
+                part = ET.SubElement(link, kind)
+                geom = ET.SubElement(part, 'geometry')
+                ET.SubElement(geom, 'mesh', filename='file://' + str(path), scale='.001 .001 .001')
+            joint = next(j for j in root.findall('joint') if j.find('child').get('link') == link_name)
+            joint.set('type', 'fixed')
+            for tag in ('axis', 'limit', 'mimic'):
+                el = joint.find(tag)
+                if el is not None: joint.remove(el)
+            xyz = [-.02335, -cx * .001, MOUNT_Z]
+            joint.find('origin').set('xyz', ' '.join(map(str, xyz)))
+            joint.find('origin').set('rpy', '0 0 1.5707963267948966')
+            assemblies.append(dict(link=link_name, mesh=str(path), sha256=digest(path), scale=.001,
+                                   xyz_m=xyz, rpy_rad=[0., 0., np.pi/2], bore_radius_m=STICK_RADIUS))
 
-    stick = ET.SubElement(root, 'link', name='right_drumstick')
-    length = GRIPPER_LENGTH + STICK_EXPOSED
-    for kind in ('visual', 'collision'):
-        part = ET.SubElement(stick, kind)
-        geom = ET.SubElement(part, 'geometry')
-        ET.SubElement(geom, 'cylinder', radius=str(STICK_RADIUS), length=str(length))
-    joint = ET.SubElement(root, 'joint', name='right_drumstick_fixed', type='fixed')
-    ET.SubElement(joint, 'parent', link='openarmx_right_hand')
-    ET.SubElement(joint, 'child', link='right_drumstick')
-    ET.SubElement(joint, 'origin', xyz=f'0 0 {MOUNT_Z + length/2}', rpy='0 0 0')
+        stick = ET.SubElement(root, 'link', name=f'{arm}_drumstick')
+        length = GRIPPER_LENGTH + STICK_EXPOSED
+        for kind in ('visual', 'collision'):
+            part = ET.SubElement(stick, kind)
+            geom = ET.SubElement(part, 'geometry')
+            ET.SubElement(geom, 'cylinder', radius=str(STICK_RADIUS), length=str(length))
+        joint = ET.SubElement(root, 'joint', name=f'{arm}_drumstick_fixed', type='fixed')
+        ET.SubElement(joint, 'parent', link=f'openarmx_{arm}_hand')
+        ET.SubElement(joint, 'child', link=f'{arm}_drumstick')
+        ET.SubElement(joint, 'origin', xyz=f'0 0 {MOUNT_Z + length/2}', rpy='0 0 0')
     # Package lookup is unnecessary; no vendor hardware launches/plugins are used.
     for mesh in root.findall('.//mesh'):
         name = mesh.get('filename')
@@ -116,6 +195,9 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION):
     srdf = ET.Element('robot', name=root.get('name'))
     group = ET.SubElement(srdf, 'group', name='right_arm')
     for name in JOINTS: ET.SubElement(group, 'joint', name=name)
+    if moving_side == 'left':
+        group = ET.SubElement(srdf, 'group', name='left_arm')
+        for name in arm_joints('left'): ET.SubElement(group, 'joint', name=name)
     groups = [{link.get('name')} for link in root.findall('link')]
     allowed = set()
     for joint in root.findall('joint'):
@@ -145,5 +227,20 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION):
                 left_stick_geometry_verified=False, hardware_execution_available=False,
                 warning='STL bore assembly is checked mathematically. Mount plane/yaw and left stick require physical verification. '
                         'Mesh mounting is provisional, not a certified physical model.')
+    if moving_side == 'left':
+        info.update(moving_side='left', left_tool_geometry='traditional perpendicular grip; gripper2 STL pair; draft mounting',
+                    left_kinematic_offsets_applied=False,
+                    left_tool=dict(stick_link='left_drumstick', stick_length_m=LEFT_STICK_LENGTH,
+                        stick_radius_m=STICK_RADIUS, stick_exposed_length_m=LEFT_STICK_EXPOSED,
+                        sleeve_length_m=LEFT_BORE_FRONT - LEFT_BORE_REAR,
+                        bore_axis_hand=[0., 1., 0.],
+                        sleeve_rear_center_hand_m=[0., LEFT_BORE_REAR, MOUNT_Z + LEFT_BORE_HEIGHT],
+                        sleeve_front_center_hand_m=[0., LEFT_BORE_FRONT, MOUNT_Z + LEFT_BORE_HEIGHT],
+                        tip_hand_m=[0., LEFT_BORE_FRONT + LEFT_STICK_EXPOSED, MOUNT_Z + LEFT_BORE_HEIGHT],
+                        rear_stick_protrusion_m=0., closed_motor_raw_rad=LEFT_CLOSED_MOTOR_RAW_RAD,
+                        closed_motor_joint_rad=-LEFT_CLOSED_MOTOR_RAW_RAD,
+                        closure='fixed CAD halves meeting at bore; no inferred motor-to-slider conversion',
+                        mounting_physically_verified=False,
+                        mounting_assumption='nominal 15 mm hand mount plane; draft hand +Y clocking selected for forward center / snare goal'))
     atomic_json(folder / 'model_manifest.json', info)
     return info

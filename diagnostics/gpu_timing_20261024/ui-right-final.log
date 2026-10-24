@@ -1,0 +1,279 @@
+SOFTWARE EXPERIMENT — saved arm state, NO CAN / NO MOTOR COMMANDS
+Saved pose: /home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/measured_start.json
+RIGHT ARM ONLY in simulation. Frozen start; choose a destination in the GUI to begin calculation. The opposite arm stays fixed. No live tracking or physical movement.
+/home/jason/Proyectos3/X5/drum_planner/build/experiment/experiment_oracle
+[experiment destination] Rejected /tmp/x5-invalid-destination-o2_1g3oz/bad.json: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[experiment destination] Selected destinationR1; old calculations/results discarded.
+[experiment cache] Automatically queued: workspace_curve, progress, sweep, single_arc, clearance. One memory-limited worker at a time.
+[experiment cache] Starting workspace_curve; 4 other methods queued.
+[experiment destination] Selected destinationR2; old calculations/results discarded.
+[experiment cache] Automatically queued: workspace_curve, progress, sweep, single_arc, clearance. One memory-limited worker at a time.
+[experiment destination] Selected destinationR1; old calculations/results discarded.
+[experiment cache] Automatically queued: workspace_curve, progress, sweep, single_arc, clearance. One memory-limited worker at a time.
+[experiment cache] Starting workspace_curve; 4 other methods queued.
+[workspace_curve +   0.0s] Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.
+[workspace_curve +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[workspace_curve +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[workspace_curve +   0.7s] WORKSPACE CURVE 1/14: joint + Cartesian Bezier fit, route prior 2, 8.6s fit allowance
+[workspace_curve +   0.8s] workspace 1: fit max 3.0 mm, 9 evaluations
+[workspace_curve +   1.1s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.1s] WORKSPACE CURVE 2/14: joint + Cartesian Bezier fit, route prior 2, 9.2s fit allowance
+[workspace_curve +   1.3s] workspace 2: fit max 6.8 mm, 11 evaluations
+[workspace_curve +   1.3s] candidate 2: rejected by continuous joint bounds
+[workspace_curve +   1.3s] WORKSPACE CURVE 3/14: joint + Cartesian Bezier fit, route prior 2, 10.0s fit allowance
+[workspace_curve +   1.4s] workspace 3: fit max 0.4 mm, 8 evaluations
+[workspace_curve +   1.4s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.4s] WORKSPACE CURVE 4/14: joint + Cartesian Bezier fit, route prior 2, 10.8s fit allowance
+[workspace_curve +   1.6s] workspace 4: fit max 3.7 mm, 10 evaluations
+[workspace_curve +   1.7s] candidate 4: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   1.7s] WORKSPACE CURVE 5/14: joint + Cartesian Bezier fit, route prior 2, 11.9s fit allowance
+[workspace_curve +   1.8s] workspace 5: fit max 2.9 mm, 14 evaluations
+[workspace_curve +   1.8s] candidate 5: rejected by continuous joint bounds
+[workspace_curve +   1.8s] WORKSPACE CURVE 6/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   1.9s] workspace 6: fit max 6.1 mm, 11 evaluations
+[workspace_curve +   3.2s] candidate 6: VALID; 8.00s; reversals=3; coordination=6.466; spatial=16.353
+[workspace_curve +   3.2s] WORKSPACE VALID 6: turn=105.1deg, score=3.4764
+[workspace_curve +   3.2s] WORKSPACE CURVE 7/14: joint + Cartesian Bezier fit, route prior 2, 12.0s fit allowance
+[workspace_curve +   3.4s] workspace 7: fit max 5.5 mm, 15 evaluations
+[workspace_curve +   3.4s] candidate 7: rejected by continuous joint bounds
+[workspace_curve +   3.4s] WORKSPACE CURVE 8/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.5s] workspace 8: fit max 3.7 mm, 9 evaluations
+[workspace_curve +   3.8s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   3.8s] WORKSPACE CURVE 9/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   3.9s] workspace 9: fit max 8.3 mm, 11 evaluations
+[workspace_curve +   3.9s] candidate 9: rejected by continuous joint bounds
+[workspace_curve +   3.9s] WORKSPACE CURVE 10/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.0s] workspace 10: fit max 0.7 mm, 10 evaluations
+[workspace_curve +   4.1s] candidate 10: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.1s] WORKSPACE CURVE 11/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.2s] workspace 11: fit max 4.5 mm, 11 evaluations
+[workspace_curve +   4.3s] candidate 11: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[workspace_curve +   4.3s] WORKSPACE CURVE 12/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.5s] workspace 12: fit max 3.6 mm, 15 evaluations
+[workspace_curve +   4.5s] candidate 12: rejected by continuous joint bounds
+[workspace_curve +   4.5s] WORKSPACE CURVE 13/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   4.6s] workspace 13: fit max 7.5 mm, 12 evaluations
+[workspace_curve +   5.8s] candidate 13: VALID; 7.88s; reversals=3; coordination=6.646; spatial=19.561
+[workspace_curve +   5.9s] WORKSPACE VALID 13: turn=114.1deg, score=3.8095
+[workspace_curve +   5.9s] WORKSPACE CURVE 14/14: joint + Cartesian Bezier fit, route prior 5, 12.0s fit allowance
+[workspace_curve +   6.0s] workspace 14: fit max 6.9 mm, 14 evaluations
+[workspace_curve +   6.0s] candidate 14: rejected by continuous joint bounds
+[workspace_curve +   6.2s] WORKSPACE SELECTED 6: geometry + clearance; 2 fully checked candidates; no legacy fallback
+[right workspace_curve-4f2020d0 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right workspace_curve-4f2020d0 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right workspace_curve-4f2020d0 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 8.000s; path and ranking locked
+[right workspace_curve-4f2020d0 timing +   0.1s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 4.205s. Current scene is checked separately.
+[right workspace_curve-4f2020d0 timing +   0.1s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right workspace_curve-4f2020d0 timing +   1.2s] CPU REFERENCE | TIMING READY: 8.000s → 4.205s outward; limits unchanged
+[right workspace_curve-4f2020d0 timing +   1.2s] CPU REFERENCE READY: 4.205074s movement; 1.11s reference lookup/qualification; cached=True. GPU acceptance ceiling 4.247125s.
+[right workspace_curve-4f2020d0 timing +   1.2s] TIMING MATH CACHE: identical curve/clock/limits; 4.247s. Current scene is checked separately.
+[right workspace_curve-4f2020d0 timing +   1.4s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right workspace_curve-4f2020d0 timing +   2.5s] GPU TIMING READY: 4.246616s movement (+0.988% vs CPU); GPU phase 0.01s, final checks 1.26s, CPU qualification 1.11s; GPU result cached=True.
+[right workspace_curve-4f2020d0 timing +   2.5s] LEG READY: 4.247s; exact timing and collision/zone checks complete; NO motor commands.
+[workspace_curve +   8.7s] READY: 4.247s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached workspace_curve: planned.
+[experiment cache] Starting progress; 3 other methods queued.
+[progress +   0.0s] Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.
+[progress +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[progress +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[progress +   0.7s] CORRIDOR 1/6: endpoint joint range + 4.5deg; 4.0s search
+[progress +   3.3s] candidate 1: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +   5.4s] candidate 2: VALID; 25.84s; reversals=2; coordination=14.280; spatial=55.725
+[progress +   5.5s] CORRIDOR 2/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +   9.0s] candidate 3: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  10.2s] candidate 4: VALID; 7.74s; reversals=4; coordination=8.693; spatial=51.343
+[progress +  10.2s] CORRIDOR 3/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  12.5s] candidate 5: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  12.9s] candidate 6: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  16.0s] candidate 7: VALID; 47.56s; reversals=3; coordination=7.869; spatial=103.284
+[progress +  16.2s] CORRIDOR 4/6: endpoint joint range + 7.0deg; 4.0s search
+[progress +  18.6s] candidate 8: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  20.0s] candidate 9: VALID; 10.59s; reversals=5; coordination=12.719; spatial=85.155
+[progress +  20.0s] CORRIDOR 5/6: endpoint joint range + 14.3deg; 4.0s search
+[progress +  23.2s] candidate 10: VALID; 8.24s; reversals=11; coordination=17.523; spatial=373.748
+[progress +  23.3s] CORRIDOR 6/6: endpoint joint range + 11.6deg; 4.0s search
+[progress +  27.1s] candidate 11: VALID; 10.01s; reversals=13; coordination=14.201; spatial=95.864
+[progress +  27.3s] arch search 1/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  27.5s] arch search 2/10: 1/60 coarse-feasible; best blocked samples 0
+[progress +  27.7s] arch search 3/10: 3/60 coarse-feasible; best blocked samples 0
+[progress +  27.9s] arch search 4/10: 2/60 coarse-feasible; best blocked samples 0
+[progress +  28.1s] arch search 5/10: 10/60 coarse-feasible; best blocked samples 0
+[progress +  28.3s] arch search 6/10: 16/60 coarse-feasible; best blocked samples 0
+[progress +  28.5s] arch search 7/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  28.7s] arch search 8/10: 28/60 coarse-feasible; best blocked samples 0
+[progress +  28.9s] arch search 9/10: 37/60 coarse-feasible; best blocked samples 0
+[progress +  29.1s] arch search 10/10: 27/60 coarse-feasible; best blocked samples 0
+[progress +  30.3s] candidate 12: VALID; 7.24s; reversals=5; coordination=5.390; spatial=14.640
+[progress +  31.5s] candidate 13: VALID; 7.82s; reversals=4; coordination=6.100; spatial=25.447
+[progress +  32.7s] candidate 14: VALID; 7.61s; reversals=5; coordination=5.500; spatial=19.734
+[progress +  35.7s] partial shortcut (economy): 34 accepted changes; objective 1.2159
+[progress +  35.9s] candidate 15: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  38.0s] candidate 16: VALID; 26.89s; reversals=2; coordination=13.928; spatial=55.380
+[progress +  40.2s] partial shortcut (economy): 22 accepted changes; objective 0.9489
+[progress +  41.4s] candidate 17: VALID; 6.18s; reversals=6; coordination=10.031; spatial=55.944
+[progress +  42.8s] elastic deformation: 16 accepted updates; objective 1.0500
+[progress +  43.1s] candidate 18: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  43.8s] candidate 19: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  43.8s] candidate 20: timing rejected: Trajectory would be impractically slow; rejected instead of creeping
+[progress +  44.9s] elastic deformation: 1 accepted updates; objective 1.4665
+[progress +  45.1s] candidate 21: rejected by final zone/collision check: {'contacts': [['gemini_native_depth', 'right_drumstick']], 'reason': 'collision'}
+[progress +  46.3s] candidate 22: VALID; 8.36s; reversals=6; coordination=9.225; spatial=51.746
+[progress +  46.4s] SHARED POOL COMPLETE: 12 validated candidates; 45.6s; no recording interiors
+[progress +  46.5s] progress: candidate 16, score=1.2329, duration=26.89s
+[progress +  46.5s] progress: candidate 2, score=1.2732, duration=25.84s
+[progress +  46.5s] progress: candidate 4, score=1.3397, duration=7.74s
+[progress +  46.5s] progress: candidate 17, score=1.6849, duration=6.18s
+[progress +  46.5s] progress: candidate 9, score=1.9108, duration=10.59s
+[progress +  46.5s] progress: candidate 7, score=1.9447, duration=47.56s
+[progress +  46.5s] progress: candidate 11, score=4.3369, duration=10.01s
+[progress +  46.5s] progress: candidate 10, score=6.2081, duration=8.24s
+[progress +  46.6s] SELECTED candidate 16: lowest progress score; 8 eligible, equally checked candidates
+[right progress-e95bbba5 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right progress-e95bbba5 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right progress-e95bbba5 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 26.895s; path and ranking locked
+[right progress-e95bbba5 timing +   0.1s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 5.631s. Current scene is checked separately.
+[right progress-e95bbba5 timing +   0.1s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right progress-e95bbba5 timing +   1.3s] CPU REFERENCE | TIMING READY: 26.895s → 5.631s outward; limits unchanged
+[right progress-e95bbba5 timing +   1.3s] CPU REFERENCE READY: 5.631435s movement; 1.16s reference lookup/qualification; cached=True. GPU acceptance ceiling 5.687750s.
+[right progress-e95bbba5 timing +   1.3s] ANALYTIC TIMING: retained exact straight-block solution; no GPU optimization necessary.
+[right progress-e95bbba5 timing +   1.3s] LEG READY: 5.631s; exact timing and collision/zone checks complete; NO motor commands.
+[progress +  47.9s] READY: 5.631s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached progress: planned.
+[experiment cache] Starting sweep; 2 other methods queued.
+[sweep +   0.0s] Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.
+[sweep +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[sweep +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[sweep +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[sweep +   0.1s] sweep: candidate 4, score=1.5130, duration=7.74s
+[sweep +   0.1s] sweep: candidate 22, score=1.5445, duration=8.36s
+[sweep +   0.1s] sweep: candidate 2, score=1.6397, duration=25.84s
+[sweep +   0.1s] sweep: candidate 9, score=2.1518, duration=10.59s
+[sweep +   0.1s] sweep: candidate 7, score=2.3340, duration=47.56s
+[sweep +   0.1s] sweep: candidate 11, score=3.5483, duration=10.01s
+[sweep +   0.1s] sweep: candidate 10, score=6.1239, duration=8.24s
+[sweep +   0.1s] SELECTED candidate 4: lowest sweep score; 7 eligible, equally checked candidates
+[right sweep-f5b5841d timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right sweep-f5b5841d timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right sweep-f5b5841d timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.740s; path and ranking locked
+[right sweep-f5b5841d timing +   0.1s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 5.149s. Current scene is checked separately.
+[right sweep-f5b5841d timing +   0.1s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right sweep-f5b5841d timing +   1.2s] CPU REFERENCE | TIMING READY: 7.740s → 5.149s outward; limits unchanged
+[right sweep-f5b5841d timing +   1.2s] CPU REFERENCE READY: 5.149210s movement; 1.12s reference lookup/qualification; cached=True. GPU acceptance ceiling 5.200702s.
+[right sweep-f5b5841d timing +   1.2s] ANALYTIC TIMING: retained exact straight-block solution; no GPU optimization necessary.
+[right sweep-f5b5841d timing +   1.2s] LEG READY: 5.149s; exact timing and collision/zone checks complete; NO motor commands.
+[sweep +   1.3s] READY: 5.149s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached sweep: planned.
+[experiment cache] Starting single_arc; 1 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] SINGLE ARC PRIORITY: 3 continuous arcs, 2 continuous fallbacks, 4 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[single_arc +   0.1s] single_arc: candidate 12, continuous_arc, score=1.3874, duration=7.24s
+[single_arc +   0.1s] single_arc: candidate 13, continuous_arc, score=1.4363, duration=7.82s
+[single_arc +   0.1s] single_arc: candidate 14, continuous_arc, score=1.4585, duration=7.61s
+[single_arc +   0.1s] single_arc: candidate 11, continuous_fallback, score=3.5483, duration=10.01s
+[single_arc +   0.1s] single_arc: candidate 10, continuous_fallback, score=6.1239, duration=8.24s
+[single_arc +   0.1s] single_arc: candidate 4, segmented_fallback, score=1.5130, duration=7.74s
+[single_arc +   0.1s] single_arc: candidate 2, segmented_fallback, score=1.6397, duration=25.84s
+[single_arc +   0.1s] single_arc: candidate 9, segmented_fallback, score=2.1518, duration=10.59s
+[single_arc +   0.1s] single_arc: candidate 7, segmented_fallback, score=2.3340, duration=47.56s
+[single_arc +   0.1s] SELECTED candidate 12: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[right single_arc-1249dac8 timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right single_arc-1249dac8 timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right single_arc-1249dac8 timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.237s; path and ranking locked
+[right single_arc-1249dac8 timing +   0.2s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 3.854s. Current scene is checked separately.
+[right single_arc-1249dac8 timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right single_arc-1249dac8 timing +   1.2s] CPU REFERENCE | TIMING READY: 7.237s → 3.854s outward; limits unchanged
+[right single_arc-1249dac8 timing +   1.2s] CPU REFERENCE READY: 3.854098s movement; 1.10s reference lookup/qualification; cached=True. GPU acceptance ceiling 3.892639s.
+[right single_arc-1249dac8 timing +   1.2s] GPU QUEUE: waiting for the bounded Vulkan timing slot
+[right single_arc-1249dac8 timing +   1.2s] GPU OPTIMIZATION START: optimizer state/updates on device; no CPU SLSQP in this phase
+[right single_arc-1249dac8 timing +   1.5s] GPU VULKAN 8 controls / pass 1: 4.339165s movement, +12.586% vs CPU reference; 0.27s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   1.8s] GPU VULKAN 12 controls / pass 1: 4.028049s movement, +4.513% vs CPU reference; 0.59s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   2.5s] GPU VULKAN 20 controls / pass 1: 3.966842s movement, +2.925% vs CPU reference; 1.22s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   3.6s] GPU VULKAN 32 controls / pass 1: 3.970134s movement, +3.011% vs CPU reference; 2.40s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   5.3s] GPU VULKAN 48 controls / pass 1: 3.924110s movement, +1.817% vs CPU reference; 4.06s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   6.9s] GPU VULKAN 48 controls / pass 2: 3.925264s movement, +1.846% vs CPU reference; 5.68s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +   8.7s] GPU VULKAN 48 controls / pass 3: 3.901348s movement, +1.226% vs CPU reference; 7.45s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +  10.7s] GPU VULKAN 64 controls / pass 1: 4.010356s movement, +4.054% vs CPU reference; 9.46s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +  12.9s] GPU VULKAN 64 controls / pass 2: 3.906261s movement, +1.353% vs CPU reference; 11.67s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +  15.1s] GPU VULKAN 64 controls / pass 3: 3.880528s movement, +0.686% vs CPU reference; 13.89s GPU optimization + continuous checking
+[right single_arc-1249dac8 timing +  15.5s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right single_arc-1249dac8 timing +  16.6s] GPU TIMING READY: 3.880528s movement (+0.686% vs CPU); GPU phase 13.91s, final checks 1.42s, CPU qualification 1.10s; GPU result cached=False.
+[right single_arc-1249dac8 timing +  16.6s] LEG READY: 3.881s; exact timing and collision/zone checks complete; NO motor commands.
+[single_arc +  16.7s] READY: 3.881s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+[experiment cache] Starting clearance; 0 other methods queued.
+[clearance +   0.0s] Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.
+[clearance +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[clearance +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[clearance +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[clearance +   0.1s] clearance: candidate 12, score=1.6429, duration=7.24s
+[clearance +   0.1s] clearance: candidate 13, score=1.7209, duration=7.82s
+[clearance +   0.1s] clearance: candidate 14, score=1.7415, duration=7.61s
+[clearance +   0.1s] clearance: candidate 22, score=1.9935, duration=8.36s
+[clearance +   0.1s] clearance: candidate 17, score=2.1172, duration=6.18s
+[clearance +   0.1s] clearance: candidate 16, score=2.2257, duration=26.89s
+[clearance +   0.1s] clearance: candidate 4, score=2.2266, duration=7.74s
+[clearance +   0.1s] clearance: candidate 2, score=2.2685, duration=25.84s
+[clearance +   0.1s] clearance: candidate 9, score=2.5361, duration=10.59s
+[clearance +   0.1s] clearance: candidate 7, score=3.0072, duration=47.56s
+[clearance +   0.1s] clearance: candidate 11, score=3.7260, duration=10.01s
+[clearance +   0.1s] clearance: candidate 10, score=6.5507, duration=8.24s
+[clearance +   0.1s] SELECTED candidate 12: lowest clearance score; 12 eligible, equally checked candidates
+[right clearance-c335fafe timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right clearance-c335fafe timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right clearance-c335fafe timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.237s; path and ranking locked
+[right clearance-c335fafe timing +   0.1s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 3.854s. Current scene is checked separately.
+[right clearance-c335fafe timing +   0.1s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right clearance-c335fafe timing +   1.2s] CPU REFERENCE | TIMING READY: 7.237s → 3.854s outward; limits unchanged
+[right clearance-c335fafe timing +   1.2s] CPU REFERENCE READY: 3.854098s movement; 1.11s reference lookup/qualification; cached=True. GPU acceptance ceiling 3.892639s.
+[right clearance-c335fafe timing +   1.2s] TIMING MATH CACHE: identical curve/clock/limits; 3.881s. Current scene is checked separately.
+[right clearance-c335fafe timing +   1.6s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right clearance-c335fafe timing +   2.7s] GPU TIMING READY: 3.880528s movement (+0.686% vs CPU); GPU phase 0.01s, final checks 1.41s, CPU qualification 1.11s; GPU result cached=True.
+[right clearance-c335fafe timing +   2.7s] LEG READY: 3.881s; exact timing and collision/zone checks complete; NO motor commands.
+[clearance +   2.8s] READY: 3.881s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached clearance: planned.
+[experiment] Loading cached result for progress (same scene, state and settings).
+[experiment] Loading cached result for progress (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for sweep (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for clearance (same scene, state and settings).
+[experiment] Loading cached result for workspace_curve (same scene, state and settings).
+[experiment] Loading cached result for workspace_curve (same scene, state and settings).
+[experiment] Loading cached result for single_arc (same scene, state and settings).
+[experiment cache] Starting single_arc; 0 other methods queued.
+[experiment cache] Automatically queued: single_arc. One memory-limited worker at a time.
+[experiment cache] Starting single_arc; 0 other methods queued.
+[single_arc +   0.0s] Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.
+[single_arc +   0.0s] preparing model + frozen inputs; FCL world is loaded only for a new pool; no motor access
+[single_arc +   0.0s] ARM: right; ZONE: zone3.json, original right gripper TCP only; 5 mm membership tolerance
+[single_arc +   0.0s] REUSING SHARED POOL: 12 validated candidates; no repeat search or FCL world loading
+[single_arc +   0.1s] SINGLE ARC PRIORITY: 3 continuous arcs, 2 continuous fallbacks, 4 segmented fallbacks; geometry score ranks within each tier, never across tiers
+[single_arc +   0.1s] single_arc: candidate 12, continuous_arc, score=1.3874, duration=7.24s
+[single_arc +   0.1s] single_arc: candidate 13, continuous_arc, score=1.4363, duration=7.82s
+[single_arc +   0.1s] single_arc: candidate 14, continuous_arc, score=1.4585, duration=7.61s
+[single_arc +   0.1s] single_arc: candidate 11, continuous_fallback, score=3.5483, duration=10.01s
+[single_arc +   0.1s] single_arc: candidate 10, continuous_fallback, score=6.1239, duration=8.24s
+[single_arc +   0.1s] single_arc: candidate 4, segmented_fallback, score=1.5130, duration=7.74s
+[single_arc +   0.1s] single_arc: candidate 2, segmented_fallback, score=1.6397, duration=25.84s
+[single_arc +   0.1s] single_arc: candidate 9, segmented_fallback, score=2.1518, duration=10.59s
+[single_arc +   0.1s] single_arc: candidate 7, segmented_fallback, score=2.3340, duration=47.56s
+[single_arc +   0.1s] SELECTED candidate 12: best continuity tier, then geometric score; 9 eligible, equally checked candidates
+[right single_arc-63696e3e timing +   0.1s] GPU AVAILABLE: AMD Radeon 780M Graphics (RADV PHOENIX), FP64. Preparing exact-input CPU quality reference.
+[right single_arc-63696e3e timing +   0.1s] CPU REFERENCE QUALIFICATION: a new curve can require a full CPU solve once; reference/cache time is separate from GPU time. Hardware modes are unchanged.
+[right single_arc-63696e3e timing +   0.1s] CPU REFERENCE | TIMING: Adaptive fixed-path retiming; reference 7.237s; path and ranking locked
+[right single_arc-63696e3e timing +   0.2s] CPU REFERENCE | TIMING MATH CACHE: identical curve/clock/limits; 3.854s. Current scene is checked separately.
+[right single_arc-63696e3e timing +   0.2s] CPU REFERENCE | TIMING VERIFY: continuous velocity/acceleration/jerk extrema + exact geometry + dense zone/collision check
+[right single_arc-63696e3e timing +   1.2s] CPU REFERENCE | TIMING READY: 7.237s → 3.854s outward; limits unchanged
+[right single_arc-63696e3e timing +   1.2s] CPU REFERENCE READY: 3.854098s movement; 1.09s reference lookup/qualification; cached=True. GPU acceptance ceiling 3.892639s.
+[right single_arc-63696e3e timing +   1.2s] TIMING MATH CACHE: identical curve/clock/limits; 3.881s. Current scene is checked separately.
+[right single_arc-63696e3e timing +   1.6s] GPU VERIFY: continuous extrema, exact curve, joint limits, rest endpoints, dense collision and zone
+[right single_arc-63696e3e timing +   2.7s] GPU TIMING READY: 3.880528s movement (+0.686% vs CPU); GPU phase 0.01s, final checks 1.41s, CPU qualification 1.09s; GPU result cached=True.
+[right single_arc-63696e3e timing +   2.7s] LEG READY: 3.881s; exact timing and collision/zone checks complete; NO motor commands.
+[single_arc +   2.8s] READY: 3.881s outward → 2s hold → exact reverse; SIMULATION ONLY
+[experiment cache] Cached single_arc: planned.
+PASS native destination UI: right [{'destination': '/home/jason/Proyectos3/X5/destinations/right/destinationR1.json', 'method': 'progress', 'status': 'planned', 'playback_tested': True}, {'destination': '/home/jason/Proyectos3/X5/destinations/right/destinationR1.json', 'method': 'sweep', 'status': 'planned', 'playback_tested': True}, {'destination': '/home/jason/Proyectos3/X5/destinations/right/destinationR1.json', 'method': 'single_arc', 'status': 'planned', 'playback_tested': True}, {'destination': '/home/jason/Proyectos3/X5/destinations/right/destinationR1.json', 'method': 'clearance', 'status': 'planned', 'playback_tested': True}, {'destination': '/home/jason/Proyectos3/X5/destinations/right/destinationR1.json', 'method': 'workspace_curve', 'status': 'planned', 'playback_tested': True}]

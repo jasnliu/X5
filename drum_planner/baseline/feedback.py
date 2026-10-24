@@ -10,19 +10,19 @@ import time
 
 import numpy as np
 
-from ..common import JOINTS,LEFT_JOINTS,atomic_json
+from ..common import JOINTS,LEFT_JOINTS,arm_joints,arm_side,atomic_json
 from ..read_only import ReadOnlyObserver
 
 STALE_SECONDS=.5
 DISPLAY_JOINTS=JOINTS+LEFT_JOINTS+['openarmx_left_finger_joint1']
 
 
-def movement_error(anchor,pose):
-    """Right-arm start guard; the passive left arm is allowed to swing."""
+def movement_error(anchor,pose,side='right'):
+    """Selected-arm start guard; the passive opposite arm may swing."""
     if anchor is None:return ''
-    delta=np.abs([pose['joints'][j]-anchor['joints'][j] for j in JOINTS])
+    delta=np.abs([pose['joints'][j]-anchor['joints'][j] for j in arm_joints(side)])
     if delta.sum()>.01 or delta.max()>np.radians(.35):
-        return f'Right arm moved since Calculate ({np.degrees(delta.max()):.2f}° on one joint). Plan discarded. Click Calculate again and leave the right arm still.'
+        return f'{side.capitalize()} arm moved since Calculate ({np.degrees(delta.max()):.2f}° on one joint). Plan discarded. Click Calculate again and leave the {side} arm still.'
     return ''
 
 
@@ -63,7 +63,8 @@ def owner_pose(states):
 
 class DisplayTelemetry:
     """Latest sample only (no history queue); 20 Hz disabled-arm readback."""
-    def __init__(self,folder,observer_factory=None):
+    def __init__(self,folder,observer_factory=None,*,moving_side='right'):
+        self.side=arm_side(moving_side)
         self.folder=Path(folder);self.folder.mkdir(parents=True,exist_ok=True)
         self.factory=observer_factory or (lambda folder:ReadOnlyObserver(folder,log_factory=RollingAudit))
         self.stop=threading.Event();self.lock=threading.Lock();self.latest=None
@@ -79,7 +80,7 @@ class DisplayTelemetry:
                 pose=normalized_pose(batch['joints'],batch['start'])
                 with self.lock:
                     self.latest=pose;self.count+=1
-                    if not self.guard_error:self.guard_error=movement_error(self.anchor,pose)
+                    if not self.guard_error:self.guard_error=movement_error(self.anchor,pose,self.side)
                 self.stop.wait(max(0.,.05-(time.monotonic()-began)))
         except Exception as exc:self.error=str(exc)
         finally:
@@ -89,7 +90,7 @@ class DisplayTelemetry:
         with self.lock:return self.latest
     def set_guard(self,anchor):
         with self.lock:
-            self.anchor=anchor;self.guard_error=movement_error(anchor,self.latest) if self.latest else ''
+            self.anchor=anchor;self.guard_error=movement_error(anchor,self.latest,self.side) if self.latest else ''
     def movement_error(self):
         with self.lock:return self.guard_error
     def close(self):

@@ -1,0 +1,62 @@
+{
+  "schema": "openarmx-right-motion-recording-v1",
+  "arm": "right",
+  "source": "Final sample imported from saved motion recording; no live capture",
+  "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+  "time_unit": "s",
+  "joint_position_unit": "rad",
+  "tcp_position_unit": "m",
+  "gripper_opening_unit": "m",
+  "joint_order": [
+    "openarmx_right_joint1",
+    "openarmx_right_joint2",
+    "openarmx_right_joint3",
+    "openarmx_right_joint4",
+    "openarmx_right_joint5",
+    "openarmx_right_joint6",
+    "openarmx_right_joint7"
+  ],
+  "gripper_name": "openarmx_right_finger_joint1",
+  "nominal_sample_rate_hz": 50.0,
+  "started_at_utc": "2026-09-23T23:46:35.783315Z",
+  "duration_s": 0.0,
+  "sample_count": 1,
+  "capture_kind": "destination",
+  "coordinate_convention": "encoder_to_joint",
+  "samples": [
+    {
+      "time_s": 0.0,
+      "positions_rad": [
+        -0.6155312428473343,
+        0.21194552529182964,
+        0.24416891737239688,
+        1.7329663538567175,
+        0.20476168513003543,
+        -0.30516319523918334,
+        0.6001606775005737
+      ],
+      "gripper_opening_m": 0.0050530379237984984,
+      "tcp_position_m": [
+        0.2590337830076238,
+        -0.33907035302174826,
+        0.49146762307026287
+      ]
+    }
+  ],
+  "captured_at_utc": "2026-09-23T23:46:35.783315Z",
+  "tcp_frame": "openarmx_right_hand_tcp",
+  "tcp_reference_frame": "world",
+  "imported_at_utc": "2026-10-21T18:33:55.020Z",
+  "source_recording": {
+    "path": "recordings/record3.json",
+    "sha256": "138c4cd724f33135b33a1ba96c40a4b2a412ba195d47a02d55f5ea8a964afa7e",
+    "sample_index": 191,
+    "sample_time_s": 3.841315,
+    "started_at_utc": "2026-09-23T23:46:31.942Z"
+  },
+  "capture": {
+    "method": "recording_endpoint_import",
+    "motor_state_commands": 0,
+    "timestamp_method": "source recording start UTC plus final sample elapsed time"
+  }
+}

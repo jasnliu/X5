@@ -7,9 +7,24 @@ from camera_calibration.core import ROOT, JOINTS, checked_transform, digest, pas
 from camera_calibration.kinematics import correction_offsets
 from camera_calibration.io import atomic_json
 
-DEFAULT_CALIBRATION = ROOT / 'calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json'
+DEFAULT_CALIBRATION = ROOT / 'calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json'
 DEFAULT_RECORDING = ROOT / 'recordings/record3.json'
+DEFAULT_LEFT_RECORDING = ROOT / 'left_recordings/record1.json'
 LEFT_JOINTS = [name.replace('right', 'left') for name in JOINTS]
+
+
+def arm_side(side):
+    if side not in ('left', 'right'):
+        raise ValueError('Arm side must be left or right')
+    return side
+
+
+def arm_joints(side='right'):
+    return JOINTS if arm_side(side) == 'right' else LEFT_JOINTS
+
+
+def goal_recording(side='right'):
+    return DEFAULT_RECORDING if arm_side(side) == 'right' else DEFAULT_LEFT_RECORDING
 
 
 def calibration(path=DEFAULT_CALIBRATION):
@@ -33,13 +48,15 @@ def calibration(path=DEFAULT_CALIBRATION):
     return obj
 
 
-def endpoint(path=DEFAULT_RECORDING):
+def endpoint(path=None, *, side='right'):
+    arm_side(side)
+    path = goal_recording(side) if path is None else path
     record = json.loads(Path(path).read_text())
-    if (record.get('schema') != 'openarmx-right-motion-recording-v1'
-            or record.get('joint_order') != JOINTS
+    if (record.get('schema') != f'openarmx-{side}-motion-recording-v1'
+            or record.get('joint_order') != arm_joints(side)
             or record.get('joint_position_unit') != 'rad'
             or record.get('model_sha256') != digest(ROOT / 'model/openarmx.urdf')):
-        raise ValueError('Incompatible right-arm recording')
+        raise ValueError(f'Incompatible {side}-arm recording')
     q = np.asarray(record['samples'][-1]['positions_rad'], dtype=float)
     if q.shape != (7,) or not np.isfinite(q).all():
         raise ValueError('Invalid recording endpoint')
@@ -53,7 +70,7 @@ def read_state(path):
     for side in ('right', 'left'):
         q = np.asarray(obj[side + '_rad'], dtype=float)
         if q.shape != (7,) or not np.isfinite(q).all():
-            raise ValueError('Provide seven finite angles for BOTH arms; left is a static obstacle')
+            raise ValueError('Provide seven finite angles for BOTH arms; the opposite arm remains static')
     if obj.get('right_gripper_closed_motor_joint_rad') != float(np.radians(7.)):
         raise ValueError('Right gripper must use customized CLOSED +7 degree convention')
     opening = obj.get('left_gripper_opening_m')

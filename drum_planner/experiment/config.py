@@ -2,20 +2,22 @@
 import json
 from pathlib import Path
 import numpy as np
-from ..common import ROOT, read_state, digest
+from ..common import ROOT, read_state, digest, arm_side
 
 METHODS = {
  'progress': 'Joint progress — partial-joint shortcuts',
  'sweep': 'Broad sweep — elastic curve refinement',
  'single_arc': 'Single arc — low-frequency gesture search',
  'clearance': 'Clearance blend — shape with more breathing room',
+ 'workspace_curve': 'Workspace curve — Cartesian-first broad sweep',
 }
 DEFAULT_METHOD = next(iter(METHODS))
 DESCRIPTIONS = {
  'progress': 'Refines freshly generated compact routes by shortcutting individual joints; prefers less angular backtracking. Fully checked compact routes remain fallbacks.',
  'sweep': 'Endpoint-preserving elastic deformation of compact routes; emphasizes broad wrist/stick curves and fewer detours. All changes are collision/zone checked.',
- 'single_arc': 'Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Exact endpoints and dense final verification; compact fallback if no arc improves the route.',
+ 'single_arc': 'Searches two low-frequency sine components per joint, initialized from endpoint-only compact proposals, not recordings. Valid continuous arcs take priority; geometry score ranks within that group. Only if none is valid: continuous compact fallback, then segmented fallback. Exact endpoints and dense final verification.',
  'clearance': 'Ranks the shared generated/refined routes by broad shape plus a soft obstacle-proximity preference. Identical HARD collision margins; estimated clearance is not a certificate.',
+ 'workspace_curve': 'Experimental: jointly fits a cubic Bezier gripper-base curve and continuous arm posture, with stick-tip regularization. Tries moderate and broad route alternatives; ranks geometric simplicity plus clearance. Exact joint endpoints and the same dense checks/timing. Independent candidates, no Single arc fallback; failure remains visible.',
 }
 BOUND_FIELDS = dict(backtrack_weight=(0.,12.),overshoot_weight=(0.,8.),clearance_weight=(0.,10.),corridor_deg=(3.,25.))
 PRESETS = {
@@ -27,8 +29,10 @@ DEFAULT = dict(PRESETS['Balanced'], candidates=6, seed=19)
 SCHEMA = 'x5-gesture-pool-v2'
 
 
-def saved_inputs():
-    data=json.loads((Path(__file__).with_name('default_inputs.json')).read_text())
+def saved_inputs(side='right'):
+    arm_side(side)
+    name='default_inputs.json' if side=='right' else 'default_left_inputs.json'
+    data=json.loads((Path(__file__).with_name(name)).read_text())
     for key in ('state','scene'):
         path=Path(data[key])
         if digest(path)!=data[key+'_sha256']:raise ValueError('Saved experiment '+key+' changed; supply explicit --state and --scene')

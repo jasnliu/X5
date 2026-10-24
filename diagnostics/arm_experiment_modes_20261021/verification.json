@@ -1,0 +1,202 @@
+{
+  "regression_tests_passed": 780,
+  "physical_motor_commands": 0,
+  "live_start_acquisition": {
+    "side": "left",
+    "bus": "can1",
+    "other_arm_queried": false,
+    "query_packets": 160,
+    "samples": 20,
+    "error": null,
+    "motor_commands": 0,
+    "enable_commands": 0,
+    "disable_commands": 0,
+    "relax_commands": 0,
+    "socket_closed": true
+  },
+  "left_goal": "left_recordings/record1.json final sample only",
+  "right_goal": "recordings/record3.json final sample only",
+  "default_left_zone": "left_zones/zone1.json",
+  "default_right_zone": "right_zones/zone3.json",
+  "left_tool_assumption": "Same custom STL halves, 130 mm gripper, 11 inch exposed stick, 14.8 mm diameter; provisional pending user confirmation",
+  "left_joint_calibration_offsets_copied_from_right": false,
+  "same_four_algorithm_sources_unchanged": true,
+  "hardware_baseline_control_sources_changed": false,
+  "arm_tests": {
+    "left": {
+      "session": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-left-experiment-verified",
+      "methods": {
+        "progress": {
+          "status": "planned",
+          "outward_s": 40.55333788094795,
+          "dense_checks": 20283,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-left-experiment-verified/plans/progress-8ae8e0a2/plan.json",
+          "plan_sha256": "c366b4e88220359db5f56c8ab5d931dede07098fedcabe6ce59deb8166414378"
+        },
+        "sweep": {
+          "status": "planned",
+          "outward_s": 28.57418778472087,
+          "dense_checks": 14292,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-left-experiment-verified/plans/sweep-74fe55c7/plan.json",
+          "plan_sha256": "85ac695904c3d68e3513dc5cb477c0ed74e9e0eaa6d141c9799e6182a7b3a711"
+        },
+        "single_arc": {
+          "status": "planned",
+          "outward_s": 3.684561316371789,
+          "dense_checks": 1844,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-left-experiment-verified/plans/single_arc-037a17b5/plan.json",
+          "plan_sha256": "705c45aa2eccc4ad43663edbf0e8af9b089290eafcbb36c2a4324ccf97f52a07"
+        },
+        "clearance": {
+          "status": "planned",
+          "outward_s": 3.9809321355732052,
+          "dense_checks": 1992,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-left-experiment-verified/plans/clearance-2a3f1c89/plan.json",
+          "plan_sha256": "4d6341b8ebb6b6cf295cc88ac2ce38c691dbe901cc4fd9266048af42d12b0370"
+        }
+      },
+      "native_gui_controls": [
+        {
+          "method": "progress",
+          "side": "left",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "sweep",
+          "side": "left",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "single_arc",
+          "side": "left",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "clearance",
+          "side": "left",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        }
+      ],
+      "render_errors": [],
+      "surface_geometry_uploads": 1,
+      "cancel_resume_passed": true,
+      "worker_observed_peak_mib": 342.18359375,
+      "os_worker_can_block_verified": true
+    },
+    "right": {
+      "session": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-right-experiment-verified",
+      "methods": {
+        "progress": {
+          "status": "planned",
+          "outward_s": 51.141384392694135,
+          "dense_checks": 25578,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-right-experiment-verified/plans/progress-7a152fa2/plan.json",
+          "plan_sha256": "4ab00641847ecaf2dc3e7c3522d2dead8434b74fe3e6ab75f089435da60327f1"
+        },
+        "sweep": {
+          "status": "planned",
+          "outward_s": 51.141384392694135,
+          "dense_checks": 25578,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-right-experiment-verified/plans/sweep-1bcf5cc2/plan.json",
+          "plan_sha256": "3bdaed768de791860c50ed9631a76b67dde2611cebda1d9238c353d2b10ecb04"
+        },
+        "single_arc": {
+          "status": "planned",
+          "outward_s": 7.775232073236282,
+          "dense_checks": 3889,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-right-experiment-verified/plans/single_arc-27182a63/plan.json",
+          "plan_sha256": "314516a2d015d7ebd8482b6379c418875f309ec840f6cb4bf193394ebb78c7d2"
+        },
+        "clearance": {
+          "status": "planned",
+          "outward_s": 7.7926996311903265,
+          "dense_checks": 3898,
+          "plan": "/home/jason/Proyectos3/X5/planner_runs/20261021T033500Z-right-experiment-verified/plans/clearance-f45a08c8/plan.json",
+          "plan_sha256": "f856e50dd699f8104a4b38c87040a0adcd0920bae752d7f595bced507c1628c5"
+        }
+      },
+      "native_gui_controls": [
+        {
+          "method": "progress",
+          "side": "right",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "sweep",
+          "side": "right",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "single_arc",
+          "side": "right",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        },
+        {
+          "method": "clearance",
+          "side": "right",
+          "play_pause": true,
+          "seek": true,
+          "goal": true,
+          "exact_return": true,
+          "loop": true,
+          "speed": true,
+          "other_arm_unchanged": true
+        }
+      ],
+      "render_errors": [],
+      "surface_geometry_uploads": 1,
+      "cancel_resume_passed": true,
+      "worker_observed_peak_mib": 359.4765625,
+      "os_worker_can_block_verified": true
+    }
+  },
+  "normal_left_launcher": {
+    "session": "/home/jason/Proyectos3/X5/planner_runs/20261021T034017Z-left-launcher-ui",
+    "autocached_methods": 4,
+    "completed_animation_cycles": 1,
+    "render_errors": [],
+    "camera_updates": false
+  }
+}

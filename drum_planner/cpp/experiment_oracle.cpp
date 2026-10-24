@@ -3,15 +3,31 @@
 #define main x5_unused_file_backend_main
 #include "moveit_plan.cpp"
 #undef main
+// Checkpoint legs share ONE captured world. Only the planning start changes;
+// self-masking must remain at the original saved camera/robot snapshot pose.
+static Json::Value experimentSceneRequest(const Json::Value& r) {
+  Json::Value scene_request=r;
+  if(r.isMember("scene_robot_start")) {
+    vector7(r["scene_robot_start"]);  // validate before constructing the world
+    scene_request["start"]=r["scene_robot_start"];
+  }
+  return scene_request;
+}
 struct ExperimentOracle {
   Checker c;
   Q start,goal;
   std::map<std::string,double> nominal;
   std::vector<std::string> ids;
-  ExperimentOracle(moveit::core::RobotModelPtr m,const Json::Value& r):c(m,r),start(vector7(r["start"])),
+  ExperimentOracle(moveit::core::RobotModelPtr m,const Json::Value& r):c(m,experimentSceneRequest(r)),start(vector7(r["start"])),
     goal(vector7(r["goal"])),nominal(c.scene.getCollisionEnv()->getLinkPadding()),
     ids(c.scene.getWorld()->getObjectIds()) {
     if(!c.initial_bounds["valid"].asBool())throw std::runtime_error("Saved start violates calibrated joint limits");
+    if(r.isMember("scene_robot_start")) {
+      c.self_filter["checkpoint_snapshot_start"]=r["scene_robot_start"];
+      c.state.setJointGroupPositions(c.group,start);c.state.update();
+      c.initial_bounds=c.positionBounds();
+      if(!c.initial_bounds["valid"].asBool())throw std::runtime_error("Checkpoint start violates calibrated joint limits");
+    }
   }
   void restore() {
     c.self_clearance=0.;
@@ -23,7 +39,7 @@ struct ExperimentOracle {
     double extra=r.get("extra_padding",0.).asDouble(),tool=r.get("tool_padding",0.).asDouble();
     if(!std::isfinite(extra)||extra<0||extra>.3||!std::isfinite(tool)||tool<0||tool>.1)
       throw std::runtime_error("Invalid experimental padding");
-    auto pads=nominal;for(auto& p:pads)p.second+=extra+(p.first=="right_drumstick"?tool:0.);
+    auto pads=nominal;for(auto& p:pads)p.second+=extra+(p.first==c.stick_link?tool:0.);
     c.scene.getCollisionEnvNonConst()->setLinkPadding(pads);
     if(r.isMember("world_transform")) {
       auto a=r["world_transform"];if(a.size()!=4)throw std::runtime_error("Expected SE3 world transform");
@@ -78,23 +94,24 @@ struct ExperimentOracle {
     if(op=="metadata") {
       for(const auto& name:c.group->getVariableNames()){auto b=c.model->getVariableBounds(name);out["lower"].append(b.min_position_);out["upper"].append(b.max_position_);}
       out["joint_limit_check"]=c.initial_bounds;out["self_filter"]=c.self_filter;
-      out["right_zone_constraint"]=c.right_zone.metadata;
+      out["world_padding"]=c.world_padding;
+      out[c.moving_side+"_zone_constraint"]=c.zone.metadata;out["moving_side"]=c.moving_side;
     }else if(op=="zone") {
       if(!r["q"].isArray()||r["q"].size()>10000)throw std::runtime_error("Zone diagnostic batch must contain <=10000 states");
-      for(const auto& q:r["q"]){Json::Value row;c.right_zone.check(vector7(q),&row,true);out["rows"].append(row);}
+      for(const auto& q:r["q"]){Json::Value row;c.zone.check(vector7(q),&row,true);out["rows"].append(row);}
     }else if(op=="plan")out=plan(r);
     else if(op=="style") {restore();out["rows"]=styleFeatures(c,r["paths"]);restore();}
     else if(op=="fk") {
       // Cheap geometric features for endpoint-only search. No collision
       // padding, ACM or world changes; never an authorization/validity test.
       if(!r["q"].isArray()||r["q"].size()>10000)throw std::runtime_error("FK batch must contain <=10000 states");
-      auto stick=c.model->getLinkModel("right_drumstick");
+      auto stick=c.model->getLinkModel(c.stick_link);
       if(!stick||stick->getShapes().size()!=1||stick->getShapes()[0]->type!=shapes::CYLINDER)
         throw std::runtime_error("Expected modeled drumstick cylinder");
       double half=static_cast<const shapes::Cylinder*>(stick->getShapes()[0].get())->length*.5;
       for(const auto& a:r["q"]) {
         auto q=vector7(a);c.state.setJointGroupPositions(c.group,q);c.state.update();
-        Eigen::Vector3d wrist=c.state.getGlobalLinkTransform("openarmx_right_hand").translation();
+        Eigen::Vector3d wrist=c.state.getGlobalLinkTransform(c.hand_link).translation();
         Eigen::Vector3d tip=c.state.getCollisionBodyTransform(stick,0)*Eigen::Vector3d(0,0,half);
         out["wrist_xyz_m"].append(jsonQ(Q{wrist.x(),wrist.y(),wrist.z()}));
         out["tip_xyz_m"].append(jsonQ(Q{tip.x(),tip.y(),tip.z()}));

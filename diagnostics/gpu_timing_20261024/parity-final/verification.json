@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "side": "right",
+      "checkpoints": 1,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-right-20261022/ui/calculate-c788c1fa/plan/plan.json",
+      "experiment": "/home/jason/Proyectos3/X5/diagnostics/gpu_timing_20261024/parity-final/right-1-leg-1/plan.json",
+      "bit_identical_fields": [
+        "path_waypoints",
+        "source_timing"
+      ],
+      "same_selection": true,
+      "same_pool_key": false,
+      "pool_reused": true,
+      "duration_s": 4.24661587780493,
+      "cpu_reference_duration_s": 4.205074117720795,
+      "duration_ratio": 1.0098789602563893,
+      "timing_backend": "vulkan"
+    },
+    {
+      "side": "left",
+      "checkpoints": 1,
+      "leg": 1,
+      "source": "/home/jason/Proyectos3/X5/planner_runs/hardware-workspace-ui-left-20261022/ui/calculate-1919690e/plan/plan.json",
+      "experiment": "/home/jason/Proyectos3/X5/diagnostics/gpu_timing_20261024/parity-final/left-1-leg-1/plan.json",
+      "bit_identical_fields": [
+        "path_waypoints",
+        "source_timing"
+      ],
+      "same_selection": true,
+      "same_pool_key": false,
+      "pool_reused": false,
+      "duration_s": 2.8600238398920435,
+      "cpu_reference_duration_s": 2.8396293748050616,
+      "duration_ratio": 1.0071820869539998,
+      "timing_backend": "vulkan"
+    }
+  ],
+  "camera_access": false,
+  "motor_commands": 0
+}

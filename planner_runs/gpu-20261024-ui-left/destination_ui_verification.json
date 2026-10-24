@@ -1,0 +1,407 @@
+{
+  "type": "snapshot_mesh_trajectory_preview",
+  "rendered_updates": 1,
+  "first_displayed_sequence": 5,
+  "last_displayed_sequence": 5,
+  "max_age_at_display_s": 353560.45836623205,
+  "last_frame_compute_s": 0.08392386406194419,
+  "maximum_draw_s": 0.06511001102626324,
+  "worker_submissions": 0,
+  "maximum_pending_jobs": 0,
+  "modes_rendered": [
+    "depth points",
+    "mesh + points",
+    "surface mesh"
+  ],
+  "freeze_count": 0,
+  "resume_count": 0,
+  "mode_switches": 2,
+  "display_point_limit": 18000,
+  "planning_points_downsampled": false,
+  "robot_overlay": true,
+  "renderer": {
+    "engine": "VTK/OpenGL",
+    "capabilities": [
+      "OpenGL vendor string:  AMD",
+      "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+      "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+    ],
+    "qt_offscreen": false,
+    "render_count": 100,
+    "maximum_frame_s": 0.06509534199722111,
+    "median_frame_s": 0.0017416785703971982,
+    "surface_geometry_uploads": 1,
+    "surface_color_uploads": 2,
+    "surface_triangles": 20184,
+    "render_errors": []
+  },
+  "robot_overlay_source": "saved plan simulation, not encoders",
+  "plan_file": "/home/jason/Proyectos3/X5/planner_runs/gpu-20261024-ui-left/initial/plan.json",
+  "plan_warning": "NO TRAJECTORY \u2014 not_generated",
+  "animation_draws": 98,
+  "animation_time_s": 0.0,
+  "animation_completed_cycles": 0,
+  "animation_play_clicks": 20,
+  "animation_seeks": 26,
+  "animation_phases_seen": [
+    "BLOCKED",
+    "HOLD (2 seconds)",
+    "outward",
+    "return"
+  ],
+  "live_collision_revalidation": false,
+  "motion_authorized": false,
+  "hardware_execution_available": false,
+  "camera_updates": false,
+  "mesh_builds": 1,
+  "mesh": {
+    "vertices": 12074,
+    "triangles": 20184,
+    "candidate_triangles": 32000,
+    "rejected_triangles": 11816,
+    "grid_step_pixels": 8,
+    "native_resolution": [
+      1280,
+      800
+    ],
+    "valid_pixels": 827092,
+    "depth_jump_m": 0.03,
+    "relative_depth_jump": 0.02,
+    "max_edge_m": 0.12,
+    "hole_filling": false,
+    "hidden_surface_reconstruction": false,
+    "preview_only": true
+  },
+  "scene_immutable": true,
+  "collision_mesh": false,
+  "experiment": true,
+  "saved_state_not_live": true,
+  "can_access": false,
+  "motor_commands": 0,
+  "context": {
+    "state": "/home/jason/Proyectos3/X5/planner_runs/20261021T032100Z-left-experiment-start/measured_start.json",
+    "state_sha256": "67507e152f39688c78e824e1e958f3295a28d12dc73b0027c59668e63b1027ca",
+    "scene": "/home/jason/Proyectos3/X5/planner_runs/gpu-20261024-ui-left/scene_5mm/scene.json",
+    "scene_sha256": "235bd66e4aa9fe9f19d12879be820a78e811a7f3dd336ee1843b3cab5b78759b",
+    "calibration": "/home/jason/Proyectos3/X5/calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json",
+    "saved_not_live": true,
+    "can_access": false,
+    "motor_commands": 0,
+    "pool_root": "/home/jason/Proyectos3/X5/planner_runs/gpu-20261024-ui-left/shared_pools",
+    "moving_side": "left",
+    "goal_recording": "/home/jason/Proyectos3/X5/left_recordings/record1.json",
+    "left_zone": {
+      "schema": "x5-left-zone-constraint-v1",
+      "enabled": true,
+      "zone_file": "/home/jason/Proyectos3/X5/left_zones/zone1.json",
+      "zone_sha256": "81e17d8b857f3b8a0df3a4f487dc4c8c56c0fdb5396268017fea3245abdbf540",
+      "reference_urdf": "/home/jason/Proyectos3/X5/model/openarmx.urdf",
+      "reference_urdf_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+      "frame": "world",
+      "tcp": "openarmx_left_hand_tcp",
+      "buffer_m": 0.005,
+      "numerical_tolerance_m": 1e-09,
+      "point_only": true,
+      "stick_constrained": false,
+      "kinematics": "original URDF, saved joint coordinates; identical to safe_zone.geometry.Model",
+      "membership": "recomputed convex hull; signed plane distance <= buffer_m + 1e-9",
+      "point_count": 1197,
+      "plane_count": 596,
+      "right_arm_constrained": false,
+      "constraint_sha256": "af73ab423d1a3c98a23cd0db99ed75ddd26921a9b1ebfb0f11fd3362c331da49"
+    },
+    "zone_path": "/home/jason/Proyectos3/X5/left_zones/zone1.json"
+  },
+  "events": [
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "destination_rejected",
+      "path": "/tmp/x5-invalid-destination-3uic2oct/bad.json",
+      "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "destination_selected",
+      "path": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "sha256": "ef5e9422c9f1e79f66bf33d712618c4eed29e7970db234f52f4bbbd00cff4331"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "workspace_curve",
+        "progress",
+        "sweep",
+        "single_arc",
+        "clearance"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "workspace_curve"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "destination_selected",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "destination_selected",
+      "path": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "sha256": "ef5e9422c9f1e79f66bf33d712618c4eed29e7970db234f52f4bbbd00cff4331"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "workspace_curve",
+        "progress",
+        "sweep",
+        "single_arc",
+        "clearance"
+      ]
+    },
+    {
+      "event": "obsolete_job_discarded",
+      "kind": "plan",
+      "method": "workspace_curve"
+    },
+    {
+      "event": "generate",
+      "method": "workspace_curve"
+    },
+    {
+      "event": "installed",
+      "method": "workspace_curve",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "workspace_curve",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/workspace_curve-24fd8773/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "progress"
+    },
+    {
+      "event": "cached",
+      "method": "progress",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/progress-abdbe84c/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "sweep"
+    },
+    {
+      "event": "cached",
+      "method": "sweep",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/sweep-9edece80/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/single_arc-4ba0ebfe/plan.json"
+    },
+    {
+      "event": "generate",
+      "method": "clearance"
+    },
+    {
+      "event": "cached",
+      "method": "clearance",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/clearance-9361efff/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": "progress",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "progress",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "sweep",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "sweep",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "clearance",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "workspace_curve",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "workspace_curve",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": "workspace_curve",
+      "status": "no_feasible_route"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "cancel",
+      "kind": "plan"
+    },
+    {
+      "event": "cache_all",
+      "methods": [
+        "single_arc"
+      ]
+    },
+    {
+      "event": "generate",
+      "method": "single_arc"
+    },
+    {
+      "event": "installed",
+      "method": "single_arc",
+      "status": "planned"
+    },
+    {
+      "event": "cached",
+      "method": "single_arc",
+      "status": "planned",
+      "plan": "planner_runs/gpu-20261024-ui-left/plans/single_arc-a109f369/plan.json"
+    },
+    {
+      "event": "installed",
+      "method": null,
+      "status": "not_generated"
+    },
+    {
+      "event": "destination_selected",
+      "path": null,
+      "sha256": null
+    }
+  ],
+  "generations": 8,
+  "scene_generations": 0,
+  "displayed_method": null,
+  "automatic_precompute": false,
+  "calculation_trigger": "destination_selection",
+  "selected_destination": null,
+  "selected_checkpoints": [
+    null
+  ],
+  "queued_methods": [],
+  "calculating_method": null,
+  "method_states": {
+    "progress": "not queued",
+    "sweep": "not queued",
+    "single_arc": "not queued",
+    "clearance": "not queued",
+    "workspace_curve": "not queued"
+  },
+  "cached_results": {},
+  "tested_destinations": [
+    {
+      "destination": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "method": "progress",
+      "status": "planned",
+      "playback_tested": true
+    },
+    {
+      "destination": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "method": "sweep",
+      "status": "planned",
+      "playback_tested": true
+    },
+    {
+      "destination": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "method": "single_arc",
+      "status": "planned",
+      "playback_tested": true
+    },
+    {
+      "destination": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "method": "clearance",
+      "status": "planned",
+      "playback_tested": true
+    },
+    {
+      "destination": "/home/jason/Proyectos3/X5/destinations/left/destinationL1.json",
+      "method": "workspace_curve",
+      "status": "planned",
+      "playback_tested": true
+    }
+  ],
+  "native_ui_errors": [],
+  "startup_unselected": true,
+  "rapid_selection_cancellation": true,
+  "refresh": true,
+  "cancel_resume": true,
+  "controls_tested": true,
+  "empty_folder_message": true,
+  "invalid_destination_recovery": true,
+  "no_route_ui_fixture_tested": true,
+  "full_cycles_played": false,
+  "camera_access": false
+}

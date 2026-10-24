@@ -1,0 +1,8 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "common.glsl"
+void main(){uint l=gl_LocalInvocationID.x,j=gl_WorkGroupID.x,c=uint(a[3]);double g=0.0;
+ for(uint r=uint(a[LO()+j])+l;r<uint(a[HI()+j]);r+=64){uint off=AUX()+(c*p.m+r)*5;uint b=B()+j*p.m+r;
+  g+=a[off+1]*a[b]+a[off+2]*a[b+p.n*p.m]+a[off+3]*a[b+2*p.n*p.m];}
+ g=sum64(g);if(l==0)a[G()+j]=a[W()+j]+g;
+}

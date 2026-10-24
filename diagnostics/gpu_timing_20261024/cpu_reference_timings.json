@@ -1,0 +1,78 @@
+{
+  "source": "diagnostics/vulkan_feasibility_20261023/SUMMARY.json",
+  "source_sha256": "a04007b39ebffd1095fd4aec5415db0f2f24e0d2731ef9f77e4aaea427e5ebf4",
+  "cases": {
+    "R1_to_R4": {
+      "profile_wall_s": 177.64304429793265,
+      "baseline_wall_s": [
+        173.6421585070202,
+        176.91937482205685
+      ],
+      "baseline_mean_wall_s": 175.28076666453853,
+      "verification_wall_s": [
+        1.0920798780862242,
+        1.0915357350604609,
+        1.0861110500991344
+      ],
+      "native_solver_s": 161.43407972052228,
+      "native_solver_fraction": 0.9087554221924635,
+      "callbacks_s": 3.0454546089749783,
+      "callbacks_fraction": 0.0171436749522673,
+      "exact_extrema_s": 11.989451961009763,
+      "exact_extrema_fraction": 0.06749181769763947,
+      "other_s": 1.1740580074256286,
+      "ideal_callback_offload_speedup": 1.017442707052259,
+      "ideal_callback_offload_saved_fraction": 0.0171436749522673,
+      "motion_duration_s": 3.493139999547328,
+      "all_trajectory_fields_except_diagnostics_exactly_equal": true
+    },
+    "rest_to_R1": {
+      "profile_wall_s": 18.478927426040173,
+      "baseline_wall_s": [
+        18.309550859965384,
+        18.333235035068356
+      ],
+      "baseline_mean_wall_s": 18.32139294751687,
+      "verification_wall_s": [
+        1.0706741400063038,
+        1.0767119799274951,
+        1.069492710987106
+      ],
+      "native_solver_s": 6.135114291333593,
+      "native_solver_fraction": 0.3320059736090581,
+      "callbacks_s": 0.11351024964824319,
+      "callbacks_fraction": 0.006142686046176391,
+      "exact_extrema_s": 12.068891394534148,
+      "exact_extrema_fraction": 0.6531164453585593,
+      "other_s": 0.16141149052418768,
+      "ideal_callback_offload_speedup": 1.006180651850052,
+      "ideal_callback_offload_saved_fraction": 0.006142686046176391,
+      "motion_duration_s": 4.205074117720795,
+      "all_trajectory_fields_except_diagnostics_exactly_equal": true
+    },
+    "R4_to_rest": {
+      "profile_wall_s": 29.0786866460694,
+      "baseline_wall_s": [
+        29.166204910958186,
+        29.097020133049227
+      ],
+      "baseline_mean_wall_s": 29.131612522003707,
+      "verification_wall_s": [
+        1.0261447130469605,
+        1.0296602989546955,
+        1.0243712299270555
+      ],
+      "native_solver_s": 16.53156300028786,
+      "native_solver_fraction": 0.5685113362065288,
+      "callbacks_s": 0.41972215729765594,
+      "callbacks_fraction": 0.014434013557981315,
+      "exact_extrema_s": 11.872145614819601,
+      "exact_extrema_fraction": 0.4082765414862494,
+      "other_s": 0.25525587366428226,
+      "ideal_callback_offload_speedup": 1.0146454055401093,
+      "ideal_callback_offload_saved_fraction": 0.014434013557981315,
+      "motion_duration_s": 2.7027626229525863,
+      "all_trajectory_fields_except_diagnostics_exactly_equal": true
+    }
+  }
+}

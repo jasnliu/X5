@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "motor_commands": 0,
+  "camera_access": false,
+  "commands": [
+    "./plan_drums.sh --hardware-sparse --right",
+    "./plan_drums.sh --hardware-sparse --left"
+  ],
+  "original_hardware_default_unchanged": true,
+  "original_engine_collision_model_and_motor_sources_byte_identical": true,
+  "shared_opt_in_wiring_files": [
+    "drum_planner/cli.py",
+    "drum_planner/timing/dispatch.py",
+    "drum_planner/baseline/computation.py",
+    "drum_planner/baseline/planner.py",
+    "drum_planner/baseline/workspace.py",
+    "drum_planner/baseline/tasks.py",
+    "drum_planner/baseline/work.py"
+  ],
+  "unchanged_captured_sources": 72,
+  "benchmark_cases": 5,
+  "max_benchmark_duration_difference_s": 2.878333194011873e-07,
+  "bit_identical_geometry": true,
+  "exact_extrema_and_dense_collision_zone_passed": true,
+  "native_ui_sides": [
+    "right",
+    "left"
+  ],
+  "native_ui_cycles": 6,
+  "hardware_default_parity_legs": 10,
+  "tests": {
+    "regression_passed": 886,
+    "regression_warnings": 1,
+    "regression_seconds": 241.72,
+    "sparse_and_preservation_tests_passed": 16,
+    "final_audit_passed": 26
+  },
+  "max_observed_calculation_group_bytes": 740229120,
+  "aggregate_calculation_group_limit_bytes": 3221225472,
+  "sparse_worker_cancelled_and_reaped": true,
+  "other_three_suggested_optimizations_implemented": false,
+  "measurements_caveat": "Timing numbers are cold solves; other software tests ran concurrently. Not a controlled universal speedup comparison.",
+  "actual_cli_offline_cases": [
+    {
+      "mode": "--hardware-sparse",
+      "side": "right",
+      "passed": true,
+      "no_automatic_calculation": true,
+      "controls_available": true
+    },
+    {
+      "mode": "--hardware-sparse",
+      "side": "left",
+      "passed": true,
+      "no_automatic_calculation": true,
+      "controls_available": true
+    },
+    {
+      "mode": "--hardware",
+      "side": "right",
+      "passed": true,
+      "no_automatic_calculation": true,
+      "controls_available": true
+    }
+  ]
+}

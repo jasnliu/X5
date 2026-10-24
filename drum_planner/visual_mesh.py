@@ -184,7 +184,7 @@ def visual_surfaces(root, target_faces=1200):
             elif geometry.find('cylinder') is not None:
                 cylinder = geometry.find('cylinder')
                 parts = [(cylinder_triangles(float(cylinder.get('radius')), float(cylinder.get('length'))),
-                          (.78, .57, .32, 1.) if name == 'right_drumstick' else DEFAULT_COLOR)]
+                          (.78, .57, .32, 1.) if name in ('right_drumstick','left_drumstick') else DEFAULT_COLOR)]
             else:
                 raise ValueError(f'Unsupported robot visual geometry: {name}')
             material = visual.find('material')

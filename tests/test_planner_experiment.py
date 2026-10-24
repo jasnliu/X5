@@ -7,11 +7,16 @@ from drum_planner.experiment import config,fluidity,algorithms,runtime,search,ge
 from drum_planner.common import ROOT
 
 
-def test_four_survivors_no_learning_or_recorded_route():
-    assert list(config.METHODS)==['progress','sweep','single_arc','clearance']
+def test_four_survivors_plus_workspace_fork_no_learning_or_recorded_route():
+    assert list(config.METHODS)==['progress','sweep','single_arc','clearance','workspace_curve']
     for path in (ROOT/'drum_planner/experiment').glob('*.py'):
         text=path.read_text()
-        assert 'motor_transport' not in text and 'Telemetry(' not in text
+        assert 'motor_transport' not in text
+        if path.name=='acquisition.py':
+            # The isolated startup job may query poses, never actuate. All
+            # calculation and UI modules remain disconnected from telemetry.
+            assert 'from ..read_only import Telemetry' in text
+        else:assert 'Telemetry(' not in text
     for name in ('risk.py','regions.py'):assert not (ROOT/'drum_planner/experiment'/name).exists()
     assert 'recordings' in config.DESCRIPTIONS['single_arc']
     assert not set(config.METHODS)&{'baseline','reversals','coordination','spatial','combined'}
@@ -88,7 +93,7 @@ def test_family_eligibility_and_no_demonstration_or_duration_filter():
 
 def test_gesture_winners_do_not_change_when_candidate_durations_change():
     rows=ranking_rows()
-    for method in config.METHODS:
+    for method in ('progress','sweep','single_arc','clearance'):
         a,_=search.rank(rows,method)
         changed=json.loads(json.dumps(rows))
         for i,row in enumerate(changed):row['duration_s']=(i+1)**3
@@ -145,7 +150,7 @@ def test_latest_pose_is_saved_success_not_example(tmp_path):
     assert config.latest_state().name=='measured_start.json'
 
 
-def test_default_prepare_uses_frozen_inputs_and_never_captures(tmp_path,monkeypatch):
+def test_low_level_study_prepare_uses_frozen_inputs_and_never_captures(tmp_path,monkeypatch):
     from drum_planner.experiment import app
     state=tmp_path/'saved_state.json';scene=tmp_path/'scene.json'
     monkeypatch.setattr(app,'saved_inputs',lambda:(state,scene))
@@ -159,7 +164,7 @@ def test_default_prepare_uses_frozen_inputs_and_never_captures(tmp_path,monkeypa
             (folder/'context.json').write_text(json.dumps(dict(state=str(state),scene=str(scene))))
     monkeypatch.setattr(app,'Job',FakeJob);monkeypatch.setattr(app,'wait',wait)
     context=app.prepare(tmp_path/'session')
-    assert context==dict(state=str(state),scene=str(scene))
+    assert context==dict(state=str(state),scene=str(scene),input_origin='offline_saved')
     assert len(commands)==2 and all('capture' not in c for c in commands)
     assert str(state) in commands[1] and str(scene) in commands[1]
 
@@ -198,13 +203,18 @@ def test_immediate_cancel_retries_service_registration_race(tmp_path,monkeypatch
     job.close()
 
 
-@pytest.fixture
-def queued_view(tmp_path,monkeypatch):
+@pytest.fixture(params=['right','left'])
+def queued_view(tmp_path,monkeypatch,request):
     """Actual controller methods with device-free workers/widgets, no solver/UI."""
     from collections import deque
     from types import SimpleNamespace
     from drum_planner.experiment import app
     from drum_planner.snapshot_preview import SnapshotPlaybackView
+    # Keep testing the generic serial-queue state machine with its historical
+    # five-method fixture. The actual new menu is covered in test_fast_gpu.py
+    # and the native UI checks; this fixture is not the user-visible registry.
+    monkeypatch.setattr(app,'METHODS',config.METHODS)
+    monkeypatch.setattr(app,'DESCRIPTIONS',config.DESCRIPTIONS)
     monkeypatch.setattr(SnapshotPlaybackView,'poll',lambda self:-1)
     monkeypatch.setattr(SnapshotPlaybackView,'close',lambda self:None)
     class Widget:
@@ -234,14 +244,17 @@ def queued_view(tmp_path,monkeypatch):
         return target,FakeJob(target,method)
     monkeypatch.setattr(app,'start_plan',start)
     view_class=app.make_view_class();v=view_class.__new__(view_class)
-    v.session=tmp_path;v.context=dict(scene_sha256='scene',state_sha256='state')
+    v.session=tmp_path;v.side=request.param
+    v.context=dict(scene_sha256='scene',state_sha256='state',moving_side=v.side)
+    v.context['destination_sha256']='selected-destination'
+    v.destination_path=tmp_path/'selected.json';v.discard_job=False
     v.params=config.settings();v.planning_seconds=60.;v.cache={};v.pending_methods=deque()
     v.method_states={key:'not queued' for key in config.METHODS};v.closing=False
     v.job=None;v.job_kind=None;v.job_method=None;v.job_signature=None;v.job_target=None
     v.active_method='progress';v.displayed_method=None;v.events=deque(maxlen=256);v.generation_count=0
     v.plan=SimpleNamespace(playable=False);v.clock=Clock();v.autoplay_result=False
     for name in ('method_box','generate_button','cache_all_button','budget_spin','settings_button',
-                 'recapture_button','cancel_button','play_button','timeline','queue_label','status','plan_label','method_description'):
+                 'recapture_button','cancel_button','play_button','timeline','queue_label','status','plan_label','method_description','info'):
         setattr(v,name,Widget())
     v.window=SimpleNamespace(findChildren=lambda kind:[]);v.QtWidgets=SimpleNamespace(QPushButton=Widget)
     def install(path,method):
@@ -256,16 +269,25 @@ def queued_view(tmp_path,monkeypatch):
     def choose(method):
         v.method_box.index=list(config.METHODS).index(method);v.select_method()
     v.finish=finish;v.choose=choose;v.test_jobs=jobs
+    class DestinationBox:
+        path=None
+        def currentData(self):return self.path
+        def blockSignals(self,value):pass
+        def setCurrentIndex(self,index):
+            if index==0:self.path=None
+    v.destination_box=DestinationBox()
+    v.checkpoint_boxes=[v.destination_box]
+    v.refresh_checkpoint_choices=lambda selected:None
     return v
 
 
-def test_cache_all_runs_every_method_without_selection_and_serializes_workers(queued_view):
+def test_cache_all_runs_every_method_without_method_selection_and_serializes_workers(queued_view):
     v=queued_view;v.cache_all()
     assert v.job_method=='progress' and len(v.pending_methods)==len(config.METHODS)-1
     while v.job:v.finish()
     assert [j.method for j in v.test_jobs]==['progress',*[m for m in config.METHODS if m!='progress']]
     assert len(v.cache)==len(config.METHODS)==v.generation_count
-    assert v.method_states['single_arc']=='no feasible route' and '4/4' in v.queue_label.text
+    assert v.method_states['single_arc']=='no feasible route' and f'{len(config.METHODS)}/{len(config.METHODS)}' in v.queue_label.text
     assert v.displayed_method=='progress' and all(j.closed for j in v.test_jobs)
     v.cache_all();assert not v.job and v.generation_count==len(config.METHODS)
 
@@ -337,3 +359,86 @@ def test_close_stops_active_worker_and_never_launches_queued_jobs(queued_view):
     v=queued_view;v.cache_all();job=v.job;v.close()
     assert job.closed and v.closing and not v.pending_methods and not v.job
     v.start_next();v.cache_all();assert len(v.test_jobs)==1
+
+
+def destination_for(v,name,delta=0.):
+    from drum_planner.common import goal_recording
+    obj=json.loads(goal_recording(v.side).read_text())
+    obj['samples']=[obj['samples'][-1]]
+    obj['samples'][0]['positions_rad'][0]+=delta
+    path=v.session/name;path.write_text(json.dumps(obj));return path
+
+
+def test_no_destination_means_no_planning_even_when_other_controls_clicked(queued_view):
+    v=queued_view;v.destination_path=None
+    v.cache_all();v.generate();v.choose('single_arc');v.budget_changed(30)
+    assert not v.test_jobs and not v.pending_methods and not v.plan.playable
+    assert 'Choose a destination' in v.status.text
+
+
+def test_destination_selection_starts_all_methods_for_selected_goal(queued_view):
+    v=queued_view;v.destination_path=None
+    path=destination_for(v,'chosen.json',.005)
+    v.destination_box.path=str(path);v.select_destination()
+    assert v.destination_path==path and v.job is not None
+    assert len(v.pending_methods)==len(config.METHODS)-1
+    assert v.context['destination_source']==str(path)
+    from drum_planner.common import endpoint
+    assert np.array_equal(endpoint(v.context['goal_recording'],side=v.side),endpoint(path,side=v.side))
+    assert json.loads((v.session/'context.json').read_text())==v.context
+
+
+def test_switch_destination_waits_for_old_worker_and_ignores_late_result(queued_view):
+    v=queued_view
+    one=destination_for(v,'one.json');two=destination_for(v,'two.json',.005);three=destination_for(v,'three.json',.01)
+    v.destination_box.path=str(one);v.select_destination();old=v.job
+    # A cancellation request does not mean the process has actually exited yet.
+    old.cancel=lambda:setattr(old,'cancelled',True)
+    for path in (two,three):
+        v.destination_box.path=str(path);v.select_destination()
+        assert v.job is old and len(v.test_jobs)==1 and not v.cache and not v.plan.playable
+    v.finish()  # even a successful late result must be discarded
+    assert old.closed and v.job is not old and v.context['destination_source']==str(three)
+    assert not v.cache and v.job_signature==v.signature()
+    assert any(e['event']=='obsolete_job_discarded' for e in v.events)
+    assert len(v.test_jobs)==2
+
+
+def test_clear_or_invalid_destination_removes_old_playback_and_is_retryable(queued_view):
+    v=queued_view;v.cache_all();v.finish()
+    assert v.plan.playable
+    broken=v.session/'broken.json';broken.write_text('{bad json')
+    v.destination_box.path=str(broken);v.select_destination();v.poll()
+    assert v.destination_path is None and v.job is None
+    assert not v.cache and not v.pending_methods and not v.plan.playable
+    assert 'destination_sha256' not in json.loads((v.session/'context.json').read_text())
+    good=destination_for(v,'good.json')
+    v.destination_box.path=str(good);v.select_destination()
+    assert v.job is not None
+    v.destination_box.path=None;v.select_destination();v.poll()
+    assert v.job is None and not v.pending_methods and v.destination_path is None
+
+
+def test_destination_switch_discards_inflight_scene_capture_without_camera_access(queued_view):
+    v=queued_view;v.cache_all();v.job_kind='capture';v.job_method=None
+    old=v.job;old.cancel=lambda:setattr(old,'cancelled',True)
+    source=destination_for(v,'new-destination.json',.01)
+    v.destination_box.path=str(source);v.select_destination()
+    assert v.job is old and len(v.pending_methods)==len(config.METHODS)
+    v.finish()
+    assert v.job_kind=='plan' and v.job is not old
+    assert v.context['destination_source']==str(source)
+
+
+def test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end(queued_view):
+    v=queued_view;v.choose('workspace_curve')
+    assert v.job_method=='workspace_curve'
+    (v.job_target/'plan.json').write_text(json.dumps(dict(status='no_feasible_route')))
+    v.finish()
+    assert v.method_states['workspace_curve']=='no feasible route'
+    assert v.cached('workspace_curve') and not v.plan.playable
+    assert v.generate_button.enabled and v.method_box.enabled and v.settings_button.enabled
+    v.generate();assert v.job_method=='workspace_curve';v.finish()
+    assert v.plan.playable
+    v.choose('single_arc');assert v.job_method=='single_arc'
+    v.finish();assert v.generate_button.enabled

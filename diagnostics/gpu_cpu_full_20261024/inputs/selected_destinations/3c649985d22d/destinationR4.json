@@ -1,0 +1,57 @@
+{
+  "schema": "openarmx-right-motion-recording-v1",
+  "arm": "right",
+  "source": "query-only disabled-motor encoder feedback",
+  "model_sha256": "01df241160f0ebb326a28888cda67d157f585f8a42d1ca467634e0f5243f01e1",
+  "time_unit": "s",
+  "joint_position_unit": "rad",
+  "tcp_position_unit": "m",
+  "gripper_opening_unit": "m",
+  "joint_order": [
+    "openarmx_right_joint1",
+    "openarmx_right_joint2",
+    "openarmx_right_joint3",
+    "openarmx_right_joint4",
+    "openarmx_right_joint5",
+    "openarmx_right_joint6",
+    "openarmx_right_joint7"
+  ],
+  "gripper_name": "openarmx_right_finger_joint1",
+  "nominal_sample_rate_hz": 50.0,
+  "started_at_utc": "2026-10-24T00:22:19.048Z",
+  "duration_s": 0.0,
+  "sample_count": 1,
+  "samples": [
+    {
+      "time_s": 0.0,
+      "positions_rad": [
+        -0.025510185397115137,
+        0.09187502861066577,
+        -0.42101396200503594,
+        0.15248569466697148,
+        -0.35416072274361843,
+        0.20504051270313717,
+        1.3877157244220655
+      ],
+      "gripper_opening_m": 0.005165864926881667,
+      "tcp_position_m": [
+        0.14652086627112726,
+        -0.0709097230600229,
+        0.2181505716424887
+      ],
+      "motor8_encoder_count": 32447,
+      "motor8_raw_rad": -0.12294758525978366
+    }
+  ],
+  "capture_kind": "destination",
+  "captured_at_utc": "2026-10-24T00:22:19.048Z",
+  "coordinate_convention": "encoder_to_joint",
+  "tcp_frame": "openarmx_right_hand_tcp",
+  "tcp_reference_frame": "world",
+  "capture": {
+    "bus": "can0",
+    "feedback_age_s": 0.00943443994037807,
+    "batch_duration_s": 0.005069238017313182,
+    "motor_state_commands": 0
+  }
+}

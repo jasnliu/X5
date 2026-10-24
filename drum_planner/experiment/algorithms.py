@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from ..common import ROOT,atomic_json,digest
 from ..planning import smooth_samples
+from ..depth import scene_voxel_size
 from .. import style
 from .config import SCHEMA
 from .fluidity import resample,measure
@@ -58,13 +59,24 @@ def timed_candidate(oracle,q,req,index,log,params,stop=False):
 
 def pool_key(context,req,params,seconds):
     # Include algorithm/model/scene contents, not temporary per-method paths.
+    import xml.etree.ElementTree as ET
+    # URDF references alone do not change when a CAD file is replaced in place.
+    # Hash collision meshes too, so refined attachments cannot reuse old routes.
+    meshes=sorted({m.get('filename').removeprefix('file://')
+                   for m in ET.parse(req['urdf']).findall('.//collision/geometry/mesh')})
     sources=['experiment/algorithms.py','experiment/fluidity.py','experiment/config.py',
              'experiment/worker.py','experiment/search.py','experiment/gesture.py','planning.py','style.py','model.py','right_zone.py','common.py',
              'cpp/experiment_oracle.cpp','cpp/moveit_plan.cpp','cpp/CMakeLists.txt']
-    data=dict(schema=SCHEMA,scene=context['scene_sha256'],state=context['state_sha256'],
+    side=req.get('moving_side','right');zone=req.get(side+'_zone')
+    data=dict(schema=SCHEMA,moving_side=side,scene=context['scene_sha256'],state=context['state_sha256'],
               calibration=digest(context['calibration']),urdf=digest(req['urdf']),srdf=digest(req['srdf']),
-              goal=req['goal'],zone=req['right_zone']['constraint_sha256'],params=params,budget_s=seconds,
-              collision_policy=req['collision_policy'],sources={n:digest(ROOT/'drum_planner'/n) for n in sources})
+              collision_meshes={name:digest(name) for name in meshes},
+              goal=req['goal'],zone=zone['constraint_sha256'] if zone else None,params=params,budget_s=seconds,
+              collision_policy=req['collision_policy'],
+              world_padding_policy=req.get('world_padding_policy','legacy_voxel_radius_v1'),
+              octree_resolution_m=scene_voxel_size(req.get('scene',{})),
+              sources={n:digest(ROOT/'drum_planner'/n) for n in sources})
+    if 'scene_robot_start' in req:data['scene_robot_start']=req['scene_robot_start']
     return hashlib.sha256(json.dumps(data,sort_keys=True,allow_nan=False).encode()).hexdigest()
 
 
@@ -94,7 +106,9 @@ def build_pool(oracle,req,folder,key,params,seconds,log):
 
 def run(method,req,context,pool_root,request_path,params,seconds,log):
     from .runtime import Oracle
+    from . import cache
     key=pool_key(context,req,params,seconds);folder=Path(pool_root)/key
+    persistent_key=cache.identity(context,req,'candidate_pool',key)
     folder.mkdir(parents=True,exist_ok=True)
     # Serialize across separate invocations as well as the single GUI queue.
     import fcntl
@@ -109,11 +123,17 @@ def run(method,req,context,pool_root,request_path,params,seconds,log):
         except (OSError,ValueError,KeyError,TypeError) as exc:
             log(f'Ignoring damaged/stale pool; rebuilding: {exc}');pool=None
         reused=pool is not None
+        if pool is None and cache.restore(persistent_key,folder,log):
+            try:pool=read_pool(folder,key)
+            except (OSError,ValueError,KeyError,TypeError):pool=None
+            reused=pool is not None
         if pool is None:
             oracle=Oracle(request_path,folder)
             try:pool=build_pool(oracle,req,folder,key,params,seconds,log)
             finally:oracle.close()
         else:log(f'REUSING SHARED POOL: {len(pool["candidates"])} validated candidates; no repeat search or FCL world loading')
+        if pool['candidates']:
+            cache.publish(persistent_key,folder,['pool.json']+[row['file'] for row in pool['candidates']])
         report=dict(method=method,pool_key=key,pool_file=str(folder/'pool.json'),pool_reused=reused,
                     candidates=[],selected=None,searches=pool['attempts'],pool_elapsed_s=pool['elapsed_s'],
                     budget_s=seconds,joint_limit_check=pool['joint_limit_check'],duration_ratio_filter=None)
@@ -122,8 +142,19 @@ def run(method,req,context,pool_root,request_path,params,seconds,log):
             return None,report
         ranked,normalization=rank(pool['candidates'],method,params)
         report.update(candidates=ranked,selected=ranked[0]['index'],normalization=normalization)
+        if method=='single_arc':
+            counts=normalization['tier_counts']
+            log(f'SINGLE ARC PRIORITY: {counts["continuous_arc"]} continuous arcs, '
+                f'{counts["continuous_fallback"]} continuous fallbacks, {counts["segmented_fallback"]} segmented fallbacks; '
+                'geometry score ranks within each tier, never across tiers')
+            if normalization['fallback_used']:
+                log('SINGLE ARC FALLBACK: no validated continuous arc available; selected '+
+                    normalization['selected_class']+
+                    (' (corner stops may remain)' if ranked[0]['continuity_tier']==2 else ' (no forced corner stops)'))
         for row in ranked:
-            log(f'{method}: candidate {row["index"]}, score={row["score"]:.4f}, duration={row["duration_s"]:.2f}s')
+            kind=f', {row["selection_class"]}' if method=='single_arc' else ''
+            log(f'{method}: candidate {row["index"]}{kind}, score={row["score"]:.4f}, duration={row["duration_s"]:.2f}s')
         path=folder/ranked[0]['file'];winner=json.loads(path.read_text())
-        log(f'SELECTED candidate {winner["index"]}: lowest {method} score; {len(ranked)} eligible, equally checked candidates')
+        preference='best continuity tier, then geometric score' if method=='single_arc' else f'lowest {method} score'
+        log(f'SELECTED candidate {winner["index"]}: {preference}; {len(ranked)} eligible, equally checked candidates')
         return winner,report

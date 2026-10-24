@@ -1,0 +1,13 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "common.glsl"
+void main(){uint r=gl_GlobalInvocationID.x;if(r>=p.m)return;
+ uint row=ROW()+13*r,first=uint(a[row]);double H=0.0,H1=0.0,H2=0.0;
+ for(uint t=0;t<4;t++){double x=a[X()+first+t];H+=a[row+1+t]*x;H1+=a[row+5+t]*x;H2+=a[row+9+t]*x;}
+ double h2=H*H,h3=h2*H,h4=h3*H,h5=h4*H;
+ for(uint j=0;j<7;j++){double q1=a[Q()+r*7+j],q2=a[Q()+7*p.m+r*7+j],q3=a[Q()+14*p.m+r*7+j];
+ double val[3]=double[3](q1/H,q2/h2-q1*H1/h3,q3/h3-3.0*q2*H1/h4-q1*H2/h4+3.0*q1*H1*H1/h5);double lim[3]=double[3](a[13],a[14],a[15]);
+ for(uint d=0;d<3;d++){uint o=LM()+(r*3+d)*7+j;a[o]=max(0.0,a[o]+a[0]*(abs(val[d])/lim[d]-1.0));}}
+ for(uint j=r;j<p.n;j+=p.m)a[D()+j]=0.0;
+ if(r==0){a[1]=0.0;a[2]=0.0;a[7]=0.0;}
+}

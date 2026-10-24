@@ -18,7 +18,9 @@ def simulate(plan):
     if plan.get('status')!='planned' or plan.get('motion_authorized') is not False:
         raise ValueError('Only an explicitly non-executable planned preview can be simulated')
     outward=plan['outward'];cycle=plan['cycle']
-    start=np.array(plan['start_state']['right_rad'])
+    from .common import arm_side
+    side=arm_side(plan.get('moving_side','right'))
+    start=np.array(plan['start_state'][side+'_rad'])
     if not np.allclose(outward[0]['positions_rad'],start,atol=1e-10,rtol=0):
         raise ValueError('Wrong starting pose')
     if not np.allclose(cycle[-1]['positions_rad'],start,atol=1e-10,rtol=0):
@@ -28,7 +30,7 @@ def simulate(plan):
         raise ValueError('Expected a two-second hold')
     if not np.array_equal(held['positions_rad'],outward[-1]['positions_rad']):
         raise ValueError('Arm moved during the hold')
-    return dict(status='software_cycle_verified',events=['START','OUTWARD','HOLD_2_SECONDS','RETURN_TO_SAVED_START',
+    result=dict(status='software_cycle_verified',events=['START','OUTWARD','HOLD_2_SECONDS','RETURN_TO_SAVED_START',
                        recovery_action(at_saved_start=True,stationary=True,supported=True)],
                 supported_rest_is_synthetic=True,right_gripper='custom CLOSED +7 degrees for all movement',
                 left_arm='static, no commands',motor_commands=0,
@@ -38,3 +40,7 @@ def simulate(plan):
                 unsafe_return=recovery_action(checked_return_available=False),
                 unsupported_rest=recovery_action(at_saved_start=True,stationary=True,supported=False),
                 physical_recovery_implemented=False)
+    if side=='left':
+        result.update(moving_side=side,left_arm='simulated only',right_arm='static, no commands',
+                      left_gripper='fixed modeled attachment; no commands',right_gripper='static, no commands')
+    return result

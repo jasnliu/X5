@@ -1,0 +1,864 @@
+{
+  "schema": "x5-timing-benchmark-v1",
+  "limits": [
+    0.6,
+    1.2,
+    6.0
+  ],
+  "inputs": {
+    "right_single_arc": {
+      "file": "diagnostics/timing_experiment_20261021/inputs/right_single_arc.json",
+      "sha256": "7e7af03a14f760b22172d6ee4521fd9604c70c743c5474edb6a17c383f5a6800"
+    },
+    "right_clearance": {
+      "file": "diagnostics/timing_experiment_20261021/inputs/right_clearance.json",
+      "sha256": "fe0cb810309dd24307024c124d3eb93a4b6cd5bc704f6aa253d2f32ed1bdc08d"
+    },
+    "left_single_arc": {
+      "file": "diagnostics/timing_experiment_20261021/inputs/left_single_arc.json",
+      "sha256": "7f6b91d0b497cef40e171989fbffa82437152b08449e7bb527fd304b6d7dae3c"
+    },
+    "left_clearance": {
+      "file": "diagnostics/timing_experiment_20261021/inputs/left_clearance.json",
+      "sha256": "fd6103b16259ea33d10702a01feaa3236c73e9c066eac4a5008e6640884962c7"
+    }
+  },
+  "rows": {
+    "right_single_arc": {
+      "global": {
+        "duration_s": 7.775232073236282,
+        "cycle_s": 17.550464146472564,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3896,
+          "dense_peaks": [
+            [
+              0.264567348889998,
+              0.0481129656902599,
+              0.2991777738491967,
+              0.4112771968054989,
+              0.19852898939773775,
+              0.1392489534827272,
+              0.14301279919096654
+            ],
+            [
+              0.6659624106766959,
+              0.062363848982407946,
+              0.7145733699910597,
+              0.8296378540588516,
+              0.47324956452392253,
+              0.3269807906613481,
+              0.30047546981231427
+            ],
+            [
+              5.771611664664146,
+              0.45341520207126584,
+              5.982035940089878,
+              5.930891200612506,
+              3.9569592225396955,
+              2.7078564331046766,
+              2.206457232704685
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3896,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.1995822539902292,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_single_arc/global.json",
+        "source_path_sha256": "2141d403c569657d4e755f7e8f9e6a4ce7fe631a8d608373f83273270eeeba54",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_single_arc/global/law.json"
+      },
+      "local_quintic": {
+        "duration_s": 7.775232073236282,
+        "cycle_s": 17.550464146472564,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3896,
+          "dense_peaks": [
+            [
+              0.264567348889998,
+              0.0481129656902599,
+              0.2991777738491967,
+              0.4112771968054989,
+              0.19852898939773775,
+              0.1392489534827272,
+              0.14301279919096654
+            ],
+            [
+              0.6659624106766959,
+              0.062363848982407946,
+              0.7145733699910597,
+              0.8296378540588516,
+              0.47324956452392253,
+              0.3269807906613481,
+              0.30047546981231427
+            ],
+            [
+              5.771611664664146,
+              0.45341520207126584,
+              5.982035940089878,
+              5.930891200612506,
+              3.9569592225396955,
+              2.7078564331046766,
+              2.206457232704685
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3896,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2132920779986307,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_single_arc/local_quintic.json",
+        "source_path_sha256": "2141d403c569657d4e755f7e8f9e6a4ce7fe631a8d608373f83273270eeeba54",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_single_arc/local_quintic/law.json"
+      },
+      "scurve": {
+        "duration_s": 7.775232073236282,
+        "cycle_s": 17.550464146472564,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3896,
+          "dense_peaks": [
+            [
+              0.264567348889998,
+              0.0481129656902599,
+              0.2991777738491967,
+              0.4112771968054989,
+              0.19852898939773775,
+              0.1392489534827272,
+              0.14301279919096654
+            ],
+            [
+              0.6659624106766959,
+              0.062363848982407946,
+              0.7145733699910597,
+              0.8296378540588516,
+              0.47324956452392253,
+              0.3269807906613481,
+              0.30047546981231427
+            ],
+            [
+              5.771611664664146,
+              0.45341520207126584,
+              5.982035940089878,
+              5.930891200612506,
+              3.9569592225396955,
+              2.7078564331046766,
+              2.206457232704685
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3896,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2090131259756163,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_single_arc/scurve.json",
+        "source_path_sha256": "2141d403c569657d4e755f7e8f9e6a4ce7fe631a8d608373f83273270eeeba54",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_single_arc/scurve/law.json"
+      },
+      "adaptive": {
+        "duration_s": 4.127994858280934,
+        "cycle_s": 10.255989716561867,
+        "proof": {
+          "geometry": {
+            "type": "original spline coefficients bit-identical; positive monotone time density",
+            "max_error_rad": 0.0
+          },
+          "dense_samples": 2260,
+          "dense_peaks": [
+            [
+              0.37270390152435484,
+              0.10507213638244436,
+              0.4227226505523165,
+              0.5988732808726269,
+              0.28070772645163045,
+              0.19801256001625597,
+              0.20437880836634964
+            ],
+            [
+              1.1955031575879533,
+              0.16926956267314858,
+              1.19551790279032,
+              1.1955203093430613,
+              0.7926276219405114,
+              0.5523593010417197,
+              0.5616251825529407
+            ],
+            [
+              5.96658149293614,
+              2.4783845352683147,
+              5.9662477429603715,
+              5.9820359400898795,
+              3.951907043593216,
+              2.7333459204629635,
+              5.966148356646385
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 2260,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 31.366785224992782,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_single_arc/adaptive.json",
+        "source_path_sha256": "2141d403c569657d4e755f7e8f9e6a4ce7fe631a8d608373f83273270eeeba54",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_single_arc/adaptive/law.json"
+      }
+    },
+    "right_clearance": {
+      "global": {
+        "duration_s": 7.7926996311903265,
+        "cycle_s": 17.585399262380655,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3905,
+          "dense_peaks": [
+            [
+              0.24929498098775654,
+              0.04764881926451849,
+              0.21073717752052978,
+              0.3847469957759584,
+              0.21424869683457018,
+              0.36533453114929987,
+              0.09927621154398468
+            ],
+            [
+              0.5041371633366949,
+              0.06954093164815589,
+              0.44687368929832416,
+              0.7681752920407255,
+              0.46491676502128443,
+              0.7901858385317144,
+              0.2249317073280661
+            ],
+            [
+              3.608018079844621,
+              0.48765405707831777,
+              3.299415911902429,
+              5.4514288662958705,
+              3.526661518851185,
+              5.982035940089877,
+              1.7528402573638857
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3905,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.1936008560005575,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_clearance/global.json",
+        "source_path_sha256": "ca04f4665e791adb32ea891dd0e2759fabd9dff0f38efda41393b94df96367fb",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_clearance/global/law.json"
+      },
+      "local_quintic": {
+        "duration_s": 7.7926996311903265,
+        "cycle_s": 17.585399262380655,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3905,
+          "dense_peaks": [
+            [
+              0.24929498098775654,
+              0.04764881926451849,
+              0.21073717752052978,
+              0.3847469957759584,
+              0.21424869683457018,
+              0.36533453114929987,
+              0.09927621154398468
+            ],
+            [
+              0.5041371633366949,
+              0.06954093164815589,
+              0.44687368929832416,
+              0.7681752920407255,
+              0.46491676502128443,
+              0.7901858385317144,
+              0.2249317073280661
+            ],
+            [
+              3.608018079844621,
+              0.48765405707831777,
+              3.299415911902429,
+              5.4514288662958705,
+              3.526661518851185,
+              5.982035940089877,
+              1.7528402573638857
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3905,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2194862299948,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_clearance/local_quintic.json",
+        "source_path_sha256": "ca04f4665e791adb32ea891dd0e2759fabd9dff0f38efda41393b94df96367fb",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_clearance/local_quintic/law.json"
+      },
+      "scurve": {
+        "duration_s": 7.7926996311903265,
+        "cycle_s": 17.585399262380655,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 4.440892098500626e-16
+          },
+          "dense_samples": 3905,
+          "dense_peaks": [
+            [
+              0.24929498098775654,
+              0.04764881926451849,
+              0.21073717752052978,
+              0.3847469957759584,
+              0.21424869683457018,
+              0.36533453114929987,
+              0.09927621154398468
+            ],
+            [
+              0.5041371633366949,
+              0.06954093164815589,
+              0.44687368929832416,
+              0.7681752920407255,
+              0.46491676502128443,
+              0.7901858385317144,
+              0.2249317073280661
+            ],
+            [
+              3.608018079844621,
+              0.48765405707831777,
+              3.299415911902429,
+              5.4514288662958705,
+              3.526661518851185,
+              5.982035940089877,
+              1.7528402573638857
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3905,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.215405491006095,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_clearance/scurve.json",
+        "source_path_sha256": "ca04f4665e791adb32ea891dd0e2759fabd9dff0f38efda41393b94df96367fb",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_clearance/scurve/law.json"
+      },
+      "adaptive": {
+        "duration_s": 4.22955156038221,
+        "cycle_s": 10.45910312076442,
+        "proof": {
+          "geometry": {
+            "type": "original spline coefficients bit-identical; positive monotone time density",
+            "max_error_rad": 0.0
+          },
+          "dense_samples": 2311,
+          "dense_peaks": [
+            [
+              0.3847595040694549,
+              0.10150524579742892,
+              0.3165524710511341,
+              0.5992838135194326,
+              0.31834326167971244,
+              0.5440215554086262,
+              0.14393814378039335
+            ],
+            [
+              1.0704129449525646,
+              0.13500882320312912,
+              0.9906180439702187,
+              1.197165834077616,
+              0.7355560505430413,
+              1.1972107229419293,
+              0.5880614077332712
+            ],
+            [
+              4.5568532484493804,
+              1.0695620616752808,
+              5.978245315972208,
+              5.9820359400897924,
+              3.6646579453210752,
+              5.979090922768856,
+              2.4813379729655973
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 2311,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 36.52844079397619,
+        "law": "diagnostics/timing_experiment_20261021/laws/right_clearance/adaptive.json",
+        "source_path_sha256": "ca04f4665e791adb32ea891dd0e2759fabd9dff0f38efda41393b94df96367fb",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/right_clearance/adaptive/law.json"
+      }
+    },
+    "left_single_arc": {
+      "global": {
+        "duration_s": 19.87641336757051,
+        "cycle_s": 41.75282673514102,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 3.552713678800501e-15
+          },
+          "dense_samples": 9944,
+          "dense_peaks": [
+            [
+              0.017690974685583005,
+              0.05213383477275032,
+              0.06960878579554891,
+              0.012310426169070719,
+              0.013391314890179806,
+              0.019626452461943097,
+              0.11951605471109535
+            ],
+            [
+              0.015929959141527145,
+              0.2261952985356137,
+              0.20129992089604754,
+              0.053411772499598054,
+              0.051199353637665146,
+              0.085154128660892,
+              0.4085137898767135
+            ],
+            [
+              0.2332689629340069,
+              3.3122710636716626,
+              2.947717779370114,
+              0.7821306174582902,
+              0.7497332554255678,
+              1.2469470326821432,
+              5.982035940089877
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 9946,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 2.1687652480322868,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_single_arc/global.json",
+        "source_path_sha256": "b5870c20b1a6b77fa63c9d8c59c30b61df74263529df2b3f01f4b1a8d3068741",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_single_arc/global/law.json"
+      },
+      "local_quintic": {
+        "duration_s": 6.090182015107813,
+        "cycle_s": 14.180364030215626,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 5.551115123125783e-16,
+            "max_waypoint_error_rad": 1.1102230246251565e-16
+          },
+          "dense_samples": 3051,
+          "dense_peaks": [
+            [
+              0.07440421110231492,
+              0.1782338380606668,
+              0.292758702386734,
+              0.015952800841373585,
+              0.0674042857767632,
+              0.06284539744178272,
+              0.5994005951617758
+            ],
+            [
+              0.1660493682172536,
+              0.397768026385125,
+              0.6533554600098126,
+              0.053412055973768524,
+              0.11231787739691604,
+              0.1402533322505121,
+              0.9988000285618006
+            ],
+            [
+              1.2506933683635773,
+              3.312271063671677,
+              4.9211108105468835,
+              0.7821306174582894,
+              0.7497332554252902,
+              1.24694703268215,
+              5.982035940089904
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 3051,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2599891350255348,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_single_arc/local_quintic.json",
+        "source_path_sha256": "b5870c20b1a6b77fa63c9d8c59c30b61df74263529df2b3f01f4b1a8d3068741",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_single_arc/local_quintic/law.json"
+      },
+      "scurve": {
+        "duration_s": 5.173891859809524,
+        "cycle_s": 12.347783719619049,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 2.220446049250313e-16,
+            "max_waypoint_error_rad": 6.938893903907228e-18
+          },
+          "dense_samples": 2614,
+          "dense_peaks": [
+            [
+              0.09467475275361496,
+              0.22679152565057534,
+              0.3725173260263334,
+              0.020298951537942096,
+              0.06740428625343088,
+              0.07996687790052144,
+              0.5994005994005994
+            ],
+            [
+              0.2503888123463882,
+              0.599801521591032,
+              0.9852063842714861,
+              0.11253598416167745,
+              0.13467389860825352,
+              0.2114905083160692,
+              1.1976035952059931
+            ],
+            [
+              1.2506933683635773,
+              3.312271063671659,
+              4.9211108105468835,
+              0.7821306174582868,
+              0.7497332554252867,
+              1.2469470326821452,
+              5.982035940089876
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 2614,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2978202439844608,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_single_arc/scurve.json",
+        "source_path_sha256": "b5870c20b1a6b77fa63c9d8c59c30b61df74263529df2b3f01f4b1a8d3068741",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_single_arc/scurve/law.json"
+      },
+      "adaptive": {
+        "duration_s": 5.173891859809524,
+        "cycle_s": 12.347783719619049,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 2.220446049250313e-16,
+            "max_waypoint_error_rad": 6.938893903907228e-18
+          },
+          "dense_samples": 2614,
+          "dense_peaks": [
+            [
+              0.09467475275361496,
+              0.22679152565057534,
+              0.3725173260263334,
+              0.020298951537942096,
+              0.06740428625343088,
+              0.07996687790052144,
+              0.5994005994005994
+            ],
+            [
+              0.2503888123463882,
+              0.599801521591032,
+              0.9852063842714861,
+              0.11253598416167745,
+              0.13467389860825352,
+              0.2114905083160692,
+              1.1976035952059931
+            ],
+            [
+              1.2506933683635773,
+              3.312271063671659,
+              4.9211108105468835,
+              0.7821306174582868,
+              0.7497332554252867,
+              1.2469470326821452,
+              5.982035940089876
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 2614,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.2372958110063337,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_single_arc/adaptive.json",
+        "source_path_sha256": "b5870c20b1a6b77fa63c9d8c59c30b61df74263529df2b3f01f4b1a8d3068741",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_single_arc/adaptive/law.json"
+      }
+    },
+    "left_clearance": {
+      "global": {
+        "duration_s": 98.1018638332064,
+        "cycle_s": 198.2037276664128,
+        "proof": {
+          "geometry": {
+            "type": "same original spline and global clock",
+            "max_error_rad": 3.1086244689504383e-15
+          },
+          "dense_samples": 49079,
+          "dense_peaks": [
+            [
+              0.003583776388888944,
+              0.01065203066298709,
+              0.014072061332004402,
+              1.8342019370429846e-05,
+              0.0027087705568169724,
+              0.0034536702914569582,
+              0.0242103597901526
+            ],
+            [
+              0.022286821540055818,
+              0.044807620642294266,
+              0.08625744120752021,
+              0.00016454272282964634,
+              0.01054767140327148,
+              0.017957816818950312,
+              0.19757352351836355
+            ],
+            [
+              0.6747896432113302,
+              0.792710506935336,
+              2.6116612399023653,
+              0.004981945273323526,
+              0.18660330151950194,
+              0.3176993080629058,
+              5.9820359400898795
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 49091,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 7.859362451999914,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_clearance/global.json",
+        "source_path_sha256": "472fb249709fb119dcc7df5914a0cb505af940014b739510be262c0572c456f5",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_clearance/global/law.json"
+      },
+      "local_quintic": {
+        "duration_s": 10.91538419307545,
+        "cycle_s": 23.8307683861509,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 3.3306690738754696e-16,
+            "max_waypoint_error_rad": 1.3322676295501878e-15
+          },
+          "dense_samples": 5472,
+          "dense_peaks": [
+            [
+              0.04224314623883821,
+              0.10127704861742073,
+              0.16590125642902054,
+              0.0003642910773412985,
+              0.06740413729349667,
+              0.03689934776713037,
+              0.5993992747567408
+            ],
+            [
+              0.1251162298771018,
+              0.29996351181914527,
+              0.49136822382773815,
+              0.00061977187393088,
+              0.11467529972452832,
+              0.10928890692575366,
+              1.01976368584167
+            ],
+            [
+              1.250693368363597,
+              3.312271063671659,
+              4.92111081054701,
+              0.0051271121140378725,
+              0.7052582883409194,
+              1.2007293996789399,
+              5.982035940089878
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 5473,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.862818897003308,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_clearance/local_quintic.json",
+        "source_path_sha256": "472fb249709fb119dcc7df5914a0cb505af940014b739510be262c0572c456f5",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_clearance/local_quintic/law.json"
+      },
+      "scurve": {
+        "duration_s": 9.051092413028472,
+        "cycle_s": 20.102184826056945,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 2.220446049250313e-16,
+            "max_waypoint_error_rad": 3.9968028886505635e-15
+          },
+          "dense_samples": 4589,
+          "dense_peaks": [
+            [
+              0.05551507940507009,
+              0.13309622735292476,
+              0.21802404044399304,
+              0.00036429188240723505,
+              0.06740428625343084,
+              0.048492368672203204,
+              0.5994005994005994
+            ],
+            [
+              0.250388812346388,
+              0.6003018756673179,
+              0.983350490258807,
+              0.00102520439213738,
+              0.13467389860825346,
+              0.218714387690982,
+              1.1976035952059931
+            ],
+            [
+              1.250693368363597,
+              3.312271063671659,
+              4.921110810547011,
+              0.005127112114037874,
+              0.7052582883409196,
+              1.20072939967894,
+              5.982035940089876
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 4590,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 2.040379627025686,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_clearance/scurve.json",
+        "source_path_sha256": "472fb249709fb119dcc7df5914a0cb505af940014b739510be262c0572c456f5",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_clearance/scurve/law.json"
+      },
+      "adaptive": {
+        "duration_s": 9.051092413028472,
+        "cycle_s": 20.102184826056945,
+        "proof": {
+          "geometry": {
+            "type": "same ordered straight segments; all original waypoints retained",
+            "max_error_rad": 2.220446049250313e-16,
+            "max_waypoint_error_rad": 3.9968028886505635e-15
+          },
+          "dense_samples": 4589,
+          "dense_peaks": [
+            [
+              0.05551507940507009,
+              0.13309622735292476,
+              0.21802404044399304,
+              0.00036429188240723505,
+              0.06740428625343084,
+              0.048492368672203204,
+              0.5994005994005994
+            ],
+            [
+              0.250388812346388,
+              0.6003018756673179,
+              0.983350490258807,
+              0.00102520439213738,
+              0.13467389860825346,
+              0.218714387690982,
+              1.1976035952059931
+            ],
+            [
+              1.250693368363597,
+              3.312271063671659,
+              4.921110810547011,
+              0.005127112114037874,
+              0.7052582883409196,
+              1.20072939967894,
+              5.982035940089876
+            ]
+          ],
+          "motor_commands": 0,
+          "collision_zone": {
+            "samples_checked": 4590,
+            "edge_joint_l1_step_rad": 0.003,
+            "max_time_step_s": 0.002
+          }
+        },
+        "elapsed_compute_and_check_s": 1.7118557910434902,
+        "law": "diagnostics/timing_experiment_20261021/laws/left_clearance/adaptive.json",
+        "source_path_sha256": "472fb249709fb119dcc7df5914a0cb505af940014b739510be262c0572c456f5",
+        "original_law": "/home/jason/Proyectos3/X5/planner_runs/timing_benchmark_20261021/left_clearance/adaptive/law.json"
+      }
+    }
+  },
+  "mean_outward_s": {
+    "global": 33.38655222630088,
+    "local_quintic": 8.143374478152468,
+    "scurve": 7.4482289943161515,
+    "adaptive": 5.645632672875285
+  },
+  "winner": "adaptive",
+  "software_only": true,
+  "motor_commands": 0,
+  "levels": [
+    8,
+    12,
+    20,
+    32,
+    48,
+    64,
+    96,
+    128,
+    192
+  ],
+  "ftol": 1e-11,
+  "maxiter": 1000
+}

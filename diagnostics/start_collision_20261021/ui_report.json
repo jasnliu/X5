@@ -1,0 +1,90 @@
+{
+  "passed": true,
+  "checks": [
+    "real no-plan startup DisplayModel path (no polling/devices)",
+    "exactly three native windows",
+    "no plan until Calculate",
+    "no overlapping controls",
+    "all five actions always clickable",
+    "prerequisite errors do not block retry",
+    "preview play pause scrub speed",
+    "live movement affects only connected window",
+    "movement invalidates plan",
+    "recalculate in same process",
+    "busy buttons explain without second owner",
+    "preview speed never changes active arm speed",
+    "one click Reverse holds checks returns and relaxes",
+    "completed owner removed without restart",
+    "new cycle after return in same program",
+    "full outward goal-hold reverse-rest-release cycle",
+    "CAN failure marks live pose stale",
+    "fault leaves every button enabled",
+    "no queued return after failed request",
+    "one click recovery after restored feedback",
+    "no automatic midair relaxation"
+  ],
+  "sessions": [
+    "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/ui/mock/controller-f6d9abb5",
+    "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/ui/mock/controller-f284d2c9",
+    "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/ui/mock/controller-40b05f53"
+  ],
+  "physical_motor_commands": 0,
+  "can_access": false,
+  "report": {
+    "type": "baseline_three_windows",
+    "plan": "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/calculation/plan/result/plan.json",
+    "plan_valid": false,
+    "simulated": true,
+    "owner": {
+      "schema": "x5-baseline-control-v1",
+      "folder": "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/ui/mock/controller-40b05f53",
+      "socket": "/run/user/1000/x5-baseline-owner-92bfa3a4789b/control.sock",
+      "unit": "x5-baseline-owner-92bfa3a4789b",
+      "simulated": true,
+      "rate": 1.0,
+      "prepared": null,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/start_collision_20261021/calculation/plan/result/plan.json"
+    },
+    "owner_status": {},
+    "last_error": "SIMULATED CAN failure Correct the cause and retry the button; no automatic release.",
+    "button_states": {
+      "calculate": true,
+      "start": true,
+      "hold": true,
+      "reverse": true,
+      "cancel": true
+    },
+    "preview_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 11,
+      "maximum_frame_s": 0.031553664011880755,
+      "median_frame_s": 0.0014502230333164334,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20042,
+      "render_errors": []
+    },
+    "live_renderer": {
+      "engine": "VTK/OpenGL",
+      "capabilities": [
+        "OpenGL vendor string:  AMD",
+        "OpenGL renderer string:  AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+        "OpenGL version string:  4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4"
+      ],
+      "qt_offscreen": false,
+      "render_count": 203,
+      "maximum_frame_s": 0.03192080103326589,
+      "median_frame_s": 0.0014421269879676402,
+      "surface_geometry_uploads": 1,
+      "surface_color_uploads": 1,
+      "surface_triangles": 20042,
+      "render_errors": []
+    }
+  }
+}

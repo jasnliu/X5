@@ -1,0 +1,84 @@
+{
+  "protected_sources_unchanged": true,
+  "protected_paths": [
+    "drum_planner/planning.py",
+    "drum_planner/experiment/search.py",
+    "drum_planner/experiment/gesture.py",
+    "drum_planner/experiment/algorithms.py",
+    "drum_planner/model.py",
+    "recordings/record3.json",
+    "left_recordings/record1.json",
+    "model/openarmx.urdf"
+  ],
+  "fresh_cli_results": [
+    {
+      "side": "right",
+      "method": "progress",
+      "status": "planned",
+      "selected": 8,
+      "duration_outward_s": 8.073394290944444,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_right_20261021/plans/progress-fbdb8e19/plan.json"
+    },
+    {
+      "side": "right",
+      "method": "sweep",
+      "status": "planned",
+      "selected": 8,
+      "duration_outward_s": 8.073394290944444,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_right_20261021/plans/sweep-33ea3848/plan.json"
+    },
+    {
+      "side": "right",
+      "method": "single_arc",
+      "status": "planned",
+      "selected": 14,
+      "duration_outward_s": 4.127994858280934,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_right_20261021/plans/single_arc-120abb45/plan.json",
+      "exact_same_frozen_curve_and_waypoints": true
+    },
+    {
+      "side": "right",
+      "method": "clearance",
+      "status": "planned",
+      "selected": 15,
+      "duration_outward_s": 4.22955156038221,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_right_20261021/plans/clearance-dd16d243/plan.json",
+      "exact_same_frozen_curve_and_waypoints": true
+    },
+    {
+      "side": "left",
+      "method": "progress",
+      "status": "planned",
+      "selected": 17,
+      "duration_outward_s": 9.051092413028472,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/progress-1fced4af/plan.json"
+    },
+    {
+      "side": "left",
+      "method": "sweep",
+      "status": "planned",
+      "selected": 23,
+      "duration_outward_s": 8.021987089971606,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/sweep-7961ccee/plan.json"
+    },
+    {
+      "side": "left",
+      "method": "single_arc",
+      "status": "planned",
+      "selected": 2,
+      "duration_outward_s": 5.173891859809524,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/single_arc-13ad5e7b/plan.json",
+      "exact_same_frozen_curve_and_waypoints": true
+    },
+    {
+      "side": "left",
+      "method": "clearance",
+      "status": "planned",
+      "selected": 17,
+      "duration_outward_s": 9.051092413028472,
+      "plan": "/home/jason/Proyectos3/X5/planner_runs/timing_winner_left_20261021/plans/clearance-99bc0c89/plan.json",
+      "exact_same_frozen_curve_and_waypoints": true
+    }
+  ],
+  "motor_commands": 0
+}

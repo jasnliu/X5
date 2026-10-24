@@ -5,29 +5,37 @@ No fault automatically starts recovery. A new, validated return requires an
 explicit operator command. A drive/CAN/power fault can make torque unavailable.
 """
 from collections import deque
+from copy import deepcopy
 import time
 import numpy as np
 from camera_playback.trajectory import PlaybackFollower
-from ..execution import Curve,TRACK_L1,REST_TOL
+from ..execution import TRACK_L1,REST_TOL
+from .curve import Curve
 from .paths import speed,validate_timing,recovery_at
+from .arms import side_of,other_side,closed_gripper,require_side
 
 HOLD_PHASES={'HELD','FAULT_HOLD','CHECKING_RETURN'}
 RELAX_PHASES={'RELAXING','RELAX_UNCONFIRMED'}
-ACTIVE_PHASES={'ARMING','SETTLING_START','OUTWARD','SETTLING_GOAL','GOAL_HOLD','RETURN','RECOVERY','SETTLING_REST'}
+ACTIVE_PHASES={'ARMING','SETTLING_START','OUTWARD','SETTLING_GOAL','GOAL_HOLD','SETTLING_CHECKPOINT','CHECKPOINT_HOLD','RETURN','RECOVERY','SETTLING_REST'}
 TERMINAL={'RELAXED','DISABLED_EXTERNALLY','REJECTED','CONTROLLER_EXIT'}
 
 
 class Controller:
-    def __init__(self,bus,obj,req,*,rate=1.,now=time.monotonic,event=lambda *_:None):
-        self.bus=bus;self.obj=obj;self.req=req;self.curve=Curve(obj);validate_timing(self.curve)
+    def __init__(self,bus,obj,req,*,rate=1.,now=time.monotonic,event=lambda *_:None,curve=None):
+        self.side=side_of(req);self.other=other_side(self.side);self.snapshot_key=self.other+'_snapshot'
+        require_side(obj,self.side)
+        if getattr(bus,'control_side',self.side)!=self.side:raise ValueError('Controller/transport arm mismatch')
+        if curve is not None and curve.plan is not obj:raise ValueError('Prepared curve/plan mismatch')
+        self.bus=bus;self.obj=obj;self.req=req;self.curve=curve if curve is not None else Curve(obj);validate_timing(self.curve)
         self.rate=speed(rate);self.now=now;self.sink=event;self.phase='READY';self.error=''
         self.tau=0.;self.anchor=self.curve.at(0);self.q=None;self.held=None;self.hold_confirmed=False
         self.started=False;self.disabled=False;self.arm_steps=None;self.previous=None;self.phase_at=now()
         self.history=deque(maxlen=200);self.events=deque(maxlen=1000);self.generation=0
+        self.leg_index=0
         self.return_spec=None;self.closed=False;self.recovery_reason='';self.feedback_error=''
         self.relax_requested_at=None;self.log_warning=''
         self.disabled_observed_since=None
-        self.return_left=None
+        self.return_left=None  # historical attribute name; stores the passive arm snapshot
         # Same dynamic follower as start_beat recording playback. TRACK_L1 is
         # a static start/hold matching tolerance, not a moving servo-error
         # tolerance: ordinary CSP following lag exceeds it almost immediately.
@@ -48,25 +56,25 @@ class Controller:
         self.bus.poll();now=self.now()
         if not self.bus.fresh() or len(self.bus.states)!=16 or any(now-v[2]>.12 for v in self.bus.states.values()):
             raise RuntimeError('Missing/stale motor feedback; holding torque cannot be confirmed')
-        if any(self.bus.states['left',i][1]!=0 for i in range(1,9)):raise RuntimeError('Left arm is not relaxed')
-        q=np.array([self.bus.states['right',i][0] for i in range(1,8)])
+        if any(self.bus.states[self.other,i][1]!=0 for i in range(1,9)):raise RuntimeError(f'{self.other.capitalize()} arm is not relaxed')
+        q=np.array([self.bus.states[self.side,i][0] for i in range(1,8)])
         if not np.isfinite(q).all():raise RuntimeError('Non-finite feedback')
         self.q=q.copy()
-        if mode=='enabled' and any(self.bus.states['right',i][1]!=2 for i in range(1,9)):
-            raise RuntimeError('Right drive not running; cannot guarantee hold or reverse')
+        if mode=='enabled' and any(self.bus.states[self.side,i][1]!=2 for i in range(1,9)):
+            raise RuntimeError(f'{self.side.capitalize()} drive not running; cannot guarantee hold or reverse')
         if mode=='disabled' and any(v[1]!=0 for v in self.bus.states.values()):raise RuntimeError('Both arms must initially be relaxed')
-        from centering.motors import RIGHT_GRIPPER_CLOSED
-        if abs(self.bus.states['right',8][0]-RIGHT_GRIPPER_CLOSED)>np.radians(1.):
+        if abs(self.bus.states[self.side,8][0]-closed_gripper(self.side))>np.radians(1.):
             raise RuntimeError('Custom gripper is not at its closed position; opening/forcing it is forbidden')
         bounds=np.asarray(self.req['execution_joint_limits'])
-        if np.any(q<bounds[:,0]) or np.any(q>bounds[:,1]):raise RuntimeError('Right joint outside model bounds; no clipping')
-        # The relaxed left arm is displayed and included in snapshot collision
-        # checks, but passive sway is NOT a right-arm playback fault.
+        if np.any(q<bounds[:,0]) or np.any(q>bounds[:,1]):raise RuntimeError(f'{self.side.capitalize()} joint outside model bounds; no clipping')
+        # The relaxed passive arm is displayed and included in snapshot collision
+        # checks, but passive sway is NOT an active-arm playback fault.
         self.feedback_error='';return q
 
-    def measured_left(self):
-        return dict(left=[float(self.bus.states['left',i][0]) for i in range(1,8)],
-                    left_opening_m=float(np.clip(.044*self.bus.states['left',8][0]/1.0472,0,.044)))
+    def measured_passive(self):
+        snapshot={self.other:[float(self.bus.states[self.other,i][0]) for i in range(1,8)]}
+        if self.other=='left':snapshot['left_opening_m']=float(np.clip(.044*self.bus.states['left',8][0]/1.0472,0,.044))
+        return snapshot
 
     def start(self):
         if self.phase!='READY':raise ValueError('This session cannot be started again; make a new measured plan')
@@ -112,7 +120,7 @@ class Controller:
     def request_return(self,operator_requested):
         if self.phase not in {'HELD','FAULT_HOLD'}:raise ValueError('Hold first; return is only available from a held state')
         if operator_requested is not True:raise ValueError('Reverse requires an explicit operator request')
-        # Use the current left pose for the return collision snapshot without
+        # Use the current passive pose for the return collision snapshot without
         # requiring the unpowered arm to stay at that exact angle afterward.
         q=self.sample()
         if self.held is None:
@@ -123,10 +131,10 @@ class Controller:
         if not self.stationary(q,self.held,.5):raise ValueError('Wait for at least 0.5 s of healthy stationary hold feedback')
         if np.sum(abs(q-self.held))>TRACK_L1:raise ValueError('Arm drifted from the hold; no unchecked reverse')
         self.hold_confirmed=True;self.generation+=1
-        self.return_left=self.measured_left()
+        self.return_left=self.measured_passive()
         self.emit('CHECKING_RETURN')
         return dict(held=q.tolist(),tau=self.tau,rate=self.rate,generation=self.generation,
-                    left_snapshot=dict(left=list(self.return_left['left']),left_opening_m=self.return_left['left_opening_m']))
+                    **{self.snapshot_key:deepcopy(self.return_left)})
 
     def retry_hold(self):
         if self.phase not in {'HELD','FAULT_HOLD'}:raise ValueError('Recheck hold is only available after a stop')
@@ -141,8 +149,8 @@ class Controller:
         if self.phase!='CHECKING_RETURN' or generation!=self.generation:return False
         q=self.sample()
         if not spec.get('proof',{}).get('all_valid'):raise ValueError('Recovery was not collision/zone checked')
-        if self.return_left is None or spec.get('left_snapshot')!=self.return_left:
-            raise ValueError('Recovery left-arm snapshot does not match the requested collision check')
+        if self.return_left is None or spec.get(self.snapshot_key)!=self.return_left:
+            raise ValueError('Recovery passive-arm snapshot does not match the requested collision check')
         if np.sum(abs(q-np.array(spec['held'])))>TRACK_L1:raise ValueError('Arm moved while checking return; hold and retry')
         if not self.stationary(q,self.held,.5):raise ValueError('Held position is not settled')
         if not 0<=spec['tau']<=self.tau+1e-9:raise ValueError('Recovery cannot advance beyond traveled progress')
@@ -201,11 +209,13 @@ class Controller:
             self.follower.update(q,self.anchor,now)
             elapsed=now-self.phase_at
             if self.phase.startswith('SETTLING_'):
-                target=self.curve.at(self.curve.duration if self.phase=='SETTLING_GOAL' else 0)
+                target=self.curve.at(self.curve.parts[self.leg_index]['arrival'] if self.phase=='SETTLING_CHECKPOINT'
+                                     else self.curve.duration if self.phase=='SETTLING_GOAL' else 0)
                 self.send(target)
                 if self.stationary(q,target):
                     if self.phase=='SETTLING_START':self.emit('OUTWARD')
                     elif self.phase=='SETTLING_GOAL':self.emit('GOAL_HOLD')
+                    elif self.phase=='SETTLING_CHECKPOINT':self.emit('CHECKPOINT_HOLD',checkpoint=self.leg_index+1)
                     else:
                         # Verify return/settling, not physical support. The
                         # original resting pose must be supported by the setup;
@@ -215,6 +225,20 @@ class Controller:
                         self.bus.release_at_verified_rest(self.req['start']);self.disabled=True
                         self.emit('RELAXED')
                 elif elapsed>8:raise RuntimeError('Endpoint did not settle; holding, no release')
+            elif self.curve.parts and self.phase in ('OUTWARD','RETURN'):
+                part=self.curve.parts[self.leg_index]
+                tau=min(part['arrival'],part['start']+elapsed*self.rate)
+                self.send(self.curve.at(tau));self.tau=tau
+                if tau>=part['arrival']:
+                    self.emit('SETTLING_REST' if part['returning'] else 'SETTLING_CHECKPOINT')
+            elif self.phase=='CHECKPOINT_HOLD':
+                part=self.curve.parts[self.leg_index]
+                self.send(self.curve.at(part['arrival']))
+                self.tau=part['arrival']+min(elapsed,2.)
+                if elapsed>=2.:
+                    self.leg_index+=1
+                    self.tau=self.curve.parts[self.leg_index]['start']
+                    self.emit('RETURN' if self.curve.parts[self.leg_index]['returning'] else 'OUTWARD')
             elif self.phase=='OUTWARD':
                 tau=min(self.curve.duration,elapsed*self.rate);self.send(self.curve.at(tau));self.tau=tau
                 if tau>=self.curve.duration:self.emit('SETTLING_GOAL')
@@ -268,11 +292,11 @@ class Controller:
         # disable. No automatic retry, target, enable, reverse, or hold is sent.
         try:
             self.bus.poll();now=self.now()
-            states=[self.bus.states.get(('right',i)) for i in range(1,9)]
+            states=[self.bus.states.get((self.side,i)) for i in range(1,9)]
             if all(s is not None and s[1]==0 and self.relax_requested_at<=s[2]<=now and now-s[2]<=.12 for s in states):
                 self.disabled=True;self.error='';self.feedback_error=''
                 self.emit('RELAXED',operator_requested=True);return
-            self.feedback_error='Waiting for fresh disabled feedback from all eight right motors'
+            self.feedback_error=f'Waiting for fresh disabled feedback from all eight {self.side} motors'
         except Exception as e:self.feedback_error=str(e)
         if self.phase=='RELAXING' and self.now()-self.relax_requested_at>1.:
             self.error='Relax requested, but torque off is NOT confirmed; check the arm/connection'
@@ -292,7 +316,8 @@ class Controller:
             duration=self.curve.duration,rate=self.rate,started=self.started,disabled=self.disabled,
             tracking_error_deg=np.degrees(self.tracking_error).tolist(),
             peak_tracking_error_deg=np.degrees(self.peak_tracking_error).tolist(),
-            hold_confirmed=bool(self.hold_confirmed),right_rad=None if self.q is None else self.q.tolist(),
+            hold_confirmed=bool(self.hold_confirmed),moving_side=self.side,
+            **{self.side+'_rad':None if self.q is None else self.q.tolist()},
             can_retry_hold=self.phase in {'HELD','FAULT_HOLD'},
             can_relax=self.phase not in TERMINAL and self.phase!='RELAXING',
             can_return=self.phase in {'HELD','FAULT_HOLD'},

@@ -1,0 +1,117 @@
+{
+  "profiled_comparisons": {
+    "right_clearance": {
+      "reference_s": 200.74294574500527,
+      "optimized_s": 181.83819512702757,
+      "reduction_percent": 9.417392251477441,
+      "duration_s": 4.114228766902272,
+      "exact_numerical_match": true,
+      "full_collision_zone_validated": true
+    },
+    "right_single_arc": {
+      "reference_s": 78.62388860696228,
+      "optimized_s": 63.05909973499365,
+      "reduction_percent": 19.796513690357386,
+      "duration_s": 4.020221427687704,
+      "exact_numerical_match": true,
+      "full_collision_zone_validated": true
+    },
+    "left_single_arc": {
+      "reference_s": 92.30803132796427,
+      "optimized_s": 77.63541456899839,
+      "reduction_percent": 15.895276443319496,
+      "duration_s": 2.8342045646868628,
+      "exact_numerical_match": true,
+      "full_collision_zone_validated": true
+    },
+    "left_clearance": {
+      "reference_s": 49.29120593902189,
+      "optimized_s": 35.81380722904578,
+      "reduction_percent": 27.342400035107662,
+      "duration_s": 2.609677502308473,
+      "exact_numerical_match": true,
+      "full_collision_zone_validated": true
+    }
+  },
+  "cross_session_ui": {
+    "right": {
+      "progress": {
+        "cold_s": 51.89743944397196,
+        "warm_s": 0.11103488400112838,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "sweep": {
+        "cold_s": 1.1802886060322635,
+        "warm_s": 0.09276319300988689,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "single_arc": {
+        "cold_s": 47.159493907005526,
+        "warm_s": 0.07759970903862268,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "clearance": {
+        "cold_s": 163.78563681198284,
+        "warm_s": 0.07857739401515573,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      }
+    },
+    "left": {
+      "progress": {
+        "cold_s": 45.63503083301475,
+        "warm_s": 0.15599707001820207,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "sweep": {
+        "cold_s": 19.447677757998463,
+        "warm_s": 0.15782850800314918,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "single_arc": {
+        "cold_s": 59.98316759499721,
+        "warm_s": 0.15293881902471185,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      },
+      "clearance": {
+        "cold_s": 0.15140596800483763,
+        "warm_s": 0.1522528569912538,
+        "exact_cached_output": true,
+        "native_playback_tested": true
+      }
+    }
+  },
+  "hardware_access": false,
+  "thread_trials": {
+    "reference_1": {
+      "elapsed_s": 23.645197366015054,
+      "exact_numerical_match": true
+    },
+    "current_1": {
+      "elapsed_s": 18.076601340959314,
+      "exact_numerical_match": true
+    },
+    "current_2": {
+      "elapsed_s": 18.323057869041804,
+      "exact_numerical_match": true
+    },
+    "current_4": {
+      "elapsed_s": 18.123030585993547,
+      "exact_numerical_match": true
+    }
+  },
+  "maximum_observed_worker_bytes": 361529344,
+  "regression": {
+    "passed": 474,
+    "failed": 0,
+    "seconds": 103.33,
+    "warnings": 1,
+    "warning": "Known SLSQP trial time-density bound adjustment in direct old/new rounded-curve comparison; no robot coordinates clipped"
+  }
+}

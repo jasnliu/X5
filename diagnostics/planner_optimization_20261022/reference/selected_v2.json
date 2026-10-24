@@ -1,0 +1,18 @@
+{
+  "schema": "x5-left-corner-smoothing-v2",
+  "method": "overlap_c3",
+  "label": "Left C3 corner blending + adaptive timing v2",
+  "widths": [0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.005],
+  "simplify_rad": 1e-12,
+  "joint_tube_rad": 0.017453292519943295,
+  "workspace_limit_m": 0.01,
+  "levels": [8, 16, 32, 64, 96],
+  "ftol": 1e-10,
+  "maxiter": 400,
+  "max_timed_candidates": 2,
+  "max_duration_ratio": 1.2,
+  "max_speed_cv": 0.45,
+  "min_speed_p10_ratio": 0.25,
+  "limits": [0.6, 1.2, 6.0],
+  "fallback": "Original v1, explicitly labeled; never weaken collision or zone checks"
+}

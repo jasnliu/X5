@@ -1,5 +1,9 @@
 # OpenArmX left/right safe-zone teaching (ROS 2 Jazzy + RViz)
 
+For one-click joint-pose destinations (not motion recordings), see
+[Destination capture](DESTINATIONS.md): `./start_destination.sh --right --hardware`
+or `./start_destination.sh --left --hardware`.
+
 ## Start
 
 Already built on this computer. Start the recorder for the arm you want to

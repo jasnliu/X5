@@ -3,6 +3,7 @@ from collections import deque
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import threading
 import time
@@ -18,6 +19,16 @@ BUILD = ROOT / 'drum_planner/build'
 DEPTH_WINDOW_FRAMES = 5
 DEPTH_MIN_SUPPORT = 3
 DEPTH_CLUSTER_SPAN_M = .02
+# Map resolution, not sensor resolution or extra collision clearance.
+VOXEL_SIZE_M = .005
+SUPPORTED_VOXEL_SIZES_M = (.005, .01)  # Keep archived 10 mm scenes replayable.
+
+
+def scene_voxel_size(scene):
+    size=scene.get('voxel_size_m', .01)  # Historical native requests omitted it.
+    if isinstance(size, bool) or size not in SUPPORTED_VOXEL_SIZES_M:
+        raise ValueError('Unsupported scene voxel size; require 5 mm or legacy 10 mm')
+    return float(size)
 
 
 def build_depth():
@@ -162,7 +173,7 @@ def deproject(minimum, meta, T_base_depth):
     return points@T[:3,:3].T+T[:3,3]
 
 
-def occupied_voxels(points, voxel=.01):
+def occupied_voxels(points, voxel=VOXEL_SIZE_M):
     """Voxel centers before robot self-filtering/padding. Uses every return."""
     if not np.isfinite(voxel) or voxel<=0 or not np.isfinite(points).all():
         raise ValueError('Voxel inputs must be finite with a positive cell size')
@@ -189,7 +200,7 @@ def snapshot(folder, meta, frames, cal_path):
     T=np.array(cal['T_base_depth']); points=deproject(minimum,meta,T)
     # Retain every temporally confirmed pixel; no spatial stride, manually
     # drawn obstacles or fitted planes. All five raw frames are archived above.
-    voxel=.01
+    voxel=VOXEL_SIZE_M
     cloud=occupied_voxels(points,voxel)
     cloud.astype('<f4').tofile(folder/'points_base.f32')
     obj=dict(schema='x5-native-depth-scene-v1', synthetic=False,
@@ -214,6 +225,52 @@ def snapshot(folder, meta, frames, cal_path):
     colored[minimum==0]=0
     cv2.imwrite(str(folder/'depth_preview.png'),colored)
     return obj
+
+
+def refine_snapshot(scene_path, folder, cal_path=DEFAULT_CALIBRATION):
+    """Derive a new 5 mm map from a saved full-resolution depth image.
+
+    Never subdivide old occupied cubes or rewrite an archived scene/plan. The
+    original temporal fusion, calibration, raw frames and depth image remain
+    intact; only their spatial occupancy grouping changes. New captures already
+    use 5 mm and need no copy. Legacy playback still uses its recorded resolution.
+    """
+    from .planning import scene as checked_scene
+    source=Path(scene_path).resolve();checked_scene(source,cal_path)
+    obj=json.loads(source.read_text())
+    if scene_voxel_size(obj)==VOXEL_SIZE_M:return source
+    if 'depth_m.bin' not in obj['files_sha256']:
+        raise ValueError('Cannot refine scene without hashed full-resolution depth_m.bin')
+    if any(Path(name).is_absolute() or '..' in Path(name).parts for name in obj['files_sha256']):
+        raise ValueError('Scene refinement requires local relative file names')
+    minimum=np.fromfile(source.parent/'depth_m.bin',dtype='<f4')
+    if (minimum.size!=1280*800 or not np.isfinite(minimum).all()
+            or np.any((minimum<0)|(minimum>5)) or np.count_nonzero(minimum)<1024):
+        raise ValueError('Invalid full-resolution depth image for scene refinement')
+    # The archived image is authoritative, including its original fusion rule.
+    # Do not rerun a different temporal filter on historical raw frames.
+    points=deproject(minimum.reshape(800,1280),obj['camera'],obj['T_base_depth'])
+    cloud=occupied_voxels(points,VOXEL_SIZE_M)
+    refinement=dict(method='revoxelize_confirmed_native_depth_v1',
+        source_scene_sha256=digest(source),source_voxel_size_m=scene_voxel_size(obj),
+        target_voxel_size_m=VOXEL_SIZE_M)
+    folder=Path(folder).resolve();output=folder/'scene.json'
+    if output.is_file():
+        existing=checked_scene(output,cal_path)
+        if existing.get('refinement')==refinement and existing['voxel_size_m']==VOXEL_SIZE_M:
+            return output
+        raise ValueError('Refined scene folder already contains different inputs')
+    folder.mkdir(parents=True,exist_ok=False)
+    for name in obj['files_sha256']:
+        target=folder/name;target.parent.mkdir(parents=True,exist_ok=True)
+        if name!=obj['points_file']:shutil.copyfile(source.parent/name,target)
+    cloud.astype('<f4').tofile(folder/obj['points_file'])
+    obj.update(voxel_size_m=VOXEL_SIZE_M,point_count=len(cloud),refinement=refinement)
+    obj['files_sha256'][obj['points_file']]=digest(folder/obj['points_file'])
+    if (source.parent/'depth_preview.png').is_file():
+        shutil.copyfile(source.parent/'depth_preview.png',folder/'depth_preview.png')
+    atomic_json(output,obj);checked_scene(output,cal_path)
+    return output
 
 
 def capture(folder, seconds=0, headless=False, cal_path=DEFAULT_CALIBRATION, view='3d', viewer_factory=None):

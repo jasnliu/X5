@@ -305,6 +305,36 @@ loosen thresholds to conceal a failed calibration.
 
 ## Offline commands and troubleshooting
 
+### Fixed corner/pose recovery (2026-10-24)
+
+Successful rigid and original local-kinematic fits retain their existing path.
+If both fail and there are at least 20 training poses, one bounded fallback now
+refines each saved IPPE image pose against **that image's original corners only**
+(OpenCV LM), then fits the same camera/mount transforms and bounded J2–J6 offsets
+using image-corner and pose residuals together. Intrinsics, board size, original
+images/observations, joint conventions and all acceptance limits are unchanged.
+No pose is removed. Five-fold training-only predictive checks must still pass
+and improve on the rigid baseline before the independent five validation poses
+are evaluated. The observation policy is frozen with the training fit; validation
+does not fit or adjust the calibration. Failed local fitting now reports its
+actual refined errors rather than the discarded rigid fit's errors.
+
+The current 40-pose session passed this recovery (35 training, five held out).
+Held-out RMS: **3.581 mm / 0.967 degrees / 1.783 pixels**; maxima:
+**5.699 mm / 1.472 degrees / 2.967 pixels**. All unchanged limits pass.
+The original session, its failed report, all 41 original images (including the
+user-undone capture), and the previous approved calibration remain intact.
+The new export is the default for every `plan_drums.sh` mode:
+
+```text
+calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json
+```
+
+This validates consistency on reserved observations, not independently measured
+absolute obstacle accuracy. Keep the camera/base fixed. Old saved scenes must use
+their original calibration explicitly; do not reinterpret them with this transform.
+See `diagnostics/calibration_recovery_20261024/REPORT.md` for verification evidence.
+
 ```bash
 ./calibrate_camera.sh --help
 ./calibrate_camera.sh build                     # compile only; no device access

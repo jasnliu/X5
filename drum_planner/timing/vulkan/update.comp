@@ -1,0 +1,25 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "common.glsl"
+void main(){uint l=gl_LocalInvocationID.x,head=uint(a[1]),count=uint(a[2]);double sy=0.0,yy=0.0;
+ for(uint j=l;j<p.n;j+=64){double s=a[X()+j]-a[OX()+j],y=a[G()+j]-a[OG()+j];sy+=s*y;yy+=y*y;}
+ sy=sum64(sy);yy=sum64(yy);
+ if(a[3]>0.0 && sy>1e-18 && yy>1e-24){
+  for(uint j=l;j<p.n;j+=64){a[S()+head*p.n+j]=a[X()+j]-a[OX()+j];a[Y()+head*p.n+j]=a[G()+j]-a[OG()+j];}
+  if(l==0){a[SY()+head]=sy;a[YY()+head]=yy;a[1]=double((head+1)%L);a[2]=double(min(count+1,L));}
+ }
+ syncbuf();head=uint(a[1]);count=uint(a[2]);double norm=0.0;
+ for(uint j=l;j<p.n;j+=64){double g=a[G()+j],x=a[X()+j];if((x<=0.005000000001 && g>0.0)||(x>=4.999999999999 && g<0.0))g=0.0;a[T()+j]=g;norm=max(norm,abs(g));}
+ norm=max64(norm);if(l==0)a[4]=norm;syncbuf();
+ for(uint i=0;i<count;i++){uint h=(head+L-1-i)%L;double dotv=0.0;for(uint j=l;j<p.n;j+=64)dotv+=a[S()+h*p.n+j]*a[T()+j];double alpha=sum64(dotv)/a[SY()+h];if(l==0)a[AL()+h]=alpha;
+  for(uint j=l;j<p.n;j+=64)a[T()+j]-=alpha*a[Y()+h*p.n+j];syncbuf();}
+ double gamma=(a[8]>0.0 || a[7]>4.0)?1.0/(2000.0*a[0]):1.0;if(count>0){uint h=(head+L-1)%L;gamma=a[SY()+h]/a[YY()+h];}
+ for(uint j=l;j<p.n;j+=64)a[T()+j]*=gamma;syncbuf();
+ for(uint i=0;i<count;i++){uint h=(head+L-count+i)%L;double dotv=0.0;for(uint j=l;j<p.n;j+=64)dotv+=a[Y()+h*p.n+j]*a[T()+j];double beta=sum64(dotv)/a[SY()+h];
+  for(uint j=l;j<p.n;j+=64)a[T()+j]+=a[S()+h*p.n+j]*(a[AL()+h]-beta);syncbuf();}
+ double descent=0.0;for(uint j=l;j<p.n;j+=64)descent+=a[T()+j]*a[G()+j];descent=sum64(descent);
+ double maxstep=0.0;for(uint j=l;j<p.n;j+=64){double d=descent>0.0?-a[T()+j]:-a[G()+j],x=a[X()+j];if((x<=0.005000000001&&d<0.0)||(x>=4.999999999999&&d>0.0))d=0.0;a[D()+j]=d;maxstep=max(maxstep,abs(d));}
+ maxstep=max64(maxstep);double scale=maxstep>0.25?0.25/maxstep:1.0;
+ for(uint j=l;j<p.n;j+=64)a[D()+j]*=scale;
+ if(l==0){a[6]+=1.0;if(a[7]>4.0)a[2]=0.0;}
+}

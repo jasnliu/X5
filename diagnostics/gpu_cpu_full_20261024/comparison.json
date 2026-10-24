@@ -1,0 +1,178 @@
+{
+  "totals_s": {
+    "gpu": 557.7117624669336,
+    "cpu": 503.9369520430919
+  },
+  "difference_s": 53.7748104238417,
+  "percent_difference": 10.670940125709105,
+  "methods": [
+    {
+      "method": "progress",
+      "gpu_s": 112.38069161004387,
+      "cpu_s": 112.4995084280381,
+      "difference_s": -0.1188168179942295,
+      "legs": [
+        {
+          "leg": "checkpoint_1",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0
+        },
+        {
+          "leg": "checkpoint_2",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0
+        },
+        {
+          "leg": "return_to_start",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "method": "sweep",
+      "gpu_s": 55.691172088030726,
+      "cpu_s": 44.781569373910315,
+      "difference_s": 10.90960271412041,
+      "legs": [
+        {
+          "leg": "checkpoint_1",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0
+        },
+        {
+          "leg": "checkpoint_2",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0076389096126577
+        },
+        {
+          "leg": "return_to_start",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0090990710920549
+        }
+      ]
+    },
+    {
+      "method": "single_arc",
+      "gpu_s": 169.4831437660614,
+      "cpu_s": 146.03501828201115,
+      "difference_s": 23.44812548405025,
+      "legs": [
+        {
+          "leg": "checkpoint_1",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0068575242291824
+        },
+        {
+          "leg": "checkpoint_2",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0085366890463345
+        },
+        {
+          "leg": "return_to_start",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.00826241731269
+        }
+      ]
+    },
+    {
+      "method": "clearance",
+      "gpu_s": 6.662371949059889,
+      "cpu_s": 3.618982897954993,
+      "difference_s": 3.0433890511048958,
+      "legs": [
+        {
+          "leg": "checkpoint_1",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0068575242291824
+        },
+        {
+          "leg": "checkpoint_2",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0076389096126577
+        },
+        {
+          "leg": "return_to_start",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0090990710920549
+        }
+      ]
+    },
+    {
+      "method": "workspace_curve",
+      "gpu_s": 213.22201382997446,
+      "cpu_s": 196.67292054696009,
+      "difference_s": 16.549093283014372,
+      "legs": [
+        {
+          "leg": "checkpoint_1",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0098789602563893
+        },
+        {
+          "leg": "checkpoint_2",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0036065415296604
+        },
+        {
+          "leg": "return_to_start",
+          "same_geometry": true,
+          "same_source_timing": true,
+          "same_selection": true,
+          "same_start_goal": true,
+          "movement_ratio": 1.0093074327733567
+        }
+      ]
+    }
+  ],
+  "existing_source_unchanged": true,
+  "input_hashes_unchanged": true,
+  "status": {
+    "gpu": "complete",
+    "cpu": "complete"
+  },
+  "motor_commands": 0,
+  "camera_access": false
+}

@@ -1,0 +1,69 @@
+.................................F...................................... [ 43%]
+............................................................FF.......... [ 87%]
+.....................                                                    [100%]
+=================================== FAILURES ===================================
+_________ test_shared_generators_timing_models_and_user_data_preserved _________
+
+    def test_shared_generators_timing_models_and_user_data_preserved():
+        from drum_planner.common import ROOT,digest
+        before=json.loads((ROOT/'diagnostics/hardware_workspace_20261022/before_hashes.json').read_text())
+        changed={'drum_planner/cli.py'}|{'drum_planner/baseline/'+n+'.py' for n in
+            ('__init__','planner','curve','motion','tasks','workspace','windows','work','computation','service','transport')}
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        changed.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+>           if path not in changed|OPTIMIZED:assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_hardware_workspace.py:198: AssertionError
+___________ test_hardware_timing_generators_and_saved_data_unchanged ___________
+
+    def test_hardware_timing_generators_and_saved_data_unchanged():
+        before=json.loads((ROOT/'diagnostics/checkpoints_20261021/before_hashes.json').read_text())
+        changed={'drum_planner/experiment/app.py','drum_planner/experiment/worker.py',
+                 'drum_planner/experiment/algorithms.py','drum_planner/cpp/experiment_oracle.cpp'}
+        # Authorized hardware Workspace curve/checkpoint rollout; new tests cover
+        # its exact mission playback and unchanged experiment/timing/input sources.
+        changed.update({'drum_planner/baseline/curve.py', 'drum_planner/baseline/transport.py', 'drum_planner/baseline/__init__.py', 'drum_planner/cli.py', 'drum_planner/baseline/computation.py', 'drum_planner/baseline/motion.py', 'drum_planner/baseline/windows.py', 'drum_planner/baseline/work.py', 'drum_planner/baseline/workspace.py', 'drum_planner/baseline/service.py', 'drum_planner/baseline/planner.py', 'drum_planner/baseline/tasks.py'})
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        changed.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+            if path.startswith('tests/') or path in changed|OPTIMIZED:continue
+>           assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_experiment_checkpoints.py:221: AssertionError
+_ test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields _
+
+    def test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields():
+        reference=ROOT/'diagnostics/checkpoints_20261021/reference'
+        # Authorized timing phase extraction replaces the worker byte check.
+        # Route generation/ranking and fixed policies remain byte-identical; full
+        # numerical/output parity is checked by the performance regression study.
+        from test_checkpoint_performance import test_policies_geometry_inputs_and_motor_control_are_unchanged
+>       test_policies_geometry_inputs_and_motor_control_are_unchanged()
+
+tests/test_experiment_checkpoints.py:230: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_checkpoint_performance.py:150: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_hardware_workspace.py::test_shared_generators_timing_models_and_user_data_preserved
+FAILED tests/test_experiment_checkpoints.py::test_hardware_timing_generators_and_saved_data_unchanged
+FAILED tests/test_experiment_checkpoints.py::test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields
+3 failed, 162 passed in 40.18s

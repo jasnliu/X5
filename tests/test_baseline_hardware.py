@@ -323,16 +323,18 @@ def test_fresh_start_through_worker_entrypoints_preserves_logs_and_new_plan_dire
     """Exercise the launcher -> Job -> tasks.main path, not a saved-plan view.
 
     Only the devices/native solver and systemd transport are simulated. Match
-    Job's real precreated log directory and planning.plan's exclusive mkdir.
+    Job's real precreated log directory and route planner's exclusive mkdir.
     """
     import sys
     from drum_planner.baseline import app
     from drum_planner import bus_ownership
     monkeypatch.setattr(bus_ownership,'check_available',lambda:None)  # isolated worker test, not live lock diagnosis
     calls=[]
-    def capture(folder,cal):
+    def capture(folder,cal,*,moving_side):
+        assert moving_side=='right'
         common.atomic_json(folder/'acquisition.json',dict(proof=dict(test=True),boot_id='unit-test'))
-    def plan(folder,state,scene,cal):
+    def plan(folder,state,scene,cal,*,moving_side):
+        assert moving_side=='right'
         assert folder.name=='result' and (folder.parent/'worker.log').read_text()=='worker log retained'
         folder.mkdir(parents=True,exist_ok=False)
         common.atomic_json(folder/'backend_request.json',dict(test=True))
@@ -347,7 +349,7 @@ def test_fresh_start_through_worker_entrypoints_preserves_logs_and_new_plan_dire
         def poll(self):return 0
         def close(self):self.closed=True
     monkeypatch.setattr(app,'Job',Job);monkeypatch.setattr(tasks,'acquire',capture)
-    monkeypatch.setattr(planning,'plan',plan)
+    monkeypatch.setattr(tasks.route_planner,'plan',plan)
     root=tmp_path/'session';path=app.initial(root,common.DEFAULT_CALIBRATION)
     assert path==root/'plan/result/plan.json' and path.is_file()
     obj=json.loads(path.read_text())
@@ -699,7 +701,7 @@ def test_service_close_active_means_hold_not_quit(rig):
 def test_operator_disable_attempts_all_right_motors_even_if_one_send_fails():
     from drum_planner.baseline.transport import BaselineMotors
     from centering.motors import packet
-    b=BaselineMotors.__new__(BaselineMotors);b.release_permitted=False;b.active=True
+    b=BaselineMotors.__new__(BaselineMotors);b.control_side='right';b.release_permitted=False;b.active=True
     sent=[]
     def send(frame):
         assert b.command_allowed(frame)
@@ -1005,7 +1007,7 @@ def test_readiness_replans_once_without_changing_margins_or_authorizing(prepared
         if len(calls)==1:raise tasks.PathBlocked([dict(sample_index=3,reason='collision',contacts=[['gemini_native_depth','right_drumstick']])])
         return normal(req,q,folder)
     monkeypatch.setattr(tasks,'hard_check',check)
-    monkeypatch.setattr(tasks,'make_plan',lambda *a:plans.append(a) or packet['plan'])
+    monkeypatch.setattr(tasks,'make_plan',lambda *a,**kw:plans.append((a,kw)) or packet['plan'])
     target=base/'replan'
     tasks.prepare(target,packet['plan'],base,packet['calibration'])
     new=json.loads((target/'prepared.json').read_text())
@@ -1020,7 +1022,7 @@ def test_replan_never_loops_or_ignores_invalid_replacement(prepared_fixture,monk
     packet=json.loads(prepared_fixture.read_text());base=prepared_fixture.parent.parent;plans=[]
     def blocked(*a):raise tasks.PathBlocked([dict(sample_index=0,reason='collision')])
     monkeypatch.setattr(tasks,'hard_check',blocked)
-    monkeypatch.setattr(tasks,'make_plan',lambda *a:plans.append(a) or packet['plan'])
+    monkeypatch.setattr(tasks,'make_plan',lambda *a,**kw:plans.append((a,kw)) or packet['plan'])
     target=base/'blocked'
     with pytest.raises(tasks.PathBlocked):tasks.prepare(target,packet['plan'],base,packet['calibration'])
     assert len(plans)==1 and not (target/'prepared.json').exists()
@@ -1130,7 +1132,7 @@ def test_status_file_failure_warns_without_control_halt(rig,tmp_path,monkeypatch
     from drum_planner.baseline import service
     r=rig;r.engine.start();r.until('OUTWARD')
     server=service.Server.__new__(service.Server);server.folder=tmp_path;server.engine=r.engine
-    server.info=dict(simulated=True);server.job=None;server.connection_error='';server.bus=r.bus
+    server.side='right';server.info=dict(simulated=True);server.job=None;server.connection_error='';server.bus=r.bus
     monkeypatch.setattr(service,'atomic_json',lambda *a:(_ for _ in ()).throw(OSError('disk full')))
     server.save_status();assert 'disk full' in server.status()['warnings'][-1]
     r.tick(30);assert r.engine.phase=='OUTWARD' and not r.engine.error

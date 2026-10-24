@@ -32,11 +32,30 @@ def rank(rows,method,params=None):
     # resampled copy of the SAME geometry can differ by ~1e-9 in its score;
     # that must not displace the earlier route merely due to floating error.
     # Timing still does not enter the preference or the tie-break.
-    ranked.sort(key=lambda r:(round(r['score'],8),r['index']))
-    return ranked,dict(objective=mode,parameters=dict(DEFAULTS,**(params or {})),
-                       duration_ratio_filter=None,lower_is_better=True,
-                       uses_recording_similarity=False,uses_elapsed_time=False,
-                       score_round_digits=8,tie_break='earlier candidate index')
+    meta=dict(objective=mode,parameters=dict(DEFAULTS,**(params or {})),
+              duration_ratio_filter=None,lower_is_better=True,
+              uses_recording_similarity=False,uses_elapsed_time=False,
+              score_round_digits=8,tie_break='earlier candidate index')
+    if method=='single_arc':
+        # These are already collision/zone-checked candidates. A small
+        # geometric-score advantage must not replace a continuous arc with
+        # a stop-at-every-corner route. Keep the original score WITHIN tiers;
+        # neither duration nor demonstration similarity enters selection.
+        classes=('continuous_arc','continuous_fallback','segmented_fallback')
+        for row in ranked:
+            continuous=row.get('stop_at_corners') is False
+            tier=0 if continuous and row['source']=='single_arc' else 1 if continuous else 2
+            row.update(continuity_tier=tier,selection_class=classes[tier])
+        ranked.sort(key=lambda r:(r['continuity_tier'],round(r['score'],8),r['index']))
+        selected=ranked[0] if ranked else None
+        meta.update(selection_policy='continuous_arc_first_v1',
+                    selection_order=['continuity_tier','rounded_geometric_score','candidate_index'],
+                    score_scope='within_continuity_tier',
+                    tier_counts={name:sum(r['selection_class']==name for r in ranked) for name in classes},
+                    selected_class=selected['selection_class'] if selected else None,
+                    fallback_used=bool(selected and selected['continuity_tier']>0))
+    else:ranked.sort(key=lambda r:(round(r['score'],8),r['index']))
+    return ranked,meta
 
 
 def build(oracle,req,folder,params,seconds,log,enabled=FAMILIES):

@@ -20,6 +20,7 @@ from .surface_mesh import SurfaceMesh,depth_metres
 
 class MeasuredPose:
     def __init__(self,folder,state,manifest):
+        self.side='right';self.joints=JOINTS;self.stick_link='right_drumstick'
         self.path=folder/'measured_start.json';self.state=state
         self.root=ET.parse(folder/'model/robot.urdf').getroot();self.model=Model(folder/'model/robot.urdf')
         self.obj={'model':manifest};self.duration=0.;self.playable=False

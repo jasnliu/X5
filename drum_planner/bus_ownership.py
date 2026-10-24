@@ -34,7 +34,7 @@ def owners(*,proc=Path('/proc'),lock_dir=Path('/tmp')):
             args=(proc/str(pid)/'cmdline').read_bytes().decode().rstrip('\0').split('\0')
             i=args.index('drum_planner.baseline.service')
             if i>0 and args[i-1]=='-m' and len(args)==i+2:
-                item['resume']='./plan_drums.sh baseline --resume '+shlex.quote(args[i+1])
+                item['resume']='./plan_drums.sh singlearc --resume '+shlex.quote(args[i+1])
         except (OSError,ValueError,UnicodeError):pass
         found.append(item)
     return found

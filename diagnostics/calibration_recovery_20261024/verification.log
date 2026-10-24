@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+  "original_and_copied_images_identical": 41,
+  "live": {
+    "right": {
+      "passed": true,
+      "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+      "elapsed_s": 3.6216290639713407,
+      "query_frames": 1168,
+      "motor_commands": 0,
+      "camera_released": true,
+      "encoders_closed": true,
+      "all_reported_motors_disabled": true,
+      "scene_sha256": "71abfe03ddee360e5f3ed714c7d14402eeaa4a4bf23b6cf779657b3c36f66246"
+    },
+    "left": {
+      "passed": true,
+      "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+      "elapsed_s": 3.491340406006202,
+      "query_frames": 1120,
+      "motor_commands": 0,
+      "camera_released": true,
+      "encoders_closed": true,
+      "all_reported_motors_disabled": true,
+      "scene_sha256": "3d92fe3d19ba1eb6013124b762c82edc169d49ee620f2698093bbab865ff70e3"
+    }
+  },
+  "changed_original_files": [
+    "CAMERA_CALIBRATION.md",
+    "DRUM_PLANNER.md",
+    "DRUM_PLANNER_EXPERIMENTS.md",
+    "camera_calibration/io.py",
+    "camera_calibration/kinematics.py",
+    "drum_planner/common.py",
+    "tests/test_baseline_workspace.py",
+    "tests/test_experiment_checkpoints.py",
+    "tests/test_hardware_workspace.py",
+    "tests/test_singlearc_arms.py",
+    "tests/test_sparse_hardware.py"
+  ]
+}
