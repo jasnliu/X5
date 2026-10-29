@@ -257,7 +257,7 @@ class SnareController:
         return command
 
 
-def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, heartbeat, sender):
+def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, heartbeat, sender, path_hold=None):
     # Only parent owns Ctrl-C / emergency; child must not die mid-handoff.
     signal.signal(signal.SIGINT, signal.SIG_IGN)
     from snare_lab.runner import _LeftJoint6Channel
@@ -290,6 +290,7 @@ def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, he
         queue_blocked_at = None
         commands_sent = queue_retries = 0
         max_gap = 0.
+        held_path=None
         while not stop.is_set():
             channel.receive()
             now = time.monotonic()
@@ -298,6 +299,20 @@ def _run(interface, template, rules, limits, lower, upper, goal, clock, stop, he
                 continue
             if now-heartbeat.value > 2.:
                 raise RuntimeError('Snare parent heartbeat lost; no further strikes')
+            if path_hold is not None and path_hold.is_set():
+                from .generated_worker_hold import PoweredPathHold
+                if not math.isfinite(goal.value):
+                    goal.value=-channel.sample.position;held_path=None
+                if held_path is None:
+                    held_path=PoweredPathHold(channel.sample,now,controller.path.bias,kp=PATH_KP,kd=PATH_KD)
+                if stop.is_set():break
+                if not held_path.send(channel.send,channel.sample,now,-goal.value,lower,upper,6,-1.):
+                    time.sleep(.00025);deadline=time.monotonic();continue
+                controller.status=replace(controller.status,phase='generated powered hold/return',armed=True,
+                    ready=True,moving=False,scheduled=False,sample=channel.sample,at=now)
+                publish(controller.status)
+                deadline=now+.002
+                continue  # Emergency Hold cancels the stroke, not a full return.
             epoch, period, enabled, calibration, advance = clock[:]
             if not enabled:
                 controller.finish()
@@ -377,6 +392,7 @@ class SnareSession(Joint7Session):
         self.clock = ctx.Array('d', [0., 0., 0., 0., 0.])
         self.heartbeat = ctx.Value('d', time.monotonic())
         self.stop_event = ctx.Event()
+        self.path_hold = ctx.Event()
         self.requests = ctx.Queue(maxsize=1)  # Joined lifecycle inherited from Joint7Session.
         self.receiver, sender = socket.socketpair(socket.AF_UNIX, socket.SOCK_DGRAM)
         self.receiver.setblocking(False)
@@ -384,7 +400,7 @@ class SnareSession(Joint7Session):
         self._status = SnareStatus()
         self.process = ctx.Process(target=_run, name='left-j6-snare-beat', args=(
             bus.sockets['left'].getsockname()[0], template, rules, limits, lower, upper,
-            self.goal, self.clock, self.stop_event, self.heartbeat, sender))
+            self.goal, self.clock, self.stop_event, self.heartbeat, sender,self.path_hold))
         bus.left_joint6_session = self
         bus.left_drive.left_joint6_session = self
         bus.left_monitor = None
@@ -409,6 +425,7 @@ class SnareSession(Joint7Session):
         return super().status
 
     def start_swing(self, bpm, advance=0.):
+        if getattr(self,'path_hold',None) is not None and self.path_hold.is_set():raise RuntimeError('Hold latched; no new snare strokes')
         s = self.status
         if s.error or not s.ready or time.monotonic()-s.at > .1:
             raise RuntimeError('Left snare must be settled at its recording endpoint')
@@ -431,6 +448,18 @@ class SnareSession(Joint7Session):
     def finish(self):
         with self.clock.get_lock():
             self.clock[2] = 0.
+
+    def emergency_hold(self,displayed_position=None):
+        self.finish();self.goal.value=float('nan') if displayed_position is None else float(displayed_position);self.path_hold.set()
+
+    @property
+    def hold_position(self):
+        value=self.goal.value
+        return value if math.isfinite(value) else None
+
+    def path_goal(self,displayed_position):
+        if not self.path_hold.is_set():raise RuntimeError('Hold before generated return')
+        self.goal.value=float(displayed_position)
 
     @property
     def finished(self):

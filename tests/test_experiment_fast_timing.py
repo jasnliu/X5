@@ -84,7 +84,10 @@ def test_only_experiment_sources_changed_since_this_task():
              # Subsequent authorized startup acquisition change, NOT timing/path
              # changes. Its CLI/offline behavior has dedicated regression tests.
              'drum_planner/cli.py','DRUM_PLANNER.md',
-             'tests/test_planner_arms.py','tests/test_planner_experiment.py'}
+             'tests/test_planner_arms.py','tests/test_planner_experiment.py',
+             # Subsequent authorized per-joint experiment controls: docs only.
+             # Hardware/core/legacy timing remain protected by both audits.
+             'AGENTS.md','drum_planner/timing/README.md'}
     for path,sha in before.items():
         if path not in allowed:assert digest(ROOT/path)==sha,path
 

@@ -1,6 +1,24 @@
 # Timing and bounded left-arm corner smoothing
 
-## Current speed-first experiment timing (2026-10-24 UTC)
+## Current experiment and normal hardware timing (2026-10-26 UTC)
+
+Normal `experiment --right/--left` and `--hardware --right/--left` reuse the CPU
+`experiment/motion_timing.py` optimizer. Each joint has independent editable
+velocity, acceleration and jerk limits. Original defaults remain 0.6 / 1.2 / 6;
+Custom values are planning constraints, never motor-protection settings. Hardware
+profiles are separately bound and verified; its unchanged 0.8 rad/s CSP cap still applies.
+Fast / Balanced / Thorough select bounded computation effort; Balanced is the
+default. All retained curves receive continuous derivative checks and native
+dense collision/zone checks. Path geometry/ranking are unchanged, with no
+trajectory-result cache, no CPU reference qualification and no global-optimum
+claim. Normal hardware calls `baseline/current.py`, not the legacy v1/v2 dispatcher.
+The separate `--hardware-sparse`, shared `core.LIMITS`, and `--fast` are unchanged. No process-global limit overrides are used.
+
+See `DRUM_PLANNER_EXPERIMENTS.md` for profile schema, simulated-start selector,
+CLI/UI workflow and the 2026-10-25 verification report. The former experiment
+`fast_timing.py` is retained unchanged for comparisons and existing callers.
+
+## Historical speed-first GPU experiment timing (2026-10-24 UTC)
 
 The visible right/left experiment now uses `experiment/fast.py` and
 `vulkan/fast.py`: 24-control GPU-native FP64 density optimization, no CPU
@@ -85,7 +103,7 @@ acquisition and `baseline/curve.py` exact playback adapter. Existing recording
 playback and `live` execution are unchanged. The pre-performance v1 implementation
 is retained byte-for-byte in `diagnostics/planner_performance_20261021/reference/`.
 
-## Retained CPU / standard hardware policy: right v1, left v2
+## Historical retained CPU policy: right v1, left v2
 
 `dispatch.py` routes right-arm plans directly to the **same v1 policy** retimer
 (`integration.py`, `adaptive.py`, `core.py`, `selected.json`). Right geometry,

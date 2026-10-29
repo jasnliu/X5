@@ -208,7 +208,7 @@ def queued_view(tmp_path,monkeypatch,request):
     """Actual controller methods with device-free workers/widgets, no solver/UI."""
     from collections import deque
     from types import SimpleNamespace
-    from drum_planner.experiment import app
+    from drum_planner.experiment import app,motion_settings
     from drum_planner.snapshot_preview import SnapshotPlaybackView
     # Keep testing the generic serial-queue state machine with its historical
     # five-method fixture. The actual new menu is covered in test_fast_gpu.py
@@ -246,6 +246,8 @@ def queued_view(tmp_path,monkeypatch,request):
     view_class=app.make_view_class();v=view_class.__new__(view_class)
     v.session=tmp_path;v.side=request.param
     v.context=dict(scene_sha256='scene',state_sha256='state',moving_side=v.side)
+    v.motion_profile=motion_settings.settings(v.side)
+    v.context.update(motion_settings=v.motion_profile,experiment_start={'kind':'default','label':'Default'})
     v.context['destination_sha256']='selected-destination'
     v.destination_path=tmp_path/'selected.json';v.discard_job=False
     v.params=config.settings();v.planning_seconds=60.;v.cache={};v.pending_methods=deque()
@@ -254,7 +256,8 @@ def queued_view(tmp_path,monkeypatch,request):
     v.active_method='progress';v.displayed_method=None;v.events=deque(maxlen=256);v.generation_count=0
     v.plan=SimpleNamespace(playable=False);v.clock=Clock();v.autoplay_result=False
     for name in ('method_box','generate_button','cache_all_button','budget_spin','settings_button',
-                 'recapture_button','cancel_button','play_button','timeline','queue_label','status','plan_label','method_description','info'):
+                 'recapture_button','cancel_button','play_button','timeline','queue_label','status','plan_label','method_description','info',
+                 'start_box','limits_button','timing_box'):
         setattr(v,name,Widget())
     v.window=SimpleNamespace(findChildren=lambda kind:[]);v.QtWidgets=SimpleNamespace(QPushButton=Widget)
     def install(path,method):
@@ -344,7 +347,9 @@ def test_budget_change_rebuilds_automatic_queue_and_invalidates_cache(queued_vie
     while v.job:v.finish()
     v.budget_changed(30)
     assert not v.cache and not v.plan.playable and v.job_method=='progress'
-    assert v.job_signature[-1]==30 and len(v.pending_methods)==len(config.METHODS)-1
+    from drum_planner.experiment.motion_settings import identity
+    assert v.job_signature[-2]==30 and len(v.pending_methods)==len(config.METHODS)-1
+    assert v.job_signature[-1]==identity(v.motion_profile)
 
 
 def test_explicit_generate_replaces_only_selected_cached_result(queued_view):

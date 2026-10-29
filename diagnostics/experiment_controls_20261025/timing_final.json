@@ -1,0 +1,2744 @@
+[
+  {
+    "case": "current_R1_R2",
+    "method": "old",
+    "duration_s": 1.8957111051633022,
+    "calculation_s": 1.9214843509253114,
+    "quality": {
+      "duration_s": 1.8957111051633033,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.5013859169763731,
+      "interior_speed_p10_ratio": 0.6266654678642155,
+      "interior_speed_cv": 0.1638989304961728,
+      "peak_joint_speed_rad_s": 0.396703591613077,
+      "cruise_joint_norm_rad_s": 0.5409173483757997,
+      "path_length_rad": 0.6503856894467366,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.001,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "gpu_native_optimizer": false,
+      "backend_label": "CPU sparse timing \u2014 intentional CPU backend",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse solve stopped: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse solve stopped: Maximum_WallTime_Exceeded"
+      ],
+      "controls": 96,
+      "precision": "float64",
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.073292217137712
+        },
+        {
+          "stage": "sparse",
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.8957111051633022,
+          "accepted": true,
+          "correction_scale": 1.001,
+          "elapsed_s": 1.110908025992103,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        }
+      ],
+      "calculation_seconds": 1.9213005480123684,
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "implementation_sha256": "eaa5420dee1f6b405a7ff56f9f999cfd539b458dd09e463adba54966dfc79fd6",
+      "global_optimum_claimed": false
+    },
+    "verified": true
+  },
+  {
+    "case": "current_R1_R2",
+    "method": "fast",
+    "duration_s": 1.7649334886528185,
+    "calculation_s": 1.874090031022206,
+    "quality": {
+      "duration_s": 1.7649334886528185,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.48535941789418263,
+      "interior_speed_p10_ratio": 0.6087248387998297,
+      "interior_speed_cv": 0.17289719619097896,
+      "peak_joint_speed_rad_s": 0.44112055106071674,
+      "cruise_joint_norm_rad_s": 0.6004883967507861,
+      "path_length_rad": 0.6503856894428415,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0029714713608564,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.0349705560365692,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        }
+      ],
+      "calculation_seconds": 1.873865289031528,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.19831434559992814,
+            0.04900873344170294,
+            0.06329524272469414,
+            0.16055520885794272,
+            0.18062747099591428,
+            0.4411205613352739,
+            0.2642961220982508
+          ],
+          [
+            0.5600981717777945,
+            0.13344655087532778,
+            0.19056475776528145,
+            0.4393300315151195,
+            0.4732828266792409,
+            1.0824990910291652,
+            0.6518302424403603
+          ],
+          [
+            5.982035940089878,
+            2.512840256530315,
+            5.601327537093591,
+            3.495755366076254,
+            5.215455735169866,
+            5.822237699663639,
+            3.6404255019023504
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3305239093332136,
+            0.08168122240283823,
+            0.10549207120782357,
+            0.2675920147632379,
+            0.30104578499319046,
+            0.7352009355587898,
+            0.44049353683041803
+          ],
+          [
+            0.4667484764814955,
+            0.11120545906277315,
+            0.1588039648044012,
+            0.36610835959593296,
+            0.3944023555660341,
+            0.9020825758576377,
+            0.5431918687003002
+          ],
+          [
+            0.9970059900149796,
+            0.41880670942171916,
+            0.9335545895155986,
+            0.5826258943460424,
+            0.869242622528311,
+            0.9703729499439399,
+            0.6067375836503918
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.822237699663639,
+            "limit": 6.0,
+            "utilization": 0.9703729499439399
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.601327537093591,
+            "limit": 6.0,
+            "utilization": 0.9335545895155986
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "current_R1_R2",
+    "method": "balanced",
+    "duration_s": 1.656983746870765,
+    "calculation_s": 3.3905719890026376,
+    "quality": {
+      "duration_s": 1.6569837468707658,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4235535443041031,
+      "interior_speed_p10_ratio": 0.5363643556004248,
+      "interior_speed_cv": 0.22302052422783045,
+      "peak_joint_speed_rad_s": 0.5372263391613749,
+      "cruise_joint_norm_rad_s": 0.7240330085742052,
+      "path_length_rad": 0.6503856894403536,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0037081268869679,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.0362075649900362,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.252466207020916,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.263202209956944,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10794974178205341,
+          "best_duration_s": 1.656983746870765
+        }
+      ],
+      "calculation_seconds": 3.3903607530519366,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23582903862143834,
+            0.05879347993548417,
+            0.07451998351829069,
+            0.19329388758696456,
+            0.21915124978148787,
+            0.5372264008284884,
+            0.32169445155847787
+          ],
+          [
+            0.6387780248724008,
+            0.146920933765777,
+            0.21005774896679802,
+            0.5010814155619616,
+            0.5210455957111921,
+            1.1913230420583387,
+            0.7436337154118805
+          ],
+          [
+            5.979305684287385,
+            2.56741673869568,
+            5.933745670776271,
+            4.267321456620004,
+            5.528198243398332,
+            5.982035940089877,
+            5.308689956284682
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.39304839770239725,
+            0.09798913322580696,
+            0.12419997253048448,
+            0.3221564793116076,
+            0.36525208296914646,
+            0.8953773347141474,
+            0.5361574192641299
+          ],
+          [
+            0.5323150207270007,
+            0.12243411147148084,
+            0.17504812413899837,
+            0.4175678463016347,
+            0.43420466309266015,
+            0.9927692017152823,
+            0.6196947628432338
+          ],
+          [
+            0.9965509473812308,
+            0.4279027897826133,
+            0.9889576117960451,
+            0.7112202427700006,
+            0.9213663738997221,
+            0.9970059900149795,
+            0.8847816593807803
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089877,
+            "limit": 6.0,
+            "utilization": 0.9970059900149795
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.979305684287385,
+            "limit": 6.0,
+            "utilization": 0.9965509473812308
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1913230420583387,
+            "limit": 1.2,
+            "utilization": 0.9927692017152823
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "current_R1_R2",
+    "method": "thorough",
+    "duration_s": 1.6467329678768035,
+    "calculation_s": 4.753819590085186,
+    "quality": {
+      "duration_s": 1.6467329678768043,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.42057256215755157,
+      "interior_speed_p10_ratio": 0.5336363234614261,
+      "interior_speed_cv": 0.2257285029353473,
+      "peak_joint_speed_rad_s": 0.5430238171619864,
+      "cruise_joint_norm_rad_s": 0.7325670600832536,
+      "path_length_rad": 0.6503856894419008,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0021630618914534,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.0378400350455195,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.2468342760112137,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.2789057419868186,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10794974178205341,
+          "best_duration_s": 1.656983746870765
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1181,
+          "duration_s": 1.6467329678768035,
+          "accepted": true,
+          "correction_scale": 1.0021630618914534,
+          "elapsed_s": 1.3387397510232404,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.010250778993961651,
+          "best_duration_s": 1.6467329678768035
+        }
+      ],
+      "calculation_seconds": 4.753611350082792,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23919240467826094,
+            0.05933533102812452,
+            0.07508767381302274,
+            0.195662951925901,
+            0.22140467165693603,
+            0.5430238177049284,
+            0.3252522113203493
+          ],
+          [
+            0.6415562333377436,
+            0.1473865227812883,
+            0.21076461408737351,
+            0.5031257969393984,
+            0.5226933785102522,
+            1.1952527138840285,
+            0.7461618334695864
+          ],
+          [
+            5.97213447222578,
+            2.6613532340201274,
+            5.961701547632451,
+            4.448448515136628,
+            5.663990647455988,
+            5.982035940089876,
+            5.399133132235494
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3986540077971016,
+            0.09889221838020754,
+            0.12514612302170458,
+            0.3261049198765017,
+            0.3690077860948934,
+            0.9050396961748807,
+            0.5420870188672489
+          ],
+          [
+            0.5346301944481197,
+            0.12282210231774025,
+            0.1756371784061446,
+            0.4192714974494987,
+            0.4355778154252102,
+            0.9960439282366905,
+            0.621801527891322
+          ],
+          [
+            0.9953557453709633,
+            0.4435588723366879,
+            0.9936169246054085,
+            0.7414080858561047,
+            0.9439984412426646,
+            0.9970059900149794,
+            0.8998555220392489
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1952527138840285,
+            "limit": 1.2,
+            "utilization": 0.9960439282366905
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.97213447222578,
+            "limit": 6.0,
+            "utilization": 0.9953557453709633
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_checkpoint_1",
+    "method": "old",
+    "duration_s": 4.212609625637505,
+    "calculation_s": 0.4352021199883893,
+    "quality": {
+      "duration_s": 4.212609625637505,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6576169671790458,
+      "interior_speed_p10_ratio": 0.771804009813605,
+      "interior_speed_cv": 0.10777612048583712,
+      "peak_joint_speed_rad_s": 0.5990062108843813,
+      "cruise_joint_norm_rad_s": 0.8324045084434166,
+      "path_length_rad": 2.6250989283226294,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0016888497399143,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "gpu_native_optimizer": false,
+      "backend_label": "CPU sparse timing \u2014 intentional CPU backend",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "controls": 96,
+      "precision": "float64",
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 502,
+          "duration_s": 4.315954137096765
+        },
+        {
+          "stage": "sparse",
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212609625637505,
+          "accepted": true,
+          "correction_scale": 1.0016888497399143,
+          "elapsed_s": 0.28899163799360394,
+          "iterations": 20,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        }
+      ],
+      "calculation_seconds": 0.4350428740726784,
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "implementation_sha256": "eaa5420dee1f6b405a7ff56f9f999cfd539b458dd09e463adba54966dfc79fd6",
+      "global_optimum_claimed": false
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_checkpoint_1",
+    "method": "fast",
+    "duration_s": 4.212609625633884,
+    "calculation_s": 0.4565883370814845,
+    "quality": {
+      "duration_s": 4.212609625633885,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6576169671783167,
+      "interior_speed_p10_ratio": 0.771804009812736,
+      "interior_speed_cv": 0.1077761204859827,
+      "peak_joint_speed_rad_s": 0.5990062108843659,
+      "cruise_joint_norm_rad_s": 0.8324045084443511,
+      "path_length_rad": 2.6250989283226347,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0016888497401342,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 582,
+          "duration_s": 4.315953269456554
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212609625633884,
+          "accepted": true,
+          "correction_scale": 1.0016888497401342,
+          "elapsed_s": 0.28884368599392474,
+          "iterations": 20,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10334364382267047,
+          "best_duration_s": 4.212609625633884
+        }
+      ],
+      "calculation_seconds": 0.4563687549671158,
+      "uniform_duration_s": 8.000160992996504,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.5331284256453703,
+            0.2680185619698484,
+            0.0698452104759178,
+            0.5990062190448755,
+            0.15438697246378472,
+            0.07522928200873123,
+            0.4193604236129948
+          ],
+          [
+            1.197603595205993,
+            0.5792940897906843,
+            0.23867229519971878,
+            1.1964246989084357,
+            0.2951096353186745,
+            0.1225036670728487,
+            0.9146039324643656
+          ],
+          [
+            5.975929336152262,
+            3.0828374561056155,
+            1.061491270471191,
+            5.974253405986121,
+            2.1803382293742706,
+            0.6135013808488835,
+            5.799732938185463
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.8885473760756173,
+            0.4466976032830807,
+            0.11640868412652966,
+            0.9983436984081259,
+            0.25731162077297454,
+            0.12538213668121873,
+            0.6989340393549913
+          ],
+          [
+            0.9980029960049941,
+            0.4827450748255703,
+            0.19889357933309898,
+            0.9970205824236965,
+            0.24592469609889545,
+            0.10208638922737391,
+            0.7621699437203047
+          ],
+          [
+            0.9959882226920437,
+            0.5138062426842692,
+            0.1769152117451985,
+            0.9957089009976868,
+            0.36338970489571176,
+            0.10225023014148059,
+            0.9666221563642439
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5990062190448755,
+            "limit": 0.6,
+            "utilization": 0.9983436984081259
+          },
+          {
+            "joint": 1,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.197603595205993,
+            "limit": 1.2,
+            "utilization": 0.9980029960049941
+          },
+          {
+            "joint": 4,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1964246989084357,
+            "limit": 1.2,
+            "utilization": 0.9970205824236965
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_checkpoint_1",
+    "method": "balanced",
+    "duration_s": 4.212609625633884,
+    "calculation_s": 0.6500867670401931,
+    "quality": {
+      "duration_s": 4.212609625633885,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6576169671783167,
+      "interior_speed_p10_ratio": 0.771804009812736,
+      "interior_speed_cv": 0.1077761204859827,
+      "peak_joint_speed_rad_s": 0.5990062108843659,
+      "cruise_joint_norm_rad_s": 0.8324045084443511,
+      "path_length_rad": 2.6250989283226347,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0016888497401342,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 582,
+          "duration_s": 4.315953269456554
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212609625633884,
+          "accepted": true,
+          "correction_scale": 1.0016888497401342,
+          "elapsed_s": 0.2878823910141364,
+          "iterations": 20,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10334364382267047,
+          "best_duration_s": 4.212609625633884
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212616465032403,
+          "accepted": false,
+          "correction_scale": 1.0016884400116477,
+          "elapsed_s": 0.19155914103612304,
+          "iterations": 11,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 4.212609625633884
+        }
+      ],
+      "calculation_seconds": 0.6498464751057327,
+      "uniform_duration_s": 8.000160992996504,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.5331284256453703,
+            0.2680185619698484,
+            0.0698452104759178,
+            0.5990062190448755,
+            0.15438697246378472,
+            0.07522928200873123,
+            0.4193604236129948
+          ],
+          [
+            1.197603595205993,
+            0.5792940897906843,
+            0.23867229519971878,
+            1.1964246989084357,
+            0.2951096353186745,
+            0.1225036670728487,
+            0.9146039324643656
+          ],
+          [
+            5.975929336152262,
+            3.0828374561056155,
+            1.061491270471191,
+            5.974253405986121,
+            2.1803382293742706,
+            0.6135013808488835,
+            5.799732938185463
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.8885473760756173,
+            0.4466976032830807,
+            0.11640868412652966,
+            0.9983436984081259,
+            0.25731162077297454,
+            0.12538213668121873,
+            0.6989340393549913
+          ],
+          [
+            0.9980029960049941,
+            0.4827450748255703,
+            0.19889357933309898,
+            0.9970205824236965,
+            0.24592469609889545,
+            0.10208638922737391,
+            0.7621699437203047
+          ],
+          [
+            0.9959882226920437,
+            0.5138062426842692,
+            0.1769152117451985,
+            0.9957089009976868,
+            0.36338970489571176,
+            0.10225023014148059,
+            0.9666221563642439
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5990062190448755,
+            "limit": 0.6,
+            "utilization": 0.9983436984081259
+          },
+          {
+            "joint": 1,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.197603595205993,
+            "limit": 1.2,
+            "utilization": 0.9980029960049941
+          },
+          {
+            "joint": 4,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1964246989084357,
+            "limit": 1.2,
+            "utilization": 0.9970205824236965
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_checkpoint_1",
+    "method": "thorough",
+    "duration_s": 4.2056996366796815,
+    "calculation_s": 1.5087311359820887,
+    "quality": {
+      "duration_s": 4.2056996366796815,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6571890108441732,
+      "interior_speed_p10_ratio": 0.7740188326114292,
+      "interior_speed_cv": 0.10755768229572815,
+      "peak_joint_speed_rad_s": 0.5992999829481293,
+      "cruise_joint_norm_rad_s": 0.8329074774142208,
+      "path_length_rad": 2.6250989291342606,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.001173229748971,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 582,
+          "duration_s": 4.315953269456554
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212609625633884,
+          "accepted": true,
+          "correction_scale": 1.0016888497401342,
+          "elapsed_s": 0.2898591209668666,
+          "iterations": 20,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10334364382267047,
+          "best_duration_s": 4.212609625633884
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 4.212616465032403,
+          "accepted": false,
+          "correction_scale": 1.0016884400116477,
+          "elapsed_s": 0.1916934009641409,
+          "iterations": 11,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 4.212609625633884
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1142,
+          "duration_s": 4.2056996366796815,
+          "accepted": true,
+          "correction_scale": 1.001173229748971,
+          "elapsed_s": 0.8394211760023609,
+          "iterations": 19,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.006909988954202362,
+          "best_duration_s": 4.2056996366796815
+        }
+      ],
+      "calculation_seconds": 1.5085104120662436,
+      "uniform_duration_s": 8.000160992996504,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.5356085523241525,
+            0.2691890177168752,
+            0.06996489888388825,
+            0.5993003453727731,
+            0.15464344882458714,
+            0.07526755816437287,
+            0.42121838549548496
+          ],
+          [
+            1.1973332377528356,
+            0.5850694097529395,
+            0.23876247112294974,
+            1.1976035952059931,
+            0.2987894613206526,
+            0.12260194314083137,
+            0.9212187484787772
+          ],
+          [
+            5.9818452128071575,
+            3.094929827431949,
+            1.1681790319262773,
+            5.978926708843773,
+            2.185096245618615,
+            0.6144501746270142,
+            5.823168633152698
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.8926809205402542,
+            0.4486483628614587,
+            0.11660816480648042,
+            0.9988339089546219,
+            0.2577390813743119,
+            0.1254459302739548,
+            0.7020306424924749
+          ],
+          [
+            0.997777698127363,
+            0.48755784146078296,
+            0.19896872593579146,
+            0.9980029960049943,
+            0.2489912177672105,
+            0.10216828595069281,
+            0.767682290398981
+          ],
+          [
+            0.9969742021345263,
+            0.5158216379053249,
+            0.1946965053210462,
+            0.9964877848072956,
+            0.3641827076031025,
+            0.1024083624378357,
+            0.9705281055254497
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5993003453727731,
+            "limit": 0.6,
+            "utilization": 0.9988339089546219
+          },
+          {
+            "joint": 4,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1976035952059931,
+            "limit": 1.2,
+            "utilization": 0.9980029960049943
+          },
+          {
+            "joint": 1,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1973332377528356,
+            "limit": 1.2,
+            "utilization": 0.997777698127363
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_return_to_start",
+    "method": "old",
+    "duration_s": 2.712258213875312,
+    "calculation_s": 0.8649928040103987,
+    "quality": {
+      "duration_s": 2.712258213875312,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.42493431049824215,
+      "interior_speed_p10_ratio": 0.49056264956968093,
+      "interior_speed_cv": 0.242635896150406,
+      "peak_joint_speed_rad_s": 0.598813410642787,
+      "cruise_joint_norm_rad_s": 0.7693814005668114,
+      "path_length_rad": 1.3535764145525135,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0020214501795572,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "gpu_native_optimizer": false,
+      "backend_label": "CPU sparse timing \u2014 intentional CPU backend",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "controls": 96,
+      "precision": "float64",
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 2.7941210033730597
+        },
+        {
+          "stage": "sparse",
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.712258213875312,
+          "accepted": true,
+          "correction_scale": 1.0020214501795572,
+          "elapsed_s": 0.3500567169394344,
+          "iterations": 25,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        }
+      ],
+      "calculation_seconds": 0.864845621981658,
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "implementation_sha256": "eaa5420dee1f6b405a7ff56f9f999cfd539b458dd09e463adba54966dfc79fd6",
+      "global_optimum_claimed": false
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_return_to_start",
+    "method": "fast",
+    "duration_s": 2.712258213875311,
+    "calculation_s": 0.8814060320146382,
+    "quality": {
+      "duration_s": 2.712258213875311,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4249343104982402,
+      "interior_speed_p10_ratio": 0.4905626495696807,
+      "interior_speed_cv": 0.24263589615040615,
+      "peak_joint_speed_rad_s": 0.5988134106427873,
+      "cruise_joint_norm_rad_s": 0.7693814005668118,
+      "path_length_rad": 1.353576414552518,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0020214501795568,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 2.7941210033730597
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.712258213875311,
+          "accepted": true,
+          "correction_scale": 1.0020214501795568,
+          "elapsed_s": 0.3513628300279379,
+          "iterations": 25,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.08186278949774861,
+          "best_duration_s": 2.712258213875311
+        }
+      ],
+      "calculation_seconds": 0.8811913500539958,
+      "uniform_duration_s": 6.26010257434396,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.18273779073150084,
+            0.19419382858283515,
+            0.38766672761486054,
+            0.33847114210186463,
+            0.19811985719898093,
+            0.20427645458363383,
+            0.598813548198763
+          ],
+          [
+            0.629223949544384,
+            0.8491405220560607,
+            1.1953029546228195,
+            1.062750755003617,
+            0.5762467605208398,
+            0.46249185493767425,
+            1.195795433955895
+          ],
+          [
+            5.633808575395854,
+            5.9698218463160835,
+            5.97561463464387,
+            5.982035940089876,
+            2.980721302372291,
+            2.7165941892238425,
+            5.970171492871327
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3045629845525014,
+            0.32365638097139193,
+            0.6461112126914342,
+            0.5641185701697744,
+            0.33019976199830153,
+            0.3404607576393897,
+            0.9980225803312717
+          ],
+          [
+            0.5243532912869867,
+            0.707617101713384,
+            0.9960857955190163,
+            0.8856256291696809,
+            0.4802056337673665,
+            0.38540987911472857,
+            0.9964961949632458
+          ],
+          [
+            0.938968095899309,
+            0.9949703077193472,
+            0.995935772440645,
+            0.9970059900149794,
+            0.4967868837287152,
+            0.4527656982039738,
+            0.9950285821452213
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.598813548198763,
+            "limit": 0.6,
+            "utilization": 0.9980225803312717
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 7,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.195795433955895,
+            "limit": 1.2,
+            "utilization": 0.9964961949632458
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_return_to_start",
+    "method": "balanced",
+    "duration_s": 2.712258213875311,
+    "calculation_s": 1.0804402680369094,
+    "quality": {
+      "duration_s": 2.712258213875311,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4249343104982402,
+      "interior_speed_p10_ratio": 0.4905626495696807,
+      "interior_speed_cv": 0.24263589615040615,
+      "peak_joint_speed_rad_s": 0.5988134106427873,
+      "cruise_joint_norm_rad_s": 0.7693814005668118,
+      "path_length_rad": 1.353576414552518,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0020214501795568,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 2.7941210033730597
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.712258213875311,
+          "accepted": true,
+          "correction_scale": 1.0020214501795568,
+          "elapsed_s": 0.3499635070329532,
+          "iterations": 25,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.08186278949774861,
+          "best_duration_s": 2.712258213875311
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.7122582223449414,
+          "accepted": false,
+          "correction_scale": 1.002021443469284,
+          "elapsed_s": 0.20310955599416047,
+          "iterations": 12,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 2.712258213875311
+        }
+      ],
+      "calculation_seconds": 1.0802235309965909,
+      "uniform_duration_s": 6.26010257434396,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.18273779073150084,
+            0.19419382858283515,
+            0.38766672761486054,
+            0.33847114210186463,
+            0.19811985719898093,
+            0.20427645458363383,
+            0.598813548198763
+          ],
+          [
+            0.629223949544384,
+            0.8491405220560607,
+            1.1953029546228195,
+            1.062750755003617,
+            0.5762467605208398,
+            0.46249185493767425,
+            1.195795433955895
+          ],
+          [
+            5.633808575395854,
+            5.9698218463160835,
+            5.97561463464387,
+            5.982035940089876,
+            2.980721302372291,
+            2.7165941892238425,
+            5.970171492871327
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3045629845525014,
+            0.32365638097139193,
+            0.6461112126914342,
+            0.5641185701697744,
+            0.33019976199830153,
+            0.3404607576393897,
+            0.9980225803312717
+          ],
+          [
+            0.5243532912869867,
+            0.707617101713384,
+            0.9960857955190163,
+            0.8856256291696809,
+            0.4802056337673665,
+            0.38540987911472857,
+            0.9964961949632458
+          ],
+          [
+            0.938968095899309,
+            0.9949703077193472,
+            0.995935772440645,
+            0.9970059900149794,
+            0.4967868837287152,
+            0.4527656982039738,
+            0.9950285821452213
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.598813548198763,
+            "limit": 0.6,
+            "utilization": 0.9980225803312717
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 7,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.195795433955895,
+            "limit": 1.2,
+            "utilization": 0.9964961949632458
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_return_to_start",
+    "method": "thorough",
+    "duration_s": 2.7023664360794264,
+    "calculation_s": 2.3481194890337065,
+    "quality": {
+      "duration_s": 2.7023664360794273,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.43560276461848174,
+      "interior_speed_p10_ratio": 0.498259037400335,
+      "interior_speed_cv": 0.23769275030414122,
+      "peak_joint_speed_rad_s": 0.5992381484485345,
+      "cruise_joint_norm_rad_s": 0.7701817404077897,
+      "path_length_rad": 1.3535764145173232,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0012778383437198,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 2.7941210033730597
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.712258213875311,
+          "accepted": true,
+          "correction_scale": 1.0020214501795568,
+          "elapsed_s": 0.3474278380163014,
+          "iterations": 25,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.08186278949774861,
+          "best_duration_s": 2.712258213875311
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.7122582223449414,
+          "accepted": false,
+          "correction_scale": 1.002021443469284,
+          "elapsed_s": 0.2055873100180179,
+          "iterations": 12,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 2.712258213875311
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1142,
+          "duration_s": 2.7023664360794264,
+          "accepted": true,
+          "correction_scale": 1.0012778383437198,
+          "elapsed_s": 1.2515741800889373,
+          "iterations": 31,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.009891777795884682,
+          "best_duration_s": 2.7023664360794264
+        }
+      ],
+      "calculation_seconds": 2.347898033913225,
+      "uniform_duration_s": 6.26010257434396,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.18292095140744005,
+            0.1956878067660119,
+            0.38819560937628467,
+            0.33878649351194845,
+            0.1984051637431757,
+            0.20446515288106357,
+            0.5992381622730986
+          ],
+          [
+            0.6301734234315142,
+            0.8525106817910179,
+            1.197032960703586,
+            1.067165996025902,
+            0.5771317049242329,
+            0.46317772190452566,
+            1.1969883275169395
+          ],
+          [
+            5.652202686509555,
+            5.978687627721876,
+            5.979204862812929,
+            5.982035940089876,
+            3.042601117668519,
+            2.740033069431321,
+            5.978301069801973
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.30486825234573345,
+            0.32614634461001984,
+            0.6469926822938078,
+            0.5646441558532475,
+            0.33067527290529286,
+            0.3407752548017726,
+            0.9987302704551643
+          ],
+          [
+            0.5251445195262618,
+            0.7104255681591816,
+            0.9975274672529882,
+            0.8893049966882516,
+            0.4809430874368608,
+            0.38598143492043807,
+            0.997490272930783
+          ],
+          [
+            0.9420337810849259,
+            0.9964479379536461,
+            0.9965341438021548,
+            0.9970059900149794,
+            0.5071001862780865,
+            0.4566721782385535,
+            0.9963835116336622
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5992381622730986,
+            "limit": 0.6,
+            "utilization": 0.9987302704551643
+          },
+          {
+            "joint": 3,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.197032960703586,
+            "limit": 1.2,
+            "utilization": 0.9975274672529882
+          },
+          {
+            "joint": 7,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1969883275169395,
+            "limit": 1.2,
+            "utilization": 0.997490272930783
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_left",
+    "method": "old",
+    "duration_s": 2.8571028422280698,
+    "calculation_s": 0.8743882329436019,
+    "quality": {
+      "duration_s": 2.857102842228072,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.5500476236052458,
+      "interior_speed_p10_ratio": 0.5942440362701796,
+      "interior_speed_cv": 0.17022590955119954,
+      "peak_joint_speed_rad_s": 0.5979971848240141,
+      "cruise_joint_norm_rad_s": 0.6838224154344884,
+      "path_length_rad": 1.3395415373248016,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.003366374920649,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "gpu_native_optimizer": false,
+      "backend_label": "CPU sparse timing \u2014 intentional CPU backend",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "controls": 96,
+      "precision": "float64",
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1767,
+          "duration_s": 2.9801750235753537
+        },
+        {
+          "stage": "sparse",
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.8571028422280698,
+          "accepted": true,
+          "correction_scale": 1.003366374920649,
+          "elapsed_s": 0.40388585499022156,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        }
+      ],
+      "calculation_seconds": 0.8742365119978786,
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "implementation_sha256": "eaa5420dee1f6b405a7ff56f9f999cfd539b458dd09e463adba54966dfc79fd6",
+      "global_optimum_claimed": false
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_left",
+    "method": "fast",
+    "duration_s": 2.857102850055718,
+    "calculation_s": 0.8845589469419792,
+    "quality": {
+      "duration_s": 2.857102850055718,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.550047626683078,
+      "interior_speed_p10_ratio": 0.59424404267209,
+      "interior_speed_cv": 0.17022590926150502,
+      "peak_joint_speed_rad_s": 0.5979971845290178,
+      "cruise_joint_norm_rad_s": 0.6838224102066774,
+      "path_length_rad": 1.3395415373247974,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0033663745412094,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1726,
+          "duration_s": 2.9801932326159544
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.857102850055718,
+          "accepted": true,
+          "correction_scale": 1.0033663745412094,
+          "elapsed_s": 0.4030509239528328,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.1230903825602363,
+          "best_duration_s": 2.857102850055718
+        }
+      ],
+      "calculation_seconds": 0.8843506870325655,
+      "uniform_duration_s": 6.583819933434297,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.20561628692771516,
+            0.14994633481516728,
+            0.15867282694236168,
+            0.28784331444897937,
+            0.031418747563939906,
+            0.06239960762582581,
+            0.5979972903127038
+          ],
+          [
+            0.7929938460732595,
+            0.5826144671400565,
+            0.4975818445422265,
+            1.0105845429051863,
+            0.09844219299059234,
+            0.23974491408719684,
+            1.192719623996352
+          ],
+          [
+            4.602293925491356,
+            4.064947555758184,
+            2.7085425028459484,
+            5.982035940089876,
+            0.566334210555982,
+            1.497941940230214,
+            5.966166730041094
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.34269381154619194,
+            0.2499105580252788,
+            0.2644547115706028,
+            0.47973885741496564,
+            0.05236457927323318,
+            0.10399934604304302,
+            0.996662150521173
+          ],
+          [
+            0.6608282050610497,
+            0.4855120559500471,
+            0.4146515371185221,
+            0.842153785754322,
+            0.08203516082549363,
+            0.19978742840599736,
+            0.99393301999696
+          ],
+          [
+            0.7670489875818927,
+            0.6774912592930306,
+            0.45142375047432476,
+            0.9970059900149794,
+            0.09438903509266366,
+            0.24965699003836903,
+            0.9943611216735156
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5979972903127038,
+            "limit": 0.6,
+            "utilization": 0.996662150521173
+          },
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.966166730041094,
+            "limit": 6.0,
+            "utilization": 0.9943611216735156
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_left",
+    "method": "balanced",
+    "duration_s": 2.857102597612472,
+    "calculation_s": 1.126388139091432,
+    "quality": {
+      "duration_s": 2.857102597612472,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.5500475346545027,
+      "interior_speed_p10_ratio": 0.5942438409054213,
+      "interior_speed_cv": 0.17022591738127915,
+      "peak_joint_speed_rad_s": 0.5979971938290058,
+      "cruise_joint_norm_rad_s": 0.6838225706548531,
+      "path_length_rad": 1.3395415373247992,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0033663869039937,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1726,
+          "duration_s": 2.9801932326159544
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.857102850055718,
+          "accepted": true,
+          "correction_scale": 1.0033663745412094,
+          "elapsed_s": 0.404549999977462,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.1230903825602363,
+          "best_duration_s": 2.857102850055718
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.857102597612472,
+          "accepted": true,
+          "correction_scale": 1.0033663869039937,
+          "elapsed_s": 0.24203640001360327,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 2.524432458628212e-07,
+          "best_duration_s": 2.857102597612472
+        }
+      ],
+      "calculation_seconds": 1.1261685469653457,
+      "uniform_duration_s": 6.583819933434297,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.20561632342676137,
+            0.14994636129632452,
+            0.15867283383018596,
+            0.28784335896442936,
+            0.03141875212840084,
+            0.06239961872525672,
+            0.5979973003903507
+          ],
+          [
+            0.7929937862219363,
+            0.5826144195701476,
+            0.4975818139775793,
+            1.0105844639229726,
+            0.09844218553578787,
+            0.23974489661194415,
+            1.1927195783889184
+          ],
+          [
+            4.602295160964571,
+            4.064947486182127,
+            2.70854475248447,
+            5.982035940089876,
+            0.5663344118948176,
+            1.4979423473675815,
+            5.966170312951393
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.34269387237793564,
+            0.24991060216054087,
+            0.2644547230503099,
+            0.4797389316073823,
+            0.05236458688066807,
+            0.10399936454209453,
+            0.9966621673172512
+          ],
+          [
+            0.660828155184947,
+            0.48551201630845636,
+            0.41465151164798275,
+            0.8421537199358106,
+            0.08203515461315657,
+            0.1997874138432868,
+            0.9939329819907654
+          ],
+          [
+            0.7670491934940952,
+            0.6774912476970211,
+            0.45142412541407834,
+            0.9970059900149794,
+            0.09438906864913627,
+            0.2496570578945969,
+            0.9943617188252322
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5979973003903507,
+            "limit": 0.6,
+            "utilization": 0.9966621673172512
+          },
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.966170312951393,
+            "limit": 6.0,
+            "utilization": 0.9943617188252322
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  },
+  {
+    "case": "historical_left",
+    "method": "thorough",
+    "duration_s": 2.8389976212067425,
+    "calculation_s": 2.459821944939904,
+    "quality": {
+      "duration_s": 2.838997621206745,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.5550391575298097,
+      "interior_speed_p10_ratio": 0.6043437665045052,
+      "interior_speed_cv": 0.16537661318794478,
+      "peak_joint_speed_rad_s": 0.5991221586371018,
+      "cruise_joint_norm_rad_s": 0.6852732680427305,
+      "path_length_rad": 1.339541537482912,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "details": {
+      "correction_scale": 1.0014687879780297,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1726,
+          "duration_s": 2.9801932326159544
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.857102850055718,
+          "accepted": true,
+          "correction_scale": 1.0033663745412094,
+          "elapsed_s": 0.402465409017168,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.1230903825602363,
+          "best_duration_s": 2.857102850055718
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 2.857102597612472,
+          "accepted": true,
+          "correction_scale": 1.0033663869039937,
+          "elapsed_s": 0.2441042469581589,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 2.524432458628212e-07,
+          "best_duration_s": 2.857102597612472
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1142,
+          "duration_s": 2.8389976212067425,
+          "accepted": true,
+          "correction_scale": 1.0014687879780297,
+          "elapsed_s": 1.309045948088169,
+          "iterations": 33,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.018104976405729722,
+          "best_duration_s": 2.8389976212067425
+        }
+      ],
+      "calculation_seconds": 2.459585730917752,
+      "uniform_duration_s": 6.583819933434297,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.20723623434649718,
+            0.1511169479288288,
+            0.1602880185552595,
+            0.2884617894804404,
+            0.031481499681678675,
+            0.062893778228124,
+            0.5991222667556696
+          ],
+          [
+            0.8017873670283228,
+            0.5899182656879596,
+            0.5015595353201997,
+            1.022417097287409,
+            0.09954058422287917,
+            0.2422645168453459,
+            1.1970503754441952
+          ],
+          [
+            4.628805007877485,
+            4.104750881156601,
+            2.730787192772873,
+            5.981855540757785,
+            0.6254779081018378,
+            1.5165969546084415,
+            5.982035940089874
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3453937239108287,
+            0.25186157988138136,
+            0.2671466975920992,
+            0.48076964913406733,
+            0.052469166136131125,
+            0.10482296371354001,
+            0.9985371112594493
+          ],
+          [
+            0.668156139190269,
+            0.49159855473996633,
+            0.4179662794334998,
+            0.8520142477395075,
+            0.08295048685239932,
+            0.2018870973711216,
+            0.9975419795368294
+          ],
+          [
+            0.7714675013129142,
+            0.6841251468594335,
+            0.45513119879547886,
+            0.9969759234596308,
+            0.10424631801697297,
+            0.25276615910140693,
+            0.997005990014979
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5991222667556696,
+            "limit": 0.6,
+            "utilization": 0.9985371112594493
+          },
+          {
+            "joint": 7,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1970503754441952,
+            "limit": 1.2,
+            "utilization": 0.9975419795368294
+          },
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089874,
+            "limit": 6.0,
+            "utilization": 0.997005990014979
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    },
+    "verified": true
+  }
+]

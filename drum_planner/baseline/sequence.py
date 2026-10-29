@@ -15,9 +15,11 @@ def initialize(curve,plan):
     start=plan['outward'][0]['positions_rad'];previous=start;offset=0.;parts=[]
     for i,segment in enumerate(segments+[sequence['return_leg']]):
         returning=i==len(segments)
-        child=Curve(dict(timing=segment['timing'],outward=[
-            dict(time_s=0.,positions_rad=segment['start']),
-            dict(time_s=segment['timing']['duration_s'],positions_rad=segment['goal'])]))
+        samples=[dict(time_s=0.,positions_rad=segment['start'])]
+        if segment['timing']['duration_s']:
+            samples.append(dict(time_s=segment['timing']['duration_s'],positions_rad=segment['goal']))
+        elif segment['start']!=segment['goal']:raise ValueError('Stationary checkpoint changes position')
+        child=Curve(dict(timing=segment['timing'],outward=samples))
         if (not np.array_equal(previous,segment['start']) or
             abs(segment['start_time_s']-offset)>1e-9 or
             abs(segment['arrival_time_s']-offset-child.duration)>1e-9 or

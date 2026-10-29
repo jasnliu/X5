@@ -135,6 +135,9 @@ class ControlWindow(QtWidgets.QWidget):
         self.status.setMinimumHeight(40);self.status.setMaximumHeight(75);layout.addWidget(self.status)
         from .destinations import Selector
         self.destinations=Selector(owner);layout.addWidget(self.destinations)
+        if owner.timing_backend=='current':
+            from .planning_ui import PlanningControls
+            self.planning=PlanningControls(owner);layout.addWidget(self.planning)
         self.buttons={}
         for name,label,callback in [('calculate','1 · Calculate trajectory',owner.calculate),
             ('start',f'2 · START trajectory on {owner.side} arm',owner.start),('hold','EMERGENCY HOLD  [Space]',owner.hold),

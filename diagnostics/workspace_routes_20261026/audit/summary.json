@@ -1,0 +1,2642 @@
+[
+  {
+    "case": "incident_right_default_R1",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/incident_right_default_R1/plans/workspace_curve-7b7b5ce1/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "c527f20413a9e04a23b5b2bc5ed0f67c4bedd6009c6011b1a8827bafb94b2a08",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.3703120806253355,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6128614885159095,
+      "interior_speed_p10_ratio": 0.7854254340805961,
+      "interior_speed_cv": 0.1055698762547104,
+      "peak_joint_speed_rad_s": 0.5992387128245324,
+      "cruise_joint_norm_rad_s": 1.0444884276381323,
+      "path_length_rad": 2.5583637717077226,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.495884104744854,
+        0.19076731979707995,
+        0.5555208569460961,
+        0.5992387328316519,
+        0.4840195179058087,
+        0.3172502446821574,
+        0.3091426753335882
+      ],
+      [
+        1.1971495272533148,
+        0.4540522091520473,
+        1.1972305901652072,
+        1.1976035952059925,
+        1.1970895381997912,
+        0.9246274060914096,
+        0.6643671434784167
+      ],
+      [
+        5.979770307345348,
+        2.8672685240757665,
+        5.979751946854763,
+        5.9807256421427955,
+        5.976680408152243,
+        5.976668494314466,
+        3.3983672761892243
+      ]
+    ],
+    "maximum_limit_fraction": 0.9987312213860865,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3472,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2980521649128831,
+          -0.2215991668909887,
+          -0.20726293693713857
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.07608757590932558,
+          -0.2042771884192988,
+          0.15404998878004098
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_default_R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/incident_right_default_R2/plans/workspace_curve-fdcfd3c9/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "d62ebce6fde8f237a74acacacd559f5b52dd3f5bfbb435cb451fdb8422073308",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.3433249326345535,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6099506760252025,
+      "interior_speed_p10_ratio": 0.7351386313646547,
+      "interior_speed_cv": 0.12356701571304597,
+      "peak_joint_speed_rad_s": 0.5991306336797008,
+      "cruise_joint_norm_rad_s": 0.9336320710262205,
+      "path_length_rad": 2.3015803567312427,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.30624295281484276,
+        0.1900302714590414,
+        0.48969843927200635,
+        0.5991307533046447,
+        0.4300516812810889,
+        0.42948307362764415,
+        0.3337329784589669
+      ],
+      [
+        0.6117845444802531,
+        0.4809163401297693,
+        1.092119916517694,
+        1.197069475192905,
+        0.5268605279608872,
+        1.197050510526713,
+        0.8642572596412682
+      ],
+      [
+        3.0469975600236796,
+        3.2350810222851973,
+        5.698782120341353,
+        5.976724834014853,
+        4.463450121969276,
+        5.982035940089876,
+        5.036449309207163
+      ]
+    ],
+    "maximum_limit_fraction": 0.9985512555077413,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3445,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2980521649128831,
+          -0.2215991668909887,
+          -0.20726293693713857
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.07608757590932558,
+          -0.2042771884192988,
+          0.15404998878004098
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "second_right_default_R1",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/second_right_default_R1/plans/workspace_curve-aecbb354/plan.json",
+    "passed": true,
+    "scene_sha256": "f1c36eb9eb033256a40e79c41d920fdc690aa591add592dd994a884213ba8af4",
+    "state_sha256": "70b042859a594e6de1f82e5a58c8377d13ac10aaee2a7a249306174da0c2c599",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "abcbe3968fed74cc2d6d1fc169a45149cb4105889143a2a5c933a703573839c4",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.4509646046564266,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6397788113633862,
+      "interior_speed_p10_ratio": 0.8165590347777131,
+      "interior_speed_cv": 0.09263720278269377,
+      "peak_joint_speed_rad_s": 0.5993323962646625,
+      "cruise_joint_norm_rad_s": 0.9756128395866591,
+      "path_length_rad": 2.4853806957404183,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.45047903334605005,
+        0.18569111879862646,
+        0.4938351740794017,
+        0.5993323973671892,
+        0.33680616572067607,
+        0.4711498809163643,
+        0.2841143091132557
+      ],
+      [
+        1.1949562692655447,
+        0.5251947362043179,
+        1.0726109168943962,
+        1.197602897665466,
+        0.799410983114042,
+        1.1974982175848283,
+        0.6080207042798607
+      ],
+      [
+        5.980761724089889,
+        3.6796274490877874,
+        5.603798705693529,
+        5.981492165636102,
+        3.5876433719586176,
+        5.982035940089874,
+        3.43453256574875
+      ]
+    ],
+    "maximum_limit_fraction": 0.9988873289453154,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3552,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2968383194593171,
+          -0.15577414424355146,
+          -0.19489311389419178
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.05924630715538467,
+          -0.18675996116866353,
+          0.155400013127809
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "second_right_default_R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/second_right_default_R2/plans/workspace_curve-065fd0b2/plan.json",
+    "passed": true,
+    "scene_sha256": "f1c36eb9eb033256a40e79c41d920fdc690aa591add592dd994a884213ba8af4",
+    "state_sha256": "70b042859a594e6de1f82e5a58c8377d13ac10aaee2a7a249306174da0c2c599",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "03d79ade9ad4f1e90129c79e8fbe46c325cfbf61ae944093931b2d848df9e5af",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.6733431859672185,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.7420519929858974,
+      "interior_speed_p10_ratio": 0.8924112683753385,
+      "interior_speed_cv": 0.046483666900870524,
+      "peak_joint_speed_rad_s": 0.5991842414729067,
+      "cruise_joint_norm_rad_s": 0.8058570999376429,
+      "path_length_rad": 2.356749655983718,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.4879954122959916,
+        0.15616430571149253,
+        0.45243885528556665,
+        0.5991842535655152,
+        0.29148331088754215,
+        0.32720554227465637,
+        0.2922886956762307
+      ],
+      [
+        1.1976035952059936,
+        0.6499615765740375,
+        1.1733508991786312,
+        1.19684347620793,
+        0.7045065166231445,
+        0.9425649504615367,
+        0.6838446579507397
+      ],
+      [
+        5.980694802581772,
+        4.692415469726673,
+        5.974192167411123,
+        5.979153356798813,
+        3.536724534900203,
+        4.985488328727581,
+        3.7859238781347635
+      ]
+    ],
+    "maximum_limit_fraction": 0.9986404226091921,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3775,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2968383194593171,
+          -0.15577414424355146,
+          -0.19489311389419178
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.05924630715538467,
+          -0.18675996116866353,
+          0.155400013127809
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "reference_right_default_R1",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/reference_right_default_R1/plans/workspace_curve-178c5e1f/plan.json",
+    "passed": true,
+    "scene_sha256": "1a02beb520df6dcb6833700a0a77cc1f4a17e90167ce7d1bfbf8a70bc36c71fe",
+    "state_sha256": "e45c168f47ece2f0369e04802a472432c2b103f9dfc79615b73fc1bae12425b0",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "cd223e79a5198765d1d27f36caf8fa42d0aba0b0af1b37dc9cc44fd3b3addd54",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.6089936782898744,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.45453712766852106,
+      "interior_speed_p10_ratio": 0.5660081602052678,
+      "interior_speed_cv": 0.189618651096331,
+      "peak_joint_speed_rad_s": 0.5983531890348451,
+      "cruise_joint_norm_rad_s": 0.8842944984814205,
+      "path_length_rad": 2.192839325437365,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.4587114956628712,
+        0.19076907335308863,
+        0.11801446349426288,
+        0.5983533932120196,
+        0.04860154125414726,
+        0.2698882131198985,
+        0.43313412544030994
+      ],
+      [
+        1.19342928115762,
+        0.640818129857201,
+        0.41232307508408966,
+        1.1938369739835006,
+        0.16166124147707614,
+        0.5602035363548836,
+        1.195768371354462
+      ],
+      [
+        5.982035940089872,
+        3.4564138103538173,
+        2.0787521855601803,
+        5.959344331780751,
+        0.89165436014278,
+        3.593382304773676,
+        5.9638257781626285
+      ]
+    ],
+    "maximum_limit_fraction": 0.9972556553533661,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3710,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.29672792128147585,
+          -0.21015192801382826,
+          -0.19277395750085893
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.05502814739648133,
+          -0.18626186858884605,
+          0.15525742666530118
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "reference_right_default_R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_primary/reference_right_default_R2/plans/workspace_curve-f202568a/plan.json",
+    "passed": true,
+    "scene_sha256": "1a02beb520df6dcb6833700a0a77cc1f4a17e90167ce7d1bfbf8a70bc36c71fe",
+    "state_sha256": "e45c168f47ece2f0369e04802a472432c2b103f9dfc79615b73fc1bae12425b0",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "49602f9895ed7b475e4c94d660268ca1c73f013491c1b707a8062143a7e8a751",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.7770011001281234,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6055624603569928,
+      "interior_speed_p10_ratio": 0.7229467942828142,
+      "interior_speed_cv": 0.12256335044407865,
+      "peak_joint_speed_rad_s": 0.5988053619800688,
+      "cruise_joint_norm_rad_s": 0.7990733413198581,
+      "path_length_rad": 2.183720918733511,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.45721268321510355,
+        0.07043711502748567,
+        0.15168617433689066,
+        0.5988054789873906,
+        0.0717081442330626,
+        0.12960294025976415,
+        0.44311989908197935
+      ],
+      [
+        1.1969684524181623,
+        0.2330798508401275,
+        0.3798889283290933,
+        1.195736715202654,
+        0.1549031897059626,
+        0.23344900357377818,
+        1.122660012541064
+      ],
+      [
+        5.982035940089876,
+        1.129885783165266,
+        1.9912189030732617,
+        5.9662417239196595,
+        1.0132621370053765,
+        1.8148247399207944,
+        5.974610345312883
+      ]
+    ],
+    "maximum_limit_fraction": 0.998009131645651,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3879,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.29672792128147585,
+          -0.21015192801382826,
+          -0.19277395750085893
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.05502814739648133,
+          -0.18626186858884605,
+          0.15525742666530118
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R1_R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R1_R2/plans/workspace_curve-b914666d/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "423409e6793c07287f641470a812c28f0de8ac4ff185cf274edaa4cc9435e4c6",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 1.6569837468707658,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4235535443041031,
+      "interior_speed_p10_ratio": 0.5363643556004248,
+      "interior_speed_cv": 0.22302052422783045,
+      "peak_joint_speed_rad_s": 0.5372263391613749,
+      "cruise_joint_norm_rad_s": 0.7240330085742052,
+      "path_length_rad": 0.6503856894403536,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.23582903862143834,
+        0.05879347993548418,
+        0.07451998351829071,
+        0.19329388758696456,
+        0.21915124978148784,
+        0.5372264008284884,
+        0.32169445155847787
+      ],
+      [
+        0.6387780248724007,
+        0.14692093376577697,
+        0.21005774896679802,
+        0.5010814155619615,
+        0.5210455957111922,
+        1.1913230420583392,
+        0.7436337154118803
+      ],
+      [
+        5.979305684287366,
+        2.567416738695683,
+        5.933745670776276,
+        4.2673214566200075,
+        5.528198243398338,
+        5.982035940089887,
+        5.308689956284685
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149811,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 1758,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R2_R1",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R2_R1/plans/workspace_curve-6316a2dc/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "e4c78fc44fcb031d2021303db29d9e13a8a039462ec129d09d60c2ef31a98aa8",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 1.6569837309124542,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4235535601616651,
+      "interior_speed_p10_ratio": 0.5363643813067567,
+      "interior_speed_cv": 0.22302049706086935,
+      "peak_joint_speed_rad_s": 0.5372263252108056,
+      "cruise_joint_norm_rad_s": 0.7240329933334637,
+      "path_length_rad": 0.6503856894403601,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.2358290349663127,
+        0.05879347797962327,
+        0.07451998033365678,
+        0.1932938833858895,
+        0.21915124357338234,
+        0.5372263868894859,
+        0.32169444356860005
+      ],
+      [
+        0.6387780195983169,
+        0.14692093766073697,
+        0.21005775413316863,
+        0.5010814117747606,
+        0.521045609556094,
+        1.1913230655413982,
+        0.7436337122155439
+      ],
+      [
+        5.979305931878585,
+        2.567416850034657,
+        5.933745946252931,
+        4.267321528569982,
+        5.5281985899118204,
+        5.982035940089858,
+        5.3086893551672825
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149764,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 1758,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_default_R1-R2/plans/workspace_curve-177b181c/checkpoint_1/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "2d80323d70ba8de94091b552a7f8781539efffc8ade5d58ca5c7cde856764404",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.3703120806253355,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6128614885159095,
+      "interior_speed_p10_ratio": 0.7854254340805961,
+      "interior_speed_cv": 0.1055698762547104,
+      "peak_joint_speed_rad_s": 0.5992387128245324,
+      "cruise_joint_norm_rad_s": 1.0444884276381323,
+      "path_length_rad": 2.5583637717077226,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.495884104744854,
+        0.19076731979707995,
+        0.5555208569460961,
+        0.5992387328316519,
+        0.4840195179058087,
+        0.3172502446821574,
+        0.3091426753335882
+      ],
+      [
+        1.1971495272533148,
+        0.4540522091520473,
+        1.1972305901652072,
+        1.1976035952059925,
+        1.1970895381997912,
+        0.9246274060914096,
+        0.6643671434784167
+      ],
+      [
+        5.979770307345348,
+        2.8672685240757665,
+        5.979751946854763,
+        5.9807256421427955,
+        5.976680408152243,
+        5.976668494314466,
+        3.3983672761892243
+      ]
+    ],
+    "maximum_limit_fraction": 0.9987312213860865,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3472,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2980521649128831,
+          -0.2215991668909887,
+          -0.20726293693713857
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.07608757590932558,
+          -0.2042771884192988,
+          0.15404998878004098
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_default_R1-R2/plans/workspace_curve-177b181c/checkpoint_2/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "a8fe96976e086687e706d00ac6de129095e7f44ebcbd735e00c47abc60ab573c",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 1.6569837468707658,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4235535443041031,
+      "interior_speed_p10_ratio": 0.5363643556004248,
+      "interior_speed_cv": 0.22302052422783045,
+      "peak_joint_speed_rad_s": 0.5372263391613749,
+      "cruise_joint_norm_rad_s": 0.7240330085742052,
+      "path_length_rad": 0.6503856894403536,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.23582903862143834,
+        0.05879347993548418,
+        0.07451998351829071,
+        0.19329388758696456,
+        0.21915124978148784,
+        0.5372264008284884,
+        0.32169445155847787
+      ],
+      [
+        0.6387780248724007,
+        0.14692093376577697,
+        0.21005774896679802,
+        0.5010814155619615,
+        0.5210455957111922,
+        1.1913230420583392,
+        0.7436337154118803
+      ],
+      [
+        5.979305684287366,
+        2.567416738695683,
+        5.933745670776276,
+        4.2673214566200075,
+        5.528198243398338,
+        5.982035940089887,
+        5.308689956284685
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149811,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 1758,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_default_R1-R2/plans/workspace_curve-177b181c/return_to_start/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "50b4653a72b1236402d097d9520eb6538f2a5129316f169fe443a9ad33649c85",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.3433213888919684,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6099502623241302,
+      "interior_speed_p10_ratio": 0.7351265722914697,
+      "interior_speed_cv": 0.12356786175217316,
+      "peak_joint_speed_rad_s": 0.5991319598227286,
+      "cruise_joint_norm_rad_s": 0.9336343214757188,
+      "path_length_rad": 2.301580356731166,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.30624351905317454,
+        0.19003215777191115,
+        0.48970046869922407,
+        0.5991320735081295,
+        0.4300522819331997,
+        0.429483544324627,
+        0.33373333855132087
+      ],
+      [
+        0.6119432617059416,
+        0.48091841959029086,
+        1.0921246312104524,
+        1.1970745570306431,
+        0.5268619471057664,
+        1.1970544434353518,
+        0.8642582180428579
+      ],
+      [
+        3.0470504721977867,
+        3.235118681229292,
+        5.69875729223479,
+        5.976633537646295,
+        4.46297528986195,
+        5.982035940089877,
+        5.036540353792547
+      ]
+    ],
+    "maximum_limit_fraction": 0.9985534558468825,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3445,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ],
+        [
+          0.2980521649128831,
+          -0.2215991668909887,
+          -0.20726293693713857
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ],
+        [
+          0.07608757590932558,
+          -0.2042771884192988,
+          0.15404998878004098
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "second_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/second_right_default_R1-R2/plans/workspace_curve-76442c8f/checkpoint_1/plan.json",
+    "passed": true,
+    "scene_sha256": "f1c36eb9eb033256a40e79c41d920fdc690aa591add592dd994a884213ba8af4",
+    "state_sha256": "70b042859a594e6de1f82e5a58c8377d13ac10aaee2a7a249306174da0c2c599",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "1cf8e4a1918fef498f7073049b5f4dc58c5b3df5602c2eeb6d7f5c05ed9d584d",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.4509646046564266,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6397788113633862,
+      "interior_speed_p10_ratio": 0.8165590347777131,
+      "interior_speed_cv": 0.09263720278269377,
+      "peak_joint_speed_rad_s": 0.5993323962646625,
+      "cruise_joint_norm_rad_s": 0.9756128395866591,
+      "path_length_rad": 2.4853806957404183,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.45047903334605005,
+        0.18569111879862646,
+        0.4938351740794017,
+        0.5993323973671892,
+        0.33680616572067607,
+        0.4711498809163643,
+        0.2841143091132557
+      ],
+      [
+        1.1949562692655447,
+        0.5251947362043179,
+        1.0726109168943962,
+        1.197602897665466,
+        0.799410983114042,
+        1.1974982175848283,
+        0.6080207042798607
+      ],
+      [
+        5.980761724089889,
+        3.6796274490877874,
+        5.603798705693529,
+        5.981492165636102,
+        3.5876433719586176,
+        5.982035940089874,
+        3.43453256574875
+      ]
+    ],
+    "maximum_limit_fraction": 0.9988873289453154,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3552,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.2968383194593171,
+          -0.15577414424355146,
+          -0.19489311389419178
+        ],
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.05924630715538467,
+          -0.18675996116866353,
+          0.155400013127809
+        ],
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "second_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/second_right_default_R1-R2/plans/workspace_curve-76442c8f/checkpoint_2/plan.json",
+    "passed": true,
+    "scene_sha256": "f1c36eb9eb033256a40e79c41d920fdc690aa591add592dd994a884213ba8af4",
+    "state_sha256": "70b042859a594e6de1f82e5a58c8377d13ac10aaee2a7a249306174da0c2c599",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "7b86f33d922358e00f523384c9c846d027886faa2531d4f8f43989ff68296b5f",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 1.6569837468707658,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.4235535443041031,
+      "interior_speed_p10_ratio": 0.5363643556004248,
+      "interior_speed_cv": 0.22302052422783045,
+      "peak_joint_speed_rad_s": 0.5372263391613749,
+      "cruise_joint_norm_rad_s": 0.7240330085742052,
+      "path_length_rad": 0.6503856894403536,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.23582903862143834,
+        0.05879347993548418,
+        0.07451998351829071,
+        0.19329388758696456,
+        0.21915124978148784,
+        0.5372264008284884,
+        0.32169445155847787
+      ],
+      [
+        0.6387780248724007,
+        0.14692093376577697,
+        0.21005774896679802,
+        0.5010814155619615,
+        0.5210455957111922,
+        1.1913230420583392,
+        0.7436337154118803
+      ],
+      [
+        5.979305684287366,
+        2.567416738695683,
+        5.933745670776276,
+        4.2673214566200075,
+        5.528198243398338,
+        5.982035940089887,
+        5.308689956284685
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149811,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 1758,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.5194560798039054,
+          -0.3701450154261489,
+          0.4972873579459726
+        ],
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.14963078201636532,
+          -0.17917019742856835,
+          0.4143824243946562
+        ],
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "second_right_default_R1-R2",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/second_right_default_R1-R2/plans/workspace_curve-76442c8f/return_to_start/plan.json",
+    "passed": true,
+    "scene_sha256": "f1c36eb9eb033256a40e79c41d920fdc690aa591add592dd994a884213ba8af4",
+    "state_sha256": "70b042859a594e6de1f82e5a58c8377d13ac10aaee2a7a249306174da0c2c599",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "f9c60c27cbd2e0e5e6f5aaa55b0b8561f8235d4d7835baad172ab8bf628ab0e7",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.673342920549228,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.7420519658792422,
+      "interior_speed_p10_ratio": 0.8924112325826057,
+      "interior_speed_cv": 0.0464836600113418,
+      "peak_joint_speed_rad_s": 0.599184304018031,
+      "cruise_joint_norm_rad_s": 0.8058572133470211,
+      "path_length_rad": 2.356749655983518,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.4879954278258217,
+        0.15616431411528844,
+        0.4524388685696325,
+        0.5991843161221132,
+        0.2914833237824856,
+        0.32720554832806087,
+        0.29228869675467023
+      ],
+      [
+        1.197603595205993,
+        0.6499616805929975,
+        1.1733512038091884,
+        1.1968437125535185,
+        0.7045067030820384,
+        0.9425651871470963,
+        0.6838445501753859
+      ],
+      [
+        5.980696150520824,
+        4.692419133664871,
+        5.974193927996537,
+        5.979147320473653,
+        3.5367253701939836,
+        4.985497964686234,
+        3.785905203828951
+      ]
+    ],
+    "maximum_limit_fraction": 0.9986405268701887,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3775,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.6295272000476773,
+          -0.09191518794273525,
+          0.37176872328147526
+        ],
+        [
+          0.2968383194593171,
+          -0.15577414424355146,
+          -0.19489311389419178
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.20638277859003853,
+          -0.12442244838394613,
+          0.374495737745571
+        ],
+        [
+          0.05924630715538467,
+          -0.18675996116866353,
+          0.155400013127809
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "reference_left_L1_L_near",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/reference_left_L1_L_near/plans/workspace_curve-73a40de2/plan.json",
+    "passed": true,
+    "scene_sha256": "1a02beb520df6dcb6833700a0a77cc1f4a17e90167ce7d1bfbf8a70bc36c71fe",
+    "state_sha256": "e45c168f47ece2f0369e04802a472432c2b103f9dfc79615b73fc1bae12425b0",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "d3e01d00b19e07bee27699fcb2fa61bf22973cc95ec0e7b7bc6b444d3fa8fd0b",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 0.4593373971066212,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.36507317814355006,
+      "interior_speed_p10_ratio": 0.4758421130472873,
+      "interior_speed_cv": 0.24622560957723122,
+      "peak_joint_speed_rad_s": 0.07525398089476815,
+      "cruise_joint_norm_rad_s": 0.07475863782622165,
+      "path_length_rad": 0.01745333458723594,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        2.6498469981291792e-05,
+        1.808347777873022e-05,
+        7.654232602461868e-06,
+        4.507548209650556e-05,
+        3.746406745562108e-06,
+        0.07525398100949986,
+        0.00014762136033138237
+      ],
+      [
+        0.0008288695088856059,
+        0.0005446866895003018,
+        0.0002584840563482716,
+        0.0013763451650605969,
+        0.00014128267425206787,
+        0.6364149758640721,
+        0.004563615549847987
+      ],
+      [
+        0.15852770594197235,
+        0.08802520559747691,
+        0.05172152779768057,
+        0.24227794064048191,
+        0.030832949465753778,
+        5.982035940089889,
+        0.8070772481933045
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149816,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 561,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.39902228657761385,
+          0.20028414806451045,
+          0.21058988569531484
+        ],
+        [
+          0.3985781322081119,
+          0.20162400024462201,
+          0.20447244708424545
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.06456509127951218,
+          0.3253193315003611,
+          0.2184992103498355
+        ],
+        [
+          0.06393156999216046,
+          0.32561052655541034,
+          0.21850774866381753
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_left_L1_L_near",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_left_L1_L_near/plans/workspace_curve-203769e1/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "1e3c5570f7041f7c623c26e24122137c27f1f48b5948b102b6a4757dce3f4045",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 0.4593373971066212,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.36507317814355006,
+      "interior_speed_p10_ratio": 0.4758421130472873,
+      "interior_speed_cv": 0.24622560957723122,
+      "peak_joint_speed_rad_s": 0.07525398089476815,
+      "cruise_joint_norm_rad_s": 0.07475863782622165,
+      "path_length_rad": 0.01745333458723594,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        2.6498469981291792e-05,
+        1.808347777873022e-05,
+        7.654232602461868e-06,
+        4.507548209650556e-05,
+        3.746406745562108e-06,
+        0.07525398100949986,
+        0.00014762136033138237
+      ],
+      [
+        0.0008288695088856059,
+        0.0005446866895003018,
+        0.0002584840563482716,
+        0.0013763451650605969,
+        0.00014128267425206787,
+        0.6364149758640721,
+        0.004563615549847987
+      ],
+      [
+        0.15852770594197235,
+        0.08802520559747691,
+        0.05172152779768057,
+        0.24227794064048191,
+        0.030832949465753778,
+        5.982035940089889,
+        0.8070772481933045
+      ]
+    ],
+    "maximum_limit_fraction": 0.9970059900149816,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 561,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.39902228657761385,
+          0.20028414806451045,
+          0.21058988569531484
+        ],
+        [
+          0.3985781322081119,
+          0.20162400024462201,
+          0.20447244708424545
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.06456509127951218,
+          0.3253193315003611,
+          0.2184992103498355
+        ],
+        [
+          0.06393156999216046,
+          0.32561052655541034,
+          0.21850774866381753
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R1_start_minus_R1_goal_minus",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R1_start_minus_R1_goal_minus/plans/workspace_curve-5abd3c6a/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "6769c13d8bb9ac68c1a2f055007e085e2e25e668dac3ce771ff588b7b899c974",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.3691763644780375,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6055444906748946,
+      "interior_speed_p10_ratio": 0.7785104967664711,
+      "interior_speed_cv": 0.10921865429494065,
+      "peak_joint_speed_rad_s": 0.5992531641121285,
+      "cruise_joint_norm_rad_s": 1.0502425226118468,
+      "path_length_rad": 2.5559944561027708,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.4942467962271299,
+        0.18899607603375185,
+        0.5684507957985733,
+        0.5992531642385774,
+        0.4855325414496376,
+        0.3164495252965571,
+        0.308457703898485
+      ],
+      [
+        1.197022766322066,
+        0.44226219625231145,
+        1.1972963236404939,
+        1.1976035952059927,
+        1.19711821342871,
+        0.9186594625452823,
+        0.651935505175762
+      ],
+      [
+        5.981441957415262,
+        2.828306587235027,
+        5.980681473342198,
+        5.981471095820437,
+        5.977170499246023,
+        5.977068915525368,
+        3.3418703757843757
+      ]
+    ],
+    "maximum_limit_fraction": 0.9987552737309624,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3471,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.28870419917473594,
+          -0.21376838174931273,
+          -0.21156763570863527
+        ],
+        [
+          0.5183409111310436,
+          -0.3680040757273427,
+          0.4891014206497973
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.07171009693608005,
+          -0.1999224469148283,
+          0.15290075754680055
+        ],
+        [
+          0.14740599342596544,
+          -0.17677428624539315,
+          0.4119404561546837
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R2_start_minus_R2_goal_minus",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R2_start_minus_R2_goal_minus/plans/workspace_curve-4121ffd5/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "0f5816cc04991dd3bd1ead8882c5df2b14e085fc5b2797b4ae9acc45e6e34137",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.342904016721265,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6065794711468411,
+      "interior_speed_p10_ratio": 0.7299020973310767,
+      "interior_speed_cv": 0.12492773227402029,
+      "peak_joint_speed_rad_s": 0.5991319834293733,
+      "cruise_joint_norm_rad_s": 0.9376777124867667,
+      "path_length_rad": 2.302108345935154,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.30784904286267223,
+        0.18738802599675813,
+        0.4971374705974147,
+        0.5991320111513915,
+        0.43051687306326136,
+        0.42934156266325485,
+        0.3355545107281425
+      ],
+      [
+        0.6164030260784918,
+        0.4761727774382295,
+        1.1108533164739975,
+        1.19707675765723,
+        0.5271310657558432,
+        1.197058232520417,
+        0.8685519267350269
+      ],
+      [
+        3.0749804823097557,
+        3.2453284837893612,
+        5.8041080611406795,
+        5.976536912356563,
+        4.473254178144926,
+        5.982035940089871,
+        5.055957542779388
+      ]
+    ],
+    "maximum_limit_fraction": 0.9985533519189859,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3444,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.28870419917473594,
+          -0.21376838174931273,
+          -0.21156763570863527
+        ],
+        [
+          0.6266961623945834,
+          -0.08882028037543988,
+          0.363165273500735
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.07171009693608005,
+          -0.1999224469148283,
+          0.15290075754680055
+        ],
+        [
+          0.20366423332376493,
+          -0.121768071212419,
+          0.3717553879111905
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R1_start_plus_R1_goal_plus",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R1_start_plus_R1_goal_plus/plans/workspace_curve-70098ceb/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "f9ee0d098c1a73a7decfe2b60e1d5736c3654aabd1e5b31ff6449f6e251d83c3",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.371967115187368,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.6203393829550792,
+      "interior_speed_p10_ratio": 0.7925345354053182,
+      "interior_speed_cv": 0.1017852224284964,
+      "peak_joint_speed_rad_s": 0.5992346859510966,
+      "cruise_joint_norm_rad_s": 1.0384922989450858,
+      "path_length_rad": 2.5610768722706694,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.49728422334621236,
+        0.19235683920970187,
+        0.5419411161624228,
+        0.5992346947830851,
+        0.48283664820697575,
+        0.31883748595459627,
+        0.3099192046039564
+      ],
+      [
+        1.197085565904968,
+        0.4676962472263487,
+        1.197180008619887,
+        1.196977458136583,
+        1.197142232917967,
+        0.9336319323815279,
+        0.6758772915581351
+      ],
+      [
+        5.979446652885532,
+        2.908370290190847,
+        5.982035940089878,
+        5.980766825204678,
+        5.976777920239834,
+        5.976763261778931,
+        3.4357261020525924
+      ]
+    ],
+    "maximum_limit_fraction": 0.9987244913051418,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3473,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.30733040532937983,
+          -0.22947105854726535,
+          -0.2027806842011209
+        ],
+        [
+          0.5204628830853493,
+          -0.3722423063060223,
+          0.5055202338885765
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.08043976806713984,
+          -0.20864371754472266,
+          0.15527269253131348
+        ],
+        [
+          0.15182790728170284,
+          -0.18154932215050018,
+          0.4168647185039887
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  },
+  {
+    "case": "incident_right_R2_start_plus_R2_goal_plus",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/workspace_routes_20261026/final_extra/incident_right_R2_start_plus_R2_goal_plus/plans/workspace_curve-abc80738/plan.json",
+    "passed": true,
+    "scene_sha256": "0991b428e0b4dc7fb5764d5a754fd6b767239a08cd55a6e706ae9784140421d6",
+    "state_sha256": "97e92377197f23e2bec9f382e6b7cdc9de93203a88537e25f8cf99d90c965a1b",
+    "calibration_sha256": "7b7ed0d43f35994dec53792f72eeef0b9659ed7452751f47b478bce4711c943d",
+    "request_sha256": "7b85caaf053a9984170bba48c2a9e7d596d371340926ea979f512ad7624bbf39",
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "quality": {
+      "duration_s": 3.5738046871198477,
+      "internal_stops": 0,
+      "deep_slowdowns": 0,
+      "stop_times_s": [],
+      "slowdown_times_s": [],
+      "interior_speed_min_ratio": 0.7042674156971582,
+      "interior_speed_p10_ratio": 0.9092584071006788,
+      "interior_speed_cv": 0.050428806690564446,
+      "peak_joint_speed_rad_s": 0.5992827058361178,
+      "cruise_joint_norm_rad_s": 0.876735863041805,
+      "path_length_rad": 2.412677597079801,
+      "endpoint_exclusion": "speed statistics: 5%; stop counting: 0.5% joint arc",
+      "definition": "joint-speed norm valleys; stops <5%, deep slowdowns <25% of interior 90th percentile; prominence >=15%"
+    },
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "peaks": [
+      [
+        0.44090692894259514,
+        0.17284986535722247,
+        0.5503855984320951,
+        0.5992827166148729,
+        0.4596931261424986,
+        0.2039943666240817,
+        0.2626808348255228
+      ],
+      [
+        1.197603595205993,
+        0.6446200295294918,
+        1.1974507026486993,
+        1.1972790818605485,
+        1.0270736290880376,
+        0.5481579351684811,
+        0.6709290763758268
+      ],
+      [
+        5.979952824710258,
+        4.432902847358418,
+        5.977634266014942,
+        5.981854834809789,
+        5.170268565208598,
+        3.0220954321139812,
+        3.610265667696218
+      ]
+    ],
+    "maximum_limit_fraction": 0.9988045276914548,
+    "check_spacing_s": 0.001,
+    "collision_zone": {
+      "samples_checked": 3675,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    },
+    "endpoints": {
+      "checks": 2,
+      "valid": [
+        true,
+        true
+      ]
+    },
+    "endpoint_fk": {
+      "checks": 2,
+      "tip_xyz_m": [
+        [
+          0.30733040532937983,
+          -0.22947105854726535,
+          -0.2027806842011209
+        ],
+        [
+          0.63224159225161,
+          -0.09498056402094357,
+          0.38044628180117107
+        ]
+      ],
+      "wrist_xyz_m": [
+        [
+          0.08043976806713984,
+          -0.20864371754472266,
+          0.15527269253131348
+        ],
+        [
+          0.20906791902806282,
+          -0.12706478210588018,
+          0.3772831756744926
+        ]
+      ]
+    },
+    "exact_endpoints": true,
+    "continuous_position_extrema": true,
+    "original_camera_mask": true,
+    "opposite_arm_unchanged": true,
+    "hardware_access": false
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "schema": "x5-experiment-motion-controls-study-v1",
+  "software_only": true,
+  "hardware_commands": 0,
+  "default_limits": {
+    "velocity_rad_s": 0.6,
+    "acceleration_rad_s2": 1.2,
+    "jerk_rad_s3": 6
+  },
+  "default_quality": "balanced",
+  "current_R1_R2": [
+    {
+      "quality": "fast",
+      "movement_s": 1.7649334886528185,
+      "cold_process_s": 8.133792853914201,
+      "timing_s": 1.9302064010407776
+    },
+    {
+      "quality": "balanced",
+      "movement_s": 1.656983746870765,
+      "cold_process_s": 9.635374694946222,
+      "timing_s": 3.458521521068178
+    },
+    {
+      "quality": "thorough",
+      "movement_s": 1.6467329678768035,
+      "cold_process_s": 11.089869679999538,
+      "timing_s": 4.803790916921571
+    }
+  ],
+  "thorough_vs_balanced": {
+    "saved_movement_s": 0.010250778993961651,
+    "extra_cold_calculation_s": 1.4544949850533158
+  },
+  "geometry_unchanged": true,
+  "calibration_unchanged": true,
+  "headless_cases": 12,
+  "headless_expected_outcomes_passed": 12,
+  "nonstationary_laws_independently_rechecked": 11,
+  "math_comparisons": 16,
+  "native_ui_sides_passed": [
+    "right",
+    "left"
+  ],
+  "regression": {
+    "passed": 258,
+    "deselected_historical_hash_fixtures": 5
+  },
+  "limitations": [
+    "Saved-input cold processes; live acquisition time is not measured.",
+    "CPU backend is intentional; no GPU discovery or result-cache reuse.",
+    "No hardware limits established and no physical execution.",
+    "No global-time-optimality guarantee.",
+    "Left saved-rest to L1 is blocked in the frozen scene; it was correctly rejected."
+  ],
+  "preservation": {
+    "snapshot_files": 3647,
+    "unchanged_files": 3634,
+    "authorized_modified_files": [
+      ".gitignore",
+      "AGENTS.md",
+      "DRUM_PLANNER_EXPERIMENTS.md",
+      "config/git_retained_artifacts.json",
+      "drum_planner/cli.py",
+      "drum_planner/experiment/app.py",
+      "drum_planner/experiment/fast.py",
+      "drum_planner/experiment/fast_config.py",
+      "drum_planner/timing/README.md",
+      "tests/test_checkpoint_performance.py",
+      "tests/test_experiment_checkpoints.py",
+      "tests/test_experiment_fast_timing.py",
+      "tests/test_planner_experiment.py"
+    ],
+    "unexpected_changes": []
+  }
+}

@@ -1,0 +1,2845 @@
+[
+  {
+    "case": "right_default",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 6.77966631797608,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "default",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_default"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_default/plans/workspace_curve-b931b0cc/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 3.6089936782898744,
+    "return_s": 3.6089936782898744,
+    "retiming": {
+      "correction_scale": 1.0028173719404063,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 852,
+          "duration_s": 3.673610397713539
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 3.609004918431712,
+          "accepted": true,
+          "correction_scale": 1.0028209364203637,
+          "elapsed_s": 0.47674111498054117,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.06460547928182692,
+          "best_duration_s": 3.609004918431712
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 3.6089936782898744,
+          "accepted": true,
+          "correction_scale": 1.0028173719404063,
+          "elapsed_s": 0.24201036896556616,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 1.1240141837731699e-05,
+          "best_duration_s": 3.6089936782898744
+        }
+      ],
+      "calculation_seconds": 0.957869241014123,
+      "uniform_duration_s": 8.275723309804262,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.4587114956628713,
+            0.19076907335308857,
+            0.11801446349426288,
+            0.5983533932120195,
+            0.04860154125414725,
+            0.2698882131198985,
+            0.43313412544030994
+          ],
+          [
+            1.1934292811576195,
+            0.6408181298572011,
+            0.4123230750840895,
+            1.1938369739835009,
+            0.1616612414770761,
+            0.5602035363548836,
+            1.195768371354462
+          ],
+          [
+            5.982035940089873,
+            3.456413810353818,
+            2.0787521855601807,
+            5.95934433178075,
+            0.8916543601427799,
+            3.5933823047736757,
+            5.963825778162626
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.7645191594381189,
+            0.31794845558848095,
+            0.19669077249043815,
+            0.9972556553533659,
+            0.08100256875691209,
+            0.4498136885331642,
+            0.7218902090671833
+          ],
+          [
+            0.994524400964683,
+            0.5340151082143343,
+            0.3436025625700746,
+            0.9948641449862508,
+            0.13471770123089677,
+            0.46683628029573637,
+            0.9964736427953851
+          ],
+          [
+            0.9970059900149789,
+            0.5760689683923029,
+            0.34645869759336345,
+            0.9932240552967917,
+            0.14860906002379665,
+            0.5988970507956126,
+            0.9939709630271043
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 4,
+            "derivative": "velocity_rad_s",
+            "peak": 0.5983533932120195,
+            "limit": 0.6,
+            "utilization": 0.9972556553533659
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089873,
+            "limit": 6.0,
+            "utilization": 0.9970059900149789
+          },
+          {
+            "joint": 7,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.195768371354462,
+            "limit": 1.2,
+            "utilization": 0.9964736427953851
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 balanced",
+      "cached": false,
+      "duration_s": 3.6089936782898744,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 1906,
+        "dense_peaks": [
+          [
+            0.4587114939506862,
+            0.19076904150866197,
+            0.11801446297512314,
+            0.5983530895545773,
+            0.048601530253930034,
+            0.269887242806534,
+            0.43313370217076796
+          ],
+          [
+            1.1934118615155587,
+            0.640813966569517,
+            0.4123106135236627,
+            1.1938289799397637,
+            0.16166066380205252,
+            0.5602022415367086,
+            1.195768350330798
+          ],
+          [
+            5.981036647222893,
+            3.4560986702225733,
+            2.078489977296271,
+            5.959340024009862,
+            0.8916543601427758,
+            3.5933823047736277,
+            5.963825604219213
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 1906,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.22863693803083152
+    }
+  },
+  {
+    "case": "right_fast",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 8.133792853914201,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "--timing-quality",
+      "fast",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_fast"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_fast/plans/workspace_curve-f15b6a82/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 1.7649334886528185,
+    "return_s": 1.7649334886528185,
+    "retiming": {
+      "correction_scale": 1.0029714713608564,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.1021122890524566,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        }
+      ],
+      "calculation_seconds": 1.9302064010407776,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.19831434559992814,
+            0.04900873344170294,
+            0.06329524272469414,
+            0.16055520885794272,
+            0.18062747099591428,
+            0.4411205613352739,
+            0.2642961220982508
+          ],
+          [
+            0.5600981717777945,
+            0.13344655087532778,
+            0.19056475776528145,
+            0.4393300315151195,
+            0.4732828266792409,
+            1.0824990910291652,
+            0.6518302424403603
+          ],
+          [
+            5.982035940089878,
+            2.512840256530315,
+            5.601327537093591,
+            3.495755366076254,
+            5.215455735169866,
+            5.822237699663639,
+            3.6404255019023504
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3305239093332136,
+            0.08168122240283823,
+            0.10549207120782357,
+            0.2675920147632379,
+            0.30104578499319046,
+            0.7352009355587898,
+            0.44049353683041803
+          ],
+          [
+            0.4667484764814955,
+            0.11120545906277315,
+            0.1588039648044012,
+            0.36610835959593296,
+            0.3944023555660341,
+            0.9020825758576377,
+            0.5431918687003002
+          ],
+          [
+            0.9970059900149796,
+            0.41880670942171916,
+            0.9335545895155986,
+            0.5826258943460424,
+            0.869242622528311,
+            0.9703729499439399,
+            0.6067375836503918
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.822237699663639,
+            "limit": 6.0,
+            "utilization": 0.9703729499439399
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.601327537093591,
+            "limit": 6.0,
+            "utilization": 0.9335545895155986
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 fast",
+      "cached": false,
+      "duration_s": 1.7649334886528185,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 983,
+        "dense_peaks": [
+          [
+            0.1983143256475199,
+            0.049008720401367806,
+            0.06329517138337028,
+            0.1605550106167107,
+            0.18062735772545466,
+            0.44112002025582325,
+            0.26429549087942633
+          ],
+          [
+            0.5600940296650437,
+            0.13344322301539596,
+            0.19056081061952354,
+            0.43932991570955277,
+            0.4732711795749905,
+            1.082497436694202,
+            0.6518161337606476
+          ],
+          [
+            5.97066427474134,
+            2.512840256530312,
+            5.5893263730023115,
+            3.49551904680184,
+            5.1971396346306715,
+            5.8221763145905365,
+            3.6403816652585266
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 983,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.09806160803418607
+    }
+  },
+  {
+    "case": "right_balanced",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 9.635374694946222,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced/plans/workspace_curve-c3597c10/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 1.656983746870765,
+    "return_s": 1.656983746870765,
+    "retiming": {
+      "correction_scale": 1.0037081268869679,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.1094825060572475,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.2441185580100864,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.26568490406498313,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10794974178205341,
+          "best_duration_s": 1.656983746870765
+        }
+      ],
+      "calculation_seconds": 3.458521521068178,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23582903862143834,
+            0.05879347993548417,
+            0.07451998351829069,
+            0.19329388758696456,
+            0.21915124978148787,
+            0.5372264008284884,
+            0.32169445155847787
+          ],
+          [
+            0.6387780248724008,
+            0.146920933765777,
+            0.21005774896679802,
+            0.5010814155619616,
+            0.5210455957111921,
+            1.1913230420583387,
+            0.7436337154118805
+          ],
+          [
+            5.979305684287385,
+            2.56741673869568,
+            5.933745670776271,
+            4.267321456620004,
+            5.528198243398332,
+            5.982035940089877,
+            5.308689956284682
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.39304839770239725,
+            0.09798913322580696,
+            0.12419997253048448,
+            0.3221564793116076,
+            0.36525208296914646,
+            0.8953773347141474,
+            0.5361574192641299
+          ],
+          [
+            0.5323150207270007,
+            0.12243411147148084,
+            0.17504812413899837,
+            0.4175678463016347,
+            0.43420466309266015,
+            0.9927692017152823,
+            0.6196947628432338
+          ],
+          [
+            0.9965509473812308,
+            0.4279027897826133,
+            0.9889576117960451,
+            0.7112202427700006,
+            0.9213663738997221,
+            0.9970059900149795,
+            0.8847816593807803
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089877,
+            "limit": 6.0,
+            "utilization": 0.9970059900149795
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.979305684287385,
+            "limit": 6.0,
+            "utilization": 0.9965509473812308
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1913230420583387,
+            "limit": 1.2,
+            "utilization": 0.9927692017152823
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 balanced",
+      "cached": false,
+      "duration_s": 1.656983746870765,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 930,
+        "dense_peaks": [
+          [
+            0.2358284880809124,
+            0.05879347778955026,
+            0.07451954292782065,
+            0.19329375119000494,
+            0.2191506364624628,
+            0.5372261374457383,
+            0.32169309580726424
+          ],
+          [
+            0.6387779929685684,
+            0.14691705698155033,
+            0.21005768507791628,
+            0.5010756761753764,
+            0.5210308856510383,
+            1.191320941672056,
+            0.7436336600985219
+          ],
+          [
+            5.979301577601129,
+            2.5674167386956794,
+            5.9337308825035455,
+            4.267321456619984,
+            5.525486706661457,
+            5.975050003240824,
+            5.308689956284688
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 930,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.09838220500387251
+    }
+  },
+  {
+    "case": "right_thorough",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 11.089869679999538,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "--timing-quality",
+      "thorough",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_thorough"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_thorough/plans/workspace_curve-b32ff980/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 1.6467329678768035,
+    "return_s": 1.6467329678768035,
+    "retiming": {
+      "correction_scale": 1.0021630618914534,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7893695874344373,
+          "accepted": true,
+          "correction_scale": 0.9999620037791802,
+          "elapsed_s": 1.0967926100129262,
+          "iterations": 81,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.2839226297032744,
+          "best_duration_s": 1.7893695874344373
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.2447518770350143,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.26267090905457735,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.1323858405636722,
+          "best_duration_s": 1.656983746870765
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1181,
+          "duration_s": 1.6467329678768035,
+          "accepted": true,
+          "correction_scale": 1.0021630618914534,
+          "elapsed_s": 1.3343845180934295,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.010250778993961651,
+          "best_duration_s": 1.6467329678768035
+        }
+      ],
+      "calculation_seconds": 4.803790916921571,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23919240467826094,
+            0.05933533102812452,
+            0.07508767381302274,
+            0.195662951925901,
+            0.22140467165693603,
+            0.5430238177049284,
+            0.3252522113203493
+          ],
+          [
+            0.6415562333377436,
+            0.1473865227812883,
+            0.21076461408737351,
+            0.5031257969393984,
+            0.5226933785102522,
+            1.1952527138840285,
+            0.7461618334695864
+          ],
+          [
+            5.97213447222578,
+            2.6613532340201274,
+            5.961701547632451,
+            4.448448515136628,
+            5.663990647455988,
+            5.982035940089876,
+            5.399133132235494
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3986540077971016,
+            0.09889221838020754,
+            0.12514612302170458,
+            0.3261049198765017,
+            0.3690077860948934,
+            0.9050396961748807,
+            0.5420870188672489
+          ],
+          [
+            0.5346301944481197,
+            0.12282210231774025,
+            0.1756371784061446,
+            0.4192714974494987,
+            0.4355778154252102,
+            0.9960439282366905,
+            0.621801527891322
+          ],
+          [
+            0.9953557453709633,
+            0.4435588723366879,
+            0.9936169246054085,
+            0.7414080858561047,
+            0.9439984412426646,
+            0.9970059900149794,
+            0.8998555220392489
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1952527138840285,
+            "limit": 1.2,
+            "utilization": 0.9960439282366905
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.97213447222578,
+            "limit": 6.0,
+            "utilization": 0.9953557453709633
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 thorough",
+      "cached": false,
+      "duration_s": 1.6467329678768035,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 1021,
+        "dense_peaks": [
+          [
+            0.2391919934807073,
+            0.05933532849106558,
+            0.07508704932677657,
+            0.19566277629041653,
+            0.221404604976868,
+            0.5430232123941021,
+            0.32525213554605603
+          ],
+          [
+            0.6415432781338402,
+            0.14738648290579406,
+            0.2107615814459864,
+            0.5031241036391647,
+            0.5226929445437154,
+            1.1951842284640364,
+            0.7461539059175633
+          ],
+          [
+            5.972131989098806,
+            2.661353234020128,
+            5.95830642855411,
+            4.448448515135831,
+            5.650989071621846,
+            5.964134586261501,
+            5.399133132235477
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 1021,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.10463008098304272
+    }
+  },
+  {
+    "case": "right_reverse",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 10.838883964926936,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_reverse"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_reverse/plans/workspace_curve-93bc4b00/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 1.6569837309124522,
+    "return_s": 1.6569837309124522,
+    "retiming": {
+      "correction_scale": 1.0037081105971601,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_Iterations_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_Iterations_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 2.0550921307838115
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 8.603832124848775,
+          "accepted": false,
+          "correction_scale": 1.2792115979827194,
+          "elapsed_s": 1.0903071169741452,
+          "iterations": 90,
+          "status": "Maximum_Iterations_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 2.0550921307838115
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.6575574686019474,
+          "accepted": true,
+          "correction_scale": 1.0044978785614462,
+          "elapsed_s": 2.497176062082872,
+          "iterations": 204,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.6569837309124522,
+          "accepted": true,
+          "correction_scale": 1.0037081105971601,
+          "elapsed_s": 0.2705137348966673,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.39810839987135926,
+          "best_duration_s": 1.6569837309124522
+        }
+      ],
+      "calculation_seconds": 4.599482289981097,
+      "uniform_duration_s": 4.723240682997436,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.2358290349663127,
+            0.05879347797962327,
+            0.07451998033365678,
+            0.19329388338588954,
+            0.2191512435733823,
+            0.5372263868894859,
+            0.3216944435686
+          ],
+          [
+            0.6387780195983171,
+            0.14692093766073694,
+            0.2100577541331686,
+            0.5010814117747604,
+            0.5210456095560939,
+            1.1913230655413976,
+            0.7436337122155439
+          ],
+          [
+            5.979305931878595,
+            2.5674168500346566,
+            5.933745946252928,
+            4.267321528569986,
+            5.528198589911817,
+            5.982035940089878,
+            5.308689355167284
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3930483916105212,
+            0.09798912996603878,
+            0.1241999672227613,
+            0.3221564723098159,
+            0.36525207262230386,
+            0.8953773114824765,
+            0.5361574059476667
+          ],
+          [
+            0.532315016331931,
+            0.12243411471728079,
+            0.17504812844430717,
+            0.41756784314563367,
+            0.4342046746300783,
+            0.992769221284498,
+            0.6196947601796199
+          ],
+          [
+            0.9965509886464324,
+            0.42790280833910943,
+            0.9889576577088213,
+            0.7112202547616643,
+            0.9213664316519695,
+            0.9970059900149796,
+            0.8847815591945474
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.979305931878595,
+            "limit": 6.0,
+            "utilization": 0.9965509886464324
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1913230655413976,
+            "limit": 1.2,
+            "utilization": 0.992769221284498
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 balanced",
+      "cached": false,
+      "duration_s": 1.6569837309124522,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 930,
+        "dense_peaks": [
+          [
+            0.23582897901832037,
+            0.05879345352014608,
+            0.07451991967644975,
+            0.19329387019803382,
+            0.21915124349251175,
+            0.5372248808385982,
+            0.32169435296086457
+          ],
+          [
+            0.6387700396282245,
+            0.14691739864052866,
+            0.21003873866287315,
+            0.501081411459032,
+            0.5210339498596392,
+            1.1913011641881022,
+            0.7436295086686702
+          ],
+          [
+            5.9417149167414784,
+            2.567416850034665,
+            5.912449961814255,
+            4.267321528569088,
+            5.509416657974195,
+            5.979304740988908,
+            5.308689355167292
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 930,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.09714196703862399
+    }
+  },
+  {
+    "case": "right_stationary",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 2.670425124000758,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_stationary"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_stationary/plans/workspace_curve-f2e88726/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 0.0,
+    "return_s": 0.0,
+    "retiming": {
+      "actual_backend": "analytic_cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "No movement \u2014 start equals target; checked hold only",
+      "selected_stage": "stationary",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [],
+      "calculation_seconds": 0.0,
+      "timing_quality": "balanced",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          },
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          },
+          {
+            "joint": 5,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "method": "experiment_stationary",
+      "gpu_used": false,
+      "label": "No movement \u2014 start equals target; checked hold only",
+      "cached": false,
+      "duration_s": 0.0,
+      "verification": {
+        "geometry": {
+          "type": "identical stationary pose; zero movement duration",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 1,
+        "dense_peaks": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 1,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.004201753996312618
+    }
+  },
+  {
+    "case": "right_sequence_custom",
+    "side": "right",
+    "returncode": 0,
+    "cold_process_s": 12.742120011011139,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_sequence_custom",
+      "--motion-profile",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/right_distal.json"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_sequence_custom/plans/workspace_curve-c3f88b2c/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 2.7103138553371995,
+    "return_s": 0.0,
+    "retiming": {
+      "actual_backends": [
+        "analytic_cpu",
+        "cpu"
+      ],
+      "requested_backend": "cpu_sparse",
+      "fallback_used": false,
+      "label": "CPU sparse timing \u2014 balanced; 2 s at every checkpoint",
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.28936472125812956,
+            0.07079868084036271,
+            0.08685269366193389,
+            0.23707528258983335,
+            0.2661581964804789,
+            0.6538515618583477,
+            0.3922323715699492
+          ],
+          [
+            1.084809552784448,
+            0.29857968496998744,
+            0.4269778349976245,
+            0.8510158395464086,
+            1.058884983079248,
+            2.4205174793793014,
+            1.3289821643103292
+          ],
+          [
+            5.982035940089878,
+            5.939991919953952,
+            5.9510027617293275,
+            5.94143628781207,
+            10.633609683236228,
+            24.65596576727558,
+            13.868346852276991
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            1.2,
+            2.4,
+            2.4
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            4.8,
+            19.2,
+            19.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            48.0,
+            384.0,
+            384.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.482274535430216,
+            0.11799780140060452,
+            0.1447544894365565,
+            0.3951254709830556,
+            0.22179849706706575,
+            0.27243815077431155,
+            0.1634301548208122
+          ],
+          [
+            0.9040079606537066,
+            0.2488164041416562,
+            0.3558148624980204,
+            0.7091798662886738,
+            0.22060103814151,
+            0.12606861871767194,
+            0.06921782105782966
+          ],
+          [
+            0.9970059900149796,
+            0.9899986533256587,
+            0.9918337936215545,
+            0.9902393813020116,
+            0.22153353506742143,
+            0.06420824418561348,
+            0.03611548659447133
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.9510027617293275,
+            "limit": 6.0,
+            "utilization": 0.9918337936215545
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.94143628781207,
+            "limit": 6.0,
+            "utilization": 0.9902393813020116
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      }
+    }
+  },
+  {
+    "case": "left_stationary",
+    "side": "left",
+    "returncode": 0,
+    "cold_process_s": 2.7706408289959654,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--left",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_stationary"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_stationary/plans/workspace_curve-1114d7ae/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 0.0,
+    "return_s": 0.0,
+    "retiming": {
+      "actual_backend": "analytic_cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "No movement \u2014 start equals target; checked hold only",
+      "selected_stage": "stationary",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [],
+      "calculation_seconds": 0.0,
+      "timing_quality": "balanced",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          },
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          },
+          {
+            "joint": 5,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.0,
+            "limit": 6.0,
+            "utilization": 0.0
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "method": "experiment_stationary",
+      "gpu_used": false,
+      "label": "No movement \u2014 start equals target; checked hold only",
+      "cached": false,
+      "duration_s": 0.0,
+      "verification": {
+        "geometry": {
+          "type": "identical stationary pose; zero movement duration",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 1,
+        "dense_peaks": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 1,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.0063373580342158675
+    }
+  },
+  {
+    "case": "left_near",
+    "side": "left",
+    "returncode": 0,
+    "cold_process_s": 8.180392857058905,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--left",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L_near.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near/plans/workspace_curve-371ea646/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 0.45933739710662114,
+    "return_s": 0.45933739710662114,
+    "retiming": {
+      "correction_scale": 1.0043273803924557,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1500,
+          "duration_s": 0.6190320214696573
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 0.4610618209932786,
+          "accepted": true,
+          "correction_scale": 1.0081714942236566,
+          "elapsed_s": 0.392294422024861,
+          "iterations": 22,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 430,
+          "duration_s": 0.4605251274098033,
+          "accepted": true,
+          "correction_scale": 1.006959017063335,
+          "elapsed_s": 0.23843298701103777,
+          "iterations": 13,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.15850689405985402,
+          "best_duration_s": 0.4605251274098033
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 430,
+          "duration_s": 0.4605250314383922,
+          "accepted": true,
+          "correction_scale": 1.0069587127401503,
+          "elapsed_s": 0.3843985330313444,
+          "iterations": 26,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 472,
+          "duration_s": 0.45933739710662114,
+          "accepted": true,
+          "correction_scale": 1.0043273803924557,
+          "elapsed_s": 0.28931493195705116,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.001187730303182144,
+          "best_duration_s": 0.45933739710662114
+        }
+      ],
+      "calculation_seconds": 1.9098656739806756,
+      "uniform_duration_s": 1.5352909634198337,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            2.6498469981291792e-05,
+            1.808347777873022e-05,
+            7.654232602461867e-06,
+            4.5075482096505564e-05,
+            3.746406745562108e-06,
+            0.07525398100949986,
+            0.00014762136033138234
+          ],
+          [
+            0.0008288695088856057,
+            0.0005446866895003016,
+            0.00025848405634827166,
+            0.0013763451650605973,
+            0.0001412826742520679,
+            0.6364149758640724,
+            0.0045636155498479875
+          ],
+          [
+            0.15852770594197232,
+            0.08802520559747688,
+            0.05172152779768059,
+            0.24227794064048183,
+            0.03083294946575376,
+            5.982035940089876,
+            0.807077248193305
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            4.416411663548632e-05,
+            3.0139129631217037e-05,
+            1.2757054337436445e-05,
+            7.512580349417595e-05,
+            6.244011242603513e-06,
+            0.12542330168249977,
+            0.00024603560055230393
+          ],
+          [
+            0.0006907245907380048,
+            0.0004539055745835847,
+            0.0002154033802902264,
+            0.0011469543042171644,
+            0.00011773556187672325,
+            0.5303458132200604,
+            0.0038030129582066565
+          ],
+          [
+            0.026421284323662055,
+            0.01467086759957948,
+            0.008620254632946765,
+            0.04037965677341364,
+            0.00513882491095896,
+            0.9970059900149794,
+            0.13451287469888415
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 0.6364149758640724,
+            "limit": 1.2,
+            "utilization": 0.5303458132200604
+          },
+          {
+            "joint": 7,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.807077248193305,
+            "limit": 6.0,
+            "utilization": 0.13451287469888415
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 balanced",
+      "cached": false,
+      "duration_s": 0.45933739710662114,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 331,
+        "dense_peaks": [
+          [
+            2.6492505732186506e-05,
+            1.8082190089728335e-05,
+            7.653519186771418e-06,
+            4.507546979178917e-05,
+            3.746117430081078e-06,
+            0.07525398002861607,
+            0.00014761975214132276
+          ],
+          [
+            0.0008254964560479583,
+            0.0005367383312755527,
+            0.00025830648819437493,
+            0.0013647914409775689,
+            0.00014128265241452947,
+            0.6362903092706882,
+            0.004515345778879271
+          ],
+          [
+            0.15819097617420647,
+            0.08800726755645741,
+            0.05170934916565162,
+            0.24170198284979436,
+            0.030763963740618454,
+            5.953839333116229,
+            0.8019616817036855
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 331,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.04532376804854721
+    }
+  },
+  {
+    "case": "left_near_custom",
+    "side": "left",
+    "returncode": 0,
+    "cold_process_s": 10.335916840936989,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--left",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L_near.json",
+      "--timing-quality",
+      "thorough",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near_custom",
+      "--motion-profile",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/left_unequal.json"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near_custom/plans/workspace_curve-59ef9305/plan.json",
+    "status": "planned",
+    "passed": true,
+    "movement_s": 0.30368523449539087,
+    "return_s": 0.30368523449539087,
+    "retiming": {
+      "correction_scale": 1.0029890678296667,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 0.41737281696082745
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 0.30737456915780204,
+          "accepted": true,
+          "correction_scale": 1.0081715948564303,
+          "elapsed_s": 0.43152763799298555,
+          "iterations": 25,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 430,
+          "duration_s": 0.3070170220405552,
+          "accepted": true,
+          "correction_scale": 1.0069602504553077,
+          "elapsed_s": 0.267037489102222,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.11035579492027225,
+          "best_duration_s": 0.3070170220405552
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 430,
+          "duration_s": 0.30701695372213755,
+          "accepted": true,
+          "correction_scale": 1.0069599333025485,
+          "elapsed_s": 0.5111530519789085,
+          "iterations": 37,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 472,
+          "duration_s": 0.30622480666915897,
+          "accepted": true,
+          "correction_scale": 1.0043269785742746,
+          "elapsed_s": 0.28642475500237197,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0007922153713962321,
+          "best_duration_s": 0.30622480666915897
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1226,
+          "duration_s": 0.30368523449539087,
+          "accepted": true,
+          "correction_scale": 1.0029890678296667,
+          "elapsed_s": 1.9329978920286521,
+          "iterations": 43,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.002539572173768101,
+          "best_duration_s": 0.30368523449539087
+        }
+      ],
+      "calculation_seconds": 4.168261562939733,
+      "uniform_duration_s": 1.0235273089465557,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            4.032848593359478e-05,
+            2.7535145328770997e-05,
+            1.1645994515524852e-05,
+            6.861789148381454e-05,
+            5.697424847279271e-06,
+            0.11466321205810534,
+            0.0002247213515185862
+          ],
+          [
+            0.0019273679708132203,
+            0.0012673255805699555,
+            0.0006011815641166749,
+            0.0032010557640190264,
+            0.00032871725146861217,
+            1.495803966900244,
+            0.010614901621545419
+          ],
+          [
+            0.5630337780727989,
+            0.3143215565468079,
+            0.1837398205539413,
+            0.862489829775932,
+            0.10970013463990769,
+            20.18937129780334,
+            2.8727497322919415
+          ]
+        ],
+        "limits": [
+          [
+            0.48,
+            0.66,
+            0.54,
+            0.42,
+            0.84,
+            0.8999999999999999,
+            0.72
+          ],
+          [
+            0.7680000000000001,
+            1.4520000000000002,
+            0.972,
+            0.5879999999999999,
+            2.3519999999999994,
+            2.6999999999999997,
+            1.728
+          ],
+          [
+            3.072000000000001,
+            7.986000000000002,
+            4.3740000000000006,
+            2.0579999999999994,
+            16.463999999999995,
+            20.25,
+            10.367999999999999
+          ]
+        ],
+        "utilization": [
+          [
+            8.401767902832245e-05,
+            4.171991716480454e-05,
+            2.1566656510231205e-05,
+            0.00016337593210432035,
+            6.782648627713418e-06,
+            0.1274035689534504,
+            0.00031211298822025863
+          ],
+          [
+            0.0025095937119963803,
+            0.0008728137607231098,
+            0.0006184995515603652,
+            0.005443972387787461,
+            0.00013976073616862766,
+            0.5540014692223126,
+            0.006142882882838784
+          ],
+          [
+            0.1832792246330725,
+            0.03935907294600648,
+            0.042007274932313966,
+            0.4190912681126979,
+            0.0066630305296348225,
+            0.9970059900149798,
+            0.27707848498186166
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 20.18937129780334,
+            "limit": 20.25,
+            "utilization": 0.9970059900149798
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.495803966900244,
+            "limit": 2.6999999999999997,
+            "utilization": 0.5540014692223126
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 0.862489829775932,
+            "limit": 2.0579999999999994,
+            "utilization": 0.4190912681126979
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2",
+      "method": "experiment_per_joint_sparse_density",
+      "gpu_used": false,
+      "label": "CPU sparse timing \u2014 thorough",
+      "cached": false,
+      "duration_s": 0.30368523449539087,
+      "verification": {
+        "geometry": {
+          "type": "original spline coefficients bit-identical; positive monotone time density",
+          "max_error_rad": 0.0
+        },
+        "dense_samples": 349,
+        "dense_peaks": [
+          [
+            4.032840408491698e-05,
+            2.7534916037922e-05,
+            1.1645835304513746e-05,
+            6.858834947734482e-05,
+            5.695814908099284e-06,
+            0.11466321108053563,
+            0.00022467289716338824
+          ],
+          [
+            0.0019273173061978154,
+            0.001267002433668362,
+            0.0006004799559461999,
+            0.00318373394195153,
+            0.00032866397198712846,
+            1.4945660650995267,
+            0.01056714005435063
+          ],
+          [
+            0.5624922919414442,
+            0.3124782691495387,
+            0.1837371917837592,
+            0.862394495583107,
+            0.10933161588313903,
+            20.07478378297074,
+            2.862204225613641
+          ]
+        ],
+        "limits": [
+          [
+            0.48,
+            0.66,
+            0.54,
+            0.42,
+            0.84,
+            0.8999999999999999,
+            0.72
+          ],
+          [
+            0.7680000000000001,
+            1.4520000000000002,
+            0.972,
+            0.5879999999999999,
+            2.3519999999999994,
+            2.6999999999999997,
+            1.728
+          ],
+          [
+            3.072000000000001,
+            7.986000000000002,
+            4.3740000000000006,
+            2.0579999999999994,
+            16.463999999999995,
+            20.25,
+            10.367999999999999
+          ]
+        ],
+        "motor_commands": 0,
+        "collision_zone": {
+          "samples_checked": 349,
+          "edge_joint_l1_step_rad": 0.003,
+          "max_time_step_s": 0.002
+        }
+      },
+      "verification_elapsed_s": 0.04734923900105059
+    }
+  },
+  {
+    "case": "left_default_blocked",
+    "side": "left",
+    "returncode": 0,
+    "cold_process_s": 5.274753674981184,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--left",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--start",
+      "default",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--timing-quality",
+      "balanced",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_default_blocked"
+    ],
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_default_blocked/plans/workspace_curve-517351fd/plan.json",
+    "status": "no_feasible_route",
+    "passed": true,
+    "expected_blocked": true
+  }
+]

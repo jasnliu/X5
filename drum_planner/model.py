@@ -100,7 +100,7 @@ def stl_vertices(path):
     return np.frombuffer(data, dtype=dtype, count=n, offset=84)['vertices'].copy()
 
 
-def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right'):
+def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right', reference_right=None, both_tools=False):
     arm_side(moving_side)
     folder = Path(folder).resolve(); folder.mkdir(parents=True, exist_ok=True)
     cal = calibration(calibration_path)
@@ -132,8 +132,13 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right
                                   saved_coordinate_lower_rad=mapped_lower,
                                   saved_coordinate_upper_rad=mapped_upper)
 
+    # Measured-coordinate operating bounds are applied AFTER this transform.
+    # They narrow only right J2, never change FK/calibration or the left mode.
+    from . import joint_position_limits
+    joint_position_limits.apply(root,limit_mapping,moving_side,reference_right)
+
     assemblies = []
-    for arm in (('right', 'left') if moving_side == 'left' else ('right',)):
+    for arm in (('right', 'left') if moving_side == 'left' or both_tools else ('right',)):
         if arm == 'left':
             _left_traditional_tool(root, assemblies)
             continue
@@ -227,6 +232,9 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right
                 left_stick_geometry_verified=False, hardware_execution_available=False,
                 warning='STL bore assembly is checked mathematically. Mount plane/yaw and left stick require physical verification. '
                         'Mesh mounting is provisional, not a certified physical model.')
+    if moving_side == 'right':
+        info.update(joint_position_policy=joint_position_limits.policy(),
+            joint_limits_coordinate_rule='q_model = q_saved + offset; nominal saved limits = original model limits - offset; right J2 is additionally narrowed in encoder coordinates')
     if moving_side == 'left':
         info.update(moving_side='left', left_tool_geometry='traditional perpendicular grip; gripper2 STL pair; draft mounting',
                     left_kinematic_offsets_applied=False,
@@ -242,5 +250,8 @@ def generate(folder, calibration_path=DEFAULT_CALIBRATION, *, moving_side='right
                         closure='fixed CAD halves meeting at bore; no inferred motor-to-slider conversion',
                         mounting_physically_verified=False,
                         mounting_assumption='nominal 15 mm hand mount plane; draft hand +Y clocking selected for forward center / snare goal'))
+    if both_tools:
+        info['both_custom_tools_included']=True
+        info['left_stick_length_m']=LEFT_STICK_LENGTH
     atomic_json(folder / 'model_manifest.json', info)
     return info

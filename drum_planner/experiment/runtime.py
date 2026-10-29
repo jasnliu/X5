@@ -88,11 +88,36 @@ class Job:
 
 class Oracle:
     def __init__(self,request_path,folder):
-        self.log=(Path(folder)/'oracle.log').open('wb');self.buffer=b''
-        self.process=subprocess.Popen([str(build()),str(request_path)],stdin=subprocess.PIPE,
-                                      stdout=subprocess.PIPE,stderr=self.log,bufsize=0)
-        if self.receive(30).get('ready') is not True:raise RuntimeError('FCL oracle did not initialize')
-        self.meta=self.call('metadata');self.lower=self.meta['lower'];self.upper=self.meta['upper']
+        self.log_path=(Path(folder)/'oracle.log').resolve()
+        self.log=self.log_path.open('wb');self.buffer=b'';self.process=None
+        try:
+            self.check_start_bounds(request_path)
+            self.process=subprocess.Popen([str(build()),str(request_path)],stdin=subprocess.PIPE,
+                                          stdout=subprocess.PIPE,stderr=self.log,bufsize=0)
+            if self.receive(30).get('ready') is not True:raise RuntimeError('FCL oracle did not initialize')
+            self.meta=self.call('metadata');self.lower=self.meta['lower'];self.upper=self.meta['upper']
+        except BaseException as exc:
+            self.log.write((str(exc)+'\n').encode());self.log.flush()
+            self.close();raise
+
+    @staticmethod
+    def check_start_bounds(request_path):
+        """Explain invalid measured coordinates before an opaque native exit."""
+        import math,xml.etree.ElementTree as ET
+        from ..common import arm_joints
+        req=json.loads(Path(request_path).read_text());side=req.get('moving_side','right')
+        root=ET.parse(req['urdf']).getroot()
+        for field in ('scene_robot_start','start'):
+            if field not in req:continue
+            q=req[field]
+            if len(q)!=7:raise ValueError(f'{side} {field}: expected seven joint positions')
+            for name,value in zip(arm_joints(side),q):
+                limit=root.find(f"joint[@name='{name}']/limit")
+                lo,hi=float(limit.get('lower')),float(limit.get('upper'))
+                if not math.isfinite(value) or value<lo-1e-12 or value>hi+1e-12:
+                    raise ValueError(f'{side} {field}: {name} = {math.degrees(value):.6f} degrees, '
+                        f'outside model [{math.degrees(lo):.6f}, {math.degrees(hi):.6f}] degrees; '
+                        'measured pose NOT clipped. Recalculate with current rest/model.')
 
     def receive(self,timeout):
         started=time.monotonic();end=started+timeout;last_progress=started
@@ -111,7 +136,11 @@ class Oracle:
                 data=os.read(self.process.stdout.fileno(),65536)
                 if not data:
                     self.process.wait(timeout=3)
-                    raise RuntimeError(f'FCL worker exited ({self.process.returncode}); see oracle.log')
+                    if self.buffer:self.log.write(self.buffer);self.buffer=b''
+                    self.log.flush()
+                    with self.log_path.open('rb') as f:
+                        f.seek(max(0,self.log_path.stat().st_size-3000));detail=f.read().decode('utf-8',errors='replace').strip()
+                    raise RuntimeError(f'FCL worker exited ({self.process.returncode}): {detail or "No native diagnostic"}\nLog: {self.log_path}')
                 self.buffer+=data
                 if len(self.buffer)>32*1024*1024:raise RuntimeError('Oversized oracle reply')
 
@@ -129,8 +158,9 @@ class Oracle:
         return self.call('check',q=q.tolist() if hasattr(q,'tolist') else q,**kwargs)
 
     def close(self):
+        if self.process is None:self.log.close();return
         if self.process.poll() is None:
             self.process.stdin.close()
             try:self.process.wait(timeout=3)
             except subprocess.TimeoutExpired:self.process.kill();self.process.wait(timeout=3)
-        self.process.stdout.close();self.log.close()
+        self.process.stdin.close();self.process.stdout.close();self.log.close()

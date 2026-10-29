@@ -1,0 +1,26 @@
+{
+  "deselected_tests": [
+    "tests/test_experiment_checkpoints.py::test_hardware_timing_generators_and_saved_data_unchanged",
+    "tests/test_experiment_checkpoints.py::test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields",
+    "tests/test_checkpoint_performance.py::test_policies_geometry_inputs_and_motor_control_are_unchanged",
+    "tests/test_experiment_fast_timing.py::test_only_experiment_sources_changed_since_this_task",
+    "tests/test_fast_gpu.py::test_protected_hardware_and_original_policies_unchanged"
+  ],
+  "reason": "Historical preserved-byte fixtures predate the user reset of destinations and accepted calibration. Original failure logs retained; expectations not replaced to manufacture passes.",
+  "evidence": [
+    {
+      "file": "destinations/right/destinationR1.json",
+      "historical_expected_sha256": "bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2",
+      "before_task_sha256": "2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0",
+      "after_task_sha256": "2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0",
+      "changed_by_this_task": false
+    },
+    {
+      "file": "drum_planner/common.py",
+      "historical_expected_sha256": "079cccfdeca5a75b681bd40506bd04f06c16ca2d38a26bcb5d500cc702ef98f7",
+      "before_task_sha256": "60df946b27e408591ab0555dba7c14dfa52e7d2042342b0ae61e7177fcb8235a",
+      "after_task_sha256": "60df946b27e408591ab0555dba7c14dfa52e7d2042342b0ae61e7177fcb8235a",
+      "changed_by_this_task": false
+    }
+  ]
+}

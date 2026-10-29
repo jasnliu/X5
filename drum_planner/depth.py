@@ -14,6 +14,7 @@ import numpy as np
 from camera_calibration.io import SDK
 from camera_calibration.core import checked_transform, digest
 from .common import ROOT, atomic_json, calibration, DEFAULT_CALIBRATION
+from .camera_diagnostics import failure_message
 
 BUILD = ROOT / 'drum_planner/build'
 DEPTH_WINDOW_FRAMES = 5
@@ -118,7 +119,9 @@ class DepthCamera:
                     # frame, not whichever frame a slower GUI happens to poll.
                     if self.single_frame: break
         except Exception as e:
-            if not self.stop.is_set(): self.error = str(e)
+            if not self.stop.is_set():
+                self.error = failure_message(e, self.folder, self.cal['camera']['serial'],
+                    ignored_pids=(() if self.process is None else (self.process.pid,)))
         finally:
             self._terminate()
 

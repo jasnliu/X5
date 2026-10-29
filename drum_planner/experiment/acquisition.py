@@ -30,7 +30,12 @@ def capture(folder, side='right', cal_path=DEFAULT_CALIBRATION):
         try:
             worker=Telemetry(folder)
             # Measure both arms, but passive-arm sway is not a stillness veto.
-            capture_current(folder,worker,cal_path,stationary_joints=arm_joints(side))
+            if side=='right':
+                from .rgbd import capture as capture_paired
+                capture_paired(folder/'camera',cal_path,worker,stationary_joints=arm_joints(side))
+                report['dt1_source']='last RGB/depth pair from the same five-frame acquisition'
+            else:
+                capture_current(folder,worker,cal_path,stationary_joints=arm_joints(side))
             report['camera_released']=True
         finally:
             if worker:worker.close()

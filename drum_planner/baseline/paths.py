@@ -23,7 +23,7 @@ def peaks(curve):
 
 def validate_timing(curve):
     p=peaks(curve)
-    if np.any(p>np.array([.6,1.2,6.])[:,None]+1e-8):
+    if np.any(p>curve.limits+1e-8):
         raise ValueError('Curve exceeds validated velocity/acceleration/jerk limits')
     if getattr(curve,'retimed',None) is not None:
         _,v,a,_=curve.retimed([0,curve.duration])
@@ -60,11 +60,16 @@ def recovery(curve,held,tau,rate):
     anchor=curve.at(projected);offset=float(np.sum(abs(anchor-held)))
     if offset>TRACK_L1:
         raise ValueError('Held pose is too far from the traveled path; no blind recovery or relaxation')
-    d=float(np.max(abs(anchor-held)))
-    bridge=max(.35,1.875*d/(.6*rate),np.sqrt(5.774*d/(1.2*rate**2)),np.cbrt(60*d/(6*rate**3)))
+    # Recovery never accelerates merely because a higher outbound profile was chosen.
+    from .settings import DEFAULT_LIMITS
+    lv,la,lj=np.minimum(curve.limits,DEFAULT_LIMITS)
+    d=abs(anchor-held)
+    bridge=max(.35,float(np.max(1.875*d/(lv*rate))),float(np.max(np.sqrt(5.774*d/(la*rate**2)))),
+               float(np.max(np.cbrt(60*d/(lj*rate**3)))))
+    # Retain the original conservative global-peak recovery bound.
     v,a,j=peaks(curve).max(axis=1);u=1.875*projected;w=5.774*projected;z=60*projected
-    duration=max(.35,u*v/(.6*rate),np.sqrt((a*u*u+v*w)/(1.2*rate**2)),
-                 np.cbrt((j*u**3+3*a*u*w+v*z)/(6*rate**3)))
+    duration=max(.35,float(np.max(u*v/(lv*rate))),float(np.max(np.sqrt((a*u*u+v*w)/(la*rate**2)))),
+                 float(np.max(np.cbrt((j*u**3+3*a*u*w+v*z)/(lj*rate**3)))))
     return dict(schema='x5-baseline-prefix-return-v1',held=held.tolist(),tau=projected,
                 last_commanded_tau=float(tau),connector_l1_rad=offset,bridge_s=bridge,return_s=duration,
                 recovery_rate=rate,original_curve_duration_s=curve.duration)
@@ -83,3 +88,13 @@ def recovery_samples(curve,spec):
     duration=spec['bridge_s']+spec['return_s']
     times=np.unique(np.r_[np.arange(0,duration,.002),spec['bridge_s'],duration])
     return np.array([recovery_at(curve,spec,t)[0] for t in times])
+
+
+def validate_drive_speed(curve,rate):
+    """Do not send a new profile faster than the unchanged CSP drive cap."""
+    from centering.motors import RIGHT_PLAYBACK_SPEED
+    actual=float(np.max(peaks(curve)[0]))*speed(rate)
+    if actual>RIGHT_PLAYBACK_SPEED+1e-8:
+        raise ValueError(f'Planned speed {actual:.3f} rad/s exceeds the unchanged drive cap '
+                         f'{RIGHT_PLAYBACK_SPEED:g} rad/s. Lower the planning velocity limits or next-Start speed; '
+                         'motor settings were not changed.')

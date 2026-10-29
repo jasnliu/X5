@@ -1,0 +1,23 @@
+RUN right_default
+RESULT right_default True 3.6089936782898744
+RUN right_fast
+RESULT right_fast True 1.7649334886528185
+RUN right_balanced
+RESULT right_balanced True 1.656983746870765
+RUN right_thorough
+RESULT right_thorough True 1.6467329678768035
+RUN right_reverse
+RESULT right_reverse True 1.6569837309124522
+RUN right_stationary
+RESULT right_stationary True 0.0
+RUN right_sequence_custom
+RESULT right_sequence_custom True 2.7103138553371995
+RUN left_stationary
+RESULT left_stationary True 0.0
+RUN left_near
+RESULT left_near True 0.45933739710662114
+RUN left_near_custom
+RESULT left_near_custom True 0.30368523449539087
+RUN left_default_blocked
+RESULT left_default_blocked True None
+RESULTS 11 / 11

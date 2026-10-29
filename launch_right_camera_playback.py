@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Launch the separate recorded-path camera-alignment program."""
+"""Generated hardware beat startup; retained recording-based test modes."""
 import argparse
 import os
 from pathlib import Path
@@ -29,11 +29,11 @@ DEFAULT_TONOR_SOURCE = (
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Right recorded-path camera alignment")
+    parser = argparse.ArgumentParser(description="Generated dual-arm hardware beats or legacy recording test modes")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
         "--hardware", action="store_true",
-        help="automatic hihat_v2 calibration 90..115 degrees; one RUN: center + close, recording, wait for hi-hat, ride_v4 search, editable BPM swing (default 100; camera/TONOR/ESP32)",
+        help="one fresh camera/rest snapshot during hi-hat calibration; generate LEFT saved goal then RIGHT dt1 paths; explicit Start, no centering/pink alignment; Hold and captured-rest return",
     )
     mode.add_argument(
         "--test", action="store_true",
@@ -48,10 +48,13 @@ def parse_args():
     )
     parser.add_argument(
         "--recording", type=Path, default=ROOT / "recordings/record3.json",
-        help="right-arm recording (default: recordings/record3.json)",
+        help="legacy test/recording-only right recording; normal --hardware generates its own path",
     )
+    mode.add_argument('--generated-simulate',type=Path,help='software-only generated mission replay; no CAN/camera/microphone/ESP32')
+    parser.add_argument('--prepare-only',action='store_true',
+                        help='with --hardware: fresh camera + query-only resting poses, calculate both paths/returns, then exit; NO arm or ESP32 motor commands')
     parser.add_argument("--left-recording", type=Path, default=ROOT / "left_recordings/record1.json",
-                        help="left recording, played before right (normal beat/test/preview)")
+                        help="legacy test/preview left recording; normal --hardware uses the sole left destination")
     camera_choice = parser.add_mutually_exclusive_group()
     add_camera_argument(camera_choice)
     camera_choice.add_argument('--select-camera', action='store_true',
@@ -103,6 +106,9 @@ def parse_args():
     parser.add_argument("--mit-latency-ms", type=float, default=None,
                         help="hardwaretest only: command/actuation delay estimate, ms (default 4)")
     args = parser.parse_args()
+    if args.prepare_only and (not args.hardware or args.recording_only or args.auto_run or args.list_cameras or
+                             args.verify_playback or args.verify_swing or args.verify_calibration):
+        parser.error('--prepare-only requires normal --hardware; no execution/recording flags')
     if args.test and args.select_camera:
         parser.error('--select-camera is unavailable in --test, which deliberately uses no camera')
     if args.recording_only and not (args.hardware or args.hardwaretest):
@@ -110,6 +116,12 @@ def parse_args():
     if args.auto_run and not args.recording_only:
         parser.error("--auto-run requires --recording-only")
     verification = sum((args.verify_playback, args.verify_swing, args.verify_calibration))
+    if verification and args.hardware and not args.recording_only:
+        parser.error('Legacy recording/centering verification flags are unavailable for generated hardware; use explicit Start')
+    if args.generated_simulate and (args.select_camera or args.list_cameras):
+        parser.error('Generated simulation does not access cameras')
+    if args.hardware and not args.recording_only and (args.select_camera or args.camera!='orbbec'):
+        parser.error('Generated hardware uses the calibrated Orbbec RGBD serial from planner calibration; RGB-only camera selection is for legacy modes')
     if verification and (not args.hardware or args.recording_only or verification > 1):
         parser.error('verification requires normal --hardware and exactly one verification mode')
     if not args.hardwaretest and any(getattr(args, name) is not None for name in (
@@ -124,6 +136,11 @@ def optional(command, flag, value):
 
 
 args = parse_args()
+if args.prepare_only:
+    # Exit before constructing an App, motor owner, ESP32 connection or audio
+    # process. The acquisition child has the existing exact CAN query allowlist.
+    from camera_playback.generated_prepare import main
+    raise SystemExit(main())
 if args.list_cameras:
     print_cameras(list_cameras())
     raise SystemExit(0)
@@ -132,10 +149,12 @@ if args.select_camera:
         args.camera = choose_camera()
     except RuntimeError as exc:
         raise SystemExit(str(exc)) from None
-perception_enabled = not args.test
+generated_hardware = args.hardware and not args.recording_only
+perception_enabled = not (args.test or args.generated_simulate)
+camera_enabled = perception_enabled and not generated_hardware
 venv_python = Y2 / ".venv/bin/python"
 detector_source = Y2 / "realtime_detector.py"
-if perception_enabled and (not venv_python.is_file() or not detector_source.is_file()):
+if camera_enabled and (not venv_python.is_file() or not detector_source.is_file()):
     raise SystemExit(f"Y2 detector environment not found under {Y2}")
 if perception_enabled:
     shared_audio_available = True
@@ -185,6 +204,8 @@ app_command = [
 ]
 if args.hardware:
     app_command.append("--hardware")
+if args.generated_simulate:
+    app_command.extend(['--generated-simulate',str(args.generated_simulate)])
 if args.test:
     app_command.append("--test")
 if args.hardwaretest:
@@ -268,7 +289,9 @@ waveform_env = audio_env.copy()
 for key in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'):
     waveform_env[key] = '1'
 
-app = ExecuteProcess(cmd=app_command, cwd=str(ROOT), output="screen",
+from camera_playback.generated_launch import HeldArmProcess
+app_process = HeldArmProcess if generated_hardware or args.generated_simulate else ExecuteProcess
+app = app_process(cmd=app_command, cwd=str(ROOT), output="screen",
                      sigterm_timeout='45', sigkill_timeout='45')
 camera = ExecuteProcess(cmd=camera_command, cwd=str(Y2), env=camera_env, output="screen")
 audio = ExecuteProcess(cmd=audio_command, cwd=str(ROOT), env=audio_env, output="screen")
@@ -287,17 +310,20 @@ rviz = Node(
     package="rviz2", executable="rviz2",
     arguments=["-d", str(ROOT / "config/safe_zone.rviz")],
 )
-processes = [rsp, rviz, app]
+generated_ui = generated_hardware or bool(args.generated_simulate)
+# The generated panel opens its calibrated preview + measured-view windows.
+# Do not also show the old nominal-URDF RViz arm as a misleading fourth view.
+processes = [app] if generated_ui else [rsp, rviz, app]
 if perception_enabled:
     audio_processes = ([shared_audio] if shared_audio_available
                        else [audio, hihat_audio, snare_audio])
-    processes.extend([camera, *audio_processes, waveform])
+    processes.extend([*([camera] if camera_enabled else []), *audio_processes, waveform])
 description = LaunchDescription(processes)
-watched_processes = [
+watched_processes = [] if generated_ui else [
     (rsp, "Robot-state publisher exited"),
     (rviz, "RViz exited"),
 ]
-if perception_enabled:
+if camera_enabled:
     watched_processes.insert(0, (camera, "Processed camera process exited"))
 for process, label in watched_processes:
     notifier = ExecuteProcess(

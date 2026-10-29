@@ -1,0 +1,83 @@
+{
+  "schema": "x5-joint-limit-study-v1",
+  "side": "right",
+  "profile": {
+    "schema": "x5-experiment-motion-profile-v1",
+    "side": "right",
+    "name": "Original limits",
+    "simulation_only": true,
+    "timing_quality": "balanced",
+    "velocity_rad_s": [
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    "acceleration_rad_s2": [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    "jerk_rad_s3": [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+    ]
+  },
+  "test_levels": [
+    0.5,
+    1.0
+  ],
+  "displacements_rad": [
+    0.04,
+    0.08
+  ],
+  "repeats": 2,
+  "sample_period_s": 0.01,
+  "settle_s": 0.4,
+  "rest_between_trials_s": 1.0,
+  "operating_speed_fraction": 0.8,
+  "acceptance": {
+    "max_tracking_rad": 0.025,
+    "rms_tracking_rad": 0.01,
+    "max_held_joint_drift_rad": 0.01,
+    "max_velocity_error_rad_s": 0.12,
+    "end_position_error_rad": 0.005,
+    "end_velocity_rad_s": 0.03,
+    "max_feedback_gap_s": 0.03,
+    "max_command_gap_s": 0.03,
+    "max_current_age_s": 0.15,
+    "max_temperature_c": 65.0,
+    "max_temperature_rise_c": 10.0,
+    "current_limits_a": [
+      6.0,
+      6.0,
+      4.0,
+      4.0,
+      2.0,
+      2.0,
+      2.0
+    ],
+    "max_current_fraction": 0.9,
+    "minimum_peak_tracking_fraction": 0.9,
+    "minimum_motion_samples": 20
+  },
+  "conditions": {
+    "payload_id": "UNSPECIFIED",
+    "controller_id": "UNSPECIFIED",
+    "supply_voltage_v": null,
+    "notes": "Fill in actual payload/controller/supply before physical tests."
+  },
+  "interpretation": "Test ceilings and analysis criteria, NOT measured hardware capabilities. Original software ceilings only; do not increase without an agreed physical test envelope."
+}

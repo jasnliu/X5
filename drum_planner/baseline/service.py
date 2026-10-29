@@ -110,11 +110,17 @@ class Server:
             req['execution_joint_limits']=[[float(root.find(f"joint[@name='{j}']/limit").get(k))
                 for k in ('lower','upper')] for j in arm_joints(self.side)]
             curve=Curve(obj);validate_timing(curve)
+            from ..joint_position_limits import feedback_limits
+            from ..rest_paths import verify_curve
+            req['execution_joint_limits']=feedback_limits(obj['model'],req['execution_joint_limits'],self.side)
+            verify_curve(curve,req)
         else:
             from .tasks import check_packet
             packet,curve=check_packet(self.info['prepared']);obj=packet['object'];req=packet['request']
             # check_packet constructed the curve from an equal immutable copy.
             curve.plan=obj
+            from .paths import validate_drive_speed
+            validate_drive_speed(curve,self.info['rate'])
             paths += [self.info['prepared'],packet['calibration'],packet['fresh_scene']]
         require_side(req,self.side);require_side(obj,self.side)
         paths += [req['urdf'],req['srdf']]

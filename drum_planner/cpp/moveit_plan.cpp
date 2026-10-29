@@ -280,15 +280,28 @@ struct Checker {
         }
         if(!camera_origin.allFinite())throw std::runtime_error("Nonfinite camera origin");
       }
+      // A sequential dual-arm mission has a different passive-arm pose on
+      // its second leg. Mask ONLY the measured acquisition robot, while all
+      // candidate collisions still use the actual leg's passive-arm pose.
+      moveit::core::RobotState mask_state(state);
+      if(r.isMember("scene_robot_poses")) {
+        for(const std::string side:{"left","right"}) {
+          auto captured=vector7(r["scene_robot_poses"][side]);
+          for(size_t i=0;i<7;i++)mask_state.setVariablePosition(
+              "openarmx_"+side+"_joint"+std::to_string(i+1),captured[i]);
+        }
+        mask_state.update();
+        self_filter["snapshot_arm_poses"]=r["scene_robot_poses"];
+      }
       for (auto link:model->getLinkModelsWithCollisionGeometry()) {
         for (size_t s=0;s<link->getShapes().size();s++) {
           bodies::BodyPtr body(bodies::createBodyFromShape(link->getShapes()[s].get()));
-          body->setPose(state.getCollisionBodyTransform(link,s));
+          body->setPose(mask_state.getCollisionBodyTransform(link,s));
           body->setPadding((link->getName()=="right_drumstick" || link->getName()=="left_drumstick")?stick_mask:.005);
           robot.emplace_back(link->getName(),body);
           if(filter_shadow && link->getName()==stick_link) {
             nominal_stick.reset(bodies::createBodyFromShape(link->getShapes()[s].get()));
-            nominal_stick->setPose(state.getCollisionBodyTransform(link,s));
+            nominal_stick->setPose(mask_state.getCollisionBodyTransform(link,s));
             nominal_stick->setPadding(0.);  // NO dilation of the shadow silhouette
           }
         }

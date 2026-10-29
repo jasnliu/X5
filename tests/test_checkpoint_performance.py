@@ -117,7 +117,10 @@ def test_cached_geometry_keeps_all_extrema_exact_and_memory_bounded():
 @pytest.mark.parametrize('side',['right','left'])
 def test_sequence_request_reuse_is_byte_identical_to_independent_request(tmp_path,monkeypatch,side):
     state,scene=config.saved_inputs(side);state=read_state(state)
-    ctx=dict(moving_side=side,scene=str(scene),calibration=str(DEFAULT_CALIBRATION),_sequence_inputs={})
+    # This archived scene predates the camera move. Compare both request paths
+    # against its actual calibration, never relabel it with today's default.
+    calibration=ROOT/'calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json'
+    ctx=dict(moving_side=side,scene=str(scene),calibration=str(calibration),_sequence_inputs={})
     calls=[];original=planning.scene
     def checked(*a,**kw):calls.append(1);return original(*a,**kw)
     monkeypatch.setattr(planning,'scene',checked)
@@ -126,7 +129,7 @@ def test_sequence_request_reuse_is_byte_identical_to_independent_request(tmp_pat
     state[side+'_rad'][0]+=.01
     second,second_manifest=inputs.request(ctx,tmp_path/'second',state)
     assert len(calls)==1 and second_manifest==manifest
-    independent,m=planning.request(tmp_path/'independent',state,original(scene,DEFAULT_CALIBRATION),moving_side=side)
+    independent,m=planning.request(tmp_path/'independent',state,original(scene,calibration),calibration,moving_side=side)
     assert m==manifest
     for kind in ('urdf','srdf'):
         assert Path(second[kind]).read_bytes()==Path(independent[kind]).read_bytes()

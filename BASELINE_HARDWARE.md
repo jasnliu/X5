@@ -46,7 +46,7 @@ relax, and remains reconnectable.
 ### 1. Calculate trajectory
 
 Place the selected arm in its physically supported, relaxed starting pose, with
-both arms disabled and the selected custom gripper closed. Choose a saved destination
+both arms disabled and the selected custom gripper closed. Choose a saved destination or right-arm **dt1**
 (the first saved destination is initially selected), optionally **Add checkpoint**
 for up to three total destinations, then click **Calculate**. Each dropdown excludes
 the preceding destination; A → B → A is allowed. Remove last / Refresh destinations
@@ -57,14 +57,82 @@ Keep the selected arm still from this click through planning and waiting to Star
 The unpowered opposite arm may sway; its position/opening does not invalidate a
 calculation, stop playback, or prevent return.
 
-The program anchors the current encoder pose, takes five full-FOV native depth
-frames, and runs **Workspace curve**, using the same independent Cartesian-first
-broad-curve proposals, geometric ranking, 120-second per-leg search budget and
-settings as the experiment mode. It uses only destination endpoints—not recorded
-interior motion. The selected arm's approved timing dispatcher is unchanged:
-right adaptive fixed-path timing; left bounded C3 corner smoothing when needed.
-The experiment-only Vulkan GPU optimizer does not change this hardware timing
-policy or the separate `--hardware-sparse` fork.
+As of 2026-10-26, normal `--hardware` calls the **same current numerical engine**
+as `experiment`: broad workspace proposals, bounded-spline/wrist-guided recovery
+when needed, and Fast/Balanced/Thorough fixed-path CPU timing. Balanced is default;
+there is no old CPU-reference solve or planning-result cache. Timing does not
+change the selected path. It uses only destination endpoints, not recorded
+interior motion. The separate `--hardware-sparse` fork retains its older planner,
+velocity/acceleration/jerk limits, camera path and timing policy. Its newly generated
+right-arm model also inherits the shared J2 position correction below.
+
+Calculate anchors the physical encoder pose and takes a new full-FOV, five-frame
+camera snapshot. On the right, depth frames are paired with RGB; the final pair
+is also the source for **dt1**, if selected. The left remains depth-only.
+**dt1 is right-arm only**. It runs the existing cymbal endpoint solver offline on
+that Calculate snapshot, preserving inward yaw ±25°, near/above-parallel stick
+orientation and J7 strike-plane alignment. It then generates and independently
+checks the whole arm route, not just the endpoint. Camera/detection/IK/path failures
+leave Start unavailable with the error shown; no old generated destination is used.
+The camera is closed before inference/planning. Start does not reacquire or regenerate.
+There is no strike: this moves to the prime endpoint and follows the normal
+hold/return workflow.
+
+Right J2 uses **0° as an interior operating floor**, in encoder/display
+coordinates, applied after calibration mapping. The reported physical stop is
+approximately -1°, not 0°. A measured original rest strictly above -1° but below
+0° is retained exactly. Only a continuous, monotone departure from that rest and
+return to that same full pose may enter this margin; other negative endpoints,
+intermediate dips/reentries, and motion below the acquired rest are rejected.
+The native model allows 1e-12 rad endpoint arithmetic roundoff (not an encoder
+or physical tracking allowance). No measured joints or trajectory coefficients
+are clipped. J2 remains free above zero; other joint bounds are unchanged.
+
+Feedback is checked separately against the provisional reported -1° boundary,
+so an ordinary small measured deviation inside the margin does not prevent HOLD.
+Reverse still requires healthy stationary feedback, the original tracking-offset
+limit, and a new native collision check of the traveled prefix and its small
+connector. If HOLD is slightly below the original rest, a private recovery model
+checks that exact measured endpoint; it does not rewrite the original plan or
+permit planning negative goals. At/beyond the reported stop is rejected.
+These are provisional software policies, not certified hardware limits.
+
+New DT1 goals retain **3° endpoint reserve at all bounds except J2 lower, where
+the additional reserve is 1°** (goal J2 >= +1°), using the same solver as the standalone
+destination program. It re-solves the posture at the unchanged green dot; it
+does not clip a goal or change velocity/acceleration/jerk or drive settings.
+This avoids stacking the former blanket 3° goal reserve onto the new J2 floor,
+which rejected an earlier actual-camera target. The policy and actual joint clearances are saved and verified. A failed
+reserved solve does not fall back to the old boundary goal. This design buffer
+does not certify physical tracking. See [the measured-rest offline verification](diagnostics/hardware_rest_transition_20261028/REPORT.md).
+Recalculate before a new Start: old right-arm preparations cannot authorize new
+forward motion. Existing v4/v5/v6 missions remain readable for their original checked
+prefix recovery; no active owner/session is rewritten. Manual saved destinations
+are not edited, but their newly planned paths obey the same operating/rest-transition policy. Left-arm behavior is unchanged.
+
+**Joint limits / profiles…** edits seven velocity/acceleration/jerk values, with
+load/save and Original defaults. These are hash-bound planning constraints, not
+motor firmware changes or a certification of hardware performance. Default rows
+remain 0.6 rad/s, 1.2 rad/s² and 6 rad/s³. Changing them or timing effort invalidates
+the old calculation; it never calculates or moves automatically. Active runs keep
+their original profile. The existing CSP speed cap remains **0.8 rad/s**: actual
+planned speed times next-Start scale must fit it, otherwise Start is rejected
+before the transport is opened. Lower the velocity profile or scale; no silent
+clipping. Emergency return respects lower custom limits and never becomes faster
+merely because outbound limits were raised.
+
+Hardware always starts/returns at its **measured physical pose**. Experiment's
+simulated-start teleport is deliberately not a physical feature. Position bounds,
+collision margins, motor current settings, fault handling, Hold and Reverse remain.
+
+Optional CLI equivalents:
+```bash
+./plan_drums.sh --hardware --right --timing-quality thorough
+./plan_drums.sh --hardware --left --motion-profile /path/to/left-profile.json
+```
+Experiment numerical profiles can be imported explicitly, with arm validation;
+this is not permission to import an experiment's plan or hardware-readiness proof.
+Current implementation/verification: [2026-10-26 report](diagnostics/hardware_current_20261026/REPORT.md).
 Each successive checkpoint leg begins at the exact previous endpoint. A multi-
 checkpoint mission also plans a separate final-checkpoint → acquired-start return;
 it does not retrace earlier checkpoints on the normal return. Every leg uses the

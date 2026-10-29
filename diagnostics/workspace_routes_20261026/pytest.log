@@ -1,0 +1,154 @@
+.........................F..F........................................... [ 25%]
+........................................................................ [ 50%]
+................................F....................................... [ 76%]
+...FF...............F.........................................F.....     [100%]
+=================================== FAILURES ===================================
+_ test_original_generators_timing_collision_inputs_and_actuator_sources_unchanged _
+
+    def test_original_generators_timing_collision_inputs_and_actuator_sources_unchanged():
+        before=json.loads((ROOT/'diagnostics/workspace_curve_20261021/before_hashes.json').read_text())
+        authorized={'drum_planner/experiment/config.py','drum_planner/experiment/worker.py',
+                    'drum_planner/experiment/app.py','drum_planner/experiment/algorithms.py',
+                    'drum_planner/cpp/experiment_oracle.cpp'}
+        # Authorized hardware Workspace curve/checkpoint rollout; new tests cover
+        # its exact mission playback and unchanged experiment/timing/input sources.
+        authorized.update({'drum_planner/baseline/curve.py', 'drum_planner/baseline/transport.py', 'drum_planner/baseline/__init__.py', 'drum_planner/cli.py', 'drum_planner/baseline/computation.py', 'drum_planner/baseline/motion.py', 'drum_planner/baseline/windows.py', 'drum_planner/baseline/work.py', 'drum_planner/baseline/workspace.py', 'drum_planner/baseline/service.py', 'drum_planner/baseline/planner.py', 'drum_planner/baseline/tasks.py'})
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        authorized.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+>           if path not in authorized|OPTIMIZED:assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_workspace_curve.py:80: AssertionError
+_ test_existing_four_routing_and_labels_are_byte_identical_after_removing_fifth_entry _
+
+    def test_existing_four_routing_and_labels_are_byte_identical_after_removing_fifth_entry():
+        import hashlib
+        from drum_planner.experiment import worker,app
+        before=json.loads((ROOT/'diagnostics/workspace_curve_20261021/before_hashes.json').read_text())
+        old_config=''.join(line for line in Path(config.__file__).read_text().splitlines(True)
+                           if not line.lstrip().startswith("'workspace_curve':"))
+        assert hashlib.sha256(old_config.encode()).hexdigest()==before['drum_planner/experiment/config.py']
+        # Authorized staged timing orchestration; generators/ranking/policies are
+        # retained, with exact mathematical parity checked against preserved code.
+        from test_checkpoint_performance import test_policies_geometry_inputs_and_motor_control_are_unchanged
+>       test_policies_geometry_inputs_and_motor_control_are_unchanged()
+
+tests/test_workspace_curve.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: drum_planner/depth.py
+E           assert 'e6890afcc6c5...7503114320041' == '837ef5eeaf01...5ec029210f0c3'
+E             - 837ef5eeaf01c4705a202ec523bc5b9ead79ba05c765beb18935ec029210f0c3
+E             + e6890afcc6c5f6fc9c8f19308603312c1a37e1cb494a05eed2d7503114320041
+
+tests/test_checkpoint_performance.py:153: AssertionError
+_____________ test_only_experiment_sources_changed_since_this_task _____________
+
+    def test_only_experiment_sources_changed_since_this_task():
+        before=json.loads((ROOT/'tests/experiment_timing_preservation.json').read_text())
+        allowed={'drum_planner/experiment/fast.py','drum_planner/experiment/fast_config.py',
+                 'drum_planner/experiment/app.py','DRUM_PLANNER_EXPERIMENTS.md',
+                 # Subsequent authorized startup acquisition change, NOT timing/path
+                 # changes. Its CLI/offline behavior has dedicated regression tests.
+                 'drum_planner/cli.py','DRUM_PLANNER.md',
+                 'tests/test_planner_arms.py','tests/test_planner_experiment.py',
+                 # Subsequent authorized per-joint experiment controls: docs only.
+                 # Hardware/core/legacy timing remain protected by both audits.
+                 'AGENTS.md','drum_planner/timing/README.md'}
+        for path,sha in before.items():
+>           if path not in allowed:assert digest(ROOT/path)==sha,path
+E           AssertionError: drum_planner/depth.py
+E           assert 'e6890afcc6c5...7503114320041' == '837ef5eeaf01...5ec029210f0c3'
+E             - 837ef5eeaf01c4705a202ec523bc5b9ead79ba05c765beb18935ec029210f0c3
+E             + e6890afcc6c5f6fc9c8f19308603312c1a37e1cb494a05eed2d7503114320041
+
+tests/test_experiment_fast_timing.py:92: AssertionError
+___________ test_hardware_timing_generators_and_saved_data_unchanged ___________
+
+    def test_hardware_timing_generators_and_saved_data_unchanged():
+        before=json.loads((ROOT/'diagnostics/checkpoints_20261021/before_hashes.json').read_text())
+        changed={'drum_planner/experiment/app.py','drum_planner/experiment/worker.py',
+                 'drum_planner/experiment/algorithms.py','drum_planner/cpp/experiment_oracle.cpp'}
+        # Authorized hardware Workspace curve/checkpoint rollout; new tests cover
+        # its exact mission playback and unchanged experiment/timing/input sources.
+        changed.update({'drum_planner/baseline/curve.py', 'drum_planner/baseline/transport.py', 'drum_planner/baseline/__init__.py', 'drum_planner/cli.py', 'drum_planner/baseline/computation.py', 'drum_planner/baseline/motion.py', 'drum_planner/baseline/windows.py', 'drum_planner/baseline/work.py', 'drum_planner/baseline/workspace.py', 'drum_planner/baseline/service.py', 'drum_planner/baseline/planner.py', 'drum_planner/baseline/tasks.py'})
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        changed.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+            if path.startswith('tests/') or path in changed|OPTIMIZED:continue
+>           assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_experiment_checkpoints.py:223: AssertionError
+_ test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields _
+
+    def test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields():
+        reference=ROOT/'diagnostics/checkpoints_20261021/reference'
+        # Authorized timing phase extraction replaces the worker byte check.
+        # Route generation/ranking and fixed policies remain byte-identical; full
+        # numerical/output parity is checked by the performance regression study.
+        from test_checkpoint_performance import test_policies_geometry_inputs_and_motor_control_are_unchanged
+>       test_policies_geometry_inputs_and_motor_control_are_unchanged()
+
+tests/test_experiment_checkpoints.py:232: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: drum_planner/depth.py
+E           assert 'e6890afcc6c5...7503114320041' == '837ef5eeaf01...5ec029210f0c3'
+E             - 837ef5eeaf01c4705a202ec523bc5b9ead79ba05c765beb18935ec029210f0c3
+E             + e6890afcc6c5f6fc9c8f19308603312c1a37e1cb494a05eed2d7503114320041
+
+tests/test_checkpoint_performance.py:153: AssertionError
+________ test_policies_geometry_inputs_and_motor_control_are_unchanged _________
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: drum_planner/depth.py
+E           assert 'e6890afcc6c5...7503114320041' == '837ef5eeaf01...5ec029210f0c3'
+E             - 837ef5eeaf01c4705a202ec523bc5b9ead79ba05c765beb18935ec029210f0c3
+E             + e6890afcc6c5f6fc9c8f19308603312c1a37e1cb494a05eed2d7503114320041
+
+tests/test_checkpoint_performance.py:153: AssertionError
+_________ test_shared_generators_timing_models_and_user_data_preserved _________
+
+    def test_shared_generators_timing_models_and_user_data_preserved():
+        from drum_planner.common import ROOT,digest
+        before=json.loads((ROOT/'diagnostics/hardware_workspace_20261022/before_hashes.json').read_text())
+        changed={'drum_planner/cli.py'}|{'drum_planner/baseline/'+n+'.py' for n in
+            ('__init__','planner','curve','motion','tasks','workspace','windows','work','computation','service','transport')}
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        changed.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+>           if path not in changed|OPTIMIZED:assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_hardware_workspace.py:198: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_workspace_curve.py::test_original_generators_timing_collision_inputs_and_actuator_sources_unchanged
+FAILED tests/test_workspace_curve.py::test_existing_four_routing_and_labels_are_byte_identical_after_removing_fifth_entry
+FAILED tests/test_experiment_fast_timing.py::test_only_experiment_sources_changed_since_this_task
+FAILED tests/test_experiment_checkpoints.py::test_hardware_timing_generators_and_saved_data_unchanged
+FAILED tests/test_experiment_checkpoints.py::test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields
+FAILED tests/test_checkpoint_performance.py::test_policies_geometry_inputs_and_motor_control_are_unchanged
+FAILED tests/test_hardware_workspace.py::test_shared_generators_timing_models_and_user_data_preserved
+7 failed, 277 passed in 56.22s

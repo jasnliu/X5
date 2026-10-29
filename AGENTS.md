@@ -6,8 +6,65 @@ permission to move hardware does **not** carry into another task. Sections 1–5
 describe durable preferences. Section 6 is an implementation snapshot verified
 on **2026-10-22**: check source before treating those details as current.
 
+## 2026-10-28 approved DT1 inward-aim range
 
-## 2026-10-24 experiment-only update (supersedes older experiment snapshot below)
+DT1 v8 restores **±25° inward yaw**, explicitly approved after the generated-beat
+startup target could not satisfy ±20° with the retained goal reserves. Green tip
+position, above-parallel/J7 alignment, J2 policy, all joint reserves, collision
+margins and motor settings are unchanged. Old v4–v7 goal metadata remain readable
+for existing recovery, not new destination ingestion. `start_beat.sh --hardware
+--prepare-only` runs fresh query-only acquisition plus the same complete
+left/right/return planner, then exits without any actuator owner, ESP32 or audio.
+See `diagnostics/dt1_ik_recovery_20261028/APPROVED_REPORT.md` for scoped verification.
+
+## 2026-10-28 right J2 measured-rest correction
+
+The operator reported a mechanical stop near -1° in encoder/display coordinates.
+**0° is the interior operating floor, NOT a hard rejection of actual resting
+feedback.** Actual failed captures rested at -0.3187004°. New selected-right
+models retain that exact acquired pose (above -1°), and `rest_paths.py` proves
+continuous monotone departure/return below zero, without going below that rest
+or allowing other negative destinations/negative intermediate excursions.
+Model endpoint arithmetic has a documented 1e-12 rad allowance; no pose is clipped.
+DT1 v7 goals remain at least +1° (other endpoint reserves 3°). All other joint
+bounds, geometry, calibration, vendor URDF, V/A/jerk and drive settings stay intact.
+Feedback uses the reported -1° boundary separately from the interior command
+margin. Checked prefix recovery can include a tiny measured HOLD connector under
+the existing tracking tolerance; its private native model never edits a plan.
+New Prepare/Start requires the current reference-bound policy. Existing v4/v5/v6
+missions stay readable for recovery, not new starts. Left-mode models are unchanged.
+See `diagnostics/hardware_rest_transition_20261028/REPORT.md`. Software-only
+verification is not a physical tracking/stop certification. Never move hardware
+or open devices based on past authorization.
+
+
+## 2026-10-26 hardware promotion (supersedes older experiment-only scope)
+
+User authorized normal `--hardware` to use the current experiment engine. The
+`baseline/current.py` adapter calls `experiment.fast.plan` on fresh Calculate
+inputs. Right Calculate uses paired five-frame acquisition and offers dt1; left
+stays depth-only/saved goals. `baseline/{settings,targets,planning_ui}.py` bind
+hardware V/A/jerk profiles and generated endpoints. Fast/Balanced/Thorough timing,
+Balanced default; original limits remain. Hardware always uses measured physical
+start, never experiment teleport. Explicit Calculate then Start; original motor
+owner/transport, Hold, reverse-prefix recovery and three-window layout remain.
+Drive cap stays 0.8 rad/s and is checked before physical transport construction.
+The separate `--hardware-sparse` retains old behavior; do not silently promote it.
+See `BASELINE_HARDWARE.md` and `diagnostics/hardware_current_20261026/REPORT.md`.
+
+## 2026-10-25 normal experiment controls (supersedes older experiment snapshots)
+
+Normal `experiment --right/--left` now has an editable 7-joint V/A/jerk profile,
+Fast/Balanced/Thorough CPU timing (Balanced default), and a simulated-start
+selector. Default start is the acquired pose; choosing a destination teleports
+only the preview and changes the cycle's return target. Camera self-masking stays
+at the original acquisition pose on every leg and recapture. New code is in
+`experiment/{motion_settings,motion_timing,motion_ui,scenario,stationary}.py`.
+Original limits remain defaults; profiles are not motor settings. Path generation,
+hardware modes, shared timing limits and the separate `--fast` implementation are
+unchanged. See `DRUM_PLANNER_EXPERIMENTS.md` and the dated controls study.
+
+## Historical 2026-10-24 experiment-only GPU update
 
 The user approved a speed-first overhaul of `plan_drums.sh experiment` for both
 arms. Its visible menu now has one GPU fast workspace pipeline. See

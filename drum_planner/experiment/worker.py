@@ -96,8 +96,9 @@ def initialize(folder,state_path,scene_path,cal_path,side='right',zone=None):
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
     state_path=str(Path(state_path).resolve());scene_path=str(Path(scene_path).resolve());cal_path=str(Path(cal_path).resolve())
     from ..depth import refine_snapshot
-    scene_path=str(refine_snapshot(scene_path,folder/'scene_5mm',cal_path))
-    state=read_state(state_path);world=planning.scene(scene_path,cal_path)
+    from .rgbd import paired,scene
+    if not paired(scene_path):scene_path=str(refine_snapshot(scene_path,folder/'scene_5mm',cal_path))
+    state=read_state(state_path);world=scene(scene_path,cal_path)
     context=dict(state=state_path,state_sha256=digest(state_path),scene=scene_path,scene_sha256=digest(scene_path),calibration=cal_path,
                  saved_not_live=True,can_access=False,motor_commands=0,pool_root=str((folder/'shared_pools').resolve()),
                  moving_side=side,goal_recording=str(goal_recording(side)))
@@ -120,7 +121,8 @@ def main():
         from .runtime import build
         print(build(),flush=True)
     elif a.action=='capture':
-        from .capture import capture
+        if a.side=='right':from .rgbd import capture
+        else:from .capture import capture
         capture(Path(a.folder)/'camera',a.calibration)
     elif a.action=='initialize':initialize(a.folder,a.state,a.scene,a.calibration,a.side,a.zone)
     else:

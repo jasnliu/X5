@@ -92,11 +92,12 @@ def scene(path, cal_path=DEFAULT_CALIBRATION):
 
 
 def request(folder, start, world, cal_path=DEFAULT_CALIBRATION, occupied_only=False,
-            candidates=DEFAULT_CANDIDATES, *, moving_side='right', zone_path=None):
+            candidates=DEFAULT_CANDIDATES, *, moving_side='right', zone_path=None, reference_right=None, both_tools=False):
     arm_side(moving_side)
     candidates=candidate_count(candidates)
     folder=Path(folder).resolve()
-    model=(generate(folder/'model',cal_path) if moving_side=='right'
+    model=(generate(folder/'model',cal_path,reference_right=(start['right_rad'] if reference_right is None else reference_right),
+                    **({'both_tools':True} if both_tools else {})) if moving_side=='right'
            else generate(folder/'model',cal_path,moving_side=moving_side))
     from .right_zone import constraint
     req=dict(schema='x5-moveit-request-v1',execute=False,urdf=str(folder/'model/robot.urdf'),
@@ -114,6 +115,8 @@ def request(folder, start, world, cal_path=DEFAULT_CALIBRATION, occupied_only=Fa
         req.update(moving_side='left',right=start['right_rad'])
         req['left_zone']=(None if zone_path=='none' else
                           constraint(zone_path or ROOT/'left_zones/zone1.json',side='left'))
+    from .joint_position_limits import bind_request
+    bind_request(req,model)
     return req,model
 
 

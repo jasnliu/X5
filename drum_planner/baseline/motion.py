@@ -83,10 +83,10 @@ class Controller:
     def send(self,target):
         target=np.asarray(target,dtype=float)
         if self.q is None:raise RuntimeError('Missing measured joint position')
-        # Per-joint step bound from the already-validated 0.6 rad/s curve and
+        # Per-joint step bound from the already-validated profile and
         # the existing 80 ms scheduler deadline, not a sum over seven axes.
         if target.shape!=(7,) or not np.isfinite(target).all():raise RuntimeError('Invalid trajectory target')
-        if np.max(abs(target-self.anchor))>.6*self.rate*.08+1e-6:
+        if np.any(abs(target-self.anchor)>self.curve.limits[0]*self.rate*.08+1e-6):
             raise RuntimeError('Target discontinuity rejected')
         self.bus.set_positions(target);self.anchor=target.copy()
 

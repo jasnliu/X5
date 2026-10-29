@@ -1,0 +1,49 @@
+[
+  {
+    "side": "right",
+    "returncode": 0,
+    "cold_process_wall_s": 12.390895746066235,
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R1",
+      "R2",
+      "--headless",
+      "--output",
+      "diagnostics/fast_posture_20261024/cold_right"
+    ],
+    "comparison_enabled": false,
+    "acquisition": false,
+    "result_cache_used": false
+  },
+  {
+    "side": "left",
+    "returncode": 0,
+    "cold_process_wall_s": 30.629099949030206,
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--left",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "L1",
+      "--headless",
+      "--output",
+      "diagnostics/fast_posture_20261024/cold_left"
+    ],
+    "comparison_enabled": false,
+    "acquisition": false,
+    "result_cache_used": false
+  }
+]

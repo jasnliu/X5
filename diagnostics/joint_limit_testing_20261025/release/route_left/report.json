@@ -1,0 +1,184 @@
+{
+  "schema": "x5-joint-limit-study-v1",
+  "kind": "fixed_path_forecast",
+  "side": "left",
+  "source_plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near/plans/workspace_curve-371ea646/plan.json",
+  "source_plan_sha256": "11a34eca5aa9310d78a78f21d2dfeab97fbdcbd069b38d98c41885ef73840fb5",
+  "source_geometry_sha256": "2600b331059dc79b1cae9881815fb2c3784db72a9f701f5ce2c313765820debd",
+  "profile": {
+    "schema": "x5-experiment-motion-profile-v1",
+    "side": "left",
+    "name": "Original limits",
+    "simulation_only": true,
+    "timing_quality": "balanced",
+    "velocity_rad_s": [
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    "acceleration_rad_s2": [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    "jerk_rad_s3": [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+    ]
+  },
+  "profile_sha256": "72ea8f60c4c2e52d83a890ebefd10a1bfe175291a2aece935fb9c59816f864ad",
+  "profile_evidence": null,
+  "quality": "balanced",
+  "previous_movement_s": 0.45933739710662114,
+  "predicted_movement_s": 0.45933739710662114,
+  "calculation_s": 3.3382805620785803,
+  "geometric_path_unchanged": true,
+  "verification": {
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "dense_samples": 331,
+    "dense_peaks": [
+      [
+        2.6492505732186506e-05,
+        1.8082190089728335e-05,
+        7.653519186771418e-06,
+        4.507546979178917e-05,
+        3.746117430081078e-06,
+        0.07525398002861607,
+        0.00014761975214132276
+      ],
+      [
+        0.0008254964560479583,
+        0.0005367383312755527,
+        0.00025830648819437493,
+        0.0013647914409775689,
+        0.00014128265241452947,
+        0.6362903092706882,
+        0.004515345778879271
+      ],
+      [
+        0.15819097617420647,
+        0.08800726755645741,
+        0.05170934916565162,
+        0.24170198284979436,
+        0.030763963740618454,
+        5.953839333116229,
+        0.8019616817036855
+      ]
+    ],
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "motor_commands": 0,
+    "collision_zone": {
+      "samples_checked": 331,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    }
+  },
+  "limits": [
+    [
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+    ]
+  ],
+  "peaks": [
+    [
+      2.6498469981291792e-05,
+      1.808347777873022e-05,
+      7.654232602461868e-06,
+      4.507548209650556e-05,
+      3.746406745562108e-06,
+      0.07525398100949986,
+      0.00014762136033138237
+    ],
+    [
+      0.0008288695088856059,
+      0.0005446866895003018,
+      0.0002584840563482716,
+      0.0013763451650605969,
+      0.00014128267425206787,
+      0.6364149758640721,
+      0.004563615549847987
+    ],
+    [
+      0.15852770594197235,
+      0.08802520559747691,
+      0.05172152779768057,
+      0.24227794064048191,
+      0.030832949465753778,
+      5.982035940089889,
+      0.8070772481933045
+    ]
+  ],
+  "hardware_execution_available": false,
+  "motion_authorized": false,
+  "global_fastest_claimed": false,
+  "result_cache_used": false,
+  "physical_route_validation_required": true,
+  "note": "Fastest checked clock found at these candidate limits on this exact saved path; NOT measured route performance or an absolute optimum."
+}

@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "preservation": {
+    "snapshot_files": 3647,
+    "unchanged_files": 3634,
+    "authorized_modified_files": [
+      ".gitignore",
+      "AGENTS.md",
+      "DRUM_PLANNER_EXPERIMENTS.md",
+      "config/git_retained_artifacts.json",
+      "drum_planner/cli.py",
+      "drum_planner/experiment/app.py",
+      "drum_planner/experiment/fast.py",
+      "drum_planner/experiment/fast_config.py",
+      "drum_planner/timing/README.md",
+      "tests/test_checkpoint_performance.py",
+      "tests/test_experiment_checkpoints.py",
+      "tests/test_experiment_fast_timing.py",
+      "tests/test_planner_experiment.py"
+    ],
+    "unexpected_changes": []
+  },
+  "headless_cases": [
+    {
+      "case": "right_default",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 3.6089936782898744,
+      "return_s": 3.6089936782898744,
+      "legs": 1
+    },
+    {
+      "case": "right_fast",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.7649334886528185,
+      "return_s": 1.7649334886528185,
+      "legs": 1
+    },
+    {
+      "case": "right_balanced",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.656983746870765,
+      "return_s": 1.656983746870765,
+      "legs": 1
+    },
+    {
+      "case": "right_thorough",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.6467329678768035,
+      "return_s": 1.6467329678768035,
+      "legs": 1
+    },
+    {
+      "case": "right_reverse",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.6569837309124522,
+      "return_s": 1.6569837309124522,
+      "legs": 1
+    },
+    {
+      "case": "right_stationary",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.0,
+      "return_s": 0.0,
+      "legs": 1
+    },
+    {
+      "case": "right_sequence_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 2.7103138553371995,
+      "return_s": 0.0,
+      "legs": 4
+    },
+    {
+      "case": "left_stationary",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.0,
+      "return_s": 0.0,
+      "legs": 1
+    },
+    {
+      "case": "left_near",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.45933739710662114,
+      "return_s": 0.45933739710662114,
+      "legs": 1
+    },
+    {
+      "case": "left_near_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.30368523449539087,
+      "return_s": 0.30368523449539087,
+      "legs": 1
+    },
+    {
+      "case": "left_default_blocked",
+      "passed": true,
+      "expected_status": "no_feasible_route"
+    },
+    {
+      "case": "left_sequence_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.6124496331884334,
+      "return_s": 0.0,
+      "legs": 4
+    }
+  ],
+  "continuously_rechecked_nonstationary_laws": 11,
+  "all_leg_actual_acquisition_masks_preserved": true,
+  "passive_arm_unchanged": true,
+  "math_comparisons": 16,
+  "native_ui_sides": [
+    "right",
+    "left"
+  ],
+  "external_path_cli_ui_passed": true,
+  "motor_commands": 0
+}

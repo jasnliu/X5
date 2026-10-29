@@ -8,6 +8,8 @@
 //     'J' = KEY CLOSE  -> drive to 100 deg and actively hold (closed-loop).
 //     'A90\n'..'A115\n' = configure calibrated target (only while open).
 //     'B' = calibrated CLOSE; 'Q' = protocol/encoder status (no motion).
+//     'P1\n'..'P90\n' = collection-only shallow close/hold, only from open.
+//     'V' = report optional collection capability; normal calibration unchanged.
 //     'O' = OPEN  -> actively return to 0 deg at HALF speed, then release (loose).
 //     Host sends C on beats 2 & 4, O on beats 1 & 3  -> Motor 2 hits on 2 & 4.
 //
@@ -149,6 +151,10 @@ uint8_t angleLength = 0;
 bool readingAngle = false;
 bool angleInvalid = false;
 unsigned long angleStartedMs = 0;
+char angleCommand = 'A';
+bool partialCollectionActive = false;
+static const long COLLECTION_TRAVEL_LIMIT_COUNTS =
+    (long)(COUNTS_PER_OUTPUT_REV * 100.0f / 360.0f);
 
 void startKick1() {
   digitalWrite(M1_R_EN, HIGH);
@@ -166,6 +172,7 @@ void m2Open()  {
 }
 void m2Close(long targetCounts) {
   if (faulted2) return;  // Faults latch until reset, never cleared by a close.
+  partialCollectionActive = false;
   openReached2 = false;
   setpoint2 = targetCounts;
   released2 = false;
@@ -176,6 +183,7 @@ void releaseAll() {
   coast1(); kick1Active = false;
   coast2(); released2 = true; setpoint2 = 0;
   movementPending = false;
+  partialCollectionActive = false;
 }
 
 void reportHiHat() {
@@ -188,6 +196,19 @@ void finishAngle() {
   angleBuffer[angleLength] = '\0';
   const int degrees = atoi(angleBuffer);
   readingAngle = false;
+  if (angleCommand == 'P') {
+    if (angleInvalid || angleLength == 0 || degrees < 1 || degrees > 90 ||
+        faulted2 || !released2 || !openReached2) {
+      Serial.println("ERROR: partial collection rejected; require open/released, integer 1..90");
+      return;
+    }
+    const long counts = (long)lroundf(COUNTS_PER_OUTPUT_REV * degrees / 360.0f);
+    integral2 = 0;
+    m2Close(counts);
+    partialCollectionActive = true;
+    Serial.printf("PARTIAL degrees=%d counts=%ld\n", degrees, counts);
+    return;
+  }
   if (angleInvalid || angleLength == 0 || degrees < CALIBRATION_MIN_DEGREES ||
       degrees > CALIBRATION_MAX_DEGREES || faulted2 || !released2 || !openReached2) {
     Serial.println("ERROR: calibrated angle rejected; require verified open return and integer 90..115");
@@ -261,7 +282,8 @@ void loop() {
       }
       continue;
     }
-    if (c == 'A') { readingAngle = true; angleLength = 0; angleInvalid = false; angleStartedMs = millis(); }
+    if (c == 'A' || c == 'P') { angleCommand = (char)c; readingAngle = true; angleLength = 0; angleInvalid = false; angleStartedMs = millis(); }
+    else if (c == 'V') Serial.println("COLLECTION v=1 min=1 max=90 guard=100");
     else if (c == 'Q') reportHiHat();
     else if (c == 'B') m2Close(calibratedCounts);
     else if (c == 'K' || c == 'k') startKick1();
@@ -296,6 +318,12 @@ void loop() {
 
   const long position = readPos2();
 
+  if (partialCollectionActive && (position > COLLECTION_TRAVEL_LIMIT_COUNTS || position < -15)) {
+    faulted2 = true; releaseAll();
+    Serial.println("FAULT: partial collection travel guard; outputs released");
+    return;
+  }
+
   if (!faulted2 && labs(position) > SAFETY_LIMIT_COUNTS) {
     faulted2 = true;
     coast2();
@@ -318,6 +346,7 @@ void loop() {
   if (setpoint2 == 0 && labs(position) <= REACHED_DEADBAND) {
     openReached2 = true;  // Preserve proof even if the loose mechanism coasts afterward.
     released2 = true;
+    partialCollectionActive = false;
     coast2();
     return;
   }

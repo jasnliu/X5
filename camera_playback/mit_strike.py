@@ -671,7 +671,13 @@ class Joint7Session:
 
     @property
     def owns_feedback(self):
-        return self.status.sample is not None
+        # A retained last sample is NOT a live feedback source. Resume the
+        # parent's query-only polling before its 300 ms freshness watchdog,
+        # including after a faulted/stopped worker. Command ownership remains
+        # unchanged until stop/join; this only controls duplicate state queries.
+        sample = self.status.sample
+        return (not self.closed and self.process.is_alive() and sample is not None
+                and -.001 <= time.monotonic()-sample.at < .1)
 
     @property
     def status(self):

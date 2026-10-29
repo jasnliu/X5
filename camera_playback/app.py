@@ -159,6 +159,7 @@ class HiHatCalibrationHold(CameraGoalControl):
 
 
 class App(CameraSearchApp):
+    generated_mode = False
     CAMERA_REQUIRED_PHASES = {
         "CLOSING GRIPPER",
         "MOVING TO RECORDING START",
@@ -497,7 +498,7 @@ class App(CameraSearchApp):
                     "ESP32 hi-hat, and encoders"
                 )
             self.status.set(initial_status)
-        if not self.hardware_test_mode and not self.recording_only:
+        if not self.hardware_test_mode and not self.recording_only and not self.generated_mode:
             self.dual = dual_control.DualRecording(self)
             self.root.title('BOTH arms: Left → Right recorded beat playback' +
                             (' — PURE SIMULATION' if self.test_mode else '' if real_hardware else ' — OFFLINE PREVIEW'))
@@ -2084,6 +2085,10 @@ class App(CameraSearchApp):
             f"PINK ZONE CONFIRMED ONCE (camera frame {frame_id}); "
             "starting the J7 hit search at 5°, then increasing by 1°"
         )
+        self._begin_prime_strikes(anchor, message)
+
+    def _begin_prime_strikes(self, anchor, message):
+        """Shared acoustic ride search after either visual alignment or a checked prime route."""
         self.result_status.set(message)
         self.result_label.config(fg="#087f23")
         print(message, flush=True)
@@ -3263,8 +3268,11 @@ class App(CameraSearchApp):
         self.hardware_test_last_workflow_hold = now
 
     def encoder_text(self):
+        joints = '  '.join(f'{i}: {math.degrees(self.q[f"openarmx_left_joint{i}"]):6.1f}'
+                           for i in range(1, 8))
         feedback = getattr(self.bus, 'motor8_feedback', {}).get('left') if self.bus else None
-        return super().encoder_text() + '\nLeft ' + gripper_feedback_text(feedback)
+        return (super().encoder_text() + '\nLeft encoder degrees:\n' + joints
+                + '\nLeft ' + gripper_feedback_text(feedback))
 
     def relaxed_feedback_sides(self):
         return ('left', 'right')
@@ -3487,6 +3495,7 @@ def main():
     mode.add_argument("--hardware", action="store_true")
     mode.add_argument("--test", action="store_true")
     mode.add_argument("--hardwaretest", action="store_true")
+    mode.add_argument('--generated-simulate',type=Path,help='device-free generated mission UI replay; no sensors or motors')
     parser.add_argument("--detection-socket", required=True)
     parser.add_argument("--audio-socket", required=True)
     parser.add_argument("--hihat-audio-socket", help="hi-hat detector socket (required for normal hardware calibration)")
@@ -3508,6 +3517,8 @@ def main():
     parser.add_argument("--mit-latency-ms", type=float, default=StrikeSettings.command_latency*1000)
     args = parser.parse_args()
     verification = sum((args.verify_playback, args.verify_swing, args.verify_calibration))
+    if verification and args.hardware and not args.recording_only:
+        parser.error('Old recording/centering verification flags do not apply to generated hardware. Start is explicit.')
     if verification and (not args.hardware or args.recording_only or verification > 1):
         parser.error('verification requires normal --hardware and exactly one verification mode')
     try:
@@ -3518,7 +3529,13 @@ def main():
         parser.error(str(exc))
     rclpy.init(args=[])
     try:
-        app = App(
+        factory=App
+        extra={}
+        if (args.hardware and not args.recording_only) or args.generated_simulate:
+            from .generated_app import GeneratedApp
+            factory=GeneratedApp
+            extra['simulate_mission']=args.generated_simulate
+        app = factory(
             args.hardware or args.hardwaretest,
             args.detection_socket,
             args.audio_socket,
@@ -3531,6 +3548,7 @@ def main():
             hihat_audio_socket=args.hihat_audio_socket,
             snare_audio_socket=args.snare_audio_socket,
             left_recording_path=args.left_recording,
+            **extra,
         )
         if args.verify_swing:
             from .beat_evidence import BeatEvidence

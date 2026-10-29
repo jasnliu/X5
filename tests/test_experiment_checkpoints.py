@@ -181,18 +181,20 @@ def test_offset_roundoff_does_not_duplicate_display_timestamps(sequence):
     assert plan.playable and np.all(np.diff(plan.times)>0)
 
 
-def test_worker_budget_scales_with_legs_not_memory(tmp_path,monkeypatch):
+@pytest.mark.parametrize('quality,per_leg',[('fast',162.),('balanced',170.),('thorough',186.)])
+def test_worker_budget_scales_with_legs_not_memory(tmp_path,monkeypatch,quality,per_leg):
     from types import SimpleNamespace
     calls=[]
     monkeypatch.setattr(app,'Job',lambda *a,**kw:calls.append(kw) or SimpleNamespace())
-    atomic_json(tmp_path/'context.json',{'checkpoints':[{}, {}, {}]})
+    atomic_json(tmp_path/'context.json',{'checkpoints':[{}, {}, {}],
+                                       'motion_settings':{'timing_quality':quality}})
     app.start_plan(tmp_path,'workspace_curve',config.settings(),120)
-    # Four serial legs, each with search cap plus bounded fast-timing/check
-    # headroom. No old ten-minute CPU reference qualification per leg.
-    assert calls==[{'timeout':600}]
-    atomic_json(tmp_path/'context.json',{})
+    # Four serial legs: explicit quality-stage solve bounds plus preparation/
+    # checking headroom. Still no CPU-reference qualification or memory increase.
+    assert calls==[{'timeout':4*per_leg}]
+    atomic_json(tmp_path/'context.json',{'motion_settings':{'timing_quality':quality}})
     app.start_plan(tmp_path,'workspace_curve',config.settings(),120)
-    assert calls[-1]=={'timeout':150}
+    assert calls[-1]=={'timeout':per_leg}
 
 
 def test_leg_cache_identity_includes_original_scene_pose(sequence):

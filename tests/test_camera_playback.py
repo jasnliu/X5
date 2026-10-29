@@ -2241,7 +2241,7 @@ class CameraPlaybackTests(unittest.TestCase):
         self.assertIn('"--hardwaretest"', new_launcher)
         self.assertIn('app_command.append("--hardwaretest")', new_launcher)
         self.assertIn(
-            "perception_enabled = not args.test",
+            "perception_enabled = not (args.test or args.generated_simulate)",
             new_launcher,
         )
         self.assertIn("if perception_enabled:", new_launcher)

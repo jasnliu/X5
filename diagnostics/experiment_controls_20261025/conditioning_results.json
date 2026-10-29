@@ -1,0 +1,1217 @@
+[
+  {
+    "name": "original",
+    "quality": "fast",
+    "duration_s": 1.7893695874344373,
+    "calculation_s": 1.9384949459927157,
+    "details": {
+      "correction_scale": 0.9999620037791802,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7893695874344373,
+          "accepted": true,
+          "correction_scale": 0.9999620037791802,
+          "elapsed_s": 1.1035164230270311,
+          "iterations": 81,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.2839226297032744,
+          "best_duration_s": 1.7893695874344373
+        }
+      ],
+      "calculation_seconds": 1.938266976037994,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.1942685389906321,
+            0.04777643118959181,
+            0.06176462864613213,
+            0.15694798042091254,
+            0.17591318433624473,
+            0.429472945291411,
+            0.2573860807318242
+          ],
+          [
+            0.5415287396287645,
+            0.12919798227760912,
+            0.18452426884728815,
+            0.42476129741203,
+            0.45821213277936923,
+            1.047970718348883,
+            0.6302046481947944
+          ],
+          [
+            5.686807773822118,
+            2.504235164186192,
+            5.2863246764358784,
+            3.3155237912351763,
+            4.873879917191457,
+            5.982035940089875,
+            3.649618658890638
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.32378089831772017,
+            0.07962738531598636,
+            0.10294104774355355,
+            0.26157996736818756,
+            0.2931886405604079,
+            0.7157882421523517,
+            0.428976801219707
+          ],
+          [
+            0.45127394969063706,
+            0.10766498523134094,
+            0.1537702240394068,
+            0.3539677478433583,
+            0.38184344398280773,
+            0.8733089319574024,
+            0.5251705401623287
+          ],
+          [
+            0.9478012956370198,
+            0.41737252736436536,
+            0.8810541127393131,
+            0.5525872985391961,
+            0.8123133195319094,
+            0.9970059900149791,
+            0.6082697764817729
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089875,
+            "limit": 6.0,
+            "utilization": 0.9970059900149791
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.686807773822118,
+            "limit": 6.0,
+            "utilization": 0.9478012956370198
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.2863246764358784,
+            "limit": 6.0,
+            "utilization": 0.8810541127393131
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  },
+  {
+    "name": "original",
+    "quality": "balanced",
+    "duration_s": 1.656983746870765,
+    "calculation_s": 3.3914443000685424,
+    "details": {
+      "correction_scale": 1.0037081268869679,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7649334886528185,
+          "accepted": true,
+          "correction_scale": 1.0029714713608564,
+          "elapsed_s": 1.0333925520535558,
+          "iterations": 82,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.3083587284848932,
+          "best_duration_s": 1.7649334886528185
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.2551401800010353,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.26391254097688943,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.10794974178205341,
+          "best_duration_s": 1.656983746870765
+        }
+      ],
+      "calculation_seconds": 3.3912065729964525,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23582903862143834,
+            0.05879347993548417,
+            0.07451998351829069,
+            0.19329388758696456,
+            0.21915124978148787,
+            0.5372264008284884,
+            0.32169445155847787
+          ],
+          [
+            0.6387780248724008,
+            0.146920933765777,
+            0.21005774896679802,
+            0.5010814155619616,
+            0.5210455957111921,
+            1.1913230420583387,
+            0.7436337154118805
+          ],
+          [
+            5.979305684287385,
+            2.56741673869568,
+            5.933745670776271,
+            4.267321456620004,
+            5.528198243398332,
+            5.982035940089877,
+            5.308689956284682
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.39304839770239725,
+            0.09798913322580696,
+            0.12419997253048448,
+            0.3221564793116076,
+            0.36525208296914646,
+            0.8953773347141474,
+            0.5361574192641299
+          ],
+          [
+            0.5323150207270007,
+            0.12243411147148084,
+            0.17504812413899837,
+            0.4175678463016347,
+            0.43420466309266015,
+            0.9927692017152823,
+            0.6196947628432338
+          ],
+          [
+            0.9965509473812308,
+            0.4279027897826133,
+            0.9889576117960451,
+            0.7112202427700006,
+            0.9213663738997221,
+            0.9970059900149795,
+            0.8847816593807803
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089877,
+            "limit": 6.0,
+            "utilization": 0.9970059900149795
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.979305684287385,
+            "limit": 6.0,
+            "utilization": 0.9965509473812308
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1913230420583387,
+            "limit": 1.2,
+            "utilization": 0.9927692017152823
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  },
+  {
+    "name": "original",
+    "quality": "thorough",
+    "duration_s": 1.6467329678768035,
+    "calculation_s": 4.74650660098996,
+    "details": {
+      "correction_scale": 1.0021630618914534,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": "Sparse bounded stop: Maximum_WallTime_Exceeded",
+      "warnings": [
+        "Sparse bounded stop: Maximum_WallTime_Exceeded"
+      ],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 2100,
+          "duration_s": 2.0732922171377117
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.7441071363881067,
+          "accepted": true,
+          "correction_scale": 1.0008119255948456,
+          "elapsed_s": 1.0419637720333412,
+          "iterations": 83,
+          "status": "Maximum_WallTime_Exceeded",
+          "converged": false,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.32918508074960506,
+          "best_duration_s": 1.7441071363881067
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.657557277160673,
+          "accepted": true,
+          "correction_scale": 1.0044977470282819,
+          "elapsed_s": 1.246911769034341,
+          "iterations": 99,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.656983746870765,
+          "accepted": true,
+          "correction_scale": 1.0037081268869679,
+          "elapsed_s": 0.2628678799374029,
+          "iterations": 15,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.08712338951734155,
+          "best_duration_s": 1.656983746870765
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1181,
+          "duration_s": 1.6467329678768035,
+          "accepted": true,
+          "correction_scale": 1.0021630618914534,
+          "elapsed_s": 1.3389513170113787,
+          "iterations": 30,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.010250778993961651,
+          "best_duration_s": 1.6467329678768035
+        }
+      ],
+      "calculation_seconds": 4.7462016839999706,
+      "uniform_duration_s": 4.723240682999497,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.23919240467826094,
+            0.05933533102812452,
+            0.07508767381302274,
+            0.195662951925901,
+            0.22140467165693603,
+            0.5430238177049284,
+            0.3252522113203493
+          ],
+          [
+            0.6415562333377436,
+            0.1473865227812883,
+            0.21076461408737351,
+            0.5031257969393984,
+            0.5226933785102522,
+            1.1952527138840285,
+            0.7461618334695864
+          ],
+          [
+            5.97213447222578,
+            2.6613532340201274,
+            5.961701547632451,
+            4.448448515136628,
+            5.663990647455988,
+            5.982035940089876,
+            5.399133132235494
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            6.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.3986540077971016,
+            0.09889221838020754,
+            0.12514612302170458,
+            0.3261049198765017,
+            0.3690077860948934,
+            0.9050396961748807,
+            0.5420870188672489
+          ],
+          [
+            0.5346301944481197,
+            0.12282210231774025,
+            0.1756371784061446,
+            0.4192714974494987,
+            0.4355778154252102,
+            0.9960439282366905,
+            0.621801527891322
+          ],
+          [
+            0.9953557453709633,
+            0.4435588723366879,
+            0.9936169246054085,
+            0.7414080858561047,
+            0.9439984412426646,
+            0.9970059900149794,
+            0.8998555220392489
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 6,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089876,
+            "limit": 6.0,
+            "utilization": 0.9970059900149794
+          },
+          {
+            "joint": 6,
+            "derivative": "acceleration_rad_s2",
+            "peak": 1.1952527138840285,
+            "limit": 1.2,
+            "utilization": 0.9960439282366905
+          },
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.97213447222578,
+            "limit": 6.0,
+            "utilization": 0.9953557453709633
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  },
+  {
+    "name": "distal",
+    "quality": "fast",
+    "duration_s": 1.3551571030531864,
+    "calculation_s": 1.297269805916585,
+    "details": {
+      "correction_scale": 1.003464851663966,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 fast",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 1.531230335946398
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.3572072470467305,
+          "accepted": true,
+          "correction_scale": 1.005112897626,
+          "elapsed_s": 0.4134708000347018,
+          "iterations": 29,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.3551571030531864,
+          "accepted": true,
+          "correction_scale": 1.003464851663966,
+          "elapsed_s": 0.28953290393110365,
+          "iterations": 17,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.17607323289321153,
+          "best_duration_s": 1.3551571030531864
+        }
+      ],
+      "calculation_seconds": 1.2970129509922117,
+      "uniform_duration_s": 3.6393471574019505,
+      "timing_quality": "fast",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.2893646786580067,
+            0.0707986734679781,
+            0.08685269366193389,
+            0.23707525032284427,
+            0.26615816575204415,
+            0.6538514852416246,
+            0.39223232441881045
+          ],
+          [
+            1.0848089917274222,
+            0.2985794897295674,
+            0.42697755713492874,
+            0.8510153994473046,
+            1.0588842905633495,
+            2.420515893477189,
+            1.3289812915051158
+          ],
+          [
+            5.982035940089878,
+            5.939987193440048,
+            5.950998280803582,
+            5.941433062071523,
+            10.633603550468958,
+            24.655950984418794,
+            13.868339328134113
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            1.2,
+            2.4,
+            2.4
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            4.8,
+            19.2,
+            19.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            48.0,
+            384.0,
+            384.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.48227446443001115,
+            0.11799778911329682,
+            0.1447544894365565,
+            0.3951254172047405,
+            0.2217984714600368,
+            0.2724381188506769,
+            0.16343013517450436
+          ],
+          [
+            0.9040074931061852,
+            0.24881624144130615,
+            0.355814630945774,
+            0.7091794995394206,
+            0.2206008938673645,
+            0.1260685361186036,
+            0.06921777559922479
+          ],
+          [
+            0.9970059900149796,
+            0.9899978655733414,
+            0.991833046800597,
+            0.9902388436785872,
+            0.22153340730143664,
+            0.0642082056885906,
+            0.036115467000349254
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.950998280803582,
+            "limit": 6.0,
+            "utilization": 0.991833046800597
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.941433062071523,
+            "limit": 6.0,
+            "utilization": 0.9902388436785872
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  },
+  {
+    "name": "distal",
+    "quality": "balanced",
+    "duration_s": 1.3551571030531864,
+    "calculation_s": 1.6038861579727381,
+    "details": {
+      "correction_scale": 1.003464851663966,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 balanced",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 1.531230335946398
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.3572072470467305,
+          "accepted": true,
+          "correction_scale": 1.005112897626,
+          "elapsed_s": 0.40989481192082167,
+          "iterations": 29,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.3551571030531864,
+          "accepted": true,
+          "correction_scale": 1.003464851663966,
+          "elapsed_s": 0.2901484500616789,
+          "iterations": 17,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.17607323289321153,
+          "best_duration_s": 1.3551571030531864
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 427,
+          "duration_s": 1.3551587912342964,
+          "accepted": false,
+          "correction_scale": 1.0034661419186348,
+          "elapsed_s": 0.30240587203297764,
+          "iterations": 18,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 1.3551571030531864
+        }
+      ],
+      "calculation_seconds": 1.6036320279818028,
+      "uniform_duration_s": 3.6393471574019505,
+      "timing_quality": "balanced",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.2893646786580067,
+            0.0707986734679781,
+            0.08685269366193389,
+            0.23707525032284427,
+            0.26615816575204415,
+            0.6538514852416246,
+            0.39223232441881045
+          ],
+          [
+            1.0848089917274222,
+            0.2985794897295674,
+            0.42697755713492874,
+            0.8510153994473046,
+            1.0588842905633495,
+            2.420515893477189,
+            1.3289812915051158
+          ],
+          [
+            5.982035940089878,
+            5.939987193440048,
+            5.950998280803582,
+            5.941433062071523,
+            10.633603550468958,
+            24.655950984418794,
+            13.868339328134113
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            1.2,
+            2.4,
+            2.4
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            4.8,
+            19.2,
+            19.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            48.0,
+            384.0,
+            384.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.48227446443001115,
+            0.11799778911329682,
+            0.1447544894365565,
+            0.3951254172047405,
+            0.2217984714600368,
+            0.2724381188506769,
+            0.16343013517450436
+          ],
+          [
+            0.9040074931061852,
+            0.24881624144130615,
+            0.355814630945774,
+            0.7091794995394206,
+            0.2206008938673645,
+            0.1260685361186036,
+            0.06921777559922479
+          ],
+          [
+            0.9970059900149796,
+            0.9899978655733414,
+            0.991833046800597,
+            0.9902388436785872,
+            0.22153340730143664,
+            0.0642082056885906,
+            0.036115467000349254
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089878,
+            "limit": 6.0,
+            "utilization": 0.9970059900149796
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.950998280803582,
+            "limit": 6.0,
+            "utilization": 0.991833046800597
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.941433062071523,
+            "limit": 6.0,
+            "utilization": 0.9902388436785872
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  },
+  {
+    "name": "distal",
+    "quality": "thorough",
+    "duration_s": 1.3481700188355576,
+    "calculation_s": 3.5101855809334666,
+    "details": {
+      "correction_scale": 1.0020376090527883,
+      "continuous_checker": "batched polynomial roots",
+      "actual_backend": "cpu",
+      "requested_backend": "cpu_sparse",
+      "backend_label": "CPU sparse timing \u2014 thorough",
+      "selected_stage": "sparse",
+      "fallback_used": false,
+      "fallback_reason": null,
+      "warnings": [],
+      "history": [
+        {
+          "stage": "fresh_seed",
+          "iterations": 1800,
+          "duration_s": 1.531230335946398
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 388,
+          "duration_s": 1.3572072470467305,
+          "accepted": true,
+          "correction_scale": 1.005112897626,
+          "elapsed_s": 0.4120756919728592,
+          "iterations": 29,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 0,
+          "controls": 96,
+          "attempt": 2,
+          "grid_points": 427,
+          "duration_s": 1.3551571030531864,
+          "accepted": true,
+          "correction_scale": 1.003464851663966,
+          "elapsed_s": 0.2893134920159355,
+          "iterations": 17,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.17607323289321153,
+          "best_duration_s": 1.3551571030531864
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 1,
+          "controls": 96,
+          "attempt": 1,
+          "grid_points": 427,
+          "duration_s": 1.3551587912342964,
+          "accepted": false,
+          "correction_scale": 1.0034661419186348,
+          "elapsed_s": 0.3070396089460701,
+          "iterations": 18,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 96,
+          "improvement_s": 0.0,
+          "best_duration_s": 1.3551571030531864
+        },
+        {
+          "stage": "sparse",
+          "quality_stage": 2,
+          "controls": 192,
+          "attempt": 1,
+          "grid_points": 1181,
+          "duration_s": 1.3481700188355576,
+          "accepted": true,
+          "correction_scale": 1.0020376090527883,
+          "elapsed_s": 1.8875410089967772,
+          "iterations": 44,
+          "status": "Solve_Succeeded",
+          "converged": true,
+          "casadi_version": "3.7.2"
+        },
+        {
+          "stage": "quality_stage_complete",
+          "controls": 192,
+          "improvement_s": 0.006987084217628725,
+          "best_duration_s": 1.3481700188355576
+        }
+      ],
+      "calculation_seconds": 3.509987349039875,
+      "uniform_duration_s": 3.6393471574019505,
+      "timing_quality": "thorough",
+      "precision": "float64",
+      "cpu_reference_used": false,
+      "result_cache_used": false,
+      "global_optimum_claimed": false,
+      "gpu_native_optimizer": false,
+      "per_joint_limits": true,
+      "constraint_summary": {
+        "peaks": [
+          [
+            0.290739368402064,
+            0.07105918500737544,
+            0.08695190156777012,
+            0.2381303080642174,
+            0.26720824302047685,
+            0.6564578460137775,
+            0.39382389449635147
+          ],
+          [
+            1.1117810272495652,
+            0.3145404536091817,
+            0.4495748565193421,
+            0.872148124671143,
+            1.1155102335534344,
+            2.550439291708204,
+            1.4006563612008265
+          ],
+          [
+            5.982035940089879,
+            5.96488388572642,
+            5.969393423201878,
+            5.966171525046665,
+            10.67543478628194,
+            25.00717973607831,
+            14.059036290077714
+          ]
+        ],
+        "limits": [
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.6,
+            1.2,
+            2.4,
+            2.4
+          ],
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            4.8,
+            19.2,
+            19.2
+          ],
+          [
+            6.0,
+            6.0,
+            6.0,
+            6.0,
+            48.0,
+            384.0,
+            384.0
+          ]
+        ],
+        "utilization": [
+          [
+            0.48456561400344,
+            0.11843197501229241,
+            0.14491983594628355,
+            0.39688384677369565,
+            0.2226735358503974,
+            0.27352410250574066,
+            0.16409328937347978
+          ],
+          [
+            0.9264841893746377,
+            0.2621170446743181,
+            0.37464571376611844,
+            0.7267901038926192,
+            0.23239796532363216,
+            0.13283537977646898,
+            0.07295085214587638
+          ],
+          [
+            0.9970059900149798,
+            0.9941473142877366,
+            0.9948989038669797,
+            0.9943619208411109,
+            0.22240489138087374,
+            0.06512286389603726,
+            0.03661207367207738
+          ]
+        ],
+        "highest_utilization": [
+          {
+            "joint": 1,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.982035940089879,
+            "limit": 6.0,
+            "utilization": 0.9970059900149798
+          },
+          {
+            "joint": 3,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.969393423201878,
+            "limit": 6.0,
+            "utilization": 0.9948989038669797
+          },
+          {
+            "joint": 4,
+            "derivative": "jerk_rad_s3",
+            "peak": 5.966171525046665,
+            "limit": 6.0,
+            "utilization": 0.9943619208411109
+          }
+        ],
+        "interpretation": "Near-active constraints, not proof of a global optimum"
+      },
+      "implementation_sha256": "e978ad3e07cd9bee5eb1ca49fd2208fc4f7381ea76e86c8f9e1c3f92c9002da2"
+    }
+  }
+]

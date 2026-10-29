@@ -1,0 +1,62 @@
+[
+  {
+    "case": "left_sequence",
+    "passed": true,
+    "process_s": 14.14574830699712,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--left",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/verify_left_sequence",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L_near.json",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/L1.json",
+      "--motion-profile",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/left_unequal.json",
+      "--timing-quality",
+      "balanced",
+      "--headless"
+    ],
+    "movement_s": 0.6124496331884334
+  },
+  {
+    "case": "cli_ui",
+    "passed": true,
+    "process_s": 17.876599919982255,
+    "command": [
+      "./plan_drums.sh",
+      "experiment",
+      "--right",
+      "--offline",
+      "--state",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "/home/jason/Proyectos3/X5/diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--calibration",
+      "/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/verify_cli_ui",
+      "--start",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R1.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/inputs/R2.json",
+      "--timing-quality",
+      "balanced",
+      "--seconds",
+      "15"
+    ],
+    "generations": 1,
+    "mesh_builds": 1
+  }
+]

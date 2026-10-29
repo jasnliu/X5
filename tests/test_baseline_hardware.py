@@ -332,7 +332,13 @@ def test_fresh_start_through_worker_entrypoints_preserves_logs_and_new_plan_dire
     calls=[]
     def capture(folder,cal,*,moving_side):
         assert moving_side=='right'
-        common.atomic_json(folder/'acquisition.json',dict(proof=dict(test=True),boot_id='unit-test'))
+        (folder/'camera').mkdir()
+        common.atomic_json(folder/'measured_start.json',{})
+        common.atomic_json(folder/'camera/scene.json',{})
+        common.atomic_json(folder/'acquisition.json',dict(proof=dict(test=True),
+            boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+            state=str(folder/'measured_start.json'),scene=str(folder/'camera/scene.json'),
+            state_sha256=common.digest(folder/'measured_start.json'),scene_sha256=common.digest(folder/'camera/scene.json')))
     def plan(folder,state,scene,cal,*,moving_side):
         assert moving_side=='right'
         assert folder.name=='result' and (folder.parent/'worker.log').read_text()=='worker log retained'
@@ -924,7 +930,7 @@ def test_native_recovery_checker_receives_current_left_pose(rig,tmp_path,monkeyp
     plan=tmp_path/'plan.json';plan.write_text('{}')
     common.atomic_json(packet,dict(plan=str(plan),calibration='unit',fresh_scene='unit-scene',fresh_scene_sha256='digest'))
     monkeypatch.setattr(tasks,'load_checked',lambda *a:(r.obj,copy.deepcopy(r.req),r.engine.curve))
-    monkeypatch.setattr(planning,'scene',lambda *a:dict(source_scene_sha256='digest'))
+    monkeypatch.setattr(tasks,'validated_scene',lambda *a:dict(source_scene_sha256='digest'))
     calls=[]
     def check(req,q,folder):calls.append((copy.deepcopy(req),q));return dict(all_valid=True,samples=len(q))
     monkeypatch.setattr(tasks,'hard_check',check)

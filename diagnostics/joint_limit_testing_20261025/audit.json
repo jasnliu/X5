@@ -1,0 +1,253 @@
+{
+  "passed": true,
+  "software_only": true,
+  "hardware_commands": 0,
+  "hardware_limits_measured": false,
+  "live_runner_implemented": false,
+  "existing_files_checked": 2454,
+  "authorized_existing_changes": [
+    ".gitignore",
+    "config/git_retained_artifacts.json"
+  ],
+  "original_programs_data_calibration_unchanged": true,
+  "cli_cases": 11,
+  "tests_passed": 107,
+  "cases": [
+    {
+      "side": "right",
+      "prepared_trials": 212,
+      "blocked_excursions": 3,
+      "synthetic_traces_passed": 212,
+      "missing_cohorts": [],
+      "export_refused_for_unspecified_conditions": true,
+      "same_profile_route_duration_s": 1.656983746870765,
+      "fresh_timing_validation_s": 4.8933579589938745
+    },
+    {
+      "side": "left",
+      "prepared_trials": 204,
+      "blocked_excursions": 5,
+      "synthetic_traces_passed": 204,
+      "missing_cohorts": [],
+      "export_refused_for_unspecified_conditions": true,
+      "same_profile_route_duration_s": 0.45933739710662114,
+      "fresh_timing_validation_s": 3.3382805620785803
+    }
+  ],
+  "contained_jobs": [
+    {
+      "case": "prepare_right",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-a93c7762adb2",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.219102325034328,
+      "unit": "x5-experiment-684da077173b",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-684da077173b.service",
+        "MemoryCurrent": "101249024",
+        "MemoryPeak": "223019008",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 222433280
+      }
+    },
+    {
+      "case": "simulate_right",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-c39092e79c24",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.5191437110770494,
+      "unit": "x5-experiment-6710bc796a41",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-6710bc796a41.service",
+        "MemoryCurrent": "86380544",
+        "MemoryPeak": "86380544",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 86380544
+      }
+    },
+    {
+      "case": "analyze_right",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-150e25fa508b",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.2598250940209255,
+      "unit": "x5-experiment-91e1de527ccc",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-91e1de527ccc.service",
+        "MemoryCurrent": "79605760",
+        "MemoryPeak": "79605760",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 79605760
+      }
+    },
+    {
+      "case": "routes_right",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-fe1c39d6a0ae",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 5.342403393005952,
+      "unit": "x5-experiment-ba525a91f6bd",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-ba525a91f6bd.service",
+        "MemoryCurrent": "236707840",
+        "MemoryPeak": "383393792",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 297402368
+      }
+    },
+    {
+      "case": "prepare_left",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-fae518e26144",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.1708661220036447,
+      "unit": "x5-experiment-295d4bab72ce",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-295d4bab72ce.service",
+        "MemoryCurrent": "76550144",
+        "MemoryPeak": "228155392",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 227012608
+      }
+    },
+    {
+      "case": "simulate_left",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-fe53f0110abb",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.349822651944123,
+      "unit": "x5-experiment-40bd4165d222",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-40bd4165d222.service",
+        "MemoryCurrent": "86859776",
+        "MemoryPeak": "86904832",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 86859776
+      }
+    },
+    {
+      "case": "analyze_left",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-b26d9782ae0f",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.1683275810210034,
+      "unit": "x5-experiment-3c4a31d9d299",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-3c4a31d9d299.service",
+        "MemoryCurrent": "79929344",
+        "MemoryPeak": "79929344",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 79929344
+      }
+    },
+    {
+      "case": "routes_left",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-2b5b39fd97e2",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.819408508017659,
+      "unit": "x5-experiment-07de01eb2933",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-07de01eb2933.service",
+        "MemoryCurrent": "363663360",
+        "MemoryPeak": "365953024",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 363663360
+      }
+    },
+    {
+      "case": "demo_right",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-fe76d4d5a68b",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 2.9566292370436713,
+      "unit": "x5-experiment-617a7f57edb6",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-617a7f57edb6.service",
+        "MemoryCurrent": "85467136",
+        "MemoryPeak": "85467136",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 85467136
+      }
+    },
+    {
+      "case": "demo_left",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-09b2b1f37b37",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 2.9124959090258926,
+      "unit": "x5-experiment-63eca1b475a0",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-63eca1b475a0.service",
+        "MemoryCurrent": "85635072",
+        "MemoryPeak": "85635072",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 85635072
+      }
+    },
+    {
+      "case": "demo_failure",
+      "folder": "/home/jason/Proyectos3/X5/diagnostics/joint-limit-job-9a63fa5db112",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 2.7113687288947403,
+      "unit": "x5-experiment-7803034d5e31",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-7803034d5e31.service",
+        "MemoryCurrent": "84258816",
+        "MemoryPeak": "84361216",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 84258816
+      }
+    }
+  ],
+  "cancel_cleanup_passed": true,
+  "sources": {
+    "joint_limit_lab/__init__.py": "ecb3f21a3c9b40c46dc68b0c86dbce568c422d9b2b3c9e2c8560ce973162fb95",
+    "joint_limit_lab/analysis.py": "0b136bd0ae414acb9153adb9ec270a94b49604d7713f7e833003f9651851eb5a",
+    "joint_limit_lab/campaign.py": "5b58a7d297a1130a81f1f4fc66551137c01afcddf004ed0e25120d1502064a3d",
+    "joint_limit_lab/cli.py": "0fe60911c05d21770dd6b31cc01f9da34293e1c19ddaa28f1bfd52162a21297f",
+    "joint_limit_lab/routes.py": "9383ef36ad68201e7d0226a236845272456abb7340d0411e929f1592b661d73a",
+    "joint_limit_lab/schema.py": "7505b673b0e8bb5b5414d242410795a881b55454b32bbfdc0a800ea191c90482",
+    "joint_limit_lab/simulation.py": "45c792d7178ff39fe17b08b654a1e96ed2ad06f5fceea30726c073d6983b9463",
+    "joint_limit_lab/telemetry.py": "24433f2b963f6faaa8529b93fee9bd384d9f153b41ce50779e8e2b64c7ba18b4",
+    "joint_limit_lab/trajectories.py": "4ae0e68175fb84543fdc2221e532e907345eda09681d3a0b31bc4f43de2fe2d9",
+    "joint_limit_lab/worker.py": "659a524fc7f7350a1a4351e6e5e9e1205861cdce18a16c33ee3cf61b354176b5",
+    "test_joint_limits.sh": "4a9088b431a4acf29f527d7e99c34157b24648580dc6706be85c31a7320d1fce",
+    "tests/test_joint_limit_lab.py": "d8a6fbcabe1f753c9ac677307c5f7cd3970c5219dd0e610ccef56a2646016d0e",
+    "JOINT_LIMIT_TESTING.md": "19209b14a8e55a33ed34206dd9a2b060b4fe034ff13689996e430101eb7dabad"
+  }
+}

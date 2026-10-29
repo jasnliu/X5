@@ -6,7 +6,7 @@ import pytest
 
 from drum_planner import cli
 from drum_planner.common import arm_joints, atomic_json
-from drum_planner.experiment import acquisition, app
+from drum_planner.experiment import acquisition, app, rgbd
 
 
 @pytest.mark.parametrize('side',['right','left'])
@@ -110,6 +110,10 @@ def devices(monkeypatch):
         events.append('camera_closed')
     monkeypatch.setattr(acquisition,'Telemetry',Telemetry)
     monkeypatch.setattr(acquisition,'capture_current',capture_current)
+    def paired(folder,cal_path,worker,*,stationary_joints):
+        capture_current(Path(folder).parent,worker,cal_path,stationary_joints=stationary_joints)
+        events.append('paired_rgb_retained')
+    monkeypatch.setattr(rgbd,'capture',paired)
     return events,workers
 
 
@@ -117,7 +121,9 @@ def devices(monkeypatch):
 def test_acquisition_measures_both_arms_but_only_selected_stillness(tmp_path,devices,side):
     events,workers=devices;folder=tmp_path/'new'
     report=acquisition.capture(folder,side)
-    assert events==['encoders_opened',('camera_capture',arm_joints(side)),'camera_closed','encoders_closed']
+    assert events==['encoders_opened',('camera_capture',arm_joints(side)),'camera_closed',
+                   *(['paired_rgb_retained'] if side=='right' else []),'encoders_closed']
+    assert ('dt1_source' in report)==(side=='right')
     assert report['passed'] and report['camera_released'] and report['telemetry']['thread_stopped']
     assert not report['cached_inputs_used'] and report['measured_sides']==['right','left']
     assert report['motor_commands']==report['mode_changes']==report['gripper_commands']==report['relax_commands']==0
@@ -125,8 +131,9 @@ def test_acquisition_measures_both_arms_but_only_selected_stillness(tmp_path,dev
     assert json.loads((folder/'acquisition_report.json').read_text())==report
 
 
+@pytest.mark.parametrize('side',['right','left'])
 @pytest.mark.parametrize('failure',['capture','telemetry','close','interrupt'])
-def test_device_failures_cleanup_and_never_mark_success(tmp_path,devices,monkeypatch,failure):
+def test_device_failures_cleanup_and_never_mark_success(tmp_path,devices,monkeypatch,failure,side):
     events,workers=devices
     def failed(folder,worker,*a,**k):
         if failure=='telemetry':worker.error='feedback lost'
@@ -136,8 +143,9 @@ def test_device_failures_cleanup_and_never_mark_success(tmp_path,devices,monkeyp
         elif failure=='interrupt':raise KeyboardInterrupt()
         else:raise RuntimeError('camera startup failed')
     monkeypatch.setattr(acquisition,'capture_current',failed)
+    monkeypatch.setattr(rgbd,'capture',lambda folder,cal_path,worker,**kw:failed(folder,worker,cal_path,**kw))
     with pytest.raises(KeyboardInterrupt if failure=='interrupt' else RuntimeError):
-        acquisition.capture(tmp_path/'bad')
+        acquisition.capture(tmp_path/'bad',side)
     assert workers[0].closed
     report=json.loads((tmp_path/'bad/acquisition_report.json').read_text())
     assert not report['passed'] and report['error']

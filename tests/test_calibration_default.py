@@ -82,7 +82,9 @@ def test_new_model_uses_new_calibration_without_global_joint_changes(tmp_path, s
     for name, offset in cal['kinematic_correction']['offsets_rad'].items():
         old = a.find(f"joint[@name='{name}']/limit"); new = b.find(f"joint[@name='{name}']/limit")
         for key in ('lower', 'upper'):
-            assert float(new.get(key)) == pytest.approx(float(old.get(key))-offset)
+            expected=float(old.get(key))-offset
+            if side=='right' and name=='openarmx_right_joint2' and key=='lower':expected=max(0.,expected)
+            assert float(new.get(key)) == pytest.approx(expected)
         for key in ('effort', 'velocity'): assert old.get(key) == new.get(key)
 
 

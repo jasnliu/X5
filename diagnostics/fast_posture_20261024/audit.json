@@ -1,0 +1,107 @@
+{
+  "passed": true,
+  "existing_files_audited": 2365,
+  "modified_existing_files": [
+    ".gitignore",
+    "config/git_retained_artifacts.json",
+    "drum_planner/cli.py"
+  ],
+  "protected_files_unchanged": 258,
+  "experiment_program_unchanged": true,
+  "hardware_programs_unchanged": true,
+  "timing_program_unchanged": true,
+  "calibration_models_destinations_recordings_unchanged": true,
+  "existing_motion_limits_unchanged": true,
+  "hardware_access_this_task": false,
+  "motor_commands": 0,
+  "fresh_camera_or_encoder_test_this_task": false,
+  "tests_used_explicit_saved_inputs": true,
+  "checked_cases": [
+    {
+      "case": "right_full",
+      "passed": true,
+      "peak_memory_bytes": "551534592",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 2.482534153247273e-16,
+      "task_constraint": "full-pose"
+    },
+    {
+      "case": "right_full_reverse",
+      "passed": true,
+      "peak_memory_bytes": "545157120",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 2.3263411494723067e-16,
+      "task_constraint": "full-pose"
+    },
+    {
+      "case": "right_axis",
+      "passed": true,
+      "peak_memory_bytes": "549695488",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 6.817503905082877e-14,
+      "task_constraint": "tip-axis"
+    },
+    {
+      "case": "right_axis_reverse",
+      "passed": true,
+      "peak_memory_bytes": "562679808",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 4.006541907466141e-06,
+      "task_constraint": "tip-axis"
+    },
+    {
+      "case": "left_full",
+      "passed": true,
+      "peak_memory_bytes": "393965568",
+      "native_fk_max_error_m": 6.522560269672795e-16,
+      "max_tip_error_m": 3.220596541973743e-14,
+      "task_constraint": "full-pose"
+    },
+    {
+      "case": "left_axis",
+      "passed": true,
+      "peak_memory_bytes": "394481664",
+      "native_fk_max_error_m": 6.522560269672795e-16,
+      "max_tip_error_m": 2.903526405976632e-14,
+      "task_constraint": "tip-axis"
+    },
+    {
+      "case": "right_plus1",
+      "passed": true,
+      "peak_memory_bytes": "549048320",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 3.447170978769293e-16,
+      "task_constraint": "full-pose"
+    },
+    {
+      "case": "right_minus1",
+      "passed": true,
+      "peak_memory_bytes": "554618880",
+      "native_fk_max_error_m": 4.163336342344337e-16,
+      "max_tip_error_m": 2.220446049250313e-16,
+      "task_constraint": "full-pose"
+    },
+    {
+      "case": "left_plus1",
+      "passed": true,
+      "peak_memory_bytes": "391917568",
+      "native_fk_max_error_m": 6.522560269672795e-16,
+      "max_tip_error_m": 2.4426546588887196e-14,
+      "task_constraint": "full-pose"
+    }
+  ],
+  "native_ui_passed_sides": [
+    "right",
+    "left"
+  ],
+  "evidence_warning": "Software and native UI only; no physical tracking, torque, thermal or acoustic validation",
+  "code_sha256": {
+    "drum_planner/fast_mode/__init__.py": "131edc773b6efbea547c6ad701acfc9a85a7a254375b2be15c17fdf0f19eef84",
+    "drum_planner/fast_mode/worker.py": "57c923d924873721133f7984d605e387c9c1f3808c63f84192cdbc2bd56f8a04",
+    "drum_planner/fast_mode/postures.py": "e87ccf6180b74928e1ecff3ae173068c1bf5ef59a5b2f13735e65863b390db36",
+    "drum_planner/fast_mode/planner.py": "e1bfd94b482fbd378a808dd3ac5551a9525a301a3fa8c6dd99500721415b83ce",
+    "drum_planner/fast_mode/app.py": "b2313a9b244c54ef7316c066c56eadfb15d360e923f57bf42eeead9c2d927172",
+    "drum_planner/fast_mode/kinematics.py": "ed90fe81d2fbe68fb7f2913d4d4c0f885141390c347890127dca16ea54276521",
+    "drum_planner/fast_mode/clearance.py": "6b361889b02f5c2a5936d5b861ff7e8318b9e69044a6975f5a86babddffa558c"
+  }
+}

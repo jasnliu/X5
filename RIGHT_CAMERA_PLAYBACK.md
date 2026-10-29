@@ -1,5 +1,13 @@
 # Right-arm recorded camera Cartesian alignment
 
+> **Normal `start_beat.sh --hardware` has changed.** It now captures one scene
+> and both resting poses, generates left-then-right paths (right DT1), and skips
+> centering and pink-zone adjustment. See [Generated beat startup](GENERATED_BEAT.md)
+> for its controls, Hold/return behavior and software-only verification.
+> The recording, camera-selector and normal-hardware centering instructions below
+> describe the older workflow; recording-based `--test`, `--hardwaretest` and
+> `--recording-only` remain separate, unchanged modes.
+
 This is a new program. It does not replace or modify
 `start_right_camera_cartesian.sh` or the `camera_search/` implementation.
 

@@ -1,0 +1,973 @@
+{
+  "endpoint_checks": {
+    "checks": 83,
+    "valid": [
+      true,
+      true
+    ]
+  },
+  "start": [
+    0.017070725566490808,
+    0.032031586175326865,
+    0.8199702449073012,
+    0.07269443808651843,
+    -0.7887929040208007,
+    0.06617303730830848,
+    0.46589654383154055
+  ],
+  "goal": [
+    -0.6431252002746621,
+    0.009014877546348998,
+    -0.1946829938200949,
+    1.5703149462119477,
+    0.2070633559929341,
+    -0.6504138246738389,
+    0.8602494850080102
+  ],
+  "lower": [
+    -1.25,
+    -0.11948622196409846,
+    -1.624918241923648,
+    -0.024088316840804737,
+    -1.4925717252812658,
+    -0.7723674418045051,
+    -1.4
+  ],
+  "upper": [
+    3.0,
+    3.2805137780359015,
+    1.515081758076352,
+    1.7759116831591952,
+    1.5074282747187342,
+    0.7276325581954949,
+    1.4
+  ],
+  "counts": {
+    "continuous_joint_bounds": 10,
+    "coarse_collision_or_zone": 4
+  },
+  "continuous_bounds": [
+    {
+      "candidate": 1,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.1194870006599219,
+          "max_rad": 0.03203158617532687,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 4.461598420799812e-05,
+          "above_deg": 0.0,
+          "minimum_s": 0.46555949697558163,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948621320646824,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 2,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.119938984957654,
+          "max_rad": 0.032031586175326865,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.025941408650441266,
+          "above_deg": 0.0,
+          "minimum_s": 0.46948317734664685,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948618495546424,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 3,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12261499195165476,
+          "max_rad": 0.03203158617532686,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.1792653153541753,
+          "above_deg": 0.0,
+          "minimum_s": 0.42275981167768334,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948621976382699,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 4,
+      "violations": []
+    },
+    {
+      "candidate": 5,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.1203013095202974,
+          "max_rad": 0.032031586175326865,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.04670107690383157,
+          "above_deg": 0.0,
+          "minimum_s": 0.4740663966269,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948622194337431,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 6,
+      "violations": []
+    },
+    {
+      "candidate": 7,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12038378276574675,
+          "max_rad": 0.03203158617532688,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.05142644579082613,
+          "above_deg": 0.0,
+          "minimum_s": 0.48079140976867646,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948622195338617,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 8,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12005657989283611,
+          "max_rad": 0.03203158617532687,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.0326791021284907,
+          "above_deg": 0.0,
+          "minimum_s": 0.4486344177535569,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948621601998818,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 9,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12056882155495517,
+          "max_rad": 0.032031586175326865,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.06202838745867944,
+          "above_deg": 0.0,
+          "minimum_s": 0.4583354704396103,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948521406140072,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 10,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12252953311301282,
+          "max_rad": 0.03203158617532686,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.17436888457790242,
+          "above_deg": 0.0,
+          "minimum_s": 0.4155558409773808,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.11948621169849834,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 11,
+      "violations": []
+    },
+    {
+      "candidate": 12,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12064265043344471,
+          "max_rad": 0.03203158617532687,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.06625847060231443,
+          "above_deg": 0.0,
+          "minimum_s": 0.3453821183869743,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.1194862219612678,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    },
+    {
+      "candidate": 13,
+      "violations": []
+    },
+    {
+      "candidate": 14,
+      "violations": [
+        {
+          "joint": 2,
+          "min_rad": -0.12149850765585478,
+          "max_rad": 0.03203158617532686,
+          "lower_rad": -0.11948622196409846,
+          "upper_rad": 3.2805137780359015,
+          "below_deg": 0.11529547731220054,
+          "above_deg": 0.0,
+          "minimum_s": 0.3556073769879449,
+          "maximum_s": 0.0,
+          "knots_min_rad": -0.1194862185443423,
+          "knots_max_rad": 0.032031586175326865
+        }
+      ]
+    }
+  ],
+  "coarse_checks": [
+    {
+      "candidate": 4,
+      "first_bad_sample": 2,
+      "reply": {
+        "checks": 5,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "candidate": 6,
+      "first_bad_sample": 2,
+      "reply": {
+        "checks": 8,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "candidate": 11,
+      "first_bad_sample": 2,
+      "reply": {
+        "checks": 13,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "candidate": 13,
+      "first_bad_sample": 2,
+      "reply": {
+        "checks": 16,
+        "details": {
+          "contacts": [
+            [
+              "gemini_native_depth",
+              "right_drumstick"
+            ]
+          ],
+          "reason": "collision"
+        },
+        "valid": [
+          true,
+          true,
+          false
+        ]
+      }
+    }
+  ],
+  "straight_joint_line": {
+    "checks": 81,
+    "details": {
+      "contacts": [
+        [
+          "gemini_native_depth",
+          "right_drumstick"
+        ]
+      ],
+      "reason": "collision"
+    },
+    "valid": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  "reports": [
+    {
+      "method": "workspace_curve",
+      "policy": "fast-workspace-v1",
+      "pool_reused": false,
+      "result_cache_used": false,
+      "selected": null,
+      "candidates": [],
+      "searches": [
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 11,
+          "fit_rms_m": 0.0007804773656066926,
+          "fit_max_m": 0.0023132050698938997,
+          "control_offsets_m": [
+            [
+              0.000725812359730067,
+              -0.001818390847819396,
+              -0.015339144329817806
+            ],
+            [
+              0.0003489326670401894,
+              -0.0006004477715014207,
+              -0.0021757856066607012
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "cost": 0.020991477268831785,
+          "index": 1,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 14,
+          "fit_rms_m": 0.0014469725040182101,
+          "fit_max_m": 0.004243093865280871,
+          "control_offsets_m": [
+            [
+              -0.1213675150357679,
+              -0.04345367715606805,
+              0.01600982289887228
+            ],
+            [
+              -0.11990606915550062,
+              -0.04175072159663473,
+              0.03486371255977674
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.1355040587721085,
+              -0.04625987039301892,
+              0.04274092486991972
+            ],
+            [
+              -0.1355040587721085,
+              -0.04625987039301892,
+              0.04274092486991972
+            ]
+          ],
+          "cost": 0.047395160397822544,
+          "index": 2,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`gtol` termination condition is satisfied.",
+          "fk_evaluations": 13,
+          "fit_rms_m": 0.00030540532511659176,
+          "fit_max_m": 0.0008379372785726181,
+          "control_offsets_m": [
+            [
+              0.12229355745928759,
+              0.04036825131147653,
+              -0.04391785852182916
+            ],
+            [
+              0.12114970808891025,
+              0.04075635992203928,
+              -0.038641858119765955
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.1355040587721085,
+              0.04625987039301892,
+              -0.04274092486991972
+            ],
+            [
+              0.1355040587721085,
+              0.04625987039301892,
+              -0.04274092486991972
+            ]
+          ],
+          "cost": 0.035067541731744624,
+          "index": 3,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`gtol` termination condition is satisfied.",
+          "fk_evaluations": 8,
+          "fit_rms_m": 0.0007480577283221644,
+          "fit_max_m": 0.0021629946608172513,
+          "control_offsets_m": [
+            [
+              0.044119840213538326,
+              -0.12819287165492332,
+              -0.012906162870004931
+            ],
+            [
+              0.04344862045489296,
+              -0.12671768808418662,
+              -0.001630474507881797
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.048276907629352314,
+              -0.14141234882773515,
+              0.0
+            ],
+            [
+              0.048276907629352314,
+              -0.14141234882773515,
+              0.0
+            ]
+          ],
+          "cost": 0.03731910172649998,
+          "index": 4,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "played_curve_fit_max_m": 0.002841020153434644,
+          "reason": "coarse_collision_or_zone"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`gtol` termination condition is satisfied.",
+          "fk_evaluations": 15,
+          "fit_rms_m": 0.000897178675574358,
+          "fit_max_m": 0.0025773265895400427,
+          "control_offsets_m": [
+            [
+              -0.04287464538035445,
+              0.12202003986211588,
+              -0.01921648658292255
+            ],
+            [
+              -0.0425814958633733,
+              0.12528946000894975,
+              -0.0032161344546900224
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.048276907629352314,
+              0.14141234882773515,
+              -0.0
+            ],
+            [
+              -0.048276907629352314,
+              0.14141234882773515,
+              -0.0
+            ]
+          ],
+          "cost": 0.04453429734308483,
+          "index": 5,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 9,
+          "fit_rms_m": 0.0012076474449211,
+          "fit_max_m": 0.0035146548719231278,
+          "control_offsets_m": [
+            [
+              -0.05480851675992146,
+              -0.1206223473359414,
+              0.008058123593059366
+            ],
+            [
+              -0.05426068135163569,
+              -0.11884650594829327,
+              0.02429279883926701
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.0616789100766268,
+              -0.13270429885132354,
+              0.030222397809704985
+            ],
+            [
+              -0.0616789100766268,
+              -0.13270429885132354,
+              0.030222397809704985
+            ]
+          ],
+          "cost": 0.042956759173405495,
+          "index": 6,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "played_curve_fit_max_m": 0.0043149540693670375,
+          "reason": "coarse_collision_or_zone"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`gtol` termination condition is satisfied.",
+          "fk_evaluations": 13,
+          "fit_rms_m": 0.001291432051866705,
+          "fit_max_m": 0.003761293562603611,
+          "control_offsets_m": [
+            [
+              -0.11667123431429725,
+              0.05636834523146067,
+              0.003958536352403571
+            ],
+            [
+              -0.11518141194857288,
+              0.059330758265759745,
+              0.02318575386476326
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.12995276759548996,
+              0.06728296274789457,
+              0.030222397809704985
+            ],
+            [
+              -0.12995276759548996,
+              0.06728296274789457,
+              0.030222397809704985
+            ]
+          ],
+          "cost": 0.047951926031248496,
+          "index": 7,
+          "accepted": false,
+          "prior_weight": 2.0,
+          "reason": "continuous_joint_bounds"
+        }
+      ],
+      "joint_limit_check": {
+        "accepted_static_encoder_overshoot": [],
+        "angles_clamped": false,
+        "moving_right_limits_unchanged": true,
+        "reason": "joint_limits",
+        "static_left_encoder_tolerance_rad": 0.0011508354314488441,
+        "valid": true,
+        "violations": []
+      },
+      "options": {
+        "knots": 9,
+        "samples": 33,
+        "max_nfev": 45,
+        "fit_weight": 35.0,
+        "length_weight": 0.45,
+        "bend_weight": 0.08,
+        "tip_weight": 0.025,
+        "joint_weight": 0.012,
+        "posture_weight": 0.015,
+        "prior_weight": 5.0,
+        "prior_weights": [
+          2.0,
+          5.0
+        ],
+        "coherence_weight": 0.35,
+        "max_fit_m": 0.025,
+        "proposal_count": 7
+      },
+      "pool_elapsed_s": 0.991629781001393,
+      "profile": {
+        "fit_s": 0.9314501040062169,
+        "geometry_s": 0.03066588799993042,
+        "style_s": 6.609989213757217e-07
+      },
+      "reason": "no_workspace_proposal_within_budget"
+    },
+    {
+      "method": "workspace_curve",
+      "policy": "fast-workspace-v1",
+      "pool_reused": false,
+      "result_cache_used": false,
+      "selected": null,
+      "candidates": [],
+      "searches": [
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 13,
+          "fit_rms_m": 0.0009886873069686725,
+          "fit_max_m": 0.002942165958791525,
+          "control_offsets_m": [
+            [
+              0.0001548448443967468,
+              -0.0003810877649837697,
+              -0.0033593223135516817
+            ],
+            [
+              5.151105440907879e-05,
+              -0.00010871205181414739,
+              -0.000284210937613965
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "cost": 0.022106456074018174,
+          "index": 8,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 15,
+          "fit_rms_m": 0.0017877986516067611,
+          "fit_max_m": 0.005346803521716251,
+          "control_offsets_m": [
+            [
+              -0.13304477408951923,
+              -0.04590169071907505,
+              0.03706995543060552
+            ],
+            [
+              -0.13272248362962621,
+              -0.045443501959209584,
+              0.04146265597616927
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.1355040587721085,
+              -0.04625987039301892,
+              0.04274092486991972
+            ],
+            [
+              -0.1355040587721085,
+              -0.04625987039301892,
+              0.04274092486991972
+            ]
+          ],
+          "cost": 0.05252506463025265,
+          "index": 9,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 15,
+          "fit_rms_m": 0.0003429212969963756,
+          "fit_max_m": 0.000937690638989441,
+          "control_offsets_m": [
+            [
+              0.13319828058659364,
+              0.04522318002577936,
+              -0.04300796509582378
+            ],
+            [
+              0.13295836419740137,
+              0.045288152051876945,
+              -0.04194156070600495
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.1355040587721085,
+              0.04625987039301892,
+              -0.04274092486991972
+            ],
+            [
+              0.1355040587721085,
+              0.04625987039301892,
+              -0.04274092486991972
+            ]
+          ],
+          "cost": 0.03679036485585938,
+          "index": 10,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 7,
+          "fit_rms_m": 0.0009248971388062542,
+          "fit_max_m": 0.002694774327296915,
+          "control_offsets_m": [
+            [
+              0.04758238763219732,
+              -0.13915079768910926,
+              -0.002811447882104894
+            ],
+            [
+              0.047413200416323666,
+              -0.13880722876755497,
+              -0.00019399986956303988
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              0.048276907629352314,
+              -0.14141234882773515,
+              0.0
+            ],
+            [
+              0.048276907629352314,
+              -0.14141234882773515,
+              0.0
+            ]
+          ],
+          "cost": 0.03966806793848265,
+          "index": 11,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "played_curve_fit_max_m": 0.00332328708117598,
+          "reason": "coarse_collision_or_zone"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 14,
+          "fit_rms_m": 0.0011839698714031272,
+          "fit_max_m": 0.0034197644764895345,
+          "control_offsets_m": [
+            [
+              -0.04732452880527431,
+              0.13779686417613582,
+              -0.00437300771734015
+            ],
+            [
+              -0.047267127363189276,
+              0.13856812322730377,
+              -0.0004696642280165418
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.048276907629352314,
+              0.14141234882773515,
+              -0.0
+            ],
+            [
+              -0.048276907629352314,
+              0.14141234882773515,
+              -0.0
+            ]
+          ],
+          "cost": 0.049004082194107026,
+          "index": 12,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "reason": "continuous_joint_bounds"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 9,
+          "fit_rms_m": 0.0015026614524008006,
+          "fit_max_m": 0.004407443002728422,
+          "control_offsets_m": [
+            [
+              -0.0604623827224555,
+              -0.13064761065336106,
+              0.025528717816020372
+            ],
+            [
+              -0.06035773246641314,
+              -0.13023770624681283,
+              0.029293775354394903
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.0616789100766268,
+              -0.13270429885132354,
+              0.030222397809704985
+            ],
+            [
+              -0.0616789100766268,
+              -0.13270429885132354,
+              0.030222397809704985
+            ]
+          ],
+          "cost": 0.04688090657259427,
+          "index": 13,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "played_curve_fit_max_m": 0.005172887573260324,
+          "reason": "coarse_collision_or_zone"
+        },
+        {
+          "optimizer_converged": true,
+          "message": "`ftol` termination condition is satisfied.",
+          "fk_evaluations": 10,
+          "fit_rms_m": 0.0016456097043157302,
+          "fit_max_m": 0.004878330556948921,
+          "control_offsets_m": [
+            [
+              -0.1276556486004048,
+              0.06518936676167301,
+              0.02453581064725011
+            ],
+            [
+              -0.12732658349942552,
+              0.06588076623661418,
+              0.029101928744023085
+            ]
+          ],
+          "requested_offsets_m": [
+            [
+              -0.12995276759548996,
+              0.06728296274789457,
+              0.030222397809704985
+            ],
+            [
+              -0.12995276759548996,
+              0.06728296274789457,
+              0.030222397809704985
+            ]
+          ],
+          "cost": 0.05343473635712805,
+          "index": 14,
+          "accepted": false,
+          "prior_weight": 5.0,
+          "reason": "continuous_joint_bounds"
+        }
+      ],
+      "joint_limit_check": {
+        "accepted_static_encoder_overshoot": [],
+        "angles_clamped": false,
+        "moving_right_limits_unchanged": true,
+        "reason": "joint_limits",
+        "static_left_encoder_tolerance_rad": 0.0011508354314488441,
+        "valid": true,
+        "violations": []
+      },
+      "options": {
+        "knots": 9,
+        "samples": 33,
+        "max_nfev": 45,
+        "fit_weight": 35.0,
+        "length_weight": 0.45,
+        "bend_weight": 0.08,
+        "tip_weight": 0.025,
+        "joint_weight": 0.012,
+        "posture_weight": 0.015,
+        "prior_weight": 5.0,
+        "prior_weights": [
+          2.0,
+          5.0
+        ],
+        "coherence_weight": 0.35,
+        "max_fit_m": 0.025,
+        "proposal_count": 7
+      },
+      "pool_elapsed_s": 0.9082498690004286,
+      "profile": {
+        "fit_s": 0.8600861560007615,
+        "geometry_s": 0.029880648999096593,
+        "style_s": 5.309993866831064e-07
+      },
+      "reason": "no_workspace_proposal_within_budget"
+    }
+  ],
+  "no_camera_access": true,
+  "no_can": true,
+  "source_edited": false
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "case": "prepare_right",
+    "command": [
+      "./test_joint_limits.sh",
+      "prepare",
+      "--config",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/right_config.json",
+      "--plan",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced/plans/workspace_curve-c3597c10/plan.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_right"
+    ],
+    "elapsed_s": 3.8232580759795383,
+    "passed": true
+  },
+  {
+    "case": "simulate_right",
+    "command": [
+      "./test_joint_limits.sh",
+      "simulate",
+      "--campaign",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_right/campaign.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/traces_right"
+    ],
+    "elapsed_s": 4.1227199180284515,
+    "passed": true
+  },
+  {
+    "case": "analyze_right",
+    "command": [
+      "./test_joint_limits.sh",
+      "analyze",
+      "--campaign",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_right/campaign.json",
+      "--traces",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/traces_right",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/analysis_right",
+      "--allow-synthetic-profile"
+    ],
+    "elapsed_s": 3.8720817919820547,
+    "passed": true
+  },
+  {
+    "case": "routes_right",
+    "command": [
+      "./test_joint_limits.sh",
+      "routes",
+      "--plan",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced/plans/workspace_curve-c3597c10/plan.json",
+      "--profile",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/right_original_profile.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/route_right"
+    ],
+    "elapsed_s": 5.92736413993407,
+    "passed": true
+  },
+  {
+    "case": "prepare_left",
+    "command": [
+      "./test_joint_limits.sh",
+      "prepare",
+      "--config",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/left_config.json",
+      "--plan",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near/plans/workspace_curve-371ea646/plan.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_left"
+    ],
+    "elapsed_s": 3.7724383550230414,
+    "passed": true
+  },
+  {
+    "case": "simulate_left",
+    "command": [
+      "./test_joint_limits.sh",
+      "simulate",
+      "--campaign",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_left/campaign.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/traces_left"
+    ],
+    "elapsed_s": 3.9717244639759883,
+    "passed": true
+  },
+  {
+    "case": "analyze_left",
+    "command": [
+      "./test_joint_limits.sh",
+      "analyze",
+      "--campaign",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/prepared_left/campaign.json",
+      "--traces",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/traces_left",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/analysis_left",
+      "--allow-synthetic-profile"
+    ],
+    "elapsed_s": 3.771600071922876,
+    "passed": true
+  },
+  {
+    "case": "routes_left",
+    "command": [
+      "./test_joint_limits.sh",
+      "routes",
+      "--plan",
+      "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/left_near/plans/workspace_curve-371ea646/plan.json",
+      "--profile",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/left_original_profile.json",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/route_left"
+    ],
+    "elapsed_s": 4.424153053900227,
+    "passed": true
+  },
+  {
+    "case": "demo_right",
+    "command": [
+      "./test_joint_limits.sh",
+      "demo",
+      "--right",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/demo_right"
+    ],
+    "elapsed_s": 3.571056590997614,
+    "passed": true
+  },
+  {
+    "case": "demo_left",
+    "command": [
+      "./test_joint_limits.sh",
+      "demo",
+      "--left",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/demo_left"
+    ],
+    "elapsed_s": 3.521577231003903,
+    "passed": true
+  },
+  {
+    "case": "demo_failure",
+    "command": [
+      "./test_joint_limits.sh",
+      "demo",
+      "--right",
+      "--failure",
+      "tracking",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/joint_limit_testing_20261025/release/demo_failure"
+    ],
+    "elapsed_s": 3.321089038043283,
+    "passed": true
+  }
+]

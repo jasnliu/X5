@@ -10,6 +10,13 @@ not physical playback.**
 It does not change `start_beat.sh`, recordings, calibration captures, shared URDF,
 encoder conversion, centering or existing playback programs.
 
+New generated **right-arm planner models use J2 >= 0°** in encoder/display
+coordinates, reflecting the operator-reported stop near -1° with provisional
+clearance. Other position bounds and velocity/acceleration/jerk limits are
+unchanged. This applies to whole planned curves, not only DT1 endpoints; the
+shared/vendor URDF and left-arm planning are unchanged. See
+[the operating-limit study](diagnostics/right_j2_operating_limit_20261028/REPORT.md).
+
 **Current collision policy: detected obstacles only.** New `live` and `plan`
 runs check the whole arm, custom gripper and drumstick against the captured
 Gemini obstacle voxels. A shoulder/wrist outside the camera view is **not** an
@@ -29,28 +36,25 @@ use the new transform and its matching calibration-local robot geometry together
 See `CAMERA_CALIBRATION.md` for the saved-data checks and their limitations.
 
 Experiment GUIs start with **no destination selected and no trajectory calculation**.
-Choose from `destinations/right` or `destinations/left` in the dropdown; selecting
-or changing the destination calculates all five methods against the same frozen
-scene/start. Hardware mode has its own destination/checkpoint selectors and starts
-calculation only when **Calculate trajectory** is clicked.
+The normal experiment and normal `--hardware` now share one current Workspace
+curve pipeline: broad proposals with bounded/wrist-guided recovery, plus adjustable
+Fast/Balanced/Thorough CPU timing (Balanced default) and per-joint V/A/jerk limits.
+Historical five-method / GPU-reference-gated implementations are retained, not the
+current default. See `DRUM_PLANNER_EXPERIMENTS.md` for their dated studies.
 
-The separate software `experiment --right` / `experiment --left` modes now
-automatically apply **GPU-native Vulkan FP64 timing** after geometric path selection,
-with a hard <=1% movement-duration gate against an exact-input CPU reference.
-An unseen curve still needs its original CPU reference solve once; logs separate
-that qualification from GPU calculation. Unavailable GPU support produces an
-explicitly labelled CPU fallback. All five experiment path choices remain, as does
-the approved left **v2 bounded C3 corner geometry** selection. The old v1/v2 CPU
-code is preserved; v2 rechecks the changed path without reducing collision
-margins. `./plan_drums.sh --hardware [--right|--left]` now uses **Workspace curve** with
-the original CPU arm-aware timing policy (not the experiment GPU optimizer).
-Choose saved destinations and optionally up to
-three checkpoints in its three-window UI. Calculate captures the measured start
-and camera scene; Start alone authorizes playback. Multi-checkpoint normal returns
-are newly planned from the final checkpoint directly to the original start, not
-through previous checkpoints. Hold and checked prefix-recovery/relax remain.
-`live` and recording playback are unchanged. See
-`DRUM_PLANNER_EXPERIMENTS.md` and `drum_planner/timing/README.md`.
+Choose saved destinations for either arm, or **dt1** for the right arm only.
+Experiment selection queues calculation; hardware selection only invalidates the
+old plan. **Calculate** in hardware captures new measured joints and a fresh camera
+scene, resolves dt1 from that same capture, plans and independently checks the exact
+route. **Start alone authorizes playback**. No saved experiment eligibility is reused.
+
+Hardware keeps three windows, selected-arm-only control, measured physical start
+(no simulated teleport), original default limits and motor settings, Hold and checked
+prefix recovery. Multi-checkpoint normal return is independently planned to the
+measured rest; two-second holds are unchanged. `--hardware-sparse`, `live`, recording
+playback and `start_beat.sh` are separate and unchanged. See
+[`BASELINE_HARDWARE.md`](BASELINE_HARDWARE.md) for the current controls, fresh-dt1
+workflow and the unchanged 0.8 rad/s CSP cap.
 
 Run from X5, or use the launcher's absolute path:
 

@@ -240,6 +240,8 @@ def test_guarded_work_wrapper_keeps_observer_through_planning_and_always_closes(
         (folder/'camera').mkdir();atomic_json(folder/'camera/scene.json',dict(test=True))
         atomic_json(folder/'measured_start.json',dict(test=True))
         return {},{}
+    from drum_planner.experiment import rgbd
+    monkeypatch.setattr(rgbd,'capture',lambda folder,cal,worker,**kw:capture(folder.parent,worker,cal,**kw))
     monkeypatch.setattr(work,'capture_current',capture)
     def verify(worker,state,*,stationary_joints=None):
         assert stationary_joints==JOINTS

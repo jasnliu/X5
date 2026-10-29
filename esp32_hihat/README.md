@@ -60,3 +60,23 @@ The copied `flash_beat.sh` is provided only when the board needs its firmware
 reloaded. Normal camera playback does **not** flash the ESP32. Do not run the
 standalone `esp-main/motor_beat.py` at the same time because only one process
 should own the serial port.
+
+## Optional shallow-close data collection (2026-10-28)
+
+`V` replies `COLLECTION v=1 min=1 max=90 guard=100` (no motion).
+`P<integer>\n` **moves motor 2** to a collection-only target from 1 through 90°
+and holds it. It requires released/open, fault-free status. This does not change
+`A90..115`, `B`, legacy `C/J`, normal `Q` fields, gains, kick behavior or watchdog.
+`O` returns to zero/releases; `S` immediately releases. P trials have an additional
+firmware travel guard at 100° (integer-count quantization) and -15 counts; faults
+latch. This is a travel guard, not a physical overshoot guarantee.
+
+`python3 -m hihat_collection.partial_close --plan PLAN.json` is dry-run only.
+Add `--folder NEW_FOLDER --execute` for physical hi-hat-only audio capture.
+Each trial may specify `target_degrees` (integer 1..90), `close_seconds` (0..4),
+`tail_seconds` (4..8), and `provisional_label`. No arm/CAN or kick is allowed.
+Provisional labels are displayed and saved, **not automatic training truth**.
+Full closures are positive `hihat_close` events; genuine ringing partial closures
+are negatives. Uncertain trials are excluded until reviewed. Motor command times
+are provenance, not acoustic onset annotations. Existing no-target plans retain
+legacy B90 early-return behavior; those transient excursions are not held poses.

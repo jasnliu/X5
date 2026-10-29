@@ -1,0 +1,1038 @@
+........................................................................ [ 27%]
+................F..FF...........FF..F.................F................. [ 55%]
+......................................FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.... [ 83%]
+..........................................F                              [100%]
+=================================== FAILURES ===================================
+________________ test_worker_budget_scales_with_legs_not_memory ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-285/test_worker_budget_scales_with0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74e9e5adbf50>
+
+    def test_worker_budget_scales_with_legs_not_memory(tmp_path,monkeypatch):
+        from types import SimpleNamespace
+        calls=[]
+        monkeypatch.setattr(app,'Job',lambda *a,**kw:calls.append(kw) or SimpleNamespace())
+        atomic_json(tmp_path/'context.json',{'checkpoints':[{}, {}, {}]})
+        app.start_plan(tmp_path,'workspace_curve',config.settings(),120)
+        # Four serial legs, each with search cap plus bounded fast-timing/check
+        # headroom. No old ten-minute CPU reference qualification per leg.
+>       assert calls==[{'timeout':600}]
+E       AssertionError: assert [{'timeout': 680.0}] == [{'timeout': 600}]
+E         At index 0 diff: {'timeout': 680.0} != {'timeout': 600}
+E         Use -v to get more diff
+
+tests/test_experiment_checkpoints.py:192: AssertionError
+___________ test_hardware_timing_generators_and_saved_data_unchanged ___________
+
+    def test_hardware_timing_generators_and_saved_data_unchanged():
+        before=json.loads((ROOT/'diagnostics/checkpoints_20261021/before_hashes.json').read_text())
+        changed={'drum_planner/experiment/app.py','drum_planner/experiment/worker.py',
+                 'drum_planner/experiment/algorithms.py','drum_planner/cpp/experiment_oracle.cpp'}
+        # Authorized hardware Workspace curve/checkpoint rollout; new tests cover
+        # its exact mission playback and unchanged experiment/timing/input sources.
+        changed.update({'drum_planner/baseline/curve.py', 'drum_planner/baseline/transport.py', 'drum_planner/baseline/__init__.py', 'drum_planner/cli.py', 'drum_planner/baseline/computation.py', 'drum_planner/baseline/motion.py', 'drum_planner/baseline/windows.py', 'drum_planner/baseline/work.py', 'drum_planner/baseline/workspace.py', 'drum_planner/baseline/service.py', 'drum_planner/baseline/planner.py', 'drum_planner/baseline/tasks.py'})
+        # Approved 5 mm map wiring; test_depth_resolution protects all generation/timing/data.
+        changed.update({'drum_planner/depth.py','drum_planner/planning.py','drum_planner/cpp/moveit_plan.cpp','drum_planner/experiment/worker.py','drum_planner/experiment/algorithms.py','drum_planner/baseline/work.py','drum_planner/live_view.py'})
+        for path,sha in before.items():
+            if path.startswith('tests/') or path in changed|OPTIMIZED:continue
+>           assert digest(ROOT/path)==sha,path
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_experiment_checkpoints.py:221: AssertionError
+_ test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields _
+
+    def test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields():
+        reference=ROOT/'diagnostics/checkpoints_20261021/reference'
+        # Authorized timing phase extraction replaces the worker byte check.
+        # Route generation/ranking and fixed policies remain byte-identical; full
+        # numerical/output parity is checked by the performance regression study.
+        from test_checkpoint_performance import test_policies_geometry_inputs_and_motor_control_are_unchanged
+>       test_policies_geometry_inputs_and_motor_control_are_unchanged()
+
+tests/test_experiment_checkpoints.py:230: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_checkpoint_performance.py:150: AssertionError
+_ test_sequence_request_reuse_is_byte_identical_to_independent_request[right] __
+
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-285/test_sequence_request_reuse_is0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74e9e5ae1700>
+side = 'right'
+
+    @pytest.mark.parametrize('side',['right','left'])
+    def test_sequence_request_reuse_is_byte_identical_to_independent_request(tmp_path,monkeypatch,side):
+        state,scene=config.saved_inputs(side);state=read_state(state)
+        ctx=dict(moving_side=side,scene=str(scene),calibration=str(DEFAULT_CALIBRATION),_sequence_inputs={})
+        calls=[];original=planning.scene
+        def checked(*a,**kw):calls.append(1);return original(*a,**kw)
+        monkeypatch.setattr(planning,'scene',checked)
+>       first,manifest=inputs.request(ctx,tmp_path/'first',state)
+
+tests/test_checkpoint_performance.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/inputs.py:15: in request
+    world=planning.scene(context['scene'],context['calibration'])
+tests/test_checkpoint_performance.py:122: in checked
+    def checked(*a,**kw):calls.append(1);return original(*a,**kw)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/camera/scene.json')
+cal_path = '/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json'
+
+    def scene(path, cal_path=DEFAULT_CALIBRATION):
+        path=Path(path).resolve(); data=json.loads(path.read_text())
+        if data.get('schema')!='x5-native-depth-scene-v1' or data.get('synthetic') is not False:
+            raise ValueError('Real planning scenes must come from the Gemini depth capture; no manually defined obstacles')
+>       if data['calibration_sha256']!=digest(cal_path): raise ValueError('Scene uses a different calibration')
+E       ValueError: Scene uses a different calibration
+
+drum_planner/planning.py:72: ValueError
+__ test_sequence_request_reuse_is_byte_identical_to_independent_request[left] __
+
+tmp_path = PosixPath('/tmp/pytest-of-jason/pytest-285/test_sequence_request_reuse_is1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74e9e5ae1250>
+side = 'left'
+
+    @pytest.mark.parametrize('side',['right','left'])
+    def test_sequence_request_reuse_is_byte_identical_to_independent_request(tmp_path,monkeypatch,side):
+        state,scene=config.saved_inputs(side);state=read_state(state)
+        ctx=dict(moving_side=side,scene=str(scene),calibration=str(DEFAULT_CALIBRATION),_sequence_inputs={})
+        calls=[];original=planning.scene
+        def checked(*a,**kw):calls.append(1);return original(*a,**kw)
+        monkeypatch.setattr(planning,'scene',checked)
+>       first,manifest=inputs.request(ctx,tmp_path/'first',state)
+
+tests/test_checkpoint_performance.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/inputs.py:15: in request
+    world=planning.scene(context['scene'],context['calibration'])
+tests/test_checkpoint_performance.py:122: in checked
+    def checked(*a,**kw):calls.append(1);return original(*a,**kw)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/jason/Proyectos3/X5/planner_runs/20261020T011905Z-baseline-ed3647/calculate-d0efbf1e/capture/camera/scene.json')
+cal_path = '/home/jason/Proyectos3/X5/calibration_sessions/20261024T211629Z-1227b7b1-reprocessed/calibration.json'
+
+    def scene(path, cal_path=DEFAULT_CALIBRATION):
+        path=Path(path).resolve(); data=json.loads(path.read_text())
+        if data.get('schema')!='x5-native-depth-scene-v1' or data.get('synthetic') is not False:
+            raise ValueError('Real planning scenes must come from the Gemini depth capture; no manually defined obstacles')
+>       if data['calibration_sha256']!=digest(cal_path): raise ValueError('Scene uses a different calibration')
+E       ValueError: Scene uses a different calibration
+
+drum_planner/planning.py:72: ValueError
+________ test_policies_geometry_inputs_and_motor_control_are_unchanged _________
+
+    def test_policies_geometry_inputs_and_motor_control_are_unchanged():
+        before=json.loads((D/'before_hashes.json').read_text())
+        for name,sha in before.items():
+>           if name not in OPTIMIZED:assert digest(ROOT/name)==sha,name
+E           AssertionError: destinations/right/destinationR1.json
+E           assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E             - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E             + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_checkpoint_performance.py:150: AssertionError
+_____________ test_only_experiment_sources_changed_since_this_task _____________
+
+    def test_only_experiment_sources_changed_since_this_task():
+        before=json.loads((ROOT/'tests/experiment_timing_preservation.json').read_text())
+        allowed={'drum_planner/experiment/fast.py','drum_planner/experiment/fast_config.py',
+                 'drum_planner/experiment/app.py','DRUM_PLANNER_EXPERIMENTS.md',
+                 # Subsequent authorized startup acquisition change, NOT timing/path
+                 # changes. Its CLI/offline behavior has dedicated regression tests.
+                 'drum_planner/cli.py','DRUM_PLANNER.md',
+                 'tests/test_planner_arms.py','tests/test_planner_experiment.py',
+                 # Subsequent authorized per-joint experiment controls: docs only.
+                 # Hardware/core/legacy timing remain protected by both audits.
+                 'AGENTS.md','drum_planner/timing/README.md'}
+        for path,sha in before.items():
+>           if path not in allowed:assert digest(ROOT/path)==sha,path
+E           AssertionError: drum_planner/common.py
+E           assert '60df946b27e4...e7177fcb8235a' == '079cccfdeca5...00cc702ef98f7'
+E             - 079cccfdeca5a75b681bd40506bd04f06c16ca2d38a26bcb5d500cc702ef98f7
+E             + 60df946b27e408591ab0555dba7c14dfa52e7d2042342b0ae61e7177fcb8235a
+
+tests/test_experiment_fast_timing.py:92: AssertionError
+_ test_cache_all_runs_every_method_without_method_selection_and_serializes_workers[right] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae35c0>
+
+    def test_cache_all_runs_every_method_without_method_selection_and_serializes_workers(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:285: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae35c0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_cache_all_runs_every_method_without_method_selection_and_serializes_workers[left] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5b04bf0>
+
+    def test_cache_all_runs_every_method_without_method_selection_and_serializes_workers(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:285: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5b04bf0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+___ test_selection_prioritizes_pending_without_stealing_worker_result[right] ___
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae39e0>
+
+    def test_selection_prioritizes_pending_without_stealing_worker_result(queued_view):
+>       v=queued_view;v.cache_all();first=v.job
+
+tests/test_planner_experiment.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae39e0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+___ test_selection_prioritizes_pending_without_stealing_worker_result[left] ____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e4b0>
+
+    def test_selection_prioritizes_pending_without_stealing_worker_result(queued_view):
+>       v=queued_view;v.cache_all();first=v.job
+
+tests/test_planner_experiment.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e4b0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_cached_playback_stays_usable_and_uninterrupted_during_other_workers[right] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c42a20>
+
+    def test_cached_playback_stays_usable_and_uninterrupted_during_other_workers(queued_view):
+>       v=queued_view;v.cache_all();v.finish()
+
+tests/test_planner_experiment.py:307: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c42a20>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_cached_playback_stays_usable_and_uninterrupted_during_other_workers[left] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43e90>
+
+    def test_cached_playback_stays_usable_and_uninterrupted_during_other_workers(queued_view):
+>       v=queued_view;v.cache_all();v.finish()
+
+tests/test_planner_experiment.py:307: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43e90>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+___ test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes[right] ____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c40fb0>
+
+    def test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes(queued_view):
+>       v=queued_view;v.cache_all();v.finish();v.cancel_job();v.poll()
+
+tests/test_planner_experiment.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c40fb0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+____ test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes[left] ____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c670b0>
+
+    def test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes(queued_view):
+>       v=queued_view;v.cache_all();v.finish();v.cancel_job();v.poll()
+
+tests/test_planner_experiment.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c670b0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+____ test_worker_failure_does_not_block_remaining_automatic_methods[right] _____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c425d0>
+
+    def test_worker_failure_does_not_block_remaining_automatic_methods(queued_view):
+>       v=queued_view;v.cache_all();v.finish(7)
+
+tests/test_planner_experiment.py:326: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c425d0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_____ test_worker_failure_does_not_block_remaining_automatic_methods[left] _____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c413a0>
+
+    def test_worker_failure_does_not_block_remaining_automatic_methods(queued_view):
+>       v=queued_view;v.cache_all();v.finish(7)
+
+tests/test_planner_experiment.py:326: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c413a0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_______ test_stale_worker_cannot_be_cached_under_changed_settings[right] _______
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e600>
+
+    def test_stale_worker_cannot_be_cached_under_changed_settings(queued_view):
+>       v=queued_view;v.cache_all();v.params['backtrack_weight']+=1;v.finish()
+
+tests/test_planner_experiment.py:336: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e600>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_______ test_stale_worker_cannot_be_cached_under_changed_settings[left] ________
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae3dd0>
+
+    def test_stale_worker_cannot_be_cached_under_changed_settings(queued_view):
+>       v=queued_view;v.cache_all();v.params['backtrack_weight']+=1;v.finish()
+
+tests/test_planner_experiment.py:336: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5ae3dd0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+___ test_budget_change_rebuilds_automatic_queue_and_invalidates_cache[right] ___
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c64da0>
+
+    def test_budget_change_rebuilds_automatic_queue_and_invalidates_cache(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:343: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c64da0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+___ test_budget_change_rebuilds_automatic_queue_and_invalidates_cache[left] ____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c67590>
+
+    def test_budget_change_rebuilds_automatic_queue_and_invalidates_cache(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:343: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c67590>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+______ test_explicit_generate_replaces_only_selected_cached_result[right] ______
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7c710>
+
+    def test_explicit_generate_replaces_only_selected_cached_result(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:351: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7c710>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+______ test_explicit_generate_replaces_only_selected_cached_result[left] _______
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43650>
+
+    def test_explicit_generate_replaces_only_selected_cached_result(queued_view):
+>       v=queued_view;v.cache_all()
+
+tests/test_planner_experiment.py:351: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43650>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_____ test_close_stops_active_worker_and_never_launches_queued_jobs[right] _____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c645f0>
+
+    def test_close_stops_active_worker_and_never_launches_queued_jobs(queued_view):
+>       v=queued_view;v.cache_all();job=v.job;v.close()
+
+tests/test_planner_experiment.py:359: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c645f0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_____ test_close_stops_active_worker_and_never_launches_queued_jobs[left] ______
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c64800>
+
+    def test_close_stops_active_worker_and_never_launches_queued_jobs(queued_view):
+>       v=queued_view;v.cache_all();job=v.job;v.close()
+
+tests/test_planner_experiment.py:359: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c64800>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_no_destination_means_no_planning_even_when_other_controls_clicked[right] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5be38f0>
+
+    def test_no_destination_means_no_planning_even_when_other_controls_clicked(queued_view):
+        v=queued_view;v.destination_path=None
+>       v.cache_all();v.generate();v.choose('single_arc');v.budget_changed(30)
+
+tests/test_planner_experiment.py:374: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:234: in budget_changed
+    self.restart_cache('budget_changed')
+drum_planner/experiment/app.py:329: in restart_cache
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5be38f0>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+_ test_no_destination_means_no_planning_even_when_other_controls_clicked[left] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd2090>
+
+    def test_no_destination_means_no_planning_even_when_other_controls_clicked(queued_view):
+        v=queued_view;v.destination_path=None
+>       v.cache_all();v.generate();v.choose('single_arc');v.budget_changed(30)
+
+tests/test_planner_experiment.py:374: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:234: in budget_changed
+    self.restart_cache('budget_changed')
+drum_planner/experiment/app.py:329: in restart_cache
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd2090>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+____ test_destination_selection_starts_all_methods_for_selected_goal[right] ____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c662a0>
+
+    def test_destination_selection_starts_all_methods_for_selected_goal(queued_view):
+        v=queued_view;v.destination_path=None
+        path=destination_for(v,'chosen.json',.005)
+>       v.destination_box.path=str(path);v.select_destination()
+
+tests/test_planner_experiment.py:382: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:195: in select_destination
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c662a0>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+____ test_destination_selection_starts_all_methods_for_selected_goal[left] _____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c41700>
+
+    def test_destination_selection_starts_all_methods_for_selected_goal(queued_view):
+        v=queued_view;v.destination_path=None
+        path=destination_for(v,'chosen.json',.005)
+>       v.destination_box.path=str(path);v.select_destination()
+
+tests/test_planner_experiment.py:382: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:195: in select_destination
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c41700>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+_ test_switch_destination_waits_for_old_worker_and_ignores_late_result[right] __
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e300>
+
+    def test_switch_destination_waits_for_old_worker_and_ignores_late_result(queued_view):
+        v=queued_view
+        one=destination_for(v,'one.json');two=destination_for(v,'two.json',.005);three=destination_for(v,'three.json',.01)
+>       v.destination_box.path=str(one);v.select_destination();old=v.job
+
+tests/test_planner_experiment.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:195: in select_destination
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e300>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+__ test_switch_destination_waits_for_old_worker_and_ignores_late_result[left] __
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd0d10>
+
+    def test_switch_destination_waits_for_old_worker_and_ignores_late_result(queued_view):
+        v=queued_view
+        one=destination_for(v,'one.json');two=destination_for(v,'two.json',.005);three=destination_for(v,'three.json',.01)
+>       v.destination_box.path=str(one);v.select_destination();old=v.job
+
+tests/test_planner_experiment.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:195: in select_destination
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd0d10>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+_ test_clear_or_invalid_destination_removes_old_playback_and_is_retryable[right] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43080>
+
+    def test_clear_or_invalid_destination_removes_old_playback_and_is_retryable(queued_view):
+>       v=queued_view;v.cache_all();v.finish()
+
+tests/test_planner_experiment.py:408: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c43080>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_clear_or_invalid_destination_removes_old_playback_and_is_retryable[left] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e7e0>
+
+    def test_clear_or_invalid_destination_removes_old_playback_and_is_retryable(queued_view):
+>       v=queued_view;v.cache_all();v.finish()
+
+tests/test_planner_experiment.py:408: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5c7e7e0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_destination_switch_discards_inflight_scene_capture_without_camera_access[right] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd1640>
+
+    def test_destination_switch_discards_inflight_scene_capture_without_camera_access(queued_view):
+>       v=queued_view;v.cache_all();v.job_kind='capture';v.job_method=None
+
+tests/test_planner_experiment.py:423: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5cd1640>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_ test_destination_switch_discards_inflight_scene_capture_without_camera_access[left] _
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5adb2c0>
+
+    def test_destination_switch_discards_inflight_scene_capture_without_camera_access(queued_view):
+>       v=queued_view;v.cache_all();v.job_kind='capture';v.job_method=None
+
+tests/test_planner_experiment.py:423: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+drum_planner/experiment/app.py:298: in cache_all
+    self.start_next();self.update_queue_status()
+drum_planner/experiment/app.py:305: in start_next
+    signature=self.signature()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5adb2c0>
+
+    def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
+                               self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
+                               self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+>                              motion_settings.identity(self.motion_profile))
+E   AttributeError: 'ExperimentView' object has no attribute 'motion_profile'
+
+drum_planner/experiment/app.py:239: AttributeError
+----------------------------- Captured stdout call -----------------------------
+[experiment] Automatically queued: progress, sweep, single_arc, clearance, workspace_curve. One memory-limited worker at a time.
+_____ test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end[right] _____
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5adb260>
+
+    def test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end(queued_view):
+>       v=queued_view;v.choose('workspace_curve')
+
+tests/test_planner_experiment.py:434: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_planner_experiment.py:270: in choose
+    v.method_box.index=list(config.METHODS).index(method);v.select_method()
+drum_planner/experiment/app.py:343: in select_method
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5adb260>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+_____ test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end[left] ______
+
+queued_view = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5b735f0>
+
+    def test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end(queued_view):
+>       v=queued_view;v.choose('workspace_curve')
+
+tests/test_planner_experiment.py:434: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_planner_experiment.py:270: in choose
+    v.method_box.index=list(config.METHODS).index(method);v.select_method()
+drum_planner/experiment/app.py:343: in select_method
+    self.install_plan(self.session/'initial/plan.json',None)
+tests/test_planner_experiment.py:264: in install
+    v.locked(bool(v.job))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <drum_planner.experiment.app.make_view_class.<locals>.ExperimentView object at 0x74e9e5b735f0>
+active = False
+
+    def locked(self,active):
+        # Planning runs separately from the displayed result. Keep cached
+        # playback/selection usable while another method is calculating.
+        blocked=active and self.job_kind!='plan'
+        self.method_box.setEnabled(not blocked)
+>       self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
+E       AttributeError: 'ExperimentView' object has no attribute 'start_box'. Did you mean: 'start_next'?
+
+drum_planner/experiment/app.py:250: AttributeError
+___________ test_protected_hardware_and_original_policies_unchanged ____________
+
+    def test_protected_hardware_and_original_policies_unchanged():
+        before=json.loads((ROOT/'diagnostics/fast_gpu_20261024/before_hashes.json').read_text())
+        protected=[p for p in before if p.startswith(('drum_planner/baseline/','model/','destinations/','destination_capture/'))]
+        protected += ['drum_planner/timing/'+p for p in ('core.py','dispatch.py','adaptive.py','integration.py',
+            'smooth_v2.py','rounding.py','pipeline.py','sparse.py','sparse_integration.py','gpu_integration.py')]
+        protected += ['drum_planner/experiment/'+p for p in ('workspace_curve.py','config.py','algorithms.py','search.py','runtime.py','checkpoints.py')]
+>       for name in protected:assert digest(ROOT/name)==before[name],name
+E       AssertionError: destinations/right/destinationR1.json
+E       assert '2e6e1d08fae3...8d4559508ecf0' == 'bd3b74c97588...ba5bd838c43a2'
+E         - bd3b74c97588c948ab99118ae052c4c7910eab0ca48a3909a32ba5bd838c43a2
+E         + 2e6e1d08fae349ce8a81943ddd0c617db047116a37f291bb0f28d4559508ecf0
+
+tests/test_fast_gpu.py:143: AssertionError
+=============================== warnings summary ===============================
+tests/test_fast_mode.py::test_postures_preserve_tasks_limits_and_proximal_cap[right-1-full-pose]
+tests/test_fast_mode.py::test_postures_preserve_tasks_limits_and_proximal_cap[right-1-tip-axis]
+tests/test_fast_mode.py::test_postures_preserve_tasks_limits_and_proximal_cap[right-2-tip-axis]
+tests/test_fast_mode.py::test_postures_preserve_tasks_limits_and_proximal_cap[left-2-full-pose]
+tests/test_fast_mode.py::test_postures_preserve_tasks_limits_and_proximal_cap[left-2-tip-axis]
+  Warning: Values in x were outside bounds during a minimize step, clipping to bounds
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_experiment_checkpoints.py::test_worker_budget_scales_with_legs_not_memory
+FAILED tests/test_experiment_checkpoints.py::test_hardware_timing_generators_and_saved_data_unchanged
+FAILED tests/test_experiment_checkpoints.py::test_single_leg_worker_and_pool_identity_unchanged_without_checkpoint_fields
+FAILED tests/test_checkpoint_performance.py::test_sequence_request_reuse_is_byte_identical_to_independent_request[right]
+FAILED tests/test_checkpoint_performance.py::test_sequence_request_reuse_is_byte_identical_to_independent_request[left]
+FAILED tests/test_checkpoint_performance.py::test_policies_geometry_inputs_and_motor_control_are_unchanged
+FAILED tests/test_experiment_fast_timing.py::test_only_experiment_sources_changed_since_this_task
+FAILED tests/test_planner_experiment.py::test_cache_all_runs_every_method_without_method_selection_and_serializes_workers[right]
+FAILED tests/test_planner_experiment.py::test_cache_all_runs_every_method_without_method_selection_and_serializes_workers[left]
+FAILED tests/test_planner_experiment.py::test_selection_prioritizes_pending_without_stealing_worker_result[right]
+FAILED tests/test_planner_experiment.py::test_selection_prioritizes_pending_without_stealing_worker_result[left]
+FAILED tests/test_planner_experiment.py::test_cached_playback_stays_usable_and_uninterrupted_during_other_workers[right]
+FAILED tests/test_planner_experiment.py::test_cached_playback_stays_usable_and_uninterrupted_during_other_workers[left]
+FAILED tests/test_planner_experiment.py::test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes[right]
+FAILED tests/test_planner_experiment.py::test_cancel_stops_entire_queue_keeps_cache_and_cache_all_resumes[left]
+FAILED tests/test_planner_experiment.py::test_worker_failure_does_not_block_remaining_automatic_methods[right]
+FAILED tests/test_planner_experiment.py::test_worker_failure_does_not_block_remaining_automatic_methods[left]
+FAILED tests/test_planner_experiment.py::test_stale_worker_cannot_be_cached_under_changed_settings[right]
+FAILED tests/test_planner_experiment.py::test_stale_worker_cannot_be_cached_under_changed_settings[left]
+FAILED tests/test_planner_experiment.py::test_budget_change_rebuilds_automatic_queue_and_invalidates_cache[right]
+FAILED tests/test_planner_experiment.py::test_budget_change_rebuilds_automatic_queue_and_invalidates_cache[left]
+FAILED tests/test_planner_experiment.py::test_explicit_generate_replaces_only_selected_cached_result[right]
+FAILED tests/test_planner_experiment.py::test_explicit_generate_replaces_only_selected_cached_result[left]
+FAILED tests/test_planner_experiment.py::test_close_stops_active_worker_and_never_launches_queued_jobs[right]
+FAILED tests/test_planner_experiment.py::test_close_stops_active_worker_and_never_launches_queued_jobs[left]
+FAILED tests/test_planner_experiment.py::test_no_destination_means_no_planning_even_when_other_controls_clicked[right]
+FAILED tests/test_planner_experiment.py::test_no_destination_means_no_planning_even_when_other_controls_clicked[left]
+FAILED tests/test_planner_experiment.py::test_destination_selection_starts_all_methods_for_selected_goal[right]
+FAILED tests/test_planner_experiment.py::test_destination_selection_starts_all_methods_for_selected_goal[left]
+FAILED tests/test_planner_experiment.py::test_switch_destination_waits_for_old_worker_and_ignores_late_result[right]
+FAILED tests/test_planner_experiment.py::test_switch_destination_waits_for_old_worker_and_ignores_late_result[left]
+FAILED tests/test_planner_experiment.py::test_clear_or_invalid_destination_removes_old_playback_and_is_retryable[right]
+FAILED tests/test_planner_experiment.py::test_clear_or_invalid_destination_removes_old_playback_and_is_retryable[left]
+FAILED tests/test_planner_experiment.py::test_destination_switch_discards_inflight_scene_capture_without_camera_access[right]
+FAILED tests/test_planner_experiment.py::test_destination_switch_discards_inflight_scene_capture_without_camera_access[left]
+FAILED tests/test_planner_experiment.py::test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end[right]
+FAILED tests/test_planner_experiment.py::test_workspace_no_route_is_a_preview_result_not_a_ui_dead_end[left]
+FAILED tests/test_fast_gpu.py::test_protected_hardware_and_original_policies_unchanged
+38 failed, 221 passed, 5 warnings in 40.08s

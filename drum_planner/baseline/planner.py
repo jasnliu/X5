@@ -42,7 +42,7 @@ def _leg(context,folder,method,params,seconds):
     try:
         if context.get('timing_backend')=='sparse':
             log('same Workspace curve generator/settings; separate sparse IPOPT timing fork; no motor commands')
-        else:log('same Workspace curve generator/settings and arm-aware timing as experiment; no motor commands')
+        else:log('retained legacy Workspace curve and arm-aware adaptive timing; no motor commands')
         winner,report=workspace_curve.run(req,context,context['pool_root'],folder/'backend_request.json',params,seconds,log)
         result['experiment']['report']=report
         if winner is None:result.update(status='no_feasible_route',details=report)
@@ -56,8 +56,13 @@ def _leg(context,folder,method,params,seconds):
     return result
 
 
-def plan(folder,state_path,scene_path,cal_path=DEFAULT_CALIBRATION,*,moving_side='right',destinations=None,simulation=False,timing_backend='adaptive'):
-    if timing_backend not in ('adaptive','sparse'):raise ValueError('Unknown hardware timing backend')
+def plan(folder,state_path,scene_path,cal_path=DEFAULT_CALIBRATION,*,moving_side='right',destinations=None,simulation=False,timing_backend='current',motion_profile=None):
+    if timing_backend not in ('current','adaptive','sparse'):raise ValueError('Unknown hardware timing backend')
+    if timing_backend=='current':
+        from .current import plan as current_plan
+        return current_plan(folder,state_path,scene_path,cal_path,moving_side=moving_side,
+            destinations=destinations,simulation=simulation,motion_profile=motion_profile)
+    if motion_profile is not None:raise ValueError('Custom profiles require the current hardware planner, not a legacy fork')
     side=arm_side(moving_side);state=read_state(state_path)
     if not state.get('measured') and not simulation:raise ValueError('Hardware planning requires an acquired arm state')
     folder=Path(folder).resolve();folder.mkdir(parents=True,exist_ok=False);began=time.monotonic()

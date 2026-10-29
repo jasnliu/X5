@@ -1,0 +1,340 @@
+{
+  "passed": true,
+  "preservation": {
+    "snapshot_files": 3647,
+    "unchanged_files": 3634,
+    "authorized_modified_files": [
+      ".gitignore",
+      "AGENTS.md",
+      "DRUM_PLANNER_EXPERIMENTS.md",
+      "config/git_retained_artifacts.json",
+      "drum_planner/cli.py",
+      "drum_planner/experiment/app.py",
+      "drum_planner/experiment/fast.py",
+      "drum_planner/experiment/fast_config.py",
+      "drum_planner/timing/README.md",
+      "tests/test_checkpoint_performance.py",
+      "tests/test_experiment_checkpoints.py",
+      "tests/test_experiment_fast_timing.py",
+      "tests/test_planner_experiment.py"
+    ],
+    "unexpected_changes": []
+  },
+  "headless_cases": [
+    {
+      "case": "right_default",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 3.6089936782898744,
+      "return_s": 3.6089936782898744,
+      "legs": 1
+    },
+    {
+      "case": "right_fast",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.7649334886528185,
+      "return_s": 1.7649334886528185,
+      "legs": 1
+    },
+    {
+      "case": "right_balanced",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.656983746870765,
+      "return_s": 1.656983746870765,
+      "legs": 1
+    },
+    {
+      "case": "right_thorough",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.6467329678768035,
+      "return_s": 1.6467329678768035,
+      "legs": 1
+    },
+    {
+      "case": "right_reverse",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 1.6569837309124522,
+      "return_s": 1.6569837309124522,
+      "legs": 1
+    },
+    {
+      "case": "right_stationary",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.0,
+      "return_s": 0.0,
+      "legs": 1
+    },
+    {
+      "case": "right_sequence_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 2.7103138553371995,
+      "return_s": 0.0,
+      "legs": 4
+    },
+    {
+      "case": "left_stationary",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.0,
+      "return_s": 0.0,
+      "legs": 1
+    },
+    {
+      "case": "left_near",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.45933739710662114,
+      "return_s": 0.45933739710662114,
+      "legs": 1
+    },
+    {
+      "case": "left_near_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.30368523449539087,
+      "return_s": 0.30368523449539087,
+      "legs": 1
+    },
+    {
+      "case": "left_default_blocked",
+      "passed": true,
+      "expected_status": "no_feasible_route"
+    },
+    {
+      "case": "left_sequence_custom",
+      "passed": true,
+      "status": "planned",
+      "movement_s": 0.6124496331884334,
+      "return_s": 0.0,
+      "legs": 4
+    }
+  ],
+  "continuously_rechecked_nonstationary_laws": 11,
+  "all_leg_actual_acquisition_masks_preserved": true,
+  "passive_arm_unchanged": true,
+  "source_geometry_bit_identical_to_prior_workspace": [
+    "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_fast/plans/workspace_curve-f15b6a82/plan.json",
+    "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced/plans/workspace_curve-c3597c10/plan.json",
+    "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_thorough/plans/workspace_curve-b32ff980/plan.json",
+    "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_sequence_custom/plans/workspace_curve-c3f88b2c/checkpoint_2/plan.json"
+  ],
+  "job_containment": [
+    {
+      "case": "right_default",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 5.444216125062667,
+      "unit": "x5-experiment-c188b7643c8f",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-c188b7643c8f.service",
+        "MemoryCurrent": "504860672",
+        "MemoryPeak": "505122816",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 504860672
+      }
+    },
+    {
+      "case": "right_fast",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 6.812703776056878,
+      "unit": "x5-experiment-bd23ad789c7c",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-bd23ad789c7c.service",
+        "MemoryCurrent": "532058112",
+        "MemoryPeak": "532058112",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 532058112
+      }
+    },
+    {
+      "case": "right_balanced",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 8.321850078064017,
+      "unit": "x5-experiment-64f210558d36",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-64f210558d36.service",
+        "MemoryCurrent": "512770048",
+        "MemoryPeak": "542404608",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 539885568
+      }
+    },
+    {
+      "case": "right_thorough",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 9.693598118028603,
+      "unit": "x5-experiment-e1c0c754b57a",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-e1c0c754b57a.service",
+        "MemoryCurrent": "567857152",
+        "MemoryPeak": "569905152",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 567857152
+      }
+    },
+    {
+      "case": "right_reverse",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 9.497645022929646,
+      "unit": "x5-experiment-aed4df0ab16e",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-aed4df0ab16e.service",
+        "MemoryCurrent": "534396928",
+        "MemoryPeak": "534454272",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 534396928
+      }
+    },
+    {
+      "case": "right_stationary",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 1.3425137660233304,
+      "unit": "x5-experiment-ee4be61790b6",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-ee4be61790b6.service",
+        "MemoryCurrent": "209891328",
+        "MemoryPeak": "209891328",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 209891328
+      }
+    },
+    {
+      "case": "right_sequence_custom",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 11.43002518103458,
+      "unit": "x5-experiment-228a0c2ec2d6",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-228a0c2ec2d6.service",
+        "MemoryCurrent": "563363840",
+        "MemoryPeak": "563363840",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 563363840
+      }
+    },
+    {
+      "case": "left_stationary",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 1.3897256989730522,
+      "unit": "x5-experiment-bb2fc04eefab",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-bb2fc04eefab.service",
+        "MemoryCurrent": "204070912",
+        "MemoryPeak": "204070912",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 204070912
+      }
+    },
+    {
+      "case": "left_near",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 6.8140691969310865,
+      "unit": "x5-experiment-f8e2167e529c",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-f8e2167e529c.service",
+        "MemoryCurrent": "513732608",
+        "MemoryPeak": "513732608",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 513732608
+      }
+    },
+    {
+      "case": "left_near_custom",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 9.033193063922226,
+      "unit": "x5-experiment-aa347b44c5f9",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-aa347b44c5f9.service",
+        "MemoryCurrent": "523862016",
+        "MemoryPeak": "524386304",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 523862016
+      }
+    },
+    {
+      "case": "left_default_blocked",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 3.963352763908915,
+      "unit": "x5-experiment-2ba792f7a40f",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-2ba792f7a40f.service",
+        "MemoryCurrent": "231464960",
+        "MemoryPeak": "232243200",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 231837696
+      }
+    },
+    {
+      "case": "left_sequence_custom",
+      "exit_code": 0,
+      "cancelled": false,
+      "elapsed_s": 12.7443204279989,
+      "unit": "x5-experiment-b6eeda87dac3",
+      "containment": {
+        "Result": "success",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/x5-experiment-b6eeda87dac3.service",
+        "MemoryCurrent": "545820672",
+        "MemoryPeak": "545820672",
+        "MemoryMax": "3221225472",
+        "MemorySwapMax": "134217728",
+        "RestrictAddressFamilies": "AF_INET AF_INET6 AF_NETLINK AF_UNIX",
+        "observed_peak_bytes": 545820672
+      }
+    }
+  ],
+  "math_comparisons": 16,
+  "native_ui_sides": [
+    "right",
+    "left"
+  ],
+  "external_path_cli_ui_passed": true,
+  "motor_commands": 0
+}

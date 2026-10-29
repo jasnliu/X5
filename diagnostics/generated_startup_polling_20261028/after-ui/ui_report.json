@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "hardware_access": false,
+  "physical_motor_commands": 0,
+  "checks": [
+    "startup obtains disabled encoder replies with state-only queries, no automatic arming",
+    "real confirmed-CSP arming configures all 16 simulated drives at acquired rest, no centering",
+    "actual 200 Hz path workers with packet-level sockets reach LEFT then RIGHT goals; physical/audio calibration skipped",
+    "Emergency Hold retains both simulated arms with query-only freshness tracking",
+    "prepared RIGHT then LEFT return reaches captured rest and confirms simulated disable replies",
+    "unchanged 120 ms feedback guard passes at realistic GUI cadence throughout setup/playback/hold/return",
+    "Stop/Close completes with fake devices, no real motor owner ever constructed"
+  ],
+  "expected_failure": false,
+  "session": "/home/jason/Proyectos3/X5/planner_runs/generated-beat-20261028T222710-32b968b7",
+  "mission": "planner_runs/generated-beat-20261028T221006-81fb4d62/plan-11753555/mission.json",
+  "faults": [],
+  "simulated_enable_count": 16,
+  "polling_interval_median_s": 0.05112835898762569,
+  "max_feedback_age_after_start_s": 0.09726365597452968,
+  "ages_by_phase": {
+    "READY": 0.05412343598436564,
+    "ARMING": 0.08707329601747915,
+    "SETTLE START": 0.05218659696402028,
+    "LEFT": 0.07020439702318981,
+    "SETTLE LEFT": 0.05244760902132839,
+    "RIGHT": 0.0710820069652982,
+    "SETTLE RIGHT": 0.05528181599220261,
+    "HOLD": 0.05452707299264148,
+    "RETURN": 0.09726365597452968,
+    "SETTLE RETURN": 0.05458609602646902,
+    "SETTLE REST": 0.05396145401755348,
+    "RELAXING": 0.00046641804510727525
+  }
+}

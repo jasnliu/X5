@@ -38,6 +38,8 @@ class Selector(QtWidgets.QWidget):
             choices=[p for p in available if str(p)!=previous]
             box.blockSignals(True);box.clear();box.addItem('Select destination…' if choices else 'No other saved destinations',None)
             for path in choices:box.addItem(path.name,str(path))
+            if (self.owner.side=='right' and getattr(self.owner,'timing_backend','current')=='current' and previous!='dt1'):
+                box.addItem('dt1 · generate from Calculate camera','dt1')
             box.setCurrentIndex(max(0,box.findData(value)));box.blockSignals(False);previous=box.currentData()
         self.add.setEnabled(len(self.boxes)<MAX_CHECKPOINTS);self.remove.setEnabled(len(self.boxes)>1)
 
@@ -67,4 +69,4 @@ class Selector(QtWidgets.QWidget):
     def restore(self,bindings):
         # Startup/resume only, before any commands or calculations.
         while len(self.boxes)<len(bindings):self.append_row()
-        self.populate([b['destination_source'] for b in bindings]);self.accepted=self.paths()
+        self.populate(['dt1' if b.get('destination_kind')=='dt1' else b['destination_source'] for b in bindings]);self.accepted=self.paths()

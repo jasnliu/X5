@@ -68,6 +68,7 @@ def prepare(app):
     app.hybrid_tuning = tuning
     left = snare.session(app)
     options = {} if left is None else {'snare_clock': left.clock}
+    if getattr(app,'generated_mode',False):options['recovery_bounds']=(float(app.lower[6]),float(app.upper[6]))
     app.hybrid_session = HybridSession(app.bus, float(anchor[6]), lower, upper, tuning, **options)
     if isinstance(app.bus, PlaybackMotors):
         # Geometry/process creation can exceed the GUI's 300 ms watchdog.
@@ -210,6 +211,10 @@ def start_swing(app, events):
 
 
 def request_stop(app, detail='Stop requested'):
+    if getattr(app,'generated_mode',False):
+        # A calibration/scheduling failure must retain the MIT owners for the
+        # new explicit checked rest-return, not join them and auto-center.
+        app.emergency_hold(detail);return
     snare.finish(app)
     if getattr(app, 'hybrid_stopping', False) or getattr(app, 'hybrid_restoring', False):
         return
@@ -235,6 +240,8 @@ def close(app):
 
 def fault(app, message):
     """Never let inherited CSP recovery write into an active/unknown MIT mode."""
+    if getattr(app,'generated_mode',False):
+        app.emergency_hold('Hybrid fault: '+str(message));return
     snare.finish(app)
     first = app.phase != FAULT
     if first and getattr(app, 'beat_evidence', None) is not None:
@@ -294,6 +301,8 @@ def recover_to_center(app):
 
 def begin_center_return(app):
     """Keep MIT powered all the way to center; no off-center CSP handoff."""
+    if getattr(app,'generated_mode',False):
+        app.return_to_rest();return
     dual = getattr(app, 'dual', None)
     if dual is not None:
         # Blocking worker joins/geometry/feedback refresh must finish BEFORE

@@ -94,11 +94,31 @@ int main() {
   send("A11"); clockMs+=160; send("H"); assert(!readingAngle && released2);
   send("A90\n"); assert(calibratedDegrees==90 && calibratedCounts==134);
   send("A9S"); assert(!readingAngle && released2); // Stop interrupts partial frames.
+  pos(0);send("V");
+  assert(Serial.output.find("COLLECTION v=1 min=1 max=90 guard=100")!=std::string::npos);
+  for (const auto& s:{"P0\n","P91\n","P-20\n","P20.5\n","P80BK\n","P999999999\n","P\n"}) {
+    send(s); assert(released2 && setpoint2==0 && !kick1Active);
+  }
+  send("P5S");assert(released2 && !readingAngle);
+  send("P55\n");assert(setpoint2==82 && partialCollectionActive && !released2);
+  assert(calibratedDegrees==90 && calibratedCounts==134); // Normal B target unchanged.
+  pos(82);send("H");assert(!movementPending);
+  send("P60\n");assert(setpoint2==82); // Retarget requires an actual open return.
+  for(int n=0;n<30;n++){clockMs+=100;send("H");}
+  assert(!faulted2 && !released2); // Sustained shallow hold is allowed.
+  send("O");pos(0);send("H");assert(released2 && openReached2 && !partialCollectionActive);
+  send("P30\n");clockMs+=401;loop();assert(released2 && !partialCollectionActive);
+  send("O");pos(0);send("H");
   send("B");
   assert(!openReached2);
   for(int n=0;n<22;n++) { clockMs+=100;send("H"); }
   assert(faulted2 && released2 && setpoint2==0); // Fresh heartbeats don't mask stall.
   send("B");send("C");send("J");send("O");send("S");
   assert(faulted2 && released2 && setpoint2==0); // Fault can't be cleared by a beat.
+  send("P30\n");assert(faulted2 && released2);
+  // Simulated reset only: prove the collection-specific measured travel guard.
+  faulted2=false;pos(0);send("O");send("H");send("P60\n");
+  pos(COLLECTION_TRAVEL_LIMIT_COUNTS+1);send("H");
+  assert(faulted2 && released2 && !kick1Active && setpoint2==0);
   std::cout << "Firmware parser, 115 degree cap, legacy targets, encoder status and stall latch passed\n";
 }

@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from ..common import DEFAULT_CALIBRATION,ROOT,JOINTS,arm_side,arm_joints,goal_recording,atomic_json,digest
 from .. import planning
+from ..experiment.rgbd import scene as validated_scene
 from ..execution import TRACK_L1
 from .curve import Curve
 from . import planner as route_planner
@@ -29,16 +30,23 @@ def acquire(folder,cal_path,*,moving_side='right'):
         proof=proof,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),motor_commands=0))
 
 
-def make_plan(folder,capture,cal_path,*,moving_side='right',destinations=None,timing_backend='adaptive'):
+def make_plan(folder,capture,cal_path,*,moving_side='right',destinations=None,timing_backend='current',motion_profile=None):
     side=arm_side(moving_side)
     folder=Path(folder);capture=Path(capture)
     acquisition=json.loads((capture/'acquisition.json').read_text())
+    for key,relative in [('state','measured_start.json'),('scene','camera/scene.json')]:
+        if (Path(acquisition[key]).resolve()!=(capture/relative).resolve() or
+            acquisition[key+'_sha256']!=digest(capture/relative)):
+            raise ValueError('Calculate acquisition changed before planning')
+    if acquisition['boot_id']!=Path('/proc/sys/kernel/random/boot_id').read_text().strip():
+        raise ValueError('Acquisition is from another boot')
     print(f'WORKSPACE CURVE: endpoint-only paths → latest {side.upper()}-arm timing → dense zone/collision check',flush=True)
     # Job/main already own folder for logs and error reports. The planner must
     # own a NEW child directory; retain its refusal to overwrite existing plans.
     output=folder/'result'
     options={} if destinations is None else dict(destinations=destinations)
-    if timing_backend!='adaptive':options['timing_backend']=timing_backend
+    if timing_backend!='current':options['timing_backend']=timing_backend
+    if motion_profile is not None:options['motion_profile']=motion_profile
     result=route_planner.plan(output,capture/'measured_start.json',capture/'camera/scene.json',cal_path,moving_side=side,**options)
     result.update(baseline_hardware_session=True,actual_current_robot_state_verified=True,
                   current_state_check=acquisition['proof'],acquisition_boot_id=acquisition['boot_id'])
@@ -68,8 +76,13 @@ def load_checked(path,cal_path):
     state=json.loads(Path(o['provenance']['state']).read_text())
     if not state.get('measured') or state[side+'_rad']!=r['start'] or state[other+'_rad']!=r[other]:
         raise ValueError('Plan does not match the acquired joints')
-    world=planning.scene(o['provenance']['scene'],cal_path)
+    world=validated_scene(o['provenance']['scene'],cal_path)
     if world['source_scene_sha256']!=r['scene']['source_scene_sha256']:raise ValueError('Scene changed')
+    from .targets import validate as validate_targets
+    validate_targets(o,world)
+    if o.get('hardware_planning_pipeline') and world.get('schema')=='x5-experiment-paired-depth-scene-v1':
+        if world.get('pose_synchronization')!='encoder_bracketed' or world.get('measured_state_sha256')!=o['provenance']['state_sha256']:
+            raise ValueError('Paired scene is not synchronized to the measured hardware start')
     curve=Curve(o);validate_timing(curve)
     from ..common import endpoint
     from ..experiment import destinations,checkpoints
@@ -96,6 +109,10 @@ def load_checked(path,cal_path):
     import xml.etree.ElementTree as ET
     root=ET.parse(r['urdf']).getroot()
     r['execution_joint_limits']=[[float(root.find(f"joint[@name='{j}']/limit").get(k)) for k in ('lower','upper')] for j in arm_joints(side)]
+    from ..joint_position_limits import feedback_limits
+    from ..rest_paths import verify_curve
+    r['execution_joint_limits']=feedback_limits(o['model'],r['execution_joint_limits'],side)
+    verify_curve(curve,r)
     return o,r,curve
 
 
@@ -150,12 +167,15 @@ def hard_check(req,q,folder):
 def prepare(folder,path,capture,cal_path,*,allow_replan=True):
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
     o,r,c=load_checked(path,cal_path)
+    from ..joint_position_limits import require_current_model,require_request
+    require_current_model(o['model'],r['urdf'],side_of(r))
+    require_request(r,o['model'])
     current=json.loads((Path(capture)/'measured_start.json').read_text())
     if np.sum(abs(np.asarray(current[side_of(r)+'_rad'])-r['start']))>TRACK_L1:
         raise ValueError('Arm changed since preview; capture/replan instead of moving to the old start')
     # Passive motion is not a start-position veto. Collision checking uses the
     # acquired passive pose in the plan, just as it uses the frozen depth scene.
-    world=planning.scene(Path(capture)/'camera/scene.json',cal_path)
+    world=validated_scene(Path(capture)/'camera/scene.json',cal_path)
     r['scene']=world
     times=np.r_[np.arange(0,c.duration,.002),c.duration]
     replanned=None
@@ -176,7 +196,12 @@ def prepare(folder,path,capture,cal_path,*,allow_replan=True):
             from ..experiment.checkpoints import signature
             bindings=o['destination_bindings'];binding=dict(bindings[-1])
             if len(bindings)>1:binding.update(checkpoints=bindings,checkpoint_sha256=signature(bindings))
+        if binding and any(b.get('destination_kind')=='dt1' for b in o.get('destination_bindings',[])):
+            from .targets import freeze
+            binding=freeze(['dt1' if b.get('destination_kind')=='dt1' else b['goal_recording']
+                            for b in o['destination_bindings']],side_of(r),folder)
         options={} if binding is None else dict(destinations=binding)
+        if o.get('hardware_motion_profile'):options['motion_profile']=o['hardware_motion_profile']
         path=make_plan(folder/'replanned',capture,cal_path,moving_side=side_of(r),**options)
         o,r,c=load_checked(path,cal_path)
         times=np.r_[np.arange(0,c.duration,.002),c.duration]
@@ -196,12 +221,15 @@ def check_packet(path):
     """Final data-integrity gate; frozen scene has no wall-clock expiration."""
     packet=json.loads(Path(path).read_text());r=packet['request'];o=packet['object']
     if packet.get('schema')!='x5-baseline-prepared-v2' or packet.get('motion_authorized') is not False:raise ValueError('Invalid calculation packet; click Calculate again')
+    from ..joint_position_limits import require_current_model,require_request
+    require_current_model(o['model'],r['urdf'],side_of(r))
+    require_request(r,o['model'])
     if packet['boot_id']!=Path('/proc/sys/kernel/random/boot_id').read_text().strip():raise ValueError('Calculation is from another system boot; click Calculate again')
     if digest(packet['plan'])!=packet['plan_sha256'] or digest(packet['calibration'])!=packet['calibration_sha256']:
         raise ValueError('Plan/calibration changed after preparation')
     original,req,c=load_checked(packet['plan'],packet['calibration'])
     if original!=o:raise ValueError('Prepared curve differs from preview')
-    world=planning.scene(packet['fresh_scene'],packet['calibration'])
+    world=validated_scene(packet['fresh_scene'],packet['calibration'])
     req['scene']=world
     if req!=r or world['source_scene_sha256']!=packet['fresh_scene_sha256'] or packet['scene_stamp']!=world['frames'][-1]['received_monotonic']:
         raise ValueError('Prepared request/scene changed')
@@ -220,7 +248,7 @@ def check_return(folder,prepared,held,tau,rate,left_snapshot=None,*,right_snapsh
     packet=json.loads(Path(prepared).read_text());o,r,c=load_checked(packet['plan'],packet['calibration'])
     # Return is operator-authorized against the same static scene; never reject
     # solely because time passed while holding. No claim of live perception.
-    world=planning.scene(packet['fresh_scene'],packet['calibration'])
+    world=validated_scene(packet['fresh_scene'],packet['calibration'])
     if world['source_scene_sha256']!=packet['fresh_scene_sha256']:raise ValueError('Recovery scene changed')
     r['scene']=world
     # The other arm stays query-only. Its CURRENT measured pose participates
@@ -238,6 +266,23 @@ def check_return(folder,prepared,held,tau,rate,left_snapshot=None,*,right_snapsh
         if not np.isfinite(opening) or not 0<=opening<=.044:raise ValueError('Invalid measured left-arm recovery snapshot')
         r['left_opening_m']=opening
     spec=recovery(c,held,tau,rate);q=recovery_samples(c,spec)
+    # Measured HOLD may differ slightly from the checked path (existing TRACK_L1
+    # still applies). Check that exact connector, not clipped feedback. Only its
+    # measured endpoint may extend the model below the original rest; never
+    # create a general negative planning range or edit the original packet.
+    from ..joint_position_limits import policy,command_lower,model_lower,RIGHT_J2
+    if side_of(r)=='right' and o.get('model',{}).get('joint_position_policy')==policy():
+        import xml.etree.ElementTree as ET
+        command_lower(held)  # Reject at/beyond the reported stop, including NaNs.
+        tree=ET.parse(r['urdf']);limit=tree.getroot().find(f"joint[@name='{RIGHT_J2}']/limit")
+        lower=float(limit.get('lower'))
+        if held[1]<lower:
+            if np.min(q[:,1])<held[1]-1e-10:raise ValueError('Recovery goes below the measured HOLD pose')
+            limit.set('lower',f'{model_lower(held):.17g}')
+            private=folder/'recovery_robot.urdf';tree.write(private,encoding='unicode',xml_declaration=True)
+            r['urdf']=str(private.resolve())
+            spec['measured_j2_connector']=dict(original_lower_rad=lower,held_lower_rad=held[1],
+                                             model_sha256=digest(private),original_plan_unchanged=True)
     spec[other+'_snapshot']=passive_snapshot(r)
     spec['proof']=hard_check(r,q,folder);spec['plan_sha256']=digest(packet['plan'])
     atomic_json(folder/'return.json',spec)

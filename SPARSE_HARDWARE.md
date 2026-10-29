@@ -1,5 +1,21 @@
 # Optional sparse-timing hardware fork
 
+## Shared right-J2 position correction (2026-10-28)
+
+This fork retains its existing path/timing algorithm, drive settings and
+velocity/acceleration/jerk policy. Like other new selected-right planner models,
+its generated URDF now imposes J2 >= 0° in encoder/display coordinates, after
+calibration mapping. Other bounds and left behavior remain unchanged. Old
+right-arm preparations require recalculation before a new Start; existing
+checked prefix recovery remains readable. See
+[the operating-limit study](diagnostics/right_j2_operating_limit_20261028/REPORT.md).
+
+**2026-10-26 clarification:** normal `--hardware` now uses the newer experiment-equivalent
+path/recovery and configurable timing pipeline. This opt-in `--hardware-sparse`
+fork still uses its historical path generator and fixed original limits; it does
+not acquire DT1 or expose the new profile controls. Comparisons below are dated
+historical results, not a claim of current parity with normal hardware.
+
 ```bash
 ./setup_planner_sparse.sh               # once, installs pinned optional dependency
 ./plan_drums.sh --hardware-sparse --right

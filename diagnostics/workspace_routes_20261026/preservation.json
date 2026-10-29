@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "existing_files_audited": 1305,
+  "changed_existing_files": [
+    {
+      "path": ".gitignore",
+      "before_sha256": "1374ce469a30cab4dbc7ee8036eb6a980b3cacbb15b44846889b0e03be3e4e93",
+      "after_sha256": "715d549977f181a929ecb14fbee35990615b2eee7b4a45fd2bd4a49541aa6410"
+    },
+    {
+      "path": "DRUM_PLANNER_EXPERIMENTS.md",
+      "before_sha256": "2fd37d0fbe821c6802e7911165d15fede08ea0dae76d9cefd16dae2a41730a5c",
+      "after_sha256": "59e818752763b82e10db23f78badb2cf1101e44f79e2985bce96c571f46b83a4"
+    },
+    {
+      "path": "config/git_retained_artifacts.json",
+      "before_sha256": "9c630e4d4bffea5797e066b9325ad0c1e4fd55ef53a1d6d75142d25cd1c362e6",
+      "after_sha256": "f58649dce5e04d62c5838e895b4777ae8ef9566f69624cfc2086fda2b8403f91"
+    },
+    {
+      "path": "drum_planner/experiment/fast.py",
+      "before_sha256": "aeac8d2a368ea3eaf8120bf60dc63250da6cfd21602a99566e1c0af884248792",
+      "after_sha256": "e43478460cf9831283d4a79c72b21386d9ee77da15da724e78d7c81ce4b89cf8"
+    },
+    {
+      "path": "drum_planner/experiment/fast_config.py",
+      "before_sha256": "f10c2bab3f61d8ee04c842a2ad3326f2e9bd36c5e933d31b765170b519132062",
+      "after_sha256": "7bab12765c2a25633aedc09a95adc0ae21f2b8016a58d428f73c31ae64657b34"
+    }
+  ],
+  "new_source_and_test_files": {
+    "drum_planner/experiment/workspace_recovery.py": "ddda49dbcb0be9813627309012a4323b90e904f33579b9c7055060aee212b1b2",
+    "tests/test_workspace_recovery.py": "7113b2111cfa523cfb5b6743de45beedb5c50477a7456a46c11887b4c794910d"
+  },
+  "protected": [
+    "URDF and tool geometry",
+    "accepted calibration",
+    "destinations and recordings",
+    "all timing implementations",
+    "shared workspace_curve.py",
+    "hardware planners and motor control",
+    "separate --fast implementation",
+    "camera acquisition and masking"
+  ],
+  "unexpected_changes": [],
+  "raw_capture_payloads_verified": "input_provenance.json",
+  "motor_commands": 0,
+  "camera_access": false,
+  "can_access": false
+}

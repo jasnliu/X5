@@ -1,0 +1,140 @@
+{
+  "R1": {
+    "width": 0.025,
+    "score": 8.068329776179162,
+    "metrics": {
+      "gesture": {
+        "joint_excess_deg": 89.67741242133542,
+        "joint_total_deg": 393.47581827722576,
+        "joint_excess_ratio": 0.2951872382894424,
+        "workspace_detour": 0.48180222651510207,
+        "workspace_overshoot": 0.253825216662623,
+        "broad_turning_rad": 3.759402508736845,
+        "progress_disagreement": 0.26104326654592747,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.45067350146747553,
+          "straight_m": 0.2716835313267055,
+          "detour_ratio": 1.6588178873659098,
+          "broad_turning_deg": 201.71797087610452,
+          "endpoint_box_overshoot_m": 0.10475561136987041,
+          "positive_x_goal_overshoot_m": 0.09515227495445291
+        },
+        "tip": {
+          "length_m": 0.9829093952803081,
+          "straight_m": 0.7533104809213668,
+          "detour_ratio": 1.3047865656642943,
+          "broad_turning_deg": 240.80347477727676,
+          "endpoint_box_overshoot_m": 0.09195728242751766,
+          "positive_x_goal_overshoot_m": 0.09195728242751766
+        }
+      },
+      "shapes": {
+        "wrist": {
+          "length": 0.45067350146747553,
+          "total_turn_rad": 3.520642752230054,
+          "bending_energy": 28.256596904679395,
+          "curvature_variation": 39.59276637734569
+        },
+        "tip": {
+          "length": 0.9829093952803081,
+          "total_turn_rad": 4.202813485106598,
+          "bending_energy": 30.368660272814004,
+          "curvature_variation": 70.40282094225385
+        }
+      }
+    },
+    "reversals": {
+      "count": 4,
+      "per_joint_count": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "excess_travel_rad": 1.5409873375217384,
+      "per_joint_excess_rad": [
+        0.2877544467266474,
+        0.5531837933506402,
+        0.02417877389942591,
+        0.0,
+        0.0,
+        0.12396280908595325,
+        0.5519075144590717
+      ],
+      "score": 6.943069024103243
+    }
+  },
+  "R2": {
+    "width": 0.05,
+    "score": 7.136660308437862,
+    "metrics": {
+      "gesture": {
+        "joint_excess_deg": 54.073078617154934,
+        "joint_total_deg": 285.6473807512645,
+        "joint_excess_ratio": 0.23350206874785304,
+        "workspace_detour": 0.6193922961434513,
+        "workspace_overshoot": 0.2573653020038669,
+        "broad_turning_rad": 3.2687711382417657,
+        "progress_disagreement": 0.38191384815859664,
+        "reversal_count": 4,
+        "wrist": {
+          "length_m": 0.49789722044188345,
+          "straight_m": 0.268234873915931,
+          "detour_ratio": 1.8561986857754083,
+          "broad_turning_deg": 188.0984673354018,
+          "endpoint_box_overshoot_m": 0.09897751276432597,
+          "positive_x_goal_overshoot_m": 0.08827973403571099
+        },
+        "tip": {
+          "length_m": 0.9397224926192138,
+          "straight_m": 0.679684703998103,
+          "detour_ratio": 1.3825859065114943,
+          "broad_turning_deg": 185.77939042118905,
+          "endpoint_box_overshoot_m": 0.09905379092245628,
+          "positive_x_goal_overshoot_m": 0.08633292617860988
+        }
+      },
+      "shapes": {
+        "wrist": {
+          "length": 0.49789722044188345,
+          "total_turn_rad": 3.282937572957766,
+          "bending_energy": 20.199584765160793,
+          "curvature_variation": 35.394424474025456
+        },
+        "tip": {
+          "length": 0.9397224926192138,
+          "total_turn_rad": 3.242462045197763,
+          "bending_energy": 20.99069402166666,
+          "curvature_variation": 49.134909584893016
+        }
+      }
+    },
+    "reversals": {
+      "count": 4,
+      "per_joint_count": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "excess_travel_rad": 0.9437532585590955,
+      "per_joint_excess_rad": [
+        0.36681308867929063,
+        0.16143902714392977,
+        0.0,
+        0.0,
+        0.0,
+        0.09126264975736798,
+        0.32423849297850715
+      ],
+      "score": 5.802435953905164
+    }
+  }
+}

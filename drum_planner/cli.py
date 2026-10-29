@@ -13,10 +13,15 @@ def output_folder(label):
 
 
 def main(argv=None):
+    fast_arguments=list(argv if argv is not None else sys.argv[1:])
+    if fast_arguments and fast_arguments[0] in ('--fast','fast'):
+        from .fast_mode.app import main as fast_main
+        return fast_main(fast_arguments[1:])
     from .planning import candidate_count, DEFAULT_CANDIDATES
     parser=argparse.ArgumentParser(description='Gemini/MoveIt planner. Hardware only through explicit --hardware Start or live --execute.')
     parser.add_argument('--hardware',action='store_true',help='Workspace curve hardware UI; --right (default) or --left')
     parser.add_argument('--hardware-sparse',action='store_true',help='Separate hardware fork: same Workspace curve/UI, sparse IPOPT timing')
+    parser.add_argument('--fast',action='store_true',help='Separate wrist-biased task planner; --fast --right/--left; software preview only')
     sub=parser.add_subparsers(dest='command')
     sub.add_parser('build',help='Compile camera-only SDK bridge and standalone MoveIt/OMPL backend')
     p=sub.add_parser('camera',help='Full-FOV native depth preview/snapshot; no robot connection')
@@ -70,7 +75,7 @@ def main(argv=None):
     from .experiment.config import budget
     from .experiment.fast_config import METHODS, DEFAULT_METHOD
     arms=p.add_mutually_exclusive_group()
-    arms.add_argument('--right',dest='side',action='store_const',const='right',help='Right-arm experiment (default): choose from destinations/right in the GUI')
+    arms.add_argument('--right',dest='side',action='store_const',const='right',help='Right-arm experiment (default): saved destinations or camera-generated dt1')
     arms.add_argument('--left',dest='side',action='store_const',const='left',help='Left-arm experiment: choose from destinations/left in the GUI')
     p.set_defaults(side='right')
     p.add_argument('--method',choices=[*METHODS,'all'],default=DEFAULT_METHOD)
@@ -81,6 +86,10 @@ def main(argv=None):
     p.add_argument('--zone',help='Selected-arm envelope; default right zone3 / left zone1. Left only: "none" disables its point envelope')
     p.add_argument('--scene',help='Offline saved five-frame scene; supply with --state, or use --offline for study defaults')
     p.add_argument('--settings',help='JSON workspace curve preferences')
+    p.add_argument('--motion-profile',help='Per-joint velocity/acceleration/jerk JSON profile; simulation only')
+    p.add_argument('--timing-quality',choices=['fast','balanced','thorough'],help='Override profile timing effort; default balanced')
+    p.add_argument('--start',default='default',help='Simulated spawn: default acquired pose, or destination name/path; no motor movement')
+    p.add_argument('--destinations',nargs='+',help='Optional one to three target names/paths, e.g. R1 R2; dt1 is camera-generated and right-only')
     p.add_argument('--budget',type=budget,default=120.,help='Workspace proposal search cap per leg (5–600 s); final verification/setup is separate')
     p.add_argument('--headless',action='store_true');p.add_argument('--output')
     p.add_argument('--calibration',default=str(DEFAULT_CALIBRATION))
@@ -95,6 +104,8 @@ def main(argv=None):
     p.add_argument('--output',help='New session directory')
     p.add_argument('--calibration',default=str(DEFAULT_CALIBRATION))
     p.add_argument('--simulate',metavar='PLAN',help='OFFLINE fake-motor UI on an existing plan; no camera/CAN or physical commands')
+    p.add_argument('--motion-profile',help='Hardware planning V/A/jerk JSON; does not change motor firmware')
+    p.add_argument('--timing-quality',choices=['fast','balanced','thorough'],help='Current hardware timing effort; balanced default')
     p.add_argument('--resume',metavar='SESSION',help='Reconnect to an existing motor-owner session without re-enabling or releasing it')
     p.add_argument('--seconds',type=float,default=0.,help='Simulation-only preview auto-close timer; NEVER closes an active hold')
     sub.add_parser('test',help='Offline tests only, including actual MoveIt/FCL planning')
@@ -174,6 +185,17 @@ def main(argv=None):
             if args.method=='all' and not args.headless:raise ValueError('--method all requires --headless; GUI selects one method at a time')
             if args.headless and (args.seconds or args.autoplay):raise ValueError('Playback options need the GUI')
             params=settings(json.loads(Path(args.settings).read_text()) if args.settings else None)
+            from .experiment import motion_settings, scenario, checkpoints
+            from .experiment import dt1_goal
+            profile=(motion_settings.load(args.motion_profile,args.side) if args.motion_profile
+                     else motion_settings.settings(args.side))
+            if args.timing_quality:profile=motion_settings.settings(args.side,dict(profile,timing_quality=args.timing_quality))
+            spawn=scenario.resolve(args.start,args.side)
+            targets=[dt1_goal.resolve(value,args.side) for value in (args.destinations or [])]
+            if args.destinations and (not 1<=len(targets)<=3 or any(p is None for p in targets)):
+                raise ValueError('Choose one to three destination targets; Default is only a starting position')
+            if any(a==b for a,b in zip(targets,targets[1:])):
+                raise ValueError('Consecutive checkpoint destinations must differ')
             folder=Path(args.output or output_folder('experiment')).resolve()
             if args.capture_start and (args.offline or args.state or args.scene):
                 raise ValueError('--capture-start requests fresh inputs; cannot combine it with offline/saved inputs')
@@ -181,6 +203,16 @@ def main(argv=None):
                 raise ValueError('Supply both --state and --scene for an offline pair, or --offline for saved study defaults')
             fresh=not (args.offline or (args.state and args.scene))
             prepare(folder,args.state,args.scene,args.calibration,side=args.side,zone=args.zone,fresh=fresh)
+            if spawn is not None or args.motion_profile or args.timing_quality or targets:
+                context=scenario.set_start(folder,spawn)
+                context['motion_settings']=profile
+                if targets:
+                    if dt1_goal.TOKEN not in targets:context.update(checkpoints.freeze(targets,args.side,folder))
+                    context['initial_checkpoint_sources']=[str(p) for p in targets]
+                atomic_json(folder/'context.json',context)
+                atomic_json(folder/'motion_settings.json',profile)
+                if args.headless and dt1_goal.TOKEN in targets:
+                    dt1_goal.bind_headless(folder,context,[str(p) for p in targets])
             if args.headless:
                 results=headless(folder,list(METHODS) if args.method=='all' else [args.method],params,args.budget)
                 print(json.dumps(results,indent=2))
@@ -193,13 +225,20 @@ def main(argv=None):
                 raise ValueError('--seconds is only for an offline simulation preview')
             from .baseline.workspace import show
             variant={'timing_backend':'sparse'} if args.command=='hardware-sparse' else {}
+            if args.motion_profile or args.timing_quality:
+                if variant:raise ValueError('Custom limits/effort are for --hardware, not the retained --hardware-sparse fork')
+                if args.resume:raise ValueError('Resume keeps its existing plan and limits; change them after returning to rest')
+                from .baseline import settings as hardware_settings
+                profile=hardware_settings.load(args.motion_profile,args.moving_side or 'right') if args.motion_profile else hardware_settings.settings(args.moving_side or 'right')
+                if args.timing_quality:profile['timing_quality']=args.timing_quality
+                variant['motion_profile']=profile
             if args.resume:
                 if args.output:raise ValueError('--resume uses its existing session; do not supply --output')
                 folder=Path(args.resume).resolve();info=json.loads((folder/'control.json').read_text())
                 cal=args.calibration if info['simulated'] else json.loads(Path(info['prepared']).read_text())['calibration']
                 show(folder,cal,rate=info['rate'],resume=info,moving_side=args.moving_side,**variant)
             else:
-                folder=Path(args.output or output_folder(('hardware-sparse-' if variant else 'hardware-')+(args.moving_side or 'right'))).resolve()
+                folder=Path(args.output or output_folder(('hardware-sparse-' if args.command=='hardware-sparse' else 'hardware-')+(args.moving_side or 'right'))).resolve()
                 if args.simulate:
                     from .experiment.config import no_can
                     no_can()

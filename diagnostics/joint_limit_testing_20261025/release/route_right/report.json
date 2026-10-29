@@ -1,0 +1,184 @@
+{
+  "schema": "x5-joint-limit-study-v1",
+  "kind": "fixed_path_forecast",
+  "side": "right",
+  "source_plan": "/home/jason/Proyectos3/X5/diagnostics/experiment_controls_20261025/runs_final/right_balanced/plans/workspace_curve-c3597c10/plan.json",
+  "source_plan_sha256": "66a5d52936a9b4f5ca1ca9391906f32839d08dfa19e21a3631fcff284ccbf1bf",
+  "source_geometry_sha256": "36c3a035e16c103e0dc7536efc13d3e300686ab6dce861a16d7b4c9ad2042709",
+  "profile": {
+    "schema": "x5-experiment-motion-profile-v1",
+    "side": "right",
+    "name": "Original limits",
+    "simulation_only": true,
+    "timing_quality": "balanced",
+    "velocity_rad_s": [
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    "acceleration_rad_s2": [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    "jerk_rad_s3": [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+    ]
+  },
+  "profile_sha256": "10dbe8b1093754f4f38745e06f441ccb170acbca119f973f44439ffd0ea62474",
+  "profile_evidence": null,
+  "quality": "balanced",
+  "previous_movement_s": 1.656983746870765,
+  "predicted_movement_s": 1.656983746870765,
+  "calculation_s": 4.8933579589938745,
+  "geometric_path_unchanged": true,
+  "verification": {
+    "geometry": {
+      "type": "original spline coefficients bit-identical; positive monotone time density",
+      "max_error_rad": 0.0
+    },
+    "dense_samples": 930,
+    "dense_peaks": [
+      [
+        0.2358284880809124,
+        0.05879347778955026,
+        0.07451954292782065,
+        0.19329375119000494,
+        0.2191506364624628,
+        0.5372261374457383,
+        0.32169309580726424
+      ],
+      [
+        0.6387779929685684,
+        0.14691705698155033,
+        0.21005768507791628,
+        0.5010756761753764,
+        0.5210308856510383,
+        1.191320941672056,
+        0.7436336600985219
+      ],
+      [
+        5.979301577601129,
+        2.5674167386956794,
+        5.9337308825035455,
+        4.267321456619984,
+        5.525486706661457,
+        5.975050003240824,
+        5.308689956284688
+      ]
+    ],
+    "limits": [
+      [
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6
+      ],
+      [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    ],
+    "motor_commands": 0,
+    "collision_zone": {
+      "samples_checked": 930,
+      "edge_joint_l1_step_rad": 0.003,
+      "max_time_step_s": 0.002
+    }
+  },
+  "limits": [
+    [
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+    ]
+  ],
+  "peaks": [
+    [
+      0.23582903862143834,
+      0.05879347993548418,
+      0.07451998351829071,
+      0.19329388758696456,
+      0.21915124978148784,
+      0.5372264008284884,
+      0.32169445155847787
+    ],
+    [
+      0.6387780248724007,
+      0.14692093376577697,
+      0.21005774896679802,
+      0.5010814155619615,
+      0.5210455957111922,
+      1.1913230420583392,
+      0.7436337154118803
+    ],
+    [
+      5.979305684287366,
+      2.567416738695683,
+      5.933745670776276,
+      4.2673214566200075,
+      5.528198243398338,
+      5.982035940089887,
+      5.308689956284685
+    ]
+  ],
+  "hardware_execution_available": false,
+  "motion_authorized": false,
+  "global_fastest_claimed": false,
+  "result_cache_used": false,
+  "physical_route_validation_required": true,
+  "note": "Fastest checked clock found at these candidate limits on this exact saved path; NOT measured route performance or an absolute optimum."
+}

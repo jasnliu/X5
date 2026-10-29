@@ -8,6 +8,9 @@ from .fast_config import METHODS,DESCRIPTIONS,DEFAULT_METHOD
 from .runtime import Job,PYTHON
 from . import destinations,checkpoints
 from .checkpoint_ui import CheckpointControls
+from .motion_ui import MotionControls
+from . import motion_settings, scenario
+from . import dt1_goal
 
 
 def command(action,folder,**values):
@@ -78,7 +81,9 @@ def start_plan(folder,method,params,seconds):
     legs=max(1,len(context.get('checkpoints',[])))
     # No CPU qualification or persistent plan cache. Leave bounded headroom
     # for blocked proposals / explicit CPU fallback, not an accuracy timeout.
-    timeout=(seconds+30)*(legs+1) if legs>1 else seconds+30
+    from .motion_timing import POLICIES
+    timing_allowance=10+sum(2*stage[2] for stage in POLICIES[motion_settings.from_context(context)['timing_quality']])
+    timeout=(seconds+30+timing_allowance)*(legs+1) if legs>1 else seconds+30+timing_allowance
     job=Job(command('plan',target,context=target/'context.json',method=method,
                     settings=target/'settings.json',budget=budget(seconds)),target,timeout=timeout)
     return target,job
@@ -97,19 +102,19 @@ def make_view_class():
     from ..snapshot_preview import SnapshotPlaybackView
     from ..trajectory_view import PlaybackClock
     from .checkpoints import ExperimentPlanDisplay as PlanDisplay
-    from ..planned_view import load
+    from .rgbd import load_view as load
     from ..common import calibration
 
-    class ExperimentView(CheckpointControls,SnapshotPlaybackView):
+    class ExperimentView(MotionControls,CheckpointControls,SnapshotPlaybackView):
         def __init__(self,folder,params=None,seconds=120.,method=DEFAULT_METHOD,autoplay=False,precompute=True):
-            self.session=Path(folder);self.context=json.loads((self.session/'context.json').read_text())
+            self.session=Path(folder);self.context=scenario.ensure(self.session)
             self.side=arm_side(self.context.get('moving_side','right'))
             self.params=settings(params);self.planning_seconds=budget(seconds);self.job=None;self.job_kind=None
             self.job_target=None;self.cache={};self.autoplay_result=autoplay;self.events=deque(maxlen=256);self.generation_count=0
             self.active_method=method;self.displayed_method=None;self.scene_generation=0
             self.pending_methods=deque();self.method_states={key:'not queued' for key in METHODS}
             self.job_method=None;self.job_signature=None;self.closing=False
-            self.destination_path=None;self.discard_job=False
+            self.destination_path=None;self.discard_job=False;self.pending_dt1=None
             plan=PlanDisplay(self.session/'initial/plan.json')
             super().__init__(calibration(self.context['calibration']),self.session,plan)
             packet,mesh=load(plan,self.context['calibration']);self.set_scene(packet,mesh)
@@ -134,6 +139,7 @@ def make_view_class():
             self.method_description=Qt.QLabel(DESCRIPTIONS[method]);self.method_description.setWordWrap(True)
             self.window.layout().insertWidget(4,self.method_description)
             self.queue_label=Qt.QLabel();self.queue_label.setWordWrap(True);self.window.layout().insertWidget(5,self.queue_label)
+            self.setup_motion_controls()
             self.refresh_destinations()
             self.generate_button.clicked.connect(self.generate)
             self.cache_all_button.clicked.connect(self.cache_all)
@@ -142,11 +148,11 @@ def make_view_class():
             self.budget_spin.valueChanged.connect(self.budget_changed)
             self.settings_button.clicked.connect(self.edit_settings)
             self.recapture_button.clicked.connect(self.recapture)
-            self.window.setWindowTitle(f'X5 {self.side} arm fast workspace experiment — frozen Gemini scene / SIMULATION ONLY')
+            self.window.setWindowTitle(f'X5 {self.side} arm Workspace curve experiment — frozen Gemini scene / SIMULATION ONLY')
             origin='FRESH STARTUP SNAPSHOT' if self.context.get('input_origin')=='fresh_startup' else 'OFFLINE SAVED INPUTS'
             self.banner.setText(f'{self.side.upper()} ARM EXPERIMENTS  •  {origin}  •  FROZEN SCENE  •  DEVICES DISCONNECTED / NO MOTOR COMMANDS')
             self.info.setText(f'Only the {self.side} arm animates. The opposite arm stays fixed.\n'
-                f'Target: choose a file from destinations/{self.side}.\nStart: {origin.lower()}, NOT live tracking.\n'
+                f'Target: choose a file from destinations/{self.side}'+(' or dt1 (fresh camera-generated).' if self.side=='right' else '.')+f'\nStart: {origin.lower()}, NOT live tracking.\n'
                 'Camera is OFF except explicit Recapture scene.\nChoose a destination → fresh timing calculation → Play animation.')
             self.note.setText('SOFTWARE EXPERIMENT ONLY. Fresh endpoint-only workspace curves and sparse CPU timing; no CPU reference or persistent trajectory cache. No recording imitation. '
                               'Original full-arm + stick collision checks remain. Unobserved space is not certified free.')
@@ -166,10 +172,15 @@ def make_view_class():
                     button.clicked.disconnect()
                     button.clicked.connect(lambda:self.seek(float(self.plan.obj['outward'][-1]['time_s'])) if self.plan.playable else None)
             self.update_queue_status()
+            initial_targets=self.context.get('initial_checkpoint_sources',[])
+            if initial_targets:
+                while len(self.checkpoint_boxes)<len(initial_targets):self.append_checkpoint_row()
+                self.refresh_checkpoint_choices(initial_targets)
+                self.select_destination()
             # Keep the old constructor argument for diagnostic callers, but GUI
             # startup is always unselected. Selection now triggers precomputation.
 
-        def select_destination(self,*_):
+        def select_destination(self,*_,_resolved=None,_dt1_proof=None):
             if self.closing:return
             selected_paths=self.checkpoint_selection()
             selected=selected_paths[-1] if all(selected_paths) else None
@@ -177,20 +188,28 @@ def make_view_class():
             # Retire the whole old input generation, including capture/setup jobs.
             # Do not start another worker until the old process group is reaped.
             if self.job:self.discard_job=True;self.job.cancel()
-            self.pending_methods.clear();self.cache.clear();self.destination_path=None
+            self.pending_methods.clear();self.cache.clear();self.destination_path=None;self.pending_dt1=None
             self.method_states={key:'not queued' for key in METHODS}
-            for key in ('destination_source','destination_sha256','checkpoints','checkpoint_sha256'):
+            for key in ('destination_source','destination_sha256','checkpoints','checkpoint_sha256','dt1_generation'):
                 self.context.pop(key,None)
             self.context['goal_recording']=str(goal_recording(self.side))
             self.install_plan(self.session/'initial/plan.json',None)
-            self.info.setText(f'Target: choose a file from destinations/{self.side}. Saved start and frozen scene are unchanged.')
-            self.plan_label.setText('No generated trajectory for this destination. Frozen start pose shown.')
+            self.info.setText(f'Target: choose a file from destinations/{self.side}'+
+                (' or dt1.' if self.side=='right' else '.')+' Simulated start: '+
+                self.context['experiment_start']['label']+'. Frozen perception unchanged.')
+            self.plan_label.setText('No generated trajectory for this selection. Selected simulated start shown.')
             try:
                 # Persist the cleared selection even if the new file is invalid.
                 atomic_json(self.session/'context.json',self.context)
                 if selected:
-                    binding=checkpoints.freeze(selected_paths,self.side,self.session)
+                    if dt1_goal.TOKEN in selected_paths and _resolved is None:
+                        if self.side!='right':raise ValueError('dt1 is right-arm only')
+                        self.pending_dt1=list(selected_paths)
+                        self.status.setText('Generating dt1 from this frozen camera scene; no camera or motor access during calculation…')
+                        self.start_next();return
+                    binding=checkpoints.freeze(_resolved or selected_paths,self.side,self.session)
                     self.context.update(binding);self.destination_path=Path(selected)
+                    if _dt1_proof is not None:self.context['dt1_generation']=_dt1_proof
                     atomic_json(self.session/'context.json',self.context)
             except Exception as exc:
                 self.destination_path=None
@@ -207,7 +226,7 @@ def make_view_class():
             if not selected:
                 self.status.setText('Choose a destination in every checkpoint dropdown, or remove the extra checkpoint.');self.update_queue_status();return
             names=' → '.join(Path(p).stem for p in selected_paths)
-            self.info.setText(f'{self.side.upper()} checkpoints: {names}\nSaved rest → each endpoint in order, 2 s hold at each → return to original start (new path for multiple checkpoints). Frozen scene unchanged.\n'
+            self.info.setText(f'{self.side.upper()} checkpoints: {names}\nSelected start → each endpoint in order, 2 s hold at each → return to selected start (new path for multiple checkpoints). Frozen scene unchanged.\n'
                               'One fresh timing calculation, then Play animation. CPU is intentional; checked-clock fallback is explicitly labelled if needed.')
             print(f'[experiment destination] Selected {names}; old calculations/results discarded.',flush=True)
             self.status.setText('Destination selected — stopping previous calculation…' if self.job else 'Destination selected — starting calculation…')
@@ -225,13 +244,19 @@ def make_view_class():
 
         def signature(self):return (self.context['scene_sha256'],self.context['state_sha256'],json.dumps(self.params,sort_keys=True),
                                    self.side,self.context.get(self.side+'_zone',{}).get('constraint_sha256'),
-                                   self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds)
+                                   self.context.get('destination_sha256'),self.context.get('checkpoint_sha256'),self.planning_seconds,
+                                   motion_settings.identity(self.motion_profile))
+
+        def refresh_destinations(self,*args):
+            super().refresh_destinations(*args)
+            self.refresh_start_choices()
 
         def locked(self,active):
             # Planning runs separately from the displayed result. Keep cached
             # playback/selection usable while another method is calculating.
             blocked=active and self.job_kind!='plan'
             self.method_box.setEnabled(not blocked)
+            self.start_box.setEnabled(not blocked);self.limits_button.setEnabled(not blocked);self.timing_box.setEnabled(not blocked)
             for widget in (self.generate_button,self.cache_all_button,self.budget_spin,self.settings_button,self.recapture_button):widget.setEnabled(not active)
             self.cancel_button.setEnabled(active or bool(self.pending_methods))
             self.play_button.setEnabled(not blocked and self.plan.playable)
@@ -282,7 +307,20 @@ def make_view_class():
             self.start_next();self.update_queue_status()
 
         def start_next(self):
-            if self.closing or self.job or self.destination_path is None:return
+            if self.closing or self.job:return
+            selected=getattr(self,'pending_dt1',None)
+            if selected:
+                self.pending_dt1=None
+                try:
+                    self.job_target,self.job=dt1_goal.start(self.session,self.context,selected)
+                    self.job_kind='dt1';self.job_method=None;self.job_signature=dt1_goal.identity(self.context,selected)
+                    self.locked(True);self.status.setText('GENERATING dt1 — frozen RGB detection + checked prime pose; progress in terminal')
+                    self.events.append(dict(event='dt1_started',selected=selected))
+                except Exception as exc:
+                    self.status.setText('dt1 could not start: '+str(exc)+'. Calculate fresh to retry.')
+                    self.events.append(dict(event='dt1_failed',error=str(exc)))
+                self.update_queue_status();return
+            if self.destination_path is None:return
             while self.pending_methods:
                 method=self.pending_methods.popleft()
                 if self.cached(method):continue
@@ -340,6 +378,9 @@ def make_view_class():
                 raise ValueError('Cannot play a trajectory for a different destination')
             if method and plan.obj.get('checkpoint_sha256')!=self.context.get('checkpoint_sha256'):
                 raise ValueError('Cannot play a trajectory for a different checkpoint sequence')
+            if method and (plan.obj.get('experiment',{}).get('motion_settings_sha256')!=motion_settings.identity(self.motion_profile)
+                           or plan.obj['provenance']['state_sha256']!=self.context['state_sha256']):
+                raise ValueError('Cannot play a trajectory for different joint limits, timing effort or simulated start')
             if self.context.get(self.side+'_zone') and plan.obj.get(self.side+'_zone_constraint')!=self.context[self.side+'_zone']:
                 raise ValueError('Cannot play a cached plan without the matching selected-arm zone constraint')
             self.clock.pause();self.plan=plan;self.robot.plan=plan;self.clock=PlaybackClock(plan.duration)
@@ -372,6 +413,10 @@ def make_view_class():
                 sequence=plan.obj['checkpoint_sequence']
                 self.plan_label.setText(self.plan_label.text()+f' • {len(sequence["segments"])} checkpoints • 2 s hold each'
                     +f' • movement {sequence["movement_outward_s"]:.2f}s • to final (with holds) {plan.obj["duration_outward_s"]:.2f}s')
+            elif plan.playable and not selected:
+                self.plan_label.setText(self.plan_label.text()+f' • movement {plan.obj["duration_outward_s"]:.3f}s • '+
+                    plan.obj.get('experiment',{}).get('retiming',{}).get('label',''))
+            self.refresh_motion_status()
             self.draw_canvas()
             self.locked(bool(self.job))
             if plan.playable and self.autoplay_result:self.toggle_play()
@@ -379,12 +424,15 @@ def make_view_class():
 
         def generate(self):
             if self.job:return
+            if dt1_goal.TOKEN in self.checkpoint_selection():
+                self.select_destination();return
             if not self.destination_ready():return
             self.active_method=self.method_box.currentData();self.cache.pop(self.active_method,None)
             self.install_plan(self.session/'initial/plan.json',None)
             self.prioritize(self.active_method);self.start_next()
 
         def cancel_job(self):
+            self.pending_dt1=None
             for method in self.pending_methods:self.method_states[method]='cancelled'
             self.pending_methods.clear()
             if self.job:
@@ -397,7 +445,7 @@ def make_view_class():
             if self.job:return
             self.pending_methods.clear();self.clock.pause()
             self.job_target=self.session/('capture_'+uuid.uuid4().hex[:8])
-            self.job=Job(command('capture',self.job_target,calibration=self.context['calibration']),
+            self.job=Job(command('capture',self.job_target,calibration=self.context['calibration'],side=self.side),
                          self.job_target/'job',timeout=35)
             self.job_kind='capture';self.job_method=None;self.locked(True)
             self.status.setText('CAPTURING NEW SCENE — saved arm pose remains unchanged; no CAN')
@@ -449,6 +497,20 @@ def make_view_class():
                     if method:self.method_states[method]='failed'
                     self.status.setText('Worker stopped (timeout/memory/error). See '+str(job.log_path)+'. You can retry.')
                     self.events.append(dict(event='worker_stopped',kind=kind,method=method,log=str(job.log_path)))
+                    if kind=='dt1':
+                        error_path=target/'result.json'
+                        detail=json.loads(error_path.read_text()).get('error') if error_path.exists() else 'see '+str(job.log_path)
+                        self.status.setText('dt1 not generated: '+str(detail)+'. No old destination used. Calculate fresh to retry, or select a saved destination.')
+                elif kind=='dt1':
+                    try:
+                        selected=self.checkpoint_selection()
+                        if signature!=dt1_goal.identity(self.context,selected):raise ValueError('Selection changed during dt1 generation')
+                        resolved,proof=dt1_goal.result(target,self.context,selected)
+                        self.select_destination(_resolved=resolved,_dt1_proof=proof)
+                        self.events.append(dict(event='dt1_ready',result=str(target/'result.json')))
+                    except Exception as exc:
+                        self.status.setText('dt1 result rejected: '+str(exc)+'. Calculate fresh to retry.')
+                        self.events.append(dict(event='dt1_failed',error=str(exc)))
                 elif kind=='plan':
                     path=target/'plan.json'
                     try:
@@ -468,13 +530,14 @@ def make_view_class():
                         self.events.append(dict(event='result_rejected',method=method,error=str(exc)))
                 elif kind=='capture':
                     self.job_target=target
-                    self.job=Job(command('initialize',target,state=self.context['state'],scene=target/'camera/scene.json',calibration=self.context['calibration'],
+                    self.job=Job(command('initialize',target,state=self.context.get('acquired_state',self.context['state']),scene=target/'camera/scene.json',calibration=self.context['calibration'],
                                          side=self.side,zone=self.context.get('zone_path')),target/'init_job',timeout=40)
                     self.job_kind='initialize';self.locked(True)
                 elif kind=='initialize':
                     context=json.loads((target/'context.json').read_text())
                     for name in ('goal_recording','destination_source','destination_sha256','checkpoints','checkpoint_sha256',
-                                 'input_origin','startup_acquisition'):
+                                 'input_origin','startup_acquisition','acquired_state','acquired_state_sha256',
+                                 'experiment_start','motion_settings','initial_checkpoint_sources'):
                         if name in self.context:context[name]=self.context[name]
                     context['scene_refreshed_after_startup']=True
                     plan=PlanDisplay(target/'initial/plan.json');packet,mesh=load(plan,context['calibration'])
@@ -485,11 +548,14 @@ def make_view_class():
                     # Initial file/model paths remain absolute and hash verified.
                     for name in ('plan.json','backend_request.json'):
                         shutil.copy2(target/'initial'/name,self.session/'initial'/name)
+                    scenario.rebase_acquisition(self.session)
+                    self.context=scenario.set_start(self.session,context['experiment_start'].get('destination_source'))
                     self.packet=None;self.mesh=None;self.mesh_builds=0;self.fit_needed=False
                     self.set_scene(packet,mesh);self.cache.clear();self.scene_generation+=1
                     self.save_status.setText('Frozen planning scene: '+self.context['scene'])
                     self.events.append(dict(event='scene_installed',generation=self.scene_generation))
-                    self.restart_cache('scene_cache_restarted')
+                    if dt1_goal.TOKEN in self.checkpoint_selection():self.select_destination()
+                    else:self.restart_cache('scene_cache_restarted')
                 self.start_next();self.update_queue_status()
             return key
 
@@ -498,9 +564,11 @@ def make_view_class():
             report.update(experiment=True,saved_state_not_live=True,can_access=False,motor_commands=0,
                           context=self.context,events=list(self.events),generations=self.generation_count,
                           scene_generations=self.scene_generation,displayed_method=self.displayed_method,
-                          automatic_precompute=self.destination_path is not None,calculation_trigger='destination_selection',
+                          automatic_precompute=self.destination_path is not None,
+                          calculation_trigger='destination/start/limits/effort selection or Calculate fresh',
                           selected_destination=str(self.destination_path) if self.destination_path else None,
                           selected_checkpoints=self.checkpoint_selection(),
+                          simulated_start=self.context.get('experiment_start'),motion_settings=self.motion_profile,
                           queued_methods=list(self.pending_methods),calculating_method=self.job_method,
                           method_states=dict(self.method_states),cached_results={key:str(value[1]) for key,value in self.cache.items() if self.cached(key)})
             return report

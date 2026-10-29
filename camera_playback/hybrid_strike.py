@@ -366,12 +366,16 @@ class HybridController:
 
 
 def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
-                requests, stop, heartbeat, sender, channel_factory, motor=7, sign=1.0, snare_clock=None):
+                requests, stop, heartbeat, sender, channel_factory, motor=7, sign=1.0, snare_clock=None,
+                path_hold=None, path_goal=None, recovery_bounds=None, parent_handles_interrupt=False):
     """Only process allowed to command J7 (or, for the left arm, J6) while the
     hybrid session is alive. `anchor`/`lower`/`upper` are already in this
     session's internal strike convention (see Command.frame()'s docstring);
     HybridController's math is unchanged either way. `motor`/`sign` are used
     only where a raw Command/frame actually reaches the wire."""
+    if parent_handles_interrupt:
+        import signal
+        signal.signal(signal.SIGINT,signal.SIG_IGN)
     channel = None
     controller = HybridController(anchor, lower, upper, parameters, rules, limits)
     last_publish = last_send = None
@@ -399,6 +403,7 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
         last_torque = controller.bias
         last_send = helper.last_command_at
         deadline = time.monotonic()
+        held_path = None
         while not stop.is_set():
             channel.receive()
             now = time.monotonic()
@@ -407,6 +412,22 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
                 continue
             if now-heartbeat.value > .5:
                 raise RuntimeError('Hybrid GUI heartbeat lost')
+            if path_hold is not None and path_hold.is_set():
+                from .generated_worker_hold import PoweredPathHold
+                if not math.isfinite(path_goal.value):
+                    path_goal.value=channel.sample.position;held_path=None
+                if held_path is None:
+                    held_path=PoweredPathHold(channel.sample,now,controller.bias)
+                lo,hi=recovery_bounds
+                if stop.is_set():break
+                if not held_path.send(channel.send,channel.sample,now,path_goal.value,lo,hi,motor,sign):
+                    time.sleep(.00025);deadline=time.monotonic();continue
+                last_send=time.monotonic()
+                controller.status=replace(controller.status,phase='generated powered hold/return',ready=True,
+                    swing=False,calibrating=False,sample=channel.sample,at=now)
+                publish(controller.status)
+                deadline=now+.01
+                continue  # Latched: queued strikes can NEVER restart after Hold.
             if now-last_send > (limits.control_timeout if controller.method else .25):
                 raise RuntimeError('Hybrid control deadline missed')
             try:
@@ -459,7 +480,11 @@ def _run_hybrid(interface, anchor, lower, upper, parameters, rules, limits,
         # hold for the GUI's explicit fault handling; never auto-retry a strike.
         if channel is not None and channel.sample is not None and not stop.is_set():
             try:
-                q = min(upper, max(lower, channel.sample.position))
+                if path_hold is not None and path_hold.is_set():
+                    q=channel.sample.position
+                    if not recovery_bounds[0]<=q<=recovery_bounds[1]:
+                        raise RuntimeError('Recovery feedback outside joint bounds; no clipped hold')
+                else:q = min(upper, max(lower, channel.sample.position))
                 channel.send(Command(q, 0, 40, 1.8, max(-2., min(2., controller.bias))).frame(motor, sign))
             except Exception:
                 pass
@@ -473,7 +498,7 @@ class HybridSession(Joint7Session):
     """Reuse the established joined ownership/IPC lifecycle, not its strategy."""
 
     def __init__(self, bus, anchor, lower, upper, tuning=None, channel_factory=Joint7Channel,
-                 motor=7, sign=1.0, snare_clock=None):
+                 motor=7, sign=1.0, snare_clock=None, recovery_bounds=None):
         """`anchor`/`lower`/`upper` are already in this session's internal
         strike convention — see Command.frame()'s docstring in mit_strike.py.
         Defaults (motor=7, sign=1.0) reproduce the original right-J7-only
@@ -497,6 +522,11 @@ class HybridSession(Joint7Session):
         ctx = multiprocessing.get_context('spawn')
         self.requests = ctx.Queue(maxsize=4)
         self.stop_event = ctx.Event()
+        self.path_hold = ctx.Event()
+        self.path_target = ctx.Value('d',anchor)
+        self.recovery_bounds = tuple(recovery_bounds or (lower,upper))
+        if not self.recovery_bounds[0]<=lower<=upper<=self.recovery_bounds[1]:
+            raise ValueError('Recovery bounds must contain the checked strike corridor')
         self.heartbeat = ctx.Value('d', time.monotonic())
         self.receiver, sender = socket.socketpair(socket.AF_UNIX, socket.SOCK_DGRAM)
         self.receiver.setblocking(False)
@@ -505,7 +535,7 @@ class HybridSession(Joint7Session):
         self.process = ctx.Process(target=_run_hybrid, name='j7-hybrid-beat', args=(
             bus.sockets[bus.control_side].getsockname()[0], anchor, lower, upper, parameters,
             rules, limits, self.requests, self.stop_event, self.heartbeat, sender, channel_factory,
-            motor, sign, snare_clock))
+            motor, sign, snare_clock,self.path_hold,self.path_target,self.recovery_bounds,recovery_bounds is not None))
         setattr(bus, self.session_attr, self)
         try:
             self.process.start()
@@ -523,6 +553,7 @@ class HybridSession(Joint7Session):
         return super().status
 
     def request(self, action, *args):
+        if getattr(self,'path_hold',None) is not None and self.path_hold.is_set():raise RuntimeError('Hold latched; no further strikes in this session')
         if self.closed:
             raise RuntimeError('Hybrid session is closed')
         if action in ('search', 'swing', 'calibrate'):
@@ -533,3 +564,20 @@ class HybridSession(Joint7Session):
         except queue.Full:
             raise RuntimeError('Hybrid request queue full; no retry') from None
         return self.request_id
+
+    def emergency_hold(self, displayed_position=None):
+        # IPC request, never a motor target: freeze the WORKER's newest sample
+        # even when the GUI snapshot is stale. No full-stroke return on Hold.
+        self.path_target.value=float('nan') if displayed_position is None else float(displayed_position)
+        self.path_hold.set()
+
+    @property
+    def hold_position(self):
+        value=self.path_target.value
+        return value if math.isfinite(value) else None
+
+    def path_goal(self, displayed_position):
+        if not self.path_hold.is_set():raise RuntimeError('Strike worker still owns J7; Hold before return')
+        value=float(displayed_position)
+        if not self.recovery_bounds[0]<=value<=self.recovery_bounds[1]:raise ValueError('J7 return goal outside bounds')
+        self.path_target.value=value

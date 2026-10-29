@@ -60,7 +60,7 @@ def test_cli_selects_fork_explicitly(monkeypatch,tmp_path,side,command):
     assert options.get('timing_backend')==('sparse' if command=='--hardware-sparse' else None)
 
 
-@pytest.mark.parametrize('backend',['adaptive','sparse'])
+@pytest.mark.parametrize('backend',['current','adaptive','sparse'])
 def test_computation_forwards_only_requested_fork(monkeypatch,tmp_path,backend):
     from drum_planner.baseline import computation
     calls=[]
@@ -68,7 +68,7 @@ def test_computation_forwards_only_requested_fork(monkeypatch,tmp_path,backend):
         calls.append(command);atomic_json(tmp_path/'computation/result.json',{'test':True});return 0
     monkeypatch.setattr(computation,'_run',run)
     assert computation.run(tmp_path,ROOT/'cal.json',SimpleNamespace(error=None),moving_side='left',timing_backend=backend)=={'test':True}
-    assert ('--timing-backend' in calls[0])==(backend=='sparse')
+    assert ('--timing-backend' in calls[0])==(backend!='current')
     assert calls[0][calls[0].index('--side')+1]=='left'
 
 

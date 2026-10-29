@@ -1,0 +1,461 @@
+[
+  {
+    "case": "right_full",
+    "side": "right",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R1",
+      "R2",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 18.7050068420358,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full/plans/572c57cbb1/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full/plans/572c57cbb1/plan.json",
+    "transfer_s": 1.5353141477234955,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.6569837454162077,
+        "travel": {
+          "joint_travel_rad": [
+            0.20830121309223948,
+            0.05063675898374953,
+            0.06636484321355063,
+            0.1733925383382906,
+            0.19525841153582132,
+            0.473760585946442,
+            0.28080384527351787
+          ],
+          "proximal_travel_rad": 0.49869535362783024,
+          "distal_travel_rad": 0.9498228427557812,
+          "net_change_rad": [
+            0.20830121309223948,
+            0.05063675898374953,
+            0.06636484321355063,
+            0.1733925383382906,
+            0.19525841153582132,
+            0.473760585946442,
+            0.28080384527351765
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full/plans/572c57cbb1/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "right_full_reverse",
+    "side": "right",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R2",
+      "R1",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full_reverse"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 20.007416214910336,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full_reverse/plans/fb4091b8a4/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full_reverse/plans/fb4091b8a4/plan.json",
+    "transfer_s": 1.5353141477729493,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.656983718869226,
+        "travel": {
+          "joint_travel_rad": [
+            0.20830121309223953,
+            0.05063675898374952,
+            0.06636484321355057,
+            0.17339253833829127,
+            0.1952584115358214,
+            0.473760585946442,
+            0.28080384527351754
+          ],
+          "proximal_travel_rad": 0.4986953536278309,
+          "distal_travel_rad": 0.9498228427557809,
+          "net_change_rad": [
+            0.20830121309223953,
+            0.05063675898374952,
+            0.06636484321355057,
+            0.17339253833829127,
+            0.19525841153582135,
+            0.473760585946442,
+            0.28080384527351754
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_full_reverse/plans/fb4091b8a4/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "right_axis",
+    "side": "right",
+    "task": "tip-axis",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R1",
+      "R2",
+      "--task",
+      "tip-axis",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 19.65791369706858,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis/plans/d8a9c1d4e3/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis/plans/d8a9c1d4e3/plan.json",
+    "transfer_s": 1.481425502943613,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.6569837454162077,
+        "travel": {
+          "joint_travel_rad": [
+            0.20830121309223948,
+            0.05063675898374953,
+            0.06636484321355063,
+            0.1733925383382906,
+            0.19525841153582132,
+            0.473760585946442,
+            0.28080384527351787
+          ],
+          "proximal_travel_rad": 0.49869535362783024,
+          "distal_travel_rad": 0.9498228427557812,
+          "net_change_rad": [
+            0.20830121309223948,
+            0.05063675898374953,
+            0.06636484321355063,
+            0.1733925383382906,
+            0.19525841153582132,
+            0.473760585946442,
+            0.28080384527351765
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis/plans/d8a9c1d4e3/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "right_axis_reverse",
+    "side": "right",
+    "task": "tip-axis",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R2",
+      "R1",
+      "--task",
+      "tip-axis",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis_reverse"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 25.019653249997646,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis_reverse/plans/2c01801bdd/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis_reverse/plans/2c01801bdd/plan.json",
+    "transfer_s": 1.4832817128556408,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.656983718869226,
+        "travel": {
+          "joint_travel_rad": [
+            0.20830121309223953,
+            0.05063675898374952,
+            0.06636484321355057,
+            0.17339253833829127,
+            0.1952584115358214,
+            0.473760585946442,
+            0.28080384527351754
+          ],
+          "proximal_travel_rad": 0.4986953536278309,
+          "distal_travel_rad": 0.9498228427557809,
+          "net_change_rad": [
+            0.20830121309223953,
+            0.05063675898374952,
+            0.06636484321355057,
+            0.17339253833829127,
+            0.19525841153582135,
+            0.473760585946442,
+            0.28080384527351754
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_axis_reverse/plans/2c01801bdd/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "left_full",
+    "side": "left",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--left",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "L1",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_full"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 34.135861452901736,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_full/plans/5272622b52/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_full/plans/5272622b52/plan.json",
+    "transfer_s": 2.576656932526777,
+    "reference": [
+      {
+        "status": "no_feasible_route",
+        "reason": "No checked continuous route; no_workspace_proposal_within_budget"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "left_axis",
+    "side": "left",
+    "task": "tip-axis",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--left",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "L1",
+      "--task",
+      "tip-axis",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_axis"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 31.829003995051607,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_axis/plans/3c3d333026/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_axis/plans/3c3d333026/plan.json",
+    "transfer_s": 2.5364777216114245,
+    "reference": [
+      {
+        "status": "no_feasible_route",
+        "reason": "No checked continuous route; no_workspace_proposal_within_budget"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "right_plus1",
+    "side": "right",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R1",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/variants/R2_plus1.json",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_plus1"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 20.304685611044988,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_plus1/plans/09a9ee69a9/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_plus1/plans/09a9ee69a9/plan.json",
+    "transfer_s": 1.5356727835697281,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.6529088190874017,
+        "travel": {
+          "joint_travel_rad": [
+            0.22575450561218258,
+            0.05063675898374953,
+            0.06636484321355066,
+            0.17339253833829038,
+            0.19525841153582127,
+            0.4737605859464419,
+            0.2808038452735173
+          ],
+          "proximal_travel_rad": 0.5161486461477731,
+          "distal_travel_rad": 0.9498228427557804,
+          "net_change_rad": [
+            0.22575450561218258,
+            0.05063675898374953,
+            0.06636484321355066,
+            0.17339253833829038,
+            0.19525841153582127,
+            0.4737605859464419,
+            0.2808038452735173
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_plus1/plans/09a9ee69a9/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "right_minus1",
+    "side": "right",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--right",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "R1",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/variants/R2_minus1.json",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_minus1"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 21.25774884200655,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_minus1/plans/14b06a0015/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_minus1/plans/14b06a0015/plan.json",
+    "transfer_s": 1.5348717939468512,
+    "reference": [
+      {
+        "status": "planned",
+        "duration_s": 1.6627862953368837,
+        "travel": {
+          "joint_travel_rad": [
+            0.19084792057229638,
+            0.050636758983749544,
+            0.0663648432135506,
+            0.17339253833829127,
+            0.1952584115358214,
+            0.473760585946442,
+            0.28080384527351765
+          ],
+          "proximal_travel_rad": 0.4812420611078878,
+          "distal_travel_rad": 0.9498228427557811,
+          "net_change_rad": [
+            0.19084792057229627,
+            0.05063675898374953,
+            0.0663648432135506,
+            0.17339253833829127,
+            0.1952584115358214,
+            0.473760585946442,
+            0.28080384527351765
+          ]
+        },
+        "route": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/right_minus1/plans/14b06a0015/reference/0/route.json"
+      }
+    ],
+    "error": null
+  },
+  {
+    "case": "left_plus1",
+    "side": "left",
+    "task": "full-pose",
+    "command": [
+      "./plan_drums.sh",
+      "--fast",
+      "--left",
+      "--offline",
+      "--state",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/measured_start.json",
+      "--scene",
+      "diagnostics/r1_r2_wrist_speed_20261024/session/acquisition/camera/scene.json",
+      "--destinations",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/variants/L1_j6_plus1.json",
+      "--task",
+      "full-pose",
+      "--compare",
+      "--headless",
+      "--output",
+      "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_plus1"
+    ],
+    "returncode": 0,
+    "cold_process_wall_s": 29.07591022294946,
+    "report": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_plus1/plans/737c3dc2e7/fast_report.json",
+    "plan": "/home/jason/Proyectos3/X5/diagnostics/fast_posture_20261024/verified/left_plus1/plans/737c3dc2e7/plan.json",
+    "transfer_s": 2.6157195631012744,
+    "reference": [
+      {
+        "status": "no_feasible_route",
+        "reason": "No checked continuous route; no_workspace_proposal_within_budget"
+      }
+    ],
+    "error": null
+  }
+]

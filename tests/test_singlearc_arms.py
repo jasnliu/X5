@@ -222,7 +222,7 @@ def test_backend_routes_goal_zone_model_and_timing_to_selected_arm(tmp_path,monk
     from drum_planner.timing import dispatch
     monkeypatch.setattr(planner.workspace_curve,'run',generate);monkeypatch.setattr(dispatch,'retime',timing)
     archive_cal=common.ROOT/'calibration_sessions/20261017T211949Z-762f9908-reprocessed/calibration.json'
-    obj=planner.plan(tmp_path/'plan',state,scene,archive_cal,moving_side=arm)
+    obj=planner.plan(tmp_path/'plan',state,scene,archive_cal,moving_side=arm,timing_backend='adaptive')
     assert calls==['search','timing'] and obj['status']=='planned'
     assert obj['moving_side']==arm and obj['joint_order']==common.arm_joints(arm)
     assert obj['recording_sha256']==common.digest(common.goal_recording(arm))
@@ -272,6 +272,8 @@ def test_guarded_worker_propagates_side_through_monitor_and_computation(tmp_path
         calls.append('verify');return {}
     def compute(folder,cal,worker,*,plan,moving_side):
         assert moving_side==arm and not worker.closed;calls.append('compute');return {}
+    from drum_planner.experiment import rgbd
+    monkeypatch.setattr(rgbd,'capture',lambda folder,cal,worker,**kw:capture(folder.parent,worker,cal,**kw))
     monkeypatch.setattr(work,'capture_current',capture);monkeypatch.setattr(work,'verify_unchanged',verify)
     monkeypatch.setattr(work.computation,'run',compute)
     work.calculate(tmp_path,common.DEFAULT_CALIBRATION,{},moving_side=arm)
@@ -293,7 +295,7 @@ def test_recovery_checker_uses_current_passive_side_snapshot(tmp_path,monkeypatc
     plan=tmp_path/'plan.json';common.atomic_json(plan,r.obj)
     packet=tmp_path/'prepared.json';common.atomic_json(packet,dict(plan=str(plan),calibration='test',fresh_scene='test',fresh_scene_sha256='scene'))
     monkeypatch.setattr(tasks,'load_checked',lambda *a:(r.obj,copy.deepcopy(request),r.engine.curve))
-    monkeypatch.setattr(planning,'scene',lambda *a:{'source_scene_sha256':'scene'})
+    monkeypatch.setattr(tasks,'validated_scene',lambda *a:{'source_scene_sha256':'scene'})
     passive={r.other:(np.asarray(r.req[r.other])+.01).tolist()}
     if r.other=='left':passive['left_opening_m']=.002
     seen=[]

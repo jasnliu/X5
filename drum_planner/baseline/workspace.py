@@ -11,7 +11,8 @@ from PyQt5 import QtCore,QtGui,QtWidgets
 
 from ..common import DEFAULT_CALIBRATION,JOINTS,LEFT_JOINTS,arm_side,arm_joints,atomic_json
 from ..experiment.runtime import Job
-from ..planned_view import load,load_scene
+from ..experiment.rgbd import load_scene
+from . import settings,targets
 from .sequence import PlanDisplay
 from . import service,tasks
 from .arms import side_of,other_side,require_side
@@ -20,11 +21,13 @@ from .windows import DisplayModel,ArmWindow,PlanWindow,ControlWindow
 
 
 class Workspace:
-    def __init__(self,folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,autoscene=True,moving_side=None,timing_backend='adaptive'):
-        if timing_backend not in ('adaptive','sparse'):raise ValueError('Unknown hardware timing backend')
+    def __init__(self,folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,autoscene=True,moving_side=None,timing_backend='current',motion_profile=None):
+        if timing_backend not in ('current','adaptive','sparse'):raise ValueError('Unknown hardware timing backend')
         self.timing_backend=timing_backend
         self.side=arm_side(moving_side or (side_of(resume) if resume else 'right'));self.other=other_side(self.side)
         if resume:require_side(resume,self.side)
+        if timing_backend!='current' and motion_profile is not None:raise ValueError('Custom limits require the current hardware planner')
+        self.motion_profile=settings.settings(self.side,motion_profile)
         self.session=Path(folder).resolve();self.session.mkdir(parents=True,exist_ok=True);self.cal_path=Path(cal_path)
         self.simulated=simulate_plan is not None or bool(resume and resume['simulated'])
         self.simulate_plan=Path(simulate_plan or resume['plan']) if self.simulated else None
@@ -40,9 +43,14 @@ class Workspace:
         model=PlanDisplay(self.simulate_plan or resume['plan']) if self.simulated or resume else DisplayModel(self.session/'display_model',self.cal_path,moving_side=self.side)
         if model.side!=self.side:raise ValueError('Preview plan arm does not match selected mode')
         if self.simulated and not model.playable:self.simulation_recalculate=True
+        if self.simulated and motion_profile is not None:
+            original=settings.settings(self.side,model.obj.get('hardware_motion_profile'))
+            if settings.identity(original)!=settings.identity(self.motion_profile):self.simulation_recalculate=True
         self.preview=PlanWindow(model,rate,self.speed_changed)
         self.live=ArmWindow(f'X5 · {self.side.capitalize()} live arm — measured status',model)
         self.live.viewport.set_title('LIVE ARM — encoder feedback only')
+        if model.obj.get('hardware_motion_profile') and motion_profile is None:
+            self.motion_profile=settings.settings(self.side,model.obj['hardware_motion_profile'])
         self.control=ControlWindow(self);self.preview.notice=self.message
         if model.obj.get('destination_bindings'):self.control.destinations.restore(model.obj['destination_bindings'])
         self.shortcuts=[]
@@ -155,12 +163,13 @@ class Workspace:
     def launch_job(self,kind,anchor=None):
         folder=self.session/(kind+'-'+uuid.uuid4().hex[:8]);folder.mkdir()
         cmd=['/usr/bin/python3','-m','drum_planner.baseline.work',kind,'--folder',str(folder),'--calibration',str(self.cal_path),'--side',self.side]
-        if self.timing_backend=='sparse':cmd+=['--timing-backend','sparse']
+        if self.timing_backend!='current':cmd+=['--timing-backend',self.timing_backend]
         if anchor is not None:
             inputs=dict(anchor=anchor,destinations=self.destination_binding)
+            if self.timing_backend=='current':inputs['motion_profile']=self.motion_profile
             if kind=='check':inputs['plan']=str(self.plan.path)
             atomic_json(folder/'input.json',inputs);cmd+=['--input',str(folder/'input.json')]
-        count=len((self.destination_binding or {}).get('checkpoints',[]))
+        count=targets.count(self.destination_binding)
         timeout=(120+600)*(count+1 if count>1 else 1) if kind=='calculate' else 180
         self.job=Job(cmd,folder,timeout=timeout,allow_can=kind!='scene')
         self.job_kind=kind;self.work_scene=None
@@ -179,13 +188,25 @@ class Workspace:
         self.invalidate('Destination selection changed. Click Calculate trajectory when ready.',error=False)
         self.preview.clock.pause()
 
+    def apply_motion_settings(self,profile):
+        if self.active:raise ValueError('The active run keeps its calculated limits. Return to rest before changing them.')
+        profile=settings.settings(self.side,profile)
+        changed=settings.identity(profile)!=settings.identity(self.motion_profile)
+        self.motion_profile=profile;self.control.planning.refresh()
+        if changed:
+            self.simulation_recalculate=True
+            self.invalidate('Planning limits / timing effort changed. Click Calculate again; no motion.',error=False)
+            self.preview.clock.pause()
+
     def launch_simulation_job(self,anchor,binding):
         folder=self.session/('calculate-'+uuid.uuid4().hex[:8]);folder.mkdir()
-        atomic_json(folder/'input.json',dict(anchor=anchor,destinations=binding,scene=str(self.scene_path)))
-        count=len(binding.get('checkpoints',[]));timeout=(120+600)*(count+1 if count>1 else 1)
-        self.job=Job(['/usr/bin/python3','-m','drum_planner.baseline.work','offline','--folder',str(folder),
+        atomic_json(folder/'input.json',dict(anchor=anchor,destinations=binding,scene=str(self.scene_path),
+            motion_profile=self.motion_profile if self.timing_backend=='current' else None))
+        count=targets.count(binding);timeout=(120+600)*(count+1 if count>1 else 1)
+        from ..experiment.runtime import PYTHON
+        self.job=Job([str(PYTHON),'-B','-m','drum_planner.baseline.work','offline','--folder',str(folder),
             '--input',str(folder/'input.json'),'--calibration',str(self.cal_path),'--side',self.side]+
-            (['--timing-backend','sparse'] if self.timing_backend=='sparse' else []),folder,timeout=timeout)
+            (['--timing-backend',self.timing_backend] if self.timing_backend!='current' else []),folder,timeout=timeout)
         self.job_kind='calculate';self.work_scene=None
         self.message('OFFLINE CALCULATING selected checkpoints from simulated joints and saved scene. No camera/CAN.')
 
@@ -193,7 +214,7 @@ class Workspace:
         self.want_start=False;self.reverse_intent=None
         if self.active:
             self.message('Arm is running or held. Use Emergency Hold / Reverse to rest + relax, then Calculate. No plan or motor state changed.');return
-        from ..experiment.checkpoints import freeze
+        from .targets import freeze
         selected=self.control.destinations.paths()
         if not all(selected):
             self.message('Select a destination in each dropdown, or remove the extra checkpoint, then Calculate.',error=True);return
@@ -449,9 +470,9 @@ class Workspace:
         self.preview.shutdown();self.live.shutdown();self.control.hide();self.control.deleteLater();self.app.processEvents()
 
 
-def show(folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,seconds=0.,moving_side=None,timing_backend='adaptive'):
-    view=Workspace(folder,cal_path,rate=rate,simulate_plan=simulate_plan,resume=resume,moving_side=moving_side,
-                   **({'timing_backend':timing_backend} if timing_backend!='adaptive' else {}))
+def show(folder,cal_path=DEFAULT_CALIBRATION,*,rate=1.,simulate_plan=None,resume=None,seconds=0.,moving_side=None,timing_backend='current',motion_profile=None):
+    view=Workspace(folder,cal_path,rate=rate,simulate_plan=simulate_plan,resume=resume,moving_side=moving_side,motion_profile=motion_profile,
+                   **({'timing_backend':timing_backend} if timing_backend!='current' else {}))
     old={s:signal.signal(s,lambda *_:view.request_close()) for s in (signal.SIGINT,signal.SIGTERM)}
     began=time.monotonic()
     try:

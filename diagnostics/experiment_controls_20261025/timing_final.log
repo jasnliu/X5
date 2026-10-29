@@ -1,0 +1,94 @@
+
+CASE current_R1_R2 old
+CPU SPARSE TIMING — intentional CPU backend; GPU not requested; fresh solve, no result cache
+CPU SPARSE bounded stop: Maximum_WallTime_Exceeded; retaining best continuously checked clock
+CPU TIMING READY: 1.8957s movement; 1.921s calculation; sparse; continuous limits verified
+
+CASE current_R1_R2 fast
+CPU SPARSE TIMING — intentional CPU backend; fast; 21 explicit joint limits; no result cache
+TIMING 96 controls: 1.764933s movement; Maximum_WallTime_Exceeded; new checked best
+TIMING READY: 1.764933s movement, 1.874s calculation
+
+CASE current_R1_R2 balanced
+CPU SPARSE TIMING — intentional CPU backend; balanced; 21 explicit joint limits; no result cache
+TIMING 96 controls: 1.764933s movement; Maximum_WallTime_Exceeded; new checked best
+TIMING 96 controls: 1.657557s movement; Solve_Succeeded; new checked best
+CPU SPARSE: bounded extrema refinement
+TIMING 96 controls: 1.656984s movement; Solve_Succeeded; new checked best
+TIMING READY: 1.656984s movement, 3.390s calculation
+
+CASE current_R1_R2 thorough
+CPU SPARSE TIMING — intentional CPU backend; thorough; 21 explicit joint limits; no result cache
+TIMING 96 controls: 1.764933s movement; Maximum_WallTime_Exceeded; new checked best
+TIMING 96 controls: 1.657557s movement; Solve_Succeeded; new checked best
+CPU SPARSE: bounded extrema refinement
+TIMING 96 controls: 1.656984s movement; Solve_Succeeded; new checked best
+TIMING 192 controls: 1.646733s movement; Solve_Succeeded; new checked best
+TIMING READY: 1.646733s movement, 4.754s calculation
+
+CASE historical_checkpoint_1 old
+CPU SPARSE TIMING — intentional CPU backend; GPU not requested; fresh solve, no result cache
+CPU TIMING READY: 4.2126s movement; 0.435s calculation; sparse; continuous limits verified
+
+CASE historical_checkpoint_1 fast
+CPU SPARSE TIMING — intentional CPU backend; fast; 21 explicit joint limits; no result cache
+TIMING 96 controls: 4.212610s movement; Solve_Succeeded; new checked best
+TIMING READY: 4.212610s movement, 0.456s calculation
+
+CASE historical_checkpoint_1 balanced
+CPU SPARSE TIMING — intentional CPU backend; balanced; 21 explicit joint limits; no result cache
+TIMING 96 controls: 4.212610s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 4.212616s movement; Solve_Succeeded; keeping faster checked incumbent
+TIMING READY: 4.212610s movement, 0.650s calculation
+
+CASE historical_checkpoint_1 thorough
+CPU SPARSE TIMING — intentional CPU backend; thorough; 21 explicit joint limits; no result cache
+TIMING 96 controls: 4.212610s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 4.212616s movement; Solve_Succeeded; keeping faster checked incumbent
+TIMING 192 controls: 4.205700s movement; Solve_Succeeded; new checked best
+TIMING READY: 4.205700s movement, 1.509s calculation
+
+CASE historical_return_to_start old
+CPU SPARSE TIMING — intentional CPU backend; GPU not requested; fresh solve, no result cache
+CPU TIMING READY: 2.7123s movement; 0.865s calculation; sparse; continuous limits verified
+
+CASE historical_return_to_start fast
+CPU SPARSE TIMING — intentional CPU backend; fast; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.712258s movement; Solve_Succeeded; new checked best
+TIMING READY: 2.712258s movement, 0.881s calculation
+
+CASE historical_return_to_start balanced
+CPU SPARSE TIMING — intentional CPU backend; balanced; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.712258s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 2.712258s movement; Solve_Succeeded; keeping faster checked incumbent
+TIMING READY: 2.712258s movement, 1.080s calculation
+
+CASE historical_return_to_start thorough
+CPU SPARSE TIMING — intentional CPU backend; thorough; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.712258s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 2.712258s movement; Solve_Succeeded; keeping faster checked incumbent
+TIMING 192 controls: 2.702366s movement; Solve_Succeeded; new checked best
+TIMING READY: 2.702366s movement, 2.348s calculation
+
+CASE historical_left old
+CPU SPARSE TIMING — intentional CPU backend; GPU not requested; fresh solve, no result cache
+CPU TIMING READY: 2.8571s movement; 0.874s calculation; sparse; continuous limits verified
+
+CASE historical_left fast
+CPU SPARSE TIMING — intentional CPU backend; fast; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.857103s movement; Solve_Succeeded; new checked best
+TIMING READY: 2.857103s movement, 0.884s calculation
+
+CASE historical_left balanced
+CPU SPARSE TIMING — intentional CPU backend; balanced; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.857103s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 2.857103s movement; Solve_Succeeded; new checked best
+TIMING READY: 2.857103s movement, 1.126s calculation
+
+CASE historical_left thorough
+CPU SPARSE TIMING — intentional CPU backend; thorough; 21 explicit joint limits; no result cache
+TIMING 96 controls: 2.857103s movement; Solve_Succeeded; new checked best
+TIMING 96 controls: 2.857103s movement; Solve_Succeeded; new checked best
+TIMING 192 controls: 2.838998s movement; Solve_Succeeded; new checked best
+TIMING READY: 2.838998s movement, 2.460s calculation
+ALL PASSED 16

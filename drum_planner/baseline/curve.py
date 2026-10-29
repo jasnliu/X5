@@ -10,6 +10,8 @@ from ..timing import core
 
 class Curve(LegacyCurve):
     def __init__(self,plan):
+        from .settings import plan_limits
+        self.limits=plan_limits(plan)
         self.plan=plan;self.retimed=None;self._peaks=None;self.parts=None
         if plan.get('checkpoint_sequence'):
             from .sequence import initialize
@@ -18,9 +20,13 @@ class Curve(LegacyCurve):
         if timing.get('schema')!='x5-fixed-path-timing-v1':
             super().__init__(plan);return
         self.duration=float(timing['duration_s'])
-        if not np.isfinite(self.duration) or not 0<self.duration<=120:
+        if not np.isfinite(self.duration) or not 0<=self.duration<=120:
             raise ValueError('Invalid exact retimed trajectory duration')
         self.retimed=core.Evaluator(timing)
+        stationary=self.duration==0
+        if stationary and (timing.get('stationary') is not True or timing.get('kind')!='joint_polynomial'
+                or np.any(self.retimed.p.c[:-1]!=0)):
+            raise ValueError('Zero-duration trajectory must be a constant checked hold')
         # Validate the actual representation, not its cached "peaks" metadata.
         if timing['kind']=='time_density':
             p,h=self.retimed.path,self.retimed.h
@@ -43,7 +49,7 @@ class Curve(LegacyCurve):
         if not np.isfinite(self._peaks).all():raise ValueError('Nonfinite motion extrema')
         times=np.array([p['time_s'] for p in plan['outward']],float)
         q=np.asarray([p['positions_rad'] for p in plan['outward']],float)
-        if (len(times)<2 or not np.isfinite(times).all() or times[0]!=0 or
+        if (len(times)<(1 if stationary else 2) or not np.isfinite(times).all() or times[0]!=0 or
                 abs(times[-1]-self.duration)>1e-9 or np.any(np.diff(times)<=0)):
             raise ValueError('Invalid retimed outward timestamps')
         if q.shape!=(len(times),7) or not np.allclose(self.at_many(times),q,atol=1e-9,rtol=0):
@@ -59,8 +65,13 @@ class Curve(LegacyCurve):
 
     def at_many(self,times):
         times=np.asarray(times,float)
-        if not np.isfinite(times).all() or np.any(times<0) or np.any(times>self.duration):
+        # Clock integration/event timestamps can differ at the endpoint by a
+        # few floating-point ULPs. Normalize only that roundoff, not an actual
+        # out-of-range trajectory or any joint position. The law is unchanged.
+        tol=32*np.spacing(max(1.,self.duration))
+        if not np.isfinite(times).all() or np.any(times < -tol) or np.any(times > self.duration+tol):
             raise ValueError('Trajectory time out of range')
+        times=np.clip(times,0.,self.duration)
         if self.retimed is None:return np.array([super(Curve,self).at(float(t)) for t in times])
         q=self.retimed(times)[0]
         if not np.isfinite(q).all():raise ValueError('Invalid trajectory target')

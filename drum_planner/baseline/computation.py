@@ -55,16 +55,20 @@ def _run(command, worker):
                 pass
 
 
-def run(folder, cal_path, worker, *, plan=None, moving_side='right', destinations=None,timing_backend='adaptive'):
+def run(folder, cal_path, worker, *, plan=None, moving_side='right', destinations=None,timing_backend='current',motion_profile=None):
     folder = Path(folder).resolve()
-    command = [sys.executable, '-m', 'drum_planner.baseline.computation',
+    from ..experiment.runtime import PYTHON
+    command = [str(PYTHON) if timing_backend=='current' else sys.executable, '-m', 'drum_planner.baseline.computation',
                '--folder', str(folder), '--calibration', str(Path(cal_path).resolve()), '--side', moving_side]
     if plan is not None:
         command += ['--plan', str(Path(plan).resolve())]
-    if timing_backend!='adaptive':command+=['--timing-backend',timing_backend]
+    if timing_backend!='current':command+=['--timing-backend',timing_backend]
     if destinations is not None:
         atomic_json(folder/'destinations.json',destinations)
         command+=['--destinations',str(folder/'destinations.json')]
+    if motion_profile is not None:
+        atomic_json(folder/'motion_profile.json',motion_profile)
+        command+=['--motion-profile',str(folder/'motion_profile.json')]
     output = folder/'computation'
     output.mkdir()  # one computation per disposable Calculate job
     print('Planning/timing isolated from encoder monitoring; feedback stays active. NO motor commands.', flush=True)
@@ -76,7 +80,7 @@ def run(folder, cal_path, worker, *, plan=None, moving_side='right', destination
     return json.loads((output/'result.json').read_text())
 
 
-def compute(folder, cal_path, *, plan=None, moving_side='right', destinations=None,timing_backend='adaptive'):
+def compute(folder, cal_path, *, plan=None, moving_side='right', destinations=None,timing_backend='current',motion_profile=None):
     # Install before importing planning dependencies. This child has no sensor
     # ownership and must never open a physical CAN socket, even accidentally.
     from ..experiment.config import no_can
@@ -86,7 +90,8 @@ def compute(folder, cal_path, *, plan=None, moving_side='right', destinations=No
     capture = folder/'capture'
     if plan is None:
         options={} if destinations is None else dict(destinations=destinations)
-        if timing_backend!='adaptive':options['timing_backend']=timing_backend
+        if timing_backend!='current':options['timing_backend']=timing_backend
+        if motion_profile is not None:options['motion_profile']=motion_profile
         plan = tasks.make_plan(folder/'plan', capture, cal_path, moving_side=moving_side,**options)
     from .arms import require_side
     require_side(json.loads((Path(plan).parent/'backend_request.json').read_text()), moving_side)
@@ -101,13 +106,15 @@ def main():
     parser.add_argument('--plan')
     parser.add_argument('--side', choices=['right','left'], default='right')
     parser.add_argument('--destinations')
-    parser.add_argument('--timing-backend',choices=['adaptive','sparse'],default='adaptive')
+    parser.add_argument('--motion-profile')
+    parser.add_argument('--timing-backend',choices=['current','adaptive','sparse'],default='current')
     args = parser.parse_args()
     folder = Path(args.folder)
     try:
         result = compute(folder, args.calibration, plan=args.plan, moving_side=args.side,
                          destinations=json.loads(Path(args.destinations).read_text()) if args.destinations else None,
-                         **({'timing_backend':args.timing_backend} if args.timing_backend!='adaptive' else {}))
+                         motion_profile=json.loads(Path(args.motion_profile).read_text()) if args.motion_profile else None,
+                         **({'timing_backend':args.timing_backend} if args.timing_backend!='current' else {}))
         atomic_json(folder/'computation/result.json', result)
     except Exception as exc:
         atomic_json(folder/'computation/error.json', dict(error=str(exc), motor_commands=0))

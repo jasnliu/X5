@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "hardware_access": false,
+  "physical_motor_commands": 0,
+  "checks": [
+    "startup obtains disabled encoder replies with state-only queries, no automatic arming",
+    "unmodified two-query scheduler reproduces the exact ARMING fault without hardware",
+    "Stop/Close completes with fake devices, no real motor owner ever constructed"
+  ],
+  "expected_failure": true,
+  "session": "/home/jason/Proyectos3/X5/planner_runs/generated-beat-20261028T221933-67a46870",
+  "mission": "planner_runs/generated-beat-20261028T221006-81fb4d62/plan-11753555/mission.json",
+  "faults": [
+    "Fresh feedback missing; powered hold cannot be confirmed"
+  ],
+  "simulated_enable_count": 0,
+  "polling_interval_median_s": 0.05073843797435984,
+  "max_feedback_age_after_start_s": 0.1687344399979338,
+  "ages_by_phase": {
+    "READY": 0.1564700260059908,
+    "ARMING": 0.1687344399979338
+  }
+}
